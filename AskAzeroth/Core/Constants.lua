@@ -103,7 +103,7 @@ C.SYNC_MAX_QUESTIONS = 30
 C.SYNC_MAX_KNOWN = 200
 -- Sync answer: at most this many bytes before compression, so one answer
 -- doesn't hold up the channel for long; the oldest answers go first.
-C.SYNC_MAX_BYTES = 12000
+C.SYNC_MAX_BYTES = 16000
 -- Seconds after joining a channel before the sync request (random).
 C.SYNC_REQUEST_DELAY_MIN = 5
 C.SYNC_REQUEST_DELAY_MAX = 15
