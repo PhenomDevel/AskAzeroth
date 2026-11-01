@@ -20,6 +20,7 @@ L.PAGE_PINNED = "Épinglées"
 L.PAGE_PLAYERS = "Joueurs"
 L.PAGE_FAQ = "FAQ"
 L.PAGE_SETTINGS = "Options"
+L.WINDOW_SUBTITLE = "Aide aux débutants"
 
 -- Status line
 L.STATUS_LOCKDOWN = "Messages de discussion bloqués (rencontre)"
@@ -182,6 +183,7 @@ L.PINNED_EMPTY = "Rien d'épinglé pour l'instant. Cliquez sur l'icône de note 
 -- FAQ
 L.FAQ_LANGUAGE = "Langue de la FAQ"
 L.FAQ_LANGUAGE_TIP = "Bascule la FAQ entre l'allemand et l'anglais."
+L.FAQ_NOT_HELPED = "Pas de réponse ? Demandez à la communauté."
 
 -- Categories
 L.CAT_QUEST = "Quête"

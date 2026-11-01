@@ -9,22 +9,27 @@ local UI = ns.UI
 local W = ns.Widgets
 local MyQuestions = ns.MyQuestions
 
-local LIST_WIDTH = 330
+local LIST_WIDTH = 380
+local PAD = 12
 local REFRESH_DELAY = 0.3
 
 local function Build(content)
 	local page = { search = "" }
 
-	local search = W.SearchBox(content, 170, L.QUEUE_SEARCH, function(text)
-		page.search = strtrim(text):lower()
-		page:Refresh()
-	end)
-	search:SetPoint("TOPLEFT", 6, -6)
+	-- Left column: search, "Clean up", count, then the list.
+	local listPane = CreateFrame("Frame", nil, content)
+	listPane:SetPoint("TOPLEFT")
+	listPane:SetPoint("BOTTOMLEFT")
+	listPane:SetWidth(LIST_WIDTH)
+	W.SideLine(listPane, "RIGHT")
 
-	local count = W.Text(content, "GameFontHighlightSmall", W.MUTED)
-	count:SetPoint("LEFT", search, "RIGHT", 14, 0)
+	local filters = CreateFrame("Frame", nil, listPane)
+	filters:SetPoint("TOPLEFT")
+	filters:SetPoint("TOPRIGHT", -1, 0)
+	filters:SetHeight(PAD + 28 + 8 + 14 + PAD)
+	W.EdgeLine(filters, "BOTTOM")
 
-	local cleanup = W.Button(content, L.MY_CLEANUP, nil, function()
+	local cleanup = W.Button(filters, L.MY_CLEANUP, nil, function()
 		local days = ns.db.settings.retentionDays or 0
 		if days <= 0 then
 			page.note:SetText(L.MY_CLEANUP_FOREVER)
@@ -33,23 +38,35 @@ local function Build(content)
 		page.note:SetText(L.MY_CLEANUP_DONE:format(MyQuestions.Cleanup()))
 		page:Refresh()
 	end)
-	cleanup:SetPoint("TOPRIGHT", -4, -5)
+	cleanup:SetHeight(28)
+	cleanup:SetPoint("TOPRIGHT", -PAD, -PAD)
 	W.Tooltip(cleanup, L.MY_CLEANUP, L.MY_CLEANUP_TIP)
 
-	page.note = W.Text(content, "GameFontHighlightSmall", W.MUTED)
-	page.note:SetPoint("RIGHT", cleanup, "LEFT", -10, 0)
+	local search = W.SearchBox(filters, 100, L.QUEUE_SEARCH, function(text)
+		page.search = strtrim(text):lower()
+		page:Refresh()
+	end)
+	search:SetPoint("TOPLEFT", PAD, -PAD)
+	search:SetPoint("RIGHT", cleanup, "LEFT", -8, 0)
 
-	local listPane = CreateFrame("Frame", nil, content)
-	listPane:SetPoint("TOPLEFT", 4, -38)
-	listPane:SetPoint("BOTTOMLEFT", 4, 4)
-	listPane:SetWidth(LIST_WIDTH)
+	local count = W.Text(filters, "GameFontHighlightSmall", W.GOLD)
+	count:SetPoint("TOPLEFT", search, "BOTTOMLEFT", 0, -8)
+
+	page.note = W.Text(filters, "GameFontHighlightSmall", W.MUTED)
+	page.note:SetPoint("LEFT", count, "RIGHT", 12, 0)
+	page.note:SetPoint("RIGHT", -PAD, 0)
+	page.note:SetWordWrap(false)
+
+	local listBox = CreateFrame("Frame", nil, listPane)
+	listBox:SetPoint("TOPLEFT", filters, "BOTTOMLEFT")
+	listBox:SetPoint("BOTTOMRIGHT", -1, 0)
 
 	local threadPane = CreateFrame("Frame", nil, content)
-	threadPane:SetPoint("TOPLEFT", listPane, "TOPRIGHT", 12, 0)
-	threadPane:SetPoint("BOTTOMRIGHT", -4, 4)
+	threadPane:SetPoint("TOPLEFT", listPane, "TOPRIGHT")
+	threadPane:SetPoint("BOTTOMRIGHT")
 
 	page.thread = ns.ThreadView.Create(threadPane, MyQuestions.GetThread)
-	page.list = ns.QueueList.Create(listPane, function(q)
+	page.list = ns.QueueList.Create(listBox, function(q)
 		page.thread:SetQuestion(q.id)
 		page.list:SetSelected(q.id)
 	end, nil, MyQuestions.GetStatus)

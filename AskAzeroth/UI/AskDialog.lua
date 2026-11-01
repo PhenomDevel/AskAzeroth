@@ -11,7 +11,9 @@ local C = ns.C
 local W = ns.Widgets
 local UI = ns.UI
 
-local WIDTH, HEIGHT = 520, 400
+local WIDTH, HEIGHT = 520, 520
+local PAD = 18
+local GRID_GAP = 6
 
 local overlay, dialog
 local state = {}
@@ -64,10 +66,17 @@ local function Submit()
 	end
 end
 
+local function Label(text, x, y)
+	local label = W.Text(dialog, "GameFontNormal", W.SOFT)
+	label:SetPoint("TOPLEFT", x, y)
+	label:SetText(text)
+	return label
+end
+
 local function Create()
 	local main = UI.GetFrame()
 	overlay = CreateFrame("Frame", nil, main)
-	overlay:SetPoint("TOPLEFT", 2, -22)
+	overlay:SetPoint("TOPLEFT", 2, -2)
 	overlay:SetPoint("BOTTOMRIGHT", -2, 2)
 	overlay:SetFrameStrata("DIALOG")
 	overlay:EnableMouse(true)
@@ -76,43 +85,37 @@ local function Create()
 	dim:SetColorTexture(0, 0, 0, 0.6)
 	overlay:SetScript("OnMouseDown", Close)
 
-	dialog = W.Panel(overlay, { 0.07, 0.065, 0.06, 0.98 }, { 0.79, 0.635, 0.29, 1 })
+	dialog = W.Panel(overlay, W.COLORS.window, W.COLORS.frame, true)
 	dialog:SetSize(WIDTH, HEIGHT)
-	dialog:SetPoint("CENTER", 0, 10)
+	dialog:SetPoint("CENTER", 0, 0)
 	dialog:EnableMouse(true)
 
-	local close = CreateFrame("Button", nil, dialog, "UIPanelCloseButton")
-	close:SetPoint("TOPRIGHT", 2, 2)
-	close:SetScript("OnClick", Close)
+	W.TitleBar(dialog, L.ASK_TITLE, Close)
 
-	local header = W.Header(dialog, L.ASK_TITLE)
-	header:SetPoint("TOPLEFT", 16, -14)
-
-	-- Category
-	local catLabel = W.Text(dialog, "GameFontNormal")
-	catLabel:SetPoint("TOPLEFT", header, "BOTTOMLEFT", 0, -14)
-	catLabel:SetText(L.ASK_CATEGORY)
+	-- Category: a grid of three columns.
+	Label(L.ASK_CATEGORY, PAD, -60)
 	dialog.chips = {}
-	for _, category in ipairs(C.CATEGORIES) do
+	local chipWidth = math.floor((WIDTH - 2 * PAD - 2 * GRID_GAP) / 3)
+	for i, category in ipairs(C.CATEGORIES) do
 		local chip = W.Chip(dialog, function(self)
 			state.cat = self.key
 			UpdateChips()
 			Validate()
-		end)
+		end, W.CategoryColor(category.key))
 		chip.key = category.key
 		chip:SetLabel(category.label)
+		chip:SetSize(chipWidth, 30)
+		local column, line = (i - 1) % 3, math.floor((i - 1) / 3)
+		chip:SetPoint("TOPLEFT", PAD + column * (chipWidth + GRID_GAP), -80 - line * (30 + GRID_GAP))
 		dialog.chips[#dialog.chips + 1] = chip
 	end
-	W.FlowChips(dialog.chips, dialog, 16, -64, 6)
 
 	-- Summary
-	local titleLabel = W.Text(dialog, "GameFontNormal")
-	titleLabel:SetPoint("TOPLEFT", 16, -100)
-	titleLabel:SetText(L.ASK_SUMMARY)
-	dialog.titleCounter = W.Text(dialog, "GameFontDisableSmall")
-	dialog.titleCounter:SetPoint("TOPRIGHT", -18, -102)
-	dialog.titleBox = W.EditBox(dialog, WIDTH - 40, Validate)
-	dialog.titleBox:SetPoint("TOPLEFT", titleLabel, "BOTTOMLEFT", 6, -4)
+	Label(L.ASK_SUMMARY, PAD, -162)
+	dialog.titleCounter = W.Text(dialog, "GameFontHighlightSmall", W.MUTED)
+	dialog.titleCounter:SetPoint("TOPRIGHT", -PAD, -163)
+	dialog.titleBox = W.EditBox(dialog, WIDTH - 2 * PAD, Validate)
+	dialog.titleBox:SetPoint("TOPLEFT", PAD, -180)
 	dialog.titleBox:SetMaxBytes(C.TITLE_MAX + 1)
 	dialog.titleBox:SetScript("OnEnterPressed", function(self)
 		self:ClearFocus()
@@ -120,17 +123,13 @@ local function Create()
 	end)
 
 	-- Details
-	local bodyLabel = W.Text(dialog, "GameFontNormal")
-	bodyLabel:SetPoint("TOPLEFT", 16, -152)
-	bodyLabel:SetText(L.ASK_DETAILS)
-	dialog.bodyBox = W.TextArea(dialog, WIDTH - 32, 100, C.BODY_MAX)
-	dialog.bodyBox:SetPoint("TOPLEFT", bodyLabel, "BOTTOMLEFT", 0, -4)
+	Label(L.ASK_DETAILS, PAD, -222)
+	dialog.bodyBox = W.TextArea(dialog, WIDTH - 2 * PAD, 96, C.BODY_MAX)
+	dialog.bodyBox:SetPoint("TOPLEFT", PAD, -240)
 
-	-- Language
-	local langLabel = W.Text(dialog, "GameFontNormal")
-	langLabel:SetPoint("TOPLEFT", 16, -300)
-	langLabel:SetText(L.ASK_LANGUAGE)
-	dialog.langDropdown = W.Dropdown(dialog, 160, function()
+	-- Language and what goes along with the question.
+	local langLabel = Label(L.ASK_LANGUAGE, PAD, -366)
+	dialog.langDropdown = W.Dropdown(dialog, 180, function()
 		local list = {}
 		for _, lang in ipairs(ns.Channel.GetSelectedLanguages()) do
 			list[#list + 1] = { value = lang, label = C.LANGUAGE_NAMES[lang] }
@@ -141,20 +140,34 @@ local function Create()
 	end, function(lang)
 		state.lang = lang
 	end)
-	dialog.langDropdown:SetPoint("LEFT", langLabel, "RIGHT", 10, 0)
+	dialog.langDropdown:SetPoint("LEFT", langLabel, "RIGHT", 12, 0)
 
-	dialog.context = W.Text(dialog, "GameFontHighlightSmall", W.MUTED)
-	dialog.context:SetPoint("TOPLEFT", langLabel, "BOTTOMLEFT", 0, -14)
-	dialog.context:SetPoint("RIGHT", -16, 0)
+	local contextBox = W.Panel(dialog, W.COLORS.nav, W.COLORS.line)
+	contextBox:SetPoint("TOPLEFT", PAD, -396)
+	contextBox:SetPoint("RIGHT", -PAD, 0)
+	contextBox:SetHeight(44)
+	dialog.context = W.Text(contextBox, "GameFontHighlightSmall", W.MUTED)
+	dialog.context:SetPoint("LEFT", 12, 0)
+	dialog.context:SetPoint("RIGHT", -12, 0)
+	dialog.context:SetWordWrap(true)
 
-	dialog.message = W.Text(dialog, "GameFontHighlightSmall", W.RED)
-	dialog.message:SetPoint("BOTTOMLEFT", 16, 18)
-	dialog.message:SetPoint("RIGHT", -220, 0)
+	-- Footer: error message, Cancel, Submit.
+	local footer = CreateFrame("Frame", nil, dialog)
+	footer:SetPoint("BOTTOMLEFT", 2, 2)
+	footer:SetPoint("BOTTOMRIGHT", -2, 2)
+	footer:SetHeight(56)
+	W.EdgeLine(footer, "TOP")
 
-	dialog.submit = W.Button(dialog, L.ASK_SUBMIT, 100, Submit)
-	dialog.submit:SetPoint("BOTTOMRIGHT", -16, 12)
-	local cancel = W.Button(dialog, L.ASK_CANCEL, 100, Close)
-	cancel:SetPoint("RIGHT", dialog.submit, "LEFT", -6, 0)
+	dialog.submit = W.Button(footer, L.ASK_SUBMIT, nil, Submit, "primary")
+	dialog.submit:SetHeight(32)
+	dialog.submit:SetPoint("RIGHT", -PAD + 2, 0)
+	local cancel = W.Button(footer, L.ASK_CANCEL, nil, Close)
+	cancel:SetHeight(32)
+	cancel:SetPoint("RIGHT", dialog.submit, "LEFT", -8, 0)
+
+	dialog.message = W.Text(footer, "GameFontHighlightSmall", W.RED)
+	dialog.message:SetPoint("LEFT", PAD - 2, 0)
+	dialog.message:SetPoint("RIGHT", cancel, "LEFT", -10, 0)
 end
 
 -- onAsked(question) runs after a successful ask.

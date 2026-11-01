@@ -3,6 +3,9 @@
 ## Unreleased
 
 - In development, no release yet.
+- New look: dark leather-and-gold window with a header bar, navigation on
+  the left, coloured categories, answer cards and an FAQ with list and
+  detail view.
 - Loads on retail (Midnight) too, for testing until Forever launches.
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
   Players, FAQ and Settings.

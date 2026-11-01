@@ -20,7 +20,7 @@ local function Build(content)
 	local page = { view = 1 }
 
 	local hint = W.Text(content, "GameFontHighlightSmall", W.MUTED)
-	hint:SetPoint("TOPRIGHT", -8, -10)
+	hint:SetPoint("TOPRIGHT", -16, -18)
 	hint:SetText(L.PLAYERS_HINT)
 
 	local chips = {}
@@ -32,11 +32,16 @@ local function Build(content)
 		chip:SetLabel(def.label)
 		chips[i] = chip
 	end
-	W.FlowChips(chips, content, 6, -6, 4)
+	W.FlowChips(chips, content, 16, -14, 6)
+	local bar = CreateFrame("Frame", nil, content)
+	bar:SetPoint("TOPLEFT")
+	bar:SetPoint("TOPRIGHT")
+	bar:SetHeight(50)
+	W.EdgeLine(bar, "BOTTOM")
 
 	local pane = CreateFrame("Frame", nil, content)
-	pane:SetPoint("TOPLEFT", 4, -38)
-	pane:SetPoint("BOTTOMRIGHT", -4, 4)
+	pane:SetPoint("TOPLEFT", 16, -62)
+	pane:SetPoint("BOTTOMRIGHT", -12, 12)
 
 	local scrollBox = CreateFrame("Frame", nil, pane, "WowScrollBoxList")
 	scrollBox:SetPoint("TOPLEFT")
@@ -49,7 +54,7 @@ local function Build(content)
 	listView:SetElementExtent(ROW_HEIGHT + 4)
 	listView:SetElementInitializer("Button", function(row, name)
 		if not row.bg then
-			row.bg = W.Panel(row, { 0.1, 0.1, 0.12, 1 }, { 0.2, 0.2, 0.24, 1 })
+			row.bg = W.Panel(row)
 			row.bg:SetPoint("TOPLEFT")
 			row.bg:SetPoint("BOTTOMRIGHT", 0, 4)
 			row.name = W.Text(row.bg, "GameFontHighlight")
@@ -82,7 +87,7 @@ local function Build(content)
 	end)
 	ScrollUtil.InitScrollBoxListWithScrollBar(scrollBox, scrollBar, listView)
 
-	local empty = W.Text(pane, "GameFontDisable")
+	local empty = W.Text(pane, "GameFontHighlight", W.MUTED)
 	empty:SetPoint("CENTER")
 	empty:SetJustifyH("CENTER")
 	empty:SetWidth(420)

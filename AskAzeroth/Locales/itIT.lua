@@ -20,6 +20,7 @@ L.PAGE_PINNED = "Fissate"
 L.PAGE_PLAYERS = "Giocatori"
 L.PAGE_FAQ = "FAQ"
 L.PAGE_SETTINGS = "Impostazioni"
+L.WINDOW_SUBTITLE = "Aiuto per i nuovi giocatori"
 
 -- Status line
 L.STATUS_LOCKDOWN = "Messaggi di chat bloccati (scontro)"
@@ -182,6 +183,7 @@ L.PINNED_EMPTY = "Ancora niente di fissato. Clicca sull'icona della nota accanto
 -- FAQ
 L.FAQ_LANGUAGE = "Lingua delle FAQ"
 L.FAQ_LANGUAGE_TIP = "Passa le FAQ dal tedesco all'inglese e viceversa."
+L.FAQ_NOT_HELPED = "Non ti ha aiutato? Chiedi alla community."
 
 -- Categories
 L.CAT_QUEST = "Missione"

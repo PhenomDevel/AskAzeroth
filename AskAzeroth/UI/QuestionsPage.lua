@@ -1,7 +1,8 @@
 local _, ns = ...
 
--- Questions page: search and category filter on top, the list of questions
--- in the selected languages on the left, the selected thread on the right.
+-- Questions page: on the left search, "Ask a question", the category
+-- filter and the list of questions in the selected languages; the selected
+-- thread on the right.
 local L = ns.L
 local C = ns.C
 local UI = ns.UI
@@ -9,56 +10,71 @@ local W = ns.Widgets
 local Store = ns.Store
 local Players = ns.Players
 
-local LIST_WIDTH = 330
+local LIST_WIDTH = 380
+local PAD = 12
 local REFRESH_DELAY = 0.3
 
 local function Build(content)
 	local page = { cats = {}, search = "" }
 
-	local search = W.SearchBox(content, 170, L.QUEUE_SEARCH, function(text)
+	-- Left column: search, "Ask", category chips, then the list.
+	local listPane = CreateFrame("Frame", nil, content)
+	listPane:SetPoint("TOPLEFT")
+	listPane:SetPoint("BOTTOMLEFT")
+	listPane:SetWidth(LIST_WIDTH)
+	W.SideLine(listPane, "RIGHT")
+
+	local filters = CreateFrame("Frame", nil, listPane)
+	filters:SetPoint("TOPLEFT")
+	filters:SetPoint("TOPRIGHT", -1, 0)
+	W.EdgeLine(filters, "BOTTOM")
+
+	local ask = W.Button(filters, L.QUEUE_ASK, nil, function()
+		ns.AskDialog.Show(function(q)
+			page.thread:SetQuestion(q.id)
+			page.list:SetSelected(q.id)
+			page:Refresh()
+		end)
+	end, "primary")
+	ask:SetHeight(28)
+	ask:SetPoint("TOPRIGHT", -PAD, -PAD)
+
+	local search = W.SearchBox(filters, 100, L.QUEUE_SEARCH, function(text)
 		page.search = strtrim(text):lower()
 		page:Refresh()
 	end)
-	search:SetPoint("TOPLEFT", 6, -6)
+	search:SetPoint("TOPLEFT", PAD, -PAD)
+	search:SetPoint("RIGHT", ask, "LEFT", -8, 0)
 
 	local chips = {}
-	local all = W.Chip(content, function()
+	local all = W.Chip(filters, function()
 		wipe(page.cats)
 		page:Refresh()
 	end)
 	all:SetLabel(L.QUEUE_ALL)
 	chips[1] = all
 	for _, category in ipairs(C.CATEGORIES) do
-		local chip = W.Chip(content, function(self)
+		local chip = W.Chip(filters, function(self)
 			page.cats[self.key] = not page.cats[self.key] or nil
 			page:Refresh()
-		end)
+		end, W.CategoryColor(category.key))
 		chip.key = category.key
 		chip:SetLabel(category.label)
 		chips[#chips + 1] = chip
 	end
-	W.FlowChips(chips, content, 186, -6, 4)
+	local chipsHeight = W.WrapChips(chips, filters, PAD, -PAD - 28 - 10, LIST_WIDTH - 2 * PAD, 6)
+	filters:SetHeight(PAD + 28 + 10 + chipsHeight + PAD)
 
-	local ask = W.Button(content, L.QUEUE_ASK, nil, function()
-		ns.AskDialog.Show(function(q)
-			page.thread:SetQuestion(q.id)
-			page.list:SetSelected(q.id)
-			page:Refresh()
-		end)
-	end)
-	ask:SetPoint("TOPRIGHT", -4, -5)
-
-	local listPane = CreateFrame("Frame", nil, content)
-	listPane:SetPoint("TOPLEFT", 4, -38)
-	listPane:SetPoint("BOTTOMLEFT", 4, 4)
-	listPane:SetWidth(LIST_WIDTH)
+	local listBox = CreateFrame("Frame", nil, listPane)
+	listBox:SetPoint("TOPLEFT", filters, "BOTTOMLEFT")
+	listBox:SetPoint("BOTTOMRIGHT", -1, 0)
 
 	local threadPane = CreateFrame("Frame", nil, content)
-	threadPane:SetPoint("TOPLEFT", listPane, "TOPRIGHT", 12, 0)
-	threadPane:SetPoint("BOTTOMRIGHT", -4, 4)
+	threadPane:SetPoint("TOPLEFT", listPane, "TOPRIGHT")
+	threadPane:SetPoint("BOTTOMRIGHT")
 
 	page.thread = ns.ThreadView.Create(threadPane)
-	page.list = ns.QueueList.Create(listPane, function(q)
+	page.list = ns.QueueList.Create(listBox, function(q)
 		page.thread:SetQuestion(q.id)
 		page.list:SetSelected(q.id)
 	end, function()

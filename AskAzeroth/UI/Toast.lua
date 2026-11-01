@@ -8,7 +8,7 @@ local C = ns.C
 local W = ns.Widgets
 local Util = ns.Util
 
-local WIDTH, HEIGHT = 320, 96
+local WIDTH, HEIGHT = 360, 96
 local ICON = "Interface\\AddOns\\AskAzeroth\\Media\\Logo"
 
 local toast, hideTimer, current
@@ -24,7 +24,7 @@ local function Hide()
 end
 
 local function Create()
-	toast = W.Panel(UIParent, { 0.05, 0.05, 0.07, 0.96 }, { 0.79, 0.635, 0.29, 1 })
+	toast = W.Panel(UIParent, W.COLORS.window, W.COLORS.accent, true)
 	toast:SetSize(WIDTH, HEIGHT)
 	toast:SetPoint("TOP", 0, -140)
 	toast:SetFrameStrata("DIALOG")
@@ -34,30 +34,35 @@ local function Create()
 
 	local icon = toast:CreateTexture(nil, "ARTWORK")
 	icon:SetTexture(ICON)
-	icon:SetSize(20, 20)
-	icon:SetPoint("TOPLEFT", 8, -8)
-	local title = W.Text(toast, "GameFontNormal")
-	title:SetPoint("LEFT", icon, "RIGHT", 6, 0)
-	title:SetText(ns.title)
-	toast.kind = W.Text(toast, "GameFontHighlightSmall", W.MUTED)
-	toast.kind:SetPoint("TOPRIGHT", -10, -12)
+	icon:SetSize(16, 16)
+	icon:SetPoint("TOPLEFT", 12, -10)
+	toast.kind = W.Text(toast, "GameFontNormalSmall")
+	toast.kind:SetPoint("LEFT", icon, "RIGHT", 6, 0)
+	toast.kind:SetPoint("RIGHT", -90, 0)
+	toast.kind:SetWordWrap(false)
+	toast.age = W.Text(toast, "GameFontHighlightSmall", W.MUTED)
+	toast.age:SetPoint("TOPRIGHT", -12, -12)
+	toast.age:SetJustifyH("RIGHT")
 
-	toast.text = W.Text(toast, "GameFontHighlight")
-	toast.text:SetPoint("TOPLEFT", 10, -34)
-	toast.text:SetPoint("RIGHT", -10, 0)
+	toast.text = W.Text(toast, "GameFontHighlight", W.TEXT)
+	toast.text:SetPoint("TOPLEFT", 12, -34)
+	toast.text:SetPoint("RIGHT", -12, 0)
 	toast.text:SetWordWrap(false)
-	toast.more = W.Text(toast, "GameFontHighlightSmall", W.MUTED)
-	toast.more:SetPoint("TOPLEFT", toast.text, "BOTTOMLEFT", 0, -4)
 
-	local open = W.Button(toast, L.TOAST_OPEN, 90, function()
+	local open = W.Button(toast, L.TOAST_OPEN, nil, function()
 		Hide()
 		if current then
 			ns.UI.ShowQuestion(current.question.id)
 		end
-	end)
-	open:SetPoint("BOTTOMRIGHT", -8, 8)
-	local later = W.Button(toast, L.TOAST_LATER, 90, Hide)
-	later:SetPoint("RIGHT", open, "LEFT", -4, 0)
+	end, "primary")
+	open:SetPoint("BOTTOMRIGHT", -12, 12)
+	local later = W.Button(toast, L.TOAST_LATER, nil, Hide)
+	later:SetPoint("RIGHT", open, "LEFT", -6, 0)
+
+	toast.more = W.Text(toast, "GameFontHighlightSmall", W.MUTED)
+	toast.more:SetPoint("BOTTOMLEFT", 12, 19)
+	toast.more:SetPoint("RIGHT", later, "LEFT", -8, 0)
+	toast.more:SetWordWrap(false)
 end
 
 ns.RegisterCallback({}, "AA_NOTIFY_TOAST", function(_, entry, more)
@@ -67,14 +72,14 @@ ns.RegisterCallback({}, "AA_NOTIFY_TOAST", function(_, entry, more)
 	current = entry
 	local q = entry.question
 	if entry.kind == "answer" then
-		toast.kind:SetText(L.TOAST_ANSWER)
+		toast.kind:SetText("|cfff0d68c" .. L.TOAST_ANSWER .. "|r")
 		toast.text:SetText(L.TOAST_LINE:format(ns.Widgets.PlayerText(entry.answer.author, ns.Players.GetClass(entry.answer.author)), Util.EscapeText(entry.answer.text)))
 	else
-		local category = C.GetCategory(q.cat)
-		toast.kind:SetText((entry.favorite and W.STAR or "") .. (category and category.label or ""))
+		toast.kind:SetText((entry.favorite and W.STAR or "") .. W.CategoryText(q.cat))
 		toast.text:SetText(L.TOAST_LINE:format(W.PlayerText(q.author, q.ctx and q.ctx.class), Util.EscapeText(q.title)))
 	end
 	toast.more:SetText(more > 0 and L.TOAST_MORE:format(more) or "")
+	toast.age:SetText(L.AGO_NOW)
 	toast:Show()
 	if hideTimer then
 		hideTimer:Cancel()

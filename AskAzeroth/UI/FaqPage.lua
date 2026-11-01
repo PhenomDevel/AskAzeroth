@@ -1,15 +1,19 @@
 -- luacheck: read globals CreateScrollBoxListLinearView ScrollUtil CreateDataProvider
 local _, ns = ...
 
--- Built-in FAQ (Core/Data/Faq*.lua) with search and category filter. Shown
--- in German for German clients, otherwise in English; a button switches
--- between the two.
+-- Built-in FAQ (Core/Data/Faq*.lua): on the left search, language switch,
+-- category filter and the list of entries; the selected answer on the
+-- right with "Ask a question" for when it did not help. Shown in German
+-- for German clients, otherwise in English.
 local L = ns.L
 local C = ns.C
 local UI = ns.UI
 local W = ns.Widgets
 
-local PAD = 8
+local LIST_WIDTH = 360
+local PAD = 12
+local SIDE = 22
+local ROW_HEIGHT = 50
 local FAQ_LANGUAGES = { "en", "de" }
 
 local function DefaultLanguage()
@@ -20,98 +24,171 @@ end
 local function Build(content)
 	local page = { cats = {}, search = "", lang = DefaultLanguage() }
 
-	local search = W.SearchBox(content, 170, L.QUEUE_SEARCH, function(text)
+	-- Left column.
+	local listPane = CreateFrame("Frame", nil, content)
+	listPane:SetPoint("TOPLEFT")
+	listPane:SetPoint("BOTTOMLEFT")
+	listPane:SetWidth(LIST_WIDTH)
+	W.SideLine(listPane, "RIGHT")
+
+	local filters = CreateFrame("Frame", nil, listPane)
+	filters:SetPoint("TOPLEFT")
+	filters:SetPoint("TOPRIGHT", -1, 0)
+	W.EdgeLine(filters, "BOTTOM")
+
+	local switch = W.Button(filters, "", 90)
+	switch:SetHeight(28)
+	switch:SetPoint("TOPRIGHT", -PAD, -PAD)
+	W.Tooltip(switch, L.FAQ_LANGUAGE, L.FAQ_LANGUAGE_TIP)
+	switch:SetScript("OnClick", function()
+		page.lang = page.lang == FAQ_LANGUAGES[1] and FAQ_LANGUAGES[2] or FAQ_LANGUAGES[1]
+		page.selected = nil
+		page:Refresh()
+	end)
+
+	local search = W.SearchBox(filters, 100, L.QUEUE_SEARCH, function(text)
 		page.search = strtrim(text):lower()
 		page:Refresh()
 	end)
-	search:SetPoint("TOPLEFT", 6, -6)
+	search:SetPoint("TOPLEFT", PAD, -PAD)
+	search:SetPoint("RIGHT", switch, "LEFT", -8, 0)
 
 	local chips = {}
-	local all = W.Chip(content, function()
+	local all = W.Chip(filters, function()
 		wipe(page.cats)
 		page:Refresh()
 	end)
 	all:SetLabel(L.QUEUE_ALL)
 	chips[1] = all
 	for _, category in ipairs(C.CATEGORIES) do
-		local chip = W.Chip(content, function(self)
+		local chip = W.Chip(filters, function(self)
 			page.cats[self.key] = not page.cats[self.key] or nil
 			page:Refresh()
-		end)
+		end, W.CategoryColor(category.key))
 		chip.key = category.key
 		chip:SetLabel(category.label)
 		chips[#chips + 1] = chip
 	end
-	W.FlowChips(chips, content, 186, -6, 4)
+	local chipsHeight = W.WrapChips(chips, filters, PAD, -PAD - 28 - 10, LIST_WIDTH - 2 * PAD, 6)
+	filters:SetHeight(PAD + 28 + 10 + chipsHeight + PAD)
 
-	local switch = W.Button(content, "", 90)
-	switch:SetPoint("TOPRIGHT", -4, -5)
-	W.Tooltip(switch, L.FAQ_LANGUAGE, L.FAQ_LANGUAGE_TIP)
-	switch:SetScript("OnClick", function()
-		page.lang = page.lang == FAQ_LANGUAGES[1] and FAQ_LANGUAGES[2] or FAQ_LANGUAGES[1]
-		page:Refresh()
-	end)
+	local listBox = CreateFrame("Frame", nil, listPane)
+	listBox:SetPoint("TOPLEFT", filters, "BOTTOMLEFT")
+	listBox:SetPoint("BOTTOMRIGHT", -1, 0)
 
-	local pane = CreateFrame("Frame", nil, content)
-	pane:SetPoint("TOPLEFT", 4, -38)
-	pane:SetPoint("BOTTOMRIGHT", -4, 4)
-
-	local scrollBox = CreateFrame("Frame", nil, pane, "WowScrollBoxList")
+	local scrollBox = CreateFrame("Frame", nil, listBox, "WowScrollBoxList")
 	scrollBox:SetPoint("TOPLEFT")
-	scrollBox:SetPoint("BOTTOMRIGHT", -16, 0)
-	local scrollBar = CreateFrame("EventFrame", nil, pane, "MinimalScrollBar")
-	scrollBar:SetPoint("TOPLEFT", scrollBox, "TOPRIGHT", 4, 0)
-	scrollBar:SetPoint("BOTTOMLEFT", scrollBox, "BOTTOMRIGHT", 4, 0)
+	scrollBox:SetPoint("BOTTOMRIGHT", -12, 0)
+	local scrollBar = CreateFrame("EventFrame", nil, listBox, "MinimalScrollBar")
+	scrollBar:SetPoint("TOPLEFT", scrollBox, "TOPRIGHT", 2, -4)
+	scrollBar:SetPoint("BOTTOMLEFT", scrollBox, "BOTTOMRIGHT", 2, 4)
 
-	local empty = W.Text(pane, "GameFontDisable")
-	empty:SetPoint("CENTER", -8, 0)
+	local empty = W.Text(listBox, "GameFontHighlight", W.MUTED)
+	empty:SetPoint("CENTER", -6, 0)
 	empty:SetJustifyH("CENTER")
-	empty:SetWidth(360)
+	empty:SetWidth(LIST_WIDTH - 40)
 	empty:SetText(L.QUEUE_NO_MATCH)
 
-	local measure = pane:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+	local listView = CreateScrollBoxListLinearView()
+	listView:SetElementExtent(ROW_HEIGHT)
+	listView:SetElementInitializer("Button", function(row, entry)
+		if not row.title then
+			row:SetHeight(ROW_HEIGHT)
+			W.ListRowLook(row)
+			row:SetHighlightTexture(W.WHITE8)
+			row:GetHighlightTexture():SetVertexColor(1, 0.85, 0.5, 0.05)
+			row.title = W.Text(row, "GameFontHighlight", W.TEXT)
+			row.title:SetPoint("TOPLEFT", PAD, -9)
+			row.title:SetPoint("RIGHT", -PAD, 0)
+			row.title:SetWordWrap(false)
+			row.meta = W.Text(row, "GameFontHighlightSmall")
+			row.meta:SetPoint("BOTTOMLEFT", PAD, 9)
+			row:SetScript("OnClick", function(self)
+				page.selected = self.entry
+				page:Refresh()
+			end)
+		end
+		row.entry = entry
+		row.title:SetText(entry.q)
+		row.meta:SetText(W.CategoryText(entry.cat))
+		row:SetSelectedLook(entry == page.selected)
+	end)
+	ScrollUtil.InitScrollBoxListWithScrollBar(scrollBox, scrollBar, listView)
+
+	-- Right column: the selected entry.
+	local detail = CreateFrame("Frame", nil, content)
+	detail:SetPoint("TOPLEFT", listPane, "TOPRIGHT")
+	detail:SetPoint("BOTTOMRIGHT")
+
+	local bottom = CreateFrame("Frame", nil, detail)
+	bottom:SetPoint("BOTTOMLEFT")
+	bottom:SetPoint("BOTTOMRIGHT")
+	bottom:SetHeight(56)
+	W.Fill(bottom, W.COLORS.nav):SetAllPoints()
+	W.EdgeLine(bottom, "TOP")
+	local askHint = W.Text(bottom, "GameFontHighlight", W.SOFT)
+	askHint:SetPoint("LEFT", SIDE, 0)
+	askHint:SetText(L.FAQ_NOT_HELPED)
+	local ask = W.Button(bottom, L.QUEUE_ASK, nil, function()
+		ns.AskDialog.Show(function(q)
+			UI.ShowQuestion(q.id)
+		end)
+	end, "primary")
+	ask:SetHeight(32)
+	ask:SetPoint("RIGHT", -SIDE, 0)
+	askHint:SetPoint("RIGHT", ask, "LEFT", -12, 0)
+	askHint:SetWordWrap(false)
+
+	-- The answer can be long: one scrolling element with everything.
+	local textBox = CreateFrame("Frame", nil, detail, "WowScrollBoxList")
+	textBox:SetPoint("TOPLEFT", SIDE, -18)
+	textBox:SetPoint("BOTTOMRIGHT", bottom, "TOPRIGHT", -SIDE - 12, 8)
+	local textBar = CreateFrame("EventFrame", nil, detail, "MinimalScrollBar")
+	textBar:SetPoint("TOPLEFT", textBox, "TOPRIGHT", 4, 0)
+	textBar:SetPoint("BOTTOMLEFT", textBox, "BOTTOMRIGHT", 4, 0)
+
+	local measure = detail:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
 	measure:Hide()
-	local function TextHeight(text, font, width)
+	local function TextHeight(text, font, width, spacing)
 		measure:SetFontObject(font)
+		measure:SetSpacing(spacing or 0)
 		measure:SetWidth(width)
 		measure:SetText(text)
 		return measure:GetStringHeight()
 	end
 
-	local function RowHeight(entry)
-		local width = math.max(100, scrollBox:GetWidth() - 2 * PAD)
-		return PAD + TextHeight(entry.q, "GameFontNormal", width) + 4 + 14 + 6
-			+ TextHeight(entry.a, "GameFontHighlight", width) + PAD + 4
+	local function DetailHeight(entry)
+		local width = math.max(100, textBox:GetWidth() - 4)
+		return 14 + 8 + TextHeight(entry.q, W.TITLE_FONT, width) + 14 + TextHeight(entry.a, "GameFontHighlight", width, 3) + 12
 	end
 
-	local function FillRow(row, entry)
-		if not row.bg then
-			row.bg = W.Panel(row, { 0.08, 0.08, 0.1, 1 }, { 0.18, 0.18, 0.22, 1 })
-			row.bg:SetPoint("TOPLEFT")
-			row.bg:SetPoint("BOTTOMRIGHT", 0, 4)
-			row.title = W.Text(row.bg, "GameFontNormal")
-			row.title:SetPoint("TOPLEFT", PAD, -PAD)
-			row.title:SetPoint("RIGHT", -PAD, 0)
-			row.title:SetWordWrap(true)
-			row.meta = W.Text(row.bg, "GameFontHighlightSmall", W.MUTED)
-			row.meta:SetPoint("TOPLEFT", row.title, "BOTTOMLEFT", 0, -4)
-			row.text = W.Text(row.bg, "GameFontHighlight", W.TEXT)
-			row.text:SetPoint("TOPLEFT", row.meta, "BOTTOMLEFT", 0, -6)
-			row.text:SetPoint("RIGHT", -PAD, 0)
-			row.text:SetWordWrap(true)
-		end
-		local category = C.GetCategory(entry.cat)
-		row.title:SetText(entry.q)
-		row.meta:SetText(category and category.label or entry.cat)
-		row.text:SetText(entry.a)
-	end
-
-	local listView = CreateScrollBoxListLinearView()
-	listView:SetElementExtentCalculator(function(_, entry)
-		return RowHeight(entry)
+	local detailView = CreateScrollBoxListLinearView()
+	detailView:SetElementExtentCalculator(function(_, entry)
+		return DetailHeight(entry)
 	end)
-	listView:SetElementInitializer("Frame", FillRow)
-	ScrollUtil.InitScrollBoxListWithScrollBar(scrollBox, scrollBar, listView)
+	detailView:SetElementInitializer("Frame", function(frame, entry)
+		if not frame.title then
+			frame.category = W.Text(frame, "GameFontNormalSmall")
+			frame.category:SetPoint("TOPLEFT")
+			frame.title = W.Text(frame, W.TITLE_FONT, W.GOLD)
+			frame.title:SetPoint("TOPLEFT", frame.category, "BOTTOMLEFT", 0, -8)
+			frame.title:SetPoint("RIGHT", -4, 0)
+			frame.title:SetWordWrap(true)
+			frame.text = W.Text(frame, "GameFontHighlight", W.TEXT)
+			frame.text:SetPoint("TOPLEFT", frame.title, "BOTTOMLEFT", 0, -14)
+			frame.text:SetPoint("RIGHT", -4, 0)
+			frame.text:SetWordWrap(true)
+			frame.text:SetSpacing(3)
+		end
+		frame.category:SetText(W.CategoryText(entry.cat))
+		frame.title:SetText(entry.q)
+		frame.text:SetText(entry.a)
+	end)
+	ScrollUtil.InitScrollBoxListWithScrollBar(textBox, textBar, detailView)
+
+	local none = W.Text(detail, "GameFontHighlight", W.MUTED)
+	none:SetPoint("CENTER", 0, 28)
+	none:SetText(L.QUEUE_NO_MATCH)
 
 	function page:Refresh()
 		all:SetActive(next(self.cats) == nil)
@@ -120,6 +197,7 @@ local function Build(content)
 		end
 		switch:SetText(C.LANGUAGE_NAMES[self.lang])
 		local list = {}
+		local selectedVisible = false
 		for _, entry in ipairs(ns.FAQ[self.lang] or {}) do
 			local ok = next(self.cats) == nil or self.cats[entry.cat]
 			if ok and self.search ~= "" then
@@ -127,10 +205,17 @@ local function Build(content)
 			end
 			if ok then
 				list[#list + 1] = entry
+				selectedVisible = selectedVisible or entry == self.selected
 			end
+		end
+		-- Keep the selection while it matches, else show the first entry.
+		if not selectedVisible then
+			self.selected = list[1]
 		end
 		scrollBox:SetDataProvider(CreateDataProvider(list), true)
 		empty:SetShown(#list == 0)
+		textBox:SetDataProvider(CreateDataProvider(self.selected and { self.selected } or {}))
+		none:SetShown(self.selected == nil)
 	end
 
 	return page

@@ -20,6 +20,7 @@ L.PAGE_PINNED = "Angepinnt"
 L.PAGE_PLAYERS = "Spieler"
 L.PAGE_FAQ = "FAQ"
 L.PAGE_SETTINGS = "Einstellungen"
+L.WINDOW_SUBTITLE = "Neulingshilfe"
 
 -- Status line
 L.STATUS_LOCKDOWN = "Chatnachrichten gesperrt (Bosskampf)"
@@ -182,6 +183,7 @@ L.PINNED_EMPTY = "Noch nichts angepinnt. Klick auf das Notiz-Symbol neben einer 
 -- FAQ
 L.FAQ_LANGUAGE = "FAQ-Sprache"
 L.FAQ_LANGUAGE_TIP = "Schaltet das FAQ zwischen Deutsch und Englisch um."
+L.FAQ_NOT_HELPED = "Nicht geholfen? Frag die Community."
 
 -- Categories
 L.CAT_QUEST = "Quest"

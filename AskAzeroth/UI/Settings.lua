@@ -9,7 +9,7 @@ local UI = ns.UI
 local W = ns.Widgets
 local Channel = ns.Channel
 
-local COLUMN_WIDTH = 250
+local COLUMN_WIDTH = 290
 -- Class files for the class filter, in the game's order where known.
 -- luacheck: read globals CLASS_SORT_ORDER
 local CLASSES = CLASS_SORT_ORDER or { "WARRIOR", "PALADIN", "HUNTER", "ROGUE", "PRIEST", "SHAMAN", "MAGE", "WARLOCK", "DRUID" }
@@ -32,7 +32,7 @@ local function Build(content)
 
 	-- General (left column)
 	local general = W.Header(content, L.SETTINGS_GENERAL)
-	general:SetPoint("TOPLEFT", 16, -16)
+	general:SetPoint("TOPLEFT", 24, -22)
 
 	local mentor = Add(W.Checkbox(content, L.SETTING_MENTOR, function()
 		return settings.mentor
@@ -162,7 +162,7 @@ local function Build(content)
 			askDropdown:Refresh()
 		end))
 		box:SetPoint("TOPLEFT", previous, "BOTTOMLEFT", i == 1 and -4 or 0, i == 1 and -6 or 2)
-		local channel = W.Text(box, "GameFontDisableSmall")
+		local channel = W.Text(box, "GameFontHighlightSmall", W.MUTED)
 		channel:SetPoint("LEFT", box.label, "RIGHT", 6, 0)
 		channel:SetText(C.GetChannelName(lang))
 		box.status = channel

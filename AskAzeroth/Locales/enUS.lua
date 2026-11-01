@@ -24,6 +24,7 @@ L.PAGE_PINNED = "Pinned"
 L.PAGE_PLAYERS = "Players"
 L.PAGE_FAQ = "FAQ"
 L.PAGE_SETTINGS = "Settings"
+L.WINDOW_SUBTITLE = "Newcomer help"
 
 -- Status line
 L.STATUS_LOCKDOWN = "Chat messages locked (encounter)"
@@ -186,6 +187,7 @@ L.PINNED_EMPTY = "Nothing pinned yet. Click the note icon next to an answer to k
 -- FAQ
 L.FAQ_LANGUAGE = "FAQ language"
 L.FAQ_LANGUAGE_TIP = "Switches the FAQ between German and English."
+L.FAQ_NOT_HELPED = "Did not help? Ask the community."
 
 -- Categories
 L.CAT_QUEST = "Quest"
