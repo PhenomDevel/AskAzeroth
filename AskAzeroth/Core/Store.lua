@@ -326,6 +326,8 @@ function handlers.SP(m, now)
 				AddAnswer(incoming, a)
 			end
 			if not Store.IsExpired(incoming, now) then
+				-- Came in late via sync: no notification for it.
+				incoming.viaSync = true
 				questions[incoming.id] = incoming
 				q = incoming
 				isNew = true

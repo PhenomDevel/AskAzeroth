@@ -1,14 +1,18 @@
 local _, ns = ...
 
--- Settings page in the main window: general options, languages (one hidden
--- channel each) and how long own questions are kept.
+-- Settings page in the main window, three columns: general options and
+-- how long own questions are kept; mentor notifications; languages (one
+-- hidden channel each).
 local L = ns.L
 local C = ns.C
 local UI = ns.UI
 local W = ns.Widgets
 local Channel = ns.Channel
 
-local COLUMN_GAP = 300
+local COLUMN_WIDTH = 250
+-- Class files for the class filter, in the game's order where known.
+-- luacheck: read globals CLASS_SORT_ORDER
+local CLASSES = CLASS_SORT_ORDER or { "WARRIOR", "PALADIN", "HUNTER", "ROGUE", "PRIEST", "SHAMAN", "MAGE", "WARLOCK", "DRUID" }
 
 local function RetentionLabel(days)
 	if days == 0 then
@@ -62,10 +66,87 @@ local function Build(content)
 	retention:SetPoint("TOPLEFT", retentionLabel, "BOTTOMLEFT", 0, -6)
 	W.Tooltip(retention, L.SETTING_RETENTION, L.SETTING_RETENTION_TIP)
 
+	-- Mentor notifications (middle column)
+	local notify = settings.notify
+	local mentorHeader = W.Header(content, L.SETTINGS_NOTIFY)
+	mentorHeader:SetPoint("TOPLEFT", general, "TOPLEFT", COLUMN_WIDTH, 0)
+	local mentorHint = W.Paragraph(content, COLUMN_WIDTH - 20, L.SETTINGS_NOTIFY_TEXT, "GameFontHighlightSmall", W.MUTED)
+	mentorHint:SetPoint("TOPLEFT", mentorHeader, "BOTTOMLEFT", 0, -6)
+
+	local modeOptions = {}
+	for _, mode in ipairs(ns.Notify.MODES) do
+		modeOptions[#modeOptions + 1] = { value = mode, label = L["NOTIFY_MODE_" .. mode:upper()] }
+	end
+	local previousRow = mentorHint
+	for i, category in ipairs(C.CATEGORIES) do
+		local label = W.Text(content, "GameFontHighlight")
+		label:SetPoint("TOPLEFT", previousRow, "BOTTOMLEFT", 0, i == 1 and -12 or -10)
+		label:SetText(category.label)
+		local dropdown = Add(W.Dropdown(content, 110, modeOptions, function()
+			return ns.Notify.GetMode(category.key)
+		end, function(mode)
+			ns.Notify.SetMode(category.key, mode)
+		end))
+		dropdown:SetPoint("LEFT", label, "LEFT", 112, 0)
+		previousRow = label
+	end
+
+	local classLabel = W.Text(content, "GameFontHighlight")
+	classLabel:SetPoint("TOPLEFT", previousRow, "BOTTOMLEFT", 0, -16)
+	classLabel:SetText(L.SETTING_CLASSES)
+	local classes = Add(W.Menu(content, 110, function(root)
+		root:CreateButton(L.SETTING_CLASSES_ALL, function()
+			wipe(notify.classes)
+		end)
+		for _, classFile in ipairs(CLASSES) do
+			local name = W.ClassName(classFile)
+			if name then
+				root:CreateCheckbox(name, function()
+					return notify.classes[classFile] == true
+				end, function()
+					notify.classes[classFile] = not notify.classes[classFile] or nil
+				end)
+			end
+		end
+	end))
+	classes:SetPoint("LEFT", classLabel, "LEFT", 112, 0)
+	if classes.SetDefaultText then
+		classes:SetDefaultText(L.SETTING_CLASSES_ALL)
+	end
+	W.Tooltip(classes, L.SETTING_CLASSES, L.SETTING_CLASSES_TIP)
+
+	local levelLabel = W.Text(content, "GameFontHighlight")
+	levelLabel:SetPoint("TOPLEFT", classLabel, "BOTTOMLEFT", 0, -16)
+	levelLabel:SetText(L.SETTING_MAX_LEVEL)
+	local levelOptions = { { value = false, label = L.SETTING_MAX_LEVEL_ANY } }
+	for _, level in ipairs(C.ASKER_LEVELS) do
+		levelOptions[#levelOptions + 1] = { value = level, label = L.LEVEL_SHORT:format(level) }
+	end
+	local level = Add(W.Dropdown(content, 110, levelOptions, function()
+		return notify.maxLevel or false
+	end, function(value)
+		notify.maxLevel = value or nil
+	end))
+	level:SetPoint("LEFT", levelLabel, "LEFT", 112, 0)
+	W.Tooltip(level, L.SETTING_MAX_LEVEL, L.SETTING_MAX_LEVEL_TIP)
+
+	local pauseCombat = Add(W.Checkbox(content, L.SETTING_PAUSE_COMBAT, function()
+		return notify.pauseCombat
+	end, function(checked)
+		notify.pauseCombat = checked
+	end))
+	pauseCombat:SetPoint("TOPLEFT", levelLabel, "BOTTOMLEFT", -4, -12)
+	local pauseInstance = Add(W.Checkbox(content, L.SETTING_PAUSE_INSTANCE, function()
+		return notify.pauseInstance
+	end, function(checked)
+		notify.pauseInstance = checked
+	end))
+	pauseInstance:SetPoint("TOPLEFT", pauseCombat, "BOTTOMLEFT", 0, -2)
+
 	-- Languages (right column)
 	local languages = W.Header(content, L.SETTINGS_LANGUAGES)
-	languages:SetPoint("TOPLEFT", general, "TOPLEFT", COLUMN_GAP, 0)
-	local hint = W.Paragraph(content, 380, L.SETTINGS_LANGUAGES_TEXT, "GameFontHighlightSmall", W.MUTED)
+	languages:SetPoint("TOPLEFT", general, "TOPLEFT", 2 * COLUMN_WIDTH, 0)
+	local hint = W.Paragraph(content, COLUMN_WIDTH - 20, L.SETTINGS_LANGUAGES_TEXT, "GameFontHighlightSmall", W.MUTED)
 	hint:SetPoint("TOPLEFT", languages, "BOTTOMLEFT", 0, -6)
 
 	local askDropdown

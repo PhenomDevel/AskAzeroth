@@ -131,6 +131,10 @@ local function Build(content)
 		end
 	end
 
+	function page:OnShow()
+		ns.Notify.MarkSeen()
+	end
+
 	function page:Tick()
 		self.list:Repaint()
 		self.thread:Tick()
@@ -147,6 +151,12 @@ local function Build(content)
 				page:Refresh()
 			end
 		end)
+	end)
+	-- What arrives while the page is open counts as seen.
+	ns.RegisterCallback(page, "AA_NOTIFY_CHANGED", function(_, count)
+		if count > 0 and content:IsVisible() then
+			ns.Notify.MarkSeen()
+		end
 	end)
 	ns.RegisterCallback(page, "AA_PLAYERS_CHANGED", function()
 		if content:IsVisible() then
