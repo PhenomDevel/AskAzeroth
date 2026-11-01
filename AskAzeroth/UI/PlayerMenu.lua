@@ -3,7 +3,8 @@
 local _, ns = ...
 
 -- Context menu for a player (right click on a name): favourite, ignore,
--- note, whisper and, on answers to own questions, "helped me".
+-- note, whisper, on answers "Pin answer" and, on answers to own questions,
+-- "helped me".
 local PlayerMenu = {}
 ns.PlayerMenu = PlayerMenu
 
@@ -59,13 +60,32 @@ function PlayerMenu.Whisper(name)
 end
 
 -- answer: set when the menu is for an answer to the player's own question,
--- to offer "helped me".
-function PlayerMenu.Open(owner, name, answer)
-	if not name or name == ns:GetPlayerFullName() or not (MenuUtil and MenuUtil.CreateContextMenu) then
+-- to offer "helped me". pin: { question, answer, onError(reason) } adds
+-- "Pin answer"; with it the menu also opens on the player's own answers
+-- (then with nothing but the pin entry).
+function PlayerMenu.Open(owner, name, answer, pin)
+	if not name or not (MenuUtil and MenuUtil.CreateContextMenu) then
+		return
+	end
+	local isSelf = name == ns:GetPlayerFullName()
+	if isSelf and not pin then
 		return
 	end
 	MenuUtil.CreateContextMenu(owner, function(_, root)
 		root:CreateTitle(Util.EscapeText(Util.ShortName(name)))
+		if pin then
+			root:CreateCheckbox(L.THREAD_PIN, function()
+				return ns.Pinned.IsPinned(pin.answer.id)
+			end, function()
+				local state, reason = ns.Pinned.Toggle(pin.question, pin.answer)
+				if state == nil and pin.onError then
+					pin.onError(reason)
+				end
+			end)
+		end
+		if isSelf then
+			return
+		end
 		if answer then
 			local done = Players.HasHelped(answer.id)
 			local button = root:CreateButton(done and L.PLAYER_HELPED_DONE or L.PLAYER_HELPED, function()
