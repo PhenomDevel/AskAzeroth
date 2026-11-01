@@ -45,10 +45,15 @@ Locales\ptBR.lua
 # Core
 Core\Init.lua
 Core\Constants.lua
+Core\Util.lua
+Core\Serializer.lua
+Core\Data\Categories.lua
 Core\Database.lua
 Core\SlashCommands.lua
 Core\Channel.lua
 Core\Comm.lua
+Core\Protocol.lua
+Core\Store.lua
 
 # UI
 UI\Widgets.lua
@@ -61,4 +66,5 @@ UI\Commands.lua
 # Transport test tools (/aa probe); development checkouts only
 #@do-not-package@
 Probe\Probe.lua
+Probe\Simulate.lua
 #@end-do-not-package@

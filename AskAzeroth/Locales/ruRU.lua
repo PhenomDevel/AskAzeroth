@@ -56,3 +56,11 @@ L.CMD_SETTINGS = "открыть настройки"
 L.CMD_MINIMAP = "показать или скрыть кнопку у миникарты"
 L.CMD_MINIMAP_HIDDEN = "Кнопка у миникарты скрыта. |cffffd100/aa minimap|r снова покажет её."
 L.CMD_MINIMAP_SHOWN = "Кнопка у миникарты показана."
+
+-- Categories
+L.CAT_QUEST = "Задание"
+L.CAT_CLASS = "Класс"
+L.CAT_DUNGEON = "Подземелье"
+L.CAT_PROF = "Профессия"
+L.CAT_UI = "Интерфейс"
+L.CAT_MISC = "Другое"

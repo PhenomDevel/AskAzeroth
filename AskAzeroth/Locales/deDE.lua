@@ -57,6 +57,30 @@ L.CMD_MINIMAP = "Minimap-Button ein- oder ausblenden"
 L.CMD_MINIMAP_HIDDEN = "Minimap-Button ausgeblendet. |cffffd100/aa minimap|r zeigt ihn wieder."
 L.CMD_MINIMAP_SHOWN = "Minimap-Button eingeblendet."
 
+-- Categories
+L.CAT_QUEST = "Quest"
+L.CAT_CLASS = "Klasse"
+L.CAT_DUNGEON = "Dungeon"
+L.CAT_PROF = "Beruf"
+L.CAT_UI = "Oberfläche"
+L.CAT_MISC = "Sonstiges"
+
+-- Store test (/aa simulate, /aa store, /aa debug; development checkouts only; enUS + deDE)
+L.SIM_HELP = "Store-Test: ausgedachte Fragen, Regelprüfung, Aufräumen, Leeren (es wird nichts gesendet)"
+L.SIM_HELP_STORE = "Fragen im Speicher auflisten oder eine anzeigen"
+L.SIM_HELP_DEBUG = "jede Änderung im Store und jede verworfene Nachricht ausgeben"
+L.SIM_DONE = "%d Fragen, %d Antworten, %d gelöst simuliert (%d abgelehnt). Im Speicher: %d."
+L.SIM_FAIL = "FEHLER"
+L.SIM_CHECK_RESULT = "Regelprüfung: %d von %d bestanden. Der Store wurde geleert."
+L.SIM_UNKNOWN_ID = "Keine Frage mit der ID %s."
+L.SIM_STATUS_LINE = "Status: %s, verschwindet in %d min."
+L.SIM_STORE_HEADER = "%d Fragen im Speicher (%d Nachrichten angenommen, %d verworfen):"
+L.SIM_DROPPED = "verworfen"
+L.SIM_SWEPT = "%d abgelaufene Fragen entfernt, %d übrig."
+L.SIM_RESET = "Store geleert."
+L.SIM_DEBUG_ON = "Store-Debugausgabe an."
+L.SIM_DEBUG_OFF = "Store-Debugausgabe aus."
+
 -- Probe
 L.PROBE_HELP = "Transporttest (M0)"
 L.PROBE_HELP_HEADER = "Transporttest (alles landet auch im gespeicherten Log):"

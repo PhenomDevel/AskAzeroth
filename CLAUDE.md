@@ -53,8 +53,8 @@ message lockdown during encounters). Do not assume the old Classic Era API.
 - Lua 5.1, tabs for indentation, English code comments and docs (except
   `PLAN.md`).
 - In-game strings in `Locales/`: enUS (base) and deDE always; frFR, esES
-  (also esMX), itIT, ruRU and ptBR get every new UI string too. The probe
-  (`PROBE_*`) strings are enUS + deDE only. Missing keys fall back to enUS.
+  (also esMX), itIT, ruRU and ptBR get every new UI string too. The
+  development-tool strings (`PROBE_*`, `SIM_*`) are enUS + deDE only. Missing keys fall back to enUS.
 - Commit messages and PR titles: Conventional Commits (`feat: …`, `fix: …`,
   `docs: …`, `chore: …`, see the general rules).
 - `.luacheckrc` holds common globals only; declare others per file with

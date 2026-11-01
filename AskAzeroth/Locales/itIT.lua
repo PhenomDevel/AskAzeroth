@@ -56,3 +56,11 @@ L.CMD_SETTINGS = "apri le impostazioni"
 L.CMD_MINIMAP = "mostra o nascondi il pulsante della minimappa"
 L.CMD_MINIMAP_HIDDEN = "Pulsante della minimappa nascosto. |cffffd100/aa minimap|r lo mostra di nuovo."
 L.CMD_MINIMAP_SHOWN = "Pulsante della minimappa visibile."
+
+-- Categories
+L.CAT_QUEST = "Missione"
+L.CAT_CLASS = "Classe"
+L.CAT_DUNGEON = "Spedizione"
+L.CAT_PROF = "Professione"
+L.CAT_UI = "Interfaccia"
+L.CAT_MISC = "Altro"
