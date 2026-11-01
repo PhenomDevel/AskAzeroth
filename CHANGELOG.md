@@ -3,9 +3,9 @@
 ## Unreleased
 
 - In development, no release yet.
+- Loads on retail (Midnight) too, for testing until Forever launches.
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
-  Players, FAQ and Settings; My questions, Pinned and FAQ are placeholders
-  for now.
+  Players, FAQ and Settings.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
   language of new questions and how long your own questions are kept.
 - Minimap button and addon compartment entry: left click opens the window,

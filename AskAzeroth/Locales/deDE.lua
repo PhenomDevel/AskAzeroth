@@ -20,10 +20,6 @@ L.PAGE_PINNED = "Angepinnt"
 L.PAGE_PLAYERS = "Spieler"
 L.PAGE_FAQ = "FAQ"
 L.PAGE_SETTINGS = "Einstellungen"
-L.PAGE_COMING_SOON = "Kommt in einer späteren Version."
-L.PAGE_MY_QUESTIONS_TEXT = "Alles, was du gefragt hast, mit allen Antworten, auch nachdem es aus der öffentlichen Liste verschwunden ist."
-L.PAGE_PINNED_TEXT = "Antworten, die du angepinnt hast, samt ihrer Frage. Sie bleiben auf deinem Rechner und laufen nie ab, auch wenn die Frage verschwunden ist."
-L.PAGE_FAQ_TEXT = "Antworten auf häufige Fragen neuer Spieler."
 
 -- Status line
 L.STATUS_LOCKDOWN = "Chatnachrichten gesperrt (Bosskampf)"
@@ -157,6 +153,36 @@ L.TOAST_LINE = "%s: „%s“"
 L.TOAST_MORE = "+%d weitere"
 L.MINIMAP_NEW = "%d neu"
 
+-- Thread (pins, My questions)
+L.THREAD_CLOSED = "Geschlossen – nicht mehr in der öffentlichen Liste."
+L.THREAD_WITHDRAWN = "Zurückgezogen."
+L.THREAD_ELSEWHERE = "Noch öffentlich, auf diesem Charakter aber noch nicht empfangen."
+L.THREAD_PIN = "Antwort anpinnen"
+L.THREAD_PIN_TIP = "Behält diese Antwort samt Frage unter „Angepinnt“. Angepinnte Antworten laufen nie ab."
+L.THREAD_UNPIN = "Pin lösen"
+L.THREAD_UNPIN_TIP = "Entfernt diese Antwort aus „Angepinnt“."
+
+-- Status and reasons
+L.STATUS_WITHDRAWN = "zurückgezogen"
+L.REASON_PIN_FULL = "Du hast die Höchstzahl von 500 Antworten angepinnt. Löse zuerst ein paar."
+
+-- My questions
+L.MY_CLEANUP = "Aufräumen"
+L.MY_CLEANUP_TIP = "Entfernt geschlossene und zurückgezogene Fragen, die älter als die Aufbewahrungsdauer aus den Einstellungen sind."
+L.MY_CLEANUP_FOREVER = "Fragen werden für immer aufbewahrt. Lege in den Einstellungen eine Aufbewahrungsdauer fest."
+L.MY_CLEANUP_DONE = "%d Fragen entfernt."
+L.MY_COUNT = "%d Fragen"
+L.MY_EMPTY = "Du hast noch nichts gefragt. Deine Fragen werden hier samt allen Antworten aufbewahrt."
+
+-- Pinned
+L.PINNED_UNPIN = "Pin lösen"
+L.PINNED_COUNT = "%d / %d angepinnt"
+L.PINNED_EMPTY = "Noch nichts angepinnt. Klick auf das Notiz-Symbol neben einer Antwort, um sie hier zu behalten."
+
+-- FAQ
+L.FAQ_LANGUAGE = "FAQ-Sprache"
+L.FAQ_LANGUAGE_TIP = "Schaltet das FAQ zwischen Deutsch und Englisch um."
+
 -- Categories
 L.CAT_QUEST = "Quest"
 L.CAT_CLASS = "Klasse"
@@ -166,8 +192,14 @@ L.CAT_UI = "Oberfläche"
 L.CAT_MISC = "Sonstiges"
 
 -- Store test (/aa simulate, /aa store, /aa debug; development checkouts only; enUS + deDE)
-L.SIM_HELP = "Store-Test: ausgedachte Fragen, Regelprüfung, Aufräumen, Leeren (es wird nichts gesendet)"
+L.SIM_HELP = "Store-Test: ausgedachte Fragen, Regelprüfung, Aufräumen, Performance-Test, Leeren (es wird nichts gesendet)"
 L.SIM_HELP_STORE = "Fragen im Speicher auflisten oder eine anzeigen"
+L.SIM_PERF_RECEIVE = "%d Nachrichten in %.1f ms empfangen (%.3f ms je Nachricht), %d Fragen im Speicher."
+L.SIM_PERF_MEMORY = "Speicher dafür: %.0f KB."
+L.SIM_PERF_LIST = "Sortierte Liste aller Fragen: %.2f ms (Mittel aus %d)."
+L.SIM_PERF_SYNC = "Sync-Antwort: %d Fragen, %d Bytes, %d Bytes komprimiert, %.1f ms."
+L.SIM_PERF_SWEEP = "Ablaufprüfung: %.2f ms."
+L.SIM_PERF_UI = "Offene Seite aktualisieren: %.1f ms."
 L.SIM_HELP_DEBUG = "jede Änderung im Store und jede verworfene, gesendete und empfangene Nachricht ausgeben"
 L.SIM_DONE = "%d Fragen, %d Antworten, %d gelöst simuliert (%d abgelehnt). Im Speicher: %d."
 L.SIM_FAIL = "FEHLER"
@@ -190,6 +222,7 @@ L.SIM_ANSWERED = "%s beantwortet."
 L.SIM_SOLVED = "%s als gelöst markiert."
 L.SIM_WITHDRAWN = "%s zurückgezogen."
 L.SIM_NET_STATS = "%d gesendet, %d empfangen (%d unlesbar oder ungültig), %d zurückgehalten."
+L.SIM_SYNC_STATS = "Sync: %d Anfragen, %d Antworten gesendet, %d Anfragen anderen überlassen oder übersprungen."
 
 -- Probe
 L.PROBE_HELP = "Transporttest (M0)"

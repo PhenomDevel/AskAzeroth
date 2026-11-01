@@ -1,3 +1,4 @@
+-- luacheck: read globals debugprofilestop
 local _, ns = ...
 
 -- Development tools for the store and protocol (M2), not packaged:
@@ -5,6 +6,8 @@ local _, ns = ...
 --   /aa simulate check     runs the receive rules against crafted messages
 --   /aa simulate sweep     removes expired questions now
 --   /aa simulate reset     clears the store
+--   /aa simulate perf      fills the store to the limit with full-length
+--                          questions and answers and prints timings
 --   /aa store [id]         lists the store or shows one question
 --   /aa debug [on|off]     prints every store change, dropped, sent and received message
 --   /aa ask <category> <title> [|| <details>]   asks in the language of new questions
@@ -100,6 +103,93 @@ local function SimulateQuestions(count)
 		end
 	end
 	ns:Print(L.SIM_DONE, made, answered, solved, failed, Store.Count())
+end
+
+--------------------------------------------------------------------------------
+-- Performance test
+--------------------------------------------------------------------------------
+
+-- ASCII filler text of exactly max bytes, made of the sample answers.
+local function Filler(max)
+	local parts, size = {}, 0
+	while size < max do
+		local text = Pick(ANSWERS)
+		parts[#parts + 1] = text
+		size = size + #text + 1
+	end
+	return table.concat(parts, " "):sub(1, max)
+end
+
+local PERF_ANSWERS = 10
+local PERF_LIST_RUNS = 100
+
+-- Worst case for memory and CPU: C.MAX_QUESTIONS questions with full title
+-- and body, PERF_ANSWERS full-length answers each, all through the receive
+-- path. Prints how long each part took (ms) and the sync answer size.
+local function RunPerf()
+	Store.Reset()
+	local lang = ns.Channel.GetAskLanguage()
+	local now = Util.Now()
+	collectgarbage("collect")
+	local memBefore = collectgarbage("count")
+	local messages = 0
+	local start = debugprofilestop()
+	for i = 1, C.MAX_QUESTIONS do
+		local author = SimName("Asker")
+		local created = now - math.random(0, 30 * 60)
+		local q = {
+			id = Util.NewId(author, created),
+			cat = Pick(C.CATEGORIES).key,
+			title = Filler(C.TITLE_MAX),
+			body = Filler(C.BODY_MAX),
+			ctx = { lvl = math.random(1, 30), race = Pick(RACES), class = Pick(CLASSES), faction = "Alliance", zone = "Elwynn Forest" },
+			created = created,
+		}
+		Feed(Protocol.EncodeQuestion(q), author, lang, now)
+		messages = messages + 1
+		for j = 1, PERF_ANSWERS do
+			local helper = SimName("Helper")
+			local at = math.min(now, created + j * 60)
+			Feed(Protocol.EncodeAnswer({ id = Util.NewId(helper, at + i), qid = q.id, text = Filler(C.ANSWER_MAX), created = at }), helper, lang, now)
+			messages = messages + 1
+		end
+	end
+	local receiveTime = debugprofilestop() - start
+	collectgarbage("collect")
+	local memAfter = collectgarbage("count")
+
+	start = debugprofilestop()
+	for _ = 1, PERF_LIST_RUNS do
+		Store.List()
+	end
+	local listTime = (debugprofilestop() - start) / PERF_LIST_RUNS
+
+	start = debugprofilestop()
+	local wire, count = Protocol.EncodeSyncAnswer(Store.GetForSync(lang, {}), C.SYNC_MAX_BYTES)
+	local LibDeflate = LibStub("LibDeflate")
+	local data = wire and LibDeflate:EncodeForWoWAddonChannel(LibDeflate:CompressDeflate(wire)) or ""
+	local syncTime = debugprofilestop() - start
+
+	local uiTime
+	local page = ns.UI.GetFrame() and ns.UI.GetFrame():IsShown() and ns.UI.GetCurrentPage()
+	if page then
+		start = debugprofilestop()
+		page:Refresh()
+		uiTime = debugprofilestop() - start
+	end
+
+	start = debugprofilestop()
+	Store.Sweep(now)
+	local sweepTime = debugprofilestop() - start
+
+	ns:Print(L.SIM_PERF_RECEIVE, messages, receiveTime, receiveTime / messages, Store.Count())
+	ns:Print(L.SIM_PERF_MEMORY, memAfter - memBefore)
+	ns:Print(L.SIM_PERF_LIST, listTime, PERF_LIST_RUNS)
+	ns:Print(L.SIM_PERF_SYNC, count or 0, wire and #wire or 0, #data, syncTime)
+	ns:Print(L.SIM_PERF_SWEEP, sweepTime)
+	if uiTime then
+		ns:Print(L.SIM_PERF_UI, uiTime)
+	end
 end
 
 --------------------------------------------------------------------------------
@@ -309,6 +399,8 @@ ns:RegisterCommand("simulate", function(args)
 		RunChecks()
 	elseif arg == "sweep" then
 		ns:Print(L.SIM_SWEPT, Store.Sweep(), Store.Count())
+	elseif arg == "perf" then
+		RunPerf()
 	elseif arg == "reset" then
 		Store.Reset()
 		ns:Print(L.SIM_RESET)
@@ -316,7 +408,7 @@ ns:RegisterCommand("simulate", function(args)
 		local count = math.min(tonumber(arg) or 10, C.MAX_QUESTIONS)
 		SimulateQuestions(math.max(1, count))
 	end
-end, "simulate [n|check|sweep|reset]", L.SIM_HELP)
+end, "simulate [n|check|sweep|perf|reset]", L.SIM_HELP)
 
 ns:RegisterCommand("store", ShowStore, "store [id]", L.SIM_HELP_STORE)
 
@@ -332,5 +424,7 @@ ns:RegisterCommand("debug", function(arg)
 	if debugOn then
 		local stats = ns.Net.stats
 		ns:Print(L.SIM_NET_STATS, stats.sent, stats.received, stats.invalid, ns.Comm.GetQueueLength())
+		local sync = ns.Sync.stats
+		ns:Print(L.SIM_SYNC_STATS, sync.requests, sync.answers, sync.skipped)
 	end
 end, "debug [on|off]", L.SIM_HELP_DEBUG)

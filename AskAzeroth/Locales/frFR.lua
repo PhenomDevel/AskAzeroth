@@ -20,10 +20,6 @@ L.PAGE_PINNED = "Épinglées"
 L.PAGE_PLAYERS = "Joueurs"
 L.PAGE_FAQ = "FAQ"
 L.PAGE_SETTINGS = "Options"
-L.PAGE_COMING_SOON = "Dans une version ultérieure."
-L.PAGE_MY_QUESTIONS_TEXT = "Tout ce que vous avez demandé, avec toutes les réponses, même après sa disparition de la liste publique."
-L.PAGE_PINNED_TEXT = "Les réponses que vous avez épinglées, avec leur question. Elles restent sur votre ordinateur et n'expirent jamais, même après la disparition de la question."
-L.PAGE_FAQ_TEXT = "Réponses aux questions fréquentes des nouveaux joueurs."
 
 -- Status line
 L.STATUS_LOCKDOWN = "Messages de discussion bloqués (rencontre)"
@@ -156,6 +152,36 @@ L.TOAST_ANSWER = "Réponse à votre question"
 L.TOAST_LINE = "%s : « %s »"
 L.TOAST_MORE = "+%d autres"
 L.MINIMAP_NEW = "%d nouveau(x)"
+
+-- Thread (pins, My questions)
+L.THREAD_CLOSED = "Fermée – n'est plus dans la liste publique."
+L.THREAD_WITHDRAWN = "Retirée."
+L.THREAD_ELSEWHERE = "Toujours publique, mais pas encore reçue sur ce personnage."
+L.THREAD_PIN = "Épingler la réponse"
+L.THREAD_PIN_TIP = "Garde cette réponse avec sa question dans « Épinglées ». Les réponses épinglées n'expirent jamais."
+L.THREAD_UNPIN = "Désépingler"
+L.THREAD_UNPIN_TIP = "Retire cette réponse de « Épinglées »."
+
+-- Status and reasons
+L.STATUS_WITHDRAWN = "retirée"
+L.REASON_PIN_FULL = "Vous avez épinglé le maximum de 500 réponses. Désépinglez-en d'abord quelques-unes."
+
+-- My questions
+L.MY_CLEANUP = "Nettoyer"
+L.MY_CLEANUP_TIP = "Supprime les questions fermées et retirées plus anciennes que la durée de conservation des paramètres."
+L.MY_CLEANUP_FOREVER = "Les questions sont conservées pour toujours. Définissez une durée de conservation dans les paramètres."
+L.MY_CLEANUP_DONE = "%d questions supprimées."
+L.MY_COUNT = "%d questions"
+L.MY_EMPTY = "Vous n'avez encore rien demandé. Vos questions et toutes leurs réponses seront conservées ici."
+
+-- Pinned
+L.PINNED_UNPIN = "Désépingler"
+L.PINNED_COUNT = "%d / %d épinglées"
+L.PINNED_EMPTY = "Rien d'épinglé pour l'instant. Cliquez sur l'icône de note à côté d'une réponse pour la garder ici."
+
+-- FAQ
+L.FAQ_LANGUAGE = "Langue de la FAQ"
+L.FAQ_LANGUAGE_TIP = "Bascule la FAQ entre l'allemand et l'anglais."
 
 -- Categories
 L.CAT_QUEST = "Quête"

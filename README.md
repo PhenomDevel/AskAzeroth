@@ -18,8 +18,10 @@ one per language. AskAzeroth is in development; there is no release yet.
 | Client | Interface |
 | --- | --- |
 | WoW: Forever | 16001 |
+| Retail | 120000 – 120105 (Midnight, for testing until Forever launches) |
 
-Classic Era, retail and other clients are not supported.
+On retail, questions only reach players on your own realm and its connected
+realms. Classic Era and other clients are not supported.
 
 ## Installation
 
@@ -35,7 +37,7 @@ What changed: [CHANGELOG.md](https://github.com/PhenomDevel/AskAzeroth/blob/main
 
 ## Features
 
-Planned for the first release:
+In the first release:
 
 - **Ask a question** with a category (quest, class, dungeon, profession,
   interface, other), a short summary and optional details.
@@ -49,6 +51,8 @@ Planned for the first release:
 - **Pin answers:** pin any helpful answer, also on other players' questions.
   It's kept on your computer together with the question and never expires.
 - **Built-in FAQ** in English and German.
+- **Sync after login:** questions asked while you were offline are fetched
+  from other players on the channel.
 - **7 languages:** English, Deutsch, Français, Español, Italiano, Русский,
   Português.
 

@@ -367,6 +367,20 @@ function Store.Receive(m, now)
 	return handler(m, now or Util.Now(), true)
 end
 
+-- Puts an own question back after a reload or login (from My questions),
+-- so its thread and actions work before anyone syncs it. q is a fresh copy
+-- with its answers. No rate limits; returns true if it was added.
+function Store.Restore(q, now)
+	if questions[q.id] or Store.IsExpired(q, now or Util.Now()) then
+		return false
+	end
+	questions[q.id] = q
+	ns:Fire("AA_QUESTION_ADDED", q)
+	EnforceCap()
+	ns:Fire("AA_STORE_CHANGED")
+	return true
+end
+
 --------------------------------------------------------------------------------
 -- Own actions
 --------------------------------------------------------------------------------

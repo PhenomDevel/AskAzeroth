@@ -12,15 +12,16 @@ AskAzeroth/                  addon folder (the only thing that gets installed)
   Locales/                   enUS (base), deDE, frFR, esES (also esMX), itIT, ruRU, ptBR
   Media/                     Logo.tga (addon icon, 64x64, 32-bit TGA from docs/logo/logo.svg)
   Core/                      namespace and events (Init.lua), constants, helpers (Util),
-                             serializer, categories (Data/), protocol, store, Net (store ↔ channels), players, notifications, saved data,
+                             serializer, categories and FAQ texts (Data/), protocol, store, Net (store ↔ channels),
+                             login sync, my questions, pinned answers, players, notifications, saved data,
                              slash commands, language channels, transport
-  UI/                        widgets, main window with its pages (placeholders until
-                             their milestone), questions page (QueueList, ThreadView,
-                             AskDialog), player menu, players page, settings page,
+  UI/                        widgets, main window with its pages: questions (QueueList,
+                             ThreadView, AskDialog), my questions, pinned, players, FAQ,
+                             settings; player menu,
                              toast, minimap button, commands
   Probe/                     development tools, not packaged: transport test (/aa probe),
                              store test (/aa simulate, /aa store, /aa debug), test actions
-                             (/aa ask, answer, solve, withdraw) until the window has them
+                             (/aa ask, answer, solve, withdraw), performance test (/aa simulate perf)
 docs/                        developer docs, spike test guide, release process,
                              logo/ (logo.svg, 400x400 logo.png for README/CurseForge/Wago)
 tools/                       fetch-libs.sh (libraries for local development)
@@ -28,7 +29,7 @@ tools/                       fetch-libs.sh (libraries for local development)
 PLAN.md                      implementation plan (not packaged)
 ```
 
-* Settings, players and own questions are stored account-wide in
+* Settings, players, own questions and pinned answers are stored account-wide in
   `AskAzerothDB`, the character's own state (window position) in
   `AskAzerothCharDB`. Public
   questions live in memory only.
@@ -81,6 +82,21 @@ New files or `.toc` changes require a client restart instead of `/reload`.
 Lint: `luacheck .` (also runs in CI on every push). Functionality is verified
 in-game; there are no automated tests and no mocked WoW API.
 
+### Performance
+
+`/aa simulate perf` (development checkout) fills the store with the worst
+case: 150 questions with full-length title and details and 10 answers of
+500 bytes each (1650 messages through the receive path), then prints how
+long receiving, sorting the list, building a sync answer, the expiry check
+and refreshing the open page took, and how much memory the questions use.
+Open the window on the Questions page first to include the page refresh.
+`/aa simulate reset` clears the store afterwards.
+
+What to look for in game: no noticeable stutter while it runs, the list
+refresh well below a frame (a few ms), and a sync answer of at most a few KB
+compressed. Real questions are much shorter than this test, so the numbers
+are an upper bound.
+
 ## Release
 
 Rename `## Unreleased` in `CHANGELOG.md` to `## vX.Y.Z (YYYY-MM-DD)`, merge
@@ -92,6 +108,15 @@ the local test build:
 
 ## Interface version
 
-The `.toc` lists `16001` (Forever) only. If the client shows the addon as out
-of date, read its value via `/dump select(4, GetBuildInfo())` and update
-`## Interface`.
+The `.toc` lists `16001` (Forever) plus the retail Midnight builds
+(`120000` … `120007`, `120100`, `120105`), the same list as Guild Finder
+Forever. Retail is supported so the addon can be tested before Forever
+launches; both run the same API. If a client shows the addon as out of date,
+read its value via `/dump select(4, GetBuildInfo())` and add it to the
+comma-separated list.
+
+Testing on retail: the language channels (and with them questions, answers
+and the sync) only reach the own realm and its connected realms. Retail has
+more classes than Forever (Death Knight, Monk, Demon Hunter, Evoker); they
+show up in the mentor class filter there. Forever-specific behaviour still
+needs a check on Forever.

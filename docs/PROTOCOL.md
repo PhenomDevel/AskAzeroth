@@ -123,6 +123,25 @@ from the author's own `S`. A forged sync answer can therefore add made-up
 questions under someone else's name (known limit), but it can't alter or
 close real ones. Rate limits don't apply to `SP`.
 
+## Sync
+
+Public questions are kept in memory only, so a client that joins a language
+channel asks the others for what it missed (`Core/Sync.lua`):
+
+1. 5 to 15 s (random) after the channel is ready, send `SR` with the ids of
+   the questions already known in that language (at most 200).
+2. A client that receives an `SR` waits 2 to 8 s (random). If anyone sent
+   an `SP` on that channel in the meantime, it does nothing. Otherwise it
+   sends one `SP` with the questions the requester doesn't know: newest
+   activity first, at most 30, and at most 16000 bytes before compression.
+   When a question doesn't fit, its oldest answers are left out first, so
+   the last answer (and with it the expiry) stays the same.
+3. Each client answers at most one `SR` per language channel every
+   5 minutes, so many logins at once don't set off a chain of answers.
+
+Own questions are also put back from "My questions" at login (as long as
+they haven't expired), so their thread and actions work before the sync.
+
 ## Expiry
 
 Every client works this out itself; there is no delete message for it.
@@ -133,8 +152,10 @@ Every client works this out itself; there is no delete message for it.
 | answered | at least one answer | 45 min after the last answer |
 | solved | `S` received | 10 min after `solved` |
 
-Checked every 60 s. Own questions are also kept under "My questions"
-(from M7), independent of this.
+Checked every 60 s. Own questions are also kept under "My questions",
+independent of this: they show "closed" after expiry and are removed after
+the retention set in the settings (forever by default; at login and with
+"Clean up"). Pinned answers are local copies and never expire.
 
 ## Store messages
 

@@ -4,7 +4,11 @@ local _, ns = ...
 
 -- Thread of one question: the question with the asker's context, every
 -- answer, when it disappears, and the answer field. The asker also gets
--- "Mark as solved" and "Withdraw".
+-- "Mark as solved" and "Withdraw". Every answer has a pin button.
+--
+-- ThreadView.Create(parent, get): get(id) returns the question to show
+-- (default Store.Get). Questions that are not public any more (My
+-- questions) show their answers read-only.
 local ThreadView = {}
 ns.ThreadView = ThreadView
 
@@ -14,11 +18,14 @@ local W = ns.Widgets
 local Util = ns.Util
 local Store = ns.Store
 local Players = ns.Players
+local Pinned = ns.Pinned
 
 local STAR = W.STAR
 local CHECK = W.CHECK
 
 local PAD = 8
+local PIN_SIZE = 16
+local PIN_ICON = "Interface\\Icons\\INV_Misc_Note_01"
 local ANSWER_HEIGHT = 64
 
 local function ContextText(q)
@@ -45,6 +52,15 @@ local function ContextText(q)
 end
 
 local function ExpiryText(q)
+	if not Store.Get(q.id) then
+		local status = ns.MyQuestions.GetStatus(q)
+		if status == "withdrawn" then
+			return L.THREAD_WITHDRAWN
+		elseif status == "closed" then
+			return L.THREAD_CLOSED
+		end
+		return L.THREAD_ELSEWHERE
+	end
 	local left = Store.ExpiresAt(q) - Util.Now()
 	local status = Store.GetStatus(q)
 	if status == "solved" then
@@ -55,8 +71,9 @@ local function ExpiryText(q)
 	return L.THREAD_OPEN_EXPIRES:format(W.Minutes(left))
 end
 
-function ThreadView.Create(parent)
+function ThreadView.Create(parent, get)
 	local view = {}
+	get = get or Store.Get
 
 	local empty = W.Text(parent, "GameFontDisable")
 	empty:SetPoint("CENTER")
@@ -160,7 +177,7 @@ function ThreadView.Create(parent)
 				unfolded[item.answer.id] = true
 				view:Refresh()
 			elseif mouseButton == "RightButton" then
-				local q = Store.Get(current)
+				local q = get(current)
 				if item.kind == "question" then
 					ns.PlayerMenu.Open(self, item.question.author)
 				elseif q then
@@ -176,9 +193,37 @@ function ThreadView.Create(parent)
 		row.bg:SetScript("OnLeave", function()
 			GameTooltip:Hide()
 		end)
+		row.pin = CreateFrame("Button", nil, row.bg)
+		row.pin:SetSize(PIN_SIZE, PIN_SIZE)
+		row.pin:SetPoint("TOPRIGHT", -PAD, -PAD + 2)
+		row.pinIcon = row.pin:CreateTexture(nil, "ARTWORK")
+		row.pinIcon:SetAllPoints()
+		row.pinIcon:SetTexture(PIN_ICON)
+		row.pin:SetHighlightTexture("Interface\\Buttons\\ButtonHilight-Square", "ADD")
+		row.pin:SetScript("OnClick", function()
+			local q = get(current)
+			local item = row.item
+			if not q or not item or item.kind ~= "answer" then
+				return
+			end
+			local state, reason = Pinned.Toggle(q, item.answer)
+			if state == nil then
+				view:ShowMessage(ns.UI.ReasonText(reason), true)
+			end
+		end)
+		row.pin:SetScript("OnEnter", function(self)
+			local pinned = row.item and row.item.answer and Pinned.IsPinned(row.item.answer.id)
+			GameTooltip:SetOwner(self, "ANCHOR_LEFT")
+			GameTooltip:SetText(pinned and L.THREAD_UNPIN or L.THREAD_PIN, 1, 1, 1)
+			GameTooltip:AddLine(pinned and L.THREAD_UNPIN_TIP or L.THREAD_PIN_TIP, nil, nil, nil, true)
+			GameTooltip:Show()
+		end)
+		row.pin:SetScript("OnLeave", function()
+			GameTooltip:Hide()
+		end)
 		row.head = W.Text(row.bg, "GameFontNormalLarge")
 		row.head:SetPoint("TOPLEFT", PAD, -PAD)
-		row.head:SetPoint("RIGHT", -PAD, 0)
+		row.head:SetPoint("RIGHT", -PAD - PIN_SIZE - 4, 0)
 		row.head:SetWordWrap(true)
 		row.sub = W.Text(row.bg, "GameFontHighlightSmall", W.MUTED)
 		row.sub:SetPoint("TOPLEFT", row.head, "BOTTOMLEFT", 0, -4)
@@ -196,6 +241,12 @@ function ThreadView.Create(parent)
 		end
 		local now = Util.Now()
 		row.item = item
+		row.pin:SetShown(item.kind == "answer" and not item.folded)
+		if item.kind == "answer" then
+			local pinned = Pinned.IsPinned(item.answer.id)
+			row.pinIcon:SetDesaturated(not pinned)
+			row.pin:SetAlpha(pinned and 1 or 0.45)
+		end
 		if item.kind == "question" then
 			local q = item.question
 			row.head:SetFontObject("GameFontNormalLarge")
@@ -249,9 +300,12 @@ function ThreadView.Create(parent)
 		message:SetText(text or "")
 		W.Color(message, isError and W.RED or W.GREEN)
 	end
+	function view:ShowMessage(text, isError)
+		ShowMessage(text, isError)
+	end
 
 	function view:Refresh()
-		local q = current and Store.Get(current)
+		local q = current and get(current)
 		empty:SetShown(q == nil)
 		content:SetShown(q ~= nil)
 		if not q then
@@ -264,18 +318,20 @@ function ThreadView.Create(parent)
 		end
 		scrollBox:SetDataProvider(CreateDataProvider(items), true)
 		expiry:SetText(ExpiryText(q))
-		local own = IsOwn(q)
+		-- Only public questions take answers and actions.
+		local live = Store.Get(q.id) ~= nil
+		local own = live and IsOwn(q)
 		local solved = q.solved ~= nil
 		solve:SetShown(own)
 		solve:SetEnabled(not solved and q.answerCount > 0)
 		withdraw:SetShown(own)
-		answerBox:SetShown(not solved)
-		send:SetShown(not solved)
+		answerBox:SetShown(live and not solved)
+		send:SetShown(live and not solved)
 	end
 
 	-- Updates ages and the expiry line without resetting the scroll position.
 	function view:Tick()
-		local q = current and Store.Get(current)
+		local q = current and get(current)
 		if q then
 			expiry:SetText(ExpiryText(q))
 		end
@@ -335,6 +391,16 @@ function ThreadView.Create(parent)
 	ns.RegisterCallback(view, "AA_PLAYERS_CHANGED", function()
 		if parent:IsVisible() then
 			view:Refresh()
+		end
+	end)
+	-- Pin icons only; keeps the scroll position.
+	ns.RegisterCallback(view, "AA_PINNED_CHANGED", function()
+		if parent:IsVisible() then
+			scrollBox:ForEachFrame(function(row)
+				if row.item then
+					FillRow(row, row.item)
+				end
+			end)
 		end
 	end)
 

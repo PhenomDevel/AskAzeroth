@@ -1,6 +1,7 @@
 # AskAzeroth – notes for Claude
 
-World of Warcraft **Forever** addon (Interface 16001, Forever only): newcomers
+World of Warcraft **Forever** addon (Interface 16001; the retail Midnight interfaces are listed too, for testing
+until Forever launches): newcomers
 ask questions in game, mentors answer in threads. Everything travels between
 players over hidden addon channels, one per language; there is no server.
 Forever runs on the modern mainline API (Midnight base, `C_*` namespaces,
