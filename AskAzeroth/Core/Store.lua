@@ -250,6 +250,9 @@ function handlers.A(m, now)
 	if not q then
 		return Drop("unknown", m.sender, "A")
 	end
+	if m.lang and m.lang ~= q.lang then
+		return Drop("lang", m.sender, "A")
+	end
 	if q.answers[a.id] then
 		return Drop(q.answers[a.id].author == a.author and "duplicate" or "collision", m.sender, "A")
 	end
@@ -271,6 +274,9 @@ function handlers.S(m)
 	if not q then
 		return Drop("unknown", m.sender, "S")
 	end
+	if m.lang and m.lang ~= q.lang then
+		return Drop("lang", m.sender, "S")
+	end
 	if q.author ~= m.sender then
 		return Drop("not-author", m.sender, "S")
 	end
@@ -291,6 +297,9 @@ function handlers.D(m)
 	local q = questions[m.qid]
 	if not q then
 		return Drop("unknown", m.sender, "D")
+	end
+	if m.lang and m.lang ~= q.lang then
+		return Drop("lang", m.sender, "D")
 	end
 	if q.author ~= m.sender then
 		return Drop("not-author", m.sender, "D")

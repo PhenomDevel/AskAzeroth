@@ -12,4 +12,6 @@
 - Questions and answers are checked and kept in memory: length and format
   checks, limits against spam, and questions disappear on their own (open
   after 2 hours, answered 45 minutes after the last answer, solved after
-  10 minutes). Nothing is sent yet.
+  10 minutes).
+- Questions, answers, "solved" and withdrawals are exchanged with other
+  players over the hidden language channels.

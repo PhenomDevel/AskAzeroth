@@ -6,9 +6,12 @@ local _, ns = ...
 --   /aa simulate sweep     removes expired questions now
 --   /aa simulate reset     clears the store
 --   /aa store [id]         lists the store or shows one question
---   /aa debug [on|off]     prints every store change and every dropped message
--- Everything goes through Protocol.Encode → Decode → Store.Receive, the same
--- path received messages take. Nothing is sent.
+--   /aa debug [on|off]     prints every store change, dropped, sent and received message
+--   /aa ask <category> <title> [|| <details>]   asks in the language of new questions
+--   /aa answer <id> <text>, /aa solve <id>, /aa withdraw <id>
+-- ask/answer/solve/withdraw send for real (M3); the rest sends nothing.
+-- Simulated messages go through Protocol.Encode → Decode → Store.Receive,
+-- the same path received messages take.
 local L = ns.L
 local C = ns.C
 local Util = ns.Util
@@ -239,6 +242,67 @@ ns.RegisterCallback(Simulate, "AA_MESSAGE_DROPPED", function(_, reason, sender, 
 	end
 end)
 
+ns.RegisterCallback(Simulate, "AA_NET_SENT", function(_, kind, lang, bytes, held)
+	if debugOn then
+		ns:Print("|cff80ff80→|r %s %s %d B%s", kind, lang, bytes, held and " (held)" or "")
+	end
+end)
+ns.RegisterCallback(Simulate, "AA_NET_RECEIVED", function(_, kind, sender, lang, bytes)
+	if debugOn then
+		ns:Print("|cff80c0ff←|r %s %s %s %d B", kind, lang, sender, bytes)
+	end
+end)
+
+--------------------------------------------------------------------------------
+-- Real actions (until the UI has them)
+--------------------------------------------------------------------------------
+
+local function Report(result, reason, okText, ...)
+	if result then
+		ns:Print(okText, ...)
+	else
+		ns:Print(L.SIM_ACTION_FAILED, tostring(reason))
+	end
+end
+
+ns:RegisterCommand("ask", function(args)
+	local cat, rest = args:match("^(%S+)%s+(.+)$")
+	if not cat then
+		ns:Print("/aa ask <%s> <title> [|| <details>]", table.concat((function()
+			local keys = {}
+			for _, c in ipairs(C.CATEGORIES) do
+				keys[#keys + 1] = c.key
+			end
+			return keys
+		end)(), "|"))
+		return
+	end
+	local title, body = rest:match("^(.-)%s*||%s*(.*)$")
+	title = title or rest
+	local q, reason = ns.Net.Ask(ns.Channel.GetAskLanguage(), cat:lower(), title, body)
+	Report(q, reason, L.SIM_ASKED, q and q.id, q and q.lang)
+end, "ask <category> <title>", L.SIM_HELP_ASK)
+
+ns:RegisterCommand("answer", function(args)
+	local id, text = args:match("^(%x+)%s+(.+)$")
+	if not id then
+		ns:Print("/aa answer <id> <text>")
+		return
+	end
+	local a, reason = ns.Net.Answer(id:upper(), text)
+	Report(a, reason, L.SIM_ANSWERED, id:upper())
+end, "answer <id> <text>", L.SIM_HELP_ANSWER)
+
+ns:RegisterCommand("solve", function(id)
+	local ok, reason = ns.Net.Solve(id:upper())
+	Report(ok, reason, L.SIM_SOLVED, id:upper())
+end, "solve <id>", L.SIM_HELP_SOLVE)
+
+ns:RegisterCommand("withdraw", function(id)
+	local ok, reason = ns.Net.Withdraw(id:upper())
+	Report(ok, reason, L.SIM_WITHDRAWN, id:upper())
+end, "withdraw <id>", L.SIM_HELP_WITHDRAW)
+
 ns:RegisterCommand("simulate", function(args)
 	local arg = args:lower()
 	if arg == "check" then
@@ -265,4 +329,8 @@ ns:RegisterCommand("debug", function(arg)
 		debugOn = not debugOn
 	end
 	ns:Print(debugOn and L.SIM_DEBUG_ON or L.SIM_DEBUG_OFF)
+	if debugOn then
+		local stats = ns.Net.stats
+		ns:Print(L.SIM_NET_STATS, stats.sent, stats.received, stats.invalid, ns.Comm.GetQueueLength())
+	end
 end, "debug [on|off]", L.SIM_HELP_DEBUG)
