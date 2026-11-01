@@ -46,6 +46,8 @@ Planned for the first release:
 - **Your own player list:** favourites, ignored players, notes and a
   "helped me" counter, all kept on your computer only.
 - **My questions** with your answers, kept as long as you like.
+- **Pin answers:** pin any helpful answer, also on other players' questions.
+  It's kept on your computer together with the question and never expires.
 - **Built-in FAQ** in English and German.
 - **7 languages:** English, Deutsch, Français, Español, Italiano, Русский,
   Português.
