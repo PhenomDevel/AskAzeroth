@@ -233,7 +233,44 @@ function Channel.Leave(lang)
 	LeaveChannelByName(C.GetChannelName(lang))
 end
 
+-- Language for new questions: the chosen one while it is selected,
+-- otherwise the first selected language.
+function Channel.GetAskLanguage()
+	local chosen = ns.db and ns.db.settings.askLanguage
+	if chosen and Channel.IsSelected(chosen) then
+		return chosen
+	end
+	return Channel.GetSelectedLanguages()[1] or C.GetClientLanguage()
+end
+
+function Channel.IsSelected(lang)
+	return ns.db ~= nil and ns.db.languages[lang] == true
+end
+
+-- Selects or deselects a language and joins or leaves its channel (once the
+-- automatic join after login has run). The last selected language can't be
+-- deselected; returns false then.
+function Channel.SetSelected(lang, selected)
+	if not C.IsLanguage(lang) or Channel.IsSelected(lang) == selected then
+		return true
+	end
+	if not selected and #Channel.GetSelectedLanguages() <= 1 then
+		return false
+	end
+	ns.db.languages[lang] = selected
+	if Channel.autoJoined then
+		if selected then
+			Channel.Join(lang)
+		else
+			Channel.Leave(lang)
+		end
+	end
+	ns:Fire("AA_LANGUAGES_CHANGED", lang, selected)
+	return true
+end
+
 function Channel.JoinSelected()
+	Channel.autoJoined = true
 	for _, lang in ipairs(Channel.GetSelectedLanguages()) do
 		Channel.Join(lang)
 	end

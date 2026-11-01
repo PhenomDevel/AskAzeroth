@@ -8,6 +8,18 @@ ns.C = C
 -- Question languages, one hidden channel each. Codes are ISO 639-1.
 C.LANGUAGES = { "en", "de", "fr", "es", "it", "ru", "pt" }
 
+-- Language names as their speakers write them (not translated, so everyone
+-- finds their own language in the list).
+C.LANGUAGE_NAMES = {
+	en = "English",
+	de = "Deutsch",
+	fr = "Français",
+	es = "Español",
+	it = "Italiano",
+	ru = "Русский",
+	pt = "Português",
+}
+
 C.LANGUAGE_BY_LOCALE = {
 	deDE = "de",
 	frFR = "fr",
@@ -47,3 +59,6 @@ C.COMM_PREFIX = "AA1"
 function C.GetCommPrefix(lang)
 	return C.COMM_PREFIX .. lang
 end
+
+-- How long own questions are kept under "My questions", in days; 0 = forever.
+C.RETENTION_DAYS = { 0, 7, 30, 90 }

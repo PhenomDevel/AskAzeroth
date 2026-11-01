@@ -13,6 +13,8 @@ AskAzeroth/                  addon folder (the only thing that gets installed)
   Media/                     Logo.tga (addon icon, 64x64, 32-bit TGA from docs/logo/logo.svg)
   Core/                      namespace and events (Init.lua), constants, saved data,
                              slash commands, language channels, transport
+  UI/                        widgets, main window with its pages (placeholders until
+                             their milestone), settings page, minimap button, commands
   Probe/                     transport test tools (/aa probe); not packaged
 docs/                        developer docs, spike test guide, release process,
                              logo/ (logo.svg, 400x400 logo.png for README/CurseForge/Wago)
@@ -22,7 +24,8 @@ PLAN.md                      implementation plan (not packaged)
 ```
 
 * Settings, players and own questions are stored account-wide in
-  `AskAzerothDB`, the character's own state in `AskAzerothCharDB`. Public
+  `AskAzerothDB`, the character's own state (window position) in
+  `AskAzerothCharDB` (window position). Public
   questions live in memory only.
 * `Core/` never depends on the UI; files talk through CallbackHandler
   messages (`ns.RegisterCallback(owner, "AA_…", func)`, `ns:Fire("AA_…", …)`).

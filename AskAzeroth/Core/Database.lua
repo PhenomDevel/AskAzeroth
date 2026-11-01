@@ -24,10 +24,24 @@ end
 
 ns.dbDefaults = {
 	version = DB_VERSION,
+	settings = {
+		-- Mentor mode: get notified about new questions (from M6 on).
+		mentor = false,
+		-- Language of new questions; nil = the first selected language.
+		askLanguage = nil,
+		-- Days own questions are kept under "My questions"; 0 = forever.
+		retentionDays = 0,
+		minimapHidden = false,
+		minimapAngle = 210,
+		-- Page the main window opens with.
+		page = 1,
+	},
 }
 
 ns.charDbDefaults = {
 	version = DB_VERSION,
+	-- Main window position (point, relativePoint, x, y).
+	window = {},
 }
 
 local function OnAddonLoaded(event, name)
