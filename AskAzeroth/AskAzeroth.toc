@@ -1,0 +1,53 @@
+## Interface: 16001
+## Title: Ask|cffe2b13cAzeroth|r
+## Notes: Ask questions in game, experienced players answer in threads.
+## Notes-deDE: Fragen im Spiel stellen, erfahrene Spieler antworten in Threads.
+## Notes-frFR: Posez vos questions en jeu, des joueurs expérimentés répondent dans des fils.
+## Notes-esES: Haz preguntas en el juego; jugadores expertos responden en hilos.
+## Notes-esMX: Haz preguntas en el juego; jugadores expertos responden en hilos.
+## Notes-itIT: Fai domande in gioco, i giocatori esperti rispondono nei thread.
+## Notes-ruRU: Задавайте вопросы в игре, опытные игроки отвечают в ветках.
+## Notes-ptBR: Faça perguntas no jogo; jogadores experientes respondem em tópicos.
+## Author: PhenomDevel
+## Version: @project-version@
+## X-License: MIT
+## X-Website: https://github.com/PhenomDevel/AskAzeroth
+## Category: Social
+## Category-deDE: Soziales
+## Category-frFR: Social
+## Category-esES: Social
+## Category-esMX: Social
+## Category-itIT: Sociale
+## Category-ruRU: Общение
+## Category-ptBR: Social
+## SavedVariables: AskAzerothDB
+## SavedVariablesPerCharacter: AskAzerothCharDB
+## IconTexture: Interface\AddOns\AskAzeroth\Media\Logo
+
+# Libraries (.pkgmeta externals; tools/fetch-libs.sh for local dev)
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+Libs\AceComm-3.0\AceComm-3.0.xml
+Libs\LibDeflate\LibDeflate.lua
+
+# Locales (enUS must be loaded first, it defines the fallback table)
+Locales\enUS.lua
+Locales\deDE.lua
+Locales\frFR.lua
+Locales\esES.lua
+Locales\itIT.lua
+Locales\ruRU.lua
+Locales\ptBR.lua
+
+# Core
+Core\Init.lua
+Core\Constants.lua
+Core\Database.lua
+Core\SlashCommands.lua
+Core\Channel.lua
+Core\Comm.lua
+
+# Transport test tools (/aa probe); development checkouts only
+#@do-not-package@
+Probe\Probe.lua
+#@end-do-not-package@

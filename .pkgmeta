@@ -1,0 +1,41 @@
+# BigWigs packager config, see .github/workflows/release.yml.
+package-as: AskAzeroth
+
+enable-nolib-creation: no
+
+# Libraries are not committed; local dev uses tools/fetch-libs.sh.
+externals:
+  AskAzeroth/Libs/LibStub: https://repos.curseforge.com/wow/libstub/trunk
+  AskAzeroth/Libs/CallbackHandler-1.0: https://repos.curseforge.com/wow/callbackhandler/trunk/CallbackHandler-1.0
+  AskAzeroth/Libs/AceComm-3.0: https://repos.curseforge.com/wow/ace3/trunk/AceComm-3.0
+  AskAzeroth/Libs/LibDeflate:
+    url: https://github.com/SafeteeWoW/LibDeflate
+    tag: 1.0.2-release
+    # GitHub repo, so name the CurseForge project for the embedded-library relation.
+    curse-slug: libdeflate
+
+# The addon lives in a subfolder; move it to the zip root.
+move-folders:
+  AskAzeroth/AskAzeroth: AskAzeroth
+
+ignore:
+  - README.md
+  - CLAUDE.md
+  - PLAN.md
+  - docs
+  - tools
+  - AskAzeroth/Probe
+  # The LibDeflate external is the whole GitHub repo; keep only what the
+  # client loads. Its second .toc (UTF-8 BOM) and HTML docs may trip
+  # CurseForge's file processor ("General error processing file").
+  - AskAzeroth/Libs/LibDeflate/LibDeflate.toc
+  - AskAzeroth/Libs/LibDeflate/lib.xml
+  - AskAzeroth/Libs/LibDeflate/libdeflate-1.0.2-1.rockspec
+  - AskAzeroth/Libs/LibDeflate/docs
+  - AskAzeroth/Libs/LibDeflate/examples
+  - AskAzeroth/Libs/LibDeflate/README.md
+  - AskAzeroth/Libs/LibDeflate/changelog.md
+
+manual-changelog:
+  filename: CHANGELOG.md
+  markup-type: markdown
