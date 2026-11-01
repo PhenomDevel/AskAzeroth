@@ -56,3 +56,11 @@ L.CMD_SETTINGS = "ouvrir les options"
 L.CMD_MINIMAP = "afficher ou masquer le bouton de la minicarte"
 L.CMD_MINIMAP_HIDDEN = "Bouton de la minicarte masqué. |cffffd100/aa minimap|r le réaffiche."
 L.CMD_MINIMAP_SHOWN = "Bouton de la minicarte affiché."
+
+-- Categories
+L.CAT_QUEST = "Quête"
+L.CAT_CLASS = "Classe"
+L.CAT_DUNGEON = "Donjon"
+L.CAT_PROF = "Métier"
+L.CAT_UI = "Interface"
+L.CAT_MISC = "Autre"

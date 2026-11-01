@@ -56,3 +56,11 @@ L.CMD_SETTINGS = "abrir as configurações"
 L.CMD_MINIMAP = "mostrar ou ocultar o botão do minimapa"
 L.CMD_MINIMAP_HIDDEN = "Botão do minimapa oculto. |cffffd100/aa minimap|r mostra de novo."
 L.CMD_MINIMAP_SHOWN = "Botão do minimapa visível."
+
+-- Categories
+L.CAT_QUEST = "Missão"
+L.CAT_CLASS = "Classe"
+L.CAT_DUNGEON = "Masmorra"
+L.CAT_PROF = "Profissão"
+L.CAT_UI = "Interface"
+L.CAT_MISC = "Outros"

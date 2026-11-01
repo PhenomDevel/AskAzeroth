@@ -61,6 +61,30 @@ L.CMD_MINIMAP = "show or hide the minimap button"
 L.CMD_MINIMAP_HIDDEN = "Minimap button hidden. |cffffd100/aa minimap|r shows it again."
 L.CMD_MINIMAP_SHOWN = "Minimap button shown."
 
+-- Categories
+L.CAT_QUEST = "Quest"
+L.CAT_CLASS = "Class"
+L.CAT_DUNGEON = "Dungeon"
+L.CAT_PROF = "Profession"
+L.CAT_UI = "Interface"
+L.CAT_MISC = "Other"
+
+-- Store test (/aa simulate, /aa store, /aa debug; development checkouts only; enUS + deDE)
+L.SIM_HELP = "store test: made-up questions, rule check, sweep, reset (nothing is sent)"
+L.SIM_HELP_STORE = "list the questions in memory or show one"
+L.SIM_HELP_DEBUG = "print every store change and every dropped message"
+L.SIM_DONE = "Simulated %d questions, %d answers, %d solved (%d rejected). In memory: %d."
+L.SIM_FAIL = "FAILED"
+L.SIM_CHECK_RESULT = "Rule check: %d of %d passed. The store was cleared."
+L.SIM_UNKNOWN_ID = "No question with id %s."
+L.SIM_STATUS_LINE = "Status: %s, disappears in %d min."
+L.SIM_STORE_HEADER = "%d questions in memory (accepted %d, dropped %d messages):"
+L.SIM_DROPPED = "dropped"
+L.SIM_SWEPT = "Removed %d expired questions, %d left."
+L.SIM_RESET = "Store cleared."
+L.SIM_DEBUG_ON = "Store debug output on."
+L.SIM_DEBUG_OFF = "Store debug output off."
+
 -- Probe (/aa probe, development checkouts only; enUS + deDE)
 L.PROBE_HELP = "transport test (M0)"
 L.PROBE_HELP_HEADER = "Transport test (everything is also written to the saved log):"
