@@ -12,12 +12,13 @@ AskAzeroth/                  addon folder (the only thing that gets installed)
   Locales/                   enUS (base), deDE, frFR, esES (also esMX), itIT, ruRU, ptBR
   Media/                     Logo.tga (addon icon, 64x64, 32-bit TGA from docs/logo/logo.svg)
   Core/                      namespace and events (Init.lua), constants, helpers (Util),
-                             serializer, categories (Data/), protocol, store, saved data,
+                             serializer, categories (Data/), protocol, store, Net (store ↔ channels), saved data,
                              slash commands, language channels, transport
   UI/                        widgets, main window with its pages (placeholders until
                              their milestone), settings page, minimap button, commands
   Probe/                     development tools, not packaged: transport test (/aa probe),
-                             store test (/aa simulate, /aa store, /aa debug)
+                             store test (/aa simulate, /aa store, /aa debug), test actions
+                             (/aa ask, answer, solve, withdraw) until the window has them
 docs/                        developer docs, spike test guide, release process,
                              logo/ (logo.svg, 400x400 logo.png for README/CurseForge/Wago)
 tools/                       fetch-libs.sh (libraries for local development)

@@ -222,7 +222,11 @@ function Protocol.Decode(text, sender, lang, now)
 	if not reader then
 		return nil, "type"
 	end
-	return reader(m, sender, lang, now or Util.Now())
+	local message, reason = reader(m, sender, lang, now or Util.Now())
+	if message then
+		message.lang = lang
+	end
+	return message, reason
 end
 
 --------------------------------------------------------------------------------

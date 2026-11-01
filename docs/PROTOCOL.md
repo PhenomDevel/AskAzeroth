@@ -17,6 +17,9 @@ expiry, rate limits), `Core/Comm.lua` (transport).
   not see the channel (details in [`SPIKE.md`](SPIKE.md)).
 - Payload: own serializer (`Core/Serializer.lua`) → LibDeflate
   `CompressDeflate` → `EncodeForWoWAddonChannel` → AceComm over `CHANNEL`.
+- Every message uses ChatThrottleLib priority `NORMAL`. With two priorities
+  on one prefix, ChatThrottleLib's turn-taking could interleave the parts of
+  two long messages and the receiver would mix them up.
 - Nothing is sent during the chat messaging lockdown (encounters); `ns.Comm`
   holds messages and sends them afterwards.
 
@@ -100,6 +103,7 @@ In `Store.Receive` (rules):
 - `S` and `D` only from the question's author (`not-author`).
 - `A` only for a known question (`unknown`), at most 50 answers per
   question, not older than the question.
+- `A`, `S` and `D` only on the channel of the question's language (`lang`).
 - Rate limits per sender for first-hand messages: 1 new question per 60 s,
   6 answers per 60 s, at most 3 open (unsolved) questions per author.
   Excess messages are dropped silently.

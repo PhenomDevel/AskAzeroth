@@ -54,6 +54,7 @@ Core\Channel.lua
 Core\Comm.lua
 Core\Protocol.lua
 Core\Store.lua
+Core\Net.lua
 
 # UI
 UI\Widgets.lua
