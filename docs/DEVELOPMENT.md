@@ -25,7 +25,7 @@ PLAN.md                      implementation plan (not packaged)
 
 * Settings, players and own questions are stored account-wide in
   `AskAzerothDB`, the character's own state (window position) in
-  `AskAzerothCharDB` (window position). Public
+  `AskAzerothCharDB`. Public
   questions live in memory only.
 * `Core/` never depends on the UI; files talk through CallbackHandler
   messages (`ns.RegisterCallback(owner, "AA_…", func)`, `ns:Fire("AA_…", …)`).
