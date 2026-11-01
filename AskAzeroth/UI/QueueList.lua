@@ -74,7 +74,7 @@ local function FillRow(list, row, item)
 	local now = Util.Now()
 	row.meta:SetText(("%s · %s · %s · %s"):format(
 		category and category.label or q.cat,
-		W.StatusText(Store.GetStatus(q), q.answerCount),
+		W.StatusText((list.statusOf or Store.GetStatus)(q), q.answerCount),
 		W.PlayerText(q.author, (q.ctx and q.ctx.class) or Players.GetClass(q.author)),
 		W.Ago(now - q.created)))
 	local selected = list.selectedId == q.id
@@ -86,9 +86,10 @@ local function FillRow(list, row, item)
 end
 
 -- onSelect(question) runs when a row is clicked, onToggleIgnored() when the
--- "ignored players" row is.
-function QueueList.Create(parent, onSelect, onToggleIgnored)
-	local list = { onSelect = onSelect, onToggleIgnored = onToggleIgnored }
+-- "ignored players" row is. statusOf(question) gives the status shown
+-- (default Store.GetStatus).
+function QueueList.Create(parent, onSelect, onToggleIgnored, statusOf)
+	local list = { onSelect = onSelect, onToggleIgnored = onToggleIgnored, statusOf = statusOf }
 	local scrollBox = CreateFrame("Frame", nil, parent, "WowScrollBoxList")
 	scrollBox:SetPoint("TOPLEFT", 0, 0)
 	scrollBox:SetPoint("BOTTOMRIGHT", -16, 0)

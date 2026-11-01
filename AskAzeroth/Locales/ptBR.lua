@@ -20,10 +20,6 @@ L.PAGE_PINNED = "Fixadas"
 L.PAGE_PLAYERS = "Jogadores"
 L.PAGE_FAQ = "FAQ"
 L.PAGE_SETTINGS = "Configurações"
-L.PAGE_COMING_SOON = "Chega em uma versão futura."
-L.PAGE_MY_QUESTIONS_TEXT = "Tudo o que você perguntou, com todas as respostas, mesmo depois de sumir da lista pública."
-L.PAGE_PINNED_TEXT = "Respostas que você fixou, junto com a pergunta. Ficam no seu computador e nunca expiram, mesmo depois que a pergunta sumir."
-L.PAGE_FAQ_TEXT = "Respostas para perguntas comuns de jogadores novos."
 
 -- Status line
 L.STATUS_LOCKDOWN = "Mensagens de bate-papo bloqueadas (encontro)"
@@ -156,6 +152,36 @@ L.TOAST_ANSWER = "Resposta à sua pergunta"
 L.TOAST_LINE = "%s: \"%s\""
 L.TOAST_MORE = "+%d outras"
 L.MINIMAP_NEW = "%d novas"
+
+-- Thread (pins, My questions)
+L.THREAD_CLOSED = "Fechada – não está mais na lista pública."
+L.THREAD_WITHDRAWN = "Retirada."
+L.THREAD_ELSEWHERE = "Ainda pública, mas ainda não recebida neste personagem."
+L.THREAD_PIN = "Fixar resposta"
+L.THREAD_PIN_TIP = "Guarda esta resposta com a pergunta em \"Fixadas\". Respostas fixadas nunca expiram."
+L.THREAD_UNPIN = "Desafixar"
+L.THREAD_UNPIN_TIP = "Remove esta resposta de \"Fixadas\"."
+
+-- Status and reasons
+L.STATUS_WITHDRAWN = "retirada"
+L.REASON_PIN_FULL = "Você fixou o máximo de 500 respostas. Desafixe algumas primeiro."
+
+-- My questions
+L.MY_CLEANUP = "Limpar"
+L.MY_CLEANUP_TIP = "Remove perguntas fechadas e retiradas mais antigas que o período de retenção das configurações."
+L.MY_CLEANUP_FOREVER = "As perguntas ficam guardadas para sempre. Defina um período de retenção nas configurações."
+L.MY_CLEANUP_DONE = "%d perguntas removidas."
+L.MY_COUNT = "%d perguntas"
+L.MY_EMPTY = "Você ainda não perguntou nada. Suas perguntas e todas as respostas ficam guardadas aqui."
+
+-- Pinned
+L.PINNED_UNPIN = "Desafixar"
+L.PINNED_COUNT = "%d / %d fixadas"
+L.PINNED_EMPTY = "Nada fixado ainda. Clique no ícone de nota ao lado de uma resposta para guardá-la aqui."
+
+-- FAQ
+L.FAQ_LANGUAGE = "Idioma do FAQ"
+L.FAQ_LANGUAGE_TIP = "Alterna o FAQ entre alemão e inglês."
 
 -- Categories
 L.CAT_QUEST = "Missão"

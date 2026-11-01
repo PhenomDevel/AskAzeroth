@@ -24,10 +24,6 @@ L.PAGE_PINNED = "Pinned"
 L.PAGE_PLAYERS = "Players"
 L.PAGE_FAQ = "FAQ"
 L.PAGE_SETTINGS = "Settings"
-L.PAGE_COMING_SOON = "Coming in a later version."
-L.PAGE_MY_QUESTIONS_TEXT = "Everything you have asked, with all answers, also after it has disappeared from the public list."
-L.PAGE_PINNED_TEXT = "Answers you pinned, together with their question. They stay on your computer and never expire, also after the question has disappeared."
-L.PAGE_FAQ_TEXT = "Answers to common questions of new players."
 
 -- Status line
 L.STATUS_LOCKDOWN = "Chat messages locked (encounter)"
@@ -161,6 +157,36 @@ L.TOAST_LINE = "%s: \"%s\""
 L.TOAST_MORE = "+%d more"
 L.MINIMAP_NEW = "%d new"
 
+-- Thread (pins, My questions)
+L.THREAD_CLOSED = "Closed – no longer in the public list."
+L.THREAD_WITHDRAWN = "Withdrawn."
+L.THREAD_ELSEWHERE = "Still public, but not received on this character yet."
+L.THREAD_PIN = "Pin answer"
+L.THREAD_PIN_TIP = "Keeps this answer with its question under \"Pinned\". Pinned answers never expire."
+L.THREAD_UNPIN = "Unpin"
+L.THREAD_UNPIN_TIP = "Removes this answer from \"Pinned\"."
+
+-- Status and reasons
+L.STATUS_WITHDRAWN = "withdrawn"
+L.REASON_PIN_FULL = "You have pinned the maximum of 500 answers. Unpin some first."
+
+-- My questions
+L.MY_CLEANUP = "Clean up"
+L.MY_CLEANUP_TIP = "Removes closed and withdrawn questions older than the retention period from the settings."
+L.MY_CLEANUP_FOREVER = "Questions are kept forever. Set a retention period in the settings."
+L.MY_CLEANUP_DONE = "%d questions removed."
+L.MY_COUNT = "%d questions"
+L.MY_EMPTY = "You haven't asked anything yet. Your questions and all their answers will be kept here."
+
+-- Pinned
+L.PINNED_UNPIN = "Unpin"
+L.PINNED_COUNT = "%d / %d pinned"
+L.PINNED_EMPTY = "Nothing pinned yet. Click the note icon next to an answer to keep it here."
+
+-- FAQ
+L.FAQ_LANGUAGE = "FAQ language"
+L.FAQ_LANGUAGE_TIP = "Switches the FAQ between German and English."
+
 -- Categories
 L.CAT_QUEST = "Quest"
 L.CAT_CLASS = "Class"
@@ -194,6 +220,7 @@ L.SIM_ANSWERED = "Answered %s."
 L.SIM_SOLVED = "Marked %s as solved."
 L.SIM_WITHDRAWN = "Withdrew %s."
 L.SIM_NET_STATS = "Sent %d, received %d (%d unreadable or invalid), %d held."
+L.SIM_SYNC_STATS = "Sync: %d requests, %d answers sent, %d requests left to others or skipped."
 
 -- Probe (/aa probe, development checkouts only; enUS + deDE)
 L.PROBE_HELP = "transport test (M0)"

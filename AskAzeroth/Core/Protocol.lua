@@ -253,16 +253,58 @@ function Protocol.EncodeSyncRequest(knownIds)
 	return Serializer.Serialize({ t = "SR", k = knownIds })
 end
 
--- questions: store entries (with their answers), at most C.SYNC_MAX_QUESTIONS.
-function Protocol.EncodeSyncAnswer(questions)
+local function SyncEntry(q, answers, count)
 	local list = {}
-	for i = 1, #questions do
+	for i = 1, count do
+		local a = answers[i]
+		list[i] = { i = a.id, a = a.author, tx = a.text, ts = a.created }
+	end
+	return { i = q.id, a = q.author, c = q.cat, ti = q.title, b = q.body, x = WireContext(q.ctx), ts = q.created, an = list }
+end
+
+-- questions: store entries (with their answers), at most C.SYNC_MAX_QUESTIONS,
+-- most important first. maxBytes (optional) limits the serialized size:
+-- the oldest answers of a question are left out first, and questions that
+-- don't fit any more are left out. Returns the message (or nil if nothing
+-- fits) and how many questions it holds.
+function Protocol.EncodeSyncAnswer(questions, maxBytes)
+	local list = {}
+	local used = 0
+	for i = 1, math.min(#questions, C.SYNC_MAX_QUESTIONS) do
 		local q = questions[i]
+		-- Newest answers first, so the last answer (and with it the expiry)
+		-- stays the same when old ones are left out.
 		local answers = {}
 		for _, a in pairs(q.answers) do
-			answers[#answers + 1] = { i = a.id, a = a.author, tx = a.text, ts = a.created }
+			answers[#answers + 1] = a
 		end
-		list[i] = { i = q.id, a = q.author, c = q.cat, ti = q.title, b = q.body, x = WireContext(q.ctx), ts = q.created, an = answers }
+		table.sort(answers, function(x, y)
+			if x.created ~= y.created then
+				return x.created > y.created
+			end
+			return x.id < y.id
+		end)
+		local count = #answers
+		local entry = SyncEntry(q, answers, count)
+		if maxBytes then
+			local size = #Serializer.Serialize(entry)
+			while used + size > maxBytes and count > 0 do
+				-- Drop roughly what is too much, at least one answer.
+				local over = used + size - maxBytes
+				local drop = math.max(1, math.floor(count * over / size))
+				count = math.max(0, count - drop)
+				entry = SyncEntry(q, answers, count)
+				size = #Serializer.Serialize(entry)
+			end
+			if used + size > maxBytes then
+				break
+			end
+			used = used + size
+		end
+		list[#list + 1] = entry
 	end
-	return Serializer.Serialize({ t = "SP", qs = list })
+	if #list == 0 then
+		return nil, 0
+	end
+	return Serializer.Serialize({ t = "SP", qs = list }), #list
 end

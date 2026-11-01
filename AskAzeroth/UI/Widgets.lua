@@ -314,7 +314,7 @@ function W.PlayerText(fullName, classFile)
 	return hex and ("|c%s%s|r"):format(hex, name) or name
 end
 
-W.STATUS_COLORS = { open = "ffffd100", answered = "ff80bfff", solved = "ff40ff60", closed = "ff9d9d9d" }
+W.STATUS_COLORS = { open = "ffffd100", answered = "ff80bfff", solved = "ff40ff60", closed = "ff9d9d9d", withdrawn = "ff9d9d9d" }
 
 function W.StatusText(status, answerCount)
 	local label

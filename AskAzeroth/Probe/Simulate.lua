@@ -332,5 +332,7 @@ ns:RegisterCommand("debug", function(arg)
 	if debugOn then
 		local stats = ns.Net.stats
 		ns:Print(L.SIM_NET_STATS, stats.sent, stats.received, stats.invalid, ns.Comm.GetQueueLength())
+		local sync = ns.Sync.stats
+		ns:Print(L.SIM_SYNC_STATS, sync.requests, sync.answers, sync.skipped)
 	end
 end, "debug [on|off]", L.SIM_HELP_DEBUG)

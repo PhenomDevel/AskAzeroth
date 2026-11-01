@@ -101,6 +101,20 @@ C.MAX_OPEN_PER_AUTHOR = 3
 C.SYNC_MAX_QUESTIONS = 30
 -- Sync request (SR): at most this many known ids.
 C.SYNC_MAX_KNOWN = 200
+-- Sync answer: at most this many bytes before compression, so one answer
+-- doesn't hold up the channel for long; the oldest answers go first.
+C.SYNC_MAX_BYTES = 12000
+-- Seconds after joining a channel before the sync request (random).
+C.SYNC_REQUEST_DELAY_MIN = 5
+C.SYNC_REQUEST_DELAY_MAX = 15
+-- Seconds before answering a request (random); someone else may be faster.
+C.SYNC_ANSWER_DELAY_MIN = 2
+C.SYNC_ANSWER_DELAY_MAX = 8
+-- Answer requests at most this often per language channel.
+C.SYNC_ANSWER_INTERVAL = 5 * 60
+
+-- Pinned answers kept at most; beyond that pinning is refused.
+C.MAX_PINNED = 500
 
 --------------------------------------------------------------------------------
 -- Notifications (PLAN.md, section 9)

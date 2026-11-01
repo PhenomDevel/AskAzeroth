@@ -12,11 +12,12 @@ AskAzeroth/                  addon folder (the only thing that gets installed)
   Locales/                   enUS (base), deDE, frFR, esES (also esMX), itIT, ruRU, ptBR
   Media/                     Logo.tga (addon icon, 64x64, 32-bit TGA from docs/logo/logo.svg)
   Core/                      namespace and events (Init.lua), constants, helpers (Util),
-                             serializer, categories (Data/), protocol, store, Net (store ↔ channels), players, notifications, saved data,
+                             serializer, categories and FAQ texts (Data/), protocol, store, Net (store ↔ channels),
+                             login sync, my questions, pinned answers, players, notifications, saved data,
                              slash commands, language channels, transport
-  UI/                        widgets, main window with its pages (placeholders until
-                             their milestone), questions page (QueueList, ThreadView,
-                             AskDialog), player menu, players page, settings page,
+  UI/                        widgets, main window with its pages: questions (QueueList,
+                             ThreadView, AskDialog), my questions, pinned, players, FAQ,
+                             settings; player menu,
                              toast, minimap button, commands
   Probe/                     development tools, not packaged: transport test (/aa probe),
                              store test (/aa simulate, /aa store, /aa debug), test actions
@@ -28,7 +29,7 @@ tools/                       fetch-libs.sh (libraries for local development)
 PLAN.md                      implementation plan (not packaged)
 ```
 
-* Settings, players and own questions are stored account-wide in
+* Settings, players, own questions and pinned answers are stored account-wide in
   `AskAzerothDB`, the character's own state (window position) in
   `AskAzerothCharDB`. Public
   questions live in memory only.
