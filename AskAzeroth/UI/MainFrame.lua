@@ -97,6 +97,13 @@ local function SelectPage(index)
 	UI.UpdateStatus()
 end
 
+-- Player-facing text for a reason code from the store or protocol.
+function UI.ReasonText(reason)
+	local key = "REASON_" .. tostring(reason):upper():gsub("%-", "_")
+	local text = rawget(L, key)
+	return text or L.REASON_OTHER:format(tostring(reason))
+end
+
 function UI.GetFrame()
 	return frame
 end

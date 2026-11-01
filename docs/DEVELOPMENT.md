@@ -15,7 +15,8 @@ AskAzeroth/                  addon folder (the only thing that gets installed)
                              serializer, categories (Data/), protocol, store, Net (store ↔ channels), saved data,
                              slash commands, language channels, transport
   UI/                        widgets, main window with its pages (placeholders until
-                             their milestone), settings page, minimap button, commands
+                             their milestone), questions page (QueueList, ThreadView,
+                             AskDialog), settings page, minimap button, commands
   Probe/                     development tools, not packaged: transport test (/aa probe),
                              store test (/aa simulate, /aa store, /aa debug), test actions
                              (/aa ask, answer, solve, withdraw) until the window has them

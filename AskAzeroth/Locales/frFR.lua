@@ -21,7 +21,6 @@ L.PAGE_PLAYERS = "Joueurs"
 L.PAGE_FAQ = "FAQ"
 L.PAGE_SETTINGS = "Options"
 L.PAGE_COMING_SOON = "Dans une version ultérieure."
-L.PAGE_QUESTIONS_TEXT = "Les questions ouvertes dans vos langues, avec des filtres par catégorie et une recherche. Choisissez-en une pour lire le fil et y répondre."
 L.PAGE_MY_QUESTIONS_TEXT = "Tout ce que vous avez demandé, avec toutes les réponses, même après sa disparition de la liste publique."
 L.PAGE_PINNED_TEXT = "Les réponses que vous avez épinglées, avec leur question. Elles restent sur votre ordinateur et n'expirent jamais, même après la disparition de la question."
 L.PAGE_PLAYERS_TEXT = "Les joueurs que vous avez mis en favoris ou que vous ignorez, avec vos notes et le nombre de fois où ils vous ont aidé. Enregistré uniquement sur votre ordinateur."
@@ -56,6 +55,64 @@ L.CMD_SETTINGS = "ouvrir les options"
 L.CMD_MINIMAP = "afficher ou masquer le bouton de la minicarte"
 L.CMD_MINIMAP_HIDDEN = "Bouton de la minicarte masqué. |cffffd100/aa minimap|r le réaffiche."
 L.CMD_MINIMAP_SHOWN = "Bouton de la minicarte affiché."
+
+-- Questions page
+L.QUEUE_SEARCH = "Rechercher…"
+L.QUEUE_ALL = "Toutes"
+L.QUEUE_ASK = "Poser une question"
+L.QUEUE_EMPTY = "Aucune question pour l'instant. Posez la première !"
+L.QUEUE_NO_MATCH = "Aucune question ne correspond au filtre."
+
+-- Thread
+L.THREAD_NONE = "Choisissez une question à gauche pour lire les réponses."
+L.THREAD_SEND = "Envoyer"
+L.THREAD_SOLVE = "Marquer comme résolue"
+L.THREAD_SOLVE_TIP = "Votre question a obtenu la réponse attendue. Elle disparaît 10 minutes plus tard."
+L.THREAD_WITHDRAW = "Retirer"
+L.THREAD_WITHDRAW_TIP = "Retire votre question pour tout le monde."
+L.THREAD_WITHDRAW_CONFIRM = "Retirer votre question pour tout le monde ?"
+L.THREAD_OPEN_EXPIRES = "Disparaît dans %d min si personne ne répond."
+L.THREAD_ANSWERED_EXPIRES = "Disparaît dans %d min sans nouvelle réponse."
+L.THREAD_SOLVED_EXPIRES = "Résolue – disparaît dans %d min."
+
+-- Formatting
+L.LEVEL_SHORT = "Niveau %d"
+L.AGO_NOW = "à l'instant"
+L.AGO_MINUTES = "il y a %d min"
+L.AGO_HOURS = "il y a %d h"
+
+-- Status
+L.STATUS_OPEN = "ouverte"
+L.STATUS_ANSWER_ONE = "1 réponse"
+L.STATUS_ANSWERS = "%d réponses"
+L.STATUS_SOLVED = "résolue"
+L.STATUS_CLOSED = "fermée"
+
+-- Ask dialog
+L.ASK_TITLE = "Poser une question"
+L.ASK_CATEGORY = "Catégorie"
+L.ASK_SUMMARY = "Résumé"
+L.ASK_DETAILS = "Détails (facultatif)"
+L.ASK_LANGUAGE = "Langue"
+L.ASK_CONTEXT = "Envoyé avec : %s"
+L.ASK_SUBMIT = "Envoyer"
+L.ASK_CANCEL = "Annuler"
+
+-- Reasons
+L.REASON_RATE = "Vous pouvez poser une question par minute. Patientez un instant."
+L.REASON_OPEN_LIMIT = "Vous avez déjà 3 questions ouvertes. Marquez-en une comme résolue ou retirez-la d'abord."
+L.REASON_TITLE = "Le résumé est vide, trop long ou contient des caractères non valides."
+L.REASON_BODY = "Les détails sont trop longs ou contiennent des caractères non valides."
+L.REASON_TEXT = "La réponse est vide, trop longue ou contient des caractères non valides."
+L.REASON_LANG = "Cette langue n'est pas sélectionnée."
+L.REASON_CATEGORY = "Choisissez une catégorie."
+L.REASON_SENDER = "Le nom de votre personnage n'est pas encore connu. Réessayez dans un instant."
+L.REASON_UNKNOWN = "Cette question n'existe plus."
+L.REASON_NOT_AUTHOR = "Seul l'auteur de la question peut faire cela."
+L.REASON_DUPLICATE = "Déjà fait."
+L.REASON_ANSWERS_FULL = "Cette question a trop de réponses."
+L.REASON_TIME = "L'heure ne correspond pas."
+L.REASON_OTHER = "Impossible (%s)."
 
 -- Categories
 L.CAT_QUEST = "Quête"

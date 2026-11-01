@@ -21,7 +21,6 @@ L.PAGE_PLAYERS = "Spieler"
 L.PAGE_FAQ = "FAQ"
 L.PAGE_SETTINGS = "Einstellungen"
 L.PAGE_COMING_SOON = "Kommt in einer späteren Version."
-L.PAGE_QUESTIONS_TEXT = "Offene Fragen in deinen Sprachen, mit Filtern nach Kategorie und einer Suche. Wähle eine aus, um den Thread zu lesen und zu antworten."
 L.PAGE_MY_QUESTIONS_TEXT = "Alles, was du gefragt hast, mit allen Antworten, auch nachdem es aus der öffentlichen Liste verschwunden ist."
 L.PAGE_PINNED_TEXT = "Antworten, die du angepinnt hast, samt ihrer Frage. Sie bleiben auf deinem Rechner und laufen nie ab, auch wenn die Frage verschwunden ist."
 L.PAGE_PLAYERS_TEXT = "Spieler, die du als Favorit markiert hast oder ignorierst, mit deinen Notizen und wie oft sie dir geholfen haben. Nur auf deinem Rechner gespeichert."
@@ -56,6 +55,64 @@ L.CMD_SETTINGS = "Einstellungen öffnen"
 L.CMD_MINIMAP = "Minimap-Button ein- oder ausblenden"
 L.CMD_MINIMAP_HIDDEN = "Minimap-Button ausgeblendet. |cffffd100/aa minimap|r zeigt ihn wieder."
 L.CMD_MINIMAP_SHOWN = "Minimap-Button eingeblendet."
+
+-- Questions page
+L.QUEUE_SEARCH = "Suchen …"
+L.QUEUE_ALL = "Alle"
+L.QUEUE_ASK = "Frage stellen"
+L.QUEUE_EMPTY = "Noch keine Fragen. Stell die erste!"
+L.QUEUE_NO_MATCH = "Keine Frage passt zum Filter."
+
+-- Thread
+L.THREAD_NONE = "Wähle links eine Frage, um die Antworten zu lesen."
+L.THREAD_SEND = "Senden"
+L.THREAD_SOLVE = "Als gelöst markieren"
+L.THREAD_SOLVE_TIP = "Deine Frage ist beantwortet. Sie verschwindet 10 Minuten später."
+L.THREAD_WITHDRAW = "Zurückziehen"
+L.THREAD_WITHDRAW_TIP = "Entfernt deine Frage für alle."
+L.THREAD_WITHDRAW_CONFIRM = "Deine Frage für alle zurückziehen?"
+L.THREAD_OPEN_EXPIRES = "Verschwindet in %d min, wenn niemand antwortet."
+L.THREAD_ANSWERED_EXPIRES = "Verschwindet in %d min ohne neue Antwort."
+L.THREAD_SOLVED_EXPIRES = "Gelöst – verschwindet in %d min."
+
+-- Formatting
+L.LEVEL_SHORT = "Stufe %d"
+L.AGO_NOW = "gerade eben"
+L.AGO_MINUTES = "vor %d min"
+L.AGO_HOURS = "vor %d h"
+
+-- Status
+L.STATUS_OPEN = "offen"
+L.STATUS_ANSWER_ONE = "1 Antwort"
+L.STATUS_ANSWERS = "%d Antworten"
+L.STATUS_SOLVED = "gelöst"
+L.STATUS_CLOSED = "geschlossen"
+
+-- Ask dialog
+L.ASK_TITLE = "Frage stellen"
+L.ASK_CATEGORY = "Kategorie"
+L.ASK_SUMMARY = "Kurzfassung"
+L.ASK_DETAILS = "Details (optional)"
+L.ASK_LANGUAGE = "Sprache"
+L.ASK_CONTEXT = "Wird mitgesendet: %s"
+L.ASK_SUBMIT = "Absenden"
+L.ASK_CANCEL = "Abbrechen"
+
+-- Reasons
+L.REASON_RATE = "Du kannst eine Frage pro Minute stellen. Bitte warte kurz."
+L.REASON_OPEN_LIMIT = "Du hast schon 3 offene Fragen. Markiere erst eine als gelöst oder zieh sie zurück."
+L.REASON_TITLE = "Die Kurzfassung ist leer, zu lang oder enthält ungültige Zeichen."
+L.REASON_BODY = "Die Details sind zu lang oder enthalten ungültige Zeichen."
+L.REASON_TEXT = "Die Antwort ist leer, zu lang oder enthält ungültige Zeichen."
+L.REASON_LANG = "Diese Sprache ist nicht ausgewählt."
+L.REASON_CATEGORY = "Wähle eine Kategorie."
+L.REASON_SENDER = "Dein Charaktername ist noch nicht bekannt. Versuch es gleich noch einmal."
+L.REASON_UNKNOWN = "Diese Frage gibt es nicht mehr."
+L.REASON_NOT_AUTHOR = "Das kann nur der Fragende."
+L.REASON_DUPLICATE = "Schon erledigt."
+L.REASON_ANSWERS_FULL = "Diese Frage hat zu viele Antworten."
+L.REASON_TIME = "Die Zeit passt nicht."
+L.REASON_OTHER = "Nicht möglich (%s)."
 
 -- Categories
 L.CAT_QUEST = "Quest"

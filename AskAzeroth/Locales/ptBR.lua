@@ -21,7 +21,6 @@ L.PAGE_PLAYERS = "Jogadores"
 L.PAGE_FAQ = "FAQ"
 L.PAGE_SETTINGS = "Configurações"
 L.PAGE_COMING_SOON = "Chega em uma versão futura."
-L.PAGE_QUESTIONS_TEXT = "Perguntas abertas nos seus idiomas, com filtros por categoria e uma busca. Escolha uma para ler o tópico e responder."
 L.PAGE_MY_QUESTIONS_TEXT = "Tudo o que você perguntou, com todas as respostas, mesmo depois de sumir da lista pública."
 L.PAGE_PINNED_TEXT = "Respostas que você fixou, junto com a pergunta. Ficam no seu computador e nunca expiram, mesmo depois que a pergunta sumir."
 L.PAGE_PLAYERS_TEXT = "Jogadores que você marcou como favoritos ou ignora, com suas notas e quantas vezes eles ajudaram você. Salvo apenas no seu computador."
@@ -56,6 +55,64 @@ L.CMD_SETTINGS = "abrir as configurações"
 L.CMD_MINIMAP = "mostrar ou ocultar o botão do minimapa"
 L.CMD_MINIMAP_HIDDEN = "Botão do minimapa oculto. |cffffd100/aa minimap|r mostra de novo."
 L.CMD_MINIMAP_SHOWN = "Botão do minimapa visível."
+
+-- Questions page
+L.QUEUE_SEARCH = "Buscar…"
+L.QUEUE_ALL = "Todas"
+L.QUEUE_ASK = "Fazer uma pergunta"
+L.QUEUE_EMPTY = "Ainda não há perguntas. Faça a primeira!"
+L.QUEUE_NO_MATCH = "Nenhuma pergunta corresponde ao filtro."
+
+-- Thread
+L.THREAD_NONE = "Escolha uma pergunta à esquerda para ler as respostas."
+L.THREAD_SEND = "Enviar"
+L.THREAD_SOLVE = "Marcar como resolvida"
+L.THREAD_SOLVE_TIP = "Sua pergunta teve a resposta que você precisava. Ela some 10 minutos depois."
+L.THREAD_WITHDRAW = "Retirar"
+L.THREAD_WITHDRAW_TIP = "Remove sua pergunta para todos."
+L.THREAD_WITHDRAW_CONFIRM = "Retirar sua pergunta para todos?"
+L.THREAD_OPEN_EXPIRES = "Some em %d min se ninguém responder."
+L.THREAD_ANSWERED_EXPIRES = "Some em %d min sem uma nova resposta."
+L.THREAD_SOLVED_EXPIRES = "Resolvida – some em %d min."
+
+-- Formatting
+L.LEVEL_SHORT = "Nível %d"
+L.AGO_NOW = "agora mesmo"
+L.AGO_MINUTES = "há %d min"
+L.AGO_HOURS = "há %d h"
+
+-- Status
+L.STATUS_OPEN = "aberta"
+L.STATUS_ANSWER_ONE = "1 resposta"
+L.STATUS_ANSWERS = "%d respostas"
+L.STATUS_SOLVED = "resolvida"
+L.STATUS_CLOSED = "fechada"
+
+-- Ask dialog
+L.ASK_TITLE = "Fazer uma pergunta"
+L.ASK_CATEGORY = "Categoria"
+L.ASK_SUMMARY = "Resumo"
+L.ASK_DETAILS = "Detalhes (opcional)"
+L.ASK_LANGUAGE = "Idioma"
+L.ASK_CONTEXT = "Enviado junto: %s"
+L.ASK_SUBMIT = "Perguntar"
+L.ASK_CANCEL = "Cancelar"
+
+-- Reasons
+L.REASON_RATE = "Você pode fazer uma pergunta por minuto. Aguarde um pouco."
+L.REASON_OPEN_LIMIT = "Você já tem 3 perguntas abertas. Marque uma como resolvida ou retire-a primeiro."
+L.REASON_TITLE = "O resumo está vazio, longo demais ou tem caracteres inválidos."
+L.REASON_BODY = "Os detalhes estão longos demais ou têm caracteres inválidos."
+L.REASON_TEXT = "A resposta está vazia, longa demais ou tem caracteres inválidos."
+L.REASON_LANG = "Este idioma não está selecionado."
+L.REASON_CATEGORY = "Escolha uma categoria."
+L.REASON_SENDER = "O nome do seu personagem ainda não é conhecido. Tente de novo em instantes."
+L.REASON_UNKNOWN = "Esta pergunta não existe mais."
+L.REASON_NOT_AUTHOR = "Só quem perguntou pode fazer isso."
+L.REASON_DUPLICATE = "Já feito."
+L.REASON_ANSWERS_FULL = "Esta pergunta tem respostas demais."
+L.REASON_TIME = "O horário não confere."
+L.REASON_OTHER = "Não é possível (%s)."
 
 -- Categories
 L.CAT_QUEST = "Missão"
