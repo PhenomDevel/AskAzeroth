@@ -19,6 +19,7 @@ Abweichend vom ursprünglichen Entwurf gilt:
 - **Sieben Sprachen** wie Guild Finder Forever: Kanäle und UI-Texte für Englisch, Deutsch, Französisch, Spanisch, Italienisch, Russisch und Portugiesisch. Das FAQ gibt es zunächst nur auf Deutsch und Englisch.
 - **M0 mit eigener Probe** (`/aa probe`, nicht gepackt).
 - **Ein PR pro Meilenstein**, danach Test im Spiel durch Kevin, erst dann der nächste.
+- **Angepinnte Antworten** (neu in 1.0): Jede Antwort, auch auf fremde Fragen, lässt sich anpinnen. Sie wird samt Frage lokal gespeichert und läuft nie ab (Abschnitte 5, 7, 10).
 - Dokumentation außer diesem Plan auf Englisch.
 
 ## 1. Ziele und Grundsätze
@@ -54,6 +55,7 @@ Falls Kanäle nicht funktionieren: Fallback-Plan ist Gilde + Flüstern an bekann
 - Benachrichtigung pro Kategorie (aus / Badge / Sound), Pause im Kampf und in Instanzen, Zusammenfassen
 - Ablauf: offen, beantwortet, gelöst
 - Meine Fragen mit einstellbarer Aufbewahrung
+- Angepinnte Antworten: lokal gespeichert, ohne Ablauf, eigene Ansicht mit Suche
 - Login-Sync der aktiven Fragen
 - Statisches FAQ (eingebaut, Deutsch und Englisch)
 - Minimap-Button mit Zähler
@@ -114,6 +116,7 @@ AskAzeroth/
     ThreadView.lua
     AskDialog.lua
     MyQuestions.lua
+    Pinned.lua        angepinnte Antworten
     PlayersView.lua
     FaqView.lua
     Settings.lua      Einstellungen als Seite im eigenen Fenster (Mentor, Sprachen, Aufbewahrung)
@@ -157,9 +160,23 @@ tools/
 ```
 
 ### SavedVariables
-- `AskAzerothDB` (account-weit): `players`, `myQuestions`, `settings` (Sprachen, Mentor-Modus, Benachrichtigungen, Aufbewahrung), `faqCustom`
+- `AskAzerothDB` (account-weit): `players`, `myQuestions`, `pinned`, `settings` (Sprachen, Mentor-Modus, Benachrichtigungen, Aufbewahrung), `faqCustom`
 - `AskAzerothCharDB`: nur, was wirklich charakterbezogen ist (z. B. Fensterposition)
 - Öffentliche Fragen werden **nicht** dauerhaft gespeichert, nur im Speicher gehalten und beim Login neu synchronisiert. Eigene Fragen gehen zusätzlich nach `myQuestions`.
+
+### Angepinnte Antwort
+Kopie zum Zeitpunkt des Anpinnens, unabhängig vom öffentlichen Thread. Schlüssel ist die Antwort-ID.
+```lua
+pinned["A1B2C3D4"] = {
+  pinnedAt = 1793551500,
+  question = { id = "7F3A9C21", author = "Thalrin-Realm", lang = "de", cat = "quest", title = "...", body = "...", created = 1793551000 },
+  answer = { id = "A1B2C3D4", author = "Varethos-Realm", text = "...", created = 1793551200 },
+}
+```
+- Rein lokal, wird nie gesendet.
+- Pin-Symbol an jeder Antwort in der Thread-Ansicht (an/aus), auch unter „Meine Fragen“.
+- Spätere Antworten im Thread kommen nicht automatisch dazu; jede wird einzeln angepinnt.
+- Obergrenze als Konstante (Vorschlag: 500); beim Erreichen wird nichts gelöscht, sondern das Anpinnen mit Hinweis abgelehnt.
 
 ### IDs
 8 Hex-Zeichen aus einem Hash von `author .. created .. counter`. Kollisionen sind bei der Datenmenge vernachlässigbar. Bei einer Kollision mit anderem Autor wird die neue Nachricht verworfen.
@@ -202,6 +219,7 @@ Jeder Client berechnet den Status selbst, es gibt keine Lösch-Nachricht für de
 - Alle Werte als Konstanten in `Core/Constants.lua`, damit sie leicht anpassbar sind.
 - **Meine Fragen** bleiben unabhängig davon in `myQuestions`. Aufbewahrung einstellbar: immer (Standard), 7, 30 oder 90 Tage. Aufräumen beim Login und per Button.
 - Nach öffentlichem Ablauf zeigt der Thread unter „Meine Fragen“ den Status „Geschlossen“.
+- **Angepinnte Antworten** laufen nie ab und werden weder vom Ablauf, vom Zurückziehen (`D`), vom Aufräumen der Meinen Fragen noch vom Ignorieren eines Spielers entfernt. Nur „Lösen“ (Pin aus) entfernt sie.
 
 ## 8. Sync
 
@@ -246,8 +264,8 @@ Favoriten, Ignorierte, Notizen, „hat geholfen“, Favoriten oben, Ignorierte e
 **M6 – Mentor-Modus und Benachrichtigungen**
 Mentor-Einstellungen, Toasts, Sound, Pausenregeln, Zusammenfassen, Badge am Minimap-Button.
 
-**M7 – Meine Fragen, Sync, FAQ**
-Aufbewahrung, Login-Sync, statisches FAQ DE/EN.
+**M7 – Meine Fragen, angepinnte Antworten, Sync, FAQ**
+Aufbewahrung, Pin an Antworten und Ansicht „Angepinnt“ (Suche, Kategoriefilter, Pin lösen), Login-Sync, statisches FAQ DE/EN.
 
 **M8 – Feinschliff und Release**
 Lokalisierung in allen sieben Sprachen vollständig, Performance-Test mit vielen simulierten Nachrichten, CurseForge-/Wago-Projekt-IDs in `.toc` und `docs/RELEASE.md`, Release als Forever-Version.
