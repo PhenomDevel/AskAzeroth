@@ -18,9 +18,10 @@ local PORTRAIT = "Interface\\AddOns\\AskAzeroth\\Media\\Logo"
 -- Page order; the files in UI/ register under these indexes.
 UI.PAGE_QUESTIONS = 1
 UI.PAGE_MY_QUESTIONS = 2
-UI.PAGE_PLAYERS = 3
-UI.PAGE_FAQ = 4
-UI.PAGE_SETTINGS = 5
+UI.PAGE_PINNED = 3
+UI.PAGE_PLAYERS = 4
+UI.PAGE_FAQ = 5
+UI.PAGE_SETTINGS = 6
 
 local pageDefs = {}
 local frame
