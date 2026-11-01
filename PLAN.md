@@ -107,6 +107,7 @@ AskAzeroth/
     Notify.lua        Benachrichtigungen, Sound, Drosselung
     Data/
       Categories.lua
+      FaqTopics.lua
       FaqDE.lua
       FaqEN.lua
   UI/

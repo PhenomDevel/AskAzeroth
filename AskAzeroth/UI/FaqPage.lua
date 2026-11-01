@@ -2,9 +2,10 @@
 local _, ns = ...
 
 -- Built-in FAQ (Core/Data/Faq*.lua): on the left search, language switch,
--- category filter and the list of entries; the selected answer on the
--- right with "Ask a question" for when it did not help. Shown in German
--- for German clients, otherwise in English.
+-- topic filter (Core/Data/FaqTopics.lua) and the list of entries; the
+-- selected answer on the right with "Ask a question" (preselecting the
+-- question category of the entry's topic) for when it did not help. Shown
+-- in German for German clients, otherwise in English.
 local L = ns.L
 local C = ns.C
 local UI = ns.UI
@@ -15,6 +16,31 @@ local PAD = 12
 local SIDE = 22
 local ROW_HEIGHT = 50
 local FAQ_LANGUAGES = { "en", "de" }
+
+-- Topic colours, in the palette of the question categories.
+local TOPIC_COLORS = {
+	addon = W.GOLD,
+	start = W.RGB("cfc4ad"),
+	quest = W.CategoryColor("quest"),
+	class = W.CategoryColor("class"),
+	combat = W.RGB("e37d73"),
+	travel = W.RGB("8cc7db"),
+	gold = W.RGB("edcc6b"),
+	prof = W.CategoryColor("prof"),
+	group = W.CategoryColor("dungeon"),
+	social = W.RGB("e399c7"),
+	ui = W.CategoryColor("ui"),
+}
+
+local function TopicColor(key)
+	return TOPIC_COLORS[key] or W.SOFT
+end
+
+-- Topic name in its colour.
+local function TopicText(key)
+	local topic = C.GetFaqTopic(key)
+	return ("|c%s%s|r"):format(W.Hex(TopicColor(key)), topic and topic.label or tostring(key))
+end
 
 local function DefaultLanguage()
 	local lang = C.GetClientLanguage()
@@ -60,13 +86,13 @@ local function Build(content)
 	end)
 	all:SetLabel(L.QUEUE_ALL)
 	chips[1] = all
-	for _, category in ipairs(C.CATEGORIES) do
+	for _, topic in ipairs(C.FAQ_TOPICS) do
 		local chip = W.Chip(filters, function(self)
 			page.cats[self.key] = not page.cats[self.key] or nil
 			page:Refresh()
-		end, W.CategoryColor(category.key))
-		chip.key = category.key
-		chip:SetLabel(category.label)
+		end, TopicColor(topic.key))
+		chip.key = topic.key
+		chip:SetLabel(topic.label)
 		chips[#chips + 1] = chip
 	end
 	local chipsHeight = W.WrapChips(chips, filters, PAD, -PAD - 28 - 10, LIST_WIDTH - 2 * PAD, 6)
@@ -110,7 +136,7 @@ local function Build(content)
 		end
 		row.entry = entry
 		row.title:SetText(entry.q)
-		row.meta:SetText(W.CategoryText(entry.cat))
+		row.meta:SetText(TopicText(entry.topic))
 		row:SetSelectedLook(entry == page.selected)
 	end)
 	ScrollUtil.InitScrollBoxListWithScrollBar(scrollBox, scrollBar, listView)
@@ -130,9 +156,10 @@ local function Build(content)
 	askHint:SetPoint("LEFT", SIDE, 0)
 	askHint:SetText(L.FAQ_NOT_HELPED)
 	local ask = W.Button(bottom, L.QUEUE_ASK, nil, function()
+		local topic = page.selected and C.GetFaqTopic(page.selected.topic)
 		ns.AskDialog.Show(function(q)
 			UI.ShowQuestion(q.id)
-		end)
+		end, topic and topic.cat)
 	end, "primary")
 	ask:SetHeight(32)
 	ask:SetPoint("RIGHT", -SIDE, 0)
@@ -180,7 +207,7 @@ local function Build(content)
 			frame.text:SetWordWrap(true)
 			frame.text:SetSpacing(3)
 		end
-		frame.category:SetText(W.CategoryText(entry.cat))
+		frame.category:SetText(TopicText(entry.topic))
 		frame.title:SetText(entry.q)
 		frame.text:SetText(entry.a)
 	end)
@@ -199,7 +226,7 @@ local function Build(content)
 		local list = {}
 		local selectedVisible = false
 		for _, entry in ipairs(ns.FAQ[self.lang] or {}) do
-			local ok = next(self.cats) == nil or self.cats[entry.cat]
+			local ok = next(self.cats) == nil or self.cats[entry.topic]
 			if ok and self.search ~= "" then
 				ok = (entry.q .. "\n" .. entry.a):lower():find(self.search, 1, true) ~= nil
 			end

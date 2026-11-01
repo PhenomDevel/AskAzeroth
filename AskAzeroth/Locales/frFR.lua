@@ -184,6 +184,17 @@ L.PINNED_EMPTY = "Rien d'épinglé pour l'instant. Cliquez sur l'icône de note 
 L.FAQ_LANGUAGE = "Langue de la FAQ"
 L.FAQ_LANGUAGE_TIP = "Bascule la FAQ entre l'allemand et l'anglais."
 L.FAQ_NOT_HELPED = "Pas de réponse ? Demandez à la communauté."
+L.FAQ_TOPIC_ADDON = "AskAzeroth"
+L.FAQ_TOPIC_START = "Premiers pas"
+L.FAQ_TOPIC_QUEST = "Quêtes"
+L.FAQ_TOPIC_CLASS = "Classe et talents"
+L.FAQ_TOPIC_COMBAT = "Combat et mort"
+L.FAQ_TOPIC_TRAVEL = "Voyages"
+L.FAQ_TOPIC_GOLD = "Or et commerce"
+L.FAQ_TOPIC_PROF = "Métiers"
+L.FAQ_TOPIC_GROUP = "Groupes et donjons"
+L.FAQ_TOPIC_SOCIAL = "Discussion et guilde"
+L.FAQ_TOPIC_UI = "Interface"
 
 -- Categories
 L.CAT_QUEST = "Quête"
