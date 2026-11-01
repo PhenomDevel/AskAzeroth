@@ -1,0 +1,124 @@
+# AskAzeroth – notes for Claude
+
+World of Warcraft **Forever** addon (Interface 16001, Forever only): newcomers
+ask questions in game, mentors answer in threads. Everything travels between
+players over hidden addon channels, one per language; there is no server.
+Forever runs on the modern mainline API (Midnight base, `C_*` namespaces,
+Settings API) including the Midnight addon restrictions (secret values, addon
+message lockdown during encounters). Do not assume the old Classic Era API.
+
+## Layout
+- Binding plan and milestones: `PLAN.md` (German). Work through the
+  milestones in order, one PR per milestone; Kevin tests in-game before the
+  next one starts.
+- Dev setup and checks: `docs/DEVELOPMENT.md`. Spike test guide and results:
+  `docs/SPIKE.md`. Release and shared conventions: see *Shared with the other
+  PhenomDevel addons* below.
+- `AskAzeroth/` is the addon folder that gets installed; everything else
+  (docs, tools, CI, `PLAN.md`) stays in the repo only.
+- Load order is defined in `AskAzeroth.toc`: Libs → Locales → Core → UI → Probe.
+- `Core/` never depends on `UI/`; files talk through CallbackHandler messages
+  (`AA_*`). Times, limits and lengths live in `Core/Constants.lua`.
+
+## Original code only (strict)
+- Every line of code, data table and asset must be written independently,
+  except the libraries listed below. Never copy, port, translate or closely
+  paraphrase code or data from other addons, regardless of their license.
+  Other addons may only be named as feature inspiration ("what"), never as
+  the source of the implementation ("how"). Kevin's own addons
+  (PhenomDevel) are not "other addons".
+- Allowed references: the official WoW API and Blizzard's UI to learn which
+  function or frame to use – do not copy Blizzard UI code either.
+- Do not guess WoW API functions. When unsure, add a note to
+  `docs/SPIKE.md` and have Kevin test it in-game.
+
+## Libraries
+- Only: LibStub, CallbackHandler-1.0, AceComm-3.0 (with ChatThrottleLib) and
+  LibDeflate. They come from `.pkgmeta` externals and are git-ignored;
+  `tools/fetch-libs.sh` fetches them for local development.
+- No other library (no AceAddon, AceDB, AceConfig, LibSerialize, LibDBIcon …):
+  serializer, saved data, window, widgets, settings and minimap button are
+  our own. Ask Kevin before adding one.
+
+## Networking rules
+- All traffic goes through `ns.Comm` (hidden language channels, LibDeflate,
+  AceComm, one prefix per language: `AA1<lang>`). Never call
+  `SendAddonMessage` elsewhere, except in `Probe/`.
+- Nothing is sent while `C_ChatInfo.InChatMessagingLockdown()` is true;
+  `ns.Comm` holds messages and sends them afterwards.
+- Treat every received value as untrusted: check types and sizes, guard
+  values that can be secret with `issecretvalue`.
+
+## Conventions
+- Lua 5.1, tabs for indentation, English code comments and docs (except
+  `PLAN.md`).
+- In-game strings in `Locales/`: enUS (base) and deDE always; frFR, esES
+  (also esMX), itIT, ruRU and ptBR get every new UI string too. The probe
+  (`PROBE_*`) strings are enUS + deDE only. Missing keys fall back to enUS.
+- Commit messages and PR titles: Conventional Commits (`feat: …`, `fix: …`,
+  `docs: …`, `chore: …`, see the general rules).
+- `.luacheckrc` holds common globals only; declare others per file with
+  `-- luacheck: read globals …`.
+- SavedVariables keys are persistent – never rename a released key without a
+  migration in `Core/Database.lua`.
+
+## Checks
+- `luacheck .` must pass before committing
+  (install with `apt-get install lua5.1 luarocks && luarocks install luacheck`).
+- There are no automated tests: Kevin verifies every change in-game. Do not
+  add a mocked WoW API. In the PR description, list what he should check
+  in-game.
+
+## Shared with the other PhenomDevel addons
+PhenomRaidTools, BlizzHUDTweaks, Quality-of-Life-Forever and
+Guild-Finder-Forever follow the same conventions below; this section is
+identical in their `CLAUDE.md`. A change to a shared file or rule goes to all
+four (one PR per repository).
+
+- Release process: `docs/RELEASE.md`. `.github/workflows/release.yml`,
+  `.github/workflows/ci.yml` and `docs/RELEASE.md` are identical in all four,
+  except the `env` block of `release.yml` and the "This repository" section
+  of `RELEASE.md`.
+- Tags: `vX.Y.Z`, test releases `vX.Y.Z-alphaN` / `-betaN`. Releases are
+  started by Kevin (*Actions → Release → Run workflow*); never push tags or
+  start the release workflow without being asked.
+- Every user-facing PR adds a line under `## Unreleased` in `CHANGELOG.md`
+  (written for players). A release PR renames it to `## vX.Y.Z (YYYY-MM-DD)`
+  and adds the "What's new" entry where the addon has one.
+- Repository layout, the same in all four (only the folders an addon needs):
+  - `<Addon>/<Addon>.toc` lists everything (libraries too, no `embeds.xml`),
+    paths with backslashes, sections `Libs`, `Locales`, `Core`, `UI`,
+    `Modules`.
+  - `<Addon>/Libs/`, `Locales/` (enUS first), `Media/` (addon icon
+    `Logo.tga`/`Logo.blp`, other assets in subfolders), `Core/` (setup in
+    `Core/Init.lua`, logic, data, events), `UI/` (windows, widgets, option
+    pages, minimap button, toasts, What's new), `Modules/` (self-contained
+    features).
+  - `docs/` (`DEVELOPMENT.md` with the layout tree, `RELEASE.md`,
+    `logo/logo.svg` + `logo/logo.png`), `tools/` (dev scripts),
+    `.github/workflows/` (`ci.yml`, `release.yml`) and
+    `.github/ISSUE_TEMPLATE/` (`bug-report.md`, `feature-request.md`,
+    identical in all four).
+  - Root: `.editorconfig`, `.gitignore` (same base, repo-specific part
+    below it), `.luacheckrc`, `.pkgmeta` (ignore `README.md`, `CLAUDE.md`,
+    `docs`, `tools`), `CHANGELOG.md`, `CLAUDE.md`, `LICENSE` (MIT),
+    `README.md`.
+- READMEs are for players only, outline in this order:
+  1. `# Name`, logo (`<img … width="96" align="right">` with an absolute
+     `https://raw.githubusercontent.com/…` URL, so it also renders on
+     CurseForge/Wago), badges: Version, CurseForge, License (same set in all
+     four)
+  2. summary: bold one-line tagline and a short abstract
+  3. `## Supported versions`: table `Client | Interface`, matching the `.toc`
+  4. `## Installation`: CurseForge/Wago app or GitHub releases, manual
+     install folder, first command; then a link to `CHANGELOG.md`
+  5. `## Features`, ending with `### Commands` (table)
+  6. `## Support`: common issues, GitHub issues, Discord where the addon has
+     one, tip link `https://streamlabs.com/phenombutbetter/tip`
+  7. footer "Developed with the help of AI …"
+- No developer, API, release or guide content in the README; that belongs in
+  `docs/` (e.g. `docs/DEVELOPMENT.md`, `docs/RELEASE.md`).
+- Every link and image in the README is absolute
+  (`https://github.com/PhenomDevel/<repo>/blob/<branch>/…`, images via
+  `https://raw.githubusercontent.com/…`), so it also works where the README
+  is shown outside GitHub (CurseForge, Wago).
