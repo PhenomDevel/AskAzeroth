@@ -62,6 +62,12 @@ curl -s https://raw.githubusercontent.com/BigWigsMods/packager/master/release.sh
 ## This repository
 
 - Default branch: `main`. No prerelease branches.
-- No CurseForge or Wago project yet; `## X-Curse-Project-ID` and
-  `## X-Wago-ID` are added to the `.toc` once they exist (planned for M8).
+- No CurseForge or Wago project yet. Once they exist, add
+  `## X-Curse-Project-ID` and `## X-Wago-ID` to the `.toc` (after
+  `## X-Website`), list both here like Guild Finder Forever does, set the
+  repository secrets and replace the "coming soon" badge in `README.md`.
+- Before the first release (v1.0.0): the in-game checks in `docs/SPIKE.md`
+  and the test lists of the milestone PRs, `/aa simulate perf` in game
+  (see `docs/DEVELOPMENT.md`), and remove "In development, no release yet."
+  from `CHANGELOG.md`.
 - No "What's new" window.

@@ -21,7 +21,7 @@ AskAzeroth/                  addon folder (the only thing that gets installed)
                              toast, minimap button, commands
   Probe/                     development tools, not packaged: transport test (/aa probe),
                              store test (/aa simulate, /aa store, /aa debug), test actions
-                             (/aa ask, answer, solve, withdraw) until the window has them
+                             (/aa ask, answer, solve, withdraw), performance test (/aa simulate perf)
 docs/                        developer docs, spike test guide, release process,
                              logo/ (logo.svg, 400x400 logo.png for README/CurseForge/Wago)
 tools/                       fetch-libs.sh (libraries for local development)
@@ -81,6 +81,21 @@ New files or `.toc` changes require a client restart instead of `/reload`.
 
 Lint: `luacheck .` (also runs in CI on every push). Functionality is verified
 in-game; there are no automated tests and no mocked WoW API.
+
+### Performance
+
+`/aa simulate perf` (development checkout) fills the store with the worst
+case: 150 questions with full-length title and details and 10 answers of
+500 bytes each (1650 messages through the receive path), then prints how
+long receiving, sorting the list, building a sync answer, the expiry check
+and refreshing the open page took, and how much memory the questions use.
+Open the window on the Questions page first to include the page refresh.
+`/aa simulate reset` clears the store afterwards.
+
+What to look for in game: no noticeable stutter while it runs, the list
+refresh well below a frame (a few ms), and a sync answer of at most a few KB
+compressed. Real questions are much shorter than this test, so the numbers
+are an upper bound.
 
 ## Release
 

@@ -133,7 +133,7 @@ channel asks the others for what it missed (`Core/Sync.lua`):
 2. A client that receives an `SR` waits 2 to 8 s (random). If anyone sent
    an `SP` on that channel in the meantime, it does nothing. Otherwise it
    sends one `SP` with the questions the requester doesn't know: newest
-   activity first, at most 30, and at most 12000 bytes before compression.
+   activity first, at most 30, and at most 16000 bytes before compression.
    When a question doesn't fit, its oldest answers are left out first, so
    the last answer (and with it the expiry) stays the same.
 3. Each client answers at most one `SR` per language channel every
