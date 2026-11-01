@@ -20,6 +20,9 @@ globals = {
 	"SLASH_ASKAZEROTH1",
 	"SLASH_ASKAZEROTH2",
 	"SlashCmdList",
+	"AskAzeroth_OnAddonCompartmentClick",
+	"AskAzeroth_OnAddonCompartmentEnter",
+	"AskAzeroth_OnAddonCompartmentLeave",
 }
 
 -- WoW API shared by most files. Everything else is declared inline:

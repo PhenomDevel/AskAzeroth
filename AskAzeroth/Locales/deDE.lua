@@ -13,6 +13,50 @@ L.HELP_HEADER = "Befehle:"
 L.YES = "ja"
 L.NO = "nein"
 
+-- Window
+L.PAGE_QUESTIONS = "Fragen"
+L.PAGE_MY_QUESTIONS = "Meine Fragen"
+L.PAGE_PINNED = "Angepinnt"
+L.PAGE_PLAYERS = "Spieler"
+L.PAGE_FAQ = "FAQ"
+L.PAGE_SETTINGS = "Einstellungen"
+L.PAGE_COMING_SOON = "Kommt in einer späteren Version."
+L.PAGE_QUESTIONS_TEXT = "Offene Fragen in deinen Sprachen, mit Filtern nach Kategorie und einer Suche. Wähle eine aus, um den Thread zu lesen und zu antworten."
+L.PAGE_MY_QUESTIONS_TEXT = "Alles, was du gefragt hast, mit allen Antworten, auch nachdem es aus der öffentlichen Liste verschwunden ist."
+L.PAGE_PINNED_TEXT = "Antworten, die du angepinnt hast, samt ihrer Frage. Sie bleiben auf deinem Rechner und laufen nie ab, auch wenn die Frage verschwunden ist."
+L.PAGE_PLAYERS_TEXT = "Spieler, die du als Favorit markiert hast oder ignorierst, mit deinen Notizen und wie oft sie dir geholfen haben. Nur auf deinem Rechner gespeichert."
+L.PAGE_FAQ_TEXT = "Antworten auf häufige Fragen neuer Spieler."
+
+-- Status line
+L.STATUS_LOCKDOWN = "Chatnachrichten gesperrt (Bosskampf)"
+L.STATUS_MENTOR = "Mentor-Modus"
+
+-- Settings
+L.SETTINGS_GENERAL = "Allgemein"
+L.SETTING_MENTOR = "Mentor-Modus"
+L.SETTING_MENTOR_TIP = "Du möchtest helfen: Du wirst über neue Fragen benachrichtigt (ab einer späteren Version)."
+L.SETTING_MINIMAP = "Minimap-Button anzeigen"
+L.SETTING_RETENTION = "Meine Fragen aufbewahren"
+L.SETTING_RETENTION_TIP = "Wie lange deine eigenen Fragen unter „Meine Fragen“ bleiben."
+L.RETENTION_FOREVER = "Immer"
+L.RETENTION_DAYS = "%d Tage"
+L.SETTINGS_LANGUAGES = "Sprachen"
+L.SETTINGS_LANGUAGES_TEXT = "Fragen laufen über einen versteckten Chatkanal pro Sprache. Jede Sprache belegt einen deiner Chatkanal-Plätze."
+L.SETTING_LANGUAGE_LAST = "Mindestens eine Sprache muss ausgewählt bleiben."
+L.SETTING_ASK_LANGUAGE = "Sprache neuer Fragen"
+
+-- Minimap button
+L.MINIMAP_LANGUAGES = "Sprachen: %s"
+L.MINIMAP_LEFT = "Linksklick: öffnen oder schließen"
+L.MINIMAP_RIGHT = "Rechtsklick: Einstellungen"
+
+-- Commands
+L.CMD_SHOW = "Fenster öffnen"
+L.CMD_SETTINGS = "Einstellungen öffnen"
+L.CMD_MINIMAP = "Minimap-Button ein- oder ausblenden"
+L.CMD_MINIMAP_HIDDEN = "Minimap-Button ausgeblendet. |cffffd100/aa minimap|r zeigt ihn wieder."
+L.CMD_MINIMAP_SHOWN = "Minimap-Button eingeblendet."
+
 -- Probe
 L.PROBE_HELP = "Transporttest (M0)"
 L.PROBE_HELP_HEADER = "Transporttest (alles landet auch im gespeicherten Log):"

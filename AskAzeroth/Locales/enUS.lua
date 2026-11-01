@@ -17,6 +17,50 @@ L.HELP_HEADER = "Commands:"
 L.YES = "yes"
 L.NO = "no"
 
+-- Window
+L.PAGE_QUESTIONS = "Questions"
+L.PAGE_MY_QUESTIONS = "My questions"
+L.PAGE_PINNED = "Pinned"
+L.PAGE_PLAYERS = "Players"
+L.PAGE_FAQ = "FAQ"
+L.PAGE_SETTINGS = "Settings"
+L.PAGE_COMING_SOON = "Coming in a later version."
+L.PAGE_QUESTIONS_TEXT = "Open questions in your languages, with filters by category and a search. Pick one to read the thread and answer it."
+L.PAGE_MY_QUESTIONS_TEXT = "Everything you have asked, with all answers, also after it has disappeared from the public list."
+L.PAGE_PINNED_TEXT = "Answers you pinned, together with their question. They stay on your computer and never expire, also after the question has disappeared."
+L.PAGE_PLAYERS_TEXT = "Players you marked as favourites or ignore, with your notes and how often they have helped you. Only stored on your computer."
+L.PAGE_FAQ_TEXT = "Answers to common questions of new players."
+
+-- Status line
+L.STATUS_LOCKDOWN = "Chat messages locked (encounter)"
+L.STATUS_MENTOR = "Mentor mode"
+
+-- Settings
+L.SETTINGS_GENERAL = "General"
+L.SETTING_MENTOR = "Mentor mode"
+L.SETTING_MENTOR_TIP = "You want to help: you get notified about new questions (from a later version on)."
+L.SETTING_MINIMAP = "Show minimap button"
+L.SETTING_RETENTION = "Keep my questions"
+L.SETTING_RETENTION_TIP = "How long your own questions stay under \"My questions\"."
+L.RETENTION_FOREVER = "Forever"
+L.RETENTION_DAYS = "%d days"
+L.SETTINGS_LANGUAGES = "Languages"
+L.SETTINGS_LANGUAGES_TEXT = "Questions are exchanged in one hidden chat channel per language. Every language uses one of your chat channel slots."
+L.SETTING_LANGUAGE_LAST = "At least one language must stay selected."
+L.SETTING_ASK_LANGUAGE = "Language of new questions"
+
+-- Minimap button
+L.MINIMAP_LANGUAGES = "Languages: %s"
+L.MINIMAP_LEFT = "Left click: open or close"
+L.MINIMAP_RIGHT = "Right click: settings"
+
+-- Commands
+L.CMD_SHOW = "open the window"
+L.CMD_SETTINGS = "open the settings"
+L.CMD_MINIMAP = "show or hide the minimap button"
+L.CMD_MINIMAP_HIDDEN = "Minimap button hidden. |cffffd100/aa minimap|r shows it again."
+L.CMD_MINIMAP_SHOWN = "Minimap button shown."
+
 -- Probe (/aa probe, development checkouts only; enUS + deDE)
 L.PROBE_HELP = "transport test (M0)"
 L.PROBE_HELP_HEADER = "Transport test (everything is also written to the saved log):"

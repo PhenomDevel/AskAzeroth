@@ -56,7 +56,10 @@ Planned for the first release:
 
 | Command | |
 |---------|-|
-| `/aa`, `/askazeroth` | List the commands |
+| `/aa`, `/askazeroth` | Open or close the window |
+| `/aa settings` | Open the settings |
+| `/aa minimap` | Show or hide the minimap button |
+| `/aa help` | List the commands |
 
 ## Support
 

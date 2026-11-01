@@ -23,6 +23,9 @@
 ## SavedVariables: AskAzerothDB
 ## SavedVariablesPerCharacter: AskAzerothCharDB
 ## IconTexture: Interface\AddOns\AskAzeroth\Media\Logo
+## AddonCompartmentFunc: AskAzeroth_OnAddonCompartmentClick
+## AddonCompartmentFuncOnEnter: AskAzeroth_OnAddonCompartmentEnter
+## AddonCompartmentFuncOnLeave: AskAzeroth_OnAddonCompartmentLeave
 
 # Libraries (.pkgmeta externals; tools/fetch-libs.sh for local dev)
 Libs\LibStub\LibStub.lua
@@ -46,6 +49,14 @@ Core\Database.lua
 Core\SlashCommands.lua
 Core\Channel.lua
 Core\Comm.lua
+
+# UI
+UI\Widgets.lua
+UI\MainFrame.lua
+UI\Pages.lua
+UI\Settings.lua
+UI\MinimapButton.lua
+UI\Commands.lua
 
 # Transport test tools (/aa probe); development checkouts only
 #@do-not-package@
