@@ -108,6 +108,15 @@ the local test build:
 
 ## Interface version
 
-The `.toc` lists `16001` (Forever) only. If the client shows the addon as out
-of date, read its value via `/dump select(4, GetBuildInfo())` and update
-`## Interface`.
+The `.toc` lists `16001` (Forever) plus the retail Midnight builds
+(`120000` … `120007`, `120100`, `120105`), the same list as Guild Finder
+Forever. Retail is supported so the addon can be tested before Forever
+launches; both run the same API. If a client shows the addon as out of date,
+read its value via `/dump select(4, GetBuildInfo())` and add it to the
+comma-separated list.
+
+Testing on retail: the language channels (and with them questions, answers
+and the sync) only reach the own realm and its connected realms. Retail has
+more classes than Forever (Death Knight, Monk, Demon Hunter, Evoker); they
+show up in the mentor class filter there. Forever-specific behaviour still
+needs a check on Forever.

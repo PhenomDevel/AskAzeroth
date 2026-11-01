@@ -18,8 +18,10 @@ one per language. AskAzeroth is in development; there is no release yet.
 | Client | Interface |
 | --- | --- |
 | WoW: Forever | 16001 |
+| Retail | 120000 – 120105 (Midnight, for testing until Forever launches) |
 
-Classic Era, retail and other clients are not supported.
+On retail, questions only reach players on your own realm and its connected
+realms. Classic Era and other clients are not supported.
 
 ## Installation
 
