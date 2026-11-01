@@ -1,12 +1,12 @@
 -- luacheck: read globals CreateScrollBoxListLinearView ScrollUtil CreateDataProvider
 local _, ns = ...
 
--- Scrolling list of questions for the Questions page. Rows show title,
--- category, status, author and age; a click selects the question.
+-- Scrolling list of questions for the Questions page. Rows show category
+-- and age, the title, author with level and the status; a click selects
+-- the question.
 local QueueList = {}
 ns.QueueList = QueueList
 
-local C = ns.C
 local W = ns.Widgets
 local Util = ns.Util
 local Store = ns.Store
@@ -15,21 +15,19 @@ local L = ns.L
 
 local STAR = W.STAR
 
-local ROW_HEIGHT = 44
-local ROW_GAP = 4
+local ROW_HEIGHT = 66
+local PAD = 12
 
 local function BuildRow(list, row)
 	row:SetHeight(ROW_HEIGHT)
-	local bg = W.Panel(row, { 0.1, 0.1, 0.12, 1 }, { 0.2, 0.2, 0.24, 1 })
-	bg:SetPoint("TOPLEFT")
-	bg:SetPoint("BOTTOMRIGHT", 0, ROW_GAP)
+	local bg = CreateFrame("Button", nil, row)
+	bg:SetAllPoints()
+	W.ListRowLook(bg)
 	row.bg = bg
-	local button = CreateFrame("Button", nil, bg)
-	button:SetAllPoints()
-	button:SetHighlightTexture("Interface\\Buttons\\WHITE8x8")
-	button:GetHighlightTexture():SetVertexColor(1, 0.82, 0, 0.06)
-	button:RegisterForClicks("LeftButtonUp", "RightButtonUp")
-	button:SetScript("OnClick", function(self, mouseButton)
+	bg:SetHighlightTexture("Interface\\Buttons\\WHITE8x8")
+	bg:GetHighlightTexture():SetVertexColor(1, 0.85, 0.5, 0.05)
+	bg:RegisterForClicks("LeftButtonUp", "RightButtonUp")
+	bg:SetScript("OnClick", function(self, mouseButton)
 		if row.toggle then
 			list.onToggleIgnored()
 		elseif row.question and mouseButton == "RightButton" then
@@ -38,14 +36,32 @@ local function BuildRow(list, row)
 			list.onSelect(row.question)
 		end
 	end)
-	row.title = W.Text(bg, "GameFontHighlight")
-	row.title:SetPoint("TOPLEFT", 8, -6)
-	row.title:SetPoint("RIGHT", -8, 0)
+	-- Category and age, title, author and status.
+	row.category = W.Text(bg, "GameFontNormalSmall")
+	row.category:SetPoint("TOPLEFT", PAD, -9)
+	row.age = W.Text(bg, "GameFontHighlightSmall", W.MUTED)
+	row.age:SetPoint("TOPRIGHT", -PAD, -9)
+	row.age:SetJustifyH("RIGHT")
+	row.title = W.Text(bg, "GameFontHighlight", W.TEXT)
+	row.title:SetPoint("TOPLEFT", PAD, -26)
+	row.title:SetPoint("RIGHT", -PAD, 0)
 	row.title:SetWordWrap(false)
+	row.status = W.Text(bg, "GameFontHighlightSmall")
+	row.status:SetPoint("BOTTOMRIGHT", -PAD, 9)
+	row.status:SetJustifyH("RIGHT")
 	row.meta = W.Text(bg, "GameFontHighlightSmall", W.MUTED)
-	row.meta:SetPoint("BOTTOMLEFT", 8, 6)
-	row.meta:SetPoint("RIGHT", -8, 0)
+	row.meta:SetPoint("BOTTOMLEFT", PAD, 9)
+	row.meta:SetPoint("RIGHT", row.status, "LEFT", -8, 0)
 	row.meta:SetWordWrap(false)
+end
+
+local function AuthorText(q)
+	local ctx = q.ctx or {}
+	local text = W.PlayerText(q.author, ctx.class or Players.GetClass(q.author))
+	if ctx.lvl then
+		text = text .. " · " .. L.LEVEL_SHORT:format(ctx.lvl)
+	end
+	return text
 end
 
 local function FillRow(list, row, item)
@@ -56,33 +72,27 @@ local function FillRow(list, row, item)
 	if item.ignoredCount then
 		row.question = nil
 		row.toggle = true
+		row.category:SetText("")
+		row.age:SetText("")
+		row.status:SetText("")
 		row.title:SetText((item.expanded and W.ARROW_UP or W.ARROW_DOWN) .. L.QUEUE_IGNORED:format(item.ignoredCount))
 		W.Color(row.title, W.MUTED)
 		row.meta:SetText("")
 		row.bg:SetAlpha(1)
-		row.bg:SetBackdropBorderColor(0.2, 0.2, 0.24, 1)
+		row.bg:SetSelectedLook(false)
 		return
 	end
 	local q = item
 	row.toggle = nil
 	row.question = q
-	W.Color(row.title, W.WHITE)
-	local ignored = Players.IsIgnored(q.author)
-	row.bg:SetAlpha(ignored and 0.5 or 1)
+	W.Color(row.title, W.TEXT)
+	row.bg:SetAlpha(Players.IsIgnored(q.author) and 0.5 or 1)
+	row.category:SetText(W.CategoryText(q.cat))
+	row.age:SetText(W.Ago(Util.Now() - q.created))
 	row.title:SetText((Players.IsFavorite(q.author) and STAR or "") .. Util.EscapeText(q.title))
-	local category = C.GetCategory(q.cat)
-	local now = Util.Now()
-	row.meta:SetText(("%s · %s · %s · %s"):format(
-		category and category.label or q.cat,
-		W.StatusText((list.statusOf or Store.GetStatus)(q), q.answerCount),
-		W.PlayerText(q.author, (q.ctx and q.ctx.class) or Players.GetClass(q.author)),
-		W.Ago(now - q.created)))
-	local selected = list.selectedId == q.id
-	if selected then
-		row.bg:SetBackdropBorderColor(0.79, 0.635, 0.29, 1)
-	else
-		row.bg:SetBackdropBorderColor(0.2, 0.2, 0.24, 1)
-	end
+	row.meta:SetText(AuthorText(q))
+	row.status:SetText(W.StatusText((list.statusOf or Store.GetStatus)(q), q.answerCount))
+	row.bg:SetSelectedLook(list.selectedId == q.id)
 end
 
 -- onSelect(question) runs when a row is clicked, onToggleIgnored() when the
@@ -92,19 +102,19 @@ function QueueList.Create(parent, onSelect, onToggleIgnored, statusOf)
 	local list = { onSelect = onSelect, onToggleIgnored = onToggleIgnored, statusOf = statusOf }
 	local scrollBox = CreateFrame("Frame", nil, parent, "WowScrollBoxList")
 	scrollBox:SetPoint("TOPLEFT", 0, 0)
-	scrollBox:SetPoint("BOTTOMRIGHT", -16, 0)
+	scrollBox:SetPoint("BOTTOMRIGHT", -12, 0)
 	local scrollBar = CreateFrame("EventFrame", nil, parent, "MinimalScrollBar")
-	scrollBar:SetPoint("TOPLEFT", scrollBox, "TOPRIGHT", 4, 0)
-	scrollBar:SetPoint("BOTTOMLEFT", scrollBox, "BOTTOMRIGHT", 4, 0)
+	scrollBar:SetPoint("TOPLEFT", scrollBox, "TOPRIGHT", 2, -4)
+	scrollBar:SetPoint("BOTTOMLEFT", scrollBox, "BOTTOMRIGHT", 2, 4)
 
 	local view = CreateScrollBoxListLinearView()
-	view:SetElementExtent(ROW_HEIGHT + ROW_GAP)
+	view:SetElementExtent(ROW_HEIGHT)
 	view:SetElementInitializer("Frame", function(row, item)
 		FillRow(list, row, item)
 	end)
 	ScrollUtil.InitScrollBoxListWithScrollBar(scrollBox, scrollBar, view)
 
-	local empty = W.Text(parent, "GameFontDisable")
+	local empty = W.Text(parent, "GameFontHighlight", W.MUTED)
 	empty:SetPoint("CENTER", -8, 0)
 	empty:SetJustifyH("CENTER")
 	empty:SetWidth(260)

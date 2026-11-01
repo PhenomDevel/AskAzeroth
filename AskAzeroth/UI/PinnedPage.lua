@@ -18,11 +18,11 @@ local UNPIN_WIDTH = 80
 local function Build(content)
 	local page = { cats = {}, search = "" }
 
-	local search = W.SearchBox(content, 170, L.QUEUE_SEARCH, function(text)
+	local search = W.SearchBox(content, 200, L.QUEUE_SEARCH, function(text)
 		page.search = strtrim(text):lower()
 		page:Refresh()
 	end)
-	search:SetPoint("TOPLEFT", 6, -6)
+	search:SetPoint("TOPLEFT", 16, -11)
 
 	local chips = {}
 	local all = W.Chip(content, function()
@@ -35,19 +35,24 @@ local function Build(content)
 		local chip = W.Chip(content, function(self)
 			page.cats[self.key] = not page.cats[self.key] or nil
 			page:Refresh()
-		end)
+		end, W.CategoryColor(category.key))
 		chip.key = category.key
 		chip:SetLabel(category.label)
 		chips[#chips + 1] = chip
 	end
-	W.FlowChips(chips, content, 186, -6, 4)
+	W.FlowChips(chips, content, 228, -14, 6)
+	local bar = CreateFrame("Frame", nil, content)
+	bar:SetPoint("TOPLEFT")
+	bar:SetPoint("TOPRIGHT")
+	bar:SetHeight(50)
+	W.EdgeLine(bar, "BOTTOM")
 
 	local count = W.Text(content, "GameFontHighlightSmall", W.MUTED)
-	count:SetPoint("TOPRIGHT", -8, -12)
+	count:SetPoint("TOPRIGHT", -16, -18)
 
 	local pane = CreateFrame("Frame", nil, content)
-	pane:SetPoint("TOPLEFT", 4, -38)
-	pane:SetPoint("BOTTOMRIGHT", -4, 4)
+	pane:SetPoint("TOPLEFT", 16, -62)
+	pane:SetPoint("BOTTOMRIGHT", -12, 12)
 
 	local scrollBox = CreateFrame("Frame", nil, pane, "WowScrollBoxList")
 	scrollBox:SetPoint("TOPLEFT")
@@ -56,7 +61,7 @@ local function Build(content)
 	scrollBar:SetPoint("TOPLEFT", scrollBox, "TOPRIGHT", 4, 0)
 	scrollBar:SetPoint("BOTTOMLEFT", scrollBox, "BOTTOMRIGHT", 4, 0)
 
-	local empty = W.Text(pane, "GameFontDisable")
+	local empty = W.Text(pane, "GameFontHighlight", W.MUTED)
 	empty:SetPoint("CENTER", -8, 0)
 	empty:SetJustifyH("CENTER")
 	empty:SetWidth(360)
@@ -91,7 +96,7 @@ local function Build(content)
 	end
 
 	local function BuildRow(row)
-		row.bg = W.Panel(row, { 0.08, 0.08, 0.1, 1 }, { 0.18, 0.18, 0.22, 1 })
+		row.bg = W.Panel(row)
 		row.bg:SetPoint("TOPLEFT")
 		row.bg:SetPoint("BOTTOMRIGHT", 0, 4)
 		row.bg:EnableMouse(true)
@@ -114,7 +119,7 @@ local function Build(content)
 			end
 		end)
 		row.unpin:SetPoint("TOPRIGHT", -PAD, -PAD + 2)
-		row.title = W.Text(row.bg, "GameFontNormal")
+		row.title = W.Text(row.bg, "GameFontNormal", W.GOLD)
 		row.title:SetPoint("TOPLEFT", PAD, -PAD)
 		row.title:SetPoint("RIGHT", row.unpin, "LEFT", -8, 0)
 		row.title:SetWordWrap(true)

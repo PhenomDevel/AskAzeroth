@@ -20,6 +20,7 @@ L.PAGE_PINNED = "Закреплённые"
 L.PAGE_PLAYERS = "Игроки"
 L.PAGE_FAQ = "FAQ"
 L.PAGE_SETTINGS = "Настройки"
+L.WINDOW_SUBTITLE = "Помощь новичкам"
 
 -- Status line
 L.STATUS_LOCKDOWN = "Сообщения чата заблокированы (бой с боссом)"
@@ -182,6 +183,7 @@ L.PINNED_EMPTY = "Пока ничего не закреплено. Нажмит�
 -- FAQ
 L.FAQ_LANGUAGE = "Язык FAQ"
 L.FAQ_LANGUAGE_TIP = "Переключает FAQ между немецким и английским."
+L.FAQ_NOT_HELPED = "Не помогло? Спросите сообщество."
 
 -- Categories
 L.CAT_QUEST = "Задание"
