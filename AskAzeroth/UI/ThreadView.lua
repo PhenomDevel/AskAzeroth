@@ -1,4 +1,4 @@
--- luacheck: read globals CreateScrollBoxListLinearView ScrollUtil CreateDataProvider StaticPopup_Show YES NO
+-- luacheck: read globals CreateScrollBoxListLinearView ScrollUtil CreateDataProvider StaticPopup_Show YES NO GameTooltip
 -- luacheck: globals StaticPopupDialogs
 local _, ns = ...
 
@@ -13,13 +13,17 @@ local C = ns.C
 local W = ns.Widgets
 local Util = ns.Util
 local Store = ns.Store
+local Players = ns.Players
+
+local STAR = W.STAR
+local CHECK = W.CHECK
 
 local PAD = 8
 local ANSWER_HEIGHT = 64
 
 local function ContextText(q)
 	local ctx = q.ctx or {}
-	local parts = { W.PlayerText(q.author, ctx.class) }
+	local parts = { (Players.IsFavorite(q.author) and STAR or "") .. W.PlayerText(q.author, ctx.class) }
 	local who = {}
 	if ctx.lvl then
 		who[#who + 1] = L.LEVEL_SHORT:format(ctx.lvl)
@@ -126,13 +130,52 @@ function ThreadView.Create(parent)
 			end
 			return height + PAD + 6
 		end
+		if item.folded then
+			return PAD + 14 + PAD + 4
+		end
 		return PAD + 14 + 2 + TextHeight(Util.EscapeText(item.answer.text), "GameFontHighlight", width) + PAD + 4
+	end
+
+	local current
+	-- Answers of ignored players the reader unfolded, by answer id.
+	local unfolded = {}
+
+	local function IsOwn(q)
+		return q.author == ns:GetPlayerFullName()
 	end
 
 	local function BuildRow(row)
 		row.bg = W.Panel(row, { 0.08, 0.08, 0.1, 1 }, { 0.18, 0.18, 0.22, 1 })
 		row.bg:SetPoint("TOPLEFT")
 		row.bg:SetPoint("BOTTOMRIGHT", 0, 4)
+		row.bg:EnableMouse(true)
+		-- Left click unfolds an ignored player's answer, right click opens
+		-- the player menu.
+		row.bg:SetScript("OnMouseUp", function(self, mouseButton)
+			local item = row.item
+			if not item then
+				return
+			end
+			if item.folded and mouseButton == "LeftButton" then
+				unfolded[item.answer.id] = true
+				view:Refresh()
+			elseif mouseButton == "RightButton" then
+				local q = Store.Get(current)
+				if item.kind == "question" then
+					ns.PlayerMenu.Open(self, item.question.author)
+				elseif q then
+					ns.PlayerMenu.Open(self, item.answer.author, IsOwn(q) and item.answer or nil)
+				end
+			end
+		end)
+		row.bg:SetScript("OnEnter", function(self)
+			GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+			GameTooltip:SetText(row.item and row.item.folded and L.THREAD_IGNORED_TIP or L.THREAD_PLAYER_TIP, 1, 1, 1, 1, true)
+			GameTooltip:Show()
+		end)
+		row.bg:SetScript("OnLeave", function()
+			GameTooltip:Hide()
+		end)
 		row.head = W.Text(row.bg, "GameFontNormalLarge")
 		row.head:SetPoint("TOPLEFT", PAD, -PAD)
 		row.head:SetPoint("RIGHT", -PAD, 0)
@@ -152,6 +195,7 @@ function ThreadView.Create(parent)
 			BuildRow(row)
 		end
 		local now = Util.Now()
+		row.item = item
 		if item.kind == "question" then
 			local q = item.question
 			row.head:SetFontObject("GameFontNormalLarge")
@@ -163,14 +207,30 @@ function ThreadView.Create(parent)
 		else
 			local a = item.answer
 			row.head:SetFontObject("GameFontHighlightSmall")
-			row.head:SetText(("%s  |cff9d9d9d%s|r"):format(W.PlayerText(a.author), W.Ago(now - a.created)))
 			row.sub:SetText("")
+			if item.folded then
+				row.head:SetText("|cff9d9d9d" .. L.THREAD_IGNORED_ANSWER .. "|r")
+				row.body:SetText("")
+				row.body:Hide()
+				row.bg:SetBackdropBorderColor(0.18, 0.18, 0.22, 1)
+				return
+			end
+			local favorite = Players.IsFavorite(a.author)
+			row.head:SetText(("%s%s%s  |cff9d9d9d%s|r"):format(
+				favorite and STAR or "",
+				W.PlayerText(a.author, Players.GetClass(a.author)),
+				Players.HasHelped(a.id) and (" " .. CHECK) or "",
+				W.Ago(now - a.created)))
 			row.body:ClearAllPoints()
 			row.body:SetPoint("TOPLEFT", row.head, "BOTTOMLEFT", 0, -2)
 			row.body:SetPoint("RIGHT", -PAD, 0)
 			row.body:SetText(Util.EscapeText(a.text))
 			row.body:Show()
-			row.bg:SetBackdropBorderColor(0.18, 0.18, 0.22, 1)
+			if favorite then
+				row.bg:SetBackdropBorderColor(0.79, 0.635, 0.29, 1)
+			else
+				row.bg:SetBackdropBorderColor(0.18, 0.18, 0.22, 1)
+			end
 			return
 		end
 		row.body:ClearAllPoints()
@@ -185,15 +245,9 @@ function ThreadView.Create(parent)
 	listView:SetElementInitializer("Frame", FillRow)
 	ScrollUtil.InitScrollBoxListWithScrollBar(scrollBox, scrollBar, listView)
 
-	local current
-
 	local function ShowMessage(text, isError)
 		message:SetText(text or "")
 		W.Color(message, isError and W.RED or W.GREEN)
-	end
-
-	local function IsOwn(q)
-		return q.author == ns:GetPlayerFullName()
 	end
 
 	function view:Refresh()
@@ -205,7 +259,8 @@ function ThreadView.Create(parent)
 		end
 		local items = { { kind = "question", question = q } }
 		for _, a in ipairs(Store.GetAnswers(q)) do
-			items[#items + 1] = { kind = "answer", answer = a }
+			local folded = Players.IsIgnored(a.author) and not unfolded[a.id]
+			items[#items + 1] = { kind = "answer", answer = a, folded = folded }
 		end
 		scrollBox:SetDataProvider(CreateDataProvider(items), true)
 		expiry:SetText(ExpiryText(q))
@@ -275,6 +330,12 @@ function ThreadView.Create(parent)
 	}
 	withdraw:SetScript("OnClick", function()
 		StaticPopup_Show("ASKAZEROTH_WITHDRAW")
+	end)
+
+	ns.RegisterCallback(view, "AA_PLAYERS_CHANGED", function()
+		if parent:IsVisible() then
+			view:Refresh()
+		end
 	end)
 
 	view:Refresh()

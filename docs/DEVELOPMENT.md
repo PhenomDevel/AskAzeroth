@@ -12,11 +12,12 @@ AskAzeroth/                  addon folder (the only thing that gets installed)
   Locales/                   enUS (base), deDE, frFR, esES (also esMX), itIT, ruRU, ptBR
   Media/                     Logo.tga (addon icon, 64x64, 32-bit TGA from docs/logo/logo.svg)
   Core/                      namespace and events (Init.lua), constants, helpers (Util),
-                             serializer, categories (Data/), protocol, store, Net (store ↔ channels), saved data,
+                             serializer, categories (Data/), protocol, store, Net (store ↔ channels), players, saved data,
                              slash commands, language channels, transport
   UI/                        widgets, main window with its pages (placeholders until
                              their milestone), questions page (QueueList, ThreadView,
-                             AskDialog), settings page, minimap button, commands
+                             AskDialog), player menu, players page, settings page,
+                             minimap button, commands
   Probe/                     development tools, not packaged: transport test (/aa probe),
                              store test (/aa simulate, /aa store, /aa debug), test actions
                              (/aa ask, answer, solve, withdraw) until the window has them

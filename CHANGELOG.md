@@ -4,8 +4,8 @@
 
 - In development, no release yet.
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
-  Players, FAQ and Settings; My questions, Pinned, Players and FAQ are
-  placeholders for now.
+  Players, FAQ and Settings; My questions, Pinned and FAQ are placeholders
+  for now.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
   language of new questions and how long your own questions are kept.
 - Minimap button and addon compartment entry: left click opens the window,
@@ -20,3 +20,7 @@
   languages and the thread with all answers and when it disappears. Ask a
   question (category, summary, details, language), answer, mark your own
   question as solved or withdraw it.
+- Your own player list (right-click a name): favourites (their questions
+  first, marked with a star), ignored players (folded away), a note, "helped
+  me" on answers to your questions, whisper. Players page with favourites,
+  ignored and recently seen players. Kept on your computer only.

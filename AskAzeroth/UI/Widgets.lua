@@ -13,6 +13,11 @@ W.GREEN = { 0.12, 1, 0 }
 W.RED = { 1, 0.3, 0.3 }
 
 W.BLUE = { 0.5, 0.75, 1 }
+-- Texture markup for symbols the game fonts lack; size follows the font.
+W.STAR = "|TInterface\\TargetingFrame\\UI-RaidTargetingIcon_1:0|t "
+W.CHECK = "|TInterface\\RaidFrame\\ReadyCheck-Ready:0|t"
+W.ARROW_DOWN = "|TInterface\\Buttons\\Arrow-Down-Up:0|t "
+W.ARROW_UP = "|TInterface\\Buttons\\Arrow-Up-Up:0|t "
 
 local WHITE8 = "Interface\\Buttons\\WHITE8x8"
 local BACKDROP = { bgFile = WHITE8, edgeFile = WHITE8, edgeSize = 1 }
