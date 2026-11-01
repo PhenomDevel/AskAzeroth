@@ -25,7 +25,6 @@ L.PAGE_PLAYERS = "Players"
 L.PAGE_FAQ = "FAQ"
 L.PAGE_SETTINGS = "Settings"
 L.PAGE_COMING_SOON = "Coming in a later version."
-L.PAGE_QUESTIONS_TEXT = "Open questions in your languages, with filters by category and a search. Pick one to read the thread and answer it."
 L.PAGE_MY_QUESTIONS_TEXT = "Everything you have asked, with all answers, also after it has disappeared from the public list."
 L.PAGE_PINNED_TEXT = "Answers you pinned, together with their question. They stay on your computer and never expire, also after the question has disappeared."
 L.PAGE_PLAYERS_TEXT = "Players you marked as favourites or ignore, with your notes and how often they have helped you. Only stored on your computer."
@@ -60,6 +59,64 @@ L.CMD_SETTINGS = "open the settings"
 L.CMD_MINIMAP = "show or hide the minimap button"
 L.CMD_MINIMAP_HIDDEN = "Minimap button hidden. |cffffd100/aa minimap|r shows it again."
 L.CMD_MINIMAP_SHOWN = "Minimap button shown."
+
+-- Questions page
+L.QUEUE_SEARCH = "Search …"
+L.QUEUE_ALL = "All"
+L.QUEUE_ASK = "Ask a question"
+L.QUEUE_EMPTY = "No questions yet. Be the first to ask one!"
+L.QUEUE_NO_MATCH = "No question matches the filter."
+
+-- Thread
+L.THREAD_NONE = "Pick a question on the left to read the answers."
+L.THREAD_SEND = "Send"
+L.THREAD_SOLVE = "Mark as solved"
+L.THREAD_SOLVE_TIP = "Your question got the answer you needed. It disappears 10 minutes later."
+L.THREAD_WITHDRAW = "Withdraw"
+L.THREAD_WITHDRAW_TIP = "Removes your question for everyone."
+L.THREAD_WITHDRAW_CONFIRM = "Withdraw your question for everyone?"
+L.THREAD_OPEN_EXPIRES = "Disappears in %d min if nobody answers."
+L.THREAD_ANSWERED_EXPIRES = "Disappears in %d min without a new answer."
+L.THREAD_SOLVED_EXPIRES = "Solved – disappears in %d min."
+
+-- Formatting
+L.LEVEL_SHORT = "Level %d"
+L.AGO_NOW = "just now"
+L.AGO_MINUTES = "%d min ago"
+L.AGO_HOURS = "%d h ago"
+
+-- Status
+L.STATUS_OPEN = "open"
+L.STATUS_ANSWER_ONE = "1 answer"
+L.STATUS_ANSWERS = "%d answers"
+L.STATUS_SOLVED = "solved"
+L.STATUS_CLOSED = "closed"
+
+-- Ask dialog
+L.ASK_TITLE = "Ask a question"
+L.ASK_CATEGORY = "Category"
+L.ASK_SUMMARY = "Short summary"
+L.ASK_DETAILS = "Details (optional)"
+L.ASK_LANGUAGE = "Language"
+L.ASK_CONTEXT = "Sent along: %s"
+L.ASK_SUBMIT = "Ask"
+L.ASK_CANCEL = "Cancel"
+
+-- Reasons
+L.REASON_RATE = "You can ask one question per minute. Please wait a moment."
+L.REASON_OPEN_LIMIT = "You already have 3 open questions. Mark one as solved or withdraw it first."
+L.REASON_TITLE = "The summary is empty, too long or contains invalid characters."
+L.REASON_BODY = "The details are too long or contain invalid characters."
+L.REASON_TEXT = "The answer is empty, too long or contains invalid characters."
+L.REASON_LANG = "This language isn't selected."
+L.REASON_CATEGORY = "Pick a category."
+L.REASON_SENDER = "Your character name isn't known yet. Try again in a moment."
+L.REASON_UNKNOWN = "This question is no longer there."
+L.REASON_NOT_AUTHOR = "Only the asker can do that."
+L.REASON_DUPLICATE = "Already done."
+L.REASON_ANSWERS_FULL = "This question has too many answers."
+L.REASON_TIME = "The time doesn't fit."
+L.REASON_OTHER = "Not possible (%s)."
 
 -- Categories
 L.CAT_QUEST = "Quest"

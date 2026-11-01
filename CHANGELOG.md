@@ -4,7 +4,8 @@
 
 - In development, no release yet.
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
-  Players, FAQ and Settings; all but Settings are placeholders for now.
+  Players, FAQ and Settings; My questions, Pinned, Players and FAQ are
+  placeholders for now.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
   language of new questions and how long your own questions are kept.
 - Minimap button and addon compartment entry: left click opens the window,
@@ -15,3 +16,7 @@
   10 minutes).
 - Questions, answers, "solved" and withdrawals are exchanged with other
   players over the hidden language channels.
+- Questions page: search, category filter, list of questions in your
+  languages and the thread with all answers and when it disappears. Ask a
+  question (category, summary, details, language), answer, mark your own
+  question as solved or withdraw it.
