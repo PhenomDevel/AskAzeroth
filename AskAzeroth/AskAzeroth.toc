@@ -55,16 +55,21 @@ Core\Comm.lua
 Core\Protocol.lua
 Core\Store.lua
 Core\Net.lua
+Core\Players.lua
+Core\Notify.lua
 
 # UI
 UI\Widgets.lua
 UI\MainFrame.lua
+UI\PlayerMenu.lua
 UI\Pages.lua
 UI\QueueList.lua
 UI\ThreadView.lua
 UI\AskDialog.lua
 UI\QuestionsPage.lua
+UI\PlayersPage.lua
 UI\Settings.lua
+UI\Toast.lua
 UI\MinimapButton.lua
 UI\Commands.lua
 

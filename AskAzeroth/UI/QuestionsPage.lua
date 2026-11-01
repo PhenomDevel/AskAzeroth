@@ -7,6 +7,7 @@ local C = ns.C
 local UI = ns.UI
 local W = ns.Widgets
 local Store = ns.Store
+local Players = ns.Players
 
 local LIST_WIDTH = 330
 local REFRESH_DELAY = 0.3
@@ -60,6 +61,9 @@ local function Build(content)
 	page.list = ns.QueueList.Create(listPane, function(q)
 		page.thread:SetQuestion(q.id)
 		page.list:SetSelected(q.id)
+	end, function()
+		page.showIgnored = not page.showIgnored
+		page:Refresh()
 	end)
 
 	local function Matches(q, langs)
@@ -87,9 +91,31 @@ local function Build(content)
 		for _, lang in ipairs(ns.Channel.GetSelectedLanguages()) do
 			langs[lang] = true
 		end
-		local list = Store.List(function(q)
+		-- Favourites first, ignored players folded in at the end.
+		local favorites, others, ignored = {}, {}, {}
+		for _, q in ipairs(Store.List(function(q)
 			return Matches(q, langs)
-		end)
+		end)) do
+			if Players.IsIgnored(q.author) then
+				ignored[#ignored + 1] = q
+			elseif Players.IsFavorite(q.author) then
+				favorites[#favorites + 1] = q
+			else
+				others[#others + 1] = q
+			end
+		end
+		local list = favorites
+		for _, q in ipairs(others) do
+			list[#list + 1] = q
+		end
+		if #ignored > 0 then
+			list[#list + 1] = { ignoredCount = #ignored, expanded = self.showIgnored }
+			if self.showIgnored then
+				for _, q in ipairs(ignored) do
+					list[#list + 1] = q
+				end
+			end
+		end
 		local emptyText
 		if #list == 0 then
 			emptyText = Store.Count() == 0 and L.QUEUE_EMPTY or L.QUEUE_NO_MATCH
@@ -103,6 +129,10 @@ local function Build(content)
 		else
 			self.thread:Refresh()
 		end
+	end
+
+	function page:OnShow()
+		ns.Notify.MarkSeen()
 	end
 
 	function page:Tick()
@@ -121,6 +151,17 @@ local function Build(content)
 				page:Refresh()
 			end
 		end)
+	end)
+	-- What arrives while the page is open counts as seen.
+	ns.RegisterCallback(page, "AA_NOTIFY_CHANGED", function(_, count)
+		if count > 0 and content:IsVisible() then
+			ns.Notify.MarkSeen()
+		end
+	end)
+	ns.RegisterCallback(page, "AA_PLAYERS_CHANGED", function()
+		if content:IsVisible() then
+			page:Refresh()
+		end
 	end)
 	ns.RegisterCallback(page, "AA_LANGUAGES_CHANGED", function()
 		if content:IsVisible() then

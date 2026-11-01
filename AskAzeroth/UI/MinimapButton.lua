@@ -3,7 +3,7 @@ local _, ns = ...
 
 -- Own minimap button: left click toggles the window, right click opens the
 -- settings, drag moves it around the minimap. The addon compartment entry
--- (.toc) does the same. The counter of new questions follows in M6.
+-- (.toc) does the same. A red badge counts notifications not yet seen.
 local MinimapButton = {}
 ns.MinimapButton = MinimapButton
 
@@ -41,6 +41,10 @@ local function ShowTooltip(owner)
 	if ns.db.settings.mentor then
 		GameTooltip:AddLine(L.STATUS_MENTOR, 0.12, 1, 0)
 	end
+	local unseen = ns.Notify.GetUnseen()
+	if unseen > 0 then
+		GameTooltip:AddLine(L.MINIMAP_NEW:format(unseen), 1, 0.82, 0)
+	end
 	GameTooltip:AddLine(" ")
 	GameTooltip:AddLine(L.MINIMAP_LEFT, 0.12, 1, 0)
 	GameTooltip:AddLine(L.MINIMAP_RIGHT, 0.12, 1, 0)
@@ -73,6 +77,15 @@ local function Create()
 	border:SetSize(53, 53)
 	border:SetPoint("TOPLEFT")
 
+	local badge = ns.Widgets.Panel(button, { 0.7, 0.1, 0.1, 1 }, { 0, 0, 0, 1 })
+	badge:SetSize(16, 14)
+	badge:SetPoint("TOPRIGHT", 2, 2)
+	badge:SetFrameLevel(button:GetFrameLevel() + 2)
+	badge.text = ns.Widgets.Text(badge, "GameFontHighlightSmall")
+	badge.text:SetPoint("CENTER", 0, 0)
+	badge:Hide()
+	button.badge = badge
+
 	button:SetScript("OnClick", function(_, mouseButton)
 		OnClick(mouseButton)
 	end)
@@ -87,6 +100,17 @@ local function Create()
 		GameTooltip:Hide()
 	end)
 	UpdatePosition()
+	MinimapButton.UpdateBadge()
+end
+
+function MinimapButton.UpdateBadge()
+	if not button then
+		return
+	end
+	local count = ns.Notify.GetUnseen()
+	button.badge:SetShown(count > 0)
+	button.badge.text:SetText(count > 99 and "99+" or tostring(count))
+	button.badge:SetWidth(math.max(16, button.badge.text:GetStringWidth() + 6))
 end
 
 function MinimapButton.Update()
@@ -103,6 +127,7 @@ function MinimapButton.Update()
 end
 
 ns.RegisterCallback(MinimapButton, "AA_DB_READY", MinimapButton.Update)
+ns.RegisterCallback(MinimapButton, "AA_NOTIFY_CHANGED", MinimapButton.UpdateBadge)
 
 -- Addon compartment (.toc AddonCompartmentFunc*).
 function AskAzeroth_OnAddonCompartmentClick(_, mouseButton)

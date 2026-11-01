@@ -117,7 +117,7 @@ local function RunChecks()
 		if got == expected then
 			passed = passed + 1
 		else
-			ns:Print("|cffff4040%s|r %s: %s ≠ %s", L.SIM_FAIL, label, got, expected)
+			ns:Print("|cffff4040%s|r %s: got %s, expected %s", L.SIM_FAIL, label, got, expected)
 		end
 	end
 	local function Question(author, overrides, at)
@@ -223,17 +223,17 @@ ns.RegisterCallback(Simulate, "AA_QUESTION_ADDED", function(_, q)
 end)
 ns.RegisterCallback(Simulate, "AA_ANSWER_ADDED", function(_, q, a)
 	if debugOn then
-		ns:Print("+A %s → %s %s", a.id, q.id, a.author)
+		ns:Print("+A %s > %s %s", a.id, q.id, a.author)
 	end
 end)
 ns.RegisterCallback(Simulate, "AA_QUESTION_SOLVED", function(_, q)
 	if debugOn then
-		ns:Print("✓ %s", q.id)
+		ns:Print("S %s", q.id)
 	end
 end)
 ns.RegisterCallback(Simulate, "AA_QUESTION_REMOVED", function(_, q, reason)
 	if debugOn then
-		ns:Print("−Q %s (%s)", q.id, reason)
+		ns:Print("-Q %s (%s)", q.id, reason)
 	end
 end)
 ns.RegisterCallback(Simulate, "AA_MESSAGE_DROPPED", function(_, reason, sender, kind)
@@ -244,12 +244,12 @@ end)
 
 ns.RegisterCallback(Simulate, "AA_NET_SENT", function(_, kind, lang, bytes, held)
 	if debugOn then
-		ns:Print("|cff80ff80→|r %s %s %d B%s", kind, lang, bytes, held and " (held)" or "")
+		ns:Print("|cff80ff80>>|r %s %s %d B%s", kind, lang, bytes, held and " (held)" or "")
 	end
 end)
 ns.RegisterCallback(Simulate, "AA_NET_RECEIVED", function(_, kind, sender, lang, bytes)
 	if debugOn then
-		ns:Print("|cff80c0ff←|r %s %s %s %d B", kind, lang, sender, bytes)
+		ns:Print("|cff80c0ff<<|r %s %s %s %d B", kind, lang, sender, bytes)
 	end
 end)
 

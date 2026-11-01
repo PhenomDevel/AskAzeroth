@@ -10,6 +10,10 @@ local C = ns.C
 local W = ns.Widgets
 local Util = ns.Util
 local Store = ns.Store
+local Players = ns.Players
+local L = ns.L
+
+local STAR = W.STAR
 
 local ROW_HEIGHT = 44
 local ROW_GAP = 4
@@ -24,8 +28,13 @@ local function BuildRow(list, row)
 	button:SetAllPoints()
 	button:SetHighlightTexture("Interface\\Buttons\\WHITE8x8")
 	button:GetHighlightTexture():SetVertexColor(1, 0.82, 0, 0.06)
-	button:SetScript("OnClick", function()
-		if row.question then
+	button:RegisterForClicks("LeftButtonUp", "RightButtonUp")
+	button:SetScript("OnClick", function(self, mouseButton)
+		if row.toggle then
+			list.onToggleIgnored()
+		elseif row.question and mouseButton == "RightButton" then
+			ns.PlayerMenu.Open(self, row.question.author)
+		elseif row.question then
 			list.onSelect(row.question)
 		end
 	end)
@@ -39,18 +48,34 @@ local function BuildRow(list, row)
 	row.meta:SetWordWrap(false)
 end
 
-local function FillRow(list, row, q)
+local function FillRow(list, row, item)
 	if not row.bg then
 		BuildRow(list, row)
 	end
+	-- The "questions from ignored players" row folds them in and out.
+	if item.ignoredCount then
+		row.question = nil
+		row.toggle = true
+		row.title:SetText((item.expanded and W.ARROW_UP or W.ARROW_DOWN) .. L.QUEUE_IGNORED:format(item.ignoredCount))
+		W.Color(row.title, W.MUTED)
+		row.meta:SetText("")
+		row.bg:SetAlpha(1)
+		row.bg:SetBackdropBorderColor(0.2, 0.2, 0.24, 1)
+		return
+	end
+	local q = item
+	row.toggle = nil
 	row.question = q
-	row.title:SetText(Util.EscapeText(q.title))
+	W.Color(row.title, W.WHITE)
+	local ignored = Players.IsIgnored(q.author)
+	row.bg:SetAlpha(ignored and 0.5 or 1)
+	row.title:SetText((Players.IsFavorite(q.author) and STAR or "") .. Util.EscapeText(q.title))
 	local category = C.GetCategory(q.cat)
 	local now = Util.Now()
 	row.meta:SetText(("%s · %s · %s · %s"):format(
 		category and category.label or q.cat,
 		W.StatusText(Store.GetStatus(q), q.answerCount),
-		W.PlayerText(q.author, q.ctx and q.ctx.class),
+		W.PlayerText(q.author, (q.ctx and q.ctx.class) or Players.GetClass(q.author)),
 		W.Ago(now - q.created)))
 	local selected = list.selectedId == q.id
 	if selected then
@@ -60,9 +85,10 @@ local function FillRow(list, row, q)
 	end
 end
 
--- onSelect(question) runs when a row is clicked.
-function QueueList.Create(parent, onSelect)
-	local list = { onSelect = onSelect }
+-- onSelect(question) runs when a row is clicked, onToggleIgnored() when the
+-- "ignored players" row is.
+function QueueList.Create(parent, onSelect, onToggleIgnored)
+	local list = { onSelect = onSelect, onToggleIgnored = onToggleIgnored }
 	local scrollBox = CreateFrame("Frame", nil, parent, "WowScrollBoxList")
 	scrollBox:SetPoint("TOPLEFT", 0, 0)
 	scrollBox:SetPoint("BOTTOMRIGHT", -16, 0)
@@ -72,8 +98,8 @@ function QueueList.Create(parent, onSelect)
 
 	local view = CreateScrollBoxListLinearView()
 	view:SetElementExtent(ROW_HEIGHT + ROW_GAP)
-	view:SetElementInitializer("Frame", function(row, q)
-		FillRow(list, row, q)
+	view:SetElementInitializer("Frame", function(row, item)
+		FillRow(list, row, item)
 	end)
 	ScrollUtil.InitScrollBoxListWithScrollBar(scrollBox, scrollBar, view)
 
@@ -82,7 +108,8 @@ function QueueList.Create(parent, onSelect)
 	empty:SetJustifyH("CENTER")
 	empty:SetWidth(260)
 
-	-- questions: the filtered list; emptyText shown when it is empty.
+	-- questions: the filtered list (questions and at most one
+	-- { ignoredCount, expanded } row); emptyText shown when it is empty.
 	function list:SetQuestions(questions, emptyText)
 		scrollBox:SetDataProvider(CreateDataProvider(questions), true)
 		empty:SetShown(#questions == 0)
@@ -96,6 +123,7 @@ function QueueList.Create(parent, onSelect)
 				FillRow(list, row, row.question)
 			end
 		end)
+		-- (the toggle row has nothing that changes over time)
 	end
 
 	function list:SetSelected(id)
