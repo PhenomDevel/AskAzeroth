@@ -56,6 +56,7 @@ Core\Protocol.lua
 Core\Store.lua
 Core\Net.lua
 Core\Players.lua
+Core\Notify.lua
 
 # UI
 UI\Widgets.lua
@@ -68,6 +69,7 @@ UI\AskDialog.lua
 UI\QuestionsPage.lua
 UI\PlayersPage.lua
 UI\Settings.lua
+UI\Toast.lua
 UI\MinimapButton.lua
 UI\Commands.lua
 

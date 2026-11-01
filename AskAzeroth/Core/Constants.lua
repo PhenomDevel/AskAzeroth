@@ -101,3 +101,14 @@ C.MAX_OPEN_PER_AUTHOR = 3
 C.SYNC_MAX_QUESTIONS = 30
 -- Sync request (SR): at most this many known ids.
 C.SYNC_MAX_KNOWN = 200
+
+--------------------------------------------------------------------------------
+-- Notifications (PLAN.md, section 9)
+--------------------------------------------------------------------------------
+
+-- At most one toast per this many seconds; the rest is summed up.
+C.TOAST_INTERVAL = 120
+-- How long a toast stays.
+C.TOAST_DURATION = 12
+-- Choices for "only questions from players up to level".
+C.ASKER_LEVELS = { 10, 20, 30, 40, 50, 60, 70, 80 }

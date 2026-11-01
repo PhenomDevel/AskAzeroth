@@ -24,3 +24,8 @@
   first, marked with a star), ignored players (folded away), a note, "helped
   me" on answers to your questions, whisper. Players page with favourites,
   ignored and recently seen players. Kept on your computer only.
+- Notifications: in mentor mode new questions per category (off, badge,
+  sound), optionally only from certain classes or up to a level; questions
+  from favourites and answers to your own questions always. A toast at most
+  every 2 minutes ("+N more"), none in combat or instances, and a counter on
+  the minimap button.
