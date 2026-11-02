@@ -67,6 +67,10 @@
 - FAQ: 11 more chat and guild questions (channels, item links, whispers,
   the other faction, emotes, AFK, rolling, founding and leaving a guild,
   reporting, roleplaying).
+- FAQ: 13 more questions about AskAzeroth itself (good questions, no
+  answers, limits, solved and withdrawn, helped me, favourites, ignoring,
+  notifications, FAQ links, offline questions, the hidden channel, minimap
+  button).
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
   Players, FAQ and Settings.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
