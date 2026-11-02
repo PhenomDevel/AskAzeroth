@@ -657,62 +657,62 @@ ns.Faq.Add("hunter", {
 		id = "hunter-traps",
 		de = {
 			q = "Wie benutze ich Fallen?",
-			a = "Fallen legst du vor dir auf den Boden, sie lösen aus, wenn ein Gegner hineinläuft. Die „Eiskältefalle“ friert einen Gegner eine Weile ein, ideal, wenn zwei auf einmal kommen. Leg die Falle vor dem Kampf und lass den Gegner hineinlaufen, während dein Tier den anderen festhält.",
+			a = "Fallen legst du vor dir auf den Boden, sie lösen aus, wenn ein Gegner hineinläuft; in WoW: Forever geht das auch mitten im Kampf. Die „Eiskältefalle“ friert einen Gegner eine Weile ein, ideal, wenn zwei auf einmal kommen: Leg sie, lass einen Gegner hineinlaufen und kümmere dich mit deinem Tier um den anderen.",
 		},
 		en = {
 			q = "How do I use traps?",
-			a = "You place traps on the ground in front of you, and they trigger when an enemy walks in. Freezing Trap freezes an enemy for a while, ideal when two come at once. Lay the trap before the fight, then let the enemy run into it while your pet holds the other one.",
+			a = "You place traps on the ground in front of you, and they trigger when an enemy walks in; in WoW: Forever this also works in the middle of a fight. Freezing Trap freezes an enemy for a while, ideal when two come at once: lay it, let one enemy run into it and deal with the other together with your pet.",
 		},
 		fr = {
 			q = "Comment utiliser les pièges ?",
-			a = "Vous posez les pièges au sol devant vous, et ils se déclenchent quand un ennemi marche dessus. Piège givrant gèle un ennemi un moment, idéal quand deux arrivent en même temps. Posez le piège avant le combat, puis laissez l'ennemi courir dedans pendant que votre familier retient l'autre.",
+			a = "Vous posez les pièges au sol devant vous, et ils se déclenchent quand un ennemi marche dessus ; dans WoW: Forever, cela marche aussi en plein combat. Piège givrant gèle un ennemi un moment, idéal quand deux arrivent en même temps : posez-le, laissez un ennemi tomber dedans et occupez-vous de l'autre avec votre familier.",
 		},
 		es = {
 			q = "¿Cómo uso las trampas?",
-			a = "Colocas las trampas en el suelo delante de ti y se activan cuando un enemigo las pisa. Trampa congelante congela a un enemigo un rato, ideal cuando llegan dos a la vez. Pon la trampa antes del combate y deja que el enemigo caiga en ella mientras tu mascota retiene al otro.",
+			a = "Colocas las trampas en el suelo delante de ti y se activan cuando un enemigo las pisa; en WoW: Forever también puedes hacerlo en pleno combate. Trampa congelante congela a un enemigo un rato, ideal cuando llegan dos a la vez: ponla, deja que un enemigo caiga en ella y encárgate del otro con tu mascota.",
 		},
 		it = {
 			q = "Come si usano le trappole?",
-			a = "Piazzi le trappole a terra davanti a te e scattano quando un nemico ci passa sopra. Trappola Congelante congela un nemico per un po', ideale quando ne arrivano due insieme. Piazza la trappola prima del combattimento, poi lascia che il nemico ci finisca dentro mentre il famiglio trattiene l'altro.",
+			a = "Piazzi le trappole a terra davanti a te e scattano quando un nemico ci passa sopra; in WoW: Forever funziona anche nel mezzo di un combattimento. Trappola Congelante congela un nemico per un po', ideale quando ne arrivano due insieme: piazzala, lascia che un nemico ci finisca dentro e occupati dell'altro con il famiglio.",
 		},
 		ru = {
 			q = "Как пользоваться ловушками?",
-			a = "Ловушки ставятся на землю перед вами и срабатывают, когда на них наступает враг. «Замораживающая ловушка» на время замораживает врага — идеально, когда нападают двое. Поставьте ловушку до боя, а затем дайте врагу в неё попасть, пока питомец держит второго.",
+			a = "Ловушки ставятся на землю перед вами и срабатывают, когда на них наступает враг; в WoW: Forever их можно ставить и посреди боя. «Замораживающая ловушка» на время замораживает врага — идеально, когда нападают двое: поставьте её, дайте одному врагу в неё попасть, а со вторым разберитесь вместе с питомцем.",
 		},
 		pt = {
 			q = "Como uso armadilhas?",
-			a = "Você coloca as armadilhas no chão à sua frente, e elas disparam quando um inimigo pisa nelas. Armadilha Congelante congela um inimigo por um tempo, ideal quando chegam dois de uma vez. Coloque a armadilha antes da luta e deixe o inimigo correr para ela enquanto o ajudante segura o outro.",
+			a = "Você coloca as armadilhas no chão à sua frente, e elas disparam quando um inimigo pisa nelas; no WoW: Forever isso funciona também no meio da luta. Armadilha Congelante congela um inimigo por um tempo, ideal quando chegam dois de uma vez: coloque-a, deixe um inimigo cair nela e cuide do outro junto com o ajudante.",
 		},
 	},
 	{
 		id = "hunter-stats",
 		de = {
 			q = "Welche Werte und Waffen sind für Jäger gut?",
-			a = "Beweglichkeit ist dein wichtigster Wert: mehr Fernkampfschaden, kritische Treffer und Ausweichen. Danach Ausdauer und Intelligenz für Mana. Deine Fernkampfwaffe (Bogen, Armbrust oder Schusswaffe) zählt viel mehr als die Nahkampfwaffe.",
+			a = "Beweglichkeit ist dein wichtigster Wert: mehr Fernkampfschaden, kritische Treffer und Ausweichen. Danach Ausdauer und Intelligenz für Mana. In WoW: Forever wird auch dein Tier mit deinen Werten stärker. Deine Fernkampfwaffe (Bogen, Armbrust oder Schusswaffe) zählt viel mehr als die Nahkampfwaffe.",
 		},
 		en = {
 			q = "Which stats and weapons are good for hunters?",
-			a = "Agility is your most important stat: more ranged damage, critical strikes and dodge. After that stamina, and intellect for mana. Your ranged weapon (bow, crossbow or gun) matters far more than your melee weapon.",
+			a = "Agility is your most important stat: more ranged damage, critical strikes and dodge. After that stamina, and intellect for mana. In WoW: Forever your pet also gets stronger from your stats. Your ranged weapon (bow, crossbow or gun) matters far more than your melee weapon.",
 		},
 		fr = {
 			q = "Quelles caractéristiques et armes sont bonnes pour les chasseurs ?",
-			a = "L'agilité est votre caractéristique la plus importante : plus de dégâts à distance, de coups critiques et d'esquive. Ensuite l'endurance, et l'intelligence pour le mana. Votre arme à distance (arc, arbalète ou arme à feu) compte bien plus que votre arme de mêlée.",
+			a = "L'agilité est votre caractéristique la plus importante : plus de dégâts à distance, de coups critiques et d'esquive. Ensuite l'endurance, et l'intelligence pour le mana. Dans WoW: Forever, votre familier devient aussi plus fort grâce à vos caractéristiques. Votre arme à distance (arc, arbalète ou arme à feu) compte bien plus que votre arme de mêlée.",
 		},
 		es = {
 			q = "¿Qué atributos y armas son buenos para cazadores?",
-			a = "La agilidad es tu atributo más importante: más daño a distancia, golpes críticos y esquiva. Después aguante, e intelecto para el maná. Tu arma a distancia (arco, ballesta o arma de fuego) importa mucho más que tu arma cuerpo a cuerpo.",
+			a = "La agilidad es tu atributo más importante: más daño a distancia, golpes críticos y esquiva. Después aguante, e intelecto para el maná. En WoW: Forever tu mascota también se hace más fuerte con tus atributos. Tu arma a distancia (arco, ballesta o arma de fuego) importa mucho más que tu arma cuerpo a cuerpo.",
 		},
 		it = {
 			q = "Quali statistiche e armi sono buone per i cacciatori?",
-			a = "L'agilità è la tua statistica più importante: più danni a distanza, colpi critici e schivata. Poi la tempra, e l'intelletto per il mana. L'arma a distanza (arco, balestra o arma da fuoco) conta molto più dell'arma da mischia.",
+			a = "L'agilità è la tua statistica più importante: più danni a distanza, colpi critici e schivata. Poi la tempra, e l'intelletto per il mana. In WoW: Forever anche il famiglio diventa più forte grazie alle tue statistiche. L'arma a distanza (arco, balestra o arma da fuoco) conta molto più dell'arma da mischia.",
 		},
 		ru = {
 			q = "Какие характеристики и оружие хороши для охотника?",
-			a = "Ловкость — ваша главная характеристика: больше урона в дальнем бою, критических ударов и уклонения. Затем выносливость, а также интеллект для маны. Оружие дальнего боя (лук, арбалет или огнестрельное) гораздо важнее оружия ближнего боя.",
+			a = "Ловкость — ваша главная характеристика: больше урона в дальнем бою, критических ударов и уклонения. Затем выносливость, а также интеллект для маны. В WoW: Forever ваши характеристики усиливают и питомца. Оружие дальнего боя (лук, арбалет или огнестрельное) гораздо важнее оружия ближнего боя.",
 		},
 		pt = {
 			q = "Quais atributos e armas são bons para caçadores?",
-			a = "Agilidade é o seu atributo mais importante: mais dano à distância, acertos críticos e esquiva. Depois vigor, e intelecto para mana. Sua arma de longo alcance (arco, besta ou arma de fogo) importa muito mais que a arma corpo a corpo.",
+			a = "Agilidade é o seu atributo mais importante: mais dano à distância, acertos críticos e esquiva. Depois vigor, e intelecto para mana. No WoW: Forever seu ajudante também fica mais forte com os seus atributos. Sua arma de longo alcance (arco, besta ou arma de fogo) importa muito mais que a arma corpo a corpo.",
 		},
 	},
 	{
