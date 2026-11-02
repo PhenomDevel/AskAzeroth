@@ -9,6 +9,13 @@
   the left, coloured categories, answer cards and an FAQ with list and
   detail view.
 - Loads on retail (Midnight) too, for testing until Forever launches.
+- FAQ suggestions while you ask: as you type the summary of a question,
+  up to three matching FAQ entries appear. Click one to read the answer
+  right there; "That helped" closes the dialog without asking.
+  `/aa faqstats` shows how often that happened.
+- Better FAQ search: finds entries by word, also with other word forms
+  ("Berufe" finds "Beruf") and without accents, best matches first. The
+  FAQ picker for mentors lists entries matching the question first.
 - Bigger FAQ: over 50 typical beginner questions (first steps, quests,
   class and talents, combat, travel, gold, professions, groups, chat,
   interface) with a topic filter. "Ask a question" from the FAQ picks the
@@ -22,6 +29,58 @@
 - FAQ: 18 more interface questions (key bindings, action bars, Edit Mode,
   macros, targeting, nameplates, auto loot, camera, chat tabs, minimap,
   resetting the interface).
+- FAQ: 22 more profession questions (where to learn, tools, ranks, recipes,
+  smelting, skinning, enchanting, first aid, cooking, fishing, camping).
+- FAQ: 18 warrior questions (rage, stances and their quests, Charge, tanking,
+  Taunt, Execute, Overpower, shouts, weapons, armour, talents).
+- FAQ: 17 paladin questions (seals, Judgement, blessings, auras, healing,
+  Lay on Hands, Divine Shield, Redemption, cleansing, mana, tanking, talents).
+- FAQ: 19 rogue questions (energy and combo points, Stealth, openers,
+  weapons, Kick, Sap, escapes, poisons, lockpicking, stuns, threat, talents).
+- FAQ: 17 priest questions (levelling, wands, shields, heals and ranks,
+  mana, buffs, Psychic Scream, Resurrection, dispelling, first dungeon,
+  Shadowform, talents).
+- FAQ: 17 shaman questions (totem items and quests, choosing totems,
+  weapon imbues, shocks, healing, Ghost Wolf, Reincarnation, Astral Recall,
+  water spells, stats, talents, mana).
+- FAQ: 17 mage questions (conjured food and water, levelling, Frost Nova
+  and Blink, Polymorph, armour spells, Counterspell, AoE, teleports and
+  portals, mana, escapes, curses, talents).
+- FAQ: 17 warlock questions (demons and their quests, soul shards, soul
+  pouch, levelling, Life Tap, healthstones, soulstones, summoning, Fear,
+  Voidwalker, Banish, talents).
+- FAQ: 18 druid questions (forms and their quests, form mana, Cat and
+  Bear, healing, buffs, Entangling Roots, Rebirth, Innervate, cleansing,
+  Moonglade, Hibernate, talents).
+- FAQ: 16 more quest questions (full quest log, tracking, sharing, group
+  credit, elite and escort quests, timers, quest items, rewards, chains,
+  dungeon and class quests, reputation).
+- FAQ: 15 more first-steps questions (race and faction, Skyborne,
+  two-part names, alts, Legacy system, junk and buyback, logging out,
+  hearthstone, levelling pace, level 10, cost, transmog, Hardcore, playing
+  with friends).
+- FAQ: 14 more combat questions (elites, aggro range, fleeing enemies,
+  evade, corpse run, resurrection sickness, dying in dungeons, durability,
+  breath and fatigue, dazed, debuffs, threat, tagged enemies, PvP flag).
+- FAQ: 10 more travel questions (flight points, hearthstone cooldown and
+  replacement, boats and zeppelins, mounting indoors, zone levels, new zones,
+  stuck characters, mage portals, graveyards).
+- FAQ: 12 more gold and trade questions (coins, trading, scams, cash on
+  delivery, mail expiry, auction fees, bid and buyout, bank, stacks,
+  destroying items, saving for a mount, unique items).
+- FAQ: 13 more group and dungeon questions (group finder playstyles and
+  listings, group size, dungeon XP, entrances, target markers, wipes,
+  leaving, loot rules, resets, launch raids, raid groups, being new).
+- FAQ: 11 more chat and guild questions (channels, item links, whispers,
+  the other faction, emotes, AFK, rolling, founding and leaving a guild,
+  reporting, roleplaying).
+- FAQ: 13 more questions about AskAzeroth itself (good questions, no
+  answers, limits, solved and withdrawn, helped me, favourites, ignoring,
+  notifications, FAQ links, offline questions, the hidden channel, minimap
+  button).
+- FAQ: 11 more questions about classes in general (beginner classes,
+  resources, spell costs, talent reset, dual specialisation, weapon skills,
+  weapon masters, racials, hybrids, buffing others, talents for dungeons).
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
   Players, FAQ and Settings.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
@@ -47,3 +106,7 @@
   from favourites and answers to your own questions always. A toast at most
   every 2 minutes ("+N more"), none in combat or instances, and a counter on
   the minimap button.
+- The FAQ can now be shown in every language of the addon; translations
+  follow topic by topic, until then entries appear in English. The FAQ points
+  to Wowhead as the best place to look up quests, items and NPCs, with the
+  address ready to copy, and has a new entry about it.
