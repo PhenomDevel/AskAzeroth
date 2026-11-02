@@ -37,31 +37,31 @@ ns.Faq.Add("paladin", {
 		id = "paladin-judgement",
 		de = {
 			q = "Was macht „Richturteil“?",
-			a = "„Richturteil“ entlädt dein aktives Siegel auf den Gegner: Es macht Schaden oder legt einen Effekt auf ihn, und das Siegel verschwindet. Danach setzt du ein neues Siegel. Das Wechselspiel aus Siegel und Richturteil ist der Kern deines Kampfes.",
+			a = "„Richturteil“ entlädt die Kraft deines aktiven Siegels auf den Gegner: Es macht Schaden oder legt einen Effekt auf ihn. In WoW: Forever bleibt dein Siegel dabei aktiv, du musst es also nicht jedes Mal neu setzen. Nutz Richturteil, sobald es wieder bereit ist.",
 		},
 		en = {
 			q = "What does Judgement do?",
-			a = "Judgement unleashes your active seal on the enemy: it deals damage or puts an effect on it, and the seal is used up. Then you apply a new seal. Alternating seal and Judgement is the core of your fighting.",
+			a = "Judgement unleashes the power of your active seal on the enemy: it deals damage or puts an effect on it. In WoW: Forever your seal stays active, so you do not have to re-apply it every time. Use Judgement whenever it is ready again.",
 		},
 		fr = {
 			q = "Que fait Jugement ?",
-			a = "Jugement libère votre sceau actif sur l'ennemi : il inflige des dégâts ou lui applique un effet, et le sceau est consommé. Ensuite vous appliquez un nouveau sceau. Alterner sceau et Jugement est le cœur de votre façon de combattre.",
+			a = "Jugement libère la puissance de votre sceau actif sur l'ennemi : il inflige des dégâts ou lui applique un effet. Dans WoW: Forever, votre sceau reste actif, vous n'avez donc pas à le réappliquer à chaque fois. Utilisez Jugement dès qu'il est de nouveau prêt.",
 		},
 		es = {
 			q = "¿Qué hace Sentencia?",
-			a = "Sentencia descarga tu sello activo sobre el enemigo: hace daño o le aplica un efecto, y el sello se consume. Después aplicas un sello nuevo. Alternar sello y Sentencia es la base de tu forma de luchar.",
+			a = "Sentencia descarga el poder de tu sello activo sobre el enemigo: hace daño o le aplica un efecto. En WoW: Forever tu sello sigue activo, así que no tienes que volver a ponerlo cada vez. Usa Sentencia en cuanto vuelva a estar lista.",
 		},
 		it = {
 			q = "Che cosa fa Giudizio?",
-			a = "Giudizio scatena il sigillo attivo sul nemico: infligge danni o gli applica un effetto, e il sigillo viene consumato. Poi applichi un nuovo sigillo. Alternare sigillo e Giudizio è il cuore del tuo modo di combattere.",
+			a = "Giudizio scatena il potere del sigillo attivo sul nemico: infligge danni o gli applica un effetto. In WoW: Forever il sigillo resta attivo, quindi non devi riapplicarlo ogni volta. Usa Giudizio appena è di nuovo pronto.",
 		},
 		ru = {
 			q = "Что делает «Правосудие»?",
-			a = "«Правосудие» высвобождает активную печать на врага: оно наносит урон или накладывает эффект, а печать расходуется. Затем вы накладываете новую печать. Чередование печати и «Правосудия» — основа вашего боя.",
+			a = "«Правосудие» высвобождает силу активной печати на врага: оно наносит урон или накладывает эффект. В WoW: Forever печать при этом остаётся активной, так что накладывать её каждый раз заново не нужно. Применяйте «Правосудие», как только оно снова готово.",
 		},
 		pt = {
 			q = "O que Julgamento faz?",
-			a = "Julgamento libera o selo ativo no inimigo: causa dano ou aplica um efeito nele, e o selo é consumido. Depois você aplica um novo selo. Alternar selo e Julgamento é o centro do seu jeito de lutar.",
+			a = "Julgamento libera o poder do selo ativo no inimigo: causa dano ou aplica um efeito nele. No WoW: Forever o selo continua ativo, então você não precisa reaplicá-lo toda vez. Use Julgamento assim que estiver pronto de novo.",
 		},
 	},
 	{
@@ -347,31 +347,31 @@ ns.Faq.Add("paladin", {
 		id = "paladin-tanking",
 		de = {
 			q = "Kann ein Paladin tanken?",
-			a = "Ja, mit Schild und dem Schutz-Talentbaum. „Zorn der Gerechtigkeit“ erhöht deine Bedrohung durch Heiligzauber, „Weihe“ trifft alle Gegner um dich. Gerade gegen mehrere Gegner ist ein Paladin ein guter Tank.",
+			a = "Ja, mit Schild und dem Schutz-Talentbaum. „Zorn der Gerechtigkeit“ erhöht deine Bedrohung durch Heiligzauber, und „Weihe“, die in WoW: Forever jeder Paladin lernt, trifft Gegner um dich herum. Dazu hast du in WoW: Forever ein eigenes Tank-Siegel, dessen Richturteil den Gegner verspottet. Gerade gegen mehrere Gegner ist ein Paladin ein guter Tank.",
 		},
 		en = {
 			q = "Can a paladin tank?",
-			a = "Yes, with a shield and the Protection talent tree. Righteous Fury increases the threat of your Holy spells, Consecration hits all enemies around you. Paladins are good tanks especially against several enemies.",
+			a = "Yes, with a shield and the Protection talent tree. Righteous Fury increases the threat of your Holy spells, and Consecration, which every paladin learns in WoW: Forever, hits enemies around you. WoW: Forever also gives you a tanking seal whose Judgement taunts the enemy. Paladins are good tanks especially against several enemies.",
 		},
 		fr = {
 			q = "Un paladin peut-il tanker ?",
-			a = "Oui, avec un bouclier et l'arbre de talents Protection. Fureur vertueuse augmente la menace de vos sorts du Sacré, Consécration touche tous les ennemis autour de vous. Les paladins sont de bons tanks, surtout contre plusieurs ennemis.",
+			a = "Oui, avec un bouclier et l'arbre de talents Protection. Fureur vertueuse augmente la menace de vos sorts du Sacré, et Consécration, que tout paladin apprend dans WoW: Forever, touche les ennemis autour de vous. WoW: Forever ajoute aussi un sceau de tank dont le Jugement provoque l'ennemi. Les paladins sont de bons tanks, surtout contre plusieurs ennemis.",
 		},
 		es = {
 			q = "¿Puede tanquear un paladín?",
-			a = "Sí, con escudo y el árbol de talentos Protección. Furia recta aumenta la amenaza de tus hechizos Sagrados y Consagración golpea a todos los enemigos a tu alrededor. Los paladines son buenos tanques, sobre todo contra varios enemigos.",
+			a = "Sí, con escudo y el árbol de talentos Protección. Furia recta aumenta la amenaza de tus hechizos Sagrados, y Consagración, que en WoW: Forever aprenden todos los paladines, golpea a los enemigos a tu alrededor. WoW: Forever añade además un sello de tanque cuya Sentencia provoca al enemigo. Los paladines son buenos tanques, sobre todo contra varios enemigos.",
 		},
 		it = {
 			q = "Un paladino può fare da tank?",
-			a = "Sì, con uno scudo e l'albero di talenti Protezione. Furia Virtuosa aumenta la minaccia degli incantesimi Sacri, Consacrazione colpisce tutti i nemici intorno a te. I paladini sono buoni tank, soprattutto contro più nemici.",
+			a = "Sì, con uno scudo e l'albero di talenti Protezione. Furia Virtuosa aumenta la minaccia degli incantesimi Sacri, e Consacrazione, che in WoW: Forever imparano tutti i paladini, colpisce i nemici intorno a te. WoW: Forever aggiunge anche un sigillo da tank il cui Giudizio provoca il nemico. I paladini sono buoni tank, soprattutto contro più nemici.",
 		},
 		ru = {
 			q = "Может ли паладин танковать?",
-			a = "Да, со щитом и веткой талантов «Защита». «Праведное неистовство» повышает угрозу от заклинаний Света, «Освящение» бьёт всех врагов вокруг. Паладины — хорошие танки, особенно против нескольких врагов.",
+			a = "Да, со щитом и веткой талантов «Защита». «Праведное неистовство» повышает угрозу от заклинаний Света, а «Освящение», которое в WoW: Forever изучает каждый паладин, бьёт врагов вокруг. Кроме того, в WoW: Forever есть печать для танкования, чьё «Правосудие» провоцирует врага. Паладины — хорошие танки, особенно против нескольких врагов.",
 		},
 		pt = {
 			q = "Paladino pode tanquear?",
-			a = "Sim, com escudo e a árvore de talentos Proteção. Fúria Justa aumenta a ameaça dos seus feitiços Sagrados, Consagração atinge todos os inimigos ao seu redor. Paladinos são bons tanques, principalmente contra vários inimigos.",
+			a = "Sim, com escudo e a árvore de talentos Proteção. Fúria Justa aumenta a ameaça dos seus feitiços Sagrados, e Consagração, que todo paladino aprende no WoW: Forever, atinge os inimigos ao seu redor. O WoW: Forever também traz um selo de tanque cujo Julgamento provoca o inimigo. Paladinos são bons tanques, principalmente contra vários inimigos.",
 		},
 	},
 	{
@@ -502,31 +502,31 @@ ns.Faq.Add("paladin", {
 		id = "paladin-rotation",
 		de = {
 			q = "Wie kämpfe ich als Paladin beim Leveln?",
-			a = "Aura an, Segen der Macht auf dich, Siegel setzen, angreifen. Im Kampf „Richturteil“ benutzen und gleich ein neues Siegel setzen. Bei wenig Gesundheit heilst du dich mit Lichtblitz oder Heiligem Licht und kämpfst weiter.",
+			a = "Aura an, Segen der Macht auf dich, Siegel setzen, angreifen. Im Kampf „Richturteil“ benutzen, sobald es bereit ist; in WoW: Forever bleibt das Siegel dabei aktiv. Bei wenig Gesundheit heilst du dich mit Lichtblitz oder Heiligem Licht und kämpfst weiter.",
 		},
 		en = {
 			q = "How do I fight as a paladin while levelling?",
-			a = "Aura on, Blessing of Might on yourself, apply a seal, attack. In the fight, use Judgement and re-apply a seal right away. When your health is low, heal yourself with Flash of Light or Holy Light and keep fighting.",
+			a = "Aura on, Blessing of Might on yourself, apply a seal, attack. In the fight, use Judgement whenever it is ready; in WoW: Forever your seal stays active. When your health is low, heal yourself with Flash of Light or Holy Light and keep fighting.",
 		},
 		fr = {
 			q = "Comment combattre en paladin pendant la montée de niveau ?",
-			a = "Aura activée, Bénédiction de puissance sur vous, appliquez un sceau, attaquez. Pendant le combat, utilisez Jugement et réappliquez aussitôt un sceau. Quand votre vie est basse, soignez-vous avec Éclair lumineux ou Lumière sacrée et continuez à combattre.",
+			a = "Aura activée, Bénédiction de puissance sur vous, appliquez un sceau, attaquez. Pendant le combat, utilisez Jugement dès qu'il est prêt ; dans WoW: Forever, le sceau reste actif. Quand votre vie est basse, soignez-vous avec Éclair lumineux ou Lumière sacrée et continuez à combattre.",
 		},
 		es = {
 			q = "¿Cómo lucho como paladín mientras subo de nivel?",
-			a = "Aura activa, Bendición de poderío sobre ti, aplica un sello y ataca. En el combate usa Sentencia y vuelve a aplicar un sello enseguida. Cuando tengas poca salud, cúrate con Destello de Luz o Luz Sagrada y sigue luchando.",
+			a = "Aura activa, Bendición de poderío sobre ti, aplica un sello y ataca. En el combate usa Sentencia en cuanto esté lista; en WoW: Forever el sello sigue activo. Cuando tengas poca salud, cúrate con Destello de Luz o Luz Sagrada y sigue luchando.",
 		},
 		it = {
 			q = "Come combatto da paladino mentre salgo di livello?",
-			a = "Aura attiva, Benedizione della Potenza su di te, applica un sigillo, attacca. Durante il combattimento usa Giudizio e riapplica subito un sigillo. Quando hai poca salute, curati con Lampo di Luce o Luce Sacra e continua a combattere.",
+			a = "Aura attiva, Benedizione della Potenza su di te, applica un sigillo, attacca. Durante il combattimento usa Giudizio appena è pronto; in WoW: Forever il sigillo resta attivo. Quando hai poca salute, curati con Lampo di Luce o Luce Sacra e continua a combattere.",
 		},
 		ru = {
 			q = "Как паладину сражаться при прокачке?",
-			a = "Включите ауру, наложите на себя «Благословение могущества», наложите печать и атакуйте. В бою используйте «Правосудие» и сразу снова накладывайте печать. Когда здоровья мало, лечитесь «Вспышкой Света» или «Светом небес» и продолжайте бой.",
+			a = "Включите ауру, наложите на себя «Благословение могущества», наложите печать и атакуйте. В бою применяйте «Правосудие», как только оно готово; в WoW: Forever печать при этом остаётся. Когда здоровья мало, лечитесь «Вспышкой Света» или «Светом небес» и продолжайте бой.",
 		},
 		pt = {
 			q = "Como luto como paladino enquanto subo de nível?",
-			a = "Aura ligada, Bênção de Poderio em você, aplique um selo e ataque. Na luta, use Julgamento e reaplique um selo na hora. Quando a vida estiver baixa, cure-se com Clarão de Luz ou Luz Sagrada e continue lutando.",
+			a = "Aura ligada, Bênção de Poderio em você, aplique um selo e ataque. Na luta, use Julgamento sempre que estiver pronto; no WoW: Forever o selo continua ativo. Quando a vida estiver baixa, cure-se com Clarão de Luz ou Luz Sagrada e continue lutando.",
 		},
 	},
 })
