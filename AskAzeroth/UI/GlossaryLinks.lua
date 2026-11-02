@@ -67,6 +67,8 @@ function GlossaryLinks.Enable(frame, tooltipOnly)
 	if not frame.SetHyperlinksEnabled then
 		return
 	end
+	-- Link events need the mouse on the frame that owns the text.
+	frame:EnableMouse(true)
 	frame:SetHyperlinksEnabled(true)
 	frame:SetScript("OnHyperlinkEnter", function(self, link)
 		local entry = EntryOfLink(link)
@@ -92,8 +94,23 @@ function GlossaryLinks.Enable(frame, tooltipOnly)
 	end)
 end
 
--- True right after a link in frame was clicked, so that a button with
--- links in its text can ignore that click.
+-- True right after a link in frame was clicked.
 function GlossaryLinks.JustClicked(frame)
-	return frame.glossaryLinkClicked == GetTime()
+	return frame.glossaryLinkClicked ~= nil and GetTime() - frame.glossaryLinkClicked < 0.2
+end
+
+-- A left click on frame outside its links clicks button instead. Checked
+-- a moment later, because the order of the mouse and the link event is
+-- not guaranteed.
+function GlossaryLinks.ForwardClicks(frame, button)
+	frame:SetScript("OnMouseUp", function(self, mouseButton)
+		if mouseButton ~= "LeftButton" then
+			return
+		end
+		C_Timer.After(0.05, function()
+			if not GlossaryLinks.JustClicked(self) and button:IsVisible() then
+				button:Click()
+			end
+		end)
+	end)
 end
