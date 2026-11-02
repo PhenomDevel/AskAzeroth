@@ -260,7 +260,7 @@ function ThreadView.Create(parent, get)
 		if item.folded then
 			return PAD + 14 + PAD + GAP
 		end
-		return PAD + 14 + 6 + TextHeight(Util.EscapeText(item.answer.text), "GameFontHighlight", InnerWidth())
+		return PAD + 14 + 6 + math.ceil(TextHeight(Util.EscapeText(item.answer.text), "GameFontHighlight", InnerWidth()))
 			+ ns.FaqRefs.Height(item.answer.faq) + PAD + GAP
 	end
 
@@ -340,7 +340,7 @@ function ThreadView.Create(parent, get)
 		row.head:SetWordWrap(false)
 		row.body = W.Text(row.bg, "GameFontHighlight", W.TEXT)
 		row.body:SetPoint("TOPLEFT", row.head, "BOTTOMLEFT", 0, -6)
-		row.body:SetPoint("RIGHT", -PAD, 0)
+		row.body:SetJustifyV("TOP")
 		row.body:SetWordWrap(true)
 		row.links = ns.FaqRefs.CreateLinks(row.bg, row.body)
 	end
@@ -371,7 +371,13 @@ function ThreadView.Create(parent, get)
 			W.PlayerText(a.author, Players.GetClass(a.author)),
 			Players.HasHelped(a.id) and (" " .. CHECK) or ""))
 		row.age:SetText(W.Ago(Util.Now() - a.created))
-		row.body:SetText(Util.EscapeText(a.text))
+		-- Explicit width and height: anchor-sized text measured before the
+		-- layout is done gets cut with "…" until the window moves.
+		local text = Util.EscapeText(a.text)
+		local width = InnerWidth()
+		row.body:SetWidth(width)
+		row.body:SetHeight(math.ceil(TextHeight(text, "GameFontHighlight", width)))
+		row.body:SetText(text)
 		row.body:Show()
 		row.links:Fill(a.faq)
 		if favorite then
@@ -387,6 +393,16 @@ function ThreadView.Create(parent, get)
 	end)
 	listView:SetElementInitializer("Frame", FillRow)
 	ScrollUtil.InitScrollBoxListWithScrollBar(scrollBox, scrollBar, listView)
+	-- Row heights depend on the width: lay out again when it changes.
+	local lastWidth = 0
+	scrollBox:HookScript("OnSizeChanged", function(_, width)
+		if width and width > 0 and math.abs(width - lastWidth) >= 1 then
+			lastWidth = width
+			if current and content:IsShown() then
+				view:Refresh()
+			end
+		end
+	end)
 
 	local function ShowMessage(text, isError)
 		message:SetText(text or "")
