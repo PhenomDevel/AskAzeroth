@@ -107,7 +107,7 @@ function MinimapButton.UpdateBadge()
 	if not button then
 		return
 	end
-	local count = ns.Notify.GetUnseen()
+	local count = ns.Notify.GetBadgeCount()
 	button.badge:SetShown(count > 0)
 	button.badge.text:SetText(count > 99 and "99+" or tostring(count))
 	button.badge:SetWidth(math.max(16, button.badge.text:GetStringWidth() + 6))

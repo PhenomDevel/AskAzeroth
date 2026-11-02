@@ -5,6 +5,11 @@
 - In development, no release yet.
 - Setup: as a mentor you can now pick the classes you help with; the
   class list shows the class colours (also in Settings).
+- Notification settings: choose how often a notification may pop up (at
+  once or every 1 to 15 minutes; what arrives in between is counted on the
+  next one), which sound plays, and whether the counter shows on the
+  minimap button and the Questions tab. The per-category choices are now
+  called "Silent" and "With sound".
 - The "Ask a question" dialog and the setup wizard use the game's window
   frame too. Selected category buttons are easier to read: dark gold with
   a gold border and white text.
