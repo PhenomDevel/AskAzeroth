@@ -54,6 +54,9 @@ In the first release:
   topics such as first steps, quests, each class, travel, gold and dungeons.
   Mentors can attach FAQ entries to their answers as links, and a hint
   points to Wowhead for looking up quests, items and NPCs.
+- **Glossary:** over 100 game terms and chat abbreviations (Aggro, DoT, BoP,
+  LFG, dungeon short names …) explained in a few words. Terms inside FAQ
+  answers show their explanation when you hover over them.
 - **FAQ suggestions while you ask:** matching FAQ entries show up as you type
   your question, so you often have the answer before anyone has to reply.
 - **Sync after login:** questions asked while you were offline are fetched

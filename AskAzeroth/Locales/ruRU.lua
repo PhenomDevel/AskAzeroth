@@ -259,6 +259,9 @@ L.FAQ_REF_OPEN = "Открывает эту статью в FAQ."
 L.FAQ_REF_UNKNOWN = "В вашей версии AskAzeroth этой статьи ещё нет. Обновите аддон, чтобы её увидеть."
 L.FAQ_REF_MISSING = "Статья FAQ из более новой версии"
 L.FAQ_REF_SUGGESTED = "подходит к вопросу"
+L.GLOSSARY = "Глоссарий"
+L.GLOSSARY_ALSO = "Также: %s"
+L.GLOSSARY_CLICK = "Нажмите, чтобы открыть в глоссарии."
 
 -- Categories
 L.CAT_QUEST = "Задание"

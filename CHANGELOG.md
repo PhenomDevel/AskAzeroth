@@ -7,6 +7,10 @@
   after the fight. Whether they also wait in instances stays a setting.
 - "Test" button for notifications in the settings, and the notification
   can be moved in Edit Mode (with "Reset position" in the settings).
+- Glossary: over 100 game terms and chat abbreviations (Aggro, DoT, BoP, LFG,
+  SW, BRD …) with a short explanation, as the last entry in the FAQ topics.
+  Terms inside FAQ answers are highlighted; hover for the explanation,
+  click to open it in the glossary.
 - The one-question-per-minute limit is visible: "Ask a question" and the
   ask button in the dialog count down the seconds until the next question.
 - Questions and answers show who wrote them with level, race and class

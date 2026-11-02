@@ -259,6 +259,9 @@ L.FAQ_REF_OPEN = "Öffnet diesen Eintrag im FAQ."
 L.FAQ_REF_UNKNOWN = "Diesen FAQ-Eintrag kennt deine Version von AskAzeroth noch nicht. Aktualisiere das Addon, um ihn zu sehen."
 L.FAQ_REF_MISSING = "FAQ-Eintrag aus einer neueren Version"
 L.FAQ_REF_SUGGESTED = "passt zur Frage"
+L.GLOSSARY = "Glossar"
+L.GLOSSARY_ALSO = "Auch: %s"
+L.GLOSSARY_CLICK = "Klicken öffnet den Begriff im Glossar."
 
 -- Categories
 L.CAT_QUEST = "Quest"
