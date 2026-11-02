@@ -3,6 +3,9 @@
 ## Unreleased
 
 - In development, no release yet.
+- The "Ask a question" dialog and the setup wizard use the game's window
+  frame too. Selected category buttons are easier to read: dark gold with
+  a gold border and white text.
 - Questions now stay in the public list for 3 days (1 day once solved)
   instead of a few hours, and the thread shows the time left in minutes,
   hours or days. You can have up to 5 open questions at once.
