@@ -3,6 +3,7 @@
 ## Unreleased
 
 - In development, no release yet.
+- New logo: a question mark in front of the globe of Azeroth.
 - Right click on an answer now always opens a menu, also on your own
   answers, with "Pin answer" in it.
 - New look: dark leather-and-gold window with a header bar, navigation on
