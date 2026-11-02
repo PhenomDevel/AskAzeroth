@@ -71,6 +71,9 @@
   answers, limits, solved and withdrawn, helped me, favourites, ignoring,
   notifications, FAQ links, offline questions, the hidden channel, minimap
   button).
+- FAQ: 11 more questions about classes in general (beginner classes,
+  resources, spell costs, talent reset, dual specialisation, weapon skills,
+  weapon masters, racials, hybrids, buffing others, talents for dungeons).
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
   Players, FAQ and Settings.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
