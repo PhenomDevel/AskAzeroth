@@ -3,6 +3,9 @@
 ## Unreleased
 
 - In development, no release yet.
+- Thread header: the line with category, language and expiry wraps next
+  to "Mark as solved" and "Withdraw" instead of being cut off. Your own
+  questions no longer show the right-click hint for the player menu.
 - Glossary tooltips in FAQ answers now show when you hover over a blue term.
 - FAQ links on answers: the FAQ button is off once 3 entries are attached,
   and the chips above the answer field always fit into the window (long

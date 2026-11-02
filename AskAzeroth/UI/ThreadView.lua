@@ -103,11 +103,16 @@ function ThreadView.Create(parent, get)
 	head:EnableMouse(true)
 	head:SetScript("OnMouseUp", function(self, mouseButton)
 		local q = current and get(current)
-		if q and mouseButton == "RightButton" then
+		if q and mouseButton == "RightButton" and not IsOwn(q) then
 			ns.PlayerMenu.Open(self, q.author)
 		end
 	end)
 	head:SetScript("OnEnter", function(self)
+		-- The player menu is for other players only: no hint on own questions.
+		local q = current and get(current)
+		if not q or IsOwn(q) then
+			return
+		end
 		GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
 		GameTooltip:SetText(L.THREAD_PLAYER_TIP, 1, 1, 1, 1, true)
 		GameTooltip:Show()
@@ -125,8 +130,9 @@ function ThreadView.Create(parent, get)
 
 	local meta = W.Text(head, "GameFontNormalSmall")
 	meta:SetPoint("TOPLEFT", SIDE, -19)
-	meta:SetPoint("RIGHT", solve, "LEFT", -8, 0)
-	meta:SetWordWrap(false)
+	meta:SetJustifyV("TOP")
+	-- Wraps next to the asker's buttons; LayoutHead sizes it.
+	meta:SetWordWrap(true)
 	local title = W.Text(head, "GameFontHighlightLarge", W.TEXT)
 	title:SetPoint("TOPLEFT", SIDE, -46)
 	title:SetPoint("RIGHT", -SIDE, 0)
@@ -244,7 +250,19 @@ function ThreadView.Create(parent, get)
 	-- Height of the question block for the current width.
 	local function LayoutHead()
 		local width = math.max(200, (head:GetWidth() > 0 and head:GetWidth() or parent:GetWidth()) - 2 * SIDE)
-		local height = 46 + TextHeight(title:GetText() or "", "GameFontHighlightLarge", width)
+		-- Meta line: explicit width (beside the buttons when shown) and
+		-- height, wrapping instead of being cut with "…".
+		local metaWidth = width
+		if solve:IsShown() then
+			metaWidth = width - (withdraw:GetRight() and solve:GetLeft() and (withdraw:GetRight() - solve:GetLeft()) or (solve:GetWidth() + 6 + withdraw:GetWidth())) - 12
+		end
+		metaWidth = math.max(120, metaWidth)
+		local metaHeight = math.ceil(TextHeight(meta:GetText() or "", "GameFontNormalSmall", metaWidth))
+		meta:SetWidth(metaWidth)
+		meta:SetHeight(metaHeight)
+		local top = math.max(46, 19 + metaHeight + 12)
+		title:SetPoint("TOPLEFT", SIDE, -top)
+		local height = top + TextHeight(title:GetText() or "", "GameFontHighlightLarge", width)
 		context:ClearAllPoints()
 		if body:IsShown() then
 			measure:SetSpacing(2)
@@ -450,7 +468,7 @@ function ThreadView.Create(parent, get)
 		solve:SetShown(own)
 		solve:SetEnabled(not solved and q.answerCount > 0)
 		withdraw:SetShown(own)
-		meta:SetPoint("RIGHT", own and solve or head, own and "LEFT" or "RIGHT", own and -8 or -SIDE, 0)
+		LayoutHead()
 		-- Read-only threads keep a slim bar for messages (pin errors).
 		local canAnswer = live and not solved
 		answerBox:SetShown(canAnswer)
@@ -485,6 +503,7 @@ function ThreadView.Create(parent, get)
 		if q then
 			meta:SetText(MetaText(q))
 			context:SetText(ContextText(q))
+			LayoutHead()
 			scrollBox:ForEachFrame(function(row)
 				if row.item then
 					FillRow(row, row.item)
