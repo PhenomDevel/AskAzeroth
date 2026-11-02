@@ -7,6 +7,28 @@
   after the fight. Whether they also wait in instances stays a setting.
 - "Test" button for notifications in the settings, and the notification
   can be moved in Edit Mode (with "Reset position" in the settings).
+- Glossary: over 100 game terms and chat abbreviations (Aggro, DoT, BoP, LFG,
+  SW, BRD …) with a short explanation, as the last entry in the FAQ topics.
+  Terms inside FAQ answers are highlighted; hover for the explanation,
+  click to open it in the glossary.
+- The one-question-per-minute limit is visible: "Ask a question" and the
+  ask button in the dialog count down the seconds until the next question.
+- Questions and answers show who wrote them with level, race and class
+  (e.g. "Level 12 Night Elf Warrior"), in the list, the thread and pinned
+  answers. Answers from older addon versions show the name only.
+- New FAQ layout: pick a topic on the left, the questions are listed as
+  bars below each other and a click unfolds the answer. Search stays, the
+  FAQ language is now a dropdown, and the Wowhead hint is a highlighted
+  banner across the top of the page.
+- Fixed answer texts that were sometimes cut off with "…" until the
+  window was moved (FAQ, FAQ suggestions and answers in threads).
+- Look closer to the game's own windows: Blizzard window frame with the
+  logo as portrait, the game's buttons, close buttons and colours, and one
+  font everywhere (also in input fields).
+- Solved questions stand out: check mark, green status and a green tint in
+  the list, a green "This question is solved" bar in the thread.
+  "Hide solved" on the Questions page hides them.
+- Your own questions are highlighted in blue in the question list.
 - New logo: a question mark in front of the globe of Azeroth.
 - First-run setup: on the first login a short wizard asks for your
   languages, whether you are new or want to help as a mentor, which

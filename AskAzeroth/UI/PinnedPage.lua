@@ -149,7 +149,7 @@ local function Build(content)
 		row.meta:SetText(QuestionLine(q))
 		row.who:SetText(("%s%s  |cff9d9d9d%s|r"):format(
 			Players.IsFavorite(a.author) and W.STAR or "",
-			W.PlayerText(a.author, Players.GetClass(a.author)),
+			W.PlayerLine(a.author, a.ctx, Players.GetClass(a.author)),
 			date("%Y-%m-%d %H:%M", a.created)))
 		row.text:SetText(Util.EscapeText(a.text))
 		row.links:Fill(a.faq)

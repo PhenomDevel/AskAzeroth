@@ -12,7 +12,7 @@ local C = ns.C
 local W = ns.Widgets
 
 local FRAME_NAME = "AskAzerothFrame"
-local WIDTH, HEIGHT = 1040, 640
+local WIDTH, HEIGHT = 1040, 652
 local HEADER_HEIGHT = 48
 local NAV_WIDTH = 150
 local NAV_BUTTON_HEIGHT = 34
@@ -63,7 +63,7 @@ function UI.UpdateStatus()
 	-- is joined, grey while not.
 	local codes = {}
 	for _, lang in ipairs(ns.Channel.GetSelectedLanguages()) do
-		local color = ns.Channel.IsReady(lang) and "fff0d68c" or "ff8a7e6a"
+		local color = ns.Channel.IsReady(lang) and "ffffd100" or "ff808080"
 		codes[#codes + 1] = ("|c%s%s|r"):format(color, lang:upper())
 	end
 	frame.languages.text:SetText(table.concat(codes, " · "))
@@ -89,7 +89,7 @@ local function UpdateNav()
 	for _, button in ipairs(frame.navButtons) do
 		local active = button.page == frame.selectedTab
 		if active then
-			W.SetColors(button, W.COLORS.navActive, W.COLORS.frame)
+			W.SetColors(button, W.COLORS.navActive, W.COLORS.favorite)
 		else
 			W.SetColors(button, { 0, 0, 0, 0 }, { 0, 0, 0, 0 })
 		end
@@ -136,34 +136,76 @@ function UI.GetCurrentPage()
 	return def and def.object
 end
 
+-- The game's window frame (PortraitFrameTemplate: metal border, title bar,
+-- round portrait, close button). Clients without it get a dark backdrop
+-- with our own title row.
+local function CreateWindow()
+	local ok, window = pcall(CreateFrame, "Frame", FRAME_NAME, UIParent, "PortraitFrameTemplate")
+	if ok and window then
+		if window.SetTitle then
+			window:SetTitle(ns.title)
+		end
+		if window.SetPortraitToAsset then
+			window:SetPortraitToAsset(LOGO)
+		end
+		window.blizzard = true
+		return window
+	end
+	window = CreateFrame("Frame", FRAME_NAME, UIParent, "BackdropTemplate")
+	window:SetBackdrop(W.BACKDROP_THICK)
+	W.SetColors(window, W.COLORS.window, W.COLORS.frame)
+	return window
+end
+
+-- Status row: subtitle on the left; lockdown, language channels and mentor
+-- state on the right. In the fallback frame it also holds logo, title and
+-- a close button.
 local function CreateHeader()
 	local header = CreateFrame("Frame", nil, frame)
-	header:SetPoint("TOPLEFT", 2, -2)
-	header:SetPoint("TOPRIGHT", -2, -2)
-	header:SetHeight(HEADER_HEIGHT)
-	W.Fill(header, W.COLORS.header):SetAllPoints()
-	W.EdgeLine(header, "BOTTOM", W.COLORS.frame)
+	if frame.blizzard then
+		header:SetPoint("TOPLEFT", 62, -24)
+		header:SetPoint("TOPRIGHT", -8, -24)
+		header:SetHeight(HEADER_HEIGHT - 14)
+	else
+		header:SetPoint("TOPLEFT", 4, -4)
+		header:SetPoint("TOPRIGHT", -4, -4)
+		header:SetHeight(HEADER_HEIGHT)
+		W.Fill(header, W.COLORS.header):SetAllPoints()
+		W.EdgeLine(header, "BOTTOM", W.COLORS.line)
+	end
 
-	local logo = header:CreateTexture(nil, "ARTWORK")
-	logo:SetTexture(LOGO)
-	logo:SetSize(26, 26)
-	logo:SetPoint("LEFT", 14, 0)
-	local title = W.Text(header, W.TITLE_FONT, W.ACCENT)
-	title:SetPoint("LEFT", logo, "RIGHT", 10, 0)
-	title:SetText(ns.title)
+	local anchor, rightAnchor = header, nil
+	if not frame.blizzard then
+		local logo = header:CreateTexture(nil, "ARTWORK")
+		logo:SetTexture(LOGO)
+		logo:SetSize(26, 26)
+		logo:SetPoint("LEFT", 14, 0)
+		local title = W.Text(header, W.TITLE_FONT, W.GOLD)
+		title:SetPoint("LEFT", logo, "RIGHT", 10, 0)
+		title:SetText(ns.title)
+		anchor = title
+		local close = W.CloseButton(header, function()
+			frame:Hide()
+		end)
+		close:SetPoint("RIGHT", -8, 0)
+		rightAnchor = close
+	end
 	local subtitle = W.Text(header, "GameFontHighlight", W.MUTED)
-	subtitle:SetPoint("LEFT", title, "RIGHT", 10, -1)
+	if anchor == header then
+		subtitle:SetPoint("LEFT", header, "LEFT", 4, 0)
+	else
+		subtitle:SetPoint("LEFT", anchor, "RIGHT", 10, -1)
+	end
 	subtitle:SetText(L.WINDOW_SUBTITLE)
-
-	local close = W.CloseButton(header, function()
-		frame:Hide()
-	end)
-	close:SetPoint("RIGHT", -12, 0)
 
 	-- Mentor state: green dot and label.
 	local mentor = CreateFrame("Frame", nil, header)
 	mentor:SetHeight(20)
-	mentor:SetPoint("RIGHT", close, "LEFT", -14, 0)
+	if rightAnchor then
+		mentor:SetPoint("RIGHT", rightAnchor, "LEFT", -14, 0)
+	else
+		mentor:SetPoint("RIGHT", header, "RIGHT", -4, 0)
+	end
 	local mentorText = W.Text(mentor, "GameFontHighlight", W.GREEN)
 	mentorText:SetPoint("RIGHT")
 	mentorText:SetText(L.STATUS_MENTOR)
@@ -174,7 +216,7 @@ local function CreateHeader()
 	frame.mentor = mentor
 
 	-- Language channels as a pill.
-	local languages = W.Panel(header, W.COLORS.header, W.COLORS.frame)
+	local languages = W.Panel(header, W.COLORS.input, W.COLORS.line)
 	languages:SetHeight(20)
 	languages:SetPoint("RIGHT", mentor, "LEFT", -14, 0)
 	languages.text = W.Text(languages, "GameFontHighlightSmall")
@@ -186,22 +228,32 @@ local function CreateHeader()
 	end)
 	frame.languages = languages
 
-	local lockdown = W.Text(header, "GameFontHighlightSmall", W.ACCENT)
+	local lockdown = W.Text(header, "GameFontHighlightSmall", W.GOLD)
 	lockdown:SetPoint("RIGHT", languages, "LEFT", -14, 0)
 	lockdown:SetText(L.STATUS_LOCKDOWN)
 	frame.lockdown = lockdown
+	return header
+end
+
+-- Top and side insets of the area below the header.
+local function BodyInsets()
+	if frame.blizzard then
+		return 4, -(24 + HEADER_HEIGHT - 14 + 4), -6, 4
+	end
+	return 4, -(4 + HEADER_HEIGHT), -4, 4
 end
 
 local function CreateNav()
+	local left, top, _, bottom = BodyInsets()
 	local nav = CreateFrame("Frame", nil, frame)
-	nav:SetPoint("TOPLEFT", 2, -2 - HEADER_HEIGHT)
-	nav:SetPoint("BOTTOMLEFT", 2, 2)
+	nav:SetPoint("TOPLEFT", left, top)
+	nav:SetPoint("BOTTOMLEFT", left, bottom)
 	nav:SetWidth(NAV_WIDTH)
 	W.Fill(nav, W.COLORS.nav):SetAllPoints()
 	W.SideLine(nav, "RIGHT")
 
 	frame.navButtons = {}
-	local y = -12
+	local y = -10
 	for _, index in ipairs(NAV_ORDER) do
 		local def = pageDefs[index]
 		if def then
@@ -209,15 +261,15 @@ local function CreateNav()
 			button:SetBackdrop({ bgFile = W.WHITE8, edgeFile = W.WHITE8, edgeSize = 1 })
 			button.page = index
 			button:SetHeight(NAV_BUTTON_HEIGHT)
-			button:SetPoint("TOPLEFT", 8, y)
-			button:SetPoint("RIGHT", -8, 0)
+			button:SetPoint("TOPLEFT", 6, y)
+			button:SetPoint("RIGHT", -6, 0)
 			button.label = W.Text(button, "GameFontHighlight", W.SOFT)
 			button.label:SetPoint("LEFT", 12, 0)
 			button.label:SetPoint("RIGHT", -28, 0)
 			button.label:SetWordWrap(false)
 			button.label:SetText(def.label)
-			button:SetHighlightTexture(W.WHITE8)
-			button:GetHighlightTexture():SetVertexColor(1, 0.85, 0.5, 0.06)
+			-- The game's list highlight.
+			button:SetHighlightTexture("Interface\\QuestFrame\\UI-QuestTitleHighlight", "ADD")
 			button:SetScript("OnClick", function(self)
 				SelectPage(self.page)
 			end)
@@ -227,7 +279,7 @@ local function CreateNav()
 	end
 
 	-- Unseen questions next to "Questions".
-	local badge = W.Panel(frame.navButtons[1], { 0.7, 0.23, 0.16, 1 }, { 0.7, 0.23, 0.16, 1 })
+	local badge = W.Panel(frame.navButtons[1], { 0.7, 0.1, 0.1, 1 }, { 0.9, 0.2, 0.2, 1 })
 	badge:SetSize(22, 18)
 	badge:SetPoint("RIGHT", -6, 0)
 	badge:SetFrameLevel(frame.navButtons[1]:GetFrameLevel() + 2)
@@ -249,9 +301,7 @@ function UI.UpdateBadge(count)
 end
 
 local function Create()
-	frame = CreateFrame("Frame", FRAME_NAME, UIParent, "BackdropTemplate")
-	frame:SetBackdrop({ bgFile = W.WHITE8, edgeFile = W.WHITE8, edgeSize = 2 })
-	W.SetColors(frame, W.COLORS.window, W.COLORS.frame)
+	frame = CreateWindow()
 	frame:SetSize(WIDTH, HEIGHT)
 	frame:SetFrameStrata("HIGH")
 	frame:SetToplevel(true)
@@ -271,11 +321,12 @@ local function Create()
 	CreateHeader()
 	local nav = CreateNav()
 
+	local _, _, right, bottom = BodyInsets()
 	frame.contents = {}
 	for i in pairs(pageDefs) do
 		local content = CreateFrame("Frame", nil, frame)
 		content:SetPoint("TOPLEFT", nav, "TOPRIGHT", 0, 0)
-		content:SetPoint("BOTTOMRIGHT", -2, 2)
+		content:SetPoint("BOTTOMRIGHT", right, bottom)
 		content:Hide()
 		frame.contents[i] = content
 	end

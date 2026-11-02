@@ -166,6 +166,28 @@ local function Allow(sender, kind, limit, window, now)
 	return true
 end
 
+-- Seconds until the player may ask the next question (the per-sender
+-- rate limit above, applied to the own name); 0 = now.
+function Store.AskWait(now)
+	now = now or Util.Now()
+	local rate = rates[ns:GetPlayerFullName() or ""]
+	local times = rate and rate.questions
+	if not times then
+		return 0
+	end
+	local recent = {}
+	for _, time in ipairs(times) do
+		if time > now - C.RATE_QUESTION_WINDOW then
+			recent[#recent + 1] = time
+		end
+	end
+	if #recent < C.RATE_QUESTIONS then
+		return 0
+	end
+	table.sort(recent)
+	return math.max(0, recent[#recent - C.RATE_QUESTIONS + 1] + C.RATE_QUESTION_WINDOW - now)
+end
+
 --------------------------------------------------------------------------------
 -- Changes
 --------------------------------------------------------------------------------
@@ -407,15 +429,16 @@ function Store.Ask(lang, cat, title, body, ctx)
 	return wire, m.question
 end
 
--- faq (optional): list of FAQ ids the answer refers to.
-function Store.Answer(qid, text, faq)
+-- faq (optional): list of FAQ ids the answer refers to. ctx (optional):
+-- the answerer's level, race and class.
+function Store.Answer(qid, text, faq, ctx)
 	local me = ns:GetPlayerFullName()
 	if not me then
 		return nil, "sender"
 	end
 	local now = Util.Now()
 	local q = questions[qid]
-	local wire = Protocol.EncodeAnswer({ id = Util.NewId(me, now), qid = qid, text = text, faq = faq, created = now })
+	local wire = Protocol.EncodeAnswer({ id = Util.NewId(me, now), qid = qid, text = text, faq = faq, ctx = ctx, created = now })
 	local m, reason = Protocol.Decode(wire, me, q and q.lang, now)
 	if not m then
 		return nil, reason

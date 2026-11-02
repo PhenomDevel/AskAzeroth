@@ -72,6 +72,8 @@ Core\Data\Faq\Social.lua
 Core\Data\Faq\Interface.lua
 Core\Data\FaqStopwords.lua
 Core\FaqSearch.lua
+Core\Glossary.lua
+Core\Data\Glossary.lua
 Core\Database.lua
 Core\SlashCommands.lua
 Core\Channel.lua
@@ -91,6 +93,7 @@ UI\MainFrame.lua
 UI\PlayerMenu.lua
 UI\QueueList.lua
 UI\FaqRefs.lua
+UI\GlossaryLinks.lua
 UI\ThreadView.lua
 UI\AskDialog.lua
 UI\QuestionsPage.lua

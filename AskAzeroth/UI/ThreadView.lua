@@ -39,16 +39,9 @@ local REF_CHIP_MAX = 24
 local function ContextText(q)
 	local ctx = q.ctx or {}
 	local parts = { (Players.IsFavorite(q.author) and STAR or "") .. W.PlayerText(q.author, ctx.class) }
-	local who = {}
-	if ctx.lvl then
-		who[#who + 1] = L.LEVEL_SHORT:format(ctx.lvl)
-	end
-	local className = W.ClassName(ctx.class)
-	if className then
-		who[#who + 1] = className
-	end
-	if #who > 0 then
-		parts[#parts + 1] = table.concat(who, " ")
+	local details = W.PlayerDetails(ctx)
+	if details then
+		parts[#parts + 1] = details
 	end
 	if ctx.zone then
 		parts[#parts + 1] = Util.EscapeText(ctx.zone)
@@ -79,7 +72,7 @@ end
 
 -- Category · language · expiry, above the question title.
 local function MetaText(q)
-	return ("%s |cffa89a80· %s · %s|r"):format(W.CategoryText(q.cat), tostring(q.lang or ""):upper(), ExpiryText(q))
+	return ("%s |cff999999· %s · %s|r"):format(W.CategoryText(q.cat), tostring(q.lang or ""):upper(), ExpiryText(q))
 end
 
 function ThreadView.Create(parent, get)
@@ -200,6 +193,13 @@ function ThreadView.Create(parent, get)
 	answerBox.counter:ClearAllPoints()
 	answerBox.counter:SetPoint("TOPLEFT", answerBox, "BOTTOMLEFT", 0, -4)
 
+	-- Solved questions: a green bar with a check mark instead of the field.
+	local solvedTint = W.Fill(bottom, W.COLORS.solved, "BORDER")
+	solvedTint:SetAllPoints()
+	local solvedLabel = W.Text(bottom, "GameFontNormal", W.GREEN)
+	solvedLabel:SetPoint("LEFT", SIDE, 0)
+	solvedLabel:SetText(CHECK .. " " .. L.THREAD_SOLVED_BANNER)
+
 	local message = W.Text(bottom, "GameFontHighlightSmall", W.RED)
 	message:SetPoint("LEFT", answerBox.counter, "RIGHT", 12, 0)
 	message:SetPoint("RIGHT", -SIDE, 0)
@@ -253,7 +253,7 @@ function ThreadView.Create(parent, get)
 		if item.folded then
 			return PAD + 14 + PAD + GAP
 		end
-		return PAD + 14 + 6 + TextHeight(Util.EscapeText(item.answer.text), "GameFontHighlight", InnerWidth())
+		return PAD + 14 + 6 + math.ceil(TextHeight(Util.EscapeText(item.answer.text), "GameFontHighlight", InnerWidth()))
 			+ ns.FaqRefs.Height(item.answer.faq) + PAD + GAP
 	end
 
@@ -333,7 +333,7 @@ function ThreadView.Create(parent, get)
 		row.head:SetWordWrap(false)
 		row.body = W.Text(row.bg, "GameFontHighlight", W.TEXT)
 		row.body:SetPoint("TOPLEFT", row.head, "BOTTOMLEFT", 0, -6)
-		row.body:SetPoint("RIGHT", -PAD, 0)
+		row.body:SetJustifyV("TOP")
 		row.body:SetWordWrap(true)
 		row.links = ns.FaqRefs.CreateLinks(row.bg, row.body)
 	end
@@ -347,7 +347,7 @@ function ThreadView.Create(parent, get)
 		if item.folded then
 			row.pin:Hide()
 			row.age:SetText("")
-			row.head:SetText("|cffa89a80" .. L.THREAD_IGNORED_ANSWER .. "|r")
+			row.head:SetText("|cff999999" .. L.THREAD_IGNORED_ANSWER .. "|r")
 			row.body:SetText("")
 			row.body:Hide()
 			row.links:Fill(nil)
@@ -361,10 +361,16 @@ function ThreadView.Create(parent, get)
 		local favorite = Players.IsFavorite(a.author)
 		row.head:SetText(("%s%s%s"):format(
 			favorite and STAR or "",
-			W.PlayerText(a.author, Players.GetClass(a.author)),
+			W.PlayerLine(a.author, a.ctx, Players.GetClass(a.author)),
 			Players.HasHelped(a.id) and (" " .. CHECK) or ""))
 		row.age:SetText(W.Ago(Util.Now() - a.created))
-		row.body:SetText(Util.EscapeText(a.text))
+		-- Explicit width and height: anchor-sized text measured before the
+		-- layout is done gets cut with "…" until the window moves.
+		local text = Util.EscapeText(a.text)
+		local width = InnerWidth()
+		row.body:SetWidth(width)
+		row.body:SetHeight(math.ceil(TextHeight(text, "GameFontHighlight", width)))
+		row.body:SetText(text)
 		row.body:Show()
 		row.links:Fill(a.faq)
 		if favorite then
@@ -380,6 +386,16 @@ function ThreadView.Create(parent, get)
 	end)
 	listView:SetElementInitializer("Frame", FillRow)
 	ScrollUtil.InitScrollBoxListWithScrollBar(scrollBox, scrollBar, listView)
+	-- Row heights depend on the width: lay out again when it changes.
+	local lastWidth = 0
+	scrollBox:HookScript("OnSizeChanged", function(_, width)
+		if width and width > 0 and math.abs(width - lastWidth) >= 1 then
+			lastWidth = width
+			if current and content:IsShown() then
+				view:Refresh()
+			end
+		end
+	end)
 
 	local function ShowMessage(text, isError)
 		message:SetText(text or "")
@@ -433,10 +449,15 @@ function ThreadView.Create(parent, get)
 			answerBox:SetPoint("TOPLEFT", SIDE, -12 - refsHeight)
 			send:SetPoint("TOPRIGHT", -SIDE, -12 - refsHeight)
 			message:SetPoint("LEFT", answerBox.counter, "RIGHT", 12, 0)
+		elseif solved then
+			bottom:SetHeight(36)
+			message:SetPoint("LEFT", solvedLabel, "RIGHT", 16, 0)
 		else
 			bottom:SetHeight(28)
 			message:SetPoint("LEFT", SIDE, 0)
 		end
+		solvedTint:SetShown(solved)
+		solvedLabel:SetShown(solved)
 		message:SetPoint("RIGHT", -SIDE, 0)
 	end
 

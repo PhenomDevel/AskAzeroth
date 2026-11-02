@@ -27,6 +27,20 @@ local function BuildRow(list, row)
 	bg:SetHighlightTexture("Interface\\Buttons\\WHITE8x8")
 	bg:GetHighlightTexture():SetVertexColor(1, 0.85, 0.5, 0.05)
 	bg:RegisterForClicks("LeftButtonUp", "RightButtonUp")
+	-- Solved questions: green tint and a green bar on the left.
+	row.solvedTint = W.Fill(bg, W.COLORS.solved, "BACKGROUND")
+	row.solvedTint:SetAllPoints()
+	row.solvedBar = W.Fill(bg, W.COLORS.success, "ARTWORK")
+	row.solvedBar:SetWidth(3)
+	row.solvedBar:SetPoint("TOPLEFT")
+	row.solvedBar:SetPoint("BOTTOMLEFT")
+	-- Own questions (Questions page): blue tint and bar.
+	row.ownTint = W.Fill(bg, W.COLORS.own, "BACKGROUND")
+	row.ownTint:SetAllPoints()
+	row.ownBar = W.Fill(bg, W.COLORS.ownBar, "ARTWORK")
+	row.ownBar:SetWidth(3)
+	row.ownBar:SetPoint("TOPLEFT")
+	row.ownBar:SetPoint("BOTTOMLEFT")
 	bg:SetScript("OnClick", function(self, mouseButton)
 		if row.toggle then
 			list.onToggleIgnored()
@@ -57,11 +71,7 @@ end
 
 local function AuthorText(q)
 	local ctx = q.ctx or {}
-	local text = W.PlayerText(q.author, ctx.class or Players.GetClass(q.author))
-	if ctx.lvl then
-		text = text .. " · " .. L.LEVEL_SHORT:format(ctx.lvl)
-	end
-	return text
+	return W.PlayerLine(q.author, ctx, Players.GetClass(q.author))
 end
 
 local function FillRow(list, row, item)
@@ -80,6 +90,10 @@ local function FillRow(list, row, item)
 		row.meta:SetText("")
 		row.bg:SetAlpha(1)
 		row.bg:SetSelectedLook(false)
+		row.solvedTint:Hide()
+		row.solvedBar:Hide()
+		row.ownTint:Hide()
+		row.ownBar:Hide()
 		return
 	end
 	local q = item
@@ -90,16 +104,25 @@ local function FillRow(list, row, item)
 	row.category:SetText(W.CategoryText(q.cat))
 	row.age:SetText(W.Ago(Util.Now() - q.created))
 	row.title:SetText((Players.IsFavorite(q.author) and STAR or "") .. Util.EscapeText(q.title))
-	row.meta:SetText(AuthorText(q))
-	row.status:SetText(W.StatusText((list.statusOf or Store.GetStatus)(q), q.answerCount))
-	row.bg:SetSelectedLook(list.selectedId == q.id)
+	local own = list.highlightOwn and q.author == ns:GetPlayerFullName()
+	row.meta:SetText(own and ("|cff7fbfff" .. L.QUEUE_OWN .. "|r") or AuthorText(q))
+	local status = (list.statusOf or Store.GetStatus)(q)
+	row.status:SetText(W.StatusText(status, q.answerCount))
+	local selected = list.selectedId == q.id
+	row.bg:SetSelectedLook(selected)
+	local solved = status == "solved" and not selected
+	row.solvedTint:SetShown(solved)
+	row.solvedBar:SetShown(solved)
+	row.ownTint:SetShown(own and not solved and not selected)
+	row.ownBar:SetShown(own and not solved and not selected)
 end
 
 -- onSelect(question) runs when a row is clicked, onToggleIgnored() when the
 -- "ignored players" row is. statusOf(question) gives the status shown
 -- (default Store.GetStatus).
 function QueueList.Create(parent, onSelect, onToggleIgnored, statusOf)
-	local list = { onSelect = onSelect, onToggleIgnored = onToggleIgnored, statusOf = statusOf }
+	-- Own questions stand out where they are mixed with others.
+	local list = { onSelect = onSelect, onToggleIgnored = onToggleIgnored, statusOf = statusOf, highlightOwn = statusOf == nil }
 	local scrollBox = CreateFrame("Frame", nil, parent, "WowScrollBoxList")
 	scrollBox:SetPoint("TOPLEFT", 0, 0)
 	scrollBox:SetPoint("BOTTOMRIGHT", -12, 0)
