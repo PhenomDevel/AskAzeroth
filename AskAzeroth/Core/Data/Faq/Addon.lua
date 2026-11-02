@@ -99,31 +99,31 @@ ns.Faq.Add("addon", {
 		id = "addon-expiry",
 		de = {
 			q = "Warum ist meine Frage verschwunden?",
-			a = "Fragen bleiben nur eine Weile in der öffentlichen Liste: 2 Stunden ohne Antwort, 45 Minuten nach der letzten Antwort, 10 Minuten nachdem du sie als gelöst markiert hast. Deine eigenen Fragen bleiben mit allen Antworten unter „Meine Fragen“.",
+			a = "Fragen bleiben nur eine Weile in der öffentlichen Liste: 3 Tage ohne Antwort, 3 Tage nach der letzten Antwort, 1 Tag nachdem du sie als gelöst markiert hast. Deine eigenen Fragen bleiben mit allen Antworten unter „Meine Fragen“.",
 		},
 		en = {
 			q = "Why did my question disappear?",
-			a = "Questions only stay in the public list for a while: 2 hours without answers, 45 minutes after the last answer, 10 minutes after you mark it as solved. Your own questions and all their answers stay under \"My questions\".",
+			a = "Questions only stay in the public list for a while: 3 days without answers, 3 days after the last answer, 1 day after you mark it as solved. Your own questions and all their answers stay under \"My questions\".",
 		},
 		fr = {
 			q = "Pourquoi ma question a-t-elle disparu ?",
-			a = "Les questions ne restent qu'un temps dans la liste publique : 2 heures sans réponse, 45 minutes après la dernière réponse, 10 minutes après l'avoir marquée comme résolue. Vos propres questions et toutes leurs réponses restent dans « Mes questions ».",
+			a = "Les questions ne restent qu'un temps dans la liste publique : 3 jours sans réponse, 3 jours après la dernière réponse, 1 jour après l'avoir marquée comme résolue. Vos propres questions et toutes leurs réponses restent dans « Mes questions ».",
 		},
 		es = {
 			q = "¿Por qué ha desaparecido mi pregunta?",
-			a = "Las preguntas solo se quedan un tiempo en la lista pública: 2 horas sin respuestas, 45 minutos tras la última respuesta y 10 minutos después de marcarla como resuelta. Tus propias preguntas y todas sus respuestas siguen en «Mis preguntas».",
+			a = "Las preguntas solo se quedan un tiempo en la lista pública: 3 días sin respuestas, 3 días tras la última respuesta y 1 día después de marcarla como resuelta. Tus propias preguntas y todas sus respuestas siguen en «Mis preguntas».",
 		},
 		it = {
 			q = "Perché la mia domanda è sparita?",
-			a = "Le domande restano nell'elenco pubblico solo per un po': 2 ore senza risposte, 45 minuti dopo l'ultima risposta, 10 minuti dopo averla segnata come risolta. Le tue domande e tutte le loro risposte restano in «Le mie domande».",
+			a = "Le domande restano nell'elenco pubblico solo per un po': 3 giorni senza risposte, 3 giorni dopo l'ultima risposta, 1 giorno dopo averla segnata come risolta. Le tue domande e tutte le loro risposte restano in «Le mie domande».",
 		},
 		ru = {
 			q = "Почему мой вопрос исчез?",
-			a = "Вопросы остаются в общем списке лишь на время: 2 часа без ответов, 45 минут после последнего ответа, 10 минут после отметки «решено». Ваши собственные вопросы со всеми ответами остаются в разделе «Мои вопросы».",
+			a = "Вопросы остаются в общем списке лишь на время: 3 дня без ответов, 3 дня после последнего ответа, 1 день после отметки «решено». Ваши собственные вопросы со всеми ответами остаются в разделе «Мои вопросы».",
 		},
 		pt = {
 			q = "Por que minha pergunta sumiu?",
-			a = "As perguntas ficam na lista pública só por um tempo: 2 horas sem respostas, 45 minutos depois da última resposta, 10 minutos depois de marcada como resolvida. Suas próprias perguntas e todas as respostas continuam em \"Minhas perguntas\".",
+			a = "As perguntas ficam na lista pública só por um tempo: 3 dias sem respostas, 3 dias depois da última resposta, 1 dia depois de marcada como resolvida. Suas próprias perguntas e todas as respostas continuam em \"Minhas perguntas\".",
 		},
 	},
 	{

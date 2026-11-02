@@ -77,9 +77,9 @@ L.THREAD_SOLVE_TIP = "Your question got the answer you needed. It disappears 10 
 L.THREAD_WITHDRAW = "Withdraw"
 L.THREAD_WITHDRAW_TIP = "Removes your question for everyone."
 L.THREAD_WITHDRAW_CONFIRM = "Withdraw your question for everyone?"
-L.THREAD_OPEN_EXPIRES = "Disappears in %d min if nobody answers."
-L.THREAD_ANSWERED_EXPIRES = "Disappears in %d min without a new answer."
-L.THREAD_SOLVED_EXPIRES = "Solved – disappears in %d min."
+L.THREAD_OPEN_EXPIRES = "Disappears in %s if nobody answers."
+L.THREAD_ANSWERED_EXPIRES = "Disappears in %s without a new answer."
+L.THREAD_SOLVED_EXPIRES = "Solved – disappears in %s."
 L.THREAD_SOLVED_BANNER = "This question is solved."
 
 -- Formatting
@@ -87,6 +87,10 @@ L.LEVEL_SHORT = "Level %d"
 L.AGO_NOW = "just now"
 L.AGO_MINUTES = "%d min ago"
 L.AGO_HOURS = "%d h ago"
+L.AGO_DAYS = "%d d ago"
+L.DURATION_MINUTES = "%d min"
+L.DURATION_HOURS = "%d h"
+L.DURATION_DAYS = "%d days"
 
 -- Status
 L.STATUS_OPEN = "open"

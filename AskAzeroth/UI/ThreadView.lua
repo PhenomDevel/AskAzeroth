@@ -63,11 +63,11 @@ local function ExpiryText(q)
 	local left = Store.ExpiresAt(q) - Util.Now()
 	local status = Store.GetStatus(q)
 	if status == "solved" then
-		return L.THREAD_SOLVED_EXPIRES:format(W.Minutes(left))
+		return L.THREAD_SOLVED_EXPIRES:format(W.Duration(left))
 	elseif status == "answered" then
-		return L.THREAD_ANSWERED_EXPIRES:format(W.Minutes(left))
+		return L.THREAD_ANSWERED_EXPIRES:format(W.Duration(left))
 	end
-	return L.THREAD_OPEN_EXPIRES:format(W.Minutes(left))
+	return L.THREAD_OPEN_EXPIRES:format(W.Duration(left))
 end
 
 -- Category · language · expiry, above the question title.

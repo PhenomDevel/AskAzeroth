@@ -72,8 +72,9 @@ local function SimulateQuestions(count)
 	local made, answered, solved, failed = 0, 0, 0, 0
 	for _ = 1, count do
 		local author = SimName("Asker")
-		-- Up to 110 minutes old, so some expire within the next minutes.
-		local created = now - math.random(0, 110 * 60)
+		-- Spread over the whole lifetime, so some expire within the next
+		-- minutes.
+		local created = now - math.random(0, C.EXPIRE_OPEN - 10 * 60)
 		local q = {
 			id = Util.NewId(author, created),
 			cat = Pick(C.CATEGORIES).key,
@@ -224,9 +225,11 @@ local function RunChecks()
 	local q1 = Question(asker)
 	Expect("valid question", "ok", Feed(Protocol.EncodeQuestion(q1), asker, lang, now))
 	Expect("second question within 60 s", "rate", Feed(Protocol.EncodeQuestion(Question(asker)), asker, lang, now))
-	Expect("open questions limit", "ok", Feed(Protocol.EncodeQuestion(Question(asker, nil, now)), asker, lang, now + 61))
-	Expect("open questions limit", "ok", Feed(Protocol.EncodeQuestion(Question(asker, nil, now)), asker, lang, now + 122))
-	Expect("fourth open question", "open-limit", Feed(Protocol.EncodeQuestion(Question(asker, nil, now)), asker, lang, now + 183))
+	-- One question per minute up to the open limit, then one more.
+	for i = 2, C.MAX_OPEN_PER_AUTHOR do
+		Expect("open questions limit", "ok", Feed(Protocol.EncodeQuestion(Question(asker, nil, now)), asker, lang, now + 61 * (i - 1)))
+	end
+	Expect("one open question too many", "open-limit", Feed(Protocol.EncodeQuestion(Question(asker, nil, now)), asker, lang, now + 61 * C.MAX_OPEN_PER_AUTHOR))
 	Expect("time in the future", "time", Feed(Protocol.EncodeQuestion(Question(troll, nil, now + C.FUTURE_TOLERANCE + 60)), troll, lang, now))
 	Expect("title too long", "title", Feed(Protocol.EncodeQuestion(Question(troll, { title = ("x"):rep(C.TITLE_MAX + 1) })), troll, lang, now))
 	Expect("control character", "title", Feed(Protocol.EncodeQuestion(Question(troll, { title = "a\1b" })), troll, lang, now))
@@ -248,7 +251,7 @@ local function RunChecks()
 	Expect("sync answer kept the title", "ok", Store.Get(q1.id).title == "Test question", "title changed")
 	Expect("solved by the author", "ok", Feed(Protocol.EncodeSolved(q1.id, now), asker, lang, now))
 	Expect("status after solving", "ok", Store.GetStatus(Store.Get(q1.id)) == "solved", "status")
-	Expect("expires 10 min after solving", "ok", Store.ExpiresAt(Store.Get(q1.id)) == now + C.EXPIRE_SOLVED, "expiry")
+	Expect("expiry after solving", "ok", Store.ExpiresAt(Store.Get(q1.id)) == now + C.EXPIRE_SOLVED, "expiry")
 	Expect("withdrawn by the author", "ok", Feed(Protocol.EncodeWithdraw(q1.id), asker, lang, now))
 	Expect("gone after withdrawing", "ok", Store.Get(q1.id) == nil, "still there")
 	-- Sync adds a missing question with its answers.
@@ -257,7 +260,7 @@ local function RunChecks()
 	synced.answers = { X = { id = "00C0FFEE", author = helper, text = "Synced answer", created = now - 300 } }
 	Expect("sync answer adds a missing question", "ok", Feed(Protocol.EncodeSyncAnswer({ synced }), troll, lang, now))
 	Expect("with its answer", "ok", Store.Get(synced.id) and Store.Get(synced.id).answerCount == 1, "answers")
-	Expect("expiry 45 min after the last answer", "ok", Store.Get(synced.id) and Store.ExpiresAt(Store.Get(synced.id)) == now - 300 + C.EXPIRE_ANSWERED, "expiry")
+	Expect("expiry after the last answer", "ok", Store.Get(synced.id) and Store.ExpiresAt(Store.Get(synced.id)) == now - 300 + C.EXPIRE_ANSWERED, "expiry")
 	Expect("sweep keeps it before then", "ok", Store.Sweep(now) == 0, "removed")
 	Expect("sweep removes it after", "ok", Store.Sweep(now - 300 + C.EXPIRE_ANSWERED) >= 1 and Store.Get(synced.id) == nil, "kept")
 	-- Cap: the least recently active go first.

@@ -73,9 +73,9 @@ L.THREAD_SOLVE_TIP = "Deine Frage ist beantwortet. Sie verschwindet 10 Minuten s
 L.THREAD_WITHDRAW = "Zurückziehen"
 L.THREAD_WITHDRAW_TIP = "Entfernt deine Frage für alle."
 L.THREAD_WITHDRAW_CONFIRM = "Deine Frage für alle zurückziehen?"
-L.THREAD_OPEN_EXPIRES = "Verschwindet in %d min, wenn niemand antwortet."
-L.THREAD_ANSWERED_EXPIRES = "Verschwindet in %d min ohne neue Antwort."
-L.THREAD_SOLVED_EXPIRES = "Gelöst – verschwindet in %d min."
+L.THREAD_OPEN_EXPIRES = "Verschwindet in %s, wenn niemand antwortet."
+L.THREAD_ANSWERED_EXPIRES = "Verschwindet in %s ohne neue Antwort."
+L.THREAD_SOLVED_EXPIRES = "Gelöst – verschwindet in %s."
 L.THREAD_SOLVED_BANNER = "Diese Frage ist gelöst."
 
 -- Formatting
@@ -83,6 +83,10 @@ L.LEVEL_SHORT = "Stufe %d"
 L.AGO_NOW = "gerade eben"
 L.AGO_MINUTES = "vor %d min"
 L.AGO_HOURS = "vor %d h"
+L.AGO_DAYS = "vor %d Tg."
+L.DURATION_MINUTES = "%d min"
+L.DURATION_HOURS = "%d Std."
+L.DURATION_DAYS = "%d Tagen"
 
 -- Status
 L.STATUS_OPEN = "offen"
