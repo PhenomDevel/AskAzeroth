@@ -88,7 +88,7 @@ function W.CategoryLangText(key, lang)
 	if type(lang) ~= "string" or lang == "" then
 		return W.CategoryText(key)
 	end
-	return ("%s |cff999999·|r |cffd9d9d9%s|r"):format(W.CategoryText(key), lang:upper())
+	return ("%s |c" .. Hex(W.MUTED) .. "·|r |cffd9d9d9%s|r"):format(W.CategoryText(key), lang:upper())
 end
 
 -- Texture markup for symbols the game fonts lack; size follows the font.
