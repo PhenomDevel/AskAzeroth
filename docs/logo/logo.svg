@@ -1,16 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-<defs>
-<radialGradient id="bg" cx="40%" cy="35%" r="80%"><stop offset="0" stop-color="#1f3b5c"/><stop offset="1" stop-color="#08111d"/></radialGradient>
-<linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe9a3"/><stop offset=".5" stop-color="#e2b13c"/><stop offset="1" stop-color="#8a5a12"/></linearGradient>
-<linearGradient id="bubble" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7f1e1"/><stop offset="1" stop-color="#d9cdb0"/></linearGradient>
-</defs>
-<circle cx="256" cy="256" r="244" fill="url(#gold)"/>
-<circle cx="256" cy="256" r="222" fill="url(#bg)"/>
-<circle cx="256" cy="256" r="222" fill="none" stroke="#000" stroke-opacity=".5" stroke-width="4"/>
-<g fill="#e2b13c" opacity=".55">
-<circle cx="120" cy="150" r="5"/><circle cx="392" cy="128" r="4"/><circle cx="410" cy="300" r="5"/><circle cx="104" cy="318" r="4"/><circle cx="170" cy="96" r="3"/>
-</g>
-<path d="M128 148 h256 a40 40 0 0 1 40 40 v116 a40 40 0 0 1 -40 40 h-120 l-62 56 v-56 h-74 a40 40 0 0 1 -40 -40 v-116 a40 40 0 0 1 40 -40 z" fill="url(#bubble)" stroke="#5b3c0c" stroke-width="10" stroke-linejoin="round"/>
-<path d="M214 214 a44 44 0 1 1 64 39 c-14 8 -20 16 -20 30 v8" fill="none" stroke="#8a1f17" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="258" cy="322" r="17" fill="#8a1f17"/>
+  <defs><clipPath id="g"><circle cx="256" cy="256" r="198"/></clipPath></defs>
+  <circle cx="256" cy="256" r="240" fill="#14233b"/>
+  <circle cx="256" cy="256" r="228" fill="none" stroke="#e2b13c" stroke-width="16"/>
+  <g clip-path="url(#g)">
+    <circle cx="256" cy="256" r="198" fill="#2a5b7a"/>
+    <path d="M70 150 C110 120 150 128 168 160 C186 196 150 214 158 250 C166 290 132 318 96 310 C70 300 60 240 70 150Z" fill="#c9a24a"/>
+    <path d="M300 92 C350 80 410 110 430 160 C440 200 404 214 380 206 C350 196 340 230 318 226 C290 220 296 182 276 170 C256 156 268 102 300 92Z" fill="#c9a24a"/>
+    <path d="M330 300 C362 284 410 296 420 332 C428 372 384 414 344 408 C314 402 300 360 312 330 C316 318 320 306 330 300Z" fill="#c9a24a"/>
+    <path d="M180 380 C210 372 236 392 232 420 L180 440 C168 420 166 386 180 380Z" fill="#c9a24a"/>
+  </g>
+  <circle cx="256" cy="256" r="198" fill="none" stroke="#e2b13c" stroke-width="10"/>
+  <g transform="translate(256 270) scale(0.88) translate(-256 -270)" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M190 196 a66 66 0 1 1 100 56 c-24 14 -34 28 -34 54 v8" stroke="#14233b" stroke-width="82"/>
+    <circle cx="256" cy="378" r="27" fill="#14233b" stroke="#14233b" stroke-width="20"/>
+    <path d="M190 196 a66 66 0 1 1 100 56 c-24 14 -34 28 -34 54 v8" stroke="#f6ecd2" stroke-width="50"/>
+    <circle cx="256" cy="378" r="27" fill="#f6ecd2"/>
+  </g>
 </svg>
