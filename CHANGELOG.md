@@ -3,6 +3,8 @@
 ## Unreleased
 
 - In development, no release yet.
+- Question lists and notifications show the question's language next to
+  the category (e.g. "Class · DE").
 - Marking your question as solved closes it on the Questions page. A
   solved question also closes when "Hide solved" takes it out of the list.
 - Setup: as a mentor you can now pick the classes you help with; the

@@ -1,8 +1,8 @@
 -- luacheck: read globals CreateScrollBoxListLinearView ScrollUtil CreateDataProvider
 local _, ns = ...
 
--- Scrolling list of questions for the Questions page. Rows show category
--- and age, the title, author with level and the status; a click selects
+-- Scrolling list of questions for the Questions page. Rows show category,
+-- language and age, the title, author with level and the status; a click selects
 -- the question.
 local QueueList = {}
 ns.QueueList = QueueList
@@ -101,7 +101,7 @@ local function FillRow(list, row, item)
 	row.question = q
 	W.Color(row.title, W.TEXT)
 	row.bg:SetAlpha(Players.IsIgnored(q.author) and 0.5 or 1)
-	row.category:SetText(W.CategoryText(q.cat))
+	row.category:SetText(W.CategoryLangText(q.cat, q.lang))
 	row.age:SetText(W.Ago(Util.Now() - q.created))
 	row.title:SetText((Players.IsFavorite(q.author) and STAR or "") .. Util.EscapeText(q.title))
 	local own = list.highlightOwn and q.author == ns:GetPlayerFullName()
