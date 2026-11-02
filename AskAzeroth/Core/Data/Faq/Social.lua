@@ -37,31 +37,31 @@ ns.Faq.Add("social", {
 		id = "social-guild",
 		de = {
 			q = "Wie finde ich eine Gilde?",
-			a = "Gilden werben in den Chatkanälen der Städte, und das Addon Guild Finder Forever listet Gilden, die Mitglieder suchen. Sprich vor dem Beitritt mit ein paar Offizieren und such dir eine Gilde, die zu ähnlichen Zeiten spielt wie du.",
+			a = "Gilden werben in den Chatkanälen der Städte, und viele suchen auch auf Discord oder Community-Seiten nach Mitgliedern. Sprich vor dem Beitritt mit ein paar Offizieren und such dir eine Gilde, die zu ähnlichen Zeiten spielt wie du und im selben Regelwerk ist.",
 		},
 		en = {
 			q = "How do I find a guild?",
-			a = "Guilds recruit in the chat channels of the cities, and the addon Guild Finder Forever lists guilds that are looking for members. Talk to a few officers before you join, and look for a guild that plays at the times you do.",
+			a = "Guilds recruit in the chat channels of the cities, and many also look for members on Discord or community sites. Talk to a few officers before you join, and look for a guild on your ruleset that plays at the times you do.",
 		},
 		fr = {
 			q = "Comment trouver une guilde ?",
-			a = "Les guildes recrutent dans les canaux de discussion des villes, et l'addon Guild Finder Forever liste les guildes qui cherchent des membres. Parlez à quelques officiers avant de rejoindre, et cherchez une guilde qui joue aux mêmes heures que vous.",
+			a = "Les guildes recrutent dans les canaux de discussion des villes, et beaucoup cherchent aussi des membres sur Discord ou des sites communautaires. Parlez à quelques officiers avant de rejoindre, et cherchez une guilde de votre ensemble de règles qui joue aux mêmes heures que vous.",
 		},
 		es = {
 			q = "¿Cómo encuentro una hermandad?",
-			a = "Las hermandades reclutan en los canales de chat de las ciudades, y el addon Guild Finder Forever muestra hermandades que buscan miembros. Habla con algunos oficiales antes de unirte y busca una hermandad que juegue a las mismas horas que tú.",
+			a = "Las hermandades reclutan en los canales de chat de las ciudades, y muchas buscan miembros también en Discord o en webs de la comunidad. Habla con algunos oficiales antes de unirte y busca una hermandad de tu conjunto de reglas que juegue a las mismas horas que tú.",
 		},
 		it = {
 			q = "Come trovo una gilda?",
-			a = "Le gilde reclutano nei canali di chat delle città, e l'addon Guild Finder Forever elenca le gilde che cercano membri. Parla con qualche ufficiale prima di entrare e cerca una gilda che giochi negli stessi orari tuoi.",
+			a = "Le gilde reclutano nei canali di chat delle città, e molte cercano membri anche su Discord o sui siti della community. Parla con qualche ufficiale prima di entrare e cerca una gilda del tuo set di regole che giochi negli stessi orari tuoi.",
 		},
 		ru = {
 			q = "Как найти гильдию?",
-			a = "Гильдии набирают игроков в чат-каналах городов, а аддон Guild Finder Forever показывает гильдии, которые ищут участников. Перед вступлением поговорите с несколькими офицерами и ищите гильдию, которая играет в то же время, что и вы.",
+			a = "Гильдии набирают игроков в чат-каналах городов, а многие ищут участников и в Discord или на сайтах сообщества. Перед вступлением поговорите с несколькими офицерами и ищите гильдию в вашем наборе правил, которая играет в то же время, что и вы.",
 		},
 		pt = {
 			q = "Como encontro uma guilda?",
-			a = "As guildas recrutam nos canais de chat das cidades, e o addon Guild Finder Forever lista guildas que procuram membros. Converse com alguns oficiais antes de entrar e procure uma guilda que jogue nos mesmos horários que você.",
+			a = "As guildas recrutam nos canais de chat das cidades, e muitas também procuram membros no Discord ou em sites da comunidade. Converse com alguns oficiais antes de entrar e procure uma guilda do seu conjunto de regras que jogue nos mesmos horários que você.",
 		},
 	},
 	{
