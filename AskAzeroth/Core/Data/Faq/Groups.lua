@@ -6,38 +6,38 @@ ns.Faq.Add("group", {
 		id = "group-find",
 		de = {
 			q = "Wie finde ich eine Gruppe für einen Dungeon?",
-			a = "Nutze die Gruppensuche: Stell deine eigene Gruppe ein oder bewirb dich bei einer, der Anführer lädt von Hand ein. Einen automatischen Dungeonfinder gibt es in WoW: Forever nicht. Fragen im Chat oder in deiner Gilde klappt auch. Sag, welchen Dungeon du machen willst und welche Rolle du spielst (Tank, Heiler oder Schaden), und klärt die Beuteregeln vor dem Start.",
+			a = "Nutze die Gruppensuche: Stell deine Gruppe ein oder schau, wer schon sucht; eingeladen wird von Hand. Einen automatischen Dungeonfinder gibt es in WoW: Forever nicht, und Versammlungssteine beschwören niemanden, also lauft ihr selbst zum Eingang. Fragen im Chat oder in deiner Gilde klappt auch. Sag, welchen Dungeon du machen willst und welche Rolle du spielst (Tank, Heiler oder DD), und klärt die Beuteregeln vor dem Start.",
 		},
 		en = {
 			q = "How do I find a group for a dungeon?",
-			a = "Use the group finder: list your own group or apply to one, the leader invites players by hand. There is no automatic Dungeon Finder in WoW: Forever. Asking in the chat or your guild works, too. Say which dungeon you want and which role you play (tank, healer or damage), and agree on loot rules before you start.",
+			a = "Use the group finder: list your group or look at who is already searching; invites are sent by hand. There is no automatic Dungeon Finder in WoW: Forever, and meeting stones do not summon anyone, so you walk to the entrance yourselves. Asking in chat or your guild works, too. Say which dungeon you want and which role you play (tank, healer or DPS), and agree on loot rules before you start.",
 		},
 		fr = {
 			q = "Comment trouver un groupe pour un donjon ?",
-			a = "Utilisez la recherche de groupe : inscrivez votre propre groupe ou postulez à un groupe, le chef invite les joueurs à la main. Il n'y a pas d'outil Donjons automatique dans WoW: Forever. Demander dans le chat ou à votre guilde marche aussi. Dites quel donjon vous voulez faire et votre rôle (tank, soigneur ou DPS), et mettez-vous d'accord sur les règles de butin avant de commencer.",
+			a = "Utilisez la recherche de groupe : inscrivez votre groupe ou regardez qui cherche déjà ; les invitations se font à la main. Il n'y a pas d'outil Donjons automatique dans WoW: Forever, et les pierres de rencontre n'invoquent personne : vous allez donc à pied jusqu'à l'entrée. Demander dans le chat ou à votre guilde marche aussi. Dites quel donjon vous voulez faire et votre rôle (tank, soigneur ou DPS), et mettez-vous d'accord sur les règles de butin avant de commencer.",
 		},
 		es = {
 			q = "¿Cómo encuentro grupo para una mazmorra?",
-			a = "Usa el buscador de grupos: anuncia tu propio grupo o apúntate a uno; el líder invita a los jugadores a mano. En WoW: Forever no hay buscador de mazmorras automático. Preguntar en el chat o en tu hermandad también funciona. Di qué mazmorra quieres hacer y tu rol (tanque, sanador o daño), y acordad las reglas de botín antes de empezar.",
+			a = "Usa el buscador de grupos: anuncia tu grupo o mira quién está buscando ya; las invitaciones se hacen a mano. En WoW: Forever no hay buscador de mazmorras automático y las piedras de encuentro no invocan a nadie, así que vais andando hasta la entrada. Preguntar en el chat o en tu hermandad también funciona. Di qué mazmorra quieres hacer y tu rol (tanque, sanador o DPS), y acordad las reglas de botín antes de empezar.",
 		},
 		it = {
 			q = "Come trovo un gruppo per una spedizione?",
-			a = "Usa la ricerca gruppo: inserisci il tuo gruppo o candidati a uno, il capogruppo invita i giocatori a mano. In WoW: Forever non c'è la ricerca automatica delle spedizioni. Funziona anche chiedere in chat o in gilda. Di' quale spedizione vuoi fare e il tuo ruolo (tank, guaritore o danni), e accordatevi sulle regole del bottino prima di iniziare.",
+			a = "Usa la ricerca gruppo: inserisci il tuo gruppo o guarda chi sta già cercando; gli inviti si mandano a mano. In WoW: Forever non c'è la ricerca automatica delle spedizioni e le pietre d'incontro non evocano nessuno, quindi raggiungete l'ingresso a piedi. Funziona anche chiedere in chat o in gilda. Di' quale spedizione vuoi fare e il tuo ruolo (tank, guaritore o DPS), e accordatevi sulle regole del bottino prima di iniziare.",
 		},
 		ru = {
 			q = "Как найти группу в подземелье?",
-			a = "Воспользуйтесь поиском группы: разместите свою группу или подайте заявку в чужую, лидер приглашает игроков вручную. Автоматического поиска подземелий в WoW: Forever нет. Можно также спросить в чате или в гильдии. Скажите, в какое подземелье хотите и какая у вас роль (танк, лекарь или боец), и до начала договоритесь о правилах добычи.",
+			a = "Воспользуйтесь поиском группы: разместите свою группу или посмотрите, кто уже ищет; приглашают вручную. Автоматического поиска подземелий в WoW: Forever нет, а камни встреч никого не призывают, так что до входа добираетесь сами. Можно также спросить в чате или в гильдии. Скажите, в какое подземелье хотите и какая у вас роль (танк, лекарь или ДД), и до начала договоритесь о правилах добычи.",
 		},
 		pt = {
 			q = "Como encontro grupo para uma masmorra?",
-			a = "Use o localizador de grupos: anuncie seu próprio grupo ou candidate-se a um; o líder convida os jogadores manualmente. Não há localizador de masmorras automático no WoW: Forever. Perguntar no chat ou na guilda também funciona. Diga qual masmorra quer fazer e sua função (tanque, curador ou dano), e combinem as regras de saque antes de começar.",
+			a = "Use o localizador de grupos: anuncie seu grupo ou veja quem já está procurando; os convites são feitos manualmente. Não há localizador de masmorras automático no WoW: Forever, e as pedras de encontro não invocam ninguém, então vocês vão a pé até a entrada. Perguntar no chat ou na guilda também funciona. Diga qual masmorra quer fazer e sua função (tanque, curador ou DPS), e combinem as regras de saque antes de começar.",
 		},
 	},
 	{
 		id = "group-first-dungeon",
 		de = {
 			q = "Was sollte ich vor meinem ersten Dungeon wissen?",
-			a = "Sag, dass du neu bist, die meisten Gruppen erklären gern. Lass den Tank die Gegner anlocken, greif sein Ziel an und halte dich aus Kämpfen raus, die die Gruppe nicht begonnen hat. Kontrolleffekte wie Verwandlung, Kopfnuss oder Fesseln sind wichtig, denn Dungeons passen sich nicht an deine Stufe an.",
+			a = "Sag, dass du neu bist, die meisten Gruppen erklären gern. Lass den Tank die Gegner pullen (anlocken), greif sein Ziel an und halte dich aus Kämpfen raus, die die Gruppe nicht begonnen hat. Kontrolleffekte (CC) wie Verwandlung, Kopfnuss oder Untote fesseln sind wichtig, denn Dungeons passen sich nicht an deine Stufe an.",
 		},
 		en = {
 			q = "What should I know before my first dungeon?",
@@ -130,62 +130,62 @@ ns.Faq.Add("group", {
 		id = "group-raid",
 		de = {
 			q = "Was ist ein Schlachtzug?",
-			a = "Ein Schlachtzug (Raid) ist ein Dungeon für eine große Gruppe auf Höchststufe. WoW: Forever startet mit Schlachtzügen für 10, 20 und 40 Spieler. Die meisten gehen mit ihrer Gilde in Schlachtzüge.",
+			a = "Ein Schlachtzug (Raid) ist ein Dungeon für eine große Gruppe auf Höchststufe. WoW: Forever hat Schlachtzüge für 10, 20 und 40 Spieler. Die meisten gehen mit ihrer Gilde raiden.",
 		},
 		en = {
 			q = "What is a raid?",
-			a = "A raid is a dungeon for a large group at the maximum level. WoW: Forever starts with raids for 10, 20 and 40 players. Most players raid with their guild.",
+			a = "A raid is a dungeon for a large group at the maximum level. WoW: Forever has raids for 10, 20 and 40 players. Most players raid with their guild.",
 		},
 		fr = {
 			q = "Qu'est-ce qu'un raid ?",
-			a = "Un raid est un donjon pour un grand groupe au niveau maximum. WoW: Forever commence avec des raids pour 10, 20 et 40 joueurs. La plupart des joueurs font les raids avec leur guilde.",
+			a = "Un raid est un donjon pour un grand groupe au niveau maximum. WoW: Forever propose des raids pour 10, 20 et 40 joueurs. La plupart des joueurs font les raids avec leur guilde.",
 		},
 		es = {
 			q = "¿Qué es una banda?",
-			a = "Una banda es una mazmorra para un grupo grande al nivel máximo. WoW: Forever empieza con bandas de 10, 20 y 40 jugadores. La mayoría juega las bandas con su hermandad.",
+			a = "Una banda es una mazmorra para un grupo grande al nivel máximo. WoW: Forever tiene bandas de 10, 20 y 40 jugadores. La mayoría juega las bandas con su hermandad.",
 		},
 		it = {
 			q = "Cos'è un'incursione?",
-			a = "Un'incursione è una spedizione per un gruppo numeroso al livello massimo. WoW: Forever parte con incursioni da 10, 20 e 40 giocatori. La maggior parte dei giocatori le affronta con la propria gilda.",
+			a = "Un'incursione è una spedizione per un gruppo numeroso al livello massimo. WoW: Forever ha incursioni da 10, 20 e 40 giocatori. La maggior parte dei giocatori le affronta con la propria gilda.",
 		},
 		ru = {
 			q = "Что такое рейд?",
-			a = "Рейд — подземелье для большой группы на максимальном уровне. В WoW: Forever на старте есть рейды на 10, 20 и 40 игроков. Большинство ходит в рейды со своей гильдией.",
+			a = "Рейд — подземелье для большой группы на максимальном уровне. В WoW: Forever есть рейды на 10, 20 и 40 игроков. Большинство ходит в рейды со своей гильдией.",
 		},
 		pt = {
 			q = "O que é uma raide?",
-			a = "Uma raide é uma masmorra para um grupo grande no nível máximo. O WoW: Forever começa com raides para 10, 20 e 40 jogadores. A maioria faz raides com a própria guilda.",
+			a = "Uma raide é uma masmorra para um grupo grande no nível máximo. O WoW: Forever tem raides para 10, 20 e 40 jogadores. A maioria faz raides com a própria guilda.",
 		},
 	},
 	{
 		id = "group-finder-playstyle",
 		de = {
 			q = "Was bedeuten die Spielstile in der Gruppensuche?",
-			a = "Gruppen geben an, wie sie spielen wollen, etwa zum Lernen, entspannt oder ehrgeizig. Als Anfänger such dir eine Gruppe zum Lernen oder eine entspannte; dort ist niemand sauer, wenn etwas schiefgeht.",
+			a = "Viele Gruppen schreiben dazu, wie sie spielen wollen, etwa zum Lernen, entspannt oder schnell und ehrgeizig. Als Anfänger such dir eine Gruppe zum Lernen oder eine entspannte; dort ist niemand sauer, wenn etwas schiefgeht.",
 		},
 		en = {
 			q = "What do the playstyles in the group finder mean?",
-			a = "Groups say how they want to play, for example learning, relaxed or competitive. As a beginner, look for a learning or relaxed group; nobody minds there if something goes wrong.",
+			a = "Many groups say how they want to play, for example to learn, relaxed, or fast and competitive. As a beginner, look for a learning or relaxed group; nobody minds there if something goes wrong.",
 		},
 		fr = {
 			q = "Que signifient les styles de jeu dans la recherche de groupe ?",
-			a = "Les groupes indiquent comment ils veulent jouer, par exemple pour apprendre, détendu ou compétitif. Débutant, cherchez un groupe pour apprendre ou détendu ; personne n'y râle si quelque chose tourne mal.",
+			a = "Beaucoup de groupes indiquent comment ils veulent jouer, par exemple pour apprendre, détendu, ou rapide et compétitif. Débutant, cherchez un groupe pour apprendre ou détendu ; personne n'y râle si quelque chose tourne mal.",
 		},
 		es = {
 			q = "¿Qué significan los estilos de juego del buscador de grupos?",
-			a = "Los grupos indican cómo quieren jugar, por ejemplo para aprender, relajado o competitivo. Si empiezas, busca un grupo para aprender o relajado; ahí a nadie le molesta que algo salga mal.",
+			a = "Muchos grupos indican cómo quieren jugar, por ejemplo para aprender, con calma, o rápido y competitivo. Como principiante, busca un grupo para aprender o uno tranquilo; ahí nadie se enfada si algo sale mal.",
 		},
 		it = {
 			q = "Cosa indicano gli stili di gioco nella ricerca gruppo?",
-			a = "I gruppi dicono come vogliono giocare, per esempio per imparare, rilassato o competitivo. Da principiante cerca un gruppo per imparare o rilassato; lì nessuno se la prende se qualcosa va storto.",
+			a = "Molti gruppi indicano come vogliono giocare, per esempio per imparare, con calma, oppure veloci e competitivi. Da principiante cerca un gruppo per imparare o uno tranquillo; lì nessuno si arrabbia se qualcosa va storto.",
 		},
 		ru = {
 			q = "Что означают стили игры в поиске группы?",
-			a = "Группы указывают, как хотят играть, например для обучения, спокойно или на результат. Новичку лучше искать группу для обучения или спокойную; там никто не злится, если что-то пошло не так.",
+			a = "Многие группы пишут, как хотят играть, например для обучения, спокойно или быстро и на результат. Новичку лучше искать группу для обучения или спокойную; там никто не злится, если что-то пошло не так.",
 		},
 		pt = {
 			q = "O que significam os estilos de jogo no localizador de grupos?",
-			a = "Os grupos dizem como querem jogar, por exemplo para aprender, relaxado ou competitivo. Como iniciante, procure um grupo para aprender ou relaxado; lá ninguém liga se algo der errado.",
+			a = "Muitos grupos dizem como querem jogar, por exemplo para aprender, com calma, ou rápido e competitivo. Como iniciante, procure um grupo para aprender ou um tranquilo; lá ninguém se irrita se algo der errado.",
 		},
 	},
 	{
@@ -254,31 +254,31 @@ ns.Faq.Add("group", {
 		id = "group-dungeon-xp",
 		de = {
 			q = "Lohnen sich Dungeons zum Leveln?",
-			a = "Ja, vor allem wegen der Quests: In WoW: Forever geben Gegner im Dungeon weniger Erfahrung, Dungeonquests beim ersten Abschluss aber deutlich mehr. Dazu kommt gute Beute. Sammle die Quests vorher ein.",
+			a = "Ja, vor allem wegen der Dungeonquests: Sie geben viel Erfahrung, und dazu kommt gute Beute. Sammle die Quests ein, bevor ihr reingeht, und teilt sie in der Gruppe.",
 		},
 		en = {
 			q = "Are dungeons worth it for levelling?",
-			a = "Yes, mainly for the quests: in WoW: Forever enemies in dungeons give less experience, but dungeon quests give much more the first time you complete them. Plus good loot. Collect the quests beforehand.",
+			a = "Yes, mainly for the dungeon quests: they give a lot of experience, and there is good loot on top. Collect the quests before you go in and share them with the group.",
 		},
 		fr = {
 			q = "Les donjons valent-ils le coup pour monter de niveau ?",
-			a = "Oui, surtout pour les quêtes : dans WoW: Forever, les ennemis des donjons donnent moins d'expérience, mais les quêtes de donjon en rapportent beaucoup plus la première fois. En plus, il y a du bon butin. Récupérez les quêtes avant.",
+			a = "Oui, surtout pour les quêtes de donjon : elles rapportent beaucoup d'expérience, et il y a du bon butin en plus. Récupérez les quêtes avant d'entrer et partagez-les avec le groupe.",
 		},
 		es = {
 			q = "¿Merecen la pena las mazmorras para subir de nivel?",
-			a = "Sí, sobre todo por las misiones: en WoW: Forever los enemigos de las mazmorras dan menos experiencia, pero las misiones de mazmorra dan mucha más la primera vez que las completas. Además hay buen botín. Recoge las misiones antes.",
+			a = "Sí, sobre todo por las misiones de mazmorra: dan mucha experiencia y además hay buen botín. Recoge las misiones antes de entrar y compártelas con el grupo.",
 		},
 		it = {
 			q = "Le spedizioni conviene farle per salire di livello?",
-			a = "Sì, soprattutto per le missioni: in WoW: Forever i nemici delle spedizioni danno meno esperienza, ma le missioni delle spedizioni ne danno molta di più la prima volta. In più c'è buon bottino. Raccogli prima le missioni.",
+			a = "Sì, soprattutto per le missioni delle spedizioni: danno molta esperienza e in più c'è buon bottino. Raccogli le missioni prima di entrare e condividile con il gruppo.",
 		},
 		ru = {
 			q = "Стоит ли ходить в подземелья ради прокачки?",
-			a = "Да, прежде всего ради заданий: в WoW: Forever враги в подземельях дают меньше опыта, но задания подземелий при первом выполнении дают намного больше. Плюс хорошая добыча. Соберите задания заранее.",
+			a = "Да, прежде всего ради заданий подземелий: они дают много опыта, а сверху ещё хорошая добыча. Соберите задания до входа и поделитесь ими с группой.",
 		},
 		pt = {
 			q = "Masmorras valem a pena para subir de nível?",
-			a = "Sim, principalmente pelas missões: no WoW: Forever inimigos de masmorra dão menos experiência, mas as missões de masmorra dão muito mais na primeira vez. Além de bom saque. Pegue as missões antes.",
+			a = "Sim, principalmente pelas missões de masmorra: elas dão muita experiência e ainda há bom saque. Pegue as missões antes de entrar e compartilhe com o grupo.",
 		},
 	},
 	{
@@ -347,7 +347,7 @@ ns.Faq.Add("group", {
 		id = "group-wipe",
 		de = {
 			q = "Die ganze Gruppe ist gestorben. Was nun?",
-			a = "Das passiert jedem. Lasst alle eure Geister frei und lauft zum Eingang. Wer wiederbeleben kann, belebt zuerst die anderen Heiler und Wiederbeleber. Besprecht kurz, was schiefging, bevor ihr den nächsten Versuch startet.",
+			a = "Das nennt man Wipe, und es passiert jedem. Lasst alle eure Geister frei und lauft zum Eingang. Wer wiederbeleben kann, belebt zuerst die anderen Heiler und Wiederbeleber. Besprecht kurz, was schiefging, bevor ihr den nächsten Versuch startet.",
 		},
 		en = {
 			q = "The whole group died. What now?",
@@ -470,32 +470,32 @@ ns.Faq.Add("group", {
 	{
 		id = "group-raid-forever",
 		de = {
-			q = "Welche Schlachtzüge gibt es zum Start?",
-			a = "WoW: Forever startet unter anderem mit Barrow Deeps für 10 Spieler, dem Hyjalgipfel für 20 und einem überarbeiteten Onyxia für 40. Weltbuffs wirken in Schlachtzügen nicht. Für Schlachtzüge brauchst du die Höchststufe und meist eine Gilde.",
+			q = "Welche Schlachtzüge gibt es in WoW: Forever?",
+			a = "Neben einem überarbeiteten Onyxias Hort für 40 Spieler hat WoW: Forever eigene Schlachtzüge, etwa Barrow Deeps für 10 und den Hyjalgipfel für 20 Spieler. Weltbuffs wirken in Schlachtzügen nicht. Für Schlachtzüge brauchst du die Höchststufe und meist eine Gilde.",
 		},
 		en = {
-			q = "Which raids are there at launch?",
-			a = "WoW: Forever starts with, among others, Barrow Deeps for 10 players, Hyjal Summit for 20 and a revamped Onyxia for 40. World buffs do not work inside raids. For raids you need the maximum level and usually a guild.",
+			q = "Which raids does WoW: Forever have?",
+			a = "Besides a revamped Onyxia's Lair for 40 players, WoW: Forever has its own raids, for example Barrow Deeps for 10 and Hyjal Summit for 20 players. World buffs do not work inside raids. For raids you need the maximum level and usually a guild.",
 		},
 		fr = {
-			q = "Quels raids y a-t-il au lancement ?",
-			a = "WoW: Forever commence entre autres avec Barrow Deeps pour 10 joueurs, le Sommet d'Hyjal pour 20 et un Onyxia remanié pour 40. Les améliorations mondiales ne fonctionnent pas dans les raids. Pour les raids, il faut le niveau maximum et généralement une guilde.",
+			q = "Quels raids y a-t-il dans WoW: Forever ?",
+			a = "En plus d'un Repaire d'Onyxia remanié pour 40 joueurs, WoW: Forever a ses propres raids, par exemple Barrow Deeps pour 10 joueurs et le Sommet d'Hyjal pour 20. Les améliorations mondiales ne fonctionnent pas dans les raids. Pour les raids, il faut le niveau maximum et généralement une guilde.",
 		},
 		es = {
-			q = "¿Qué bandas hay en el lanzamiento?",
-			a = "WoW: Forever empieza, entre otras, con Barrow Deeps para 10 jugadores, la Cima Hyjal para 20 y una Onyxia renovada para 40. Los beneficios de mundo no funcionan dentro de las bandas. Para las bandas necesitas el nivel máximo y normalmente una hermandad.",
+			q = "¿Qué bandas hay en WoW: Forever?",
+			a = "Además de una Guarida de Onyxia renovada para 40 jugadores, WoW: Forever tiene sus propias bandas, por ejemplo Barrow Deeps para 10 y la Cima Hyjal para 20 jugadores. Los beneficios de mundo no funcionan dentro de las bandas. Para las bandas necesitas el nivel máximo y normalmente una hermandad.",
 		},
 		it = {
-			q = "Quali incursioni ci sono al lancio?",
-			a = "WoW: Forever parte, tra le altre, con Barrow Deeps per 10 giocatori, la Vetta di Hyjal per 20 e un Onyxia rinnovato per 40. I benefici del mondo non funzionano nelle incursioni. Per le incursioni serve il livello massimo e di solito una gilda.",
+			q = "Quali incursioni ci sono in WoW: Forever?",
+			a = "Oltre a una Tana di Onyxia rinnovata per 40 giocatori, WoW: Forever ha incursioni proprie, per esempio Barrow Deeps per 10 e la Vetta di Hyjal per 20 giocatori. I benefici del mondo non funzionano nelle incursioni. Per le incursioni servono il livello massimo e di solito una gilda.",
 		},
 		ru = {
-			q = "Какие рейды есть на старте?",
-			a = "WoW: Forever начинается, среди прочего, с Barrow Deeps на 10 игроков, Вершины Хиджала на 20 и обновлённой Ониксии на 40. Мировые усиления в рейдах не действуют. Для рейдов нужен максимальный уровень и обычно гильдия.",
+			q = "Какие рейды есть в WoW: Forever?",
+			a = "Кроме обновлённого Логова Ониксии на 40 игроков, в WoW: Forever есть собственные рейды, например Barrow Deeps на 10 и Вершина Хиджала на 20 игроков. Мировые усиления в рейдах не действуют. Для рейдов нужен максимальный уровень и обычно гильдия.",
 		},
 		pt = {
-			q = "Quais raides existem no lançamento?",
-			a = "O WoW: Forever começa, entre outras, com Barrow Deeps para 10 jogadores, o Pico Hyjal para 20 e uma Onyxia renovada para 40. Bônus de mundo não funcionam dentro das raides. Para raides você precisa do nível máximo e geralmente de uma guilda.",
+			q = "Quais raides existem no WoW: Forever?",
+			a = "Além de um Covil da Onyxia renovado para 40 jogadores, o WoW: Forever tem raides próprias, por exemplo Barrow Deeps para 10 e o Pico Hyjal para 20 jogadores. Bônus de mundo não funcionam dentro das raides. Para raides você precisa do nível máximo e geralmente de uma guilda.",
 		},
 	},
 	{
