@@ -68,31 +68,31 @@ ns.Faq.Add("start", {
 		id = "start-rule-sets",
 		de = {
 			q = "Welches Regelwerk soll ich wählen?",
-			a = "Statt Realms wählst du beim Erstellen deines Charakters ein Regelwerk. Normal ist zum gemeinsamen Spielen ohne erzwungenes PvP, bei PvP kann dich die andere Fraktion in vielen Gebieten angreifen, und Rollenspiel ist für Spieler, die in ihrer Rolle bleiben. Hardcore, wo ein Tod endgültig ist, folgt später. Gruppen gibt es nur mit Spielern im selben Regelwerk, also nimm das, in dem deine Freunde spielen.",
+			a = "Statt Realms wählst du ein Regelwerk. Auf Normal kämpfst du nur gegen Spieler, wenn du es selbst willst. Auf PvP kann dich die andere Fraktion fast überall angreifen. Rollenspiel hat feste Namens- und Verhaltensregeln, Rollenspiel-PvP verbindet beides. Hardcore, wo ein Tod endgültig ist, kommt später dazu. Gruppen gibt es nur im selben Regelwerk, also nimm das, in dem deine Freunde spielen.",
 		},
 		en = {
 			q = "Which rule set should I choose?",
-			a = "Instead of realms you pick a rule set when you create your character. Normal is for playing together without forced PvP, PvP lets the other faction attack you in many zones, and Roleplaying is for players who stay in character. Hardcore, where death is final, follows later. You only group with players on the same rule set, so pick the one your friends use.",
+			a = "Instead of realms you pick a ruleset. On Normal you only fight other players if you choose to. On PvP the other faction can attack you almost anywhere. Roleplay has naming and behaviour rules, and Roleplay-PvP combines both. Hardcore, where death is permanent, comes later. You can only group within the same ruleset, so pick the one your friends play on.",
 		},
 		fr = {
 			q = "Quel ensemble de règles choisir ?",
-			a = "Au lieu des royaumes, vous choisissez un ensemble de règles en créant votre personnage. Normal sert à jouer ensemble sans JcJ imposé, JcJ permet à l'autre faction de vous attaquer dans beaucoup de zones, et Jeu de rôle est pour les joueurs qui restent dans leur personnage. Hardcore, où la mort est définitive, arrive plus tard. Vous ne jouez en groupe qu'avec les joueurs du même ensemble de règles, alors prenez celui de vos amis.",
+			a = "Au lieu des royaumes, vous choisissez un ensemble de règles. En Normal, vous ne combattez d'autres joueurs que si vous le voulez. En JcJ, l'autre faction peut vous attaquer presque partout. Jeu de rôle impose des règles de nom et de comportement, et Jeu de rôle JcJ combine les deux. Le mode Hardcore, où la mort est définitive, arrivera plus tard. On ne peut grouper qu'dans le même ensemble de règles : choisissez celui de vos amis.",
 		},
 		es = {
 			q = "¿Qué conjunto de reglas elijo?",
-			a = "En lugar de reinos eliges un conjunto de reglas al crear tu personaje. Normal es para jugar juntos sin JcJ obligatorio, JcJ deja que la otra facción te ataque en muchas zonas y Rol es para quienes se mantienen en su papel. Hardcore, donde la muerte es definitiva, llegará más tarde. Solo te agrupas con jugadores del mismo conjunto de reglas, así que elige el de tus amigos.",
+			a = "En lugar de reinos eliges un conjunto de reglas. En Normal solo luchas contra otros jugadores si tú quieres. En JcJ la otra facción puede atacarte casi en cualquier parte. Rol tiene normas de nombres y de comportamiento, y Rol-JcJ combina ambas cosas. Hardcore, donde la muerte es definitiva, llegará más adelante. Solo puedes agruparte dentro del mismo conjunto de reglas, así que elige el de tus amigos.",
 		},
 		it = {
 			q = "Quale set di regole scelgo?",
-			a = "Invece dei reami scegli un set di regole quando crei il personaggio. Normale serve per giocare insieme senza PvP obbligatorio, PvP permette all'altra fazione di attaccarti in molte zone e Gioco di ruolo è per chi resta nel personaggio. Hardcore, dove la morte è definitiva, arriverà più avanti. Puoi fare gruppo solo con giocatori dello stesso set di regole, quindi scegli quello dei tuoi amici.",
+			a = "Invece dei reami scegli un set di regole. In Normale combatti contro altri giocatori solo se lo vuoi tu. In PvP l'altra fazione può attaccarti quasi ovunque. Gioco di ruolo ha regole su nomi e comportamento, e Gioco di ruolo PvP unisce le due cose. Hardcore, dove la morte è definitiva, arriverà più avanti. Puoi fare gruppo solo nello stesso set di regole, quindi scegli quello dei tuoi amici.",
 		},
 		ru = {
 			q = "Какой набор правил выбрать?",
-			a = "Вместо игровых миров при создании персонажа выбирают набор правил. «Обычный» для совместной игры без обязательного PvP, «PvP» позволяет другой фракции нападать на вас во многих зонах, «Ролевой» для тех, кто отыгрывает роль. «Хардкор», где смерть окончательна, появится позже. В группу можно вступать только с игроками того же набора правил, поэтому выбирайте тот же, что у друзей.",
+			a = "Вместо игровых миров вы выбираете набор правил. В «Обычном» вы сражаетесь с игроками, только если сами этого хотите. В PvP другая фракция может напасть на вас почти везде. В «Ролевом» действуют правила для имён и поведения, а «Ролевой PvP» сочетает оба варианта. «Хардкор», где смерть окончательна, появится позже. Собирать группы можно только в одном наборе правил, поэтому выбирайте тот, где играют ваши друзья.",
 		},
 		pt = {
 			q = "Qual conjunto de regras escolho?",
-			a = "Em vez de reinos, você escolhe um conjunto de regras ao criar o personagem. Normal é para jogar junto sem JxJ obrigatório, JxJ deixa a outra facção atacar você em muitas zonas e Interpretação é para quem joga no papel do personagem. Hardcore, onde a morte é definitiva, vem depois. Você só forma grupo com jogadores do mesmo conjunto de regras, então escolha o dos seus amigos.",
+			a = "Em vez de reinos você escolhe um conjunto de regras. No Normal você só luta contra outros jogadores se quiser. No JxJ a outra facção pode atacar você em quase todo lugar. Interpretação tem regras de nome e de comportamento, e Interpretação JxJ junta as duas coisas. O Hardcore, em que a morte é definitiva, chega depois. Só dá para formar grupo no mesmo conjunto de regras, então escolha o dos seus amigos.",
 		},
 	},
 	{
@@ -130,62 +130,62 @@ ns.Faq.Add("start", {
 		id = "start-rested",
 		de = {
 			q = "Was ist Ruhebonus?",
-			a = "Solange du ausgeloggt bist oder in einem Gasthaus oder einer Stadt rastest, sammelt dein Charakter Ruhebonus. Monster geben dann extra Erfahrung, bis der Bonus aufgebraucht ist. Die Erfahrungsleiste ist in der Zeit blau.",
+			a = "In einem Gasthaus oder einer Stadt sammelst du Ruhebonus, auch wenn du dort ausloggst; ausgeloggt draußen geht es viel langsamer. Mit Ruhebonus geben Monster doppelte Erfahrung, bis er aufgebraucht ist. Die Erfahrungsleiste ist in der Zeit blau.",
 		},
 		en = {
 			q = "What is rested experience?",
-			a = "While you are logged out or rest in an inn or a city, your character builds up rested experience. Enemies then give extra experience until the bonus is used up. During that time the experience bar is blue.",
+			a = "In an inn or a city you build up rested bonus, also while logged out there; logged out in the wild it builds much more slowly. While rested, monsters give double experience until the bonus is used up. Your experience bar is blue during that time.",
 		},
 		fr = {
 			q = "Qu'est-ce que l'expérience de repos ?",
-			a = "Quand vous êtes déconnecté ou vous reposez dans une auberge ou une ville, votre personnage accumule de l'expérience de repos. Les ennemis donnent alors de l'expérience en plus jusqu'à épuisement du bonus. Pendant ce temps, la barre d'expérience est bleue.",
+			a = "Dans une auberge ou une ville, vous accumulez du repos, même déconnecté sur place ; déconnecté en pleine nature, cela va beaucoup plus lentement. Reposé, vous gagnez le double d'expérience sur les monstres jusqu'à épuisement du bonus. Votre barre d'expérience est alors bleue.",
 		},
 		es = {
 			q = "¿Qué es la experiencia de descanso?",
-			a = "Mientras estás desconectado o descansas en una posada o una ciudad, tu personaje acumula experiencia de descanso. Los enemigos dan entonces experiencia extra hasta que se agota la bonificación. Mientras tanto, la barra de experiencia es azul.",
+			a = "En una posada o una ciudad acumulas descanso, también si te desconectas allí; desconectado en el campo se acumula mucho más despacio. Con descanso, los monstruos dan el doble de experiencia hasta que se agota. Mientras tanto la barra de experiencia se ve azul.",
 		},
 		it = {
 			q = "Cos'è l'esperienza di riposo?",
-			a = "Mentre sei disconnesso o riposi in una locanda o in città, il personaggio accumula esperienza di riposo. I nemici danno allora esperienza extra finché il bonus non finisce. In quel periodo la barra dell'esperienza è blu.",
+			a = "In una locanda o in una città accumuli riposo, anche se ti disconnetti lì; disconnesso all'aperto si accumula molto più lentamente. Da riposato, i mostri danno il doppio dell'esperienza finché il bonus non finisce. Nel frattempo la barra dell'esperienza è blu.",
 		},
 		ru = {
 			q = "Что такое бонус отдыха?",
-			a = "Пока вы не в игре или отдыхаете в таверне или городе, персонаж накапливает бонус отдыха. Тогда за врагов дают дополнительный опыт, пока бонус не закончится. В это время полоса опыта синяя.",
+			a = "В таверне или городе копится бонус отдыха, даже если вы там вышли из игры; вне таких мест он копится гораздо медленнее. С бонусом отдыха монстры дают двойной опыт, пока он не закончится. В это время полоса опыта синяя.",
 		},
 		pt = {
 			q = "O que é experiência de descanso?",
-			a = "Enquanto você está deslogado ou descansa numa estalagem ou cidade, o personagem acumula experiência de descanso. Os inimigos dão experiência extra até o bônus acabar. Nesse período a barra de experiência fica azul.",
+			a = "Numa estalagem ou cidade você acumula descanso, inclusive se desconectar lá; desconectado em campo aberto acumula bem mais devagar. Descansado, os monstros dão o dobro de experiência até o bônus acabar. Enquanto isso a barra de experiência fica azul.",
 		},
 	},
 	{
 		id = "start-eat-drink",
 		de = {
 			q = "Wie bekomme ich schnell Gesundheit und Mana zurück?",
-			a = "Iss nach dem Kampf etwas für Gesundheit und trink Wasser für Mana; dabei setzt du dich hin und bist nach ein paar Sekunden wieder voll. Gastwirte und Lebensmittelhändler verkaufen beides, Magier können es herbeizaubern. Wer jeden Kampf mit voller Gesundheit und vollem Mana beginnt, stirbt viel seltener.",
+			a = "Iss nach dem Kampf etwas für Gesundheit und trink Wasser für Mana; dabei setzt du dich hin und bist nach kurzer Zeit wieder voll. Gastwirte und Lebensmittelhändler verkaufen beides, Magier können es herbeizaubern. Wer jeden Kampf mit voller Gesundheit und vollem Mana beginnt, stirbt viel seltener.",
 		},
 		en = {
 			q = "How do I get health and mana back quickly?",
-			a = "Eat food for health and drink water for mana after a fight; you sit down while doing so and get back to full within a few seconds. Innkeepers and food vendors sell both, and mages can conjure them. Starting the next fight with full health and mana saves you many deaths.",
+			a = "After a fight, eat for health and drink water for mana; you sit down and are full again after a short while. Innkeepers and food vendors sell both, and mages can conjure them. Starting every fight with full health and mana means you die far less often.",
 		},
 		fr = {
 			q = "Comment récupérer vite ma vie et mon mana ?",
-			a = "Après un combat, mangez pour la vie et buvez de l'eau pour le mana ; vous vous asseyez et êtes au maximum en quelques secondes. Les aubergistes et les marchands de nourriture vendent les deux, et les mages peuvent en invoquer. Commencer le combat suivant avec la vie et le mana au maximum vous évite beaucoup de morts.",
+			a = "Après un combat, mangez pour la vie et buvez de l'eau pour le mana ; vous vous asseyez et êtes de nouveau au maximum après un court moment. Les aubergistes et les marchands de nourriture vendent les deux, et les mages peuvent en invoquer. Commencer chaque combat avec toute sa vie et tout son mana évite bien des morts.",
 		},
 		es = {
 			q = "¿Cómo recupero rápido la salud y el maná?",
-			a = "Tras un combate, come para la salud y bebe agua para el maná; te sientas mientras tanto y en pocos segundos estás al máximo. Los posaderos y vendedores de comida venden ambas cosas, y los magos pueden conjurarlas. Empezar el siguiente combate con salud y maná al máximo te ahorra muchas muertes.",
+			a = "Tras un combate, come para recuperar salud y bebe agua para el maná; te sientas y en poco tiempo estás al máximo. Los posaderos y los vendedores de comida venden ambas cosas, y los magos pueden conjurarlas. Si empiezas cada combate con la salud y el maná llenos, morirás mucho menos.",
 		},
 		it = {
 			q = "Come recupero in fretta salute e mana?",
-			a = "Dopo uno scontro mangia per la salute e bevi acqua per il mana; ti siedi e in pochi secondi sei al massimo. Locandieri e venditori di cibo vendono entrambi, e i maghi possono evocarli. Iniziare lo scontro successivo con salute e mana pieni ti evita molte morti.",
+			a = "Dopo un combattimento mangia per la salute e bevi acqua per il mana; ti siedi e in poco tempo sei di nuovo al massimo. Locandieri e venditori di cibo vendono entrambi, e i maghi possono evocarli. Iniziare ogni combattimento con salute e mana pieni ti fa morire molto meno.",
 		},
 		ru = {
 			q = "Как быстро восстановить здоровье и ману?",
-			a = "После боя ешьте еду для здоровья и пейте воду для маны; персонаж садится и за несколько секунд восстанавливается полностью. Трактирщики и торговцы едой продают и то и другое, а маги умеют их создавать. Начинать следующий бой с полным здоровьем и маной — значит избежать многих смертей.",
+			a = "После боя ешьте, чтобы восстановить здоровье, и пейте воду для маны; персонаж садится и вскоре полностью восстанавливается. Еду и воду продают трактирщики и торговцы провизией, а маги могут их сотворить. Если начинать каждый бой с полным здоровьем и маной, умирать придётся гораздо реже.",
 		},
 		pt = {
 			q = "Como recupero vida e mana rápido?",
-			a = "Depois de uma luta, coma para recuperar vida e beba água para mana; você se senta e em poucos segundos está cheio. Taberneiros e vendedores de comida vendem os dois, e magos podem conjurá-los. Começar a próxima luta com vida e mana cheios evita muitas mortes.",
+			a = "Depois da luta, coma para recuperar vida e beba água para mana; você se senta e logo fica cheio de novo. Estalajadeiros e vendedores de comida vendem os dois, e magos podem conjurá-los. Começar toda luta com vida e mana cheios faz você morrer bem menos.",
 		},
 	},
 	{
@@ -254,31 +254,31 @@ ns.Faq.Add("start", {
 		id = "start-skyborne",
 		de = {
 			q = "Was ist das Volk der Skyborne?",
-			a = "Ein neues Volk in WoW: Forever, das ein Erweiterungspaket voraussetzt. Es startet auf Zephras Isle mit einem eigenen Abenteuer bis Stufe 12, und du wählst beim Erstellen, ob es zur Allianz oder Horde gehört.",
+			a = "Ein neues Volk in WoW: Forever, für das du ein kostenpflichtiges Upgrade-Paket brauchst. Beim Erstellen wählst du, ob es zur Allianz oder Horde gehört; davon hängt ab, welche Klassen du spielen kannst. Skyborne starten auf Zephras Isle mit einem eigenen Abenteuer bis Stufe 12.",
 		},
 		en = {
 			q = "What is the Skyborne race?",
-			a = "A new race in WoW: Forever that needs an upgrade pack. It starts on Zephras Isle with its own adventure up to level 12, and you choose Alliance or Horde when you create it.",
+			a = "A new race in WoW: Forever that needs a paid upgrade pack. When you create one you choose Alliance or Horde, and that decides which classes you can play. Skyborne start on Zephras Isle with their own adventure up to level 12.",
 		},
 		fr = {
 			q = "Qu'est-ce que la race Skyborne ?",
-			a = "Une nouvelle race de WoW: Forever qui nécessite un pack d'amélioration. Elle commence sur l'île de Zephras avec sa propre aventure jusqu'au niveau 12, et vous choisissez Alliance ou Horde à sa création.",
+			a = "Une nouvelle race de WoW: Forever, qui nécessite un pack d'amélioration payant. À la création, vous choisissez l'Alliance ou la Horde, ce qui détermine les classes disponibles. Les Skyborne commencent sur l'île de Zephras avec leur propre aventure jusqu'au niveau 12.",
 		},
 		es = {
 			q = "¿Qué es la raza Skyborne?",
-			a = "Una raza nueva de WoW: Forever que necesita un paquete de mejora. Empieza en la isla de Zephras con su propia aventura hasta el nivel 12, y eliges Alianza u Horda al crearla.",
+			a = "Una raza nueva de WoW: Forever que requiere un paquete de mejora de pago. Al crearla eliges Alianza o Horda, y de eso dependen las clases que puedes jugar. Los Skyborne empiezan en la isla de Zephras con su propia aventura hasta el nivel 12.",
 		},
 		it = {
 			q = "Cos'è la razza Skyborne?",
-			a = "Una nuova razza di WoW: Forever che richiede un pacchetto di potenziamento. Inizia sull'isola di Zephras con una propria avventura fino al livello 12, e scegli Alleanza o Orda quando la crei.",
+			a = "Una nuova razza di WoW: Forever che richiede un pacchetto di aggiornamento a pagamento. Alla creazione scegli Alleanza o Orda, e da questo dipendono le classi disponibili. Gli Skyborne iniziano sull'isola di Zephras con una propria avventura fino al livello 12.",
 		},
 		ru = {
 			q = "Что за раса Skyborne?",
-			a = "Новая раса WoW: Forever, для которой нужен пакет улучшения. Она начинает на острове Зефрас со своим приключением до 12-го уровня, а Альянс или Орду вы выбираете при создании.",
+			a = "Новая раса в WoW: Forever, для которой нужен платный пакет улучшения. При создании вы выбираете Альянс или Орду, и от этого зависит, какие классы доступны. Skyborne начинают на острове Зефрас со своим приключением до 12-го уровня.",
 		},
 		pt = {
 			q = "O que é a raça Skyborne?",
-			a = "Uma raça nova do WoW: Forever que precisa de um pacote de melhoria. Ela começa na Ilha de Zephras com uma aventura própria até o nível 12, e você escolhe Aliança ou Horda ao criá-la.",
+			a = "Uma raça nova do WoW: Forever que exige um pacote de melhoria pago. Na criação você escolhe Aliança ou Horda, e isso define quais classes pode jogar. Os Skyborne começam na Ilha de Zephras com uma aventura própria até o nível 12.",
 		},
 	},
 	{
@@ -533,62 +533,62 @@ ns.Faq.Add("start", {
 		id = "start-subscription",
 		de = {
 			q = "Was kostet WoW: Forever?",
-			a = "WoW: Forever ist im normalen WoW-Abo enthalten. Optionale Pakete bringen zum Beispiel das Volk der Skyborne. Es gibt keine WoW-Marke und keine Charakter-Boosts.",
+			a = "WoW: Forever ist im normalen WoW-Abo bzw. in der Spielzeit enthalten. Optionale Upgrade-Pakete bringen Extras wie das Volk der Skyborne; was genau drin ist, steht im Shop.",
 		},
 		en = {
 			q = "What does WoW: Forever cost?",
-			a = "WoW: Forever is included in the normal WoW subscription. Optional packs add, for example, the Skyborne race. There is no WoW Token for gold and no character boosts.",
+			a = "WoW: Forever is included in the normal WoW subscription or game time. Optional upgrade packs add extras such as the Skyborne race; the shop lists exactly what each one contains.",
 		},
 		fr = {
 			q = "Combien coûte WoW: Forever ?",
-			a = "WoW: Forever est inclus dans l'abonnement WoW normal. Des packs optionnels ajoutent par exemple la race Skyborne. Il n'y a pas de jeton WoW contre de l'or ni de boost de personnage.",
+			a = "WoW: Forever est inclus dans l'abonnement WoW normal ou le temps de jeu. Des packs d'amélioration facultatifs ajoutent des extras comme la race Skyborne ; la boutique indique le contenu exact de chacun.",
 		},
 		es = {
 			q = "¿Cuánto cuesta WoW: Forever?",
-			a = "WoW: Forever está incluido en la suscripción normal de WoW. Paquetes opcionales añaden, por ejemplo, la raza Skyborne. No hay Ficha de WoW por oro ni potenciadores de personaje.",
+			a = "WoW: Forever está incluido en la suscripción normal de WoW o el tiempo de juego. Los paquetes de mejora opcionales añaden extras como la raza Skyborne; la tienda muestra qué incluye cada uno.",
 		},
 		it = {
 			q = "Quanto costa WoW: Forever?",
-			a = "WoW: Forever è incluso nel normale abbonamento a WoW. Pacchetti opzionali aggiungono per esempio la razza Skyborne. Non c'è il Gettone WoW per l'oro e non ci sono potenziamenti dei personaggi.",
+			a = "WoW: Forever è incluso nel normale abbonamento a WoW o nel tempo di gioco. I pacchetti di aggiornamento opzionali aggiungono extra come la razza Skyborne; il negozio indica cosa contiene ciascuno.",
 		},
 		ru = {
 			q = "Сколько стоит WoW: Forever?",
-			a = "WoW: Forever входит в обычную подписку WoW. Дополнительные пакеты добавляют, например, расу Skyborne. Жетона WoW за золото и ускоренного повышения уровня персонажа нет.",
+			a = "WoW: Forever входит в обычную подписку WoW или игровое время. Необязательные пакеты улучшения добавляют дополнительный контент, например новую расу Skyborne; что именно входит в каждый, указано в магазине.",
 		},
 		pt = {
 			q = "Quanto custa o WoW: Forever?",
-			a = "O WoW: Forever está incluído na assinatura normal do WoW. Pacotes opcionais adicionam, por exemplo, a raça Skyborne. Não há Ficha de WoW por ouro nem impulsos de personagem.",
+			a = "O WoW: Forever está incluído na assinatura normal do WoW ou no tempo de jogo. Pacotes de melhoria opcionais trazem extras como a raça Skyborne; a loja mostra o que cada um inclui.",
 		},
 	},
 	{
 		id = "start-transmog",
 		de = {
 			q = "Gibt es Transmogrifikation?",
-			a = "Ja, in WoW: Forever ist Transmog optional und lässt sich abschalten. Aussehen aus Dungeon-Beute wird für die ganze Gruppe freigeschaltet, epische Gegenstände sind ausgenommen.",
+			a = "Ja, aber freiwillig: Du stellst es beim Transmogrifizierer in einigen Städten ein oder schaltest es ganz ab; mit der klassischen Voreinstellung ist es anfangs aus. Seltene und rare Dungeon-Beute schaltet ihr Aussehen für alle in der Gruppe frei, die sie tragen könnten, epische Schlachtzugsbeute nur für den, der sie bekommt.",
 		},
 		en = {
 			q = "Is there transmogrification?",
-			a = "Yes, in WoW: Forever transmog is optional and can be turned off. Appearances from dungeon loot unlock for the whole group; epic items are excluded.",
+			a = "Yes, but it is optional: you set it up at a transmogrifier in some cities or turn it off completely; with the Classic preset it starts switched off. Uncommon and rare dungeon loot unlocks its appearance for everyone in the group who could wear it, epic raid loot only for the player who gets it.",
 		},
 		fr = {
 			q = "Y a-t-il la transmogrification ?",
-			a = "Oui, dans WoW: Forever la transmogrification est optionnelle et peut être désactivée. Les apparences du butin de donjon se débloquent pour tout le groupe ; les objets épiques en sont exclus.",
+			a = "Oui, mais c'est facultatif : vous la réglez chez un transmogrificateur dans certaines villes ou la désactivez complètement ; avec le préréglage Classic, elle est désactivée au départ. Le butin de donjon inhabituel et rare débloque son apparence pour tous les membres du groupe qui pourraient le porter, le butin épique de raid seulement pour celui qui l'obtient.",
 		},
 		es = {
 			q = "¿Hay transfiguración?",
-			a = "Sí, en WoW: Forever la transfiguración es opcional y se puede desactivar. Las apariencias del botín de mazmorra se desbloquean para todo el grupo; los objetos épicos quedan excluidos.",
+			a = "Sí, pero es opcional: la configuras con un transfigurador en algunas ciudades o la desactivas del todo; con el preajuste Classic empieza desactivada. El botín de mazmorra poco común y raro desbloquea su apariencia para todos los del grupo que podrían llevarlo, y el botín épico de banda solo para quien lo recibe.",
 		},
 		it = {
 			q = "C'è la trasmogrificazione?",
-			a = "Sì, in WoW: Forever la trasmogrificazione è opzionale e si può disattivare. Gli aspetti del bottino delle spedizioni si sbloccano per tutto il gruppo; gli oggetti epici sono esclusi.",
+			a = "Sì, ma è facoltativa: la imposti da un trasmogrificatore in alcune città o la disattivi del tutto; con l'impostazione Classic all'inizio è spenta. Il bottino non comune e raro delle spedizioni sblocca l'aspetto per tutti nel gruppo che potrebbero indossarlo, quello epico delle incursioni solo per chi lo ottiene.",
 		},
 		ru = {
 			q = "Есть ли трансмогрификация?",
-			a = "Да, в WoW: Forever трансмогрификация необязательна и её можно отключить. Облики из добычи подземелий открываются для всей группы; эпические предметы исключены.",
+			a = "Да, но по желанию: её настраивают у трансмогрификатора в некоторых городах или полностью отключают; с пресетом Classic она сначала выключена. Необычная и редкая добыча из подземелий открывает облик всем в группе, кто мог бы её надеть, а эпическая добыча из рейдов — только тому, кто её получил.",
 		},
 		pt = {
 			q = "Existe transmogrificação?",
-			a = "Sim, no WoW: Forever a transmogrificação é opcional e pode ser desligada. Aparências do saque de masmorras são liberadas para o grupo todo; itens épicos ficam de fora.",
+			a = "Sim, mas é opcional: você configura com um transmogrificador em algumas cidades ou desliga de vez; com a predefinição Classic ela começa desligada. Saque incomum e raro de masmorra libera a aparência para todos do grupo que poderiam usá-lo, e saque épico de raide só para quem o recebe.",
 		},
 	},
 	{
