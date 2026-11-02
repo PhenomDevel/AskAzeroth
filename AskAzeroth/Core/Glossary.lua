@@ -13,6 +13,9 @@ local _, ns = ...
 --       mark = false,            -- optional: never mark it inside texts,
 --                                --   for words of everyday language
 --                                --   ("add", "pull")
+--       lower = false,           -- optional: mark it only as written, not
+--                                --   in lower or upper case, when that is
+--                                --   an everyday word ("ah", "hot")
 --       de = { term = "BoP", alt = { "Segen des Schutzes" }, def = "…" },
 --       en = { term = "BoP", alt = { "Blessing of Protection" }, def = "…" },
 --     },
@@ -65,6 +68,9 @@ local function Check(entry)
 	end
 	if entry.mark ~= nil and entry.mark ~= false then
 		return "mark"
+	end
+	if entry.lower ~= nil and entry.lower ~= false then
+		return "lower"
 	end
 	for _, lang in ipairs(C.FAQ_REQUIRED) do
 		if entry[lang] == nil then
@@ -139,9 +145,11 @@ function Glossary.Contains(entry, text, lang)
 end
 
 -- Words that mark an entry inside a text in lang: term and other names
--- (the chat forms are for chat only), each with its first letter also in
--- upper and lower case (ASCII only). Longest first, so "Blessing of
--- Protection" wins over a shorter form inside it. Built once per language.
+-- (the chat forms are for chat only), each also with its first letter in
+-- upper and lower case and all in lower and upper case, since players
+-- write "dot", "aoe" or "DOT" (ASCII only). Entries with lower = false
+-- only as written. Longest first, so "Blessing of Protection" wins over a
+-- shorter form inside it. Built once per language.
 local forms = {}
 
 local function Forms(lang)
@@ -159,19 +167,17 @@ local function Forms(lang)
 	end
 	local function AddCased(entry, form)
 		Add(entry, form)
-		Add(entry, form:sub(1, 1):upper() .. form:sub(2))
-		Add(entry, form:sub(1, 1):lower() .. form:sub(2))
+		if entry.lower ~= false then
+			Add(entry, form:sub(1, 1):upper() .. form:sub(2))
+			Add(entry, form:sub(1, 1):lower() .. form:sub(2))
+			Add(entry, form:lower())
+			Add(entry, form:upper())
+		end
 	end
 	for _, entry in ipairs(all) do
 		if entry.mark ~= false then
 			local term, alt = Glossary.GetText(entry, lang)
-			-- Short all-caps forms (AoE, DoT, CC, IF) only as written, so
-			-- that "cc" or "if" in a sentence are not marked.
-			if #term > 3 or not term:find("^[%u%d]+$") then
-				AddCased(entry, term)
-			else
-				Add(entry, term)
-			end
+			AddCased(entry, term)
 			for _, other in ipairs(alt) do
 				AddCased(entry, other)
 			end

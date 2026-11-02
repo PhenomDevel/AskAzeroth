@@ -179,3 +179,5 @@
   address ready to copy, and has a new entry about it.
 - Hovering a blue glossary term or a spell name now shows its tooltip, and
   clicking a term opens it in the glossary (the links were not recognised).
+- Glossary terms are also found when written in lower or upper case ("dot",
+  "aoe", "DPS"), as players usually type them.
