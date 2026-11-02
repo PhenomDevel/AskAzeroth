@@ -33,6 +33,9 @@
 - FAQ: 17 priest questions (levelling, wands, shields, heals and ranks,
   mana, buffs, Psychic Scream, Resurrection, dispelling, first dungeon,
   Shadowform, talents).
+- FAQ: 17 shaman questions (totem items and quests, choosing totems,
+  weapon imbues, shocks, healing, Ghost Wolf, Reincarnation, Astral Recall,
+  water spells, stats, talents, mana).
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
   Players, FAQ and Settings.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
