@@ -136,18 +136,23 @@ local function Build(content)
 	level:SetPoint("LEFT", levelLabel, "LEFT", 112, 0)
 	W.Tooltip(level, L.SETTING_MAX_LEVEL, L.SETTING_MAX_LEVEL_TIP)
 
-	local pauseCombat = Add(W.Checkbox(content, L.SETTING_PAUSE_COMBAT, function()
-		return notify.pauseCombat
-	end, function(checked)
-		notify.pauseCombat = checked
-	end))
-	pauseCombat:SetPoint("TOPLEFT", levelLabel, "BOTTOMLEFT", -4, -12)
 	local pauseInstance = Add(W.Checkbox(content, L.SETTING_PAUSE_INSTANCE, function()
 		return notify.pauseInstance
 	end, function(checked)
 		notify.pauseInstance = checked
 	end))
-	pauseInstance:SetPoint("TOPLEFT", pauseCombat, "BOTTOMLEFT", 0, -2)
+	pauseInstance:SetPoint("TOPLEFT", levelLabel, "BOTTOMLEFT", -4, -12)
+	W.Tooltip(pauseInstance, L.SETTING_PAUSE_INSTANCE, L.SETTING_PAUSE_INSTANCE_TIP)
+
+	local test = W.Button(content, L.NOTIFY_TEST, nil, function()
+		ns.Notify.Test()
+	end)
+	test:SetPoint("TOPLEFT", pauseInstance, "BOTTOMLEFT", 4, -10)
+	W.Tooltip(test, L.NOTIFY_TEST, ns.Toast.HasEditMode() and L.NOTIFY_TEST_TIP or L.NOTIFY_TEST_TIP_DRAG)
+	local reset = W.Button(content, L.NOTIFY_RESET_POSITION, nil, function()
+		ns.Toast.ResetPosition()
+	end)
+	reset:SetPoint("LEFT", test, "RIGHT", 6, 0)
 
 	-- Languages (right column)
 	local languages = W.Header(content, L.SETTINGS_LANGUAGES)

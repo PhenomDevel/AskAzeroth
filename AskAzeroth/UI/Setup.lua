@@ -256,19 +256,13 @@ function builders.notify(page)
 	W.Tooltip(level, L.SETTING_MAX_LEVEL, L.SETTING_MAX_LEVEL_TIP)
 	controls[#controls + 1] = level
 
-	local pauseCombat = W.Checkbox(page, L.SETTING_PAUSE_COMBAT, function()
-		return Settings().notify.pauseCombat
-	end, function(checked)
-		Settings().notify.pauseCombat = checked
-	end)
-	pauseCombat:SetPoint("TOPLEFT", levelLabel, "BOTTOMLEFT", -4, -16)
-	controls[#controls + 1] = pauseCombat
 	local pauseInstance = W.Checkbox(page, L.SETTING_PAUSE_INSTANCE, function()
 		return Settings().notify.pauseInstance
 	end, function(checked)
 		Settings().notify.pauseInstance = checked
 	end)
-	pauseInstance:SetPoint("LEFT", pauseCombat, "LEFT", 220, 0)
+	pauseInstance:SetPoint("TOPLEFT", levelLabel, "BOTTOMLEFT", -4, -16)
+	W.Tooltip(pauseInstance, L.SETTING_PAUSE_INSTANCE, L.SETTING_PAUSE_INSTANCE_TIP)
 	controls[#controls + 1] = pauseInstance
 
 	function page:Refresh()

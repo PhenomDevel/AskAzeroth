@@ -6,8 +6,8 @@ local _, ns = ...
 --     optional class filter and asker level limit;
 --   * questions of favourites: always (badge + toast);
 --   * answers to own questions: always.
--- No toast or sound in combat or (optionally) in instances; the badge still
--- counts. At most one toast per C.TOAST_INTERVAL, the rest are summed up
+-- Never a toast or sound in combat, optionally none in instances; the
+-- badge still counts and held back toasts follow afterwards. At most one toast per C.TOAST_INTERVAL, the rest are summed up
 -- as "+N more" in the next one.
 --
 -- Messages: AA_NOTIFY_TOAST (entry, more), AA_NOTIFY_CHANGED (unseen)
@@ -26,7 +26,7 @@ ns.dbDefaults.settings.notify = {
 	classes = {},
 	-- Only questions from players up to this level; nil = any level.
 	maxLevel = nil,
-	pauseCombat = true,
+	-- Hold toasts and sounds in instances (combat always holds them).
 	pauseInstance = true,
 }
 
@@ -61,11 +61,11 @@ function Notify.MarkSeen()
 end
 
 function Notify.IsPaused()
-	local settings = Settings()
-	if settings.pauseCombat and InCombatLockdown() then
+	-- The player is in combat (regen disabled), with or without a target.
+	if InCombatLockdown() then
 		return true
 	end
-	if settings.pauseInstance and IsInInstance() then
+	if Settings().pauseInstance and IsInInstance() then
 		return true
 	end
 	return false
@@ -122,6 +122,25 @@ local function Raise(entry)
 		FlushLater()
 	end
 end
+
+-- Settings "Test": a sample toast with sound, shown right away.
+function Notify.Test()
+	PlayAlert()
+	ns:Fire("AA_NOTIFY_TOAST", { kind = "test" }, 0)
+end
+
+-- Held back toasts follow soon after combat instead of waiting for the
+-- next retry.
+ns:RegisterEvent("PLAYER_REGEN_ENABLED", function()
+	if not pending or Notify.IsPaused() then
+		return
+	end
+	if timer then
+		timer:Cancel()
+		timer = nil
+	end
+	FlushLater()
+end)
 
 -- Whether a new question passes the mentor filters.
 function Notify.WantsQuestion(q)

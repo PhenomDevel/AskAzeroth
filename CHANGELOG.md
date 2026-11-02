@@ -3,6 +3,10 @@
 ## Unreleased
 
 - In development, no release yet.
+- Notifications never pop up during combat any more; they follow right
+  after the fight. Whether they also wait in instances stays a setting.
+- "Test" button for notifications in the settings, and the notification
+  can be moved in Edit Mode (with "Reset position" in the settings).
 - New logo: a question mark in front of the globe of Azeroth.
 - First-run setup: on the first login a short wizard asks for your
   languages, whether you are new or want to help as a mentor, which
