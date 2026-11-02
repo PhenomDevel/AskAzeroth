@@ -5,6 +5,9 @@
 - In development, no release yet.
 - Setup: as a mentor you can now pick the classes you help with; the
   class list shows the class colours (also in Settings).
+- Questions now stay in the public list for 3 days (1 day once solved)
+  instead of a few hours, and the thread shows the time left in minutes,
+  hours or days. You can have up to 5 open questions at once.
 - FAQ answers list the glossary terms they use in a row "Terms:" below the
   answer; hover a term for its explanation, click to open it in the glossary.
 - Notifications show right away again: there was a two-minute pause
@@ -15,6 +18,11 @@
   to "Mark as solved" and "Withdraw" instead of being cut off. Your own
   questions no longer show the right-click hint for the player menu.
 - Glossary tooltips in FAQ answers now show when you hover over a blue term.
+- Glossary terms in questions and answers of the threads and in pinned
+  answers are marked too: hover for the explanation, click to open it in the
+  glossary.
+- Glossary entries with more detail in the FAQ have a "More in the FAQ:"
+  button below them that opens the FAQ entry.
 - FAQ links on answers: the FAQ button is off once 3 entries are attached,
   and the chips above the answer field always fit into the window (long
   questions are shortened, the tooltip shows them in full).
@@ -44,7 +52,7 @@
   the list, a green "This question is solved" bar in the thread.
   "Hide solved" on the Questions page hides them.
 - Your own questions are highlighted in blue in the question list.
-- New logo: a question mark in front of the globe of Azeroth.
+- New logo: a question mark in front of the globe of Azeroth, with its continents roughly in place.
 - First-run setup: on the first login a short wizard asks for your
   languages, whether you are new or want to help as a mentor, which
   questions should notify you and a few extras. `/aa setup` or the button

@@ -200,7 +200,7 @@ Transport: AceComm im Sprachkanal, Payload = eigener Serializer → LibDeflate �
 - Absender aus dem Event muss bei `Q`, `S`, `D` dem Autor entsprechen, bei `A` dem Antwortautor. Sonst verwerfen.
 - Längen begrenzen, Kategorien und Sprachen nur aus erlaubter Liste.
 - Zeitstempel mehr als 5 Minuten in der Zukunft: verwerfen.
-- Rate-Limit pro Absender: max. 1 neue Frage pro 60 s, max. 3 offene Fragen, max. 6 Antworten pro 60 s. Überschreitungen werden still verworfen.
+- Rate-Limit pro Absender: max. 1 neue Frage pro 60 s, max. 5 offene Fragen, max. 6 Antworten pro 60 s. Überschreitungen werden still verworfen.
 - Ignorierte Spieler: Nachrichten werden gespeichert (für korrekte Zähler), aber in der UI ausgeblendet bzw. eingeklappt.
 
 Ausführliche Spezifikation mit Beispielen in `docs/PROTOCOL.md` anlegen.
@@ -211,12 +211,12 @@ Jeder Client berechnet den Status selbst, es gibt keine Lösch-Nachricht für de
 
 | Status | Bedingung | Verschwindet nach |
 |---|---|---|
-| Offen | keine Antwort | 2 h ab `created` |
-| Beantwortet | ≥ 1 Antwort | 45 min ab `lastAnswer` (neue Antwort setzt zurück) |
-| Gelöst | `solved` gesetzt | 10 min ab `solved` |
+| Offen | keine Antwort | 3 Tage ab `created` |
+| Beantwortet | ≥ 1 Antwort | 3 Tage ab `lastAnswer` (neue Antwort setzt zurück) |
+| Gelöst | `solved` gesetzt | 1 Tag ab `solved` |
 
 - Prüfung per Timer alle 60 s in `Store.lua`.
-- Harte Obergrenze: 150 öffentliche Threads im Speicher, älteste zuerst raus.
+- Harte Obergrenze: 300 öffentliche Threads im Speicher, älteste zuerst raus.
 - Alle Werte als Konstanten in `Core/Constants.lua`, damit sie leicht anpassbar sind.
 - **Meine Fragen** bleiben unabhängig davon in `myQuestions`. Aufbewahrung einstellbar: immer (Standard), 7, 30 oder 90 Tage. Aufräumen beim Login und per Button.
 - Nach öffentlichem Ablauf zeigt der Thread unter „Meine Fragen“ den Status „Geschlossen“.

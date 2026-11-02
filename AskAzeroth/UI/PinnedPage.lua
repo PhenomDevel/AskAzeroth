@@ -8,7 +8,6 @@ local L = ns.L
 local C = ns.C
 local UI = ns.UI
 local W = ns.Widgets
-local Util = ns.Util
 local Pinned = ns.Pinned
 local Players = ns.Players
 
@@ -81,9 +80,9 @@ local function Build(content)
 	local function RowHeight(entry)
 		local width = InnerWidth()
 		return PAD
-			+ TextHeight(Util.EscapeText(entry.question.title), "GameFontNormal", width - UNPIN_WIDTH - 8)
+			+ TextHeight(ns.GlossaryLinks.PlayerText(entry.question.title, entry.question.lang), "GameFontNormal", width - UNPIN_WIDTH - 8)
 			+ 4 + 14 + 8 + 14 + 2
-			+ TextHeight(Util.EscapeText(entry.answer.text), "GameFontHighlight", width)
+			+ TextHeight(ns.GlossaryLinks.PlayerText(entry.answer.text, entry.question.lang), "GameFontHighlight", width)
 			+ ns.FaqRefs.Height(entry.answer.faq)
 			+ PAD + 4
 	end
@@ -137,6 +136,9 @@ local function Build(content)
 		row.text:SetPoint("RIGHT", -PAD, 0)
 		row.text:SetWordWrap(true)
 		row.links = ns.FaqRefs.CreateLinks(row.bg, row.text)
+		-- Glossary terms in question and answer: tooltip, click opens the
+		-- glossary.
+		ns.GlossaryLinks.Enable(row.bg)
 	end
 
 	local function FillRow(row, entry)
@@ -145,13 +147,13 @@ local function Build(content)
 		end
 		row.entry = entry
 		local q, a = entry.question, entry.answer
-		row.title:SetText(Util.EscapeText(q.title))
+		row.title:SetText(ns.GlossaryLinks.PlayerText(q.title, q.lang))
 		row.meta:SetText(QuestionLine(q))
 		row.who:SetText(("%s%s  |cff9d9d9d%s|r"):format(
 			Players.IsFavorite(a.author) and W.STAR or "",
 			W.PlayerLine(a.author, a.ctx, Players.GetClass(a.author)),
 			date("%Y-%m-%d %H:%M", a.created)))
-		row.text:SetText(Util.EscapeText(a.text))
+		row.text:SetText(ns.GlossaryLinks.PlayerText(a.text, q.lang))
 		row.links:Fill(a.faq)
 	end
 

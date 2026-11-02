@@ -9,6 +9,7 @@ local GlossaryLinks = {}
 ns.GlossaryLinks = GlossaryLinks
 
 local L = ns.L
+local C = ns.C
 local W = ns.Widgets
 local Glossary = ns.Glossary
 
@@ -16,7 +17,8 @@ local LINK_TYPE = "askazeroth-glossary"
 local FAQ_LINK_TYPE = "askazeroth-faq"
 local LINK_COLOR = W.Hex(W.BLUE)
 
--- text with links for the glossary terms in it (plain text in lang).
+-- text with links for the glossary terms in it (plain text in lang, or
+-- text with "|" escaped as "||").
 function GlossaryLinks.Annotate(text, lang)
 	local found = Glossary.Find(text, lang)
 	if #found == 0 then
@@ -31,6 +33,30 @@ function GlossaryLinks.Annotate(text, lang)
 	end
 	parts[#parts + 1] = text:sub(last + 1)
 	return table.concat(parts)
+end
+
+-- Player text (question or answer) for a font string: "|" escaped, the
+-- glossary terms of lang (the thread's language) as links. Rows are filled
+-- again on every scroll, so the results are kept for a while.
+local playerCache, playerCacheSize = {}, 0
+local PLAYER_CACHE_MAX = 300
+
+function GlossaryLinks.PlayerText(text, lang)
+	if type(text) ~= "string" then
+		return ""
+	end
+	lang = C.IsLanguage(lang) and lang or ns.FaqRefs.ReaderLanguage()
+	local key = lang .. "\n" .. text
+	local result = playerCache[key]
+	if not result then
+		if playerCacheSize >= PLAYER_CACHE_MAX then
+			playerCache, playerCacheSize = {}, 0
+		end
+		result = GlossaryLinks.Annotate(ns.Util.EscapeText(text), lang)
+		playerCache[key] = result
+		playerCacheSize = playerCacheSize + 1
+	end
+	return result
 end
 
 -- Tooltip of a glossary entry at owner: term, other names, explanation.

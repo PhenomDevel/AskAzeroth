@@ -1,4 +1,4 @@
--- luacheck: read globals UnitName UnitLevel UnitRace UnitClass UnitFactionGroup GetNormalizedRealmName GetRealZoneText GetSubZoneText IsInInstance InCombatLockdown IsEncounterInProgress C_Map
+-- luacheck: read globals UnitName UnitLevel UnitRace UnitClass UnitFactionGroup GetNormalizedRealmName GetRealZoneText GetSubZoneText IsInInstance InCombatLockdown IsEncounterInProgress C_Map UIParent
 local _, ns = ...
 
 -- M0 spike (/aa probe): checks the language channels, raw and AceComm
@@ -28,6 +28,7 @@ local ECHO_TIMEOUT = 5
 ns.dbDefaults.probe = {
 	loginCount = 0,
 	loopback = true,
+	verbose = false,
 	log = {},
 }
 ns.charDbDefaults.probe = {
@@ -51,10 +52,12 @@ local function SafeString(value)
 	return tostring(value)
 end
 
--- Every probe event is printed and kept in the saved log, so the results of
--- all accounts can be compared afterwards (WTF\…\SavedVariables).
+-- Every probe event is kept in the saved log, so the results of all
+-- accounts can be compared afterwards (WTF\…\SavedVariables).
 -- Missing fields of malformed messages are logged as "?".
-local function Log(text, ...)
+-- Results of commands are printed to chat; passive observations (channel
+-- notices, lockdown, encounters …) only with "/aa probe verbose on".
+local function Write(quiet, text, ...)
 	local count = select("#", ...)
 	if count > 0 then
 		local args = { ... }
@@ -72,7 +75,18 @@ local function Log(text, ...)
 			table.remove(log, 1)
 		end
 	end
-	ns:Print(text)
+	if not quiet or (db and db.verbose) then
+		ns:Print(text)
+	end
+end
+
+local function Log(text, ...)
+	Write(false, text, ...)
+end
+
+-- Passive observation: saved log, chat only in verbose mode.
+local function Note(text, ...)
+	Write(true, text, ...)
 end
 
 local function ReverseLookup(enum, value)
@@ -179,7 +193,7 @@ prefixResult = type(prefixResult) == "number" and ReverseLookup(Enum.RegisterAdd
 -- Player context (which values are secret where)
 --------------------------------------------------------------------------------
 
-local function LogContext(reason)
+local function LogContext(reason, quiet)
 	local _, raceFile = UnitRace("player")
 	local _, classFile = UnitClass("player")
 	local inInstance, instanceType = IsInInstance()
@@ -201,7 +215,7 @@ local function LogContext(reason)
 			secret[#secret + 1] = entry[1]
 		end
 	end
-	Log(L.PROBE_CONTEXT, reason, table.concat(parts, ", "), SafeString(inInstance) .. "/" .. SafeString(instanceType), YesNo(InCombatLockdown()), #secret > 0 and table.concat(secret, ", ") or "-")
+	Write(quiet, L.PROBE_CONTEXT, reason, table.concat(parts, ", "), SafeString(inInstance) .. "/" .. SafeString(instanceType), YesNo(InCombatLockdown()), #secret > 0 and table.concat(secret, ", ") or "-")
 end
 
 --------------------------------------------------------------------------------
@@ -520,6 +534,19 @@ AddCommand("loopback", "loopback [on|off]", L.PROBE_HELP_LOOPBACK, function(args
 	Log(enabled and L.PROBE_LOOPBACK_ON or L.PROBE_LOOPBACK_OFF)
 end)
 
+AddCommand("verbose", "verbose [on|off]", L.PROBE_HELP_VERBOSE, function(args)
+	local enabled
+	if args == "on" then
+		enabled = true
+	elseif args == "off" then
+		enabled = false
+	else
+		enabled = not db.verbose
+	end
+	db.verbose = enabled
+	Log(enabled and L.PROBE_VERBOSE_ON or L.PROBE_VERBOSE_OFF)
+end)
+
 AddCommand("show", "show | hide", L.PROBE_HELP_SHOW, function()
 	ns.Channel.SetHidden(false)
 	Log(L.PROBE_CHANNEL_SHOWN)
@@ -531,6 +558,89 @@ commands.hide = {
 		Log(L.PROBE_CHANNEL_HIDDEN)
 	end,
 }
+
+-- Link test: do links in the addon's own texts get mouse events? Three
+-- variants of the same line: a frame with a font string and
+-- SetHyperlinksEnabled (what the glossary uses), the same without that call,
+-- and a SimpleHTML frame. Each line has a custom link, an item link and an
+-- "addon:" link.
+local linkTest
+
+local LINK_LINE = "%s:  |cff8ab4e8|Haskazeroth-glossary:aggro|hAggro|h|r   |cffa335ee|Hitem:6948|h[Item 6948]|h|r   |cff8ab4e8|Haddon:AskAzeroth:aggro|hAddon-Link|h|r"
+
+local function TrySetScript(frame, name, handler, label)
+	local ok, err = pcall(frame.SetScript, frame, name, handler)
+	if not ok then
+		Log(L.PROBE_LINKS_ERROR, label, tostring(err))
+	end
+end
+
+local function AddLinkLine(parent, label, kind, top)
+	local frame
+	local ok, err = pcall(function()
+		frame = CreateFrame(kind == "html" and "SimpleHTML" or "Frame", nil, parent)
+	end)
+	if not ok then
+		Log(L.PROBE_LINKS_ERROR, label, tostring(err))
+		return false
+	end
+	frame:SetPoint("TOPLEFT", 12, top)
+	frame:SetSize(456, 22)
+	frame:EnableMouse(true)
+	local text = LINK_LINE:format(label)
+	if kind == "html" then
+		pcall(frame.SetFontObject, frame, "GameFontHighlight")
+		pcall(frame.SetText, frame, text)
+	else
+		local fontString = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+		fontString:SetAllPoints()
+		fontString:SetJustifyH("LEFT")
+		fontString:SetText(text)
+		if kind == "enabled" then
+			local called = frame.SetHyperlinksEnabled and pcall(frame.SetHyperlinksEnabled, frame, true)
+			if not called then
+				Log(L.PROBE_LINKS_ERROR, label, "SetHyperlinksEnabled failed")
+			end
+		end
+	end
+	TrySetScript(frame, "OnEnter", function()
+		Log(L.PROBE_LINKS_MOUSE, label)
+	end, label)
+	TrySetScript(frame, "OnHyperlinkEnter", function(_, link)
+		Log(L.PROBE_LINKS_EVENT, label, "enter", tostring(link))
+	end, label)
+	TrySetScript(frame, "OnHyperlinkLeave", function(_, link)
+		Log(L.PROBE_LINKS_EVENT, label, "leave", tostring(link))
+	end, label)
+	TrySetScript(frame, "OnHyperlinkClick", function(_, link, _, button)
+		Log(L.PROBE_LINKS_EVENT, label, "click " .. tostring(button), tostring(link))
+	end, label)
+	return true
+end
+
+AddCommand("links", "links", L.PROBE_HELP_LINKS, function()
+	if linkTest and linkTest:IsShown() then
+		linkTest:Hide()
+		Log(L.PROBE_LINKS_CLOSED)
+		return
+	end
+	if not linkTest then
+		linkTest = ns.Widgets.Panel(UIParent)
+		linkTest:SetSize(480, 130)
+		linkTest:SetPoint("CENTER", 0, 120)
+		linkTest:SetFrameStrata("DIALOG")
+		local title = linkTest:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+		title:SetPoint("TOPLEFT", 12, -10)
+		title:SetPoint("RIGHT", -12, 0)
+		title:SetJustifyH("LEFT")
+		title:SetText(L.PROBE_LINKS_TITLE)
+		AddLinkLine(linkTest, "A", "enabled", -40)
+		AddLinkLine(linkTest, "B", "plain", -68)
+		linkTest.hasHtml = AddLinkLine(linkTest, "C", "html", -96)
+	end
+	Log(L.PROBE_LINKS_API, YesNo(linkTest.SetHyperlinksEnabled ~= nil), YesNo(linkTest.hasHtml))
+	linkTest:Show()
+end)
 
 AddCommand("log", "log [lines]", L.PROBE_HELP_LOG, function(args)
 	local log = db.log
@@ -564,43 +674,60 @@ end, "probe <command>", L.PROBE_HELP)
 --------------------------------------------------------------------------------
 
 ns.RegisterCallback(Probe, "AA_CHANNEL_READY", function(_, lang, number)
-	Log(L.PROBE_CHANNEL_READY, C.GetChannelName(lang), tostring(number), ns.Channel.CountJoined())
+	Note(L.PROBE_CHANNEL_READY, C.GetChannelName(lang), tostring(number), ns.Channel.CountJoined())
 end)
 
 ns.RegisterCallback(Probe, "AA_CHANNEL_FAILED", function(_, lang)
-	Log(L.PROBE_CHANNEL_FAILED, C.GetChannelName(lang), ns.Channel.CountJoined())
+	Note(L.PROBE_CHANNEL_FAILED, C.GetChannelName(lang), ns.Channel.CountJoined())
 end)
 
+-- Readable text for the notice codes of CHAT_MSG_CHANNEL_NOTICE(_USER);
+-- unknown codes are shown as they are.
+local NOTICES = {
+	YOU_JOINED = L.PROBE_NOTICE_JOINED,
+	YOU_CHANGED = L.PROBE_NOTICE_JOINED,
+	YOU_LEFT = L.PROBE_NOTICE_LEFT,
+	SUSPENDED = L.PROBE_NOTICE_SUSPENDED,
+	THROTTLED = L.PROBE_NOTICE_THROTTLED,
+	WRONG_PASSWORD = L.PROBE_NOTICE_PASSWORD,
+	BANNED = L.PROBE_NOTICE_BANNED,
+}
+
+local function NoticeText(notice)
+	notice = SafeString(notice)
+	return NOTICES[notice] or notice
+end
+
 ns.RegisterCallback(Probe, "AA_CHANNEL_NOTICE", function(_, lang, notice)
-	Log(L.PROBE_CHANNEL_NOTICE, C.GetChannelName(lang), SafeString(notice))
+	Note(L.PROBE_CHANNEL_NOTICE, C.GetChannelName(lang), NoticeText(notice))
 end)
 
 ns.RegisterCallback(Probe, "AA_CHANNEL_NOTICE_USER", function(_, lang, notice, playerName)
-	Log(L.PROBE_CHANNEL_NOTICE_USER, C.GetChannelName(lang), SafeString(notice), SafeString(playerName))
+	Note(L.PROBE_CHANNEL_NOTICE_USER, C.GetChannelName(lang), NoticeText(notice), SafeString(playerName))
 end)
 
 ns.RegisterCallback(Probe, "AA_COMM_HELD", function(_, length)
-	Log(L.PROBE_COMM_HELD, length)
+	Note(L.PROBE_COMM_HELD, length)
 end)
 
 ns.RegisterCallback(Probe, "AA_COMM_FLUSHED", function()
-	Log(L.PROBE_COMM_FLUSHED)
+	Note(L.PROBE_COMM_FLUSHED)
 end)
 
 ns:RegisterEvent("ENCOUNTER_START", function(_, _, encounterName)
-	Log(L.PROBE_ENCOUNTER_START, SafeString(encounterName), YesNo(ns.Comm.InLockdown()))
-	LogContext("ENCOUNTER_START")
+	Note(L.PROBE_ENCOUNTER_START, SafeString(encounterName), YesNo(ns.Comm.InLockdown()))
+	LogContext("ENCOUNTER_START", true)
 end)
 
 ns:RegisterEvent("ENCOUNTER_END", function(_, _, encounterName)
-	Log(L.PROBE_ENCOUNTER_END, SafeString(encounterName), YesNo(ns.Comm.InLockdown()))
+	Note(L.PROBE_ENCOUNTER_END, SafeString(encounterName), YesNo(ns.Comm.InLockdown()))
 end)
 
 -- Context once per instance entered, to see what is secret inside.
 ns:RegisterEvent("PLAYER_ENTERING_WORLD", function()
 	if IsInInstance() then
 		C_Timer.After(2, function()
-			LogContext("PLAYER_ENTERING_WORLD")
+			LogContext("PLAYER_ENTERING_WORLD", true)
 		end)
 	end
 end)
@@ -611,7 +738,7 @@ C_Timer.NewTicker(1, function()
 	local lockdown = ns.Comm.InLockdown()
 	if lockdown ~= wasLockdown then
 		wasLockdown = lockdown
-		Log(lockdown and L.PROBE_LOCKDOWN_START or L.PROBE_LOCKDOWN_END)
+		Note(lockdown and L.PROBE_LOCKDOWN_START or L.PROBE_LOCKDOWN_END)
 	end
 end)
 
@@ -626,11 +753,11 @@ ns:RegisterEvent("PLAYER_LOGIN", function()
 	db.loginCount = db.loginCount + 1
 	charDb.loginCount = charDb.loginCount + 1
 	local lastLogout = db.lastLogout and date("%Y-%m-%d %H:%M:%S", db.lastLogout) or L.PROBE_NEVER
-	Log(L.PROBE_SAVED_LOGIN, db.loginCount, charDb.loginCount, lastLogout)
+	Note(L.PROBE_SAVED_LOGIN, db.loginCount, charDb.loginCount, lastLogout)
 	if ns.dbLoaded ~= ns.charDbLoaded then
 		Log(L.PROBE_SAVED_MISMATCH, YesNo(ns.dbLoaded), YesNo(ns.charDbLoaded))
 	elseif not ns.dbLoaded then
-		Log(L.PROBE_SAVED_NONE)
+		Note(L.PROBE_SAVED_NONE)
 	end
 end)
 

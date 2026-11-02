@@ -280,10 +280,6 @@ local function Build(content)
 			if #alt > 0 then
 				text = text .. "\n\n" .. ("|c%s%s|r"):format(W.Hex(W.MUTED), L.GLOSSARY_ALSO:format(table.concat(alt, ", ")))
 			end
-			local faqTitle = entry.faq and FaqRefs.Title(entry.faq, page.lang)
-			if faqTitle then
-				text = text .. "\n\n" .. GlossaryLinks.FaqLink(entry.faq, L.FAQ_REF_LINK:format(faqTitle))
-			end
 			return term, text
 		end
 		local q, a = Faq.GetText(entry, page.lang)
@@ -306,6 +302,11 @@ local function Build(content)
 		return list
 	end
 
+	-- FAQ entry a glossary entry points to (shown as a button below it).
+	local function FaqOfGlossary(entry)
+		return IsGlossary(entry) and entry.faq and Faq.Get(entry.faq) and entry.faq or nil
+	end
+
 	local function Heights(entry)
 		local q, a = Texts(entry)
 		local qHeight = TextHeight(q, "GameFontNormal", QuestionWidth())
@@ -314,7 +315,7 @@ local function Build(content)
 			return head, qHeight, 0
 		end
 		local aHeight = TextHeight(a, "GameFontHighlight", AnswerWidth(), 3)
-		local terms = #Terms(entry) > 0 and ITEM_PAD / 2 + TERMS_HEIGHT or 0
+		local terms = (#Terms(entry) > 0 or FaqOfGlossary(entry)) and ITEM_PAD / 2 + TERMS_HEIGHT or 0
 		return head + aHeight + terms + ITEM_PAD + 2, qHeight, aHeight
 	end
 
@@ -364,6 +365,47 @@ local function Build(content)
 				button:SetShown(shown)
 			end
 		end
+	end
+
+	-- Fills the row below a glossary entry with a button to its FAQ entry.
+	local function FillFaqButton(item, faqId)
+		local row = item.termsRow
+		if not row.faqButton then
+			local button = CreateFrame("Button", nil, row)
+			button:SetHeight(TERMS_HEIGHT)
+			button.text = W.Text(button, "GameFontHighlightSmall", W.GOLD)
+			button.text:SetPoint("LEFT")
+			button.text:SetWordWrap(false)
+			-- The title may be shortened: the tooltip has all of it.
+			button:SetScript("OnEnter", function(self)
+				self.text:SetTextColor(1, 1, 1)
+				GameTooltip:SetOwner(self, "ANCHOR_TOP")
+				GameTooltip:SetText(self.title, 1, 1, 1, 1, true)
+				GameTooltip:Show()
+			end)
+			button:SetScript("OnLeave", function(self)
+				W.Color(self.text, W.GOLD)
+				GameTooltip:Hide()
+			end)
+			button:SetScript("OnClick", function(self)
+				GameTooltip:Hide()
+				page:Select(self.faqId)
+			end)
+			row.faqButton = button
+		end
+		local button = row.faqButton
+		button.faqId = faqId
+		button.title = FaqRefs.Title(faqId, page.lang) or faqId
+		local x = row.label:GetStringWidth() + 6
+		local room = math.max(20, AnswerWidth() - x)
+		button.text:SetWidth(0)
+		button.text:SetText(button.title)
+		local width = math.min(button.text:GetStringWidth(), room - 8)
+		button.text:SetWidth(width)
+		button:ClearAllPoints()
+		button:SetPoint("LEFT", row, "LEFT", x, 0)
+		button:SetWidth(width + 8)
+		button:Show()
 	end
 
 	local listView = CreateScrollBoxListLinearView()
@@ -463,13 +505,20 @@ local function Build(content)
 			item.answer:SetText(a)
 			item.answerFrame:Show()
 			local terms = Terms(entry)
-			if #terms > 0 then
+			local faqId = FaqOfGlossary(entry)
+			if #terms > 0 or faqId then
 				item.termsRow:ClearAllPoints()
 				item.termsRow:SetPoint("TOPLEFT", item.answerFrame, "BOTTOMLEFT", 0, -ITEM_PAD / 2)
 				item.termsRow:SetWidth(AnswerWidth())
+				item.termsRow.label:SetText(faqId and L.GLOSSARY_MORE or L.GLOSSARY_TERMS)
 				FillTerms(item, terms)
+				if faqId then
+					FillFaqButton(item, faqId)
+				elseif item.termsRow.faqButton then
+					item.termsRow.faqButton:Hide()
+				end
 			end
-			item.termsRow:SetShown(#terms > 0)
+			item.termsRow:SetShown(#terms > 0 or faqId ~= nil)
 		else
 			W.SetColors(item.bg, W.COLORS.card, W.COLORS.line)
 			item.divider:Hide()

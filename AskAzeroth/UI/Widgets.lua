@@ -583,19 +583,27 @@ end
 
 local L = ns.L
 
--- "just now", "5 min ago", "2 h ago".
+-- "just now", "5 min ago", "2 h ago", "3 d ago".
 function W.Ago(seconds)
 	if seconds < 60 then
 		return L.AGO_NOW
 	elseif seconds < 3600 then
 		return L.AGO_MINUTES:format(math.floor(seconds / 60))
+	elseif seconds < 86400 then
+		return L.AGO_HOURS:format(math.floor(seconds / 3600))
 	end
-	return L.AGO_HOURS:format(math.floor(seconds / 3600))
+	return L.AGO_DAYS:format(math.floor(seconds / 86400))
 end
 
--- Minutes, rounded up, at least 1.
-function W.Minutes(seconds)
-	return math.max(1, math.ceil(seconds / 60))
+-- Time left: "5 min" below an hour, "7 h" below two days, else "3 d".
+-- Rounded up, at least 1 min.
+function W.Duration(seconds)
+	if seconds < 3600 then
+		return L.DURATION_MINUTES:format(math.max(1, math.ceil(seconds / 60)))
+	elseif seconds < 2 * 86400 then
+		return L.DURATION_HOURS:format(math.ceil(seconds / 3600))
+	end
+	return L.DURATION_DAYS:format(math.ceil(seconds / 86400))
 end
 
 -- Colour code ("ffrrggbb") of a class file name, or nil.
