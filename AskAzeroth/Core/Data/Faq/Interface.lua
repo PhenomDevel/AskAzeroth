@@ -564,31 +564,31 @@ ns.Faq.Add("ui", {
 		id = "ui-graphics-models",
 		de = {
 			q = "Kann ich zwischen alten und neuen Modellen wählen?",
-			a = "Ja, WoW: Forever bietet klassische und hochauflösende Modelle. Die Auswahl findest du in den Grafikoptionen. Wenn das Spiel ruckelt, senk dort auch die Grafikqualität oder die Sichtweite.",
+			a = "Ja: Beim ersten Einloggen wählst du eine Voreinstellung, klassisch oder modernisiert; ändern kannst du sie später in den Optionen. Ob dein Charakter klassisch oder hochauflösend aussieht, stellst du pro Charakter in den Optionen oder beim Barbier ein. Wenn das Spiel ruckelt, senk in den Grafikoptionen die Qualität oder die Sichtweite.",
 		},
 		en = {
 			q = "Can I choose between classic and new models?",
-			a = "Yes, WoW: Forever offers classic and high-definition models. The choice is in the graphics options. If the game stutters, lower the graphics quality or view distance there too.",
+			a = "Yes: at your first login you choose a preset, Classic or Enhanced, and you can change it later in the options. Whether a character uses the classic or the high-definition model is set per character in the options or at a barber. If the game stutters, lower the quality or view distance in the graphics options.",
 		},
 		fr = {
 			q = "Puis-je choisir entre modèles classiques et nouveaux ?",
-			a = "Oui, WoW: Forever propose des modèles classiques et en haute définition. Le choix se fait dans les options graphiques. Si le jeu saccade, baissez-y aussi la qualité graphique ou la distance d'affichage.",
+			a = "Oui : à la première connexion, vous choisissez un préréglage, Classic ou Enhanced, modifiable ensuite dans les options. Le modèle classique ou haute définition se règle pour chaque personnage dans les options ou chez un barbier. Si le jeu saccade, baissez la qualité ou la distance d'affichage dans les options graphiques.",
 		},
 		es = {
 			q = "¿Puedo elegir entre modelos clásicos y nuevos?",
-			a = "Sí, WoW: Forever ofrece modelos clásicos y de alta definición. Se elige en las opciones de gráficos. Si el juego va a tirones, baja ahí también la calidad gráfica o la distancia de visión.",
+			a = "Sí: al conectarte por primera vez eliges un preajuste, Classic o Enhanced, y puedes cambiarlo luego en las opciones. El modelo clásico o de alta definición se elige para cada personaje en las opciones o en una barbería. Si el juego va a tirones, baja la calidad o la distancia de visión en las opciones de gráficos.",
 		},
 		it = {
 			q = "Posso scegliere tra modelli classici e nuovi?",
-			a = "Sì, WoW: Forever offre modelli classici e ad alta definizione. La scelta è nelle opzioni grafiche. Se il gioco scatta, abbassa lì anche la qualità grafica o la distanza visiva.",
+			a = "Sì: al primo accesso scegli un'impostazione, Classic o Enhanced, che puoi cambiare dopo nelle opzioni. Il modello classico o ad alta definizione si imposta per ogni personaggio nelle opzioni o dal barbiere. Se il gioco scatta, abbassa la qualità o la distanza visiva nelle opzioni grafiche.",
 		},
 		ru = {
 			q = "Можно ли выбрать между классическими и новыми моделями?",
-			a = "Да, WoW: Forever предлагает классические модели и модели высокой чёткости. Выбор — в настройках графики. Если игра подтормаживает, там же снизьте качество графики или дальность обзора.",
+			a = "Да: при первом входе вы выбираете пресет, Classic или Enhanced, и позже можете сменить его в настройках. Классическую модель или модель высокой чёткости выбирают для каждого персонажа в настройках или у парикмахера. Если игра подтормаживает, снизьте в настройках графики качество или дальность обзора.",
 		},
 		pt = {
 			q = "Posso escolher entre modelos clássicos e novos?",
-			a = "Sim, o WoW: Forever oferece modelos clássicos e em alta definição. A escolha fica nas opções de gráficos. Se o jogo travar, reduza ali também a qualidade gráfica ou a distância de visão.",
+			a = "Sim: no primeiro login você escolhe uma predefinição, Classic ou Enhanced, e pode trocá-la depois nas opções. O modelo clássico ou em alta definição é escolhido por personagem nas opções ou na barbearia. Se o jogo travar, reduza a qualidade ou a distância de visão nas opções de gráficos.",
 		},
 	},
 	{
