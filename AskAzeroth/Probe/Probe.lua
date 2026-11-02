@@ -1,4 +1,4 @@
--- luacheck: read globals UnitName UnitLevel UnitRace UnitClass UnitFactionGroup GetNormalizedRealmName GetRealZoneText GetSubZoneText IsInInstance InCombatLockdown IsEncounterInProgress C_Map UIParent
+-- luacheck: read globals UnitName UnitLevel UnitRace UnitClass UnitFactionGroup GetNormalizedRealmName GetRealZoneText GetSubZoneText IsInInstance InCombatLockdown IsEncounterInProgress C_Map UIParent CreateScrollBoxListLinearView ScrollUtil CreateDataProvider
 local _, ns = ...
 
 -- M0 spike (/aa probe): checks the language channels, raw and AceComm
@@ -559,14 +559,19 @@ commands.hide = {
 	end,
 }
 
--- Link test: do links in the addon's own texts get mouse events? Three
--- variants of the same line: a frame with a font string and
--- SetHyperlinksEnabled (what the glossary uses), the same without that call,
--- and a SimpleHTML frame. Each line has a custom link, an item link and an
--- "addon:" link.
+-- Link test: do links in the addon's own texts get mouse events? Each line
+-- has a custom link, an item link and an "addon:" link, in a frame with a
+-- font string and SetHyperlinksEnabled (the way the glossary does it):
+-- A on its own, D inside a frame that clips its children, E as the element
+-- of a scroll box list (like FAQ entries and thread answers), F prepared by
+-- GlossaryLinks.Enable itself (should show the glossary tooltip for Aggro).
+-- The first test showed that plain frames without SetHyperlinksEnabled and
+-- SimpleHTML frames get no link events.
 local linkTest
 
 local LINK_LINE = "%s:  |cff8ab4e8|Haskazeroth-glossary:aggro|hAggro|h|r   |cffa335ee|Hitem:6948|h[Item 6948]|h|r   |cff8ab4e8|Haddon:AskAzeroth:aggro|hAddon-Link|h|r"
+local LINE_WIDTH = 456
+local LINE_HEIGHT = 22
 
 local function TrySetScript(frame, name, handler, label)
 	local ok, err = pcall(frame.SetScript, frame, name, handler)
@@ -575,37 +580,28 @@ local function TrySetScript(frame, name, handler, label)
 	end
 end
 
-local function AddLinkLine(parent, label, kind, top)
-	local frame
-	local ok, err = pcall(function()
-		frame = CreateFrame(kind == "html" and "SimpleHTML" or "Frame", nil, parent)
-	end)
-	if not ok then
-		Log(L.PROBE_LINKS_ERROR, label, tostring(err))
-		return false
-	end
-	frame:SetPoint("TOPLEFT", 12, top)
-	frame:SetSize(456, 22)
+-- Puts the test line into frame (sized by the caller) and logs its events.
+-- With glossary, GlossaryLinks.Enable sets the link scripts instead.
+local function SetUpLinkLine(frame, label, glossary)
 	frame:EnableMouse(true)
-	local text = LINK_LINE:format(label)
-	if kind == "html" then
-		pcall(frame.SetFontObject, frame, "GameFontHighlight")
-		pcall(frame.SetText, frame, text)
-	else
-		local fontString = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
-		fontString:SetAllPoints()
-		fontString:SetJustifyH("LEFT")
-		fontString:SetText(text)
-		if kind == "enabled" then
-			local called = frame.SetHyperlinksEnabled and pcall(frame.SetHyperlinksEnabled, frame, true)
-			if not called then
-				Log(L.PROBE_LINKS_ERROR, label, "SetHyperlinksEnabled failed")
-			end
-		end
-	end
+	local fontString = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+	fontString:SetAllPoints()
+	fontString:SetJustifyH("LEFT")
+	fontString:SetText(LINK_LINE:format(label))
 	TrySetScript(frame, "OnEnter", function()
 		Log(L.PROBE_LINKS_MOUSE, label)
 	end, label)
+	if glossary then
+		ns.GlossaryLinks.Enable(frame)
+		frame:HookScript("OnHyperlinkEnter", function(_, link)
+			Log(L.PROBE_LINKS_EVENT, label, "enter", tostring(link))
+		end)
+		return
+	end
+	local called = frame.SetHyperlinksEnabled and pcall(frame.SetHyperlinksEnabled, frame, true)
+	if not called then
+		Log(L.PROBE_LINKS_ERROR, label, "SetHyperlinksEnabled failed")
+	end
 	TrySetScript(frame, "OnHyperlinkEnter", function(_, link)
 		Log(L.PROBE_LINKS_EVENT, label, "enter", tostring(link))
 	end, label)
@@ -615,7 +611,48 @@ local function AddLinkLine(parent, label, kind, top)
 	TrySetScript(frame, "OnHyperlinkClick", function(_, link, _, button)
 		Log(L.PROBE_LINKS_EVENT, label, "click " .. tostring(button), tostring(link))
 	end, label)
-	return true
+end
+
+local function AddLinkLine(parent, label, top, glossary)
+	local frame = CreateFrame("Frame", nil, parent)
+	frame:SetPoint("TOPLEFT", 12, top)
+	frame:SetSize(LINE_WIDTH, LINE_HEIGHT)
+	SetUpLinkLine(frame, label, glossary)
+end
+
+local function AddClippedLine(parent, label, top)
+	local clip = CreateFrame("Frame", nil, parent)
+	clip:SetPoint("TOPLEFT", 12, top)
+	clip:SetSize(LINE_WIDTH, LINE_HEIGHT)
+	clip:SetClipsChildren(true)
+	local frame = CreateFrame("Frame", nil, clip)
+	frame:SetPoint("TOPLEFT")
+	frame:SetSize(LINE_WIDTH, LINE_HEIGHT)
+	SetUpLinkLine(frame, label)
+end
+
+local function AddScrollBoxLine(parent, label, top)
+	local ok, err = pcall(function()
+		local scrollBox = CreateFrame("Frame", nil, parent, "WowScrollBoxList")
+		scrollBox:SetPoint("TOPLEFT", 12, top)
+		scrollBox:SetSize(LINE_WIDTH, LINE_HEIGHT + 4)
+		local scrollBar = CreateFrame("EventFrame", nil, parent, "MinimalScrollBar")
+		scrollBar:SetPoint("TOPLEFT", scrollBox, "TOPRIGHT", 2, 0)
+		scrollBar:SetPoint("BOTTOMLEFT", scrollBox, "BOTTOMRIGHT", 2, 0)
+		local view = CreateScrollBoxListLinearView()
+		view:SetElementExtent(LINE_HEIGHT)
+		view:SetElementInitializer("Frame", function(element)
+			if not element.probeLine then
+				element.probeLine = true
+				SetUpLinkLine(element, label)
+			end
+		end)
+		ScrollUtil.InitScrollBoxListWithScrollBar(scrollBox, scrollBar, view)
+		scrollBox:SetDataProvider(CreateDataProvider({ 1 }))
+	end)
+	if not ok then
+		Log(L.PROBE_LINKS_ERROR, label, tostring(err))
+	end
 end
 
 AddCommand("links", "links", L.PROBE_HELP_LINKS, function()
@@ -626,7 +663,7 @@ AddCommand("links", "links", L.PROBE_HELP_LINKS, function()
 	end
 	if not linkTest then
 		linkTest = ns.Widgets.Panel(UIParent)
-		linkTest:SetSize(480, 130)
+		linkTest:SetSize(480, 160)
 		linkTest:SetPoint("CENTER", 0, 120)
 		linkTest:SetFrameStrata("DIALOG")
 		local title = linkTest:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
@@ -634,26 +671,12 @@ AddCommand("links", "links", L.PROBE_HELP_LINKS, function()
 		title:SetPoint("RIGHT", -12, 0)
 		title:SetJustifyH("LEFT")
 		title:SetText(L.PROBE_LINKS_TITLE)
-		AddLinkLine(linkTest, "A", "enabled", -40)
-		AddLinkLine(linkTest, "B", "plain", -68)
-		linkTest.hasHtml = AddLinkLine(linkTest, "C", "html", -96)
+		AddLinkLine(linkTest, "A", -40)
+		AddClippedLine(linkTest, "D", -68)
+		AddScrollBoxLine(linkTest, "E", -96)
+		AddLinkLine(linkTest, "F", -126, true)
 	end
-	Log(L.PROBE_LINKS_API, YesNo(linkTest.SetHyperlinksEnabled ~= nil), YesNo(linkTest.hasHtml))
 	linkTest:Show()
-end)
-
-AddCommand("spells", "spells [text]", L.PROBE_HELP_SPELLS, function(args)
-	local listed, spellbook = ns.SpellRefs.Count()
-	Log(L.PROBE_SPELLS_COUNT, listed, spellbook)
-	if args ~= "" then
-		local found = ns.SpellRefs.Find(args)
-		for _, place in ipairs(found) do
-			Log(L.PROBE_SPELLS_FOUND, args:sub(place[1], place[2]), place[3])
-		end
-		if #found == 0 then
-			Log(L.PROBE_SPELLS_NONE)
-		end
-	end
 end)
 
 AddCommand("log", "log [lines]", L.PROBE_HELP_LOG, function(args)
