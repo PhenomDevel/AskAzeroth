@@ -316,31 +316,31 @@ ns.Faq.Add("travel", {
 		id = "travel-new-zones",
 		de = {
 			q = "Welche neuen Gebiete gibt es in WoW: Forever?",
-			a = "Zum Start kommen unter anderem Zephras Isle, die Riverglades, Shen'dralar und der Berg Hyjal dazu, dazu über tausend neue Quests. Wo sie liegen und für welche Stufen sie sind, zeigt dir die Weltkarte; frag hier, wenn du den Weg suchst.",
+			a = "WoW: Forever bringt neue und überarbeitete Gebiete, zum Beispiel Zephras Isle (das Startgebiet der Skyborne), die Riverglades und den Berg Hyjal, dazu über tausend neue Quests. Wo sie liegen und für welche Stufen sie sind, zeigt dir die Weltkarte; frag hier, wenn du den Weg suchst.",
 		},
 		en = {
 			q = "Which new zones does WoW: Forever have?",
-			a = "At launch, among others, Zephras Isle, the Riverglades, Shen'dralar and Mount Hyjal join, plus over a thousand new quests. The world map shows where they are and for which levels; ask here if you need directions.",
+			a = "WoW: Forever adds new and reworked zones, for example Zephras Isle (the Skyborne starting zone), the Riverglades and Mount Hyjal, plus over a thousand new quests. The world map shows where they are and for which levels; ask here if you need directions.",
 		},
 		fr = {
 			q = "Quelles nouvelles zones WoW: Forever propose-t-il ?",
-			a = "Au lancement arrivent entre autres l'île de Zephras, les Riverglades, Shen'dralar et le mont Hyjal, ainsi que plus d'un millier de nouvelles quêtes. La carte du monde montre où elles se trouvent et pour quels niveaux ; demandez ici si vous cherchez le chemin.",
+			a = "WoW: Forever ajoute des zones nouvelles ou remaniées, par exemple l'île de Zephras (la zone de départ des Skyborne), les Riverglades et le mont Hyjal, ainsi que plus d'un millier de nouvelles quêtes. La carte du monde montre où elles se trouvent et pour quels niveaux ; demandez ici si vous cherchez le chemin.",
 		},
 		es = {
 			q = "¿Qué zonas nuevas tiene WoW: Forever?",
-			a = "En el lanzamiento llegan, entre otras, la isla de Zephras, Riverglades, Shen'dralar y el Monte Hyjal, además de más de mil misiones nuevas. El mapa del mundo muestra dónde están y para qué niveles; pregunta aquí si necesitas indicaciones.",
+			a = "WoW: Forever añade zonas nuevas y renovadas, por ejemplo la isla de Zephras (la zona inicial de los Skyborne), Riverglades y el Monte Hyjal, además de más de mil misiones nuevas. El mapa del mundo muestra dónde están y para qué niveles; pregunta aquí si necesitas indicaciones.",
 		},
 		it = {
 			q = "Quali nuove zone ha WoW: Forever?",
-			a = "Al lancio arrivano, tra le altre, l'isola di Zephras, Riverglades, Shen'dralar e il Monte Hyjal, più oltre mille nuove missioni. La mappa del mondo mostra dove sono e per quali livelli; chiedi qui se ti servono indicazioni.",
+			a = "WoW: Forever aggiunge zone nuove e rinnovate, per esempio l'isola di Zephras (la zona iniziale degli Skyborne), Riverglades e il Monte Hyjal, più oltre mille nuove missioni. La mappa del mondo mostra dove sono e per quali livelli; chiedi qui se ti servono indicazioni.",
 		},
 		ru = {
 			q = "Какие новые зоны есть в WoW: Forever?",
-			a = "При запуске появляются, среди прочих, остров Зефрас, Riverglades, Шен'дралар и Хиджал, а также более тысячи новых заданий. Карта мира показывает, где они и для каких уровней; если нужна дорога, спросите здесь.",
+			a = "В WoW: Forever есть новые и переработанные зоны, например остров Зефрас (стартовая зона Skyborne), Riverglades и Хиджал, а также более тысячи новых заданий. Карта мира показывает, где они и для каких уровней; если нужна дорога, спросите здесь.",
 		},
 		pt = {
 			q = "Quais zonas novas o WoW: Forever tem?",
-			a = "No lançamento chegam, entre outras, a Ilha de Zephras, Riverglades, Shen'dralar e o Monte Hyjal, além de mais de mil missões novas. O mapa-múndi mostra onde ficam e para quais níveis; pergunte aqui se precisar de direções.",
+			a = "O WoW: Forever traz zonas novas e reformuladas, por exemplo a Ilha de Zephras (a zona inicial dos Skyborne), Riverglades e o Monte Hyjal, além de mais de mil missões novas. O mapa-múndi mostra onde ficam e para quais níveis; pergunte aqui se precisar de direções.",
 		},
 	},
 	{
