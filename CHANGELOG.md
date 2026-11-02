@@ -3,6 +3,10 @@
 ## Unreleased
 
 - In development, no release yet.
+- Notifications never pop up during combat any more; they follow right
+  after the fight. Whether they also wait in instances stays a setting.
+- "Test" button for notifications in the settings, and the notification
+  can be moved in Edit Mode (with "Reset position" in the settings).
 - The one-question-per-minute limit is visible: "Ask a question" and the
   ask button in the dialog count down the seconds until the next question.
 - Questions and answers show who wrote them with level, race and class
