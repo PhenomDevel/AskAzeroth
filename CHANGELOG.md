@@ -179,3 +179,5 @@
   follow topic by topic, until then entries appear in English. The FAQ points
   to Wowhead as the best place to look up quests, items and NPCs, with the
   address ready to copy, and has a new entry about it.
+- Hovering a blue glossary term or a spell name now shows its tooltip, and
+  clicking a term opens it in the glossary (the links were not recognised).
