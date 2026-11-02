@@ -68,31 +68,31 @@ ns.Faq.Add("warlock", {
 		id = "warlock-soul-shards",
 		de = {
 			q = "Was sind Seelensplitter?",
-			a = "Seelensplitter brauchst du für die meisten Dämonenbeschwörungen, Gesundheitssteine und Seelensteine. Du bekommst sie, wenn ein Gegner, der Erfahrung gibt, stirbt, während „Seele entziehen“ auf ihm wirkt. Sammle immer ein paar auf Vorrat.",
+			a = "Seelensplitter brauchst du für die meisten Dämonenbeschwörungen, Gesundheitssteine und Seelensteine. Du bekommst sie mit „Seele entziehen“, am sichersten, wenn ein Gegner, der Erfahrung gibt, stirbt, während der Zauber auf ihm wirkt. In WoW: Forever kann er auch schon während des Wirkens Splitter geben. Sammle immer ein paar auf Vorrat.",
 		},
 		en = {
 			q = "What are soul shards?",
-			a = "You need soul shards for most demon summons, healthstones and soulstones. You get one when an enemy that gives experience dies while Drain Soul is channelled on it. Always keep a few in stock.",
+			a = "You need soul shards for most demon summons, healthstones and soulstones. You get them with Drain Soul, most reliably when an enemy that gives experience dies while it is channelled on it. In WoW: Forever the spell can also give shards while you channel it. Always keep a few in stock.",
 		},
 		fr = {
 			q = "Que sont les fragments d'âme ?",
-			a = "Il vous faut des fragments d'âme pour la plupart des invocations de démons, les pierres de soins et les pierres d'âme. Vous en obtenez un quand un ennemi qui rapporte de l'expérience meurt pendant que vous canalisez Siphon d'âme sur lui. Gardez-en toujours quelques-uns en réserve.",
+			a = "Il vous faut des fragments d'âme pour la plupart des invocations de démons, les pierres de soins et les pierres d'âme. Vous les obtenez avec Siphon d'âme, le plus sûrement quand un ennemi qui rapporte de l'expérience meurt pendant que vous le canalisez sur lui. Dans WoW: Forever, le sort peut aussi en donner pendant la canalisation. Gardez-en toujours quelques-uns en réserve.",
 		},
 		es = {
 			q = "¿Qué son los fragmentos de alma?",
-			a = "Necesitas fragmentos de alma para la mayoría de invocaciones de demonios, piedras de salud y piedras de alma. Consigues uno cuando un enemigo que da experiencia muere mientras canalizas Drenar alma sobre él. Ten siempre unos cuantos de reserva.",
+			a = "Necesitas fragmentos de alma para la mayoría de invocaciones de demonios, piedras de salud y piedras de alma. Los consigues con Drenar alma, sobre todo cuando un enemigo que da experiencia muere mientras lo canalizas sobre él. En WoW: Forever el hechizo también puede darlos mientras lo canalizas. Ten siempre unos cuantos de reserva.",
 		},
 		it = {
 			q = "Che cosa sono i frammenti d'anima?",
-			a = "Ti servono frammenti d'anima per la maggior parte delle evocazioni di demoni, per le pietre della salute e per le pietre dell'anima. Ne ottieni uno quando un nemico che dà esperienza muore mentre incanali Risucchio d'Anima su di lui. Tienine sempre qualcuno di scorta.",
+			a = "Ti servono frammenti d'anima per la maggior parte delle evocazioni di demoni, per le pietre della salute e per le pietre dell'anima. Li ottieni con Risucchio d'Anima, con più sicurezza quando un nemico che dà esperienza muore mentre lo incanali su di lui. In WoW: Forever l'incantesimo può darne anche durante la canalizzazione. Tienine sempre qualcuno di scorta.",
 		},
 		ru = {
 			q = "Что такое осколки души?",
-			a = "Осколки души нужны для большинства призывов демонов, камней здоровья и камней души. Вы получаете осколок, когда враг, дающий опыт, умирает, пока вы применяете к нему «Похищение души». Всегда держите несколько в запасе.",
+			a = "Осколки души нужны для большинства призывов демонов, камней здоровья и камней души. Их дают «Похищением души», вернее всего, если враг, дающий опыт, умирает, пока вы применяете к нему это заклинание. В WoW: Forever оно может давать осколки и во время поддержания. Всегда держите несколько в запасе.",
 		},
 		pt = {
 			q = "O que são fragmentos de alma?",
-			a = "Você precisa de fragmentos de alma para a maioria das evocações de demônios, pedras de vida e pedras da alma. Você ganha um quando um inimigo que dá experiência morre enquanto você canaliza Drenar Alma nele. Tenha sempre alguns de reserva.",
+			a = "Você precisa de fragmentos de alma para a maioria das evocações de demônios, pedras de vida e pedras da alma. Você os ganha com Drenar Alma, com mais certeza quando um inimigo que dá experiência morre enquanto você canaliza o feitiço nele. No WoW: Forever o feitiço também pode dar fragmentos durante a canalização. Tenha sempre alguns de reserva.",
 		},
 	},
 	{
