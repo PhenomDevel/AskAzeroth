@@ -9,7 +9,8 @@ local _, ns = ...
 local Serializer = {}
 ns.Serializer = Serializer
 
--- Deep enough for a sync answer: list → question → answers → answer.
+-- Deep enough for a sync answer: list → question → answers → answer →
+-- FAQ references.
 local MAX_DEPTH = 6
 local MAX_ITEMS = 6000
 

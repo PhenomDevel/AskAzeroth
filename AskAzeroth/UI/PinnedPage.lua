@@ -84,6 +84,7 @@ local function Build(content)
 			+ TextHeight(Util.EscapeText(entry.question.title), "GameFontNormal", width - UNPIN_WIDTH - 8)
 			+ 4 + 14 + 8 + 14 + 2
 			+ TextHeight(Util.EscapeText(entry.answer.text), "GameFontHighlight", width)
+			+ ns.FaqRefs.Height(entry.answer.faq)
 			+ PAD + 4
 	end
 
@@ -135,6 +136,7 @@ local function Build(content)
 		row.text:SetPoint("TOPLEFT", row.who, "BOTTOMLEFT", 0, -2)
 		row.text:SetPoint("RIGHT", -PAD, 0)
 		row.text:SetWordWrap(true)
+		row.links = ns.FaqRefs.CreateLinks(row.bg, row.text)
 	end
 
 	local function FillRow(row, entry)
@@ -150,6 +152,7 @@ local function Build(content)
 			W.PlayerText(a.author, Players.GetClass(a.author)),
 			date("%Y-%m-%d %H:%M", a.created)))
 		row.text:SetText(Util.EscapeText(a.text))
+		row.links:Fill(a.faq)
 	end
 
 	local listView = CreateScrollBoxListLinearView()

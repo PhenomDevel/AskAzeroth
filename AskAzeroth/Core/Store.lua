@@ -407,14 +407,15 @@ function Store.Ask(lang, cat, title, body, ctx)
 	return wire, m.question
 end
 
-function Store.Answer(qid, text)
+-- faq (optional): list of FAQ ids the answer refers to.
+function Store.Answer(qid, text, faq)
 	local me = ns:GetPlayerFullName()
 	if not me then
 		return nil, "sender"
 	end
 	local now = Util.Now()
 	local q = questions[qid]
-	local wire = Protocol.EncodeAnswer({ id = Util.NewId(me, now), qid = qid, text = text, created = now })
+	local wire = Protocol.EncodeAnswer({ id = Util.NewId(me, now), qid = qid, text = text, faq = faq, created = now })
 	local m, reason = Protocol.Decode(wire, me, q and q.lang, now)
 	if not m then
 		return nil, reason

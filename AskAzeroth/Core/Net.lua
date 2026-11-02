@@ -63,8 +63,8 @@ function Net.Ask(lang, cat, title, body)
 	return q
 end
 
-function Net.Answer(qid, text)
-	local wire, a = Store.Answer(qid, text)
+function Net.Answer(qid, text, faq)
+	local wire, a = Store.Answer(qid, text, faq)
 	if not wire then
 		return nil, a
 	end

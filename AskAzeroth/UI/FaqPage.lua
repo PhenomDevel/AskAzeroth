@@ -1,54 +1,29 @@
 -- luacheck: read globals CreateScrollBoxListLinearView ScrollUtil CreateDataProvider
 local _, ns = ...
 
--- Built-in FAQ (Core/Data/Faq*.lua): on the left search, language switch,
--- topic filter (Core/Data/FaqTopics.lua) and the list of entries; the
+-- Built-in FAQ (Core/Faq.lua, entries in Core/Data/Faq/): on the left
+-- search, language switch, topic dropdown and the list of entries; the
 -- selected answer on the right with "Ask a question" (preselecting the
 -- question category of the entry's topic) for when it did not help. Shown
--- in German for German clients, otherwise in English.
+-- in the client's language (English for entries not translated yet); the
+-- language switch shows any other. Above the bottom bar a hint points to
+-- Wowhead with the address in a field to copy. UI.ShowFaq(id) opens an
+-- entry, e.g. from a FAQ link under an answer.
 local L = ns.L
 local C = ns.C
 local UI = ns.UI
 local W = ns.Widgets
+local Faq = ns.Faq
+local FaqRefs = ns.FaqRefs
+local FaqSearch = ns.FaqSearch
 
 local LIST_WIDTH = 360
 local PAD = 12
 local SIDE = 22
 local ROW_HEIGHT = 50
-local FAQ_LANGUAGES = { "en", "de" }
-
--- Topic colours, in the palette of the question categories.
-local TOPIC_COLORS = {
-	addon = W.GOLD,
-	start = W.RGB("cfc4ad"),
-	quest = W.CategoryColor("quest"),
-	class = W.CategoryColor("class"),
-	combat = W.RGB("e37d73"),
-	travel = W.RGB("8cc7db"),
-	gold = W.RGB("edcc6b"),
-	prof = W.CategoryColor("prof"),
-	group = W.CategoryColor("dungeon"),
-	social = W.RGB("e399c7"),
-	ui = W.CategoryColor("ui"),
-}
-
-local function TopicColor(key)
-	return TOPIC_COLORS[key] or W.SOFT
-end
-
--- Topic name in its colour.
-local function TopicText(key)
-	local topic = C.GetFaqTopic(key)
-	return ("|c%s%s|r"):format(W.Hex(TopicColor(key)), topic and topic.label or tostring(key))
-end
-
-local function DefaultLanguage()
-	local lang = C.GetClientLanguage()
-	return ns.FAQ[lang] and lang or "en"
-end
 
 local function Build(content)
-	local page = { cats = {}, search = "", lang = DefaultLanguage() }
+	local page = { search = "", lang = FaqRefs.ReaderLanguage() }
 
 	-- Left column.
 	local listPane = CreateFrame("Frame", nil, content)
@@ -60,6 +35,7 @@ local function Build(content)
 	local filters = CreateFrame("Frame", nil, listPane)
 	filters:SetPoint("TOPLEFT")
 	filters:SetPoint("TOPRIGHT", -1, 0)
+	filters:SetHeight(PAD + 28 + 8 + 28 + PAD)
 	W.EdgeLine(filters, "BOTTOM")
 
 	local switch = W.Button(filters, "", 90)
@@ -67,8 +43,13 @@ local function Build(content)
 	switch:SetPoint("TOPRIGHT", -PAD, -PAD)
 	W.Tooltip(switch, L.FAQ_LANGUAGE, L.FAQ_LANGUAGE_TIP)
 	switch:SetScript("OnClick", function()
-		page.lang = page.lang == FAQ_LANGUAGES[1] and FAQ_LANGUAGES[2] or FAQ_LANGUAGES[1]
-		page.selected = nil
+		local languages = C.FAQ_LANGUAGES
+		for i, lang in ipairs(languages) do
+			if lang == page.lang then
+				page.lang = languages[i % #languages + 1]
+				break
+			end
+		end
 		page:Refresh()
 	end)
 
@@ -79,24 +60,24 @@ local function Build(content)
 	search:SetPoint("TOPLEFT", PAD, -PAD)
 	search:SetPoint("RIGHT", switch, "LEFT", -8, 0)
 
-	local chips = {}
-	local all = W.Chip(filters, function()
-		wipe(page.cats)
+	-- Topics with entries, each with its count; nil = all topics.
+	local function TopicOptions()
+		local options = { { value = false, label = L.FAQ_ALL_TOPICS:format(#Faq.GetAll()) } }
+		for _, topic in ipairs(C.FAQ_TOPICS) do
+			local count = Faq.Count(topic.key)
+			if count > 0 then
+				options[#options + 1] = { value = topic.key, label = ("%s (%d)"):format(FaqRefs.TopicText(topic.key), count) }
+			end
+		end
+		return options
+	end
+	local topicDropdown = W.Dropdown(filters, LIST_WIDTH - 2 * PAD, TopicOptions, function()
+		return page.topic or false
+	end, function(value)
+		page.topic = value or nil
 		page:Refresh()
 	end)
-	all:SetLabel(L.QUEUE_ALL)
-	chips[1] = all
-	for _, topic in ipairs(C.FAQ_TOPICS) do
-		local chip = W.Chip(filters, function(self)
-			page.cats[self.key] = not page.cats[self.key] or nil
-			page:Refresh()
-		end, TopicColor(topic.key))
-		chip.key = topic.key
-		chip:SetLabel(topic.label)
-		chips[#chips + 1] = chip
-	end
-	local chipsHeight = W.WrapChips(chips, filters, PAD, -PAD - 28 - 10, LIST_WIDTH - 2 * PAD, 6)
-	filters:SetHeight(PAD + 28 + 10 + chipsHeight + PAD)
+	topicDropdown:SetPoint("TOPLEFT", PAD, -PAD - 28 - 8)
 
 	local listBox = CreateFrame("Frame", nil, listPane)
 	listBox:SetPoint("TOPLEFT", filters, "BOTTOMLEFT")
@@ -135,8 +116,8 @@ local function Build(content)
 			end)
 		end
 		row.entry = entry
-		row.title:SetText(entry.q)
-		row.meta:SetText(TopicText(entry.topic))
+		row.title:SetText((Faq.GetText(entry, page.lang)))
+		row.meta:SetText(FaqRefs.TopicText(entry.topic))
 		row:SetSelectedLook(entry == page.selected)
 	end)
 	ScrollUtil.InitScrollBoxListWithScrollBar(scrollBox, scrollBar, listView)
@@ -166,10 +147,44 @@ local function Build(content)
 	askHint:SetPoint("RIGHT", ask, "LEFT", -12, 0)
 	askHint:SetWordWrap(false)
 
+	-- Wowhead hint: addons cannot open web pages, so the address sits in a
+	-- read-only field that selects itself for Ctrl+C.
+	local wowhead = CreateFrame("Frame", nil, detail)
+	wowhead:SetPoint("BOTTOMLEFT", bottom, "TOPLEFT")
+	wowhead:SetPoint("BOTTOMRIGHT", bottom, "TOPRIGHT")
+	wowhead:SetHeight(40)
+	W.EdgeLine(wowhead, "TOP")
+	local url = W.EditBox(wowhead, 190)
+	url:SetHeight(24)
+	url:SetPoint("RIGHT", -SIDE, 0)
+	url:SetText(C.WOWHEAD_URL)
+	url:SetCursorPosition(0)
+	url:SetScript("OnTextChanged", function(self, userInput)
+		if userInput then
+			self:SetText(C.WOWHEAD_URL)
+			self:HighlightText()
+		end
+	end)
+	url:HookScript("OnEditFocusGained", function(self)
+		self:HighlightText()
+	end)
+	url:HookScript("OnEditFocusLost", function(self)
+		self:HighlightText(0, 0)
+		self:SetCursorPosition(0)
+	end)
+	W.Tooltip(url, "Wowhead", L.FAQ_WOWHEAD_TIP)
+	local wowheadHint = W.Text(wowhead, "GameFontHighlightSmall", W.SOFT)
+	wowheadHint:SetPoint("LEFT", SIDE, 0)
+	wowheadHint:SetPoint("RIGHT", url, "LEFT", -10, 0)
+	wowheadHint:SetJustifyH("LEFT")
+	wowheadHint:SetWordWrap(true)
+	wowheadHint:SetMaxLines(2)
+	wowheadHint:SetText(L.FAQ_WOWHEAD)
+
 	-- The answer can be long: one scrolling element with everything.
 	local textBox = CreateFrame("Frame", nil, detail, "WowScrollBoxList")
 	textBox:SetPoint("TOPLEFT", SIDE, -18)
-	textBox:SetPoint("BOTTOMRIGHT", bottom, "TOPRIGHT", -SIDE - 12, 8)
+	textBox:SetPoint("BOTTOMRIGHT", wowhead, "TOPRIGHT", -SIDE - 12, 8)
 	local textBar = CreateFrame("EventFrame", nil, detail, "MinimalScrollBar")
 	textBar:SetPoint("TOPLEFT", textBox, "TOPRIGHT", 4, 0)
 	textBar:SetPoint("BOTTOMLEFT", textBox, "BOTTOMRIGHT", 4, 0)
@@ -186,7 +201,8 @@ local function Build(content)
 
 	local function DetailHeight(entry)
 		local width = math.max(100, textBox:GetWidth() - 4)
-		return 14 + 8 + TextHeight(entry.q, W.TITLE_FONT, width) + 14 + TextHeight(entry.a, "GameFontHighlight", width, 3) + 12
+		local q, a = Faq.GetText(entry, page.lang)
+		return 14 + 8 + TextHeight(q, W.TITLE_FONT, width) + 14 + TextHeight(a, "GameFontHighlight", width, 3) + 12
 	end
 
 	local detailView = CreateScrollBoxListLinearView()
@@ -207,9 +223,10 @@ local function Build(content)
 			frame.text:SetWordWrap(true)
 			frame.text:SetSpacing(3)
 		end
-		frame.category:SetText(TopicText(entry.topic))
-		frame.title:SetText(entry.q)
-		frame.text:SetText(entry.a)
+		local q, a = Faq.GetText(entry, page.lang)
+		frame.category:SetText(FaqRefs.TopicText(entry.topic))
+		frame.title:SetText(q)
+		frame.text:SetText(a)
 	end)
 	ScrollUtil.InitScrollBoxListWithScrollBar(textBox, textBar, detailView)
 
@@ -218,22 +235,27 @@ local function Build(content)
 	none:SetText(L.QUEUE_NO_MATCH)
 
 	function page:Refresh()
-		all:SetActive(next(self.cats) == nil)
-		for i = 2, #chips do
-			chips[i]:SetActive(self.cats[chips[i].key] == true)
-		end
 		switch:SetText(C.LANGUAGE_NAMES[self.lang])
-		local list = {}
+		topicDropdown:Refresh()
+		local source = self.topic and Faq.GetTopic(self.topic) or Faq.GetAll()
+		-- Word search (all words, best match first); plain text search for
+		-- searches without a usable word, e.g. while the first letters are
+		-- typed.
+		local list = source
+		if self.search ~= "" then
+			list = FaqSearch.Filter(source, self.search, { self.lang, "en" })
+			if not list then
+				list = {}
+				for _, entry in ipairs(source) do
+					if FaqSearch.Contains(entry, self.search, self.lang) then
+						list[#list + 1] = entry
+					end
+				end
+			end
+		end
 		local selectedVisible = false
-		for _, entry in ipairs(ns.FAQ[self.lang] or {}) do
-			local ok = next(self.cats) == nil or self.cats[entry.topic]
-			if ok and self.search ~= "" then
-				ok = (entry.q .. "\n" .. entry.a):lower():find(self.search, 1, true) ~= nil
-			end
-			if ok then
-				list[#list + 1] = entry
-				selectedVisible = selectedVisible or entry == self.selected
-			end
+		for _, entry in ipairs(list) do
+			selectedVisible = selectedVisible or entry == self.selected
 		end
 		-- Keep the selection while it matches, else show the first entry.
 		if not selectedVisible then
@@ -245,7 +267,32 @@ local function Build(content)
 		none:SetShown(self.selected == nil)
 	end
 
+	-- Shows one entry: its topic, no search, the entry selected and in view.
+	function page:Select(id)
+		local entry = Faq.Get(id)
+		if not entry then
+			return
+		end
+		self.topic = entry.topic
+		self.search = ""
+		search:SetText("")
+		self.selected = entry
+		self:Refresh()
+		if scrollBox.ScrollToElementData then
+			scrollBox:ScrollToElementData(entry)
+		end
+	end
+
 	return page
 end
 
 UI.RegisterPage(UI.PAGE_FAQ, L.PAGE_FAQ, Build)
+
+-- Opens the FAQ on an entry (FAQ links under answers).
+function UI.ShowFaq(id)
+	UI.Show(UI.PAGE_FAQ)
+	local page = UI.GetCurrentPage()
+	if page and page.Select then
+		page:Select(id)
+	end
+end
