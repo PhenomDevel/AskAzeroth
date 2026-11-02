@@ -3,6 +3,9 @@
 ## Unreleased
 
 - In development, no release yet.
+- Questions and answers show who wrote them with level, race and class
+  (e.g. "Level 12 Night Elf Warrior"), in the list, the thread and pinned
+  answers. Answers from older addon versions show the name only.
 - New FAQ layout: pick a topic on the left, the questions are listed as
   bars below each other and a click unfolds the answer. Search stays, the
   FAQ language is now a dropdown, and the Wowhead hint is a highlighted

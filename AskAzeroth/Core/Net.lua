@@ -64,7 +64,8 @@ function Net.Ask(lang, cat, title, body)
 end
 
 function Net.Answer(qid, text, faq)
-	local wire, a = Store.Answer(qid, text, faq)
+	local own = Net.GetPlayerContext()
+	local wire, a = Store.Answer(qid, text, faq, { lvl = own.lvl, race = own.race, class = own.class })
 	if not wire then
 		return nil, a
 	end

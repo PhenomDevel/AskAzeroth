@@ -5,11 +5,11 @@ local _, ns = ...
 -- serialized tables with short keys; t is the type.
 --
 --   Q   { t, i = id, c = category, ti = title, b = body?, x = context?, ts = created }
---   A   { t, i = id, q = question id, tx = text, f = FAQ ids?, ts = created }
+--   A   { t, i = id, q = question id, tx = text, f = FAQ ids?, x = context?, ts = created }
 --   S   { t, q = question id, ts = solved at }
 --   D   { t, q = question id }
 --   SR  { t, k = { known question ids } }
---   SP  { t, qs = { { i, a = author, c, ti, b?, x?, ts, an = { { i, a, tx, f?, ts } } } } }
+--   SP  { t, qs = { { i, a = author, c, ti, b?, x?, ts, an = { { i, a, tx, f?, x?, ts } } } } }
 --
 -- Decode returns a normalized message or nil plus a reason. It checks types,
 -- lengths, lists and times; who may send what is checked by the store, which
@@ -113,9 +113,18 @@ local function ReadAnswer(m, qid, author, now)
 	if not IsTime(m.ts, now) then
 		return nil, "time"
 	end
-	-- FAQ references are optional extras: invalid ones are dropped, the
+	-- FAQ references and the answerer's context (level, race, class; sent
+	-- since 2026-11) are optional extras: invalid ones are dropped, the
 	-- answer stays.
-	return { id = m.i, qid = qid, author = author, text = text, faq = ns.Faq.CleanRefs(m.f), created = m.ts }
+	local ctx = CleanContext(m.x)
+	if ctx then
+		ctx.zone = nil
+		ctx.faction = nil
+		if next(ctx) == nil then
+			ctx = nil
+		end
+	end
+	return { id = m.i, qid = qid, author = author, text = text, faq = ns.Faq.CleanRefs(m.f), ctx = ctx, created = m.ts }
 end
 
 --------------------------------------------------------------------------------
@@ -240,7 +249,7 @@ function Protocol.EncodeQuestion(q)
 end
 
 function Protocol.EncodeAnswer(a)
-	return Serializer.Serialize({ t = "A", i = a.id, q = a.qid, tx = a.text, f = a.faq, ts = a.created })
+	return Serializer.Serialize({ t = "A", i = a.id, q = a.qid, tx = a.text, f = a.faq, x = WireContext(a.ctx), ts = a.created })
 end
 
 function Protocol.EncodeSolved(qid, time)
@@ -259,7 +268,7 @@ local function SyncEntry(q, answers, count)
 	local list = {}
 	for i = 1, count do
 		local a = answers[i]
-		list[i] = { i = a.id, a = a.author, tx = a.text, f = a.faq, ts = a.created }
+		list[i] = { i = a.id, a = a.author, tx = a.text, f = a.faq, x = WireContext(a.ctx), ts = a.created }
 	end
 	return { i = q.id, a = q.author, c = q.cat, ti = q.title, b = q.body, x = WireContext(q.ctx), ts = q.created, an = list }
 end

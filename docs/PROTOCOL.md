@@ -45,11 +45,11 @@ messages small.
 | Type | Fields | Who may send it |
 |---|---|---|
 | `Q` question | `i` id, `c` category, `ti` title, `b` body (optional), `x` context (optional), `ts` created | the author |
-| `A` answer | `i` id, `q` question id, `tx` text, `f` FAQ ids (optional), `ts` created | anyone |
+| `A` answer | `i` id, `q` question id, `tx` text, `f` FAQ ids (optional), `x` answerer context `{ l, r, k }` (optional, level/race/class), `ts` created | anyone |
 | `S` solved | `q` question id, `ts` time | the question's author |
 | `D` withdrawn | `q` question id | the question's author |
 | `SR` sync request | `k` list of known question ids | anyone |
-| `SP` sync answer | `qs` list of questions with `a` author and `an` answers (`i`, `a`, `tx`, `f`, `ts`) | anyone |
+| `SP` sync answer | `qs` list of questions with `a` author and `an` answers (`i`, `a`, `tx`, `f`, `x`, `ts`) | anyone |
 
 The author of `Q`, `A`, `S` and `D` is always the sender reported by the
 game (`Name-Realm`); it is never part of the message. Only `SP` carries
