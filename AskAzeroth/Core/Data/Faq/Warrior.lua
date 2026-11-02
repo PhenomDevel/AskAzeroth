@@ -37,31 +37,31 @@ ns.Faq.Add("warrior", {
 		id = "warrior-stances",
 		de = {
 			q = "Was sind Haltungen?",
-			a = "Haltungen verändern, welche Fähigkeiten du nutzen kannst. In der Kampfhaltung kämpfst du anfangs, die Verteidigungshaltung ist zum Tanken, die Berserkerhaltung für viel Schaden. Beim Wechsel verlierst du einen Teil deiner Wut, also wechsle nicht ständig.",
+			a = "Haltungen verändern, welche Fähigkeiten du nutzen kannst. In der Kampfhaltung kämpfst du anfangs, die Verteidigungshaltung ist zum Tanken, die Berserkerhaltung für viel Schaden. Beim Wechsel behältst du nur einen kleinen Teil deiner Wut, also wechsle nicht ständig.",
 		},
 		en = {
 			q = "What are stances?",
-			a = "Stances change which abilities you can use. Battle Stance is where you start, Defensive Stance is for tanking, Berserker Stance for high damage. Switching costs part of your rage, so do not switch all the time.",
+			a = "Stances change which abilities you can use. Battle Stance is where you start, Defensive Stance is for tanking, Berserker Stance for high damage. When you switch you keep only a little of your rage, so do not switch all the time.",
 		},
 		fr = {
 			q = "Que sont les postures ?",
-			a = "Les postures changent les techniques que vous pouvez utiliser. Posture de combat est celle de départ, Posture défensive sert à tanker, Posture berserker à infliger de gros dégâts. Changer coûte une partie de votre rage, alors ne changez pas sans arrêt.",
+			a = "Les postures changent les techniques que vous pouvez utiliser. Posture de combat est celle de départ, Posture défensive sert à tanker, Posture berserker à infliger de gros dégâts. En changeant, vous ne gardez qu'un peu de votre rage, alors ne changez pas sans arrêt.",
 		},
 		es = {
 			q = "¿Qué son las actitudes?",
-			a = "Las actitudes cambian qué habilidades puedes usar. Actitud de batalla es la inicial, Actitud defensiva sirve para tanquear y Actitud rabiosa para hacer mucho daño. Cambiar cuesta parte de tu ira, así que no cambies constantemente.",
+			a = "Las actitudes cambian qué habilidades puedes usar. Actitud de batalla es la inicial, Actitud defensiva sirve para tanquear y Actitud rabiosa para hacer mucho daño. Al cambiar solo conservas un poco de tu ira, así que no cambies constantemente.",
 		},
 		it = {
 			q = "Che cosa sono le posture?",
-			a = "Le posture cambiano le abilità che puoi usare. Postura da Battaglia è quella iniziale, Postura Difensiva serve per fare da tank, Postura del Berserker per danni elevati. Cambiare costa parte dell'ira, quindi non cambiare di continuo.",
+			a = "Le posture cambiano le abilità che puoi usare. Postura da Battaglia è quella iniziale, Postura Difensiva serve per fare da tank, Postura del Berserker per danni elevati. Quando cambi conservi solo un po' di ira, quindi non cambiare di continuo.",
 		},
 		ru = {
 			q = "Что такое стойки?",
-			a = "Стойки определяют, какие способности вам доступны. «Боевая стойка» — начальная, «Оборонительная стойка» для танкования, «Стойка берсерка» для большого урона. Смена стойки стоит части ярости, поэтому не переключайтесь постоянно.",
+			a = "Стойки определяют, какие способности вам доступны. «Боевая стойка» — начальная, «Оборонительная стойка» для танкования, «Стойка берсерка» для большого урона. При смене стойки сохраняется лишь немного ярости, поэтому не переключайтесь постоянно.",
 		},
 		pt = {
 			q = "O que são posturas?",
-			a = "Posturas mudam quais habilidades você pode usar. Postura de Batalha é a inicial, Postura Defensiva serve para tanquear, Postura de Berserker para muito dano. Trocar custa parte da sua raiva, então não troque o tempo todo.",
+			a = "Posturas mudam quais habilidades você pode usar. Postura de Batalha é a inicial, Postura Defensiva serve para tanquear, Postura de Berserker para muito dano. Ao trocar você só mantém um pouco da sua raiva, então não troque o tempo todo.",
 		},
 	},
 	{
@@ -378,31 +378,31 @@ ns.Faq.Add("warrior", {
 		id = "warrior-downtime",
 		de = {
 			q = "Ich muss nach jedem Kampf lange essen. Ist das normal?",
-			a = "Ja, Krieger können sich nicht selbst heilen. Iss nach den Kämpfen, lern Erste Hilfe für Verbände und nimm immer bessere Ausrüstung mit, besonders eine starke Waffe. Mit einem Heiler in der Gruppe levelst du deutlich schneller.",
+			a = "Ja, Krieger haben kaum Selbstheilung. In WoW: Forever hilft „Siegesrausch“: Nach einem Sieg kannst du ihn kurz einsetzen, er macht Schaden und heilt dich etwas. Iss trotzdem nach den Kämpfen, lern Erste Hilfe für Verbände und rüste dich laufend auf, besonders die Waffe. Mit einem Heiler in der Gruppe levelst du deutlich schneller.",
 		},
 		en = {
 			q = "I have to eat for ages after every fight. Is that normal?",
-			a = "Yes, warriors cannot heal themselves. Eat after fights, learn first aid for bandages and keep upgrading your gear, especially your weapon. With a healer in your group you level much faster.",
+			a = "Yes, warriors have very little self-healing. In WoW: Forever Victory Rush helps: after you win a fight you can use it for a short time, and it deals damage and heals you a bit. Still eat after fights, learn first aid for bandages and keep upgrading your gear, especially your weapon. With a healer in your group you level much faster.",
 		},
 		fr = {
 			q = "Je dois manger longtemps après chaque combat. C'est normal ?",
-			a = "Oui, les guerriers ne peuvent pas se soigner eux-mêmes. Mangez après les combats, apprenez les premiers soins pour les bandages et améliorez sans cesse votre équipement, surtout votre arme. Avec un soigneur dans le groupe, vous montez bien plus vite.",
+			a = "Oui, les guerriers n'ont presque pas de soins personnels. Dans WoW: Forever, Ivresse de la victoire aide : après une victoire, vous pouvez l'utiliser brièvement, elle inflige des dégâts et vous soigne un peu. Mangez quand même après les combats, apprenez les premiers soins pour les bandages et améliorez sans cesse votre équipement, surtout votre arme. Avec un soigneur dans le groupe, vous montez bien plus vite.",
 		},
 		es = {
 			q = "Tengo que comer mucho rato después de cada combate. ¿Es normal?",
-			a = "Sí, los guerreros no pueden curarse a sí mismos. Come tras los combates, aprende primeros auxilios para las vendas y mejora tu equipo, sobre todo el arma. Con un sanador en el grupo subes mucho más rápido.",
+			a = "Sí, los guerreros apenas pueden curarse. En WoW: Forever ayuda Arremetida victoriosa: tras ganar un combate puedes usarla un momento, hace daño y te cura un poco. Aun así, come tras los combates, aprende primeros auxilios para las vendas y mejora tu equipo, sobre todo el arma. Con un sanador en el grupo subes mucho más rápido.",
 		},
 		it = {
 			q = "Devo mangiare a lungo dopo ogni combattimento. È normale?",
-			a = "Sì, i guerrieri non possono curarsi da soli. Mangia dopo i combattimenti, impara il primo soccorso per le bende e migliora continuamente l'equipaggiamento, soprattutto l'arma. Con un guaritore nel gruppo sali di livello molto più in fretta.",
+			a = "Sì, i guerrieri hanno pochissime cure proprie. In WoW: Forever aiuta Impeto della Vittoria: dopo aver vinto un combattimento puoi usarlo per poco tempo, infligge danni e ti cura un po'. Mangia comunque dopo i combattimenti, impara il primo soccorso per le bende e migliora continuamente l'equipaggiamento, soprattutto l'arma. Con un guaritore nel gruppo sali di livello molto più in fretta.",
 		},
 		ru = {
 			q = "После каждого боя приходится долго есть. Это нормально?",
-			a = "Да, воины не умеют лечить себя. Ешьте после боёв, изучите первую помощь ради бинтов и постоянно улучшайте экипировку, особенно оружие. С лекарем в группе прокачка идёт гораздо быстрее.",
+			a = "Да, у воинов почти нет самолечения. В WoW: Forever помогает «Победный раж»: после победы его можно ненадолго применить, он наносит урон и немного лечит. Всё равно ешьте после боёв, изучите первую помощь ради бинтов и постоянно улучшайте экипировку, особенно оружие. С лекарем в группе прокачка идёт гораздо быстрее.",
 		},
 		pt = {
 			q = "Preciso comer muito tempo depois de cada luta. Isso é normal?",
-			a = "Sim, guerreiros não conseguem se curar. Coma após as lutas, aprenda primeiros socorros para fazer ataduras e melhore sempre o equipamento, principalmente a arma. Com um curador no grupo você sobe de nível bem mais rápido.",
+			a = "Sim, guerreiros quase não têm autocura. No WoW: Forever ajuda a Vitória Impetuosa: depois de vencer uma luta você pode usá-la por pouco tempo, ela causa dano e cura um pouco. Mesmo assim, coma após as lutas, aprenda primeiros socorros para fazer ataduras e melhore sempre o equipamento, principalmente a arma. Com um curador no grupo você sobe de nível bem mais rápido.",
 		},
 	},
 	{
