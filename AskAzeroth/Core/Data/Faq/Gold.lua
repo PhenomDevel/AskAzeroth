@@ -409,31 +409,31 @@ ns.Faq.Add("gold", {
 		id = "gold-bank",
 		de = {
 			q = "Wie funktioniert die Bank?",
-			a = "Bei den Bankiers in den Hauptstädten lagerst du Gegenstände, die du nicht ständig brauchst. Weitere Taschenplätze in der Bank kannst du gegen Gold dazukaufen. Die Bank gehört nur diesem Charakter.",
+			a = "Bei den Bankiers in den Hauptstädten lagerst du Gegenstände, die du nicht ständig brauchst. Weitere Taschenplätze in der Bank kannst du gegen Gold dazukaufen und dort eigene Taschen hineinstecken.",
 		},
 		en = {
 			q = "How does the bank work?",
-			a = "At the bankers in capital cities you store items you do not need all the time. You can buy more bag slots in the bank for gold. The bank belongs to this character only.",
+			a = "At the bankers in capital cities you store items you do not need all the time. You can buy more bag slots in the bank for gold and put your own bags in them.",
 		},
 		fr = {
 			q = "Comment fonctionne la banque ?",
-			a = "Chez les banquiers des capitales, vous entreposez les objets dont vous n'avez pas besoin en permanence. Vous pouvez acheter des emplacements de sac supplémentaires à la banque contre de l'or. La banque appartient à ce personnage uniquement.",
+			a = "Chez les banquiers des capitales, vous entreposez les objets dont vous n'avez pas besoin en permanence. Vous pouvez acheter des emplacements de sac supplémentaires à la banque contre de l'or et y placer vos propres sacs.",
 		},
 		es = {
 			q = "¿Cómo funciona el banco?",
-			a = "Con los banqueros de las capitales guardas objetos que no necesitas siempre. Puedes comprar más ranuras de bolsa en el banco con oro. El banco pertenece solo a este personaje.",
+			a = "Con los banqueros de las capitales guardas objetos que no necesitas siempre. Puedes comprar más ranuras de bolsa en el banco con oro y meter en ellas tus propias bolsas.",
 		},
 		it = {
 			q = "Come funziona la banca?",
-			a = "Dai banchieri delle capitali depositi gli oggetti che non ti servono sempre. Puoi comprare altri spazi per borse in banca con l'oro. La banca appartiene solo a questo personaggio.",
+			a = "Dai banchieri delle capitali depositi gli oggetti che non ti servono sempre. Puoi comprare altri spazi per borse in banca con l'oro e metterci le tue borse.",
 		},
 		ru = {
 			q = "Как работает банк?",
-			a = "У банкиров в столицах вы храните предметы, которые нужны не постоянно. За золото в банке можно купить дополнительные ячейки для сумок. Банк принадлежит только этому персонажу.",
+			a = "У банкиров в столицах вы храните предметы, которые нужны не постоянно. За золото в банке можно купить дополнительные ячейки и положить в них свои сумки.",
 		},
 		pt = {
 			q = "Como funciona o banco?",
-			a = "Com os banqueiros das capitais você guarda itens que não precisa o tempo todo. Dá para comprar mais espaços de bolsa no banco com ouro. O banco pertence só a este personagem.",
+			a = "Com os banqueiros das capitais você guarda itens que não precisa o tempo todo. Dá para comprar mais espaços de bolsa no banco com ouro e colocar neles suas próprias bolsas.",
 		},
 	},
 	{
