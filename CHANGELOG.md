@@ -61,6 +61,9 @@
 - FAQ: 12 more gold and trade questions (coins, trading, scams, cash on
   delivery, mail expiry, auction fees, bid and buyout, bank, stacks,
   destroying items, saving for a mount, unique items).
+- FAQ: 13 more group and dungeon questions (group finder playstyles and
+  listings, group size, dungeon XP, entrances, target markers, wipes,
+  leaving, loot rules, resets, launch raids, raid groups, being new).
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
   Players, FAQ and Settings.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
