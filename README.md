@@ -11,7 +11,7 @@
 New to World of Warcraft Forever? Ask your question in game and players who
 know the answer reply in a thread. There's no website and no external tool:
 questions and answers go from player to player over hidden addon channels,
-one per language. AskAzeroth is in development; there is no release yet.
+one per language.
 
 ## Supported versions
 
@@ -25,8 +25,6 @@ realms. Classic Era and other clients are not supported.
 
 ## Installation
 
-AskAzeroth isn't released yet. Once it is:
-
 1. Install it with the CurseForge or Wago app, or download the zip from
    [GitHub releases](https://github.com/PhenomDevel/AskAzeroth/releases/latest).
 2. Manual install: extract `AskAzeroth` into
@@ -36,8 +34,6 @@ AskAzeroth isn't released yet. Once it is:
 What changed: [CHANGELOG.md](https://github.com/PhenomDevel/AskAzeroth/blob/main/CHANGELOG.md)
 
 ## Features
-
-In the first release:
 
 - **Ask a question** with a category (quest, class, dungeon, profession,
   interface, other), a short summary and optional details.

@@ -65,9 +65,9 @@ curl -s https://raw.githubusercontent.com/BigWigsMods/packager/master/release.sh
 - No CurseForge or Wago project yet. Once they exist, add
   `## X-Curse-Project-ID` and `## X-Wago-ID` to the `.toc` (after
   `## X-Website`), list both here like Guild Finder Forever does, set the
-  repository secrets and replace the "coming soon" badge in `README.md`.
+  repository secrets (`CF_API_KEY`, `WAGO_API_TOKEN`) and replace the
+  "coming soon" badge in `README.md` and the links under *Installation*.
 - Before the first release (v1.0.0): the in-game checks in `docs/SPIKE.md`
-  and the test lists of the milestone PRs, `/aa simulate perf` in game
-  (see `docs/DEVELOPMENT.md`), and remove "In development, no release yet."
-  from `CHANGELOG.md`.
+  and the test lists of the milestone PRs, and `/aa simulate perf` in game
+  (see `docs/DEVELOPMENT.md`).
 - No "What's new" window.
