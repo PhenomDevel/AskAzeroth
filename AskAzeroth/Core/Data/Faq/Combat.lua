@@ -6,31 +6,31 @@ ns.Faq.Add("combat", {
 		id = "combat-death",
 		de = {
 			q = "Was passiert, wenn ich sterbe?",
-			a = "Lass deinen Geist frei und lauf als Geist zu deinem Körper zurück, um wiederbelebt zu werden. Alternativ holt dich der Geistheiler am Friedhof sofort zurück, dann verliert deine Ausrüstung aber Haltbarkeit und du bist eine Weile geschwächt.",
+			a = "Jeder Tod kostet deine Ausrüstung etwas Haltbarkeit. Lass deinen Geist frei und lauf als Geist zu deinem Körper zurück, um dort wiederbelebt zu werden. Alternativ holt dich der Geistheiler am Friedhof sofort zurück, dann verliert deine Ausrüstung aber zusätzlich Haltbarkeit und du bist eine Weile geschwächt.",
 		},
 		en = {
 			q = "What happens when I die?",
-			a = "Release your spirit and run back to your body as a ghost to be resurrected. Alternatively the spirit healer at the graveyard brings you back right away, but your gear loses durability and you are weakened for a while.",
+			a = "Every death costs your gear some durability. Release your spirit and run back to your body as a ghost to be resurrected there. Alternatively the spirit healer at the graveyard brings you back right away, but your gear loses extra durability and you are weakened for a while.",
 		},
 		fr = {
 			q = "Que se passe-t-il quand je meurs ?",
-			a = "Libérez votre esprit et retournez à votre corps sous forme de fantôme pour ressusciter. Sinon, le gardien des âmes du cimetière vous ramène tout de suite, mais votre équipement perd de la durabilité et vous êtes affaibli un moment.",
+			a = "Chaque mort fait perdre un peu de durabilité à votre équipement. Libérez votre esprit et retournez à votre corps sous forme de fantôme pour y ressusciter. Sinon, le gardien des âmes du cimetière vous ramène tout de suite, mais votre équipement perd encore plus de durabilité et vous êtes affaibli un moment.",
 		},
 		es = {
 			q = "¿Qué pasa cuando muero?",
-			a = "Libera tu espíritu y corre como fantasma hasta tu cuerpo para resucitar. Otra opción es que el ángel de la resurrección del cementerio te devuelva al instante, pero tu equipo pierde durabilidad y quedas debilitado un rato.",
+			a = "Cada muerte le quita algo de durabilidad a tu equipo. Libera tu espíritu y corre como fantasma hasta tu cuerpo para resucitar allí. Otra opción es que el ángel de la resurrección del cementerio te devuelva al instante, pero tu equipo pierde aún más durabilidad y quedas debilitado un rato.",
 		},
 		it = {
 			q = "Cosa succede quando muoio?",
-			a = "Libera lo spirito e torna al tuo corpo come fantasma per resuscitare. In alternativa il guaritore spirituale del cimitero ti riporta subito in vita, ma l'equipaggiamento perde integrità e resti indebolito per un po'.",
+			a = "Ogni morte fa perdere un po' di integrità all'equipaggiamento. Libera lo spirito e torna al tuo corpo come fantasma per resuscitare lì. In alternativa il guaritore spirituale del cimitero ti riporta subito in vita, ma l'equipaggiamento perde altra integrità e resti indebolito per un po'.",
 		},
 		ru = {
 			q = "Что происходит, когда я умираю?",
-			a = "Отпустите дух и бегите призраком к своему телу, чтобы воскреснуть. Либо целитель душ на кладбище сразу вернёт вас к жизни, но экипировка потеряет прочность, а вы на время ослабнете.",
+			a = "Каждая смерть немного снижает прочность экипировки. Отпустите дух и бегите призраком к своему телу, чтобы воскреснуть рядом с ним. Либо целитель душ на кладбище сразу вернёт вас к жизни, но экипировка потеряет ещё больше прочности, а вы на время ослабнете.",
 		},
 		pt = {
 			q = "O que acontece quando eu morro?",
-			a = "Libere seu espírito e corra como fantasma até o corpo para ressuscitar. Outra opção é o curandeiro espiritual do cemitério trazer você de volta na hora, mas seu equipamento perde durabilidade e você fica enfraquecido por um tempo.",
+			a = "Cada morte tira um pouco de durabilidade do seu equipamento. Libere seu espírito e corra como fantasma até o corpo para ressuscitar lá. Outra opção é o curandeiro espiritual do cemitério trazer você de volta na hora, mas seu equipamento perde mais durabilidade e você fica enfraquecido por um tempo.",
 		},
 	},
 	{
@@ -502,7 +502,7 @@ ns.Faq.Add("combat", {
 		id = "combat-threat",
 		de = {
 			q = "Warum greift mich der Gegner an und nicht den Tank?",
-			a = "Gegner greifen an, wer die meiste Bedrohung erzeugt hat; Schaden und Heilung erzeugen Bedrohung. Lass dem Tank einen Moment Vorsprung und greif sein Ziel an. Reißt du den Gegner trotzdem, lauf zum Tank, statt wegzulaufen.",
+			a = "Gegner greifen an, wer die meiste Bedrohung (Aggro) erzeugt hat; Schaden und Heilung erzeugen Bedrohung. Lass dem Tank einen Moment Vorsprung und greif sein Ziel an. Ziehst du trotzdem Aggro, lauf zum Tank, statt wegzulaufen.",
 		},
 		en = {
 			q = "Why does the enemy attack me and not the tank?",
@@ -564,31 +564,31 @@ ns.Faq.Add("combat", {
 		id = "combat-pvp-flag",
 		de = {
 			q = "Warum greift mich ein Spieler der anderen Fraktion an?",
-			a = "Du bist für PvP markiert: auf PvP-Regelwerken in vielen Gebieten automatisch, sonst, wenn du selbst einen Spieler oder Wachen der anderen Fraktion angreifst. Auf dem normalen Regelwerk kannst du PvP meiden, solange du dich nicht markierst.",
+			a = "Du bist für PvP markiert: auf PvP-Regelwerken in vielen Gebieten automatisch, sonst, wenn du selbst einen Spieler oder Wachen der anderen Fraktion angreifst oder /pvp eingibst. Auf dem normalen Regelwerk kannst du PvP meiden, solange du dich nicht markierst.",
 		},
 		en = {
 			q = "Why does a player of the other faction attack me?",
-			a = "You are flagged for PvP: on PvP rule sets automatically in many zones, otherwise when you attack a player or guards of the other faction yourself. On the normal rule set you can avoid PvP as long as you do not flag yourself.",
+			a = "You are flagged for PvP: on PvP rulesets automatically in many zones, otherwise when you attack a player or guards of the other faction yourself or type /pvp. On the Normal ruleset you can avoid PvP as long as you do not flag yourself.",
 		},
 		fr = {
 			q = "Pourquoi un joueur de l'autre faction m'attaque-t-il ?",
-			a = "Vous êtes marqué JcJ : automatiquement dans beaucoup de zones sur les ensembles de règles JcJ, sinon quand vous attaquez vous-même un joueur ou des gardes de l'autre faction. Sur l'ensemble de règles normal, vous évitez le JcJ tant que vous ne vous marquez pas.",
+			a = "Vous êtes marqué JcJ : automatiquement dans beaucoup de zones sur les ensembles de règles JcJ, sinon quand vous attaquez vous-même un joueur ou des gardes de l'autre faction, ou que vous tapez /pvp. Sur l'ensemble de règles Normal, vous évitez le JcJ tant que vous ne vous marquez pas.",
 		},
 		es = {
 			q = "¿Por qué me ataca un jugador de la otra facción?",
-			a = "Estás marcado para JcJ: en los conjuntos de reglas JcJ, automáticamente en muchas zonas; si no, cuando tú atacas a un jugador o a los guardias de la otra facción. En el conjunto de reglas normal puedes evitar el JcJ mientras no te marques.",
+			a = "Estás marcado para JcJ: en los conjuntos de reglas JcJ, automáticamente en muchas zonas; si no, cuando tú atacas a un jugador o a los guardias de la otra facción, o escribes /pvp. En el conjunto de reglas Normal puedes evitar el JcJ mientras no te marques.",
 		},
 		it = {
 			q = "Perché un giocatore dell'altra fazione mi attacca?",
-			a = "Sei segnato per il PvP: nei set di regole PvP automaticamente in molte zone, altrimenti quando attacchi tu un giocatore o le guardie dell'altra fazione. Nel set di regole normale eviti il PvP finché non ti segni da solo.",
+			a = "Sei segnato per il PvP: nei set di regole PvP automaticamente in molte zone, altrimenti quando attacchi tu un giocatore o le guardie dell'altra fazione, oppure scrivi /pvp. Nel set di regole Normale eviti il PvP finché non ti segni da solo.",
 		},
 		ru = {
 			q = "Почему на меня нападает игрок другой фракции?",
-			a = "У вас включён режим PvP: в наборах правил PvP — автоматически во многих зонах, в остальных случаях — когда вы сами нападаете на игрока или стражу другой фракции. В обычном наборе правил PvP можно избегать, пока вы сами его не включите.",
+			a = "У вас включён режим PvP: в наборах правил PvP — автоматически во многих зонах, в остальных случаях — когда вы сами нападаете на игрока или стражу другой фракции либо вводите /pvp. В «Обычном» наборе правил PvP можно избегать, пока вы сами его не включите.",
 		},
 		pt = {
 			q = "Por que um jogador da outra facção me ataca?",
-			a = "Você está marcado para JxJ: nos conjuntos de regras JxJ, automaticamente em muitas zonas; nos outros, quando você mesmo ataca um jogador ou guardas da outra facção. No conjunto de regras normal você evita JxJ enquanto não se marcar.",
+			a = "Você está marcado para JxJ: nos conjuntos de regras JxJ, automaticamente em muitas zonas; nos outros, quando você mesmo ataca um jogador ou guardas da outra facção, ou digita /pvp. No conjunto de regras Normal você evita JxJ enquanto não se marcar.",
 		},
 	},
 })
