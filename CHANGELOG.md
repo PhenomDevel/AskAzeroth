@@ -3,6 +3,8 @@
 ## Unreleased
 
 - In development, no release yet.
+- The Questions page and the minimap button tooltip show how many
+  questions in your languages are still waiting for an answer.
 - Question lists and notifications show the question's language next to
   the category (e.g. "Class · DE").
 - Marking your question as solved closes it on the Questions page. A
