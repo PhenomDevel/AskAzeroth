@@ -3,6 +3,9 @@
 ## Unreleased
 
 - In development, no release yet.
+- Better contrast: grey secondary text is lighter, and open FAQ entries and
+  selected rows use a darker gold background, so grey and blue text on
+  them is easier to read. The pin icon of unpinned answers is easier to see.
 - Marking your question as solved closes it on the Questions page. A
   solved question also closes when "Hide solved" takes it out of the list.
 - Setup: as a mentor you can now pick the classes you help with; the

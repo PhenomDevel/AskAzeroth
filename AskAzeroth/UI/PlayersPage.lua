@@ -70,7 +70,7 @@ local function Build(content)
 		end
 		row.player = name
 		local star = Players.IsFavorite(name) and W.STAR or ""
-		row.name:SetText(star .. W.PlayerText(name, Players.GetClass(name)) .. "  |cff9d9d9d" .. Util.EscapeText(name) .. "|r")
+		row.name:SetText(star .. W.PlayerText(name, Players.GetClass(name)) .. "  |c" .. W.Hex(W.MUTED) .. Util.EscapeText(name) .. "|r")
 		local parts = {}
 		local helped = Players.GetHelped(name)
 		if helped > 0 then

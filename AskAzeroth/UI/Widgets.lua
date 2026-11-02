@@ -21,7 +21,8 @@ W.COLORS = {
 	nav = { 0, 0, 0, 0.3 },
 	navActive = { 0.32, 0.25, 0.05, 0.55 },
 	threadHead = { 0, 0, 0, 0.25 },
-	selected = { 0.32, 0.25, 0.05, 0.45 },
+	-- Dark enough for grey (W.MUTED) and blue link text on top of it.
+	selected = { 0.22, 0.17, 0.03, 0.5 },
 	card = { 0.09, 0.09, 0.09, 0.9 },
 	cardFavorite = { 0.15, 0.12, 0.04, 0.9 },
 	input = { 0, 0, 0, 0.6 },
@@ -46,7 +47,9 @@ W.ACCENT = W.GOLD
 W.TEXT = { 1, 1, 1 }
 W.SOFT = { 0.85, 0.85, 0.85 }
 W.WHITE = W.TEXT
-W.MUTED = { 0.6, 0.6, 0.6 }
+-- Secondary text; light enough for 4.5:1 on the gold-tinted backgrounds
+-- (selected rows, open FAQ entries).
+W.MUTED = { 0.7, 0.7, 0.7 }
 W.GREEN = { 0.25, 1, 0.25 }
 W.RED = { 1, 0.35, 0.35 }
 W.BLUE = RGB("8ab4e8")
@@ -540,7 +543,7 @@ function W.Chip(parent, onClick, color)
 		end
 	end)
 	function chip:SetLabel(label, removable)
-		text:SetText(removable and (label .. "  |cff9d9d9d×|r") or label)
+		text:SetText(removable and (label .. "  |c" .. Hex(W.SOFT) .. "×|r") or label)
 		self:SetWidth(text:GetStringWidth() + 20)
 	end
 	function chip:SetActive(active)
@@ -689,7 +692,7 @@ function W.PlayerLine(fullName, ctx, classFile)
 	local text = W.PlayerText(fullName, (ctx and ctx.class) or classFile)
 	local details = W.PlayerDetails(ctx)
 	if details then
-		text = text .. " |cff999999· " .. details .. "|r"
+		text = text .. " |c" .. Hex(W.MUTED) .. "· " .. details .. "|r"
 	end
 	return text
 end
@@ -701,7 +704,7 @@ function W.PlayerText(fullName, classFile)
 	return hex and ("|c%s%s|r"):format(hex, name) or name
 end
 
-W.STATUS_COLORS = { open = "ffff8080", answered = "ffffd100", solved = "ff40ff40", closed = "ff999999", withdrawn = "ff999999" }
+W.STATUS_COLORS = { open = "ffff8080", answered = "ffffd100", solved = "ff40ff40", closed = Hex(W.MUTED), withdrawn = Hex(W.MUTED) }
 
 function W.StatusText(status, answerCount)
 	local label
