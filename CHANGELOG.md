@@ -5,6 +5,11 @@
 - In development, no release yet.
 - The "Ask a question" buttons on the Questions and FAQ pages are greyed
   out while the one-minute wait runs and show the seconds left.
+- Notification settings: choose how often a notification may pop up (at
+  once or every 1 to 15 minutes; what arrives in between is counted on the
+  next one), which sound plays, and whether the counter shows on the
+  minimap button and the Questions tab. The per-category choices are now
+  called "Silent" and "With sound".
 - The "Ask a question" dialog and the setup wizard use the game's window
   frame too. Selected category buttons are easier to read: dark gold with
   a gold border and white text.

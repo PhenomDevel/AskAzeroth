@@ -290,11 +290,11 @@ local function CreateNav()
 	return nav
 end
 
-function UI.UpdateBadge(count)
+function UI.UpdateBadge()
 	if not frame then
 		return
 	end
-	count = count or ns.Notify.GetUnseen()
+	local count = ns.Notify.GetBadgeCount()
 	frame.badge:SetShown(count > 0)
 	frame.badge.text:SetText(count > 99 and "99+" or tostring(count))
 	frame.badge:SetWidth(math.max(18, frame.badge.text:GetStringWidth() + 10))
@@ -386,8 +386,8 @@ function UI.Refresh()
 	end
 end
 
-ns.RegisterCallback(UI, "AA_NOTIFY_CHANGED", function(_, count)
-	UI.UpdateBadge(count)
+ns.RegisterCallback(UI, "AA_NOTIFY_CHANGED", function()
+	UI.UpdateBadge()
 end)
 for _, message in ipairs({ "AA_CHANNEL_READY", "AA_CHANNEL_LEFT", "AA_CHANNEL_FAILED", "AA_COMM_HELD", "AA_COMM_FLUSHED", "AA_LANGUAGES_CHANGED" }) do
 	ns.RegisterCallback(UI, message, UI.UpdateStatus)
