@@ -52,6 +52,9 @@
   two-part names, alts, Legacy system, junk and buyback, logging out,
   hearthstone, levelling pace, level 10, cost, transmog, Hardcore, playing
   with friends).
+- FAQ: 14 more combat questions (elites, aggro range, fleeing enemies,
+  evade, corpse run, resurrection sickness, dying in dungeons, durability,
+  breath and fatigue, dazed, debuffs, threat, tagged enemies, PvP flag).
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
   Players, FAQ and Settings.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
