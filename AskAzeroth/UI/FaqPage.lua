@@ -45,8 +45,7 @@ local SIDE = 18
 local ITEM_GAP = 6
 local ITEM_PAD = 10
 -- Row "Terms: …" under an answer: glossary terms as buttons with tooltip.
-local TERMS_HEIGHT = 18
-local TERMS_MAX = 6
+local FAQ_ROW_HEIGHT = 18
 local ICON_SIZE = 14
 -- Fallback for the first layout pass, before the list has a width.
 local FALLBACK_WIDTH = 560
@@ -287,22 +286,6 @@ local function Build(content)
 		return q, GlossaryLinks.Annotate(a, page.lang)
 	end
 
-	-- Glossary entries in the answer of a FAQ entry, in text order.
-	local function Terms(entry)
-		local list = {}
-		if IsGlossary(entry) then
-			return list
-		end
-		local _, a = Faq.GetText(entry, page.lang)
-		for _, place in ipairs(Glossary.Find(a, page.lang)) do
-			if #list >= TERMS_MAX then
-				break
-			end
-			list[#list + 1] = place[3]
-		end
-		return list
-	end
-
 	-- FAQ entry a glossary entry points to (shown as a button below it).
 	local function FaqOfGlossary(entry)
 		return IsGlossary(entry) and entry.faq and Faq.Get(entry.faq) and entry.faq or nil
@@ -316,64 +299,16 @@ local function Build(content)
 			return head, qHeight, 0
 		end
 		local aHeight = TextHeight(a, "GameFontHighlight", AnswerWidth(), 3)
-		local terms = (#Terms(entry) > 0 or FaqOfGlossary(entry)) and ITEM_PAD / 2 + TERMS_HEIGHT or 0
+		local terms = FaqOfGlossary(entry) and ITEM_PAD / 2 + FAQ_ROW_HEIGHT or 0
 		return head + aHeight + terms + ITEM_PAD + 2, qHeight, aHeight
-	end
-
-	-- Fills the "Terms:" row of item with the terms (glossary entries);
-	-- hides buttons that do not fit into the row.
-	local function FillTerms(item, terms)
-		local row = item.termsRow
-		row.buttons = row.buttons or {}
-		local width = AnswerWidth()
-		local x = row.label:GetStringWidth() + 6
-		for i = 1, TERMS_MAX do
-			local button = row.buttons[i]
-			local entry = terms[i]
-			if entry and not button then
-				button = CreateFrame("Button", nil, row)
-				button:SetHeight(TERMS_HEIGHT)
-				button.text = W.Text(button, "GameFontHighlightSmall", W.BLUE)
-				button.text:SetPoint("LEFT")
-				button:SetScript("OnEnter", function(self)
-					self.text:SetTextColor(1, 1, 1)
-					GlossaryLinks.ShowTooltip(self, self.entry, page.lang, true)
-				end)
-				button:SetScript("OnLeave", function(self)
-					W.Color(self.text, W.BLUE)
-					GameTooltip:Hide()
-				end)
-				button:SetScript("OnClick", function(self)
-					GameTooltip:Hide()
-					page:SelectGlossary(self.entry.id)
-				end)
-				row.buttons[i] = button
-			end
-			if button then
-				local shown = false
-				if entry then
-					button.entry = entry
-					button.text:SetText((i > 1 and "·  " or "") .. (Glossary.GetText(entry, page.lang)))
-					local buttonWidth = button.text:GetStringWidth() + 8
-					if x + buttonWidth <= width then
-						button:SetWidth(buttonWidth)
-						button:ClearAllPoints()
-						button:SetPoint("LEFT", row, "LEFT", x, 0)
-						x = x + buttonWidth
-						shown = true
-					end
-				end
-				button:SetShown(shown)
-			end
-		end
 	end
 
 	-- Fills the row below a glossary entry with a button to its FAQ entry.
 	local function FillFaqButton(item, faqId)
-		local row = item.termsRow
+		local row = item.faqRow
 		if not row.faqButton then
 			local button = CreateFrame("Button", nil, row)
-			button:SetHeight(TERMS_HEIGHT)
+			button:SetHeight(FAQ_ROW_HEIGHT)
 			button.text = W.Text(button, "GameFontHighlightSmall", W.GOLD)
 			button.text:SetPoint("LEFT")
 			button.text:SetWordWrap(false)
@@ -452,11 +387,11 @@ local function Build(content)
 			item.answer:SetJustifyV("TOP")
 			item.answer:SetWordWrap(true)
 			item.answer:SetSpacing(3)
-			item.termsRow = CreateFrame("Frame", nil, bg)
-			item.termsRow:SetHeight(TERMS_HEIGHT)
-			item.termsRow.label = W.Text(item.termsRow, "GameFontHighlightSmall", W.MUTED)
-			item.termsRow.label:SetPoint("LEFT")
-			item.termsRow.label:SetText(L.GLOSSARY_TERMS)
+			item.faqRow = CreateFrame("Frame", nil, bg)
+			item.faqRow:SetHeight(FAQ_ROW_HEIGHT)
+			item.faqRow.label = W.Text(item.faqRow, "GameFontHighlightSmall", W.MUTED)
+			item.faqRow.label:SetPoint("LEFT")
+			item.faqRow.label:SetText(L.GLOSSARY_MORE)
 			item.divider = W.Divider(bg)
 			item.divider:SetHeight(1)
 			item:SetScript("OnClick", function(self)
@@ -505,26 +440,19 @@ local function Build(content)
 			item.answerFrame:SetSize(AnswerWidth(), aHeight)
 			item.answer:SetText(a)
 			item.answerFrame:Show()
-			local terms = Terms(entry)
 			local faqId = FaqOfGlossary(entry)
-			if #terms > 0 or faqId then
-				item.termsRow:ClearAllPoints()
-				item.termsRow:SetPoint("TOPLEFT", item.answerFrame, "BOTTOMLEFT", 0, -ITEM_PAD / 2)
-				item.termsRow:SetWidth(AnswerWidth())
-				item.termsRow.label:SetText(faqId and L.GLOSSARY_MORE or L.GLOSSARY_TERMS)
-				FillTerms(item, terms)
-				if faqId then
-					FillFaqButton(item, faqId)
-				elseif item.termsRow.faqButton then
-					item.termsRow.faqButton:Hide()
-				end
+			if faqId then
+				item.faqRow:ClearAllPoints()
+				item.faqRow:SetPoint("TOPLEFT", item.answerFrame, "BOTTOMLEFT", 0, -ITEM_PAD / 2)
+				item.faqRow:SetWidth(AnswerWidth())
+				FillFaqButton(item, faqId)
 			end
-			item.termsRow:SetShown(#terms > 0 or faqId ~= nil)
+			item.faqRow:SetShown(faqId ~= nil)
 		else
 			W.SetColors(item.bg, W.COLORS.card, W.COLORS.line)
 			item.divider:Hide()
 			item.answerFrame:Hide()
-			item.termsRow:Hide()
+			item.faqRow:Hide()
 		end
 	end)
 	ScrollUtil.InitScrollBoxListWithScrollBar(listBox, listBar, listView)

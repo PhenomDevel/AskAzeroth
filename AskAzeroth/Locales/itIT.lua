@@ -283,7 +283,6 @@ L.FAQ_REF_SUGGESTED = "adatta alla domanda"
 L.GLOSSARY = "Glossario"
 L.GLOSSARY_ALSO = "Anche: %s"
 L.GLOSSARY_CLICK = "Clicca per aprirlo nel glossario."
-L.GLOSSARY_TERMS = "Termini:"
 L.GLOSSARY_MORE = "Altro nelle FAQ:"
 
 -- Categories
