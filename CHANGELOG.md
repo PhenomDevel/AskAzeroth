@@ -6,6 +6,8 @@
 - Better contrast: grey secondary text is lighter, and open FAQ entries and
   selected rows use a darker gold background, so grey and blue text on
   them is easier to read. The pin icon of unpinned answers is easier to see.
+- FAQ answers can show keys, buttons and menu entries, and chat commands
+  in their own colours, so they stand out from the text.
 - The Questions page and the minimap button tooltip show how many
   questions in your languages are still waiting for an answer.
 - Question lists and notifications show the question's language next to

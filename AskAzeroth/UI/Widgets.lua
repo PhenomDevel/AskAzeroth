@@ -54,6 +54,12 @@ W.GREEN = { 0.25, 1, 0.25 }
 W.RED = { 1, 0.35, 0.35 }
 W.BLUE = RGB("8ab4e8")
 W.DARK = { 0, 0, 0 }
+-- FAQ markup (Core/FaqMarkup.lua): keys, interface names (windows,
+-- buttons, menu paths) and chat commands. Distinct from the gold FAQ
+-- links, the blue glossary links and the game's light blue spell links.
+W.KEY = RGB("ffb84d")
+W.INTERFACE = RGB("7fe0c0")
+W.COMMAND = RGB("c8f08c")
 
 -- One colour per question category, also used for its label.
 local CATEGORY_COLORS = {
