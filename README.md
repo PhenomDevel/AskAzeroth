@@ -56,7 +56,8 @@ In the first release:
   points to Wowhead for looking up quests, items and NPCs.
 - **Glossary:** over 100 game terms and chat abbreviations (Aggro, DoT, BoP,
   LFG, dungeon short names …) explained in a few words. Terms inside FAQ
-  answers show their explanation when you hover over them.
+  answers, threads and the normal chat show their explanation when you hover
+  over them (the chat part can be switched off in the settings).
 - **Spell links:** abilities named in FAQ answers, the glossary and threads
   show their icon and the game's own spell tooltip when you hover over them;
   shift-click puts the spell link into the chat.

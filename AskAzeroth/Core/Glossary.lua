@@ -8,7 +8,9 @@ local _, ns = ...
 --     {
 --       id = "bop",              -- stable, like FAQ ids; never change it
 --       chat = { "BoP" },        -- optional: short forms players write in
---                                --   chat in every language (Part 2)
+--                                --   chat in every language; marked as
+--                                --   written in chat lines
+--                                --   (UI/ChatGlossary.lua)
 --       faq = "paladin-bop",     -- optional: FAQ entry with more detail
 --       mark = false,            -- optional: never mark it inside texts,
 --                                --   for words of everyday language
@@ -148,14 +150,16 @@ end
 -- (the chat forms are for chat only), each also with its first letter in
 -- upper and lower case and all in lower and upper case, since players
 -- write "dot", "aoe" or "DOT" (ASCII only). Entries with lower = false
--- only as written. withEnglish adds the English forms (players write
+-- only as written. withChat adds the chat forms (field chat, as written).
+-- withEnglish adds the English forms (players write
 -- "threat" or "healer" in every language); the forms of lang come first.
 -- Longest first, so "Blessing of Protection" wins over a shorter form
 -- inside it. Built once per language.
 local forms = {}
 
-local function Forms(lang, withEnglish)
-	local key = withEnglish and lang ~= "en" and lang .. "+en" or lang
+local function Forms(lang, withEnglish, withChat)
+	local langKey = withEnglish and lang ~= "en" and lang .. "+en" or lang
+	local key = withChat and langKey .. "+chat" or langKey
 	local list = forms[key]
 	if list then
 		return list
@@ -177,7 +181,7 @@ local function Forms(lang, withEnglish)
 			Add(entry, form:upper())
 		end
 	end
-	local langs = key == lang and { lang } or { lang, "en" }
+	local langs = langKey == lang and { lang } or { lang, "en" }
 	for _, formLang in ipairs(langs) do
 		for _, entry in ipairs(all) do
 			if entry.mark ~= false then
@@ -186,6 +190,15 @@ local function Forms(lang, withEnglish)
 				for _, other in ipairs(alt) do
 					AddCased(entry, other)
 				end
+			end
+		end
+	end
+	-- Chat forms as written, also of entries never marked in texts: in chat
+	-- "pull" or "need" mean the game term.
+	if withChat then
+		for _, entry in ipairs(all) do
+			for _, form in ipairs(entry.chat or {}) do
+				Add(entry, form)
 			end
 		end
 	end
@@ -207,10 +220,10 @@ end
 -- Places of glossary terms in text (plain text, no escape sequences), each
 -- entry at most once (its first place), non-overlapping, in text order:
 -- a list of { first, last, entry }. withEnglish: also the English terms
--- (for texts players write).
-function Glossary.Find(text, lang, withEnglish)
+-- (for texts players write); withChat: also the chat forms (chat lines).
+function Glossary.Find(text, lang, withEnglish, withChat)
 	local found, used, taken = {}, {}, {}
-	for _, form in ipairs(Forms(lang, withEnglish)) do
+	for _, form in ipairs(Forms(lang, withEnglish, withChat)) do
 		if not used[form.entry] then
 			local init = 1
 			while true do
