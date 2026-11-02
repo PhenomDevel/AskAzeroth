@@ -170,12 +170,10 @@ local function Create()
 	dim:SetColorTexture(0, 0, 0, 0.6)
 	overlay:SetScript("OnMouseDown", Close)
 
-	dialog = W.Panel(overlay, W.COLORS.window, W.COLORS.frame, true)
+	dialog = W.Window(nil, overlay, L.ASK_TITLE, Close)
 	dialog:SetSize(WIDTH, HEIGHT)
 	dialog:SetPoint("CENTER", 0, 0)
 	dialog:EnableMouse(true)
-
-	W.TitleBar(dialog, L.ASK_TITLE, Close)
 
 	-- Category: a grid of three columns.
 	Label(dialog, L.ASK_CATEGORY, PAD, -60)
@@ -190,6 +188,7 @@ local function Create()
 		chip.key = category.key
 		chip:SetLabel(category.label)
 		chip:SetSize(chipWidth, 30)
+		chip.text:SetFontObject("GameFontHighlight")
 		local column, line = (i - 1) % 3, math.floor((i - 1) / 3)
 		chip:SetPoint("TOPLEFT", PAD + column * (chipWidth + GRID_GAP), -80 - line * (30 + GRID_GAP))
 		dialog.chips[#dialog.chips + 1] = chip
@@ -280,8 +279,8 @@ local function Create()
 
 	-- Footer: error message, Cancel, Submit.
 	local footer = CreateFrame("Frame", nil, dialog)
-	footer:SetPoint("BOTTOMLEFT", 2, 2)
-	footer:SetPoint("BOTTOMRIGHT", -2, 2)
+	footer:SetPoint("BOTTOMLEFT", 4, 4)
+	footer:SetPoint("BOTTOMRIGHT", -4, 4)
 	footer:SetHeight(56)
 	W.EdgeLine(footer, "TOP")
 

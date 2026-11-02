@@ -8,11 +8,17 @@
   next one), which sound plays, and whether the counter shows on the
   minimap button and the Questions tab. The per-category choices are now
   called "Silent" and "With sound".
+- The "Ask a question" dialog and the setup wizard use the game's window
+  frame too. Selected category buttons are easier to read: dark gold with
+  a gold border and white text.
 - Questions now stay in the public list for 3 days (1 day once solved)
   instead of a few hours, and the thread shows the time left in minutes,
   hours or days. You can have up to 5 open questions at once.
 - FAQ answers list the glossary terms they use in a row "Terms:" below the
   answer; hover a term for its explanation, click to open it in the glossary.
+- Abilities named in FAQ answers, glossary entries, questions and answers
+  are now real spell links with their icon: hover to see the game's spell
+  tooltip, shift-click to post the link in chat.
 - Notifications show right away again: there was a two-minute pause
   between two notifications, so many seemed to be missing. A notification
   that is still on screen now counts new ones as "+N more", and answers to
