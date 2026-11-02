@@ -74,8 +74,8 @@ end)
 -- text in lang, or text with "|" escaped as "||": spell names and terms
 -- never contain "|", so a link never splits an escaped "||"). A spell
 -- name is never also a glossary link.
-function GlossaryLinks.Annotate(text, lang)
-	local key = lang .. "\0" .. text
+function GlossaryLinks.Annotate(text, lang, withEnglish)
+	local key = lang .. (withEnglish and "+en" or "") .. "\0" .. text
 	local result = cache[key]
 	if result then
 		return result
@@ -87,7 +87,7 @@ function GlossaryLinks.Annotate(text, lang)
 	for _, place in ipairs(places) do
 		masked = masked:sub(1, place[1] - 1) .. (" "):rep(place[2] - place[1] + 1) .. masked:sub(place[2] + 1)
 	end
-	for _, found in ipairs(Glossary.Find(masked, lang)) do
+	for _, found in ipairs(Glossary.Find(masked, lang, withEnglish)) do
 		local id = found[3].id
 		places[#places + 1] = { found[1], found[2], function(label)
 			return ("|c%s|H%s:%s|h%s|h|r"):format(LINK_COLOR, LINK_TYPE, id, label)
@@ -133,7 +133,8 @@ function GlossaryLinks.PlayerText(text, lang)
 		if playerCacheSize >= PLAYER_CACHE_MAX then
 			playerCache, playerCacheSize = {}, 0
 		end
-		result = GlossaryLinks.Annotate(ns.Util.EscapeText(text), lang)
+		-- Players use English terms in every language.
+		result = GlossaryLinks.Annotate(ns.Util.EscapeText(text), lang, true)
 		playerCache[key] = result
 		playerCacheSize = playerCacheSize + 1
 	end

@@ -71,6 +71,8 @@ ns.Glossary.Add({
 	},
 	{
 		id = "hot",
+		-- lower case is an everyday word (English "hot")
+		lower = false,
 		chat = { "HoT", "HOT", "HoTs" },
 		de = {
 			term = "HoT",
@@ -365,6 +367,8 @@ ns.Glossary.Add({
 	},
 	{
 		id = "los",
+		-- lower case is an everyday word (German "los")
+		lower = false,
 		chat = { "LoS", "LOS" },
 		de = {
 			term = "LoS",
@@ -738,6 +742,8 @@ ns.Glossary.Add({
 	},
 	{
 		id = "ah",
+		-- lower case is an everyday word ("ah")
+		lower = false,
 		chat = { "AH" },
 		de = {
 			term = "AH",

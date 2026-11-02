@@ -83,6 +83,14 @@ function W.CategoryText(key)
 	return ("|c%s%s|r"):format(Hex(W.CategoryColor(key)), category and category.label or tostring(key))
 end
 
+-- Category followed by the question's language code, e.g. "Class · DE".
+function W.CategoryLangText(key, lang)
+	if type(lang) ~= "string" or lang == "" then
+		return W.CategoryText(key)
+	end
+	return ("%s |cff999999·|r |cffd9d9d9%s|r"):format(W.CategoryText(key), lang:upper())
+end
+
 -- Texture markup for symbols the game fonts lack; size follows the font.
 W.STAR = "|TInterface\\TargetingFrame\\UI-RaidTargetingIcon_1:0|t "
 W.CHECK = "|TInterface\\RaidFrame\\ReadyCheck-Ready:0|t"

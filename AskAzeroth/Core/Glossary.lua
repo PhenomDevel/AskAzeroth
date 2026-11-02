@@ -13,6 +13,9 @@ local _, ns = ...
 --       mark = false,            -- optional: never mark it inside texts,
 --                                --   for words of everyday language
 --                                --   ("add", "pull")
+--       lower = false,           -- optional: mark it only as written, not
+--                                --   in lower or upper case, when that is
+--                                --   an everyday word ("ah", "hot")
 --       de = { term = "BoP", alt = { "Segen des Schutzes" }, def = "…" },
 --       en = { term = "BoP", alt = { "Blessing of Protection" }, def = "…" },
 --     },
@@ -65,6 +68,9 @@ local function Check(entry)
 	end
 	if entry.mark ~= nil and entry.mark ~= false then
 		return "mark"
+	end
+	if entry.lower ~= nil and entry.lower ~= false then
+		return "lower"
 	end
 	for _, lang in ipairs(C.FAQ_REQUIRED) do
 		if entry[lang] == nil then
@@ -139,13 +145,18 @@ function Glossary.Contains(entry, text, lang)
 end
 
 -- Words that mark an entry inside a text in lang: term and other names
--- (the chat forms are for chat only), each with its first letter also in
--- upper and lower case (ASCII only). Longest first, so "Blessing of
--- Protection" wins over a shorter form inside it. Built once per language.
+-- (the chat forms are for chat only), each also with its first letter in
+-- upper and lower case and all in lower and upper case, since players
+-- write "dot", "aoe" or "DOT" (ASCII only). Entries with lower = false
+-- only as written. withEnglish adds the English forms (players write
+-- "threat" or "healer" in every language); the forms of lang come first.
+-- Longest first, so "Blessing of Protection" wins over a shorter form
+-- inside it. Built once per language.
 local forms = {}
 
-local function Forms(lang)
-	local list = forms[lang]
+local function Forms(lang, withEnglish)
+	local key = withEnglish and lang ~= "en" and lang .. "+en" or lang
+	local list = forms[key]
 	if list then
 		return list
 	end
@@ -159,21 +170,22 @@ local function Forms(lang)
 	end
 	local function AddCased(entry, form)
 		Add(entry, form)
-		Add(entry, form:sub(1, 1):upper() .. form:sub(2))
-		Add(entry, form:sub(1, 1):lower() .. form:sub(2))
+		if entry.lower ~= false then
+			Add(entry, form:sub(1, 1):upper() .. form:sub(2))
+			Add(entry, form:sub(1, 1):lower() .. form:sub(2))
+			Add(entry, form:lower())
+			Add(entry, form:upper())
+		end
 	end
-	for _, entry in ipairs(all) do
-		if entry.mark ~= false then
-			local term, alt = Glossary.GetText(entry, lang)
-			-- Short all-caps forms (AoE, DoT, CC, IF) only as written, so
-			-- that "cc" or "if" in a sentence are not marked.
-			if #term > 3 or not term:find("^[%u%d]+$") then
+	local langs = key == lang and { lang } or { lang, "en" }
+	for _, formLang in ipairs(langs) do
+		for _, entry in ipairs(all) do
+			if entry.mark ~= false then
+				local term, alt = Glossary.GetText(entry, formLang)
 				AddCased(entry, term)
-			else
-				Add(entry, term)
-			end
-			for _, other in ipairs(alt) do
-				AddCased(entry, other)
+				for _, other in ipairs(alt) do
+					AddCased(entry, other)
+				end
 			end
 		end
 	end
@@ -183,7 +195,7 @@ local function Forms(lang)
 		end
 		return a.text < b.text
 	end)
-	forms[lang] = list
+	forms[key] = list
 	return list
 end
 
@@ -194,10 +206,11 @@ end
 
 -- Places of glossary terms in text (plain text, no escape sequences), each
 -- entry at most once (its first place), non-overlapping, in text order:
--- a list of { first, last, entry }.
-function Glossary.Find(text, lang)
+-- a list of { first, last, entry }. withEnglish: also the English terms
+-- (for texts players write).
+function Glossary.Find(text, lang, withEnglish)
 	local found, used, taken = {}, {}, {}
-	for _, form in ipairs(Forms(lang)) do
+	for _, form in ipairs(Forms(lang, withEnglish)) do
 		if not used[form.entry] then
 			local init = 1
 			while true do

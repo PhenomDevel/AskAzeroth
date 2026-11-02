@@ -73,6 +73,11 @@ local function Build(content)
 		page:Refresh()
 	end)
 	hideSolved:SetPoint("TOPLEFT", PAD - 4, -PAD - 28 - 10 - chipsHeight - 6)
+	-- How many questions still wait for a first answer.
+	local openCount = W.Text(filters, "GameFontHighlight", W.SOFT)
+	openCount:SetPoint("RIGHT", filters, "RIGHT", -PAD, 0)
+	openCount:SetPoint("TOP", hideSolved, "TOP", 0, -6)
+	openCount:SetJustifyH("RIGHT")
 	filters:SetHeight(PAD + 28 + 10 + chipsHeight + 6 + 26 + PAD - 4)
 
 	local listBox = CreateFrame("Frame", nil, listPane)
@@ -153,6 +158,7 @@ local function Build(content)
 			end
 		end
 		hideSolved:Refresh()
+		openCount:SetText(L.QUEUE_OPEN_COUNT:format(UI.CountOpenQuestions()))
 		local emptyText
 		if #list == 0 then
 			emptyText = Store.Count() == 0 and L.QUEUE_EMPTY or L.QUEUE_NO_MATCH
