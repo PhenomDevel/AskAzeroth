@@ -54,6 +54,15 @@ Core\Data\Faq\Addon.lua
 Core\Data\Faq\Start.lua
 Core\Data\Faq\Quests.lua
 Core\Data\Faq\Classes.lua
+Core\Data\Faq\Warrior.lua
+Core\Data\Faq\Paladin.lua
+Core\Data\Faq\Rogue.lua
+Core\Data\Faq\Priest.lua
+Core\Data\Faq\Shaman.lua
+Core\Data\Faq\Mage.lua
+Core\Data\Faq\Warlock.lua
+Core\Data\Faq\Druid.lua
+Core\Data\Faq\Hunter.lua
 Core\Data\Faq\Combat.lua
 Core\Data\Faq\Travel.lua
 Core\Data\Faq\Gold.lua
@@ -61,6 +70,8 @@ Core\Data\Faq\Professions.lua
 Core\Data\Faq\Groups.lua
 Core\Data\Faq\Social.lua
 Core\Data\Faq\Interface.lua
+Core\Data\FaqStopwords.lua
+Core\FaqSearch.lua
 Core\Database.lua
 Core\SlashCommands.lua
 Core\Channel.lua

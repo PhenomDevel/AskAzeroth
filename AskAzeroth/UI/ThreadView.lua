@@ -184,6 +184,13 @@ function ThreadView.Create(parent, get)
 			refs[#refs + 1] = id
 			UpdateRefs()
 		end
+	end, function()
+		-- The question's text puts matching FAQ entries first.
+		local q = current and get(current)
+		if not q or type(q.title) ~= "string" then
+			return nil
+		end
+		return type(q.body) == "string" and q.title .. " " .. q.body or q.title
 	end)
 	faqButton:SetPoint("RIGHT", send, "LEFT", -8, 0)
 
