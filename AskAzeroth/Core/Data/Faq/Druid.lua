@@ -285,62 +285,62 @@ ns.Faq.Add("druid", {
 		id = "druid-roots",
 		de = {
 			q = "Wie halte ich Gegner auf Abstand?",
-			a = "„Wucherwurzeln“ halten einen Gegner draußen eine Weile fest. Er kann dabei noch zaubern oder zuschlagen, wenn du nah stehst, also geh auf Abstand. In Innenräumen wirkt der Zauber nicht.",
+			a = "„Wucherwurzeln“ halten einen Gegner eine Weile fest; in WoW: Forever wirkt der Zauber auch in Innenräumen. Er kann dabei noch zaubern oder zuschlagen, wenn du nah stehst, also geh auf Abstand.",
 		},
 		en = {
 			q = "How do I keep enemies at a distance?",
-			a = "Entangling Roots hold an enemy in place outdoors for a while. It can still cast or hit you if you stand close, so keep your distance. The spell does not work indoors.",
+			a = "Entangling Roots hold an enemy in place for a while; in WoW: Forever the spell also works indoors. It can still cast or hit you if you stand close, so keep your distance.",
 		},
 		fr = {
 			q = "Comment garder les ennemis à distance ?",
-			a = "Sarments immobilisent un ennemi en extérieur pendant un moment. Il peut encore lancer des sorts ou vous frapper si vous êtes près, alors gardez vos distances. Le sort ne fonctionne pas en intérieur.",
+			a = "Sarments immobilisent un ennemi pendant un moment ; dans WoW: Forever, le sort fonctionne aussi en intérieur. Il peut encore lancer des sorts ou vous frapper si vous êtes près, alors gardez vos distances.",
 		},
 		es = {
 			q = "¿Cómo mantengo a los enemigos a distancia?",
-			a = "Raíces enredadoras inmovilizan a un enemigo al aire libre durante un tiempo. Aún puede lanzar hechizos o golpearte si estás cerca, así que mantén la distancia. El hechizo no funciona en interiores.",
+			a = "Raíces enredadoras inmovilizan a un enemigo durante un tiempo; en WoW: Forever el hechizo también funciona en interiores. Aún puede lanzar hechizos o golpearte si estás cerca, así que mantén la distancia.",
 		},
 		it = {
 			q = "Come tengo i nemici a distanza?",
-			a = "Radici Avvolgenti bloccano un nemico all'aperto per un po'. Può ancora lanciare incantesimi o colpirti se sei vicino, quindi mantieni la distanza. L'incantesimo non funziona al chiuso.",
+			a = "Radici Avvolgenti bloccano un nemico per un po'; in WoW: Forever l'incantesimo funziona anche al chiuso. Può ancora lanciare incantesimi o colpirti se sei vicino, quindi mantieni la distanza.",
 		},
 		ru = {
 			q = "Как держать врагов на расстоянии?",
-			a = "«Гнев деревьев» на время обездвиживает врага на открытой местности. Он всё ещё может колдовать или бить вас, если вы рядом, поэтому держите дистанцию. В помещениях заклинание не работает.",
+			a = "«Гнев деревьев» на время обездвиживает врага; в WoW: Forever заклинание работает и в помещениях. Враг всё ещё может колдовать или бить вас, если вы рядом, поэтому держите дистанцию.",
 		},
 		pt = {
 			q = "Como mantenho inimigos à distância?",
-			a = "Raízes Constritoras prendem um inimigo no lugar ao ar livre por um tempo. Ele ainda pode lançar feitiços ou bater em você se estiver perto, então mantenha distância. O feitiço não funciona em ambientes fechados.",
+			a = "Raízes Constritoras prendem um inimigo no lugar por um tempo; no WoW: Forever o feitiço também funciona em ambientes fechados. Ele ainda pode lançar feitiços ou bater em você se estiver perto, então mantenha distância.",
 		},
 	},
 	{
 		id = "druid-rebirth",
 		de = {
 			q = "Kann ich im Kampf wiederbeleben?",
-			a = "Ja, mit „Wiedergeburt“: Sie belebt ein totes Gruppenmitglied auch mitten im Kampf wieder. Sie braucht ein Reagenz vom Händler und hat eine lange Abklingzeit, also setz sie gezielt ein, am besten auf Heiler oder Tank.",
+			a = "Ja, mit „Wiedergeburt“: Sie belebt ein totes Gruppenmitglied auch mitten im Kampf wieder. Sie braucht ein Reagenz vom Händler und hat eine lange Abklingzeit, also setz sie gezielt ein, am besten auf Heiler oder Tank. Außerhalb des Kampfes hast du in WoW: Forever zusätzlich „Wiederbeleben“.",
 		},
 		en = {
 			q = "Can I resurrect during combat?",
-			a = "Yes, with Rebirth: it brings a dead party member back even mid-fight. It needs a reagent from a vendor and has a long cooldown, so use it on purpose, ideally on the healer or tank.",
+			a = "Yes, with Rebirth: it brings a dead party member back even mid-fight. It needs a reagent from a vendor and has a long cooldown, so use it on purpose, ideally on the healer or tank. Out of combat, WoW: Forever also gives you Revive.",
 		},
 		fr = {
 			q = "Puis-je ressusciter pendant un combat ?",
-			a = "Oui, avec Renaissance : elle ramène un membre du groupe mort même en plein combat. Elle nécessite un composant vendu par un marchand et a un long temps de recharge, utilisez-la donc à bon escient, idéalement sur le soigneur ou le tank.",
+			a = "Oui, avec Renaissance : elle ramène un membre du groupe mort même en plein combat. Elle nécessite un composant vendu par un marchand et a un long temps de recharge, utilisez-la donc à bon escient, idéalement sur le soigneur ou le tank. Hors combat, WoW: Forever vous donne aussi Ressusciter.",
 		},
 		es = {
 			q = "¿Puedo resucitar durante un combate?",
-			a = "Sí, con Renacer: devuelve a la vida a un miembro del grupo muerto incluso en pleno combate. Necesita un componente de un vendedor y tiene un tiempo de reutilización largo, así que úsalo con intención, idealmente en el sanador o el tanque.",
+			a = "Sí, con Renacer: devuelve a la vida a un miembro del grupo muerto incluso en pleno combate. Necesita un componente de un vendedor y tiene un tiempo de reutilización largo, así que úsalo con intención, idealmente en el sanador o el tanque. Fuera de combate, WoW: Forever te da además Revivir.",
 		},
 		it = {
 			q = "Posso resuscitare durante un combattimento?",
-			a = "Sì, con Rinascita: riporta in vita un membro del gruppo morto anche nel mezzo di un combattimento. Richiede un reagente da un venditore e ha un lungo tempo di recupero, quindi usala con criterio, idealmente sul guaritore o sul tank.",
+			a = "Sì, con Rinascita: riporta in vita un membro del gruppo morto anche nel mezzo di un combattimento. Richiede un reagente da un venditore e ha un lungo tempo di recupero, quindi usala con criterio, idealmente sul guaritore o sul tank. Fuori dal combattimento, WoW: Forever ti dà anche Rianimazione.",
 		},
 		ru = {
 			q = "Можно ли воскрешать во время боя?",
-			a = "Да, «Возрождением»: оно возвращает погибшего члена группы даже посреди боя. Нужен реагент от торговца, а время восстановления долгое, поэтому используйте его осознанно, лучше всего на лекаря или танка.",
+			a = "Да, «Возрождением»: оно возвращает погибшего члена группы даже посреди боя. Нужен реагент от торговца, а время восстановления долгое, поэтому используйте его осознанно, лучше всего на лекаря или танка. Вне боя в WoW: Forever у вас есть ещё и «Оживление».",
 		},
 		pt = {
 			q = "Posso ressuscitar durante o combate?",
-			a = "Sim, com Renascimento: traz de volta um membro do grupo morto até no meio da luta. Precisa de um reagente de um mercador e tem um tempo de recarga longo, então use com propósito, de preferência no curador ou no tanque.",
+			a = "Sim, com Renascimento: traz de volta um membro do grupo morto até no meio da luta. Precisa de um reagente de um mercador e tem um tempo de recarga longo, então use com propósito, de preferência no curador ou no tanque. Fora de combate, o WoW: Forever também dá Reviver.",
 		},
 	},
 	{
@@ -471,31 +471,31 @@ ns.Faq.Add("druid", {
 		id = "druid-stats",
 		de = {
 			q = "Welche Werte sind für Druiden wichtig?",
-			a = "Das hängt von der Rolle ab: Katze Beweglichkeit und Stärke, Bär Ausdauer, Rüstung und Beweglichkeit, Heiler und Mondkin Intelligenz, Willenskraft und Heilung oder Zauberschaden. In Gestalten zählt die Waffe kaum, Werte schon.",
+			a = "Das hängt von der Rolle ab: Katze Beweglichkeit und Stärke, Bär Ausdauer, Rüstung und Beweglichkeit, Heiler und Mondkin Intelligenz, Willenskraft und Heilung oder Zauberschaden. In WoW: Forever wirken Waffenverzauberungen und Waffeneffekte auch in Gestalten, eine gute Waffe lohnt sich also.",
 		},
 		en = {
 			q = "Which stats matter for druids?",
-			a = "It depends on the role: Cat agility and strength, Bear stamina, armour and agility, healer and Moonkin intellect, spirit and healing or spell damage. In forms your weapon barely matters, its stats do.",
+			a = "It depends on the role: Cat agility and strength, Bear stamina, armour and agility, healer and Moonkin intellect, spirit and healing or spell damage. In WoW: Forever weapon enchants and weapon effects also work in forms, so a good weapon pays off.",
 		},
 		fr = {
 			q = "Quelles caractéristiques comptent pour les druides ?",
-			a = "Cela dépend du rôle : en félin, agilité et force ; en ours, endurance, armure et agilité ; en soigneur et en sélénien, intelligence, esprit et soins ou dégâts des sorts. En forme, votre arme compte à peine, ses caractéristiques si.",
+			a = "Cela dépend du rôle : en félin, agilité et force ; en ours, endurance, armure et agilité ; en soigneur et en sélénien, intelligence, esprit et soins ou dégâts des sorts. Dans WoW: Forever, les enchantements et effets d'arme fonctionnent aussi en forme : une bonne arme vaut donc le coup.",
 		},
 		es = {
 			q = "¿Qué atributos importan a los druidas?",
-			a = "Depende del rol: felino, agilidad y fuerza; oso, aguante, armadura y agilidad; sanador y lechúcico lunar, intelecto, espíritu y sanación o daño con hechizos. En forma tu arma apenas importa, pero sus atributos sí.",
+			a = "Depende del rol: felino, agilidad y fuerza; oso, aguante, armadura y agilidad; sanador y lechúcico lunar, intelecto, espíritu y sanación o daño con hechizos. En WoW: Forever los encantamientos y efectos de arma también funcionan en forma, así que una buena arma merece la pena.",
 		},
 		it = {
 			q = "Quali statistiche contano per i druidi?",
-			a = "Dipende dal ruolo: Felina agilità e forza, Orso tempra, armatura e agilità, guaritore e Lunagufo intelletto, spirito e cure o danni degli incantesimi. In forma l'arma conta poco, le sue statistiche sì.",
+			a = "Dipende dal ruolo: Felina agilità e forza, Orso tempra, armatura e agilità, guaritore e Lunagufo intelletto, spirito e cure o danni degli incantesimi. In WoW: Forever incantamenti ed effetti dell'arma funzionano anche in forma, quindi una buona arma conviene.",
 		},
 		ru = {
 			q = "Какие характеристики важны друиду?",
-			a = "Зависит от роли: кошке ловкость и сила, медведю выносливость, броня и ловкость, лекарю и совуху интеллект, дух и сила исцеления или урон от заклинаний. В облике само оружие почти не важно, а его характеристики — важны.",
+			a = "Зависит от роли: кошке ловкость и сила, медведю выносливость, броня и ловкость, лекарю и совуху интеллект, дух и сила исцеления или урон от заклинаний. В WoW: Forever чары и эффекты оружия действуют и в облике, так что хорошее оружие окупается.",
 		},
 		pt = {
 			q = "Quais atributos importam para druidas?",
-			a = "Depende do papel: Felino, agilidade e força; Urso, vigor, armadura e agilidade; curador e Luniscante, intelecto, espírito e cura ou dano mágico. Em forma a arma quase não importa, mas os atributos dela sim.",
+			a = "Depende do papel: Felino, agilidade e força; Urso, vigor, armadura e agilidade; curador e Luniscante, intelecto, espírito e cura ou dano mágico. No WoW: Forever encantamentos e efeitos de arma também funcionam em forma, então uma boa arma vale a pena.",
 		},
 	},
 	{
