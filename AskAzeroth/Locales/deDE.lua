@@ -264,6 +264,7 @@ L.GLOSSARY = "Glossar"
 L.GLOSSARY_ALSO = "Auch: %s"
 L.GLOSSARY_CLICK = "Klicken öffnet den Begriff im Glossar."
 L.GLOSSARY_TERMS = "Begriffe:"
+L.GLOSSARY_MORE = "Mehr im FAQ:"
 
 -- Categories
 L.CAT_QUEST = "Quest"
@@ -323,6 +324,13 @@ L.PROBE_HELP_LOOPBACK = "eigene Nachrichten wie die eines anderen Spielers behan
 L.PROBE_HELP_SHOW = "Kanäle im Chatfenster zeigen oder verstecken"
 L.PROBE_HELP_LOG = "letzte Logzeilen ausgeben (Standard 20)"
 L.PROBE_HELP_CLEAR = "Log leeren"
+L.PROBE_HELP_LINKS = "Testfenster für Links in Texten (Glossar-Tooltips): welche Zeilen auf die Maus reagieren"
+L.PROBE_LINKS_TITLE = "AskAzeroth Link-Test – jedes blaue und violette Wort überfahren und anklicken, dann erneut /aa probe links"
+L.PROBE_LINKS_API = "Links: Frame:SetHyperlinksEnabled %s, SimpleHTML %s."
+L.PROBE_LINKS_EVENT = "Link-Test %s: %s %s"
+L.PROBE_LINKS_MOUSE = "Link-Test %s: Maus über der Zeile."
+L.PROBE_LINKS_ERROR = "Link-Test %s: %s"
+L.PROBE_LINKS_CLOSED = "Link-Test geschlossen. Bitte die Zeilen oben schicken (oder /aa probe log)."
 
 L.PROBE_IN_LOCKDOWN = " (Lockdown)"
 L.PROBE_HELD = " – vorerst gehalten"

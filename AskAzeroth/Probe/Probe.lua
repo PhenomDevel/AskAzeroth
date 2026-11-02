@@ -1,4 +1,4 @@
--- luacheck: read globals UnitName UnitLevel UnitRace UnitClass UnitFactionGroup GetNormalizedRealmName GetRealZoneText GetSubZoneText IsInInstance InCombatLockdown IsEncounterInProgress C_Map
+-- luacheck: read globals UnitName UnitLevel UnitRace UnitClass UnitFactionGroup GetNormalizedRealmName GetRealZoneText GetSubZoneText IsInInstance InCombatLockdown IsEncounterInProgress C_Map UIParent
 local _, ns = ...
 
 -- M0 spike (/aa probe): checks the language channels, raw and AceComm
@@ -531,6 +531,89 @@ commands.hide = {
 		Log(L.PROBE_CHANNEL_HIDDEN)
 	end,
 }
+
+-- Link test: do links in the addon's own texts get mouse events? Three
+-- variants of the same line: a frame with a font string and
+-- SetHyperlinksEnabled (what the glossary uses), the same without that call,
+-- and a SimpleHTML frame. Each line has a custom link, an item link and an
+-- "addon:" link.
+local linkTest
+
+local LINK_LINE = "%s:  |cff8ab4e8|Haskazeroth-glossary:aggro|hAggro|h|r   |cffa335ee|Hitem:6948|h[Item 6948]|h|r   |cff8ab4e8|Haddon:AskAzeroth:aggro|hAddon-Link|h|r"
+
+local function TrySetScript(frame, name, handler, label)
+	local ok, err = pcall(frame.SetScript, frame, name, handler)
+	if not ok then
+		Log(L.PROBE_LINKS_ERROR, label, tostring(err))
+	end
+end
+
+local function AddLinkLine(parent, label, kind, top)
+	local frame
+	local ok, err = pcall(function()
+		frame = CreateFrame(kind == "html" and "SimpleHTML" or "Frame", nil, parent)
+	end)
+	if not ok then
+		Log(L.PROBE_LINKS_ERROR, label, tostring(err))
+		return false
+	end
+	frame:SetPoint("TOPLEFT", 12, top)
+	frame:SetSize(456, 22)
+	frame:EnableMouse(true)
+	local text = LINK_LINE:format(label)
+	if kind == "html" then
+		pcall(frame.SetFontObject, frame, "GameFontHighlight")
+		pcall(frame.SetText, frame, text)
+	else
+		local fontString = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+		fontString:SetAllPoints()
+		fontString:SetJustifyH("LEFT")
+		fontString:SetText(text)
+		if kind == "enabled" then
+			local called = frame.SetHyperlinksEnabled and pcall(frame.SetHyperlinksEnabled, frame, true)
+			if not called then
+				Log(L.PROBE_LINKS_ERROR, label, "SetHyperlinksEnabled failed")
+			end
+		end
+	end
+	TrySetScript(frame, "OnEnter", function()
+		Log(L.PROBE_LINKS_MOUSE, label)
+	end, label)
+	TrySetScript(frame, "OnHyperlinkEnter", function(_, link)
+		Log(L.PROBE_LINKS_EVENT, label, "enter", tostring(link))
+	end, label)
+	TrySetScript(frame, "OnHyperlinkLeave", function(_, link)
+		Log(L.PROBE_LINKS_EVENT, label, "leave", tostring(link))
+	end, label)
+	TrySetScript(frame, "OnHyperlinkClick", function(_, link, _, button)
+		Log(L.PROBE_LINKS_EVENT, label, "click " .. tostring(button), tostring(link))
+	end, label)
+	return true
+end
+
+AddCommand("links", "links", L.PROBE_HELP_LINKS, function()
+	if linkTest and linkTest:IsShown() then
+		linkTest:Hide()
+		Log(L.PROBE_LINKS_CLOSED)
+		return
+	end
+	if not linkTest then
+		linkTest = ns.Widgets.Panel(UIParent)
+		linkTest:SetSize(480, 130)
+		linkTest:SetPoint("CENTER", 0, 120)
+		linkTest:SetFrameStrata("DIALOG")
+		local title = linkTest:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+		title:SetPoint("TOPLEFT", 12, -10)
+		title:SetPoint("RIGHT", -12, 0)
+		title:SetJustifyH("LEFT")
+		title:SetText(L.PROBE_LINKS_TITLE)
+		AddLinkLine(linkTest, "A", "enabled", -40)
+		AddLinkLine(linkTest, "B", "plain", -68)
+		linkTest.hasHtml = AddLinkLine(linkTest, "C", "html", -96)
+	end
+	Log(L.PROBE_LINKS_API, YesNo(linkTest.SetHyperlinksEnabled ~= nil), YesNo(linkTest.hasHtml))
+	linkTest:Show()
+end)
 
 AddCommand("log", "log [lines]", L.PROBE_HELP_LOG, function(args)
 	local log = db.log

@@ -13,6 +13,11 @@
   to "Mark as solved" and "Withdraw" instead of being cut off. Your own
   questions no longer show the right-click hint for the player menu.
 - Glossary tooltips in FAQ answers now show when you hover over a blue term.
+- Glossary terms in questions and answers of the threads and in pinned
+  answers are marked too: hover for the explanation, click to open it in the
+  glossary.
+- Glossary entries with more detail in the FAQ have a "More in the FAQ:"
+  button below them that opens the FAQ entry.
 - FAQ links on answers: the FAQ button is off once 3 entries are attached,
   and the chips above the answer field always fit into the window (long
   questions are shortened, the tooltip shows them in full).

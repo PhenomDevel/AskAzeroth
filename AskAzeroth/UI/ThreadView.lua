@@ -117,6 +117,8 @@ function ThreadView.Create(parent, get)
 		GameTooltip:SetText(L.THREAD_PLAYER_TIP, 1, 1, 1, 1, true)
 		GameTooltip:Show()
 	end)
+	-- Glossary terms in title and text: tooltip, click opens the glossary.
+	ns.GlossaryLinks.Enable(head)
 	head:SetScript("OnLeave", function()
 		GameTooltip:Hide()
 	end)
@@ -285,11 +287,17 @@ function ThreadView.Create(parent, get)
 		return math.max(100, scrollBox:GetWidth() - 2 * PAD - 2)
 	end
 
+	-- Answer text with the glossary terms of the thread's language as links.
+	local function AnswerText(a)
+		local q = current and get(current)
+		return ns.GlossaryLinks.PlayerText(a.text, q and q.lang)
+	end
+
 	local function RowHeight(item)
 		if item.folded then
 			return PAD + 14 + PAD + GAP
 		end
-		return PAD + 14 + 6 + math.ceil(TextHeight(Util.EscapeText(item.answer.text), "GameFontHighlight", InnerWidth()))
+		return PAD + 14 + 6 + math.ceil(TextHeight(AnswerText(item.answer), "GameFontHighlight", InnerWidth()))
 			+ ns.FaqRefs.Height(item.answer.faq) + PAD + GAP
 	end
 
@@ -372,6 +380,8 @@ function ThreadView.Create(parent, get)
 		row.body:SetJustifyV("TOP")
 		row.body:SetWordWrap(true)
 		row.links = ns.FaqRefs.CreateLinks(row.bg, row.body)
+		-- Glossary terms in the answer: tooltip, click opens the glossary.
+		ns.GlossaryLinks.Enable(row.bg)
 	end
 
 	local function FillRow(row, item)
@@ -402,7 +412,7 @@ function ThreadView.Create(parent, get)
 		row.age:SetText(W.Ago(Util.Now() - a.created))
 		-- Explicit width and height: anchor-sized text measured before the
 		-- layout is done gets cut with "…" until the window moves.
-		local text = Util.EscapeText(a.text)
+		local text = AnswerText(a)
 		local width = InnerWidth()
 		row.body:SetWidth(width)
 		row.body:SetHeight(math.ceil(TextHeight(text, "GameFontHighlight", width)))
@@ -449,8 +459,8 @@ function ThreadView.Create(parent, get)
 			return
 		end
 		meta:SetText(MetaText(q))
-		title:SetText(Util.EscapeText(q.title))
-		body:SetText(q.body and Util.EscapeText(q.body) or "")
+		title:SetText(ns.GlossaryLinks.PlayerText(q.title, q.lang))
+		body:SetText(q.body and ns.GlossaryLinks.PlayerText(q.body, q.lang) or "")
 		body:SetShown(q.body ~= nil)
 		context:SetText(ContextText(q))
 		LayoutHead()

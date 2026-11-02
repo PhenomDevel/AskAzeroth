@@ -264,6 +264,7 @@ L.GLOSSARY = "Глоссарий"
 L.GLOSSARY_ALSO = "Также: %s"
 L.GLOSSARY_CLICK = "Нажмите, чтобы открыть в глоссарии."
 L.GLOSSARY_TERMS = "Термины:"
+L.GLOSSARY_MORE = "Подробнее в FAQ:"
 
 -- Categories
 L.CAT_QUEST = "Задание"
