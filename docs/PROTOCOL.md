@@ -113,10 +113,10 @@ In `Store.Receive` (rules):
   question, not older than the question.
 - `A`, `S` and `D` only on the channel of the question's language (`lang`).
 - Rate limits per sender for first-hand messages: 1 new question per 60 s,
-  6 answers per 60 s, at most 3 open (unsolved) questions per author.
+  6 answers per 60 s, at most 5 open (unsolved) questions per author.
   Excess messages are dropped silently.
 - An already expired question is not added.
-- At most 150 questions in memory; the least recently active go first.
+- At most 300 questions in memory; the least recently active go first.
 
 Dropped messages fire `AA_MESSAGE_DROPPED (reason, sender, type)`; `/aa debug`
 in a development checkout prints them.
@@ -156,9 +156,9 @@ Every client works this out itself; there is no delete message for it.
 
 | Status | Condition | Disappears |
 |---|---|---|
-| open | no answer | 2 h after `created` |
-| answered | at least one answer | 45 min after the last answer |
-| solved | `S` received | 10 min after `solved` |
+| open | no answer | 3 days after `created` |
+| answered | at least one answer | 3 days after the last answer |
+| solved | `S` received | 1 day after `solved` |
 
 Checked every 60 s. Own questions are also kept under "My questions",
 independent of this: they show "closed" after expiry and are removed after

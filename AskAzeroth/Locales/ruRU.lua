@@ -73,9 +73,9 @@ L.THREAD_SOLVE_TIP = "Вы получили нужный ответ. Вопро�
 L.THREAD_WITHDRAW = "Отозвать"
 L.THREAD_WITHDRAW_TIP = "Удаляет ваш вопрос у всех."
 L.THREAD_WITHDRAW_CONFIRM = "Отозвать ваш вопрос у всех?"
-L.THREAD_OPEN_EXPIRES = "Исчезнет через %d мин., если никто не ответит."
-L.THREAD_ANSWERED_EXPIRES = "Исчезнет через %d мин. без нового ответа."
-L.THREAD_SOLVED_EXPIRES = "Решён – исчезнет через %d мин."
+L.THREAD_OPEN_EXPIRES = "Исчезнет через %s, если никто не ответит."
+L.THREAD_ANSWERED_EXPIRES = "Исчезнет через %s без нового ответа."
+L.THREAD_SOLVED_EXPIRES = "Решён – исчезнет через %s"
 L.THREAD_SOLVED_BANNER = "Этот вопрос решён."
 
 -- Formatting
@@ -83,6 +83,10 @@ L.LEVEL_SHORT = "Уровень %d"
 L.AGO_NOW = "только что"
 L.AGO_MINUTES = "%d мин. назад"
 L.AGO_HOURS = "%d ч. назад"
+L.AGO_DAYS = "%d дн. назад"
+L.DURATION_MINUTES = "%d мин."
+L.DURATION_HOURS = "%d ч."
+L.DURATION_DAYS = "%d дн."
 
 -- Status
 L.STATUS_OPEN = "открыт"
@@ -263,6 +267,8 @@ L.FAQ_REF_SUGGESTED = "подходит к вопросу"
 L.GLOSSARY = "Глоссарий"
 L.GLOSSARY_ALSO = "Также: %s"
 L.GLOSSARY_CLICK = "Нажмите, чтобы открыть в глоссарии."
+L.GLOSSARY_TERMS = "Термины:"
+L.GLOSSARY_MORE = "Подробнее в FAQ:"
 
 -- Categories
 L.CAT_QUEST = "Задание"
