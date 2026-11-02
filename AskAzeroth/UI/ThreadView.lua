@@ -73,7 +73,7 @@ end
 
 -- Category · language · expiry, above the question title.
 local function MetaText(q)
-	return ("%s |cff999999· %s · %s|r"):format(W.CategoryText(q.cat), tostring(q.lang or ""):upper(), ExpiryText(q))
+	return ("%s |c%s· %s · %s|r"):format(W.CategoryText(q.cat), W.Hex(W.MUTED), tostring(q.lang or ""):upper(), ExpiryText(q))
 end
 
 function ThreadView.Create(parent, get)
@@ -394,7 +394,7 @@ function ThreadView.Create(parent, get)
 		if item.folded then
 			row.pin:Hide()
 			row.age:SetText("")
-			row.head:SetText("|cff999999" .. L.THREAD_IGNORED_ANSWER .. "|r")
+			row.head:SetText("|c" .. W.Hex(W.MUTED) .. L.THREAD_IGNORED_ANSWER .. "|r")
 			row.body:SetText("")
 			row.body:Hide()
 			row.links:Fill(nil)
@@ -404,7 +404,7 @@ function ThreadView.Create(parent, get)
 		local pinned = Pinned.IsPinned(a.id)
 		row.pin:Show()
 		row.pinIcon:SetDesaturated(not pinned)
-		row.pin:SetAlpha(pinned and 1 or 0.45)
+		row.pin:SetAlpha(pinned and 1 or 0.65)
 		local favorite = Players.IsFavorite(a.author)
 		row.head:SetText(("%s%s%s"):format(
 			favorite and STAR or "",

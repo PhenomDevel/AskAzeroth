@@ -149,9 +149,10 @@ local function Build(content)
 		local q, a = entry.question, entry.answer
 		row.title:SetText(ns.GlossaryLinks.PlayerText(q.title, q.lang))
 		row.meta:SetText(QuestionLine(q))
-		row.who:SetText(("%s%s  |cff9d9d9d%s|r"):format(
+		row.who:SetText(("%s%s  |c%s%s|r"):format(
 			Players.IsFavorite(a.author) and W.STAR or "",
 			W.PlayerLine(a.author, a.ctx, Players.GetClass(a.author)),
+			W.Hex(W.MUTED),
 			date("%Y-%m-%d %H:%M", a.created)))
 		row.text:SetText(ns.GlossaryLinks.PlayerText(a.text, q.lang))
 		row.links:Fill(a.faq)
