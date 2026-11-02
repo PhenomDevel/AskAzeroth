@@ -60,6 +60,7 @@ Core\Data\Faq\Rogue.lua
 Core\Data\Faq\Priest.lua
 Core\Data\Faq\Shaman.lua
 Core\Data\Faq\Mage.lua
+Core\Data\Faq\Warlock.lua
 Core\Data\Faq\Hunter.lua
 Core\Data\Faq\Combat.lua
 Core\Data\Faq\Travel.lua

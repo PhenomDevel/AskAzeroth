@@ -39,6 +39,9 @@
 - FAQ: 17 mage questions (conjured food and water, levelling, Frost Nova
   and Blink, Polymorph, armour spells, Counterspell, AoE, teleports and
   portals, mana, escapes, curses, talents).
+- FAQ: 17 warlock questions (demons and their quests, soul shards, soul
+  pouch, levelling, Life Tap, healthstones, soulstones, summoning, Fear,
+  Voidwalker, Banish, talents).
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
   Players, FAQ and Settings.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
