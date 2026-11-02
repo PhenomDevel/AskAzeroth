@@ -3,6 +3,8 @@
 ## Unreleased
 
 - In development, no release yet.
+- The "Ask a question" buttons on the Questions and FAQ pages are greyed
+  out while the one-minute wait runs and show the seconds left.
 - Notification settings: choose how often a notification may pop up (at
   once or every 1 to 15 minutes; what arrives in between is counted on the
   next one), which sound plays, and whether the counter shows on the
