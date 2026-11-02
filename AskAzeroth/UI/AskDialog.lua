@@ -127,7 +127,14 @@ end
 local function Validate()
 	local title = strtrim(dialog.titleBox:GetText())
 	dialog.titleCounter:SetFormattedText("%d / %d", #title, C.TITLE_MAX)
-	dialog.submit:SetEnabled(state.cat ~= nil and title ~= "")
+	-- One question per minute: the button counts down until the next one.
+	local wait = ns.Store.AskWait()
+	if wait > 0 then
+		dialog.submit:SetText(L.ASK_SUBMIT_WAIT:format(math.ceil(wait)))
+	else
+		dialog.submit:SetText(L.ASK_SUBMIT)
+	end
+	dialog.submit:SetEnabled(state.cat ~= nil and title ~= "" and wait <= 0)
 end
 
 local function Submit()
@@ -281,6 +288,17 @@ local function Create()
 	dialog.submit = W.Button(footer, L.ASK_SUBMIT, nil, Submit, "primary")
 	dialog.submit:SetHeight(32)
 	dialog.submit:SetPoint("RIGHT", -PAD + 2, 0)
+	W.FitButton(dialog.submit, L.ASK_SUBMIT, L.ASK_SUBMIT_WAIT:format(60))
+	W.Tooltip(dialog.submit, L.ASK_SUBMIT, L.ASK_WAIT_TIP)
+	-- Keep the countdown current while the dialog is open.
+	local elapsed = 0
+	dialog:SetScript("OnUpdate", function(_, delta)
+		elapsed = elapsed + delta
+		if elapsed >= 0.5 then
+			elapsed = 0
+			Validate()
+		end
+	end)
 	local cancel = W.Button(footer, L.ASK_CANCEL, nil, Close)
 	cancel:SetHeight(32)
 	cancel:SetPoint("RIGHT", dialog.submit, "LEFT", -8, 0)

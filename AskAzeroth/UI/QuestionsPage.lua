@@ -38,6 +38,18 @@ local function Build(content)
 	end, "primary")
 	ask:SetHeight(28)
 	ask:SetPoint("TOPRIGHT", -PAD, -PAD)
+	W.FitButton(ask, L.QUEUE_ASK, L.QUEUE_ASK_WAIT:format(60))
+	W.Tooltip(ask, L.QUEUE_ASK, L.ASK_WAIT_TIP)
+	-- One question per minute: count down on the button.
+	local function UpdateAsk()
+		local wait = ns.Store.AskWait()
+		ask:SetText(wait > 0 and L.QUEUE_ASK_WAIT:format(math.ceil(wait)) or L.QUEUE_ASK)
+	end
+	C_Timer.NewTicker(1, function()
+		if content:IsVisible() then
+			UpdateAsk()
+		end
+	end)
 
 	local search = W.SearchBox(filters, 100, L.QUEUE_SEARCH, function(text)
 		page.search = strtrim(text):lower()
