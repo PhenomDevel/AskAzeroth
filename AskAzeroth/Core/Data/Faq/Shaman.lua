@@ -37,31 +37,31 @@ ns.Faq.Add("shaman", {
 		id = "shaman-totems-how",
 		de = {
 			q = "Wie funktionieren Totems?",
-			a = "Ein Totem steht eine Weile am Boden und wirkt auf dich und deine Gruppe in der Nähe, zum Beispiel mehr Rüstung, Stärke oder Mana-Regeneration. Von jedem Element kann nur ein Totem stehen. Läufst du weg, wirken sie nicht mehr; stell sie neu auf.",
+			a = "Ein Totem steht eine Weile am Boden und wirkt auf dich und deine Gruppe in der Nähe, zum Beispiel mehr Rüstung, Stärke oder Mana-Regeneration. Von jedem Element kann nur ein Totem stehen. Läufst du weg, wirken sie nicht mehr; stell sie neu auf. In WoW: Forever stellst du später mit „Ruf der Elemente“ mehrere vorher gewählte Totems auf einmal auf.",
 		},
 		en = {
 			q = "How do totems work?",
-			a = "A totem stands on the ground for a while and affects you and your nearby group, for example more armour, strength or mana regeneration. Only one totem per element can be active. If you move away they stop working, so drop them again.",
+			a = "A totem stands on the ground for a while and affects you and your nearby group, for example more armour, strength or mana regeneration. Only one totem per element can be active. If you move away they stop working, so drop them again. In WoW: Forever you later get Call of the Elements, which drops several pre-chosen totems at once.",
 		},
 		fr = {
 			q = "Comment fonctionnent les totems ?",
-			a = "Un totem reste au sol un moment et agit sur vous et votre groupe proche, par exemple plus d'armure, de force ou de régénération de mana. Un seul totem par élément peut être actif. Si vous vous éloignez, ils n'agissent plus, alors reposez-les.",
+			a = "Un totem reste au sol un moment et agit sur vous et votre groupe proche, par exemple plus d'armure, de force ou de régénération de mana. Un seul totem par élément peut être actif. Si vous vous éloignez, ils n'agissent plus, alors reposez-les. Dans WoW: Forever, vous obtenez plus tard Appel des éléments, qui pose d'un coup plusieurs totems choisis à l'avance.",
 		},
 		es = {
 			q = "¿Cómo funcionan los tótems?",
-			a = "Un tótem queda en el suelo un tiempo y te afecta a ti y a tu grupo cercano, por ejemplo con más armadura, fuerza o regeneración de maná. Solo puede haber un tótem activo por elemento. Si te alejas dejan de funcionar, así que vuelve a ponerlos.",
+			a = "Un tótem queda en el suelo un tiempo y te afecta a ti y a tu grupo cercano, por ejemplo con más armadura, fuerza o regeneración de maná. Solo puede haber un tótem activo por elemento. Si te alejas dejan de funcionar, así que vuelve a ponerlos. En WoW: Forever consigues más adelante Llamada de los elementos, que coloca a la vez varios tótems elegidos de antemano.",
 		},
 		it = {
 			q = "Come funzionano i totem?",
-			a = "Un totem resta a terra per un po' e agisce su di te e sul gruppo vicino, per esempio con più armatura, forza o rigenerazione del mana. Può essere attivo un solo totem per elemento. Se ti allontani smettono di funzionare, quindi piazzali di nuovo.",
+			a = "Un totem resta a terra per un po' e agisce su di te e sul gruppo vicino, per esempio con più armatura, forza o rigenerazione del mana. Può essere attivo un solo totem per elemento. Se ti allontani smettono di funzionare, quindi piazzali di nuovo. In WoW: Forever più avanti ottieni Richiamo degli Elementi, che piazza insieme più totem scelti in anticipo.",
 		},
 		ru = {
 			q = "Как работают тотемы?",
-			a = "Тотем стоит на земле некоторое время и действует на вас и группу поблизости, например даёт больше брони, силы или восполнения маны. Одновременно может действовать только один тотем каждой стихии. Если вы отойдёте, они перестают действовать, так что ставьте их заново.",
+			a = "Тотем стоит на земле некоторое время и действует на вас и группу поблизости, например даёт больше брони, силы или восполнения маны. Одновременно может действовать только один тотем каждой стихии. Если вы отойдёте, они перестают действовать, так что ставьте их заново. В WoW: Forever позже появляется «Зов Стихий», который ставит сразу несколько заранее выбранных тотемов.",
 		},
 		pt = {
 			q = "Como funcionam os totens?",
-			a = "Um totem fica no chão por um tempo e afeta você e o grupo próximo, por exemplo com mais armadura, força ou regeneração de mana. Só pode haver um totem ativo por elemento. Se você se afastar eles param de funcionar, então coloque-os de novo.",
+			a = "Um totem fica no chão por um tempo e afeta você e o grupo próximo, por exemplo com mais armadura, força ou regeneração de mana. Só pode haver um totem ativo por elemento. Se você se afastar eles param de funcionar, então coloque-os de novo. No WoW: Forever você ganha mais tarde Chamado dos Elementos, que coloca de uma vez vários totens escolhidos antes.",
 		},
 	},
 	{
@@ -254,31 +254,31 @@ ns.Faq.Add("shaman", {
 		id = "shaman-ghost-wolf",
 		de = {
 			q = "Wie bekomme ich den Geisterwolf?",
-			a = "Über eine Klassenquest um Stufe 20. Als Geisterwolf läufst du schneller, bis du ein Reittier hast; im Kampf ist er aber keine gute Idee. Er hilft auch, um aus einem verlorenen Kampf zu fliehen.",
+			a = "Um Stufe 20 bei deinem Schamanenlehrer. Als Geisterwolf läufst du schneller, bis du ein Reittier hast; im Kampf ist er aber keine gute Idee. Er hilft auch, um aus einem verlorenen Kampf zu fliehen.",
 		},
 		en = {
 			q = "How do I get Ghost Wolf?",
-			a = "From a class quest around level 20. As a Ghost Wolf you run faster until you have a mount; it is not a good idea in combat though. It also helps to escape a lost fight.",
+			a = "From your shaman trainer around level 20. As a Ghost Wolf you run faster until you have a mount; it is not a good idea in combat though. It also helps to escape a lost fight.",
 		},
 		fr = {
 			q = "Comment obtenir Loup fantôme ?",
-			a = "Par une quête de classe vers le niveau 20. En Loup fantôme, vous courez plus vite jusqu'à ce que vous ayez une monture ; ce n'est pas une bonne idée en combat, en revanche. Cela aide aussi à fuir un combat perdu.",
+			a = "Auprès de votre maître des chamans, vers le niveau 20. En Loup fantôme, vous courez plus vite jusqu'à ce que vous ayez une monture ; ce n'est pas une bonne idée en combat, en revanche. Cela aide aussi à fuir un combat perdu.",
 		},
 		es = {
 			q = "¿Cómo consigo Lobo fantasmal?",
-			a = "Con una misión de clase hacia el nivel 20. Como Lobo fantasmal corres más rápido hasta que tengas montura; en combate, en cambio, no es buena idea. También ayuda a huir de un combate perdido.",
+			a = "Con tu instructor de chamanes, hacia el nivel 20. Como Lobo fantasmal corres más rápido hasta que tengas montura; en combate, en cambio, no es buena idea. También ayuda a huir de un combate perdido.",
 		},
 		it = {
 			q = "Come ottengo Lupo Spettrale?",
-			a = "Con una missione di classe verso il livello 20. Come Lupo Spettrale corri più veloce finché non hai una cavalcatura; in combattimento però non è una buona idea. Aiuta anche a fuggire da un combattimento perso.",
+			a = "Dal tuo istruttore degli sciamani, verso il livello 20. Come Lupo Spettrale corri più veloce finché non hai una cavalcatura; in combattimento però non è una buona idea. Aiuta anche a fuggire da un combattimento perso.",
 		},
 		ru = {
 			q = "Как получить «Призрачного волка»?",
-			a = "За классовое задание около 20-го уровня. В облике «Призрачного волка» вы бегаете быстрее, пока у вас нет маунта; в бою это, правда, плохая идея. Он также помогает сбежать из проигранного боя.",
+			a = "У наставника шаманов, примерно на 20-м уровне. В облике «Призрачного волка» вы бегаете быстрее, пока у вас нет маунта; в бою это, правда, плохая идея. Он также помогает сбежать из проигранного боя.",
 		},
 		pt = {
 			q = "Como consigo Lobo Fantasma?",
-			a = "Numa missão de classe por volta do nível 20. Como Lobo Fantasma você corre mais rápido até ter uma montaria; em combate, porém, não é uma boa ideia. Também ajuda a fugir de uma luta perdida.",
+			a = "Com seu instrutor de xamãs, por volta do nível 20. Como Lobo Fantasma você corre mais rápido até ter uma montaria; em combate, porém, não é uma boa ideia. Também ajuda a fugir de uma luta perdida.",
 		},
 	},
 	{
