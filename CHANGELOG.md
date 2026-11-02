@@ -36,6 +36,9 @@
 - FAQ: 17 shaman questions (totem items and quests, choosing totems,
   weapon imbues, shocks, healing, Ghost Wolf, Reincarnation, Astral Recall,
   water spells, stats, talents, mana).
+- FAQ: 17 mage questions (conjured food and water, levelling, Frost Nova
+  and Blink, Polymorph, armour spells, Counterspell, AoE, teleports and
+  portals, mana, escapes, curses, talents).
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
   Players, FAQ and Settings.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
