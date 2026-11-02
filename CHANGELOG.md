@@ -3,6 +3,8 @@
 ## Unreleased
 
 - In development, no release yet.
+- Setup: as a mentor you can now pick the classes you help with; the
+  class list shows the class colours (also in Settings).
 - FAQ answers list the glossary terms they use in a row "Terms:" below the
   answer; hover a term for its explanation, click to open it in the glossary.
 - Notifications show right away again: there was a two-minute pause

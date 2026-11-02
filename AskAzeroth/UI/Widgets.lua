@@ -437,6 +437,37 @@ function W.Dropdown(parent, width, options, get, set)
 	end)
 end
 
+-- Class files for the mentor class filter, in the game's order where known.
+-- luacheck: read globals CLASS_SORT_ORDER
+W.CLASSES = CLASS_SORT_ORDER or { "WARRIOR", "PALADIN", "HUNTER", "ROGUE", "PRIEST", "SHAMAN", "MAGE", "WARLOCK", "DRUID" }
+
+-- Dropdown with a checkbox per class (class colour) and "All classes" on
+-- top; selected = { classFile → true }, empty means every class.
+function W.ClassMenu(parent, width, selected)
+	local L = ns.L
+	local menu = W.Menu(parent, width, function(root)
+		root:CreateButton(L.SETTING_CLASSES_ALL, function()
+			wipe(selected)
+		end)
+		for _, classFile in ipairs(W.CLASSES) do
+			local name = W.ClassName(classFile)
+			if name then
+				local hex = W.ClassColorHex(classFile)
+				root:CreateCheckbox(hex and ("|c%s%s|r"):format(hex, name) or name, function()
+					return selected[classFile] == true
+				end, function()
+					selected[classFile] = not selected[classFile] or nil
+				end)
+			end
+		end
+	end)
+	if menu.SetDefaultText then
+		menu:SetDefaultText(L.SETTING_CLASSES_ALL)
+	end
+	W.Tooltip(menu, L.SETTING_CLASSES, L.SETTING_CLASSES_TIP)
+	return menu
+end
+
 -- 1 px line in the separator colour.
 function W.Divider(parent, color)
 	return W.Fill(parent, color or W.COLORS.line, "ARTWORK")

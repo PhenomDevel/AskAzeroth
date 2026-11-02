@@ -196,6 +196,7 @@ L.SETUP_ROLE_MENTOR_TEXT = "Conozco el juego y me gusta responder preguntas. Las
 L.SETUP_NOTIFY_HEAD = "¿Con qué preguntas puedes ayudar?"
 L.SETUP_NOTIFY_TEXT = "Las nuevas preguntas de las categorías elegidas te avisan. Haz clic en una categoría para activarla o desactivarla. El filtro de clases y más está en Opciones."
 L.SETUP_NOTIFY_SOUND = "Reproducir un sonido con nuevas preguntas"
+L.SETUP_NOTIFY_CLASSES = "Ayudo con"
 L.SETUP_EXTRAS_HEAD = "Casi listo"
 L.SETUP_EXTRAS_TEXT = "Dos cosas más."
 L.SETUP_TIP_NEWCOMER = "Consejo: las FAQ ya responden muchas preguntas de principiantes. Se abren al hacer clic en Terminar."
