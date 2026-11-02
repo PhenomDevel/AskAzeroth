@@ -36,6 +36,9 @@ ns.dbDefaults = {
 		-- Page the main window opens with.
 		page = 1,
 	},
+	-- FAQ entry id → how often its suggestion in the ask dialog was marked
+	-- "That helped" (/aa faqstats). Stays on this computer.
+	faqHelped = {},
 }
 
 ns.charDbDefaults = {
