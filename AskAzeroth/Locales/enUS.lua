@@ -188,6 +188,17 @@ L.PINNED_EMPTY = "Nothing pinned yet. Click the note icon next to an answer to k
 L.FAQ_LANGUAGE = "FAQ language"
 L.FAQ_LANGUAGE_TIP = "Switches the FAQ between German and English."
 L.FAQ_NOT_HELPED = "Did not help? Ask the community."
+L.FAQ_TOPIC_ADDON = "AskAzeroth"
+L.FAQ_TOPIC_START = "First steps"
+L.FAQ_TOPIC_QUEST = "Quests"
+L.FAQ_TOPIC_CLASS = "Class & talents"
+L.FAQ_TOPIC_COMBAT = "Combat & death"
+L.FAQ_TOPIC_TRAVEL = "Travel"
+L.FAQ_TOPIC_GOLD = "Gold & trade"
+L.FAQ_TOPIC_PROF = "Professions"
+L.FAQ_TOPIC_GROUP = "Groups & dungeons"
+L.FAQ_TOPIC_SOCIAL = "Chat & guild"
+L.FAQ_TOPIC_UI = "Interface"
 
 -- Categories
 L.CAT_QUEST = "Quest"

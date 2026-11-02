@@ -184,6 +184,17 @@ L.PINNED_EMPTY = "Noch nichts angepinnt. Klick auf das Notiz-Symbol neben einer 
 L.FAQ_LANGUAGE = "FAQ-Sprache"
 L.FAQ_LANGUAGE_TIP = "Schaltet das FAQ zwischen Deutsch und Englisch um."
 L.FAQ_NOT_HELPED = "Nicht geholfen? Frag die Community."
+L.FAQ_TOPIC_ADDON = "AskAzeroth"
+L.FAQ_TOPIC_START = "Erste Schritte"
+L.FAQ_TOPIC_QUEST = "Quests"
+L.FAQ_TOPIC_CLASS = "Klasse & Talente"
+L.FAQ_TOPIC_COMBAT = "Kampf & Tod"
+L.FAQ_TOPIC_TRAVEL = "Reisen"
+L.FAQ_TOPIC_GOLD = "Gold & Handel"
+L.FAQ_TOPIC_PROF = "Berufe"
+L.FAQ_TOPIC_GROUP = "Gruppen & Dungeons"
+L.FAQ_TOPIC_SOCIAL = "Chat & Gilde"
+L.FAQ_TOPIC_UI = "Oberfläche"
 
 -- Categories
 L.CAT_QUEST = "Quest"

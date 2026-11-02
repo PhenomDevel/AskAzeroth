@@ -48,6 +48,7 @@ Core\Constants.lua
 Core\Util.lua
 Core\Serializer.lua
 Core\Data\Categories.lua
+Core\Data\FaqTopics.lua
 Core\Data\FaqEN.lua
 Core\Data\FaqDE.lua
 Core\Database.lua

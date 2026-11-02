@@ -9,6 +9,10 @@
   the left, coloured categories, answer cards and an FAQ with list and
   detail view.
 - Loads on retail (Midnight) too, for testing until Forever launches.
+- Bigger FAQ: over 50 typical beginner questions (first steps, quests,
+  class and talents, combat, travel, gold, professions, groups, chat,
+  interface) with a topic filter. "Ask a question" from the FAQ picks the
+  matching category for you.
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
   Players, FAQ and Settings.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),

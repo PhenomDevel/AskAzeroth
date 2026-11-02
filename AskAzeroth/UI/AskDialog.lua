@@ -171,13 +171,14 @@ local function Create()
 end
 
 -- onAsked(question) runs after a successful ask.
-function AskDialog.Show(onAsked)
+-- cat (optional) preselects a question category.
+function AskDialog.Show(onAsked, cat)
 	UI.Show(UI.PAGE_QUESTIONS)
 	if not overlay then
 		Create()
 	end
 	AskDialog.onAsked = onAsked
-	state.cat = nil
+	state.cat = C.IsCategory(cat) and cat or nil
 	state.lang = ns.Channel.GetAskLanguage()
 	dialog.titleBox:SetText("")
 	dialog.bodyBox:SetText("")

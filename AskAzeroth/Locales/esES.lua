@@ -184,6 +184,17 @@ L.PINNED_EMPTY = "Aún no hay nada fijado. Haz clic en el icono de nota junto a 
 L.FAQ_LANGUAGE = "Idioma de las preguntas frecuentes"
 L.FAQ_LANGUAGE_TIP = "Cambia las preguntas frecuentes entre alemán e inglés."
 L.FAQ_NOT_HELPED = "¿No te ha ayudado? Pregunta a la comunidad."
+L.FAQ_TOPIC_ADDON = "AskAzeroth"
+L.FAQ_TOPIC_START = "Primeros pasos"
+L.FAQ_TOPIC_QUEST = "Misiones"
+L.FAQ_TOPIC_CLASS = "Clase y talentos"
+L.FAQ_TOPIC_COMBAT = "Combate y muerte"
+L.FAQ_TOPIC_TRAVEL = "Viajes"
+L.FAQ_TOPIC_GOLD = "Oro y comercio"
+L.FAQ_TOPIC_PROF = "Profesiones"
+L.FAQ_TOPIC_GROUP = "Grupos y mazmorras"
+L.FAQ_TOPIC_SOCIAL = "Chat y hermandad"
+L.FAQ_TOPIC_UI = "Interfaz"
 
 -- Categories
 L.CAT_QUEST = "Misión"

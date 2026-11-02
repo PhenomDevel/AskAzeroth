@@ -184,6 +184,17 @@ L.PINNED_EMPTY = "Пока ничего не закреплено. Нажмит�
 L.FAQ_LANGUAGE = "Язык FAQ"
 L.FAQ_LANGUAGE_TIP = "Переключает FAQ между немецким и английским."
 L.FAQ_NOT_HELPED = "Не помогло? Спросите сообщество."
+L.FAQ_TOPIC_ADDON = "AskAzeroth"
+L.FAQ_TOPIC_START = "Первые шаги"
+L.FAQ_TOPIC_QUEST = "Задания"
+L.FAQ_TOPIC_CLASS = "Класс и таланты"
+L.FAQ_TOPIC_COMBAT = "Бой и смерть"
+L.FAQ_TOPIC_TRAVEL = "Путешествия"
+L.FAQ_TOPIC_GOLD = "Золото и торговля"
+L.FAQ_TOPIC_PROF = "Профессии"
+L.FAQ_TOPIC_GROUP = "Группы и подземелья"
+L.FAQ_TOPIC_SOCIAL = "Чат и гильдия"
+L.FAQ_TOPIC_UI = "Интерфейс"
 
 -- Categories
 L.CAT_QUEST = "Задание"
