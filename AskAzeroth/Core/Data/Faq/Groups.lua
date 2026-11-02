@@ -12,6 +12,26 @@ ns.Faq.Add("group", {
 			q = "How do I find a group for a dungeon?",
 			a = "Use the group finder: list your own group or apply to one, the leader invites players by hand. There is no automatic Dungeon Finder in WoW: Forever. Asking in the chat or your guild works, too. Say which dungeon you want and which role you play (tank, healer or damage), and agree on loot rules before you start.",
 		},
+		fr = {
+			q = "Comment trouver un groupe pour un donjon ?",
+			a = "Utilisez la recherche de groupe : inscrivez votre propre groupe ou postulez à un groupe, le chef invite les joueurs à la main. Il n'y a pas d'outil Donjons automatique dans WoW: Forever. Demander dans le chat ou à votre guilde marche aussi. Dites quel donjon vous voulez faire et votre rôle (tank, soigneur ou DPS), et mettez-vous d'accord sur les règles de butin avant de commencer.",
+		},
+		es = {
+			q = "¿Cómo encuentro grupo para una mazmorra?",
+			a = "Usa el buscador de grupos: anuncia tu propio grupo o apúntate a uno; el líder invita a los jugadores a mano. En WoW: Forever no hay buscador de mazmorras automático. Preguntar en el chat o en tu hermandad también funciona. Di qué mazmorra quieres hacer y tu rol (tanque, sanador o daño), y acordad las reglas de botín antes de empezar.",
+		},
+		it = {
+			q = "Come trovo un gruppo per una spedizione?",
+			a = "Usa la ricerca gruppo: inserisci il tuo gruppo o candidati a uno, il capogruppo invita i giocatori a mano. In WoW: Forever non c'è la ricerca automatica delle spedizioni. Funziona anche chiedere in chat o in gilda. Di' quale spedizione vuoi fare e il tuo ruolo (tank, guaritore o danni), e accordatevi sulle regole del bottino prima di iniziare.",
+		},
+		ru = {
+			q = "Как найти группу в подземелье?",
+			a = "Воспользуйтесь поиском группы: разместите свою группу или подайте заявку в чужую, лидер приглашает игроков вручную. Автоматического поиска подземелий в WoW: Forever нет. Можно также спросить в чате или в гильдии. Скажите, в какое подземелье хотите и какая у вас роль (танк, лекарь или боец), и до начала договоритесь о правилах добычи.",
+		},
+		pt = {
+			q = "Como encontro grupo para uma masmorra?",
+			a = "Use o localizador de grupos: anuncie seu próprio grupo ou candidate-se a um; o líder convida os jogadores manualmente. Não há localizador de masmorras automático no WoW: Forever. Perguntar no chat ou na guilda também funciona. Diga qual masmorra quer fazer e sua função (tanque, curador ou dano), e combinem as regras de saque antes de começar.",
+		},
 	},
 	{
 		id = "group-first-dungeon",
@@ -22,6 +42,26 @@ ns.Faq.Add("group", {
 		en = {
 			q = "What should I know before my first dungeon?",
 			a = "Say that you are new, most groups gladly explain. Let the tank pull, attack the tank's target and stay out of fights the group has not started. Crowd control such as sheep, sap or shackle matters, because dungeons do not scale to your level.",
+		},
+		fr = {
+			q = "Que dois-je savoir avant mon premier donjon ?",
+			a = "Dites que vous êtes nouveau, la plupart des groupes expliquent volontiers. Laissez le tank attirer les ennemis, attaquez sa cible et ne vous mêlez pas aux combats que le groupe n'a pas commencés. Le contrôle des foules, comme la métamorphose, Assommer ou Entraves des morts-vivants, compte, car les donjons ne s'adaptent pas à votre niveau.",
+		},
+		es = {
+			q = "¿Qué debo saber antes de mi primera mazmorra?",
+			a = "Di que eres nuevo; la mayoría de los grupos lo explican con gusto. Deja que el tanque atraiga a los enemigos, ataca a su objetivo y no te metas en combates que el grupo no ha empezado. El control de masas, como Polimorfia, Porrazo o Grilletes de no-muerto, importa, porque las mazmorras no se adaptan a tu nivel.",
+		},
+		it = {
+			q = "Cosa devo sapere prima della mia prima spedizione?",
+			a = "Di' che sei nuovo, quasi tutti i gruppi spiegano volentieri. Lascia che sia il tank ad attirare i nemici, attacca il suo bersaglio e non entrare in scontri che il gruppo non ha iniziato. Il controllo dei nemici, come Metamorfosi, Tramortire o Incatena Non Morti, è importante, perché le spedizioni non si adattano al tuo livello.",
+		},
+		ru = {
+			q = "Что нужно знать перед первым подземельем?",
+			a = "Скажите, что вы новичок, — большинство групп охотно всё объяснят. Пусть врагов притягивает танк, атакуйте его цель и не лезьте в бои, которые группа не начинала. Контроль врагов, например «Превращение», «Ошеломление» или «Сковывание нежити», важен, потому что подземелья не подстраиваются под ваш уровень.",
+		},
+		pt = {
+			q = "O que devo saber antes da minha primeira masmorra?",
+			a = "Diga que é novo; a maioria dos grupos explica com prazer. Deixe o tanque puxar os inimigos, ataque o alvo dele e não entre em lutas que o grupo não começou. Controle de grupo, como Polimorfia, Aturdir ou Agrilhoar Morto-vivo, é importante, porque as masmorras não se ajustam ao seu nível.",
 		},
 	},
 	{
@@ -34,6 +74,26 @@ ns.Faq.Add("group", {
 			q = "How does loot work in a group?",
 			a = "For many items everyone rolls Need, Greed or Pass. Choose Need only if your character will really use the item, otherwise Greed. Ask before rolling Need on items others might want as well.",
 		},
+		fr = {
+			q = "Comment fonctionne le butin en groupe ?",
+			a = "Pour beaucoup d'objets, chacun choisit Besoin, Cupidité ou Passer. Ne choisissez Besoin que si votre personnage utilisera vraiment l'objet, sinon Cupidité. Demandez avant de faire Besoin sur des objets que d'autres pourraient aussi vouloir.",
+		},
+		es = {
+			q = "¿Cómo funciona el botín en grupo?",
+			a = "En muchos objetos todos eligen Necesidad, Codicia o Pasar. Elige Necesidad solo si tu personaje de verdad va a usar el objeto; si no, Codicia. Pregunta antes de tirar Necesidad en objetos que otros también podrían querer.",
+		},
+		it = {
+			q = "Come funziona il bottino in gruppo?",
+			a = "Per molti oggetti tutti scelgono Necessità, Avidità o Passa. Scegli Necessità solo se il tuo personaggio userà davvero l'oggetto, altrimenti Avidità. Chiedi prima di scegliere Necessità su oggetti che anche altri potrebbero volere.",
+		},
+		ru = {
+			q = "Как делится добыча в группе?",
+			a = "На многие предметы каждый выбирает «Мне это нужно», «Не откажусь» или «Отказаться». Выбирайте «Нужно», только если ваш персонаж действительно будет пользоваться предметом, иначе «Не откажусь». Спросите, прежде чем выбирать «Нужно» на то, что может пригодиться и другим.",
+		},
+		pt = {
+			q = "Como funciona o saque em grupo?",
+			a = "Em muitos itens todos escolhem Necessidade, Ganância ou Passar. Escolha Necessidade só se seu personagem realmente vai usar o item; senão, Ganância. Pergunte antes de rolar Necessidade em itens que outros também podem querer.",
+		},
 	},
 	{
 		id = "group-invite",
@@ -44,6 +104,26 @@ ns.Faq.Add("group", {
 		en = {
 			q = "How do I invite someone to my group?",
 			a = "Right-click their name in the chat or their portrait and choose Invite. Your party frames then appear on the left.",
+		},
+		fr = {
+			q = "Comment inviter quelqu'un dans mon groupe ?",
+			a = "Clic droit sur son nom dans le chat ou sur son portrait, puis « Inviter ». Les cadres du groupe apparaissent alors à gauche.",
+		},
+		es = {
+			q = "¿Cómo invito a alguien a mi grupo?",
+			a = "Clic derecho en su nombre en el chat o en su retrato y elige «Invitar». Los marcos del grupo aparecen entonces a la izquierda.",
+		},
+		it = {
+			q = "Come invito qualcuno nel gruppo?",
+			a = "Clic destro sul suo nome in chat o sul suo ritratto e scegli «Invita». I riquadri del gruppo compaiono poi a sinistra.",
+		},
+		ru = {
+			q = "Как пригласить кого-то в группу?",
+			a = "Щёлкните правой кнопкой по имени в чате или по портрету и выберите «Пригласить». Рамки группы появятся слева.",
+		},
+		pt = {
+			q = "Como convido alguém para o grupo?",
+			a = "Clique com o botão direito no nome no chat ou no retrato e escolha \"Convidar\". Os quadros do grupo aparecem então à esquerda.",
 		},
 	},
 	{
@@ -56,6 +136,26 @@ ns.Faq.Add("group", {
 			q = "What is a raid?",
 			a = "A raid is a dungeon for a large group at the maximum level. WoW: Forever starts with raids for 10, 20 and 40 players. Most players raid with their guild.",
 		},
+		fr = {
+			q = "Qu'est-ce qu'un raid ?",
+			a = "Un raid est un donjon pour un grand groupe au niveau maximum. WoW: Forever commence avec des raids pour 10, 20 et 40 joueurs. La plupart des joueurs font les raids avec leur guilde.",
+		},
+		es = {
+			q = "¿Qué es una banda?",
+			a = "Una banda es una mazmorra para un grupo grande al nivel máximo. WoW: Forever empieza con bandas de 10, 20 y 40 jugadores. La mayoría juega las bandas con su hermandad.",
+		},
+		it = {
+			q = "Cos'è un'incursione?",
+			a = "Un'incursione è una spedizione per un gruppo numeroso al livello massimo. WoW: Forever parte con incursioni da 10, 20 e 40 giocatori. La maggior parte dei giocatori le affronta con la propria gilda.",
+		},
+		ru = {
+			q = "Что такое рейд?",
+			a = "Рейд — подземелье для большой группы на максимальном уровне. В WoW: Forever на старте есть рейды на 10, 20 и 40 игроков. Большинство ходит в рейды со своей гильдией.",
+		},
+		pt = {
+			q = "O que é uma raide?",
+			a = "Uma raide é uma masmorra para um grupo grande no nível máximo. O WoW: Forever começa com raides para 10, 20 e 40 jogadores. A maioria faz raides com a própria guilda.",
+		},
 	},
 	{
 		id = "group-finder-playstyle",
@@ -66,6 +166,26 @@ ns.Faq.Add("group", {
 		en = {
 			q = "What do the playstyles in the group finder mean?",
 			a = "Groups say how they want to play, for example learning, relaxed or competitive. As a beginner, look for a learning or relaxed group; nobody minds there if something goes wrong.",
+		},
+		fr = {
+			q = "Que signifient les styles de jeu dans la recherche de groupe ?",
+			a = "Les groupes indiquent comment ils veulent jouer, par exemple pour apprendre, détendu ou compétitif. Débutant, cherchez un groupe pour apprendre ou détendu ; personne n'y râle si quelque chose tourne mal.",
+		},
+		es = {
+			q = "¿Qué significan los estilos de juego del buscador de grupos?",
+			a = "Los grupos indican cómo quieren jugar, por ejemplo para aprender, relajado o competitivo. Si empiezas, busca un grupo para aprender o relajado; ahí a nadie le molesta que algo salga mal.",
+		},
+		it = {
+			q = "Cosa indicano gli stili di gioco nella ricerca gruppo?",
+			a = "I gruppi dicono come vogliono giocare, per esempio per imparare, rilassato o competitivo. Da principiante cerca un gruppo per imparare o rilassato; lì nessuno se la prende se qualcosa va storto.",
+		},
+		ru = {
+			q = "Что означают стили игры в поиске группы?",
+			a = "Группы указывают, как хотят играть, например для обучения, спокойно или на результат. Новичку лучше искать группу для обучения или спокойную; там никто не злится, если что-то пошло не так.",
+		},
+		pt = {
+			q = "O que significam os estilos de jogo no localizador de grupos?",
+			a = "Os grupos dizem como querem jogar, por exemplo para aprender, relaxado ou competitivo. Como iniciante, procure um grupo para aprender ou relaxado; lá ninguém liga se algo der errado.",
 		},
 	},
 	{
@@ -78,6 +198,26 @@ ns.Faq.Add("group", {
 			q = "How do I list my own group in the group finder?",
 			a = "Open the group finder, choose the dungeon and briefly describe what you need, for example \"looking for healer and tank\". Accept applicants by inviting them. As the leader you are not waiting on anyone, which saves a lot of time.",
 		},
+		fr = {
+			q = "Comment inscrire mon propre groupe dans la recherche de groupe ?",
+			a = "Ouvrez la recherche de groupe, choisissez le donjon et décrivez brièvement ce qu'il vous faut, par exemple « cherche soigneur et tank ». Acceptez les candidats en les invitant. En tant que chef, vous n'attendez personne, ce qui fait gagner beaucoup de temps.",
+		},
+		es = {
+			q = "¿Cómo anuncio mi propio grupo en el buscador?",
+			a = "Abre el buscador de grupos, elige la mazmorra y describe brevemente lo que buscas, por ejemplo «se busca sanador y tanque». Acepta a los solicitantes invitándolos. Como líder no esperas a nadie, lo que ahorra mucho tiempo.",
+		},
+		it = {
+			q = "Come inserisco il mio gruppo nella ricerca gruppo?",
+			a = "Apri la ricerca gruppo, scegli la spedizione e descrivi brevemente cosa ti serve, per esempio «cerco guaritore e tank». Accetta i candidati invitandoli. Da capogruppo non aspetti nessuno, e risparmi molto tempo.",
+		},
+		ru = {
+			q = "Как разместить свою группу в поиске группы?",
+			a = "Откройте поиск группы, выберите подземелье и кратко опишите, кто нужен, например «ищем лекаря и танка». Принимайте заявки, приглашая игроков. Как лидер вы ни от кого не ждёте приглашения, и это экономит много времени.",
+		},
+		pt = {
+			q = "Como anuncio meu próprio grupo no localizador?",
+			a = "Abra o localizador de grupos, escolha a masmorra e descreva rápido o que precisa, por exemplo \"procurando curador e tanque\". Aceite candidatos convidando-os. Como líder você não espera ninguém, o que poupa muito tempo.",
+		},
 	},
 	{
 		id = "group-size",
@@ -88,6 +228,26 @@ ns.Faq.Add("group", {
 		en = {
 			q = "How many players does a dungeon need?",
 			a = "Five: usually one tank, one healer and three damage dealers. Make sure someone can control enemies, for example with Polymorph or Sap, which makes a lot easier.",
+		},
+		fr = {
+			q = "Combien de joueurs faut-il pour un donjon ?",
+			a = "Cinq : généralement un tank, un soigneur et trois DPS. Veillez à ce que quelqu'un puisse contrôler des ennemis, par exemple avec la Métamorphose ou Assommer, cela facilite beaucoup de choses.",
+		},
+		es = {
+			q = "¿Cuántos jugadores hacen falta para una mazmorra?",
+			a = "Cinco: normalmente un tanque, un sanador y tres de daño. Asegúrate de que alguien pueda controlar enemigos, por ejemplo con Polimorfia o Porrazo, eso facilita mucho las cosas.",
+		},
+		it = {
+			q = "Quanti giocatori servono per una spedizione?",
+			a = "Cinque: di solito un tank, un guaritore e tre che fanno danni. Assicurati che qualcuno possa controllare i nemici, per esempio con Metamorfosi o Tramortire, rende molto più facile.",
+		},
+		ru = {
+			q = "Сколько игроков нужно для подземелья?",
+			a = "Пятеро: обычно танк, лекарь и три бойца. Хорошо, если кто-то умеет контролировать врагов, например «Превращением» или «Ошеломлением», — это многое упрощает.",
+		},
+		pt = {
+			q = "Quantos jogadores uma masmorra precisa?",
+			a = "Cinco: normalmente um tanque, um curador e três de dano. Garanta que alguém consiga controlar inimigos, por exemplo com Polimorfia ou Aturdir, o que facilita muito.",
 		},
 	},
 	{
@@ -100,6 +260,26 @@ ns.Faq.Add("group", {
 			q = "Are dungeons worth it for levelling?",
 			a = "Yes, mainly for the quests: in WoW: Forever enemies in dungeons give less experience, but dungeon quests give much more the first time you complete them. Plus good loot. Collect the quests beforehand.",
 		},
+		fr = {
+			q = "Les donjons valent-ils le coup pour monter de niveau ?",
+			a = "Oui, surtout pour les quêtes : dans WoW: Forever, les ennemis des donjons donnent moins d'expérience, mais les quêtes de donjon en rapportent beaucoup plus la première fois. En plus, il y a du bon butin. Récupérez les quêtes avant.",
+		},
+		es = {
+			q = "¿Merecen la pena las mazmorras para subir de nivel?",
+			a = "Sí, sobre todo por las misiones: en WoW: Forever los enemigos de las mazmorras dan menos experiencia, pero las misiones de mazmorra dan mucha más la primera vez que las completas. Además hay buen botín. Recoge las misiones antes.",
+		},
+		it = {
+			q = "Le spedizioni conviene farle per salire di livello?",
+			a = "Sì, soprattutto per le missioni: in WoW: Forever i nemici delle spedizioni danno meno esperienza, ma le missioni delle spedizioni ne danno molta di più la prima volta. In più c'è buon bottino. Raccogli prima le missioni.",
+		},
+		ru = {
+			q = "Стоит ли ходить в подземелья ради прокачки?",
+			a = "Да, прежде всего ради заданий: в WoW: Forever враги в подземельях дают меньше опыта, но задания подземелий при первом выполнении дают намного больше. Плюс хорошая добыча. Соберите задания заранее.",
+		},
+		pt = {
+			q = "Masmorras valem a pena para subir de nível?",
+			a = "Sim, principalmente pelas missões: no WoW: Forever inimigos de masmorra dão menos experiência, mas as missões de masmorra dão muito mais na primeira vez. Além de bom saque. Pegue as missões antes.",
+		},
 	},
 	{
 		id = "group-entrance",
@@ -110,6 +290,26 @@ ns.Faq.Add("group", {
 		en = {
 			q = "Where is the dungeon entrance?",
 			a = "Dungeons have a glowing entrance somewhere in the world, often in a cave or ruin. The world map usually shows them with their own icon. Ask your group who knows the way, or ask here.",
+		},
+		fr = {
+			q = "Où est l'entrée du donjon ?",
+			a = "Les donjons ont une entrée lumineuse quelque part dans le monde, souvent dans une grotte ou une ruine. La carte du monde les montre généralement avec leur propre icône. Demandez à votre groupe qui connaît le chemin, ou demandez ici.",
+		},
+		es = {
+			q = "¿Dónde está la entrada de la mazmorra?",
+			a = "Las mazmorras tienen una entrada brillante en algún lugar del mundo, a menudo en una cueva o unas ruinas. El mapa del mundo suele mostrarlas con su propio icono. Pregunta en el grupo quién conoce el camino, o pregunta aquí.",
+		},
+		it = {
+			q = "Dov'è l'ingresso della spedizione?",
+			a = "Le spedizioni hanno un ingresso luminoso da qualche parte nel mondo, spesso in una grotta o in rovine. La mappa del mondo di solito le mostra con un'icona apposita. Chiedi al gruppo chi conosce la strada, o chiedi qui.",
+		},
+		ru = {
+			q = "Где вход в подземелье?",
+			a = "У подземелий есть светящийся вход где-то в мире, часто в пещере или руинах. На карте мира они обычно отмечены своим значком. Спросите в группе, кто знает дорогу, или спросите здесь.",
+		},
+		pt = {
+			q = "Onde fica a entrada da masmorra?",
+			a = "As masmorras têm uma entrada brilhante em algum lugar do mundo, muitas vezes numa caverna ou ruína. O mapa-múndi costuma mostrá-las com um ícone próprio. Pergunte no grupo quem sabe o caminho, ou pergunte aqui.",
 		},
 	},
 	{
@@ -122,6 +322,26 @@ ns.Faq.Add("group", {
 			q = "What do the skull, cross and moon above enemies mean?",
 			a = "Those are target markers set by the tank or leader. Usually skull means kill first, cross next, and moon or another symbol means crowd control (for example Polymorph). Agree on it briefly before the fight.",
 		},
+		fr = {
+			q = "Que signifient la tête de mort, la croix et la lune au-dessus des ennemis ?",
+			a = "Ce sont des marqueurs de cible posés par le tank ou le chef. En général, la tête de mort signifie à tuer en premier, la croix ensuite, et la lune ou un autre symbole à contrôler (par exemple avec la Métamorphose). Mettez-vous d'accord avant le combat.",
+		},
+		es = {
+			q = "¿Qué significan la calavera, la cruz y la luna sobre los enemigos?",
+			a = "Son marcas de objetivo que pone el tanque o el líder. Normalmente la calavera significa matar primero, la cruz después, y la luna u otro símbolo, controlar (por ejemplo con Polimorfia). Acordadlo antes del combate.",
+		},
+		it = {
+			q = "Cosa indicano teschio, croce e luna sopra i nemici?",
+			a = "Sono segnalini bersaglio messi dal tank o dal capogruppo. Di solito il teschio significa uccidere per primo, la croce dopo, e la luna o un altro simbolo controllare (per esempio con Metamorfosi). Mettetevi d'accordo prima dello scontro.",
+		},
+		ru = {
+			q = "Что означают череп, крест и луна над врагами?",
+			a = "Это метки целей, которые ставит танк или лидер. Обычно череп — убить первым, крест — следующим, а луна или другой знак — контролировать (например, «Превращением»). Коротко договоритесь об этом перед боем.",
+		},
+		pt = {
+			q = "O que significam a caveira, o X e a lua acima dos inimigos?",
+			a = "São marcadores de alvo colocados pelo tanque ou líder. Normalmente caveira significa matar primeiro, o X depois, e a lua ou outro símbolo significa controlar (por exemplo com Polimorfia). Combinem rápido antes da luta.",
+		},
 	},
 	{
 		id = "group-wipe",
@@ -132,6 +352,26 @@ ns.Faq.Add("group", {
 		en = {
 			q = "The whole group died. What now?",
 			a = "It happens to everyone. Everyone releases their spirit and runs to the entrance. Whoever can resurrect first brings back other healers and resurrecters. Talk briefly about what went wrong before trying again.",
+		},
+		fr = {
+			q = "Tout le groupe est mort. Et maintenant ?",
+			a = "Ça arrive à tout le monde. Chacun libère son esprit et court jusqu'à l'entrée. Celui qui peut ressusciter ramène d'abord les autres soigneurs et ceux qui peuvent ressusciter. Discutez brièvement de ce qui n'a pas marché avant de réessayer.",
+		},
+		es = {
+			q = "Ha muerto todo el grupo. ¿Y ahora?",
+			a = "Le pasa a todo el mundo. Todos liberan su espíritu y corren a la entrada. Quien pueda resucitar trae primero a los otros sanadores y a quienes resucitan. Hablad brevemente de qué falló antes de intentarlo otra vez.",
+		},
+		it = {
+			q = "È morto tutto il gruppo. E adesso?",
+			a = "Capita a tutti. Tutti liberano lo spirito e corrono all'ingresso. Chi può resuscitare riporta in vita prima gli altri guaritori e chi sa resuscitare. Parlate brevemente di cosa è andato storto prima di riprovare.",
+		},
+		ru = {
+			q = "Погибла вся группа. Что теперь?",
+			a = "Такое бывает со всеми. Все отпускают дух и бегут ко входу. Кто умеет воскрешать, сначала поднимает других лекарей и воскрешающих. Коротко обсудите, что пошло не так, прежде чем пробовать снова.",
+		},
+		pt = {
+			q = "O grupo inteiro morreu. E agora?",
+			a = "Acontece com todo mundo. Todos liberam o espírito e correm até a entrada. Quem pode ressuscitar traz primeiro os outros curadores e quem ressuscita. Conversem rápido sobre o que deu errado antes de tentar de novo.",
 		},
 	},
 	{
@@ -144,6 +384,26 @@ ns.Faq.Add("group", {
 			q = "How do I leave a group?",
 			a = "Right-click your own portrait and choose Leave Group. Let the others know before you go, especially in the middle of a dungeon.",
 		},
+		fr = {
+			q = "Comment quitter un groupe ?",
+			a = "Clic droit sur votre propre portrait puis « Quitter le groupe ». Prévenez les autres avant de partir, surtout au milieu d'un donjon.",
+		},
+		es = {
+			q = "¿Cómo dejo un grupo?",
+			a = "Clic derecho en tu propio retrato y elige «Abandonar grupo». Avisa a los demás antes de irte, sobre todo en mitad de una mazmorra.",
+		},
+		it = {
+			q = "Come lascio un gruppo?",
+			a = "Clic destro sul tuo ritratto e scegli «Lascia il gruppo». Avvisa gli altri prima di andartene, soprattutto a metà di una spedizione.",
+		},
+		ru = {
+			q = "Как покинуть группу?",
+			a = "Щёлкните правой кнопкой по своему портрету и выберите «Покинуть группу». Предупредите остальных, прежде чем уйти, особенно посреди подземелья.",
+		},
+		pt = {
+			q = "Como saio de um grupo?",
+			a = "Clique com o botão direito no seu próprio retrato e escolha \"Sair do grupo\". Avise os outros antes de sair, principalmente no meio de uma masmorra.",
+		},
 	},
 	{
 		id = "group-loot-method",
@@ -154,6 +414,26 @@ ns.Faq.Add("group", {
 		en = {
 			q = "Who sets the loot rules?",
 			a = "The group leader, from their portrait menu. Usually players roll on good items and simple ones are handed out automatically. If you are unsure, agree on it before the first fight.",
+		},
+		fr = {
+			q = "Qui fixe les règles de butin ?",
+			a = "Le chef du groupe, depuis le menu de son portrait. En général, on lance les dés pour les bons objets et les objets simples sont répartis automatiquement. En cas de doute, mettez-vous d'accord avant le premier combat.",
+		},
+		es = {
+			q = "¿Quién decide las reglas de botín?",
+			a = "El líder del grupo, desde el menú de su retrato. Lo normal es tirar dados por los objetos buenos y repartir automáticamente los sencillos. Si no estáis seguros, acordadlo antes del primer combate.",
+		},
+		it = {
+			q = "Chi decide le regole del bottino?",
+			a = "Il capogruppo, dal menu del suo ritratto. Di solito si tira per gli oggetti buoni e quelli semplici vengono assegnati automaticamente. Se non siete sicuri, accordatevi prima del primo scontro.",
+		},
+		ru = {
+			q = "Кто устанавливает правила добычи?",
+			a = "Лидер группы, через меню своего портрета. Обычно на хорошие предметы бросают кости, а простые раздаются автоматически. Если не уверены, договоритесь перед первым боем.",
+		},
+		pt = {
+			q = "Quem define as regras de saque?",
+			a = "O líder do grupo, pelo menu do retrato dele. Normalmente se rola dado pelos itens bons e os simples são distribuídos automaticamente. Se não tiverem certeza, combinem antes da primeira luta.",
 		},
 	},
 	{
@@ -166,6 +446,26 @@ ns.Faq.Add("group", {
 			q = "Can I run a dungeon again right away?",
 			a = "Dungeons can be reset so all enemies are back; the leader does it when everyone is outside. Raids, on the other hand, have a lockout and can only be done once per reset period.",
 		},
+		fr = {
+			q = "Puis-je refaire un donjon tout de suite ?",
+			a = "Les donjons peuvent être réinitialisés pour que tous les ennemis reviennent ; c'est le chef qui le fait quand tout le monde est sorti. Les raids, en revanche, ont un verrouillage et ne se font qu'une fois par période de réinitialisation.",
+		},
+		es = {
+			q = "¿Puedo repetir una mazmorra enseguida?",
+			a = "Las mazmorras se pueden reiniciar para que vuelvan todos los enemigos; lo hace el líder cuando todos están fuera. Las bandas, en cambio, tienen un bloqueo y solo se pueden hacer una vez por periodo de reinicio.",
+		},
+		it = {
+			q = "Posso rifare subito una spedizione?",
+			a = "Le spedizioni si possono azzerare così tornano tutti i nemici; lo fa il capogruppo quando tutti sono fuori. Le incursioni invece hanno un blocco e si possono fare solo una volta per periodo di azzeramento.",
+		},
+		ru = {
+			q = "Можно ли сразу пройти подземелье ещё раз?",
+			a = "Подземелья можно сбросить, чтобы все враги вернулись; это делает лидер, когда все снаружи. А у рейдов есть сохранение, и их можно проходить только раз за период сброса.",
+		},
+		pt = {
+			q = "Posso refazer uma masmorra logo em seguida?",
+			a = "As masmorras podem ser reiniciadas para todos os inimigos voltarem; o líder faz isso quando todos estão fora. Já as raides têm um bloqueio e só podem ser feitas uma vez por período de reinício.",
+		},
 	},
 	{
 		id = "group-raid-forever",
@@ -176,6 +476,26 @@ ns.Faq.Add("group", {
 		en = {
 			q = "Which raids are there at launch?",
 			a = "WoW: Forever starts with, among others, Barrow Deeps for 10 players, Hyjal Summit for 20 and a revamped Onyxia for 40. World buffs do not work inside raids. For raids you need the maximum level and usually a guild.",
+		},
+		fr = {
+			q = "Quels raids y a-t-il au lancement ?",
+			a = "WoW: Forever commence entre autres avec Barrow Deeps pour 10 joueurs, le Sommet d'Hyjal pour 20 et un Onyxia remanié pour 40. Les améliorations mondiales ne fonctionnent pas dans les raids. Pour les raids, il faut le niveau maximum et généralement une guilde.",
+		},
+		es = {
+			q = "¿Qué bandas hay en el lanzamiento?",
+			a = "WoW: Forever empieza, entre otras, con Barrow Deeps para 10 jugadores, la Cima Hyjal para 20 y una Onyxia renovada para 40. Los beneficios de mundo no funcionan dentro de las bandas. Para las bandas necesitas el nivel máximo y normalmente una hermandad.",
+		},
+		it = {
+			q = "Quali incursioni ci sono al lancio?",
+			a = "WoW: Forever parte, tra le altre, con Barrow Deeps per 10 giocatori, la Vetta di Hyjal per 20 e un Onyxia rinnovato per 40. I benefici del mondo non funzionano nelle incursioni. Per le incursioni serve il livello massimo e di solito una gilda.",
+		},
+		ru = {
+			q = "Какие рейды есть на старте?",
+			a = "WoW: Forever начинается, среди прочего, с Barrow Deeps на 10 игроков, Вершины Хиджала на 20 и обновлённой Ониксии на 40. Мировые усиления в рейдах не действуют. Для рейдов нужен максимальный уровень и обычно гильдия.",
+		},
+		pt = {
+			q = "Quais raides existem no lançamento?",
+			a = "O WoW: Forever começa, entre outras, com Barrow Deeps para 10 jogadores, o Pico Hyjal para 20 e uma Onyxia renovada para 40. Bônus de mundo não funcionam dentro das raides. Para raides você precisa do nível máximo e geralmente de uma guilda.",
 		},
 	},
 	{
@@ -188,6 +508,26 @@ ns.Faq.Add("group", {
 			q = "How do I turn my group into a raid?",
 			a = "As leader, choose Convert to Raid from your portrait menu. Then more than five players can join. In a raid group many normal quests no longer count.",
 		},
+		fr = {
+			q = "Comment transformer mon groupe en raid ?",
+			a = "En tant que chef, choisissez « Convertir en raid » dans le menu de votre portrait. Plus de cinq joueurs peuvent alors rejoindre. Dans un groupe de raid, beaucoup de quêtes normales ne comptent plus.",
+		},
+		es = {
+			q = "¿Cómo convierto mi grupo en banda?",
+			a = "Como líder, elige «Convertir en banda» en el menú de tu retrato. Entonces pueden unirse más de cinco jugadores. En un grupo de banda muchas misiones normales dejan de contar.",
+		},
+		it = {
+			q = "Come trasformo il gruppo in un'incursione?",
+			a = "Da capogruppo scegli «Converti in incursione» dal menu del tuo ritratto. Poi possono unirsi più di cinque giocatori. In un gruppo d'incursione molte missioni normali non contano più.",
+		},
+		ru = {
+			q = "Как превратить группу в рейд?",
+			a = "Как лидер выберите «Преобразовать в рейд» в меню своего портрета. Тогда смогут присоединиться больше пяти игроков. В рейдовой группе многие обычные задания не засчитываются.",
+		},
+		pt = {
+			q = "Como transformo meu grupo em raide?",
+			a = "Como líder, escolha \"Converter em raide\" no menu do seu retrato. Aí mais de cinco jogadores podem entrar. Num grupo de raide muitas missões normais deixam de contar.",
+		},
 	},
 	{
 		id = "group-new-player",
@@ -198,6 +538,26 @@ ns.Faq.Add("group", {
 		en = {
 			q = "I am new and afraid of making mistakes.",
 			a = "Say at the start that you are new; most players gladly help. Stick with the tank, attack their target and ask when something is unclear. Mistakes are part of it, and with AskAzeroth you can ask any time.",
+		},
+		fr = {
+			q = "Je suis nouveau et j'ai peur de faire des erreurs.",
+			a = "Dites au début que vous êtes nouveau ; la plupart des joueurs aident volontiers. Restez près du tank, attaquez sa cible et demandez quand quelque chose n'est pas clair. Les erreurs font partie du jeu, et avec AskAzeroth vous pouvez poser des questions à tout moment.",
+		},
+		es = {
+			q = "Soy nuevo y me da miedo cometer errores.",
+			a = "Di al principio que eres nuevo; la mayoría de los jugadores ayudan con gusto. Quédate cerca del tanque, ataca a su objetivo y pregunta si algo no está claro. Los errores forman parte del juego, y con AskAzeroth puedes preguntar en cualquier momento.",
+		},
+		it = {
+			q = "Sono nuovo e ho paura di sbagliare.",
+			a = "Di' all'inizio che sei nuovo; la maggior parte dei giocatori aiuta volentieri. Resta vicino al tank, attacca il suo bersaglio e chiedi quando qualcosa non è chiaro. Gli errori fanno parte del gioco, e con AskAzeroth puoi chiedere in qualsiasi momento.",
+		},
+		ru = {
+			q = "Я новичок и боюсь ошибиться.",
+			a = "Скажите в начале, что вы новичок; большинство игроков охотно помогут. Держитесь рядом с танком, атакуйте его цель и спрашивайте, если что-то непонятно. Ошибки — часть игры, а в AskAzeroth можно спросить в любой момент.",
+		},
+		pt = {
+			q = "Sou novo e tenho medo de errar.",
+			a = "Diga no começo que é novo; a maioria dos jogadores ajuda com prazer. Fique perto do tanque, ataque o alvo dele e pergunte quando algo não estiver claro. Erros fazem parte, e com o AskAzeroth você pode perguntar a qualquer momento.",
 		},
 	},
 })
