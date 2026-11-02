@@ -238,7 +238,13 @@ function ThreadView.Create(parent, get)
 			elseif mouseButton == "RightButton" then
 				local q = get(current)
 				if q then
-					ns.PlayerMenu.Open(self, item.answer.author, IsOwn(q) and item.answer or nil)
+					ns.PlayerMenu.Open(self, item.answer.author, IsOwn(q) and item.answer or nil, {
+						question = q,
+						answer = item.answer,
+						onError = function(reason)
+							view:ShowMessage(ns.UI.ReasonText(reason), true)
+						end,
+					})
 				end
 			end
 		end)
