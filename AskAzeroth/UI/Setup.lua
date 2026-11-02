@@ -240,8 +240,16 @@ function builders.notify(page)
 	soundBox:SetPoint("TOPLEFT", intro, "BOTTOMLEFT", -4, chipsBottom - 10)
 	controls[#controls + 1] = soundBox
 
+	-- Classes the mentor can help with (empty = all).
+	local classLabel = W.Text(page, "GameFontHighlight")
+	classLabel:SetPoint("TOPLEFT", soundBox, "BOTTOMLEFT", 4, -14)
+	classLabel:SetText(L.SETUP_NOTIFY_CLASSES)
+	local classes = W.ClassMenu(page, 180, Settings().notify.classes)
+	classes:SetPoint("LEFT", classLabel, "LEFT", 140, 0)
+	controls[#controls + 1] = classes
+
 	local levelLabel = W.Text(page, "GameFontHighlight")
-	levelLabel:SetPoint("TOPLEFT", soundBox, "BOTTOMLEFT", 4, -14)
+	levelLabel:SetPoint("TOPLEFT", classLabel, "BOTTOMLEFT", 0, -18)
 	levelLabel:SetText(L.SETTING_MAX_LEVEL)
 	local levelOptions = { { value = false, label = L.SETTING_MAX_LEVEL_ANY } }
 	for _, level in ipairs(C.ASKER_LEVELS) do

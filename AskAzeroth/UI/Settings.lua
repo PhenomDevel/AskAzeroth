@@ -10,9 +10,6 @@ local W = ns.Widgets
 local Channel = ns.Channel
 
 local COLUMN_WIDTH = 290
--- Class files for the class filter, in the game's order where known.
--- luacheck: read globals CLASS_SORT_ORDER
-local CLASSES = CLASS_SORT_ORDER or { "WARRIOR", "PALADIN", "HUNTER", "ROGUE", "PRIEST", "SHAMAN", "MAGE", "WARLOCK", "DRUID" }
 
 local function IntervalLabel(seconds)
 	if seconds == 0 then
@@ -111,26 +108,8 @@ local function Build(content)
 	local classLabel = W.Text(content, "GameFontHighlight")
 	classLabel:SetPoint("TOPLEFT", previousRow, "BOTTOMLEFT", 0, -16)
 	classLabel:SetText(L.SETTING_CLASSES)
-	local classes = Add(W.Menu(content, 110, function(root)
-		root:CreateButton(L.SETTING_CLASSES_ALL, function()
-			wipe(notify.classes)
-		end)
-		for _, classFile in ipairs(CLASSES) do
-			local name = W.ClassName(classFile)
-			if name then
-				root:CreateCheckbox(name, function()
-					return notify.classes[classFile] == true
-				end, function()
-					notify.classes[classFile] = not notify.classes[classFile] or nil
-				end)
-			end
-		end
-	end))
+	local classes = Add(W.ClassMenu(content, 110, notify.classes))
 	classes:SetPoint("LEFT", classLabel, "LEFT", 112, 0)
-	if classes.SetDefaultText then
-		classes:SetDefaultText(L.SETTING_CLASSES_ALL)
-	end
-	W.Tooltip(classes, L.SETTING_CLASSES, L.SETTING_CLASSES_TIP)
 
 	local levelLabel = W.Text(content, "GameFontHighlight")
 	levelLabel:SetPoint("TOPLEFT", classLabel, "BOTTOMLEFT", 0, -16)

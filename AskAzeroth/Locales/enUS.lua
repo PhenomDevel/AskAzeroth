@@ -219,6 +219,7 @@ L.SETUP_ROLE_MENTOR_TEXT = "I know my way around and like to answer questions. N
 L.SETUP_NOTIFY_HEAD = "Which questions can you help with?"
 L.SETUP_NOTIFY_TEXT = "New questions in the selected categories notify you. Click a category to switch it on or off. Class filters and more are under Settings."
 L.SETUP_NOTIFY_SOUND = "Play a sound for new questions"
+L.SETUP_NOTIFY_CLASSES = "I help with"
 L.SETUP_EXTRAS_HEAD = "Almost done"
 L.SETUP_EXTRAS_TEXT = "Two more small things."
 L.SETUP_TIP_NEWCOMER = "Tip: many beginner questions are already answered in the FAQ. It opens when you click Finish."

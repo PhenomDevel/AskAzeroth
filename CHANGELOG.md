@@ -3,6 +3,8 @@
 ## Unreleased
 
 - In development, no release yet.
+- Setup: as a mentor you can now pick the classes you help with; the
+  class list shows the class colours (also in Settings).
 - The "Ask a question" buttons on the Questions and FAQ pages are greyed
   out while the one-minute wait runs and show the seconds left.
 - Notification settings: choose how often a notification may pop up (at
