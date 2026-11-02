@@ -64,6 +64,9 @@
 - FAQ: 13 more group and dungeon questions (group finder playstyles and
   listings, group size, dungeon XP, entrances, target markers, wipes,
   leaving, loot rules, resets, launch raids, raid groups, being new).
+- FAQ: 11 more chat and guild questions (channels, item links, whispers,
+  the other faction, emotes, AFK, rolling, founding and leaving a guild,
+  reporting, roleplaying).
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
   Players, FAQ and Settings.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
