@@ -99,31 +99,31 @@ ns.Faq.Add("class", {
 		id = "class-stats",
 		de = {
 			q = "Welche Werte sind für mich wichtig?",
-			a = "Stärke hilft Kriegern und Paladinen, Beweglichkeit Schurken und Jägern, Intelligenz gibt Zauberklassen Mana und Zaubermacht, Ausdauer gibt allen Gesundheit. Willenskraft beschleunigt die Regeneration von Gesundheit und Mana. Vergleich die Tooltips zweier Gegenstände, bevor du dich entscheidest.",
+			a = "Stärke hilft Kriegern und Paladinen, Beweglichkeit Schurken und Jägern, Intelligenz gibt Zauberklassen mehr Mana und kritische Zaubertreffer, Ausdauer gibt allen Gesundheit. Willenskraft beschleunigt die Regeneration von Gesundheit und Mana. Zauberschaden und Heilung kommen von der Ausrüstung. Vergleich die Tooltips zweier Gegenstände, bevor du dich entscheidest.",
 		},
 		en = {
 			q = "Which stats matter for me?",
-			a = "Strength helps warriors and paladins, agility rogues and hunters, intellect gives casters mana and spell power, stamina gives everyone health. Spirit speeds up health and mana regeneration. Compare the tooltips of two items before you decide.",
+			a = "Strength helps warriors and paladins, agility rogues and hunters, intellect gives casters more mana and spell crit, stamina gives everyone health. Spirit speeds up health and mana regeneration. Spell damage and healing come from your gear. Compare the tooltips of two items before you decide.",
 		},
 		fr = {
 			q = "Quelles caractéristiques comptent pour moi ?",
-			a = "La force aide les guerriers et les paladins, l'agilité les voleurs et les chasseurs, l'intelligence donne du mana et de la puissance des sorts aux lanceurs de sorts, l'endurance donne de la vie à tous. L'esprit accélère la récupération de la vie et du mana. Comparez les infobulles de deux objets avant de choisir.",
+			a = "La force aide les guerriers et les paladins, l'agilité les voleurs et les chasseurs, l'intelligence donne aux lanceurs de sorts plus de mana et de critique des sorts, l'endurance donne de la vie à tous. L'esprit accélère la récupération de la vie et du mana. Les dégâts et les soins des sorts viennent de l'équipement. Comparez les infobulles de deux objets avant de choisir.",
 		},
 		es = {
 			q = "¿Qué atributos me importan?",
-			a = "La fuerza ayuda a guerreros y paladines, la agilidad a pícaros y cazadores, el intelecto da maná y poder con hechizos a los lanzadores, y el aguante da salud a todos. El espíritu acelera la regeneración de salud y maná. Compara las descripciones de dos objetos antes de decidir.",
+			a = "La fuerza ayuda a guerreros y paladines, la agilidad a pícaros y cazadores, el intelecto da a los lanzadores más maná y crítico con hechizos, y el aguante da salud a todos. El espíritu acelera la regeneración de salud y maná. El daño y la sanación con hechizos vienen del equipo. Compara las descripciones de dos objetos antes de decidir.",
 		},
 		it = {
 			q = "Quali statistiche contano per me?",
-			a = "La forza aiuta guerrieri e paladini, l'agilità ladri e cacciatori, l'intelletto dà mana e potere magico agli incantatori, la tempra dà salute a tutti. Lo spirito accelera la rigenerazione di salute e mana. Confronta i tooltip di due oggetti prima di decidere.",
+			a = "La forza aiuta guerrieri e paladini, l'agilità ladri e cacciatori, l'intelletto dà agli incantatori più mana e critico magico, la tempra dà salute a tutti. Lo spirito accelera la rigenerazione di salute e mana. Danni e cure degli incantesimi vengono dall'equipaggiamento. Confronta i tooltip di due oggetti prima di decidere.",
 		},
 		ru = {
 			q = "Какие характеристики мне важны?",
-			a = "Сила помогает воинам и паладинам, ловкость — разбойникам и охотникам, интеллект даёт заклинателям ману и силу заклинаний, выносливость даёт всем здоровье. Дух ускоряет восстановление здоровья и маны. Прежде чем решить, сравните подсказки двух предметов.",
+			a = "Сила помогает воинам и паладинам, ловкость — разбойникам и охотникам, интеллект даёт заклинателям больше маны и шанс критического эффекта заклинаний, выносливость даёт всем здоровье. Дух ускоряет восстановление здоровья и маны. Урон и исцеление от заклинаний дают предметы. Прежде чем решить, сравните подсказки двух предметов.",
 		},
 		pt = {
 			q = "Quais atributos importam para mim?",
-			a = "Força ajuda guerreiros e paladinos, agilidade ladinos e caçadores, intelecto dá mana e poder mágico a quem conjura e vigor dá vida a todos. Espírito acelera a regeneração de vida e mana. Compare as dicas de dois itens antes de decidir.",
+			a = "Força ajuda guerreiros e paladinos, agilidade ladinos e caçadores, intelecto dá a quem conjura mais mana e crítico mágico e vigor dá vida a todos. Espírito acelera a regeneração de vida e mana. Dano e cura mágicos vêm do equipamento. Compare as dicas de dois itens antes de decidir.",
 		},
 	},
 	{
