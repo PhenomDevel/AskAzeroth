@@ -679,6 +679,27 @@ AddCommand("links", "links", L.PROBE_HELP_LINKS, function()
 	linkTest:Show()
 end)
 
+-- Logs every link event in the addon's real windows (FAQ, glossary,
+-- threads), to find out where glossary tooltips get lost.
+AddCommand("glossary", "glossary [on|off]", L.PROBE_HELP_GLOSSARY, function(args)
+	local enabled
+	if args == "on" then
+		enabled = true
+	elseif args == "off" then
+		enabled = false
+	else
+		enabled = ns.GlossaryLinks.debugLog == nil
+	end
+	if enabled then
+		ns.GlossaryLinks.debugLog = function(event, link, details)
+			Log(L.PROBE_GLOSSARY_EVENT, event, link, details)
+		end
+	else
+		ns.GlossaryLinks.debugLog = nil
+	end
+	Log(enabled and L.PROBE_GLOSSARY_ON or L.PROBE_GLOSSARY_OFF)
+end)
+
 AddCommand("log", "log [lines]", L.PROBE_HELP_LOG, function(args)
 	local log = db.log
 	local count = math.min(tonumber(args) or 20, #log)
