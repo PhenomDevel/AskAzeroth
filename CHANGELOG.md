@@ -45,6 +45,9 @@
 - FAQ: 18 druid questions (forms and their quests, form mana, Cat and
   Bear, healing, buffs, Entangling Roots, Rebirth, Innervate, cleansing,
   Moonglade, Hibernate, talents).
+- FAQ: 16 more quest questions (full quest log, tracking, sharing, group
+  credit, elite and escort quests, timers, quest items, rewards, chains,
+  dungeon and class quests, reputation).
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
   Players, FAQ and Settings.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
