@@ -28,6 +28,8 @@
   Taunt, Execute, Overpower, shouts, weapons, armour, talents).
 - FAQ: 17 paladin questions (seals, Judgement, blessings, auras, healing,
   Lay on Hands, Divine Shield, Redemption, cleansing, mana, tanking, talents).
+- FAQ: 19 rogue questions (energy and combo points, Stealth, openers,
+  weapons, Kick, Sap, escapes, poisons, lockpicking, stuns, threat, talents).
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
   Players, FAQ and Settings.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
