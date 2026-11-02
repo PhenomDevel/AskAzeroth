@@ -192,3 +192,7 @@
   "aoe", "DPS"), as players usually type them.
 - Questions and answers also mark the English terms in every language
   ("threat", "healer" in a German thread).
+- Game terms and abbreviations in the normal chat (party, raid, guild,
+  whispers, say, channels) become links: hover over "Aggro" for its
+  explanation, click to open it in the glossary. Can be switched off in the
+  settings ("Explain terms in the chat").

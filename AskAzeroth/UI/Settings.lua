@@ -59,8 +59,16 @@ local function Build(content)
 	end))
 	minimap:SetPoint("TOPLEFT", mentor, "BOTTOMLEFT", 0, -4)
 
+	local chatGlossary = Add(W.Checkbox(content, L.SETTING_CHAT_GLOSSARY, function()
+		return ns.ChatGlossary.IsEnabled()
+	end, function(checked)
+		ns.ChatGlossary.SetEnabled(checked)
+	end))
+	chatGlossary:SetPoint("TOPLEFT", minimap, "BOTTOMLEFT", 0, -4)
+	W.Tooltip(chatGlossary, L.SETTING_CHAT_GLOSSARY, L.SETTING_CHAT_GLOSSARY_TIP)
+
 	local retentionLabel = W.Text(content, "GameFontNormal")
-	retentionLabel:SetPoint("TOPLEFT", minimap, "BOTTOMLEFT", 4, -16)
+	retentionLabel:SetPoint("TOPLEFT", chatGlossary, "BOTTOMLEFT", 4, -16)
 	retentionLabel:SetText(L.SETTING_RETENTION)
 	local retentionOptions = {}
 	for _, days in ipairs(C.RETENTION_DAYS) do

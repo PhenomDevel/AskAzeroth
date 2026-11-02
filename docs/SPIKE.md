@@ -237,3 +237,17 @@ Fill in after testing (or paste the logs into the PR and I'll fill it in).
 ### Consequences for the protocol
 
 To be written after the results are in.
+
+## Glossary in the chat (to confirm in game)
+
+`UI/ChatGlossary.lua` relies on these Retail behaviours:
+
+- `ChatFrameUtil.AddMessageEventFilter` (fallback
+  `ChatFrame_AddMessageEventFilter`) may return a changed message; lines
+  with secret values skip the filters.
+- Links of the type `addon:AskAzeroth:glossary:<id>` in a chat frame: the
+  chat's own click handling accepts the `addon:` type without an error; our
+  `HookScript` on `OnHyperlinkEnter`/`Leave`/`Click` of `ChatFrame1`–`N`
+  shows the tooltip and opens the glossary.
+- Chat frames are found through `NUM_CHAT_WINDOWS`, `CHAT_FRAMES` and a
+  `hooksecurefunc` on `FCF_OpenTemporaryWindow` (whisper windows).
