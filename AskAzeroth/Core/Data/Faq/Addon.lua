@@ -285,62 +285,62 @@ ns.Faq.Add("addon", {
 		id = "addon-limits",
 		de = {
 			q = "Warum kann ich keine weitere Frage stellen?",
-			a = "Gegen Spam gibt es Grenzen: höchstens 3 offene Fragen gleichzeitig und eine neue Frage pro Minute. Markiere beantwortete Fragen als gelöst oder zieh alte zurück, dann geht es wieder.",
+			a = "Gegen Spam gibt es Grenzen: höchstens 5 offene Fragen gleichzeitig und eine neue Frage pro Minute; wie lange du noch warten musst, zeigt der Knopf „Frage stellen“. Markiere beantwortete Fragen als gelöst oder zieh alte zurück, dann geht es wieder.",
 		},
 		en = {
 			q = "Why can I not ask another question?",
-			a = "There are limits against spam: at most 3 open questions at once and one new question per minute. Mark answered questions as solved or withdraw old ones, then you can ask again.",
+			a = "There are limits against spam: at most 5 open questions at once and one new question per minute; the \"Ask a question\" button shows how long you still have to wait. Mark answered questions as solved or withdraw old ones, then you can ask again.",
 		},
 		fr = {
 			q = "Pourquoi je ne peux pas poser d'autre question ?",
-			a = "Il y a des limites contre le spam : 3 questions ouvertes au maximum et une nouvelle question par minute. Marquez les questions répondues comme résolues ou retirez les anciennes, puis vous pourrez de nouveau demander.",
+			a = "Il y a des limites contre le spam : 5 questions ouvertes au maximum et une nouvelle question par minute ; le bouton « Poser une question » indique combien de temps il reste à attendre. Marquez les questions répondues comme résolues ou retirez les anciennes, puis vous pourrez de nouveau demander.",
 		},
 		es = {
 			q = "¿Por qué no puedo hacer otra pregunta?",
-			a = "Hay límites contra el spam: como mucho 3 preguntas abiertas a la vez y una pregunta nueva por minuto. Marca como resueltas las preguntas respondidas o retira las antiguas y podrás volver a preguntar.",
+			a = "Hay límites contra el spam: como mucho 5 preguntas abiertas a la vez y una pregunta nueva por minuto; el botón «Hacer una pregunta» muestra cuánto te queda por esperar. Marca como resueltas las preguntas respondidas o retira las antiguas y podrás volver a preguntar.",
 		},
 		it = {
 			q = "Perché non posso fare un'altra domanda?",
-			a = "Ci sono limiti contro lo spam: al massimo 3 domande aperte alla volta e una nuova domanda al minuto. Segna come risolte le domande con risposta o ritira quelle vecchie, poi potrai chiedere di nuovo.",
+			a = "Ci sono limiti contro lo spam: al massimo 5 domande aperte alla volta e una nuova domanda al minuto; il pulsante «Fai una domanda» mostra quanto devi ancora aspettare. Segna come risolte le domande con risposta o ritira quelle vecchie, poi potrai chiedere di nuovo.",
 		},
 		ru = {
 			q = "Почему я не могу задать ещё один вопрос?",
-			a = "Против спама действуют ограничения: не больше 3 открытых вопросов одновременно и один новый вопрос в минуту. Отметьте отвеченные вопросы как решённые или отзовите старые, и можно спрашивать снова.",
+			a = "Против спама действуют ограничения: не больше 5 открытых вопросов одновременно и один новый вопрос в минуту; сколько ещё ждать, показывает кнопка «Задать вопрос». Отметьте отвеченные вопросы как решённые или отзовите старые, и можно спрашивать снова.",
 		},
 		pt = {
 			q = "Por que não consigo fazer outra pergunta?",
-			a = "Há limites contra spam: no máximo 3 perguntas abertas ao mesmo tempo e uma pergunta nova por minuto. Marque as perguntas respondidas como resolvidas ou retire as antigas, e você poderá perguntar de novo.",
+			a = "Há limites contra spam: no máximo 5 perguntas abertas ao mesmo tempo e uma pergunta nova por minuto; o botão \"Fazer uma pergunta\" mostra quanto falta esperar. Marque as perguntas respondidas como resolvidas ou retire as antigas, e você poderá perguntar de novo.",
 		},
 	},
 	{
 		id = "addon-solve",
 		de = {
 			q = "Wann markiere ich eine Frage als gelöst?",
-			a = "Sobald dir eine Antwort geholfen hat. Andere sehen dann, dass keine Hilfe mehr nötig ist, und die Frage verschwindet 10 Minuten später aus der Liste. Du findest sie weiterhin unter „Meine Fragen“.",
+			a = "Sobald dir eine Antwort geholfen hat. Andere sehen dann, dass keine Hilfe mehr nötig ist, und die Frage verschwindet einen Tag später aus der öffentlichen Liste. Du findest sie weiterhin unter „Meine Fragen“.",
 		},
 		en = {
 			q = "When do I mark a question as solved?",
-			a = "As soon as an answer helped you. Others then see that no more help is needed, and the question disappears from the list 10 minutes later. You still find it under My questions.",
+			a = "As soon as an answer helped you. Others then see that no more help is needed, and the question disappears from the public list a day later. You still find it under My questions.",
 		},
 		fr = {
 			q = "Quand marquer une question comme résolue ?",
-			a = "Dès qu'une réponse vous a aidé. Les autres voient alors qu'il n'y a plus besoin d'aide, et la question disparaît de la liste 10 minutes plus tard. Vous la retrouvez toujours dans « Mes questions ».",
+			a = "Dès qu'une réponse vous a aidé. Les autres voient alors qu'il n'y a plus besoin d'aide, et la question disparaît de la liste publique un jour plus tard. Vous la retrouvez toujours dans « Mes questions ».",
 		},
 		es = {
 			q = "¿Cuándo marco una pregunta como resuelta?",
-			a = "En cuanto una respuesta te haya ayudado. Así los demás ven que ya no hace falta ayuda, y la pregunta desaparece de la lista 10 minutos después. La sigues teniendo en «Mis preguntas».",
+			a = "En cuanto una respuesta te haya ayudado. Así los demás ven que ya no hace falta ayuda, y la pregunta desaparece de la lista pública un día después. La sigues teniendo en «Mis preguntas».",
 		},
 		it = {
 			q = "Quando segno una domanda come risolta?",
-			a = "Appena una risposta ti ha aiutato. Gli altri vedono così che non serve più aiuto, e la domanda sparisce dall'elenco 10 minuti dopo. La trovi sempre in «Le mie domande».",
+			a = "Appena una risposta ti ha aiutato. Gli altri vedono così che non serve più aiuto, e la domanda sparisce dall'elenco pubblico un giorno dopo. La trovi sempre in «Le mie domande».",
 		},
 		ru = {
 			q = "Когда отмечать вопрос как решённый?",
-			a = "Как только ответ вам помог. Тогда остальные видят, что помощь больше не нужна, и через 10 минут вопрос исчезает из списка. В разделе «Мои вопросы» он останется.",
+			a = "Как только ответ вам помог. Тогда остальные видят, что помощь больше не нужна, и через день вопрос исчезает из общего списка. В разделе «Мои вопросы» он останется.",
 		},
 		pt = {
 			q = "Quando marco uma pergunta como resolvida?",
-			a = "Assim que uma resposta tiver ajudado. Os outros veem que não precisa mais de ajuda, e a pergunta some da lista 10 minutos depois. Ela continua em \"Minhas perguntas\".",
+			a = "Assim que uma resposta tiver ajudado. Os outros veem que não precisa mais de ajuda, e a pergunta some da lista pública um dia depois. Ela continua em \"Minhas perguntas\".",
 		},
 	},
 	{
@@ -471,31 +471,31 @@ ns.Faq.Add("addon", {
 		id = "addon-notifications",
 		de = {
 			q = "Wie stelle ich Benachrichtigungen ein?",
-			a = "In den Einstellungen unter Mentor-Benachrichtigungen legst du pro Kategorie fest: aus, nur Badge am Minimap-Button oder mit Ton. Fragen von Favoriten und Antworten auf deine Fragen melden sich immer. Im Kampf gibt es keine Toasts, in Instanzen auf Wunsch auch nicht.",
+			a = "In den Einstellungen unter „Mentor-Benachrichtigungen“ legst du pro Kategorie fest: „Aus“, „Ohne Ton“ oder „Mit Ton“. Dort wählst du auch den Ton, wie oft Benachrichtigungen eingeblendet werden und ob der Zähler am Minimap-Button erscheint. Fragen von Favoriten und Antworten auf deine Fragen melden sich immer. Im Kampf gibt es keine Benachrichtigungen, in Instanzen auf Wunsch auch nicht.",
 		},
 		en = {
 			q = "How do I set up notifications?",
-			a = "In the settings under mentor notifications you choose per category: off, badge on the minimap button only, or with sound. Questions from favourites and answers to your questions always notify you. There are no toasts in combat, and optionally none in instances.",
+			a = "In the settings under \"Mentor notifications\" you choose per category: \"Off\", \"Silent\" or \"With sound\". There you also pick the sound, how often pop-ups appear and whether the counter shows on the minimap button. Questions from favourites and answers to your questions always notify you. There are no notifications in combat, and optionally none in instances.",
 		},
 		fr = {
 			q = "Comment régler les notifications ?",
-			a = "Dans les paramètres, sous « Notifications mentor », vous choisissez par catégorie : désactivé, seulement un badge sur le bouton de la minicarte, ou avec son. Les questions des favoris et les réponses à vos questions sont toujours signalées. Pas de notification en combat, et en option aucune en instance.",
+			a = "Dans les paramètres, sous « Notifications mentor », vous choisissez par catégorie : « Désactivé », « Sans son » ou « Avec son ». Vous y réglez aussi le son, la fréquence d'affichage et le compteur sur le bouton de la minicarte. Les questions des favoris et les réponses à vos questions sont toujours signalées. Pas de notification en combat, et en option aucune en instance.",
 		},
 		es = {
 			q = "¿Cómo configuro los avisos?",
-			a = "En los ajustes, en «Avisos de mentor», eliges por categoría: desactivado, solo una insignia en el botón del minimapa o con sonido. Las preguntas de favoritos y las respuestas a tus preguntas siempre avisan. No hay avisos en combate y, si quieres, tampoco en instancias.",
+			a = "En los ajustes, en «Avisos de mentor», eliges por categoría: «Desactivado», «Sin sonido» o «Con sonido». Ahí también eliges el sonido, cada cuánto se muestran los avisos y si aparece el contador en el botón del minimapa. Las preguntas de favoritos y las respuestas a tus preguntas siempre avisan. No hay avisos en combate y, si quieres, tampoco en instancias.",
 		},
 		it = {
 			q = "Come imposto le notifiche?",
-			a = "Nelle impostazioni, in «Notifiche mentore», scegli per categoria: disattivate, solo un indicatore sul pulsante della minimappa, oppure con suono. Le domande dei preferiti e le risposte alle tue domande avvisano sempre. Niente notifiche in combattimento e, se vuoi, nemmeno nelle istanze.",
+			a = "Nelle impostazioni, in «Notifiche mentore», scegli per categoria: «Disattivato», «Senza suono» o «Con suono». Lì scegli anche il suono, ogni quanto mostrare le notifiche e se far apparire il contatore sul pulsante della minimappa. Le domande dei preferiti e le risposte alle tue domande avvisano sempre. Niente notifiche in combattimento e, se vuoi, nemmeno nelle istanze.",
 		},
 		ru = {
 			q = "Как настроить уведомления?",
-			a = "В настройках в разделе «Уведомления наставника» вы выбираете для каждой категории: выключено, только значок на кнопке миникарты или со звуком. О вопросах избранных и ответах на ваши вопросы уведомление приходит всегда. В бою всплывающих уведомлений нет, а по желанию их нет и в подземельях.",
+			a = "В настройках в разделе «Уведомления наставника» вы выбираете для каждой категории: «Выкл.», «Без звука» или «Со звуком». Там же выбирают звук, как часто показывать уведомления и показывать ли счётчик на кнопке миникарты. О вопросах избранных и ответах на ваши вопросы уведомление приходит всегда. В бою уведомлений нет, а по желанию их нет и в подземельях.",
 		},
 		pt = {
 			q = "Como configuro os avisos?",
-			a = "Nas configurações, em \"Avisos de mentor\", você escolhe por categoria: desligado, só um selo no botão do minimapa, ou com som. Perguntas de favoritos e respostas às suas perguntas sempre avisam. Não há avisos em combate e, se quiser, nem em instâncias.",
+			a = "Nas configurações, em \"Avisos de mentor\", você escolhe por categoria: \"Desligado\", \"Sem som\" ou \"Com som\". Ali também escolhe o som, com que frequência os avisos aparecem e se o contador aparece no botão do minimapa. Perguntas de favoritos e respostas às suas perguntas sempre avisam. Não há avisos em combate e, se quiser, nem em instâncias.",
 		},
 	},
 	{
