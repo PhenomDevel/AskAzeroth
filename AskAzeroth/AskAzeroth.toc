@@ -70,6 +70,8 @@ Core\Data\Faq\Professions.lua
 Core\Data\Faq\Groups.lua
 Core\Data\Faq\Social.lua
 Core\Data\Faq\Interface.lua
+Core\Data\FaqStopwords.lua
+Core\FaqSearch.lua
 Core\Database.lua
 Core\SlashCommands.lua
 Core\Channel.lua
