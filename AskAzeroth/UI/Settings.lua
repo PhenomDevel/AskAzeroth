@@ -14,6 +14,17 @@ local COLUMN_WIDTH = 290
 -- luacheck: read globals CLASS_SORT_ORDER
 local CLASSES = CLASS_SORT_ORDER or { "WARRIOR", "PALADIN", "HUNTER", "ROGUE", "PRIEST", "SHAMAN", "MAGE", "WARLOCK", "DRUID" }
 
+local function IntervalLabel(seconds)
+	if seconds == 0 then
+		return L.NOTIFY_INTERVAL_NOW
+	end
+	return L.NOTIFY_INTERVAL_MINUTES:format(seconds / 60)
+end
+
+local function SoundLabel(key)
+	return L["NOTIFY_SOUND_" .. key] or key
+end
+
 local function RetentionLabel(days)
 	if days == 0 then
 		return L.RETENTION_FOREVER
@@ -136,12 +147,52 @@ local function Build(content)
 	level:SetPoint("LEFT", levelLabel, "LEFT", 112, 0)
 	W.Tooltip(level, L.SETTING_MAX_LEVEL, L.SETTING_MAX_LEVEL_TIP)
 
+	local intervalLabel = W.Text(content, "GameFontHighlight")
+	intervalLabel:SetPoint("TOPLEFT", levelLabel, "BOTTOMLEFT", 0, -16)
+	intervalLabel:SetText(L.NOTIFY_INTERVAL)
+	local intervalOptions = {}
+	for _, seconds in ipairs(ns.Notify.INTERVALS) do
+		intervalOptions[#intervalOptions + 1] = { value = seconds, label = IntervalLabel(seconds) }
+	end
+	local interval = Add(W.Dropdown(content, 110, intervalOptions, function()
+		return notify.interval or 0
+	end, function(seconds)
+		notify.interval = seconds
+	end))
+	interval:SetPoint("LEFT", intervalLabel, "LEFT", 112, 0)
+	W.Tooltip(interval, L.NOTIFY_INTERVAL, L.NOTIFY_INTERVAL_TIP)
+
+	local soundLabel = W.Text(content, "GameFontHighlight")
+	soundLabel:SetPoint("TOPLEFT", intervalLabel, "BOTTOMLEFT", 0, -16)
+	soundLabel:SetText(L.NOTIFY_SOUND)
+	local sound = Add(W.Dropdown(content, 110, function()
+		local list = { { value = "none", label = L.NOTIFY_SOUND_NONE } }
+		for _, key in ipairs(ns.Notify.GetSounds()) do
+			list[#list + 1] = { value = key, label = SoundLabel(key) }
+		end
+		return list
+	end, ns.Notify.GetSound, function(key)
+		notify.sound = key
+		-- Preview
+		ns.Notify.PlaySound(key)
+	end))
+	sound:SetPoint("LEFT", soundLabel, "LEFT", 112, 0)
+	W.Tooltip(sound, L.NOTIFY_SOUND, L.NOTIFY_SOUND_TIP)
+
+	local badge = Add(W.Checkbox(content, L.NOTIFY_BADGE, function()
+		return notify.badge ~= false
+	end, function(checked)
+		ns.Notify.SetBadge(checked)
+	end))
+	badge:SetPoint("TOPLEFT", soundLabel, "BOTTOMLEFT", -4, -12)
+	W.Tooltip(badge, L.NOTIFY_BADGE, L.NOTIFY_BADGE_TIP)
+
 	local pauseInstance = Add(W.Checkbox(content, L.SETTING_PAUSE_INSTANCE, function()
 		return notify.pauseInstance
 	end, function(checked)
 		notify.pauseInstance = checked
 	end))
-	pauseInstance:SetPoint("TOPLEFT", levelLabel, "BOTTOMLEFT", -4, -12)
+	pauseInstance:SetPoint("TOPLEFT", badge, "BOTTOMLEFT", 0, -2)
 	W.Tooltip(pauseInstance, L.SETTING_PAUSE_INSTANCE, L.SETTING_PAUSE_INSTANCE_TIP)
 
 	local test = W.Button(content, L.NOTIFY_TEST, nil, function()

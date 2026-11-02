@@ -3,6 +3,11 @@
 ## Unreleased
 
 - In development, no release yet.
+- Notification settings: choose how often a notification may pop up (at
+  once or every 1 to 15 minutes; what arrives in between is counted on the
+  next one), which sound plays, and whether the counter shows on the
+  minimap button and the Questions tab. The per-category choices are now
+  called "Silent" and "With sound".
 - FAQ answers list the glossary terms they use in a row "Terms:" below the
   answer; hover a term for its explanation, click to open it in the glossary.
 - Notifications show right away again: there was a two-minute pause
