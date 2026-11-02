@@ -63,7 +63,16 @@ local function Build(content)
 		chips[#chips + 1] = chip
 	end
 	local chipsHeight = W.WrapChips(chips, filters, PAD, -PAD - 28 - 10, LIST_WIDTH - 2 * PAD, 6)
-	filters:SetHeight(PAD + 28 + 10 + chipsHeight + PAD)
+
+	-- Hide solved questions (kept in the settings).
+	local hideSolved = W.Checkbox(filters, L.QUEUE_HIDE_SOLVED, function()
+		return ns.db.settings.hideSolved
+	end, function(checked)
+		ns.db.settings.hideSolved = checked
+		page:Refresh()
+	end)
+	hideSolved:SetPoint("TOPLEFT", PAD - 4, -PAD - 28 - 10 - chipsHeight - 6)
+	filters:SetHeight(PAD + 28 + 10 + chipsHeight + 6 + 26 + PAD - 4)
 
 	local listBox = CreateFrame("Frame", nil, listPane)
 	listBox:SetPoint("TOPLEFT", filters, "BOTTOMLEFT")
@@ -84,6 +93,9 @@ local function Build(content)
 
 	local function Matches(q, langs)
 		if not langs[q.lang] then
+			return false
+		end
+		if ns.db.settings.hideSolved and q.solved then
 			return false
 		end
 		if next(page.cats) and not page.cats[q.cat] then
@@ -132,6 +144,7 @@ local function Build(content)
 				end
 			end
 		end
+		hideSolved:Refresh()
 		local emptyText
 		if #list == 0 then
 			emptyText = Store.Count() == 0 and L.QUEUE_EMPTY or L.QUEUE_NO_MATCH

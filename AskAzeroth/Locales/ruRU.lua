@@ -58,6 +58,8 @@ L.FAQSTATS_HEADER = "Подсказки из FAQ помогли %d раз. Ча�
 -- Questions page
 L.QUEUE_SEARCH = "Поиск…"
 L.QUEUE_ALL = "Все"
+L.QUEUE_OWN = "Ваш вопрос"
+L.QUEUE_HIDE_SOLVED = "Скрыть решённые"
 L.QUEUE_ASK = "Задать вопрос"
 L.QUEUE_EMPTY = "Вопросов пока нет. Задайте первый!"
 L.QUEUE_NO_MATCH = "Ни один вопрос не подходит под фильтр."
@@ -73,6 +75,7 @@ L.THREAD_WITHDRAW_CONFIRM = "Отозвать ваш вопрос у всех?"
 L.THREAD_OPEN_EXPIRES = "Исчезнет через %d мин., если никто не ответит."
 L.THREAD_ANSWERED_EXPIRES = "Исчезнет через %d мин. без нового ответа."
 L.THREAD_SOLVED_EXPIRES = "Решён – исчезнет через %d мин."
+L.THREAD_SOLVED_BANNER = "Этот вопрос решён."
 
 -- Formatting
 L.LEVEL_SHORT = "Уровень %d"

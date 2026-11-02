@@ -1,9 +1,12 @@
--- luacheck: read globals GameTooltip RAID_CLASS_COLORS LOCALIZED_CLASS_NAMES_MALE CreateFont GameFontNormalLarge GetLocale
+-- luacheck: read globals GameTooltip RAID_CLASS_COLORS LOCALIZED_CLASS_NAMES_MALE
 local _, ns = ...
 
--- Small widget kit for the window. Dark leather-and-gold look: our own
--- backdrops for panels, buttons, chips and input fields; scroll bars,
--- checkboxes and dropdowns stay the game's templates.
+-- Small widget kit for the window, close to the game's own look: buttons,
+-- close buttons, search fields, checkboxes, dropdowns and scroll bars are
+-- the game's templates; panels, cards and chips are plain backdrops in the
+-- game's colours (black panels, grey lines, gold headings, white text).
+-- One font family everywhere: the game's standard font objects
+-- (GameFont*), also in input fields.
 local W = {}
 ns.Widgets = W
 
@@ -13,36 +16,39 @@ local function RGB(hex)
 end
 W.RGB = RGB
 W.COLORS = {
-	window = RGB("1c1812"),
-	header = RGB("120f0b"),
-	nav = RGB("15120d"),
-	navActive = RGB("2e2618"),
-	threadHead = RGB("1f1a13"),
-	selected = RGB("2a2217"),
-	card = RGB("211c14"),
-	cardFavorite = RGB("262016"),
-	input = RGB("0f0c09"),
-	button = RGB("2a231a"),
-	buttonPrimary = RGB("7a5a1e"),
-	buttonSuccess = RGB("1f2a1c"),
-	frame = RGB("6b5533"),
-	line = RGB("3d3122"),
-	field = RGB("4a3c28"),
-	favorite = RGB("8a6d32"),
-	accent = RGB("d9b45a"),
-	success = RGB("4f7a46"),
+	window = { 0.05, 0.05, 0.05, 0.96 },
+	header = { 0, 0, 0, 0.35 },
+	nav = { 0, 0, 0, 0.3 },
+	navActive = { 0.32, 0.25, 0.05, 0.55 },
+	threadHead = { 0, 0, 0, 0.25 },
+	selected = { 0.32, 0.25, 0.05, 0.45 },
+	card = { 0.09, 0.09, 0.09, 0.9 },
+	cardFavorite = { 0.15, 0.12, 0.04, 0.9 },
+	input = { 0, 0, 0, 0.6 },
+	button = { 0.12, 0.12, 0.12, 1 },
+	frame = { 0.5, 0.5, 0.5, 1 },
+	line = { 0.3, 0.3, 0.3, 0.8 },
+	field = { 0.4, 0.4, 0.4, 1 },
+	favorite = { 0.6, 0.48, 0.12, 1 },
+	accent = { 1, 0.82, 0, 1 },
+	success = { 0.2, 0.75, 0.2, 1 },
+	solved = { 0.08, 0.3, 0.08, 0.55 },
+	own = { 0.06, 0.16, 0.32, 0.55 },
+	ownBar = { 0.5, 0.75, 1, 1 },
 }
 
-W.GOLD = RGB("f0d68c")
-W.ACCENT = RGB("d9b45a")
-W.TEXT = RGB("e8dfcc")
-W.SOFT = RGB("cfc4ad")
+-- Text colours, the game's NORMAL (gold), HIGHLIGHT (white), GRAY and
+-- GREEN/RED font colours.
+W.GOLD = { 1, 0.82, 0 }
+W.ACCENT = W.GOLD
+W.TEXT = { 1, 1, 1 }
+W.SOFT = { 0.85, 0.85, 0.85 }
 W.WHITE = W.TEXT
-W.MUTED = RGB("a89a80")
-W.GREEN = RGB("8fd18f")
-W.RED = RGB("e8a0a0")
+W.MUTED = { 0.6, 0.6, 0.6 }
+W.GREEN = { 0.25, 1, 0.25 }
+W.RED = { 1, 0.35, 0.35 }
 W.BLUE = RGB("8ab4e8")
-W.DARK = RGB("1c1812")
+W.DARK = { 0, 0, 0 }
 
 -- One colour per question category, also used for its label.
 local CATEGORY_COLORS = {
@@ -80,23 +86,19 @@ W.ARROW_UP = "|TInterface\\Buttons\\Arrow-Up-Up:0|t "
 
 local WHITE8 = "Interface\\Buttons\\WHITE8x8"
 local BACKDROP = { bgFile = WHITE8, edgeFile = WHITE8, edgeSize = 1 }
-local BACKDROP_THICK = { bgFile = WHITE8, edgeFile = WHITE8, edgeSize = 2 }
+-- Windows, dialogs and toasts: dark background with the tooltip border.
+local BACKDROP_THICK = {
+	bgFile = WHITE8,
+	edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
+	edgeSize = 16,
+	insets = { left = 4, right = 4, top = 4, bottom = 4 },
+}
 W.WHITE8 = WHITE8
+W.BACKDROP_THICK = BACKDROP_THICK
 
--- Serif display font for window and dialog titles. Clients whose script
--- the font lacks keep the game's large font (also the fallback when the
--- file is missing).
-local TITLE_FONT_FILES = { ruRU = "Fonts\\MORPHEUS_CYR.TTF", koKR = false, zhCN = false, zhTW = false }
-local titleFont = CreateFont("AskAzerothTitleFont")
-titleFont:CopyFontObject(GameFontNormalLarge)
-local titleFile = TITLE_FONT_FILES[GetLocale()]
-if titleFile == nil then
-	titleFile = "Fonts\\MORPHEUS.TTF"
-end
-if titleFile then
-	titleFont:SetFont(titleFile, 18, "")
-end
-W.TITLE_FONT = "AskAzerothTitleFont"
+-- Titles use the game's large standard font like its own windows, so the
+-- whole addon is one font family.
+W.TITLE_FONT = "GameFontNormalLarge"
 
 local function Color(region, color, alpha)
 	region:SetTextColor(color[1], color[2], color[3], alpha or 1)
@@ -110,7 +112,8 @@ end
 W.SetColors = SetBackdropColors
 
 -- Panel with a thin border. bg and border are colours ({ r, g, b[, a] });
--- default is a card. thick = 2 px border (windows, dialogs, toasts).
+-- default is a card. thick = the game's tooltip border (windows, dialogs,
+-- toasts).
 function W.Panel(parent, bg, border, thick)
 	local panel = CreateFrame("Frame", nil, parent, "BackdropTemplate")
 	panel:SetBackdrop(thick and BACKDROP_THICK or BACKDROP)
@@ -151,8 +154,8 @@ end
 -- Bar along the top of a dialog: title in the display font, a close button.
 function W.TitleBar(parent, label, onClose)
 	local bar = CreateFrame("Frame", nil, parent)
-	bar:SetPoint("TOPLEFT", 2, -2)
-	bar:SetPoint("TOPRIGHT", -2, -2)
+	bar:SetPoint("TOPLEFT", 4, -4)
+	bar:SetPoint("TOPRIGHT", -4, -4)
 	bar:SetHeight(44)
 	W.Fill(bar, W.COLORS.header):SetAllPoints()
 	local line = W.Fill(bar, W.COLORS.frame, "BORDER")
@@ -169,45 +172,32 @@ function W.TitleBar(parent, label, onClose)
 	return bar
 end
 
-local BUTTON_STYLES = {
-	secondary = { bg = W.COLORS.button, border = W.COLORS.frame, text = W.TEXT },
-	primary = { bg = W.COLORS.buttonPrimary, border = W.COLORS.accent, text = RGB("fff4d6") },
-	success = { bg = W.COLORS.buttonSuccess, border = W.COLORS.success, text = RGB("b9e0b0") },
-}
-
-local function UpdateButtonLook(button)
-	local style = BUTTON_STYLES[button.style] or BUTTON_STYLES.secondary
-	if button:IsEnabled() then
-		SetBackdropColors(button, style.bg, style.border)
-		Color(button:GetFontString(), style.text)
-	else
-		SetBackdropColors(button, W.COLORS.nav, W.COLORS.line)
-		Color(button:GetFontString(), W.MUTED, 0.7)
-	end
-end
-
--- Flat button. style: "secondary" (default), "primary" (gold, the main
--- action of a view) or "success" (green, "mark as solved").
+-- The game's red panel button. style is kept for callers ("secondary",
+-- "primary", "success"); primary buttons get the gold label, the others
+-- the white one, like the game's main and side actions.
 function W.Button(parent, label, width, onClick, style)
-	local button = CreateFrame("Button", nil, parent, "BackdropTemplate")
-	button:SetBackdrop(BACKDROP)
-	local text = button:CreateFontString(nil, "OVERLAY", style == "primary" and "GameFontNormal" or "GameFontHighlight")
-	text:SetPoint("LEFT", 8, 0)
-	text:SetPoint("RIGHT", -8, 0)
-	text:SetWordWrap(false)
-	button:SetFontString(text)
-	button:SetHighlightTexture(WHITE8)
-	button:GetHighlightTexture():SetVertexColor(1, 0.85, 0.5, 0.08)
+	local button = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
 	button.style = style or "secondary"
+	local function ApplyFonts(self)
+		local primary = self.style == "primary"
+		self:SetNormalFontObject(primary and "GameFontNormal" or "GameFontHighlight")
+		self:SetHighlightFontObject("GameFontHighlight")
+		self:SetDisabledFontObject("GameFontDisable")
+	end
+	ApplyFonts(button)
 	button:SetText(label)
-	button:SetSize(width or (text:GetStringWidth() + 28), 26)
-	button:SetScript("OnEnable", UpdateButtonLook)
-	button:SetScript("OnDisable", UpdateButtonLook)
+	local text = button:GetFontString()
+	if text then
+		text:SetWordWrap(false)
+		text:ClearAllPoints()
+		text:SetPoint("LEFT", 8, 0)
+		text:SetPoint("RIGHT", -8, 0)
+	end
+	button:SetSize(width or ((text and text:GetStringWidth() or 60) + 28), 24)
 	function button:SetStyle(name)
 		self.style = name
-		UpdateButtonLook(self)
+		ApplyFonts(self)
 	end
-	UpdateButtonLook(button)
 	if onClick then
 		button:SetScript("OnClick", onClick)
 	end
@@ -232,9 +222,13 @@ function W.IconButton(parent, size, texture, onClick)
 	return button
 end
 
+-- The game's close button (red "X").
 function W.CloseButton(parent, onClick)
-	local button = W.IconButton(parent, 26, "Interface\\Buttons\\UI-StopButton", onClick)
-	button.icon:SetVertexColor(W.TEXT[1], W.TEXT[2], W.TEXT[3])
+	local button = CreateFrame("Button", nil, parent, "UIPanelCloseButton")
+	button:SetSize(28, 28)
+	if onClick then
+		button:SetScript("OnClick", onClick)
+	end
 	return button
 end
 
@@ -292,7 +286,7 @@ local function NewEditBox(parent, width, height)
 	local box = CreateFrame("EditBox", nil, parent, "BackdropTemplate")
 	box:SetSize(width, height)
 	box:SetAutoFocus(false)
-	box:SetFontObject("ChatFontNormal")
+	box:SetFontObject("GameFontHighlight")
 	box:SetTextColor(W.TEXT[1], W.TEXT[2], W.TEXT[3])
 	box:SetTextInsets(8, 8, 0, 0)
 	box:SetScript("OnEscapePressed", box.ClearFocus)
@@ -364,7 +358,7 @@ function W.TextArea(parent, width, height, maxBytes, onChange)
 	local box = CreateFrame("EditBox", nil, frame)
 	box:SetMultiLine(true)
 	box:SetAutoFocus(false)
-	box:SetFontObject("ChatFontNormal")
+	box:SetFontObject("GameFontHighlight")
 	box:SetTextColor(W.TEXT[1], W.TEXT[2], W.TEXT[3])
 	box:SetMaxBytes(maxBytes + 1)
 	box:SetPoint("TOPLEFT", 8, -7)
@@ -576,7 +570,7 @@ function W.PlayerText(fullName, classFile)
 	return hex and ("|c%s%s|r"):format(hex, name) or name
 end
 
-W.STATUS_COLORS = { open = "ffe8a0a0", answered = "fff0d68c", solved = "ff8fd18f", closed = "ffa89a80", withdrawn = "ffa89a80" }
+W.STATUS_COLORS = { open = "ffff8080", answered = "ffffd100", solved = "ff40ff40", closed = "ff999999", withdrawn = "ff999999" }
 
 function W.StatusText(status, answerCount)
 	local label
@@ -584,6 +578,10 @@ function W.StatusText(status, answerCount)
 		label = (answerCount == 1 and L.STATUS_ANSWER_ONE or L.STATUS_ANSWERS):format(answerCount)
 	else
 		label = L["STATUS_" .. status:upper()]
+	end
+	-- Solved stands out with a check mark (rows add a green tint).
+	if status == "solved" then
+		return ("%s |c%s%s|r"):format(W.CHECK, W.STATUS_COLORS.solved, label)
 	end
 	return ("|c%s%s|r"):format(W.STATUS_COLORS[status] or "ffffffff", label)
 end

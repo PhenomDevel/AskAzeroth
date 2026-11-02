@@ -3,6 +3,13 @@
 ## Unreleased
 
 - In development, no release yet.
+- Look closer to the game's own windows: Blizzard window frame with the
+  logo as portrait, the game's buttons, close buttons and colours, and one
+  font everywhere (also in input fields).
+- Solved questions stand out: check mark, green status and a green tint in
+  the list, a green "This question is solved" bar in the thread.
+  "Hide solved" on the Questions page hides them.
+- Your own questions are highlighted in blue in the question list.
 - New logo: a question mark in front of the globe of Azeroth.
 - First-run setup: on the first login a short wizard asks for your
   languages, whether you are new or want to help as a mentor, which

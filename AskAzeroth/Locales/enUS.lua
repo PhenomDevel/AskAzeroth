@@ -62,6 +62,8 @@ L.FAQSTATS_HEADER = "FAQ suggestions helped %d times. Most often:"
 -- Questions page
 L.QUEUE_SEARCH = "Search …"
 L.QUEUE_ALL = "All"
+L.QUEUE_OWN = "Your question"
+L.QUEUE_HIDE_SOLVED = "Hide solved"
 L.QUEUE_ASK = "Ask a question"
 L.QUEUE_EMPTY = "No questions yet. Be the first to ask one!"
 L.QUEUE_NO_MATCH = "No question matches the filter."
@@ -77,6 +79,7 @@ L.THREAD_WITHDRAW_CONFIRM = "Withdraw your question for everyone?"
 L.THREAD_OPEN_EXPIRES = "Disappears in %d min if nobody answers."
 L.THREAD_ANSWERED_EXPIRES = "Disappears in %d min without a new answer."
 L.THREAD_SOLVED_EXPIRES = "Solved – disappears in %d min."
+L.THREAD_SOLVED_BANNER = "This question is solved."
 
 -- Formatting
 L.LEVEL_SHORT = "Level %d"

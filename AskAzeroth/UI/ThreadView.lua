@@ -79,7 +79,7 @@ end
 
 -- Category · language · expiry, above the question title.
 local function MetaText(q)
-	return ("%s |cffa89a80· %s · %s|r"):format(W.CategoryText(q.cat), tostring(q.lang or ""):upper(), ExpiryText(q))
+	return ("%s |cff999999· %s · %s|r"):format(W.CategoryText(q.cat), tostring(q.lang or ""):upper(), ExpiryText(q))
 end
 
 function ThreadView.Create(parent, get)
@@ -199,6 +199,13 @@ function ThreadView.Create(parent, get)
 	answerBox:SetPoint("RIGHT", faqButton, "LEFT", -8, 0)
 	answerBox.counter:ClearAllPoints()
 	answerBox.counter:SetPoint("TOPLEFT", answerBox, "BOTTOMLEFT", 0, -4)
+
+	-- Solved questions: a green bar with a check mark instead of the field.
+	local solvedTint = W.Fill(bottom, W.COLORS.solved, "BORDER")
+	solvedTint:SetAllPoints()
+	local solvedLabel = W.Text(bottom, "GameFontNormal", W.GREEN)
+	solvedLabel:SetPoint("LEFT", SIDE, 0)
+	solvedLabel:SetText(CHECK .. " " .. L.THREAD_SOLVED_BANNER)
 
 	local message = W.Text(bottom, "GameFontHighlightSmall", W.RED)
 	message:SetPoint("LEFT", answerBox.counter, "RIGHT", 12, 0)
@@ -347,7 +354,7 @@ function ThreadView.Create(parent, get)
 		if item.folded then
 			row.pin:Hide()
 			row.age:SetText("")
-			row.head:SetText("|cffa89a80" .. L.THREAD_IGNORED_ANSWER .. "|r")
+			row.head:SetText("|cff999999" .. L.THREAD_IGNORED_ANSWER .. "|r")
 			row.body:SetText("")
 			row.body:Hide()
 			row.links:Fill(nil)
@@ -433,10 +440,15 @@ function ThreadView.Create(parent, get)
 			answerBox:SetPoint("TOPLEFT", SIDE, -12 - refsHeight)
 			send:SetPoint("TOPRIGHT", -SIDE, -12 - refsHeight)
 			message:SetPoint("LEFT", answerBox.counter, "RIGHT", 12, 0)
+		elseif solved then
+			bottom:SetHeight(36)
+			message:SetPoint("LEFT", solvedLabel, "RIGHT", 16, 0)
 		else
 			bottom:SetHeight(28)
 			message:SetPoint("LEFT", SIDE, 0)
 		end
+		solvedTint:SetShown(solved)
+		solvedLabel:SetShown(solved)
 		message:SetPoint("RIGHT", -SIDE, 0)
 	end
 

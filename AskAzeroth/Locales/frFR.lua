@@ -58,6 +58,8 @@ L.FAQSTATS_HEADER = "Les suggestions de FAQ ont aidé %d fois. Le plus souvent :
 -- Questions page
 L.QUEUE_SEARCH = "Rechercher…"
 L.QUEUE_ALL = "Toutes"
+L.QUEUE_OWN = "Votre question"
+L.QUEUE_HIDE_SOLVED = "Masquer les résolues"
 L.QUEUE_ASK = "Poser une question"
 L.QUEUE_EMPTY = "Aucune question pour l'instant. Posez la première !"
 L.QUEUE_NO_MATCH = "Aucune question ne correspond au filtre."
@@ -73,6 +75,7 @@ L.THREAD_WITHDRAW_CONFIRM = "Retirer votre question pour tout le monde ?"
 L.THREAD_OPEN_EXPIRES = "Disparaît dans %d min si personne ne répond."
 L.THREAD_ANSWERED_EXPIRES = "Disparaît dans %d min sans nouvelle réponse."
 L.THREAD_SOLVED_EXPIRES = "Résolue – disparaît dans %d min."
+L.THREAD_SOLVED_BANNER = "Cette question est résolue."
 
 -- Formatting
 L.LEVEL_SHORT = "Niveau %d"

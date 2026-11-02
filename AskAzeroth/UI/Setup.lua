@@ -411,7 +411,7 @@ end
 
 local function Create()
 	frame = CreateFrame("Frame", FRAME_NAME, UIParent, "BackdropTemplate")
-	frame:SetBackdrop({ bgFile = W.WHITE8, edgeFile = W.WHITE8, edgeSize = 2 })
+	frame:SetBackdrop(W.BACKDROP_THICK)
 	W.SetColors(frame, W.COLORS.window, W.COLORS.frame)
 	frame:SetSize(WIDTH, HEIGHT)
 	frame:SetPoint("CENTER", 0, 40)
