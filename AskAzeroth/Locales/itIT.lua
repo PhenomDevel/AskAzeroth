@@ -51,6 +51,9 @@ L.CMD_SETTINGS = "apri le impostazioni"
 L.CMD_MINIMAP = "mostra o nascondi il pulsante della minimappa"
 L.CMD_MINIMAP_HIDDEN = "Pulsante della minimappa nascosto. |cffffd100/aa minimap|r lo mostra di nuovo."
 L.CMD_MINIMAP_SHOWN = "Pulsante della minimappa visibile."
+L.CMD_FAQSTATS = "mostra quali suggerimenti delle FAQ hanno evitato una domanda"
+L.FAQSTATS_NONE = "Nessun suggerimento delle FAQ è stato ancora utile."
+L.FAQSTATS_HEADER = "I suggerimenti delle FAQ sono stati utili %d volte. I più frequenti:"
 
 -- Questions page
 L.QUEUE_SEARCH = "Cerca…"
@@ -93,6 +96,9 @@ L.ASK_LANGUAGE = "Lingua"
 L.ASK_CONTEXT = "Inviato insieme: %s"
 L.ASK_SUBMIT = "Chiedi"
 L.ASK_CANCEL = "Annulla"
+L.ASK_SUGGEST_TITLE = "È già nelle FAQ?"
+L.ASK_SUGGEST_HELPED = "Mi è stato utile"
+L.ASK_SUGGEST_BACK = "Chiedi comunque"
 
 -- Reasons
 L.REASON_RATE = "Puoi fare una domanda al minuto. Attendi un momento."
@@ -205,6 +211,7 @@ L.FAQ_REF_LINK = "FAQ: %s"
 L.FAQ_REF_OPEN = "Apre questa voce nelle FAQ."
 L.FAQ_REF_UNKNOWN = "La tua versione di AskAzeroth non ha ancora questa voce. Aggiorna l'addon per vederla."
 L.FAQ_REF_MISSING = "Voce delle FAQ di una versione più recente"
+L.FAQ_REF_SUGGESTED = "adatta alla domanda"
 
 -- Categories
 L.CAT_QUEST = "Missione"

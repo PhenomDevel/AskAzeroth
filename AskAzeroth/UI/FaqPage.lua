@@ -15,6 +15,7 @@ local UI = ns.UI
 local W = ns.Widgets
 local Faq = ns.Faq
 local FaqRefs = ns.FaqRefs
+local FaqSearch = ns.FaqSearch
 
 local LIST_WIDTH = 360
 local PAD = 12
@@ -236,19 +237,25 @@ local function Build(content)
 	function page:Refresh()
 		switch:SetText(C.LANGUAGE_NAMES[self.lang])
 		topicDropdown:Refresh()
-		local list = {}
-		local selectedVisible = false
 		local source = self.topic and Faq.GetTopic(self.topic) or Faq.GetAll()
-		for _, entry in ipairs(source) do
-			local ok = true
-			if self.search ~= "" then
-				local q, a = Faq.GetText(entry, self.lang)
-				ok = (q .. "\n" .. a):lower():find(self.search, 1, true) ~= nil
+		-- Word search (all words, best match first); plain text search for
+		-- searches without a usable word, e.g. while the first letters are
+		-- typed.
+		local list = source
+		if self.search ~= "" then
+			list = FaqSearch.Filter(source, self.search, { self.lang, "en" })
+			if not list then
+				list = {}
+				for _, entry in ipairs(source) do
+					if FaqSearch.Contains(entry, self.search, self.lang) then
+						list[#list + 1] = entry
+					end
+				end
 			end
-			if ok then
-				list[#list + 1] = entry
-				selectedVisible = selectedVisible or entry == self.selected
-			end
+		end
+		local selectedVisible = false
+		for _, entry in ipairs(list) do
+			selectedVisible = selectedVisible or entry == self.selected
 		end
 		-- Keep the selection while it matches, else show the first entry.
 		if not selectedVisible then

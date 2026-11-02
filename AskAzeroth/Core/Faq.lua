@@ -8,10 +8,13 @@ local _, ns = ...
 --     {
 --       id = "hunter-tame",   -- stable, lower case, digits and "-"; answers refer to it
 --       de = { q = "…", a = "…" },
---       en = { q = "…", a = "…" },
+--       en = { q = "…", a = "…", kw = "…" },
 --     },
 --   })
 --
+-- kw (optional, per language) holds extra search words that are neither
+-- in the question nor in the answer, separated by spaces; the FAQ search
+-- (Core/FaqSearch.lua) weighs them like the question.
 -- Further languages (fr, es, it, ru, pt) use the same shape. Texts are
 -- plain text: no "|" escape sequences. Every entry needs English and German
 -- (C.FAQ_REQUIRED); the other FAQ languages (C.FAQ_LANGUAGES) are checked
@@ -55,7 +58,7 @@ local function Check(topic, entry)
 	end
 	for _, lang in ipairs(C.FAQ_LANGUAGES) do
 		local text = entry[lang]
-		if text ~= nil and (type(text) ~= "table" or not IsText(text.q) or not IsText(text.a)) then
+		if text ~= nil and (type(text) ~= "table" or not IsText(text.q) or not IsText(text.a) or (text.kw ~= nil and not IsText(text.kw))) then
 			return lang
 		end
 	end

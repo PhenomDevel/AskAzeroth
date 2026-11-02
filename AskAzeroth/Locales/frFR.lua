@@ -51,6 +51,9 @@ L.CMD_SETTINGS = "ouvrir les options"
 L.CMD_MINIMAP = "afficher ou masquer le bouton de la minicarte"
 L.CMD_MINIMAP_HIDDEN = "Bouton de la minicarte masqué. |cffffd100/aa minimap|r le réaffiche."
 L.CMD_MINIMAP_SHOWN = "Bouton de la minicarte affiché."
+L.CMD_FAQSTATS = "affiche les suggestions de FAQ qui ont évité une question"
+L.FAQSTATS_NONE = "Aucune suggestion de FAQ n'a encore aidé."
+L.FAQSTATS_HEADER = "Les suggestions de FAQ ont aidé %d fois. Le plus souvent :"
 
 -- Questions page
 L.QUEUE_SEARCH = "Rechercher…"
@@ -93,6 +96,9 @@ L.ASK_LANGUAGE = "Langue"
 L.ASK_CONTEXT = "Envoyé avec : %s"
 L.ASK_SUBMIT = "Envoyer"
 L.ASK_CANCEL = "Annuler"
+L.ASK_SUGGEST_TITLE = "Déjà dans la FAQ ?"
+L.ASK_SUGGEST_HELPED = "Ça m'a aidé"
+L.ASK_SUGGEST_BACK = "Demander quand même"
 
 -- Reasons
 L.REASON_RATE = "Vous pouvez poser une question par minute. Patientez un instant."
@@ -205,6 +211,7 @@ L.FAQ_REF_LINK = "FAQ : %s"
 L.FAQ_REF_OPEN = "Ouvre cette entrée dans la FAQ."
 L.FAQ_REF_UNKNOWN = "Votre version d'AskAzeroth ne connaît pas encore cette entrée. Mettez l'addon à jour pour la voir."
 L.FAQ_REF_MISSING = "Entrée de FAQ d'une version plus récente"
+L.FAQ_REF_SUGGESTED = "correspond à la question"
 
 -- Categories
 L.CAT_QUEST = "Quête"

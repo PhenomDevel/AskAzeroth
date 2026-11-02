@@ -150,8 +150,9 @@ function FaqRefs.CreateLinks(parent, anchor)
 end
 
 -- Button that opens the picker; onPick(id) gets the chosen entry. The
--- picker opens above the button.
-function FaqRefs.CreatePickerButton(parent, size, onPick)
+-- picker opens above the button. getContext (optional) returns the text
+-- of the question being answered; entries matching it come first.
+function FaqRefs.CreatePickerButton(parent, size, onPick, getContext)
 	local picker
 	local button = W.IconButton(parent, size, BOOK_ICON)
 	W.Tooltip(button, L.FAQ_REF_ATTACH, L.FAQ_REF_ATTACH_TIP)
@@ -172,6 +173,7 @@ function FaqRefs.CreatePickerButton(parent, size, onPick)
 		title:SetText(L.FAQ_REF_ATTACH)
 
 		local search = ""
+		local suggested = {}
 		local scrollBox, list
 		local searchBox = W.SearchBox(picker, 100, L.QUEUE_SEARCH, function(text)
 			search = strtrim(text):lower()
@@ -209,18 +211,44 @@ function FaqRefs.CreatePickerButton(parent, size, onPick)
 			end
 			row.entry = entry
 			row.title:SetText((Faq.GetText(entry, FaqRefs.ReaderLanguage())))
-			row.meta:SetText(FaqRefs.TopicText(entry.topic))
+			local topic = FaqRefs.TopicText(entry.topic)
+			row.meta:SetText(suggested[entry] and topic .. "  |cff8fd18f" .. L.FAQ_REF_SUGGESTED .. "|r" or topic)
 			row:SetSelectedLook(false)
 		end)
 		ScrollUtil.InitScrollBoxListWithScrollBar(scrollBox, scrollBar, view)
 
+		-- Without a search: entries matching the question first, then all
+		-- others. With a search: word search, plain text search for
+		-- searches without a usable word.
 		function list()
 			local lang = FaqRefs.ReaderLanguage()
-			local result = {}
-			for _, entry in ipairs(Faq.GetAll()) do
-				local q, a = Faq.GetText(entry, lang)
-				if search == "" or (q .. "\n" .. a):lower():find(search, 1, true) then
-					result[#result + 1] = entry
+			local langs = { lang, "en" }
+			local all = Faq.GetAll()
+			local result
+			suggested = {}
+			if search == "" then
+				result = {}
+				local context = getContext and getContext()
+				if context and context ~= "" then
+					for _, entry in ipairs(ns.FaqSearch.Suggest(context, langs, C.FAQ_SUGGEST_MAX)) do
+						suggested[entry] = true
+						result[#result + 1] = entry
+					end
+				end
+				for _, entry in ipairs(all) do
+					if not suggested[entry] then
+						result[#result + 1] = entry
+					end
+				end
+			else
+				result = ns.FaqSearch.Filter(all, search, langs)
+				if not result then
+					result = {}
+					for _, entry in ipairs(all) do
+						if ns.FaqSearch.Contains(entry, search, lang) then
+							result[#result + 1] = entry
+						end
+					end
 				end
 			end
 			scrollBox:SetDataProvider(CreateDataProvider(result))
