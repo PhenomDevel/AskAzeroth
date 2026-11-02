@@ -238,6 +238,21 @@ Fill in after testing (or paste the logs into the PR and I'll fill it in).
 
 To be written after the results are in.
 
+## Category icons (to confirm in game)
+
+`Core/Data/Categories.lua` and `W.CategoryIcon` use these textures:
+
+- `Interface\GossipFrame\AvailableQuestIcon` (Quest),
+  `Interface\Icons\INV_Misc_Book_09` (Class),
+  `Interface\Icons\INV_Misc_Head_Dragon_01` (Dungeon),
+  `Interface\Icons\Trade_BlackSmithing` (Profession),
+  `Interface\Icons\INV_Misc_Gear_01` (Interface),
+  `Interface\Icons\INV_Misc_QuestionMark` (Other). A missing one shows
+  as a green square.
+- Class questions show the asker's class icon through the atlas
+  `classicon-<class>` (e.g. `classicon-warrior`), only when
+  `C_Texture.GetAtlasInfo` knows it; otherwise the book icon.
+
 ## Glossary in the chat (to confirm in game)
 
 `UI/ChatGlossary.lua` relies on these Retail behaviours:

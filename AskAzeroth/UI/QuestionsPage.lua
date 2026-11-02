@@ -60,7 +60,7 @@ local function Build(content)
 			page:Refresh()
 		end, W.CategoryColor(category.key))
 		chip.key = category.key
-		chip:SetLabel(category.label)
+		chip:SetLabel(W.CategoryLabel(category.key))
 		chips[#chips + 1] = chip
 	end
 	local chipsHeight = W.WrapChips(chips, filters, PAD, -PAD - 28 - 10, LIST_WIDTH - 2 * PAD, 6)

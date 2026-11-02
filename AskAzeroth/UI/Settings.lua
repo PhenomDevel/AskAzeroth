@@ -103,7 +103,7 @@ local function Build(content)
 	for i, category in ipairs(C.CATEGORIES) do
 		local label = W.Text(content, "GameFontHighlight")
 		label:SetPoint("TOPLEFT", previousRow, "BOTTOMLEFT", 0, i == 1 and -12 or -10)
-		label:SetText(category.label)
+		label:SetText(W.CategoryLabel(category.key))
 		local dropdown = Add(W.Dropdown(content, 110, modeOptions, function()
 			return ns.Notify.GetMode(category.key)
 		end, function(mode)
