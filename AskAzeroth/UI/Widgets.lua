@@ -1,4 +1,4 @@
--- luacheck: read globals GameTooltip RAID_CLASS_COLORS LOCALIZED_CLASS_NAMES_MALE
+-- luacheck: read globals GameTooltip RAID_CLASS_COLORS LOCALIZED_CLASS_NAMES_MALE C_CreatureInfo
 local _, ns = ...
 
 -- Small widget kit for the window, close to the game's own look: buttons,
@@ -202,6 +202,20 @@ function W.Button(parent, label, width, onClick, style)
 		button:SetScript("OnClick", onClick)
 	end
 	return button
+end
+
+-- Widens a button to fit the longest of the given labels, then shows the
+-- first one (labels that change, e.g. with a countdown).
+function W.FitButton(button, ...)
+	local text = button:GetFontString()
+	local width = button:GetWidth()
+	for i = select("#", ...), 1, -1 do
+		button:SetText((select(i, ...)))
+		if text then
+			width = math.max(width, text:GetStringWidth() + 28)
+		end
+	end
+	button:SetWidth(width)
 end
 
 -- Small square button with an icon texture.
@@ -561,6 +575,52 @@ end
 
 function W.ClassName(classFile)
 	return classFile and LOCALIZED_CLASS_NAMES_MALE and LOCALIZED_CLASS_NAMES_MALE[classFile]
+end
+
+-- Localized race name of a race file ("NightElf"), read from the game's
+-- race list once (so new races need no update), or nil.
+local raceNames
+function W.RaceName(raceFile)
+	if not raceFile then
+		return nil
+	end
+	if not raceNames then
+		raceNames = {}
+		if C_CreatureInfo and C_CreatureInfo.GetRaceInfo then
+			for id = 1, 200 do
+				local info = C_CreatureInfo.GetRaceInfo(id)
+				if info and info.clientFileString and info.raceName and not raceNames[info.clientFileString] then
+					raceNames[info.clientFileString] = info.raceName
+				end
+			end
+		end
+	end
+	return raceNames[raceFile]
+end
+
+-- "Level 12 Night Elf Warrior" from a context (lvl, race, class); the parts
+-- that are unknown are left out. nil when nothing is known.
+function W.PlayerDetails(ctx)
+	if not ctx then
+		return nil
+	end
+	local parts = {}
+	if ctx.lvl then
+		parts[#parts + 1] = L.LEVEL_SHORT:format(ctx.lvl)
+	end
+	parts[#parts + 1] = W.RaceName(ctx.race)
+	parts[#parts + 1] = W.ClassName(ctx.class)
+	return #parts > 0 and table.concat(parts, " ") or nil
+end
+
+-- Name, coloured by class, followed by level, race and class in grey.
+function W.PlayerLine(fullName, ctx, classFile)
+	local text = W.PlayerText(fullName, (ctx and ctx.class) or classFile)
+	local details = W.PlayerDetails(ctx)
+	if details then
+		text = text .. " |cff999999· " .. details .. "|r"
+	end
+	return text
 end
 
 -- Short player name, coloured by class when known.

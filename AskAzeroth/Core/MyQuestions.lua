@@ -29,15 +29,15 @@ local function Changed()
 	ns:Fire("AA_MY_QUESTIONS_CHANGED")
 end
 
-local function CopyAnswer(a)
-	return { id = a.id, qid = a.qid, author = a.author, text = a.text, faq = a.faq, created = a.created }
-end
-
 local function CopyContext(ctx)
 	if not ctx then
 		return nil
 	end
 	return { lvl = ctx.lvl, race = ctx.race, class = ctx.class, faction = ctx.faction, zone = ctx.zone }
+end
+
+local function CopyAnswer(a)
+	return { id = a.id, qid = a.qid, author = a.author, text = a.text, faq = a.faq, ctx = CopyContext(a.ctx), created = a.created }
 end
 
 -- A copy of q in the store's shape, so Store.GetStatus/ExpiresAt/GetAnswers

@@ -71,11 +71,7 @@ end
 
 local function AuthorText(q)
 	local ctx = q.ctx or {}
-	local text = W.PlayerText(q.author, ctx.class or Players.GetClass(q.author))
-	if ctx.lvl then
-		text = text .. " · " .. L.LEVEL_SHORT:format(ctx.lvl)
-	end
-	return text
+	return W.PlayerLine(q.author, ctx, Players.GetClass(q.author))
 end
 
 local function FillRow(list, row, item)

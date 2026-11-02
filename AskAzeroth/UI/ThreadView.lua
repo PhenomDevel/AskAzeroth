@@ -39,16 +39,9 @@ local REF_CHIP_MAX = 24
 local function ContextText(q)
 	local ctx = q.ctx or {}
 	local parts = { (Players.IsFavorite(q.author) and STAR or "") .. W.PlayerText(q.author, ctx.class) }
-	local who = {}
-	if ctx.lvl then
-		who[#who + 1] = L.LEVEL_SHORT:format(ctx.lvl)
-	end
-	local className = W.ClassName(ctx.class)
-	if className then
-		who[#who + 1] = className
-	end
-	if #who > 0 then
-		parts[#parts + 1] = table.concat(who, " ")
+	local details = W.PlayerDetails(ctx)
+	if details then
+		parts[#parts + 1] = details
 	end
 	if ctx.zone then
 		parts[#parts + 1] = Util.EscapeText(ctx.zone)
@@ -368,7 +361,7 @@ function ThreadView.Create(parent, get)
 		local favorite = Players.IsFavorite(a.author)
 		row.head:SetText(("%s%s%s"):format(
 			favorite and STAR or "",
-			W.PlayerText(a.author, Players.GetClass(a.author)),
+			W.PlayerLine(a.author, a.ctx, Players.GetClass(a.author)),
 			Players.HasHelped(a.id) and (" " .. CHECK) or ""))
 		row.age:SetText(W.Ago(Util.Now() - a.created))
 		-- Explicit width and height: anchor-sized text measured before the

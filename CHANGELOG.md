@@ -3,6 +3,11 @@
 ## Unreleased
 
 - In development, no release yet.
+- The one-question-per-minute limit is visible: "Ask a question" and the
+  ask button in the dialog count down the seconds until the next question.
+- Questions and answers show who wrote them with level, race and class
+  (e.g. "Level 12 Night Elf Warrior"), in the list, the thread and pinned
+  answers. Answers from older addon versions show the name only.
 - New FAQ layout: pick a topic on the left, the questions are listed as
   bars below each other and a click unfolds the answer. Search stays, the
   FAQ language is now a dropdown, and the Wowhead hint is a highlighted
