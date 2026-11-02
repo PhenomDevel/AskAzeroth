@@ -267,6 +267,7 @@ L.FAQ_REF_SUGGESTED = "fits the question"
 L.GLOSSARY = "Glossary"
 L.GLOSSARY_ALSO = "Also: %s"
 L.GLOSSARY_CLICK = "Click to open it in the glossary."
+L.GLOSSARY_TERMS = "Terms:"
 
 -- Categories
 L.CAT_QUEST = "Quest"

@@ -263,6 +263,7 @@ L.FAQ_REF_SUGGESTED = "подходит к вопросу"
 L.GLOSSARY = "Глоссарий"
 L.GLOSSARY_ALSO = "Также: %s"
 L.GLOSSARY_CLICK = "Нажмите, чтобы открыть в глоссарии."
+L.GLOSSARY_TERMS = "Термины:"
 
 -- Categories
 L.CAT_QUEST = "Задание"
