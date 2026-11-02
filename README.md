@@ -54,6 +54,8 @@ In the first release:
   topics such as first steps, quests, each class, travel, gold and dungeons.
   Mentors can attach FAQ entries to their answers as links, and a hint
   points to Wowhead for looking up quests, items and NPCs.
+- **FAQ suggestions while you ask:** matching FAQ entries show up as you type
+  your question, so you often have the answer before anyone has to reply.
 - **Sync after login:** questions asked while you were offline are fetched
   from other players on the channel.
 - **7 languages:** English, Deutsch, Français, Español, Italiano, Русский,
@@ -66,6 +68,7 @@ In the first release:
 | `/aa`, `/askazeroth` | Open or close the window |
 | `/aa settings` | Open the settings |
 | `/aa minimap` | Show or hide the minimap button |
+| `/aa faqstats` | Show which FAQ suggestions answered a question before it was asked |
 | `/aa help` | List the commands |
 
 ## Support

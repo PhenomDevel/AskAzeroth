@@ -51,6 +51,9 @@ L.CMD_SETTINGS = "Einstellungen öffnen"
 L.CMD_MINIMAP = "Minimap-Button ein- oder ausblenden"
 L.CMD_MINIMAP_HIDDEN = "Minimap-Button ausgeblendet. |cffffd100/aa minimap|r zeigt ihn wieder."
 L.CMD_MINIMAP_SHOWN = "Minimap-Button eingeblendet."
+L.CMD_FAQSTATS = "zeigt, welche FAQ-Vorschläge Fragen erspart haben"
+L.FAQSTATS_NONE = "Noch hat kein FAQ-Vorschlag geholfen."
+L.FAQSTATS_HEADER = "FAQ-Vorschläge haben %d-mal geholfen. Am häufigsten:"
 
 -- Questions page
 L.QUEUE_SEARCH = "Suchen …"
@@ -93,6 +96,9 @@ L.ASK_LANGUAGE = "Sprache"
 L.ASK_CONTEXT = "Wird mitgesendet: %s"
 L.ASK_SUBMIT = "Absenden"
 L.ASK_CANCEL = "Abbrechen"
+L.ASK_SUGGEST_TITLE = "Steht das schon in der FAQ?"
+L.ASK_SUGGEST_HELPED = "Hat geholfen"
+L.ASK_SUGGEST_BACK = "Trotzdem fragen"
 
 -- Reasons
 L.REASON_RATE = "Du kannst eine Frage pro Minute stellen. Bitte warte kurz."
@@ -205,6 +211,7 @@ L.FAQ_REF_LINK = "FAQ: %s"
 L.FAQ_REF_OPEN = "Öffnet diesen Eintrag im FAQ."
 L.FAQ_REF_UNKNOWN = "Diesen FAQ-Eintrag kennt deine Version von AskAzeroth noch nicht. Aktualisiere das Addon, um ihn zu sehen."
 L.FAQ_REF_MISSING = "FAQ-Eintrag aus einer neueren Version"
+L.FAQ_REF_SUGGESTED = "passt zur Frage"
 
 -- Categories
 L.CAT_QUEST = "Quest"

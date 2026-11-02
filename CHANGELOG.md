@@ -9,6 +9,13 @@
   the left, coloured categories, answer cards and an FAQ with list and
   detail view.
 - Loads on retail (Midnight) too, for testing until Forever launches.
+- FAQ suggestions while you ask: as you type the summary of a question,
+  up to three matching FAQ entries appear. Click one to read the answer
+  right there; "That helped" closes the dialog without asking.
+  `/aa faqstats` shows how often that happened.
+- Better FAQ search: finds entries by word, also with other word forms
+  ("Berufe" finds "Beruf") and without accents, best matches first. The
+  FAQ picker for mentors lists entries matching the question first.
 - Bigger FAQ: over 50 typical beginner questions (first steps, quests,
   class and talents, combat, travel, gold, professions, groups, chat,
   interface) with a topic filter. "Ask a question" from the FAQ picks the
