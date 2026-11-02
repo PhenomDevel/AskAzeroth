@@ -161,8 +161,18 @@ function GlossaryLinks.FaqLink(id, label)
 	return ("|c%s|H%s:%s|h%s|h|r"):format(W.Hex(W.GOLD), FAQ_LINK_TYPE, id, label)
 end
 
+-- The part of link after "linkType:", or nil for other link types. A plain
+-- comparison: the "-" in the link types would be a pattern quantifier.
+local function LinkValue(link, linkType)
+	if type(link) ~= "string" or link:sub(1, #linkType + 1) ~= linkType .. ":" then
+		return nil
+	end
+	return link:sub(#linkType + 2)
+end
+
 local function SpellOfLink(link)
-	return tonumber(link:match("^" .. SPELL_LINK_TYPE .. ":(%d+)$"))
+	local value = LinkValue(link, SPELL_LINK_TYPE)
+	return value and value:find("^%d+$") and tonumber(value)
 end
 
 -- The game's tooltip of a spell at owner.
@@ -196,7 +206,7 @@ local function Debug(event, link, details)
 end
 
 local function EntryOfLink(link)
-	local id = link:match("^" .. LINK_TYPE .. ":([%l%d%-]+)$")
+	local id = LinkValue(link, LINK_TYPE)
 	return id and Glossary.Get(id)
 end
 
@@ -238,7 +248,7 @@ function GlossaryLinks.Enable(frame, tooltipOnly)
 			end
 			return
 		end
-		local faqId = link:match("^" .. FAQ_LINK_TYPE .. ":([%l%d%-]+)$")
+		local faqId = LinkValue(link, FAQ_LINK_TYPE)
 		if faqId and ns.Faq.Get(faqId) then
 			ns.UI.ShowFaq(faqId)
 			return
