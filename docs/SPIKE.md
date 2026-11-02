@@ -145,6 +145,21 @@ Channel notices (owner changes, kicks, password changes) end up in the log.
 - Warning signs: `Saved data incomplete! …` or `No saved data loaded …` on a
   login where data existed before.
 
+### 10. Links in the addon's own texts (glossary)
+
+`/aa probe links` opens a small test window with three lines, each with a
+custom link (`askazeroth-glossary:`), an item link and an `addon:` link:
+
+- **A**: frame with a font string and `SetHyperlinksEnabled(true)` (what the
+  glossary uses in FAQ answers and threads),
+- **B**: the same frame without that call,
+- **C**: a `SimpleHTML` frame.
+
+Hover and click every link in every line, then run `/aa probe links` again
+to close it. The chat (and `/aa probe log`) shows which line and which link
+type got `enter`/`click` events and whether `SetHyperlinksEnabled` exists.
+The glossary tooltips are built on whichever variant reacts.
+
 ## Design notes from building the probe
 
 1. **One addon message prefix per language** (`AA1de`, `AA1en`, …) instead of
