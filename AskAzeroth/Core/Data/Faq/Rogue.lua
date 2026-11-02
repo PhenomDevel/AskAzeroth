@@ -6,31 +6,31 @@ ns.Faq.Add("rogue", {
 		id = "rogue-energy-combo",
 		de = {
 			q = "Wie funktionieren Energie und Combopunkte?",
-			a = "Schurken nutzen Energie, die sich schnell von selbst auffüllt. Angriffe wie „Finsterer Stoß“ geben Combopunkte auf deinem Ziel, bis zu fünf. Finishing-Moves wie „Ausweiden“ verbrauchen alle Punkte und werden mit jedem Punkt stärker.",
+			a = "Schurken nutzen Energie, die sich schnell von selbst auffüllt. Angriffe wie „Finsterer Stoß“ geben dir Combopunkte, bis zu fünf. Finishing-Moves wie „Ausweiden“ verbrauchen alle Punkte und werden mit jedem Punkt stärker.",
 		},
 		en = {
 			q = "How do energy and combo points work?",
-			a = "Rogues use energy, which refills quickly on its own. Attacks like Sinister Strike add combo points on your target, up to five. Finishers like Eviscerate spend all points and get stronger with each one.",
+			a = "Rogues use energy, which refills quickly on its own. Attacks like Sinister Strike give you combo points, up to five. Finishers like Eviscerate spend all points and get stronger with each one.",
 		},
 		fr = {
 			q = "Comment fonctionnent l'énergie et les points de combo ?",
-			a = "Les voleurs utilisent l'énergie, qui se remplit vite toute seule. Des attaques comme Attaque pernicieuse ajoutent des points de combo sur votre cible, jusqu'à cinq. Les coups de grâce comme Éviscération dépensent tous les points et sont plus forts à chaque point.",
+			a = "Les voleurs utilisent l'énergie, qui se remplit vite toute seule. Des attaques comme Attaque pernicieuse vous donnent des points de combo, jusqu'à cinq. Les coups de grâce comme Éviscération dépensent tous les points et sont plus forts à chaque point.",
 		},
 		es = {
 			q = "¿Cómo funcionan la energía y los puntos de combo?",
-			a = "Los pícaros usan energía, que se recarga rápido por sí sola. Ataques como Golpe siniestro añaden puntos de combo a tu objetivo, hasta cinco. Los remates como Eviscerar gastan todos los puntos y son más fuertes con cada uno.",
+			a = "Los pícaros usan energía, que se recarga rápido por sí sola. Ataques como Golpe siniestro te dan puntos de combo, hasta cinco. Los remates como Eviscerar gastan todos los puntos y son más fuertes con cada uno.",
 		},
 		it = {
 			q = "Come funzionano energia e punti combo?",
-			a = "I ladri usano l'energia, che si ricarica rapidamente da sola. Attacchi come Colpo Sinistro aggiungono punti combo sul bersaglio, fino a cinque. Le mosse finali come Eviscerazione consumano tutti i punti e diventano più forti con ognuno.",
+			a = "I ladri usano l'energia, che si ricarica rapidamente da sola. Attacchi come Colpo Sinistro ti danno punti combo, fino a cinque. Le mosse finali come Eviscerazione consumano tutti i punti e diventano più forti con ognuno.",
 		},
 		ru = {
 			q = "Как работают энергия и приёмы серии?",
-			a = "Разбойники используют энергию, которая быстро восполняется сама. Атаки вроде «Коварного удара» добавляют на цель приёмы серии, до пяти. Завершающие приёмы вроде «Потрошения» тратят все очки и становятся сильнее с каждым.",
+			a = "Разбойники используют энергию, которая быстро восполняется сама. Атаки вроде «Коварного удара» дают вам приёмы серии, до пяти. Завершающие приёмы вроде «Потрошения» тратят все очки и становятся сильнее с каждым.",
 		},
 		pt = {
 			q = "Como funcionam energia e pontos de combo?",
-			a = "Ladinos usam energia, que se recarrega rápido sozinha. Ataques como Golpe Sinistro acumulam pontos de combo no alvo, até cinco. Finalizadores como Eviscerar gastam todos os pontos e ficam mais fortes com cada um.",
+			a = "Ladinos usam energia, que se recarrega rápido sozinha. Ataques como Golpe Sinistro dão pontos de combo, até cinco. Finalizadores como Eviscerar gastam todos os pontos e ficam mais fortes com cada um.",
 		},
 	},
 	{
@@ -223,31 +223,31 @@ ns.Faq.Add("rogue", {
 		id = "rogue-sap",
 		de = {
 			q = "Was ist „Kopfnuss“?",
-			a = "„Kopfnuss“ setzt einen Humanoiden außerhalb des Kampfes eine Weile außer Gefecht. Du kannst so einen Gegner aus einer Gruppe ausschalten und die anderen einzeln bekämpfen. Schaden weckt ihn wieder auf. In Dungeons ist das eine wichtige Aufgabe für Schurken.",
+			a = "„Kopfnuss“ setzt einen Humanoiden außerhalb des Kampfes eine Weile außer Gefecht, und in WoW: Forever bleibst du dabei in Verstohlenheit. So schaltest du einen Gegner aus einer Gruppe aus und bekämpfst die anderen einzeln. Schaden weckt ihn wieder auf. In Dungeons ist das eine wichtige Aufgabe für Schurken.",
 		},
 		en = {
 			q = "What is Sap?",
-			a = "Sap incapacitates a humanoid out of combat for a while. That lets you take one enemy out of a group and fight the others one at a time. Damage wakes it up. In dungeons this is an important job for rogues.",
+			a = "Sap incapacitates a humanoid out of combat for a while, and in WoW: Forever you stay in stealth while doing it. That lets you take one enemy out of a group and fight the others one at a time. Damage wakes it up. In dungeons this is an important job for rogues.",
 		},
 		fr = {
 			q = "Qu'est-ce qu'Assommer ?",
-			a = "Assommer neutralise un humanoïde hors combat pendant un moment. Vous pouvez ainsi retirer un ennemi d'un groupe et combattre les autres un par un. Les dégâts le réveillent. En donjon, c'est une tâche importante des voleurs.",
+			a = "Assommer neutralise un humanoïde hors combat pendant un moment, et dans WoW: Forever vous restez camouflé en le faisant. Vous pouvez ainsi retirer un ennemi d'un groupe et combattre les autres un par un. Les dégâts le réveillent. En donjon, c'est une tâche importante des voleurs.",
 		},
 		es = {
 			q = "¿Qué es Porrazo?",
-			a = "Porrazo incapacita a un humanoide fuera de combate durante un tiempo. Así puedes sacar a un enemigo de un grupo y luchar contra los demás de uno en uno. El daño lo despierta. En mazmorras es una tarea importante de los pícaros.",
+			a = "Porrazo incapacita a un humanoide fuera de combate durante un tiempo, y en WoW: Forever sigues en sigilo al usarlo. Así puedes sacar a un enemigo de un grupo y luchar contra los demás de uno en uno. El daño lo despierta. En mazmorras es una tarea importante de los pícaros.",
 		},
 		it = {
 			q = "Che cos'è Tramortire?",
-			a = "Tramortire rende inerme un umanoide fuori dal combattimento per un po'. Così puoi togliere un nemico da un gruppo e combattere gli altri uno alla volta. I danni lo risvegliano. Nelle spedizioni è un compito importante dei ladri.",
+			a = "Tramortire rende inerme un umanoide fuori dal combattimento per un po', e in WoW: Forever resti furtivo mentre lo usi. Così puoi togliere un nemico da un gruppo e combattere gli altri uno alla volta. I danni lo risvegliano. Nelle spedizioni è un compito importante dei ladri.",
 		},
 		ru = {
 			q = "Что такое «Ошеломление»?",
-			a = "«Ошеломление» выводит гуманоида из строя вне боя на некоторое время. Так можно убрать одного врага из группы и сражаться с остальными по одному. Урон его пробуждает. В подземельях это важная задача разбойника.",
+			a = "«Ошеломление» выводит гуманоида из строя вне боя на некоторое время, а в WoW: Forever вы при этом остаётесь в незаметности. Так можно убрать одного врага из группы и сражаться с остальными по одному. Урон его пробуждает. В подземельях это важная задача разбойника.",
 		},
 		pt = {
 			q = "O que é Aturdir?",
-			a = "Aturdir incapacita um humanoide fora de combate por um tempo. Assim você tira um inimigo de um grupo e enfrenta os outros um de cada vez. Dano o desperta. Em masmorras, essa é uma tarefa importante dos ladinos.",
+			a = "Aturdir incapacita um humanoide fora de combate por um tempo, e no WoW: Forever você continua furtivo ao usá-lo. Assim você tira um inimigo de um grupo e enfrenta os outros um de cada vez. Dano o desperta. Em masmorras, essa é uma tarefa importante dos ladinos.",
 		},
 	},
 	{
@@ -347,31 +347,31 @@ ns.Faq.Add("rogue", {
 		id = "rogue-lockpicking",
 		de = {
 			q = "Wie öffne ich Schließkassetten?",
-			a = "Mit „Schlossknacken“. Schurken lernen es über eine Quest und steigern es, indem sie Schlösser öffnen. In Schließkassetten von Gegnern steckt oft Gold oder Beute; du kannst auch für andere Spieler Kassetten öffnen.",
+			a = "Mit „Schlossknacken“, das du beim Schurkenlehrer lernst. Die Fertigkeit steigt, wenn du Schlösser öffnest. In Schließkassetten von Gegnern steckt oft Gold oder Beute; du kannst auch für andere Spieler Kassetten öffnen.",
 		},
 		en = {
 			q = "How do I open lockboxes?",
-			a = "With Pick Lock. Rogues learn it from a quest and raise it by opening locks. Lockboxes from enemies often contain gold or loot; you can open boxes for other players too.",
+			a = "With Pick Lock, which you learn from your rogue trainer. The skill rises as you open locks. Lockboxes from enemies often contain gold or loot; you can open boxes for other players too.",
 		},
 		fr = {
 			q = "Comment ouvrir les coffrets ?",
-			a = "Avec Crochetage. Les voleurs l'apprennent par une quête et le font progresser en ouvrant des serrures. Les coffrets des ennemis contiennent souvent de l'or ou du butin ; vous pouvez aussi en ouvrir pour d'autres joueurs.",
+			a = "Avec Crochetage, que vous apprenez auprès de votre maître des voleurs. La compétence progresse quand vous ouvrez des serrures. Les coffrets des ennemis contiennent souvent de l'or ou du butin ; vous pouvez aussi en ouvrir pour d'autres joueurs.",
 		},
 		es = {
 			q = "¿Cómo abro las cajas fuertes?",
-			a = "Con Forzar cerradura. Los pícaros lo aprenden con una misión y lo mejoran abriendo cerraduras. Las cajas de los enemigos suelen contener oro o botín; también puedes abrir cajas para otros jugadores.",
+			a = "Con Forzar cerradura, que aprendes con tu instructor de pícaros. La habilidad sube al abrir cerraduras. Las cajas de los enemigos suelen contener oro o botín; también puedes abrir cajas para otros jugadores.",
 		},
 		it = {
 			q = "Come apro le cassette chiuse?",
-			a = "Con Scassinare. I ladri lo imparano con una missione e lo migliorano aprendo serrature. Le cassette dei nemici contengono spesso oro o bottino; puoi aprirle anche per altri giocatori.",
+			a = "Con Scassinare, che impari dal tuo istruttore dei ladri. L'abilità sale aprendo serrature. Le cassette dei nemici contengono spesso oro o bottino; puoi aprirle anche per altri giocatori.",
 		},
 		ru = {
 			q = "Как открывать запертые сундучки?",
-			a = "С помощью «Вскрытия замка». Разбойники изучают его за задание и развивают, открывая замки. В сундучках с врагов часто есть золото или добыча; вы можете открывать их и для других игроков.",
+			a = "С помощью «Вскрытия замка», которому учит наставник разбойников. Навык растёт, когда вы открываете замки. В сундучках с врагов часто есть золото или добыча; вы можете открывать их и для других игроков.",
 		},
 		pt = {
 			q = "Como abro cofres trancados?",
-			a = "Com Arrombar. Ladinos aprendem isso numa missão e melhoram abrindo fechaduras. Cofres de inimigos costumam ter ouro ou saque; você também pode abrir cofres para outros jogadores.",
+			a = "Com Arrombar, que você aprende com seu instrutor de ladinos. A perícia sobe conforme você abre fechaduras. Cofres de inimigos costumam ter ouro ou saque; você também pode abrir cofres para outros jogadores.",
 		},
 	},
 	{
