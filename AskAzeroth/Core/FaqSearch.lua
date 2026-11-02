@@ -289,5 +289,5 @@ end
 -- before this module; still used for very short search texts).
 function FaqSearch.Contains(entry, text, lang)
 	local q, a = Faq.GetText(entry, lang)
-	return (q .. "\n" .. a):lower():find(text:lower(), 1, true) ~= nil
+	return (q .. "\n" .. ns.FaqMarkup.Strip(a)):lower():find(text:lower(), 1, true) ~= nil
 end

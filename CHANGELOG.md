@@ -3,6 +3,8 @@
 ## Unreleased
 
 - In development, no release yet.
+- FAQ answers can show keys, buttons and menu entries, and chat commands
+  in their own colours, so they stand out from the text.
 - The Questions page and the minimap button tooltip show how many
   questions in your languages are still waiting for an answer.
 - Question lists and notifications show the question's language next to

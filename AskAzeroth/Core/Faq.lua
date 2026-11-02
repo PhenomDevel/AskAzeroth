@@ -16,7 +16,9 @@ local _, ns = ...
 -- in the question nor in the answer, separated by spaces; the FAQ search
 -- (Core/FaqSearch.lua) weighs them like the question.
 -- Further languages (fr, es, it, ru, pt) use the same shape. Texts are
--- plain text: no "|" escape sequences. Every entry needs English and German
+-- plain text: no "|" escape sequences. Answers may mark keys as [M],
+-- interface names and menu paths as {Key Bindings} and chat commands as
+-- `/who` (Core/FaqMarkup.lua); questions and kw stay unmarked. Every entry needs English and German
 -- (C.FAQ_REQUIRED); the other FAQ languages (C.FAQ_LANGUAGES) are checked
 -- when present and fall back to English while an entry is not translated
 -- yet. Never change or reuse an id once released:

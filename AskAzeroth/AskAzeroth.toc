@@ -50,6 +50,7 @@ Core\Serializer.lua
 Core\Data\Categories.lua
 Core\Data\FaqTopics.lua
 Core\Faq.lua
+Core\FaqMarkup.lua
 Core\Data\Faq\Addon.lua
 Core\Data\Faq\Start.lua
 Core\Data\Faq\Quests.lua
