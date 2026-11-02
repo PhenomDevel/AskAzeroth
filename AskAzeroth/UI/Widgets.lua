@@ -204,6 +204,20 @@ function W.Button(parent, label, width, onClick, style)
 	return button
 end
 
+-- Widens a button to fit the longest of the given labels, then shows the
+-- first one (labels that change, e.g. with a countdown).
+function W.FitButton(button, ...)
+	local text = button:GetFontString()
+	local width = button:GetWidth()
+	for i = select("#", ...), 1, -1 do
+		button:SetText((select(i, ...)))
+		if text then
+			width = math.max(width, text:GetStringWidth() + 28)
+		end
+	end
+	button:SetWidth(width)
+end
+
 -- Small square button with an icon texture.
 function W.IconButton(parent, size, texture, onClick)
 	local button = CreateFrame("Button", nil, parent, "BackdropTemplate")
