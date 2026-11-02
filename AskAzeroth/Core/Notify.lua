@@ -7,8 +7,9 @@ local _, ns = ...
 --   * questions of favourites: always (badge + toast);
 --   * answers to own questions: always.
 -- Never a toast or sound in combat, optionally none in instances; the
--- badge still counts and held back toasts follow afterwards. At most one toast per C.TOAST_INTERVAL, the rest are summed up
--- as "+N more" in the next one.
+-- badge still counts and held back toasts follow right afterwards. Every
+-- other notification shows at once; while a toast is up, it is updated
+-- and counts the others as "+N more".
 --
 -- Messages: AA_NOTIFY_TOAST (entry, more), AA_NOTIFY_CHANGED (unseen)
 local Notify = {}
@@ -31,8 +32,9 @@ ns.dbDefaults.settings.notify = {
 }
 
 local unseen = 0
-local lastToast = -math.huge
--- Newest suppressed entry and how many were held back since the last toast.
+-- The toast on screen (entry and "+N more") and until when it stays.
+local shown, shownMore, shownUntil = nil, 0, 0
+-- Newest entry held back in combat or an instance, and how many.
 local pending, pendingCount = nil, 0
 local timer
 
@@ -78,17 +80,26 @@ local function PlayAlert()
 end
 
 local function ShowToast(entry, more)
-	lastToast = GetTime()
+	shown, shownMore, shownUntil = entry, more, GetTime() + C.TOAST_DURATION
 	ns:Fire("AA_NOTIFY_TOAST", entry, more)
 end
 
--- After the interval, show what was held back.
+-- Of two entries for one toast, an answer to an own question wins over a
+-- new question; otherwise the newer one.
+local function Pick(old, new)
+	if old and old.kind == "answer" and new.kind ~= "answer" then
+		return old
+	end
+	return new
+end
+
+-- Shows what was held back once combat or the instance is over (checked
+-- every second while something waits).
 local function FlushLater()
 	if timer then
 		return
 	end
-	local wait = math.max(1, lastToast + C.TOAST_INTERVAL - GetTime())
-	timer = C_Timer.NewTimer(wait, function()
+	timer = C_Timer.NewTimer(1, function()
 		timer = nil
 		if not pending then
 			return
@@ -108,18 +119,18 @@ local function Raise(entry)
 	unseen = unseen + 1
 	ns:Fire("AA_NOTIFY_CHANGED", unseen)
 	if Notify.IsPaused() then
-		pending, pendingCount = entry, pendingCount + 1
+		pending, pendingCount = Pick(pending, entry), pendingCount + 1
 		FlushLater()
 		return
 	end
 	if entry.sound then
 		PlayAlert()
 	end
-	if GetTime() - lastToast >= C.TOAST_INTERVAL then
-		ShowToast(entry, 0)
+	-- A toast is still up: update it ("+N more") instead of stacking.
+	if shown and GetTime() < shownUntil then
+		ShowToast(Pick(shown, entry), shownMore + 1)
 	else
-		pending, pendingCount = entry, pendingCount + 1
-		FlushLater()
+		ShowToast(entry, 0)
 	end
 end
 
@@ -139,7 +150,9 @@ ns:RegisterEvent("PLAYER_REGEN_ENABLED", function()
 		timer:Cancel()
 		timer = nil
 	end
-	FlushLater()
+	local entry, more = pending, pendingCount - 1
+	pending, pendingCount = nil, 0
+	ShowToast(entry, more)
 end)
 
 -- Whether a new question passes the mentor filters.
