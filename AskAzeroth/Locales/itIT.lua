@@ -73,9 +73,9 @@ L.THREAD_SOLVE_TIP = "La tua domanda ha avuto la risposta che cercavi. Sparisce 
 L.THREAD_WITHDRAW = "Ritira"
 L.THREAD_WITHDRAW_TIP = "Rimuove la tua domanda per tutti."
 L.THREAD_WITHDRAW_CONFIRM = "Ritirare la tua domanda per tutti?"
-L.THREAD_OPEN_EXPIRES = "Sparisce tra %d min se nessuno risponde."
-L.THREAD_ANSWERED_EXPIRES = "Sparisce tra %d min senza una nuova risposta."
-L.THREAD_SOLVED_EXPIRES = "Risolta – sparisce tra %d min."
+L.THREAD_OPEN_EXPIRES = "Sparisce tra %s se nessuno risponde."
+L.THREAD_ANSWERED_EXPIRES = "Sparisce tra %s senza una nuova risposta."
+L.THREAD_SOLVED_EXPIRES = "Risolta – sparisce tra %s."
 L.THREAD_SOLVED_BANNER = "Questa domanda è risolta."
 
 -- Formatting
@@ -83,6 +83,10 @@ L.LEVEL_SHORT = "Livello %d"
 L.AGO_NOW = "adesso"
 L.AGO_MINUTES = "%d min fa"
 L.AGO_HOURS = "%d h fa"
+L.AGO_DAYS = "%d g fa"
+L.DURATION_MINUTES = "%d min"
+L.DURATION_HOURS = "%d h"
+L.DURATION_DAYS = "%d giorni"
 
 -- Status
 L.STATUS_OPEN = "aperta"
@@ -279,6 +283,7 @@ L.GLOSSARY = "Glossario"
 L.GLOSSARY_ALSO = "Anche: %s"
 L.GLOSSARY_CLICK = "Clicca per aprirlo nel glossario."
 L.GLOSSARY_TERMS = "Termini:"
+L.GLOSSARY_MORE = "Altro nelle FAQ:"
 
 -- Categories
 L.CAT_QUEST = "Missione"
