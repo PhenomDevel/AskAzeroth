@@ -30,6 +30,9 @@
   Lay on Hands, Divine Shield, Redemption, cleansing, mana, tanking, talents).
 - FAQ: 19 rogue questions (energy and combo points, Stealth, openers,
   weapons, Kick, Sap, escapes, poisons, lockpicking, stuns, threat, talents).
+- FAQ: 17 priest questions (levelling, wands, shields, heals and ranks,
+  mana, buffs, Psychic Scream, Resurrection, dispelling, first dungeon,
+  Shadowform, talents).
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
   Players, FAQ and Settings.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
