@@ -331,7 +331,12 @@ local function Build(content)
 			item.question:SetPoint("TOPLEFT", item.icon, "TOPRIGHT", 8, 0)
 			item.topic = W.Text(bg, "GameFontHighlightSmall", W.MUTED)
 			item.topic:SetWordWrap(false)
-			item.answer = bg:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+			-- The answer sits in its own frame: link events go to the frame
+			-- that owns the text, and only this frame takes the mouse for
+			-- them. A click on its plain text still folds the entry.
+			item.answerFrame = CreateFrame("Frame", nil, bg)
+			item.answer = item.answerFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+			item.answer:SetAllPoints()
 			item.answer:SetJustifyH("LEFT")
 			item.answer:SetJustifyV("TOP")
 			item.answer:SetWordWrap(true)
@@ -339,10 +344,6 @@ local function Build(content)
 			item.divider = W.Divider(bg)
 			item.divider:SetHeight(1)
 			item:SetScript("OnClick", function(self)
-				-- A click on a link in the answer does not fold it.
-				if GlossaryLinks.JustClicked(self) then
-					return
-				end
 				local key = Key(self.entry)
 				page.expanded[key] = not page.expanded[key] or nil
 				if page.expanded[key] and not IsGlossary(self.entry) then
@@ -350,7 +351,14 @@ local function Build(content)
 				end
 				page:RefreshList()
 			end)
-			GlossaryLinks.Enable(item)
+			GlossaryLinks.Enable(item.answerFrame)
+			item.answerFrame:SetScript("OnEnter", function()
+				item.hl:Show()
+			end)
+			item.answerFrame:SetScript("OnLeave", function()
+				item.hl:Hide()
+			end)
+			GlossaryLinks.ForwardClicks(item.answerFrame, item)
 		end
 		item.entry = entry
 		local q, a = Texts(entry)
@@ -376,16 +384,15 @@ local function Build(content)
 			item.divider:SetPoint("TOPLEFT", below, "BOTTOMLEFT", 0, -ITEM_PAD / 2)
 			item.divider:SetPoint("RIGHT", item.bg, "RIGHT", -ITEM_PAD, 0)
 			item.divider:Show()
-			item.answer:ClearAllPoints()
-			item.answer:SetPoint("TOPLEFT", below, "BOTTOMLEFT", 0, -ITEM_PAD)
-			item.answer:SetWidth(AnswerWidth())
-			item.answer:SetHeight(aHeight)
+			item.answerFrame:ClearAllPoints()
+			item.answerFrame:SetPoint("TOPLEFT", below, "BOTTOMLEFT", 0, -ITEM_PAD)
+			item.answerFrame:SetSize(AnswerWidth(), aHeight)
 			item.answer:SetText(a)
-			item.answer:Show()
+			item.answerFrame:Show()
 		else
 			W.SetColors(item.bg, W.COLORS.card, W.COLORS.line)
 			item.divider:Hide()
-			item.answer:Hide()
+			item.answerFrame:Hide()
 		end
 	end)
 	ScrollUtil.InitScrollBoxListWithScrollBar(listBox, listBar, listView)

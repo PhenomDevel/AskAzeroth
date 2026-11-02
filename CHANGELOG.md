@@ -3,6 +3,7 @@
 ## Unreleased
 
 - In development, no release yet.
+- Glossary tooltips in FAQ answers now show when you hover over a blue term.
 - Notifications never pop up during combat any more; they follow right
   after the fight. Whether they also wait in instances stays a setting.
 - "Test" button for notifications in the settings, and the notification
