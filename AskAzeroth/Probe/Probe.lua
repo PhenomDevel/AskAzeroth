@@ -615,6 +615,20 @@ AddCommand("links", "links", L.PROBE_HELP_LINKS, function()
 	linkTest:Show()
 end)
 
+AddCommand("spells", "spells [text]", L.PROBE_HELP_SPELLS, function(args)
+	local listed, spellbook = ns.SpellRefs.Count()
+	Log(L.PROBE_SPELLS_COUNT, listed, spellbook)
+	if args ~= "" then
+		local found = ns.SpellRefs.Find(args)
+		for _, place in ipairs(found) do
+			Log(L.PROBE_SPELLS_FOUND, args:sub(place[1], place[2]), place[3])
+		end
+		if #found == 0 then
+			Log(L.PROBE_SPELLS_NONE)
+		end
+	end
+end)
+
 AddCommand("log", "log [lines]", L.PROBE_HELP_LOG, function(args)
 	local log = db.log
 	local count = math.min(tonumber(args) or 20, #log)

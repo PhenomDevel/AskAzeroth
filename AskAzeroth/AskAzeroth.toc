@@ -73,6 +73,8 @@ Core\Data\Faq\Interface.lua
 Core\Data\FaqStopwords.lua
 Core\FaqSearch.lua
 Core\Glossary.lua
+Core\SpellRefs.lua
+Core\Data\Spells.lua
 Core\Data\Glossary.lua
 Core\Database.lua
 Core\SlashCommands.lua

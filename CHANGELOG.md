@@ -5,6 +5,9 @@
 - In development, no release yet.
 - FAQ answers list the glossary terms they use in a row "Terms:" below the
   answer; hover a term for its explanation, click to open it in the glossary.
+- Abilities named in FAQ answers, glossary entries, questions and answers
+  are now real spell links with their icon: hover to see the game's spell
+  tooltip, shift-click to post the link in chat.
 - Notifications show right away again: there was a two-minute pause
   between two notifications, so many seemed to be missing. A notification
   that is still on screen now counts new ones as "+N more", and answers to
