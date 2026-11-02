@@ -192,31 +192,31 @@ ns.Faq.Add("priest", {
 		id = "priest-buffs",
 		de = {
 			q = "Welche Buffs hat ein Priester?",
-			a = "„Machtwort: Seelenstärke“ erhöht die Ausdauer und gehört auf jedes Gruppenmitglied. „Inneres Feuer“ verstärkt deine Rüstung und deinen Schaden. Beide halten eine Weile; erneuere sie, bevor sie auslaufen.",
+			a = "„Machtwort: Seelenstärke“ erhöht die Ausdauer und gehört auf jedes Gruppenmitglied. „Inneres Feuer“ verstärkt deine Rüstung und deinen Schaden. In WoW: Forever lernt außerdem jeder Priester „Göttlicher Willen“ für mehr Willenskraft und „Furchtzauberschutz“ gegen Furcht. Buffs halten eine Weile; erneuere sie, bevor sie auslaufen.",
 		},
 		en = {
 			q = "Which buffs does a priest have?",
-			a = "Power Word: Fortitude increases stamina and belongs on every party member. Inner Fire boosts your armour and damage. Both last a while; renew them before they run out.",
+			a = "Power Word: Fortitude increases stamina and belongs on every party member. Inner Fire boosts your armour and damage. In WoW: Forever every priest also learns Divine Spirit for more spirit and Fear Ward against fear. Buffs last a while; renew them before they run out.",
 		},
 		fr = {
 			q = "Quelles améliorations a un prêtre ?",
-			a = "Mot de pouvoir : Robustesse augmente l'endurance et doit être sur chaque membre du groupe. Feu intérieur renforce votre armure et vos dégâts. Les deux durent un moment ; renouvelez-les avant qu'ils expirent.",
+			a = "Mot de pouvoir : Robustesse augmente l'endurance et doit être sur chaque membre du groupe. Feu intérieur renforce votre armure et vos dégâts. Dans WoW: Forever, tout prêtre apprend aussi Esprit divin pour plus d'esprit et Gardien de peur contre la peur. Les améliorations durent un moment ; renouvelez-les avant qu'elles expirent.",
 		},
 		es = {
 			q = "¿Qué beneficios tiene un sacerdote?",
-			a = "Palabra de poder: entereza aumenta el aguante y debe estar en cada miembro del grupo. Fuego interno mejora tu armadura y tu daño. Ambos duran un rato; renuévalos antes de que se acaben.",
+			a = "Palabra de poder: entereza aumenta el aguante y debe estar en cada miembro del grupo. Fuego interno mejora tu armadura y tu daño. En WoW: Forever todos los sacerdotes aprenden además Espíritu divino para más espíritu y Resguardo de miedo contra el miedo. Los beneficios duran un rato; renuévalos antes de que se acaben.",
 		},
 		it = {
 			q = "Quali benefici ha un sacerdote?",
-			a = "Parola del Potere: Fortezza aumenta la tempra e va messa su ogni membro del gruppo. Fuoco Interiore potenzia armatura e danni. Entrambi durano un po'; rinnovali prima che finiscano.",
+			a = "Parola del Potere: Fortezza aumenta la tempra e va messa su ogni membro del gruppo. Fuoco Interiore potenzia armatura e danni. In WoW: Forever ogni sacerdote impara anche Spirito Divino per più spirito e Protezione dalla Paura contro la paura. I benefici durano un po'; rinnovali prima che finiscano.",
 		},
 		ru = {
 			q = "Какие усиления есть у жреца?",
-			a = "«Слово силы: Стойкость» повышает выносливость и должно быть на каждом члене группы. «Внутренний огонь» усиливает броню и урон. Оба действуют долго; обновляйте их до того, как они закончатся.",
+			a = "«Слово силы: Стойкость» повышает выносливость и должно быть на каждом члене группы. «Внутренний огонь» усиливает броню и урон. В WoW: Forever каждый жрец также изучает «Божественный дух» для большего духа и «Защиту от страха» от страха. Усиления действуют долго; обновляйте их до того, как они закончатся.",
 		},
 		pt = {
 			q = "Quais bônus o sacerdote tem?",
-			a = "Palavra de Poder: Fortitude aumenta o vigor e deve estar em cada membro do grupo. Fogo Interior fortalece sua armadura e seu dano. Os dois duram um tempo; renove-os antes de acabarem.",
+			a = "Palavra de Poder: Fortitude aumenta o vigor e deve estar em cada membro do grupo. Fogo Interior fortalece sua armadura e seu dano. No WoW: Forever todo sacerdote também aprende Espírito Divino para mais espírito e Proteção contra o Medo contra medo. Os bônus duram um tempo; renove-os antes de acabarem.",
 		},
 	},
 	{
@@ -347,31 +347,31 @@ ns.Faq.Add("priest", {
 		id = "priest-shadowform",
 		de = {
 			q = "Was ist Schattengestalt?",
-			a = "Ein Talent im Schattenbaum: Du verstärkst deinen Schattenschaden und erleidest weniger Schaden, kannst in der Gestalt aber nicht heilen. Viele Priester leveln als Schatten und heilen in Gruppen per Dualspezialisierung.",
+			a = "Ein Talent im Schattenbaum: Es verstärkt deinen Schattenschaden und senkt den Schaden, den du nimmst; in WoW: Forever kosten deine Schattenzauber darin auch weniger Mana. Viele Priester leveln als Schatten und heilen in Gruppen per Dualspezialisierung.",
 		},
 		en = {
 			q = "What is Shadowform?",
-			a = "A talent in the Shadow tree: it increases your Shadow damage and reduces the damage you take, but you cannot heal while in it. Many priests level as Shadow and heal in groups with dual specialisation.",
+			a = "A talent in the Shadow tree: it increases your Shadow damage and reduces the damage you take; in WoW: Forever your Shadow spells also cost less mana in it. Many priests level as Shadow and heal in groups with dual specialisation.",
 		},
 		fr = {
 			q = "Qu'est-ce que Forme d'Ombre ?",
-			a = "Un talent de l'arbre Ombre : elle augmente vos dégâts d'Ombre et réduit les dégâts subis, mais vous ne pouvez pas soigner sous cette forme. Beaucoup de prêtres montent de niveau en Ombre et soignent en groupe grâce à la double spécialisation.",
+			a = "Un talent de l'arbre Ombre : elle augmente vos dégâts d'Ombre et réduit les dégâts subis ; dans WoW: Forever, vos sorts d'Ombre y coûtent aussi moins de mana. Beaucoup de prêtres montent de niveau en Ombre et soignent en groupe grâce à la double spécialisation.",
 		},
 		es = {
 			q = "¿Qué es Forma de las Sombras?",
-			a = "Un talento del árbol Sombra: aumenta tu daño de Sombras y reduce el daño que recibes, pero no puedes curar en esa forma. Muchos sacerdotes suben de nivel como Sombra y curan en grupo con la especialización doble.",
+			a = "Un talento del árbol Sombra: aumenta tu daño de Sombras y reduce el daño que recibes; en WoW: Forever tus hechizos de Sombras también cuestan menos maná en esa forma. Muchos sacerdotes suben de nivel como Sombra y curan en grupo con la especialización doble.",
 		},
 		it = {
 			q = "Che cos'è Forma d'Ombra?",
-			a = "Un talento dell'albero Ombra: aumenta i danni d'Ombra e riduce i danni subiti, ma in questa forma non puoi curare. Molti sacerdoti salgono di livello come Ombra e curano in gruppo con la doppia specializzazione.",
+			a = "Un talento dell'albero Ombra: aumenta i danni d'Ombra e riduce i danni subiti; in WoW: Forever in questa forma gli incantesimi d'Ombra costano anche meno mana. Molti sacerdoti salgono di livello come Ombra e curano in gruppo con la doppia specializzazione.",
 		},
 		ru = {
 			q = "Что такое «Облик Тьмы»?",
-			a = "Талант ветки «Тьма»: он повышает урон от темной магии и снижает получаемый урон, но в этом облике нельзя лечить. Многие жрецы качаются в «Тьме», а в группах лечат благодаря двойной специализации.",
+			a = "Талант ветки «Тьма»: он повышает урон от тёмной магии и снижает получаемый урон; в WoW: Forever заклинания Тьмы в этом облике ещё и стоят меньше маны. Многие жрецы качаются в «Тьме», а в группах лечат благодаря двойной специализации.",
 		},
 		pt = {
 			q = "O que é Forma de Sombra?",
-			a = "Um talento da árvore Sombra: aumenta seu dano de Sombra e reduz o dano que você recebe, mas você não pode curar nessa forma. Muitos sacerdotes sobem de nível como Sombra e curam em grupo com a especialização dupla.",
+			a = "Um talento da árvore Sombra: aumenta seu dano de Sombra e reduz o dano que você recebe; no WoW: Forever seus feitiços de Sombra também custam menos mana nessa forma. Muitos sacerdotes sobem de nível como Sombra e curam em grupo com a especialização dupla.",
 		},
 	},
 	{
