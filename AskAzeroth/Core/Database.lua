@@ -39,6 +39,9 @@ ns.dbDefaults = {
 		-- 0 = never (UI/Setup.lua opens it after login).
 		setupVersion = 0,
 	},
+	-- FAQ entry id → how often its suggestion in the ask dialog was marked
+	-- "That helped" (/aa faqstats). Stays on this computer.
+	faqHelped = {},
 }
 
 ns.charDbDefaults = {

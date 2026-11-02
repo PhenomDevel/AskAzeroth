@@ -43,7 +43,7 @@ function Pinned.Pin(q, a)
 	local entry = {
 		pinnedAt = Util.Now(),
 		question = { id = q.id, author = q.author, lang = q.lang, cat = q.cat, title = q.title, body = q.body, created = q.created },
-		answer = { id = a.id, author = a.author, text = a.text, created = a.created },
+		answer = { id = a.id, author = a.author, text = a.text, faq = a.faq, created = a.created },
 	}
 	entries[a.id] = entry
 	ns:Fire("AA_PINNED_CHANGED", a.id, true)

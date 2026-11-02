@@ -30,6 +30,9 @@ C.LANGUAGE_BY_LOCALE = {
 	ptBR = "pt",
 }
 
+-- Shown on the FAQ page as the place to look things up.
+C.WOWHEAD_URL = "https://www.wowhead.com"
+
 local known = {}
 for _, lang in ipairs(C.LANGUAGES) do
 	known[lang] = true
@@ -71,6 +74,23 @@ C.RETENTION_DAYS = { 0, 7, 30, 90 }
 C.TITLE_MAX = 120
 C.BODY_MAX = 500
 C.ANSWER_MAX = 500
+-- FAQ entries an answer can refer to, and the longest FAQ id.
+C.FAQ_REFS_MAX = 3
+C.FAQ_ID_MAX = 32
+-- FAQ search (Core/FaqSearch.lua): words need this many characters (numbers
+-- like "60" always count) and are cut to C.FAQ_SEARCH_STEM characters.
+C.FAQ_SEARCH_MIN_CHARS = 3
+C.FAQ_SEARCH_STEM = 5
+-- FAQ suggestions while a question is typed: at most this many entries,
+-- shown this many seconds after the last key, only for entries with at
+-- least FAQ_SUGGEST_MIN_HITS of the search words (all when there are
+-- fewer) and this score (a word in the question counts 3, in the answer 1).
+-- Suggestions start once the summary has FAQ_SUGGEST_MIN_LENGTH characters.
+C.FAQ_SUGGEST_MAX = 3
+C.FAQ_SUGGEST_MIN_LENGTH = 8
+C.FAQ_SUGGEST_DELAY = 0.3
+C.FAQ_SUGGEST_MIN_HITS = 2
+C.FAQ_SUGGEST_MIN_SCORE = 3
 C.ZONE_MAX = 64
 C.CTX_TEXT_MAX = 24
 C.LEVEL_MAX = 100

@@ -45,15 +45,23 @@ messages small.
 | Type | Fields | Who may send it |
 |---|---|---|
 | `Q` question | `i` id, `c` category, `ti` title, `b` body (optional), `x` context (optional), `ts` created | the author |
-| `A` answer | `i` id, `q` question id, `tx` text, `ts` created | anyone |
+| `A` answer | `i` id, `q` question id, `tx` text, `f` FAQ ids (optional), `ts` created | anyone |
 | `S` solved | `q` question id, `ts` time | the question's author |
 | `D` withdrawn | `q` question id | the question's author |
 | `SR` sync request | `k` list of known question ids | anyone |
-| `SP` sync answer | `qs` list of questions with `a` author and `an` answers (`i`, `a`, `tx`, `ts`) | anyone |
+| `SP` sync answer | `qs` list of questions with `a` author and `an` answers (`i`, `a`, `tx`, `f`, `ts`) | anyone |
 
 The author of `Q`, `A`, `S` and `D` is always the sender reported by the
 game (`Name-Realm`); it is never part of the message. Only `SP` carries
 authors, because it relays other players' messages.
+
+FAQ references `f` (optional): list of up to 3 ids of built-in FAQ
+entries (lower case letters, digits and `-`, at most 32 bytes, e.g.
+`hunter-tame`). Invalid ids and anything past the third are dropped, the
+answer stays. Ids the receiver does not know are kept and shown as "FAQ
+entry from a newer version". Older versions ignore the field; an answer
+always has text (when a mentor only attaches links, the text names the
+linked questions).
 
 Context `x` (all optional): `l` level, `r` race (file name, e.g. `NightElf`),
 `k` class (file name, e.g. `DRUID`), `f` faction (`Alliance`/`Horde`), `z`

@@ -30,7 +30,7 @@ local function Changed()
 end
 
 local function CopyAnswer(a)
-	return { id = a.id, qid = a.qid, author = a.author, text = a.text, created = a.created }
+	return { id = a.id, qid = a.qid, author = a.author, text = a.text, faq = a.faq, created = a.created }
 end
 
 local function CopyContext(ctx)
