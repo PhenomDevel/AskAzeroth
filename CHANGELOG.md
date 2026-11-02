@@ -3,6 +3,8 @@
 ## Unreleased
 
 - In development, no release yet.
+- The "Ask a question" buttons on the Questions and FAQ pages are greyed
+  out while the one-minute wait runs and show the seconds left.
 - FAQ answers list the glossary terms they use in a row "Terms:" below the
   answer; hover a term for its explanation, click to open it in the glossary.
 - Notifications show right away again: there was a two-minute pause

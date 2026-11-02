@@ -394,6 +394,26 @@ end
 
 -- onAsked(question) runs after a successful ask.
 -- cat (optional) preselects a question category.
+-- An "Ask a question" button on a page: one question per minute, so while
+-- the wait runs the button is disabled and counts down. Checked every
+-- second while the page (content) is visible and whenever it is shown.
+function AskDialog.BindButton(button, content)
+	W.FitButton(button, L.QUEUE_ASK, L.QUEUE_ASK_WAIT:format(60))
+	W.Tooltip(button, L.QUEUE_ASK, L.ASK_WAIT_TIP)
+	local function Update()
+		local wait = ns.Store.AskWait()
+		button:SetText(wait > 0 and L.QUEUE_ASK_WAIT:format(math.ceil(wait)) or L.QUEUE_ASK)
+		button:SetEnabled(wait <= 0)
+	end
+	content:HookScript("OnShow", Update)
+	C_Timer.NewTicker(1, function()
+		if content:IsVisible() then
+			Update()
+		end
+	end)
+	Update()
+end
+
 function AskDialog.Show(onAsked, cat)
 	UI.Show(UI.PAGE_QUESTIONS)
 	if not overlay then
