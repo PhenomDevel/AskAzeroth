@@ -68,4 +68,169 @@ ns.Faq.Add("start", {
 			a = "Eat food for health and drink water for mana after a fight; you sit down while doing so and get back to full within a few seconds. Innkeepers and food vendors sell both, and mages can conjure them. Starting the next fight with full health and mana saves you many deaths.",
 		},
 	},
+	{
+		id = "start-race",
+		de = {
+			q = "Welches Volk soll ich wählen?",
+			a = "Das Volk bestimmt deine Fraktion, dein Startgebiet, dein Aussehen und deine Volksfähigkeiten. In WoW: Forever hat jedes Volk zwei aktive und zwei passive Volksfähigkeiten, und es gibt neue Kombinationen aus Volk und Klasse. Für den Anfang zählt vor allem, was dir gefällt.",
+		},
+		en = {
+			q = "Which race should I pick?",
+			a = "Your race decides your faction, starting zone, looks and racial abilities. In WoW: Forever every race has two active and two passive racials, and there are new race and class combinations. To start with, what you like matters most.",
+		},
+	},
+	{
+		id = "start-faction",
+		de = {
+			q = "Allianz oder Horde?",
+			a = "Die Fraktion entscheidet, mit wem du spielst: Gruppen, Gilden, Handel und Chat gibt es nur innerhalb der Fraktion. Spielen Freunde schon, nimm ihre Fraktion. Auf PvP-Regelwerken kannst du nur eine Fraktion wählen.",
+		},
+		en = {
+			q = "Alliance or Horde?",
+			a = "Your faction decides who you play with: groups, guilds, trading and chat only work within a faction. If friends already play, join their faction. On PvP rule sets you can only pick one faction.",
+		},
+	},
+	{
+		id = "start-skyborne",
+		de = {
+			q = "Was ist das Volk der Skyborne?",
+			a = "Ein neues Volk in WoW: Forever, das ein Erweiterungspaket voraussetzt. Es startet auf Zephras Isle mit einem eigenen Abenteuer bis Stufe 12, und du wählst beim Erstellen, ob es zur Allianz oder Horde gehört.",
+		},
+		en = {
+			q = "What is the Skyborne race?",
+			a = "A new race in WoW: Forever that needs an upgrade pack. It starts on Zephras Isle with its own adventure up to level 12, and you choose Alliance or Horde when you create it.",
+		},
+	},
+	{
+		id = "start-names",
+		de = {
+			q = "Warum hat mein Charakter zwei Namen?",
+			a = "WoW: Forever hat keine Realms mehr, daher besteht jeder Name aus Vor- und Nachname. So können mehr Spieler ihren Wunschnamen bekommen. Beim Einladen oder Flüstern brauchst du oft den vollen Namen.",
+		},
+		en = {
+			q = "Why does my character have two names?",
+			a = "WoW: Forever has no realms any more, so every name has a first and a last part. That way more players can get the name they want. To invite or whisper someone you often need the full name.",
+		},
+	},
+	{
+		id = "start-alts",
+		de = {
+			q = "Kann ich mehrere Charaktere spielen?",
+			a = "Ja, du kannst mehrere Charaktere anlegen, man nennt sie Twinks. Viele Fortschritte, etwa im Legacy-System, gelten accountweit und helfen auch deinen anderen Charakteren. Gegenstände schickst du dir per Post, solange Regelwerk und Fraktion gleich sind.",
+		},
+		en = {
+			q = "Can I play several characters?",
+			a = "Yes, you can create several characters, called alts. A lot of progress, for example in the Legacy system, is account-wide and helps your other characters too. You can mail yourself items as long as rule set and faction match.",
+		},
+	},
+	{
+		id = "start-legacy",
+		de = {
+			q = "Was ist das Legacy-System?",
+			a = "Ein accountweites Fortschrittssystem in WoW: Forever: Für Herausforderungen bekommst du Legacy-Punkte und verteilst sie pro Charakter in Bäumen wie Berufe, Abenteuer und Ressourcen. So wird jeder neue Charakter etwas stärker oder bequemer.",
+		},
+		en = {
+			q = "What is the Legacy system?",
+			a = "An account-wide progression system in WoW: Forever: challenges earn Legacy Points, which you spend per character in trees such as Professions, Adventure and Resourcefulness. That makes every new character a bit stronger or more convenient.",
+		},
+	},
+	{
+		id = "start-sell-junk",
+		de = {
+			q = "Was mache ich mit grauen Gegenständen?",
+			a = "Grau ist Plunder: Verkauf ihn beim nächsten Händler. Das ist am Anfang eine wichtige Goldquelle. Hast du etwas versehentlich verkauft, findest du es eine Weile unter „Rückkauf“ im Händlerfenster.",
+		},
+		en = {
+			q = "What do I do with grey items?",
+			a = "Grey is junk: sell it at the next vendor. Early on that is an important source of gold. If you sold something by mistake, you find it for a while under Buyback in the vendor window.",
+		},
+	},
+	{
+		id = "start-inn",
+		de = {
+			q = "Wo soll ich mich ausloggen?",
+			a = "In einem Gasthaus oder einer Stadt: Dort sammelst du schneller Ruhebonus, und du loggst sofort aus. Draußen dauert das Ausloggen ein paar Sekunden, und du bekommst weniger Ruhebonus.",
+		},
+		en = {
+			q = "Where should I log out?",
+			a = "In an inn or a city: you build rested experience faster there and log out instantly. Outside, logging out takes a few seconds and you get less rested experience.",
+		},
+	},
+	{
+		id = "start-hearthstone-set",
+		de = {
+			q = "Wie lege ich meinen Ruhestein fest?",
+			a = "Sprich einen Gastwirt an und wähl die Option, das Gasthaus zu deinem Zuhause zu machen. Ab dann bringt dich dein Ruhestein in dieses Gasthaus. Wähle ein Gasthaus in der Nähe deiner aktuellen Quests.",
+		},
+		en = {
+			q = "How do I set my hearthstone?",
+			a = "Talk to an innkeeper and choose Make this inn your home. From then on your hearthstone takes you to that inn. Pick an inn close to your current quests.",
+		},
+	},
+	{
+		id = "start-level-pace",
+		de = {
+			q = "Wie lange dauert es bis Stufe 60?",
+			a = "Deutlich länger als in modernen WoW-Versionen: Der Weg ist das Ziel. Die ersten Stufen gehen schnell, später brauchst du für eine Stufe mehrere Stunden. Gruppen, Dungeons, Ruhebonus und selbst gekochtes Essen machen es schneller.",
+		},
+		en = {
+			q = "How long does it take to reach level 60?",
+			a = "Much longer than in modern WoW: the journey is the point. The first levels go quickly, later a single level takes several hours. Groups, dungeons, rested experience and home-cooked food speed it up.",
+		},
+	},
+	{
+		id = "start-what-at-10",
+		de = {
+			q = "Was ändert sich ab Stufe 10?",
+			a = "Du bekommst deinen ersten Talentpunkt, viele Klassen erhalten Klassenquests (etwa Begleiter oder Haltungen), und die ersten Dungeons rücken näher. Schau beim Lehrer vorbei und öffne das Talentfenster.",
+		},
+		en = {
+			q = "What changes at level 10?",
+			a = "You get your first talent point, many classes get class quests (such as pets or stances), and the first dungeons come within reach. Visit your trainer and open the talent window.",
+		},
+	},
+	{
+		id = "start-subscription",
+		de = {
+			q = "Was kostet WoW: Forever?",
+			a = "WoW: Forever ist im normalen WoW-Abo enthalten. Optionale Pakete bringen zum Beispiel das Volk der Skyborne. Es gibt keine WoW-Marke und keine Charakter-Boosts.",
+		},
+		en = {
+			q = "What does WoW: Forever cost?",
+			a = "WoW: Forever is included in the normal WoW subscription. Optional packs add, for example, the Skyborne race. There is no WoW Token for gold and no character boosts.",
+		},
+	},
+	{
+		id = "start-transmog",
+		de = {
+			q = "Gibt es Transmogrifikation?",
+			a = "Ja, in WoW: Forever ist Transmog optional und lässt sich abschalten. Aussehen aus Dungeon-Beute wird für die ganze Gruppe freigeschaltet, epische Gegenstände sind ausgenommen.",
+		},
+		en = {
+			q = "Is there transmogrification?",
+			a = "Yes, in WoW: Forever transmog is optional and can be turned off. Appearances from dungeon loot unlock for the whole group; epic items are excluded.",
+		},
+	},
+	{
+		id = "start-hardcore",
+		de = {
+			q = "Was ist Hardcore?",
+			a = "Ein eigenes Regelwerk, das nach dem Start von WoW: Forever kommt: Stirbt dein Charakter, ist er endgültig weg. Fortschritt aus Hardcore zählt für deinen Account, umgekehrt nicht. Für den Anfang ist ein normales Regelwerk entspannter.",
+		},
+		en = {
+			q = "What is Hardcore?",
+			a = "A separate rule set that arrives after WoW: Forever launches: if your character dies, it is gone for good. Progress from Hardcore counts for your account, not the other way round. A normal rule set is more relaxed to start with.",
+		},
+	},
+	{
+		id = "start-play-with-friends",
+		de = {
+			q = "Wie spiele ich mit Freunden zusammen?",
+			a = "Wählt dasselbe Regelwerk und dieselbe Fraktion, dann könnt ihr Gruppen bilden. Fügt euch als Freunde hinzu, ladet euch in eine Gruppe ein und teilt Quests. Startet ihr in verschiedenen Gebieten, trefft ihr euch am einfachsten in einer Hauptstadt.",
+		},
+		en = {
+			q = "How do I play with friends?",
+			a = "Pick the same rule set and faction so you can group. Add each other as friends, invite each other to a group and share quests. If you start in different zones, meeting in a capital city is easiest.",
+		},
+	},
 })

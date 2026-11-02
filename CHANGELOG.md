@@ -48,6 +48,10 @@
 - FAQ: 16 more quest questions (full quest log, tracking, sharing, group
   credit, elite and escort quests, timers, quest items, rewards, chains,
   dungeon and class quests, reputation).
+- FAQ: 15 more first-steps questions (race and faction, Skyborne,
+  two-part names, alts, Legacy system, junk and buyback, logging out,
+  hearthstone, levelling pace, level 10, cost, transmog, Hardcore, playing
+  with friends).
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
   Players, FAQ and Settings.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
