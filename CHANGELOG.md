@@ -22,6 +22,8 @@
 - FAQ: 18 more interface questions (key bindings, action bars, Edit Mode,
   macros, targeting, nameplates, auto loot, camera, chat tabs, minimap,
   resetting the interface).
+- FAQ: 22 more profession questions (where to learn, tools, ranks, recipes,
+  smelting, skinning, enchanting, first aid, cooking, fishing, camping).
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
   Players, FAQ and Settings.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
