@@ -33,7 +33,7 @@ local BUTTON_WIDTH = 96
 local BOTTOM_HEIGHT = 12 + ANSWER_HEIGHT + 4 + 14 + 8
 -- Row of attached FAQ entries above the answer field.
 local REFS_HEIGHT = 22 + 8
-local REF_CHIP_MAX = 24
+local REF_CHIP_GAP = 6
 
 -- Asker line under the question: name, level and class, zone, age.
 local function ContextText(q)
@@ -160,12 +160,30 @@ function ThreadView.Create(parent, get)
 	local refChips = {}
 	local UpdateRefs
 	for i = 1, C.FAQ_REFS_MAX do
-		refChips[i] = W.Chip(refsRow, function(self)
+		local chip = W.Chip(refsRow, function(self)
+			GameTooltip:Hide()
 			table.remove(refs, self.index)
 			UpdateRefs()
 		end, W.GOLD)
-		refChips[i].index = i
+		chip.index = i
+		-- The label may be shortened; the tooltip has the whole question.
+		chip:HookScript("OnEnter", function(self)
+			GameTooltip:SetOwner(self, "ANCHOR_TOP")
+			GameTooltip:SetText(self.fullTitle or "", 1, 1, 1, 1, true)
+			GameTooltip:AddLine(L.FAQ_REF_REMOVE, nil, nil, nil, true)
+			GameTooltip:Show()
+		end)
+		chip:HookScript("OnLeave", function()
+			GameTooltip:Hide()
+		end)
+		refChips[i] = chip
 	end
+	-- Chip widths depend on the row width: lay out again when it changes.
+	refsRow:SetScript("OnSizeChanged", function()
+		if #refs > 0 then
+			UpdateRefs(true)
+		end
+	end)
 
 	local faqButton = ns.FaqRefs.CreatePickerButton(bottom, ANSWER_HEIGHT, function(id)
 		for _, known in ipairs(refs) do
@@ -475,16 +493,34 @@ function ThreadView.Create(parent, get)
 		end
 	end
 
-	function UpdateRefs()
+	-- Sets the chip's label to "FAQ: <title>", shortened letter by letter
+	-- until the chip is at most maxWidth wide (maxWidth nil: no limit).
+	local function FitChip(chip, question, maxWidth)
+		local label = question
+		chip:SetLabel(L.FAQ_REF_CHIP:format(label), true)
+		while maxWidth and chip:GetWidth() > maxWidth and #label > 1 do
+			label = label:sub(1, -2):gsub("[\192-\255][\128-\191]*$", ""):gsub("[\192-\255]$", "")
+			label = label:gsub("%s+$", "")
+			chip:SetLabel(L.FAQ_REF_CHIP:format(label .. "…"), true)
+		end
+	end
+
+	-- Shows the chips of refs side by side, each at most a third of the row
+	-- wide, and turns the FAQ button off while the maximum is attached.
+	-- layoutOnly: only the row width changed, no full view refresh.
+	function UpdateRefs(layoutOnly)
+		local width = refsRow:GetWidth()
+		local maxWidth
+		if width and width > 0 then
+			maxWidth = math.floor((width - (C.FAQ_REFS_MAX - 1) * REF_CHIP_GAP) / C.FAQ_REFS_MAX)
+		end
 		local chips = {}
 		for i, chip in ipairs(refChips) do
 			local id = refs[i]
 			if id then
-				local label = ns.FaqRefs.Title(id) or id
-				if #label > REF_CHIP_MAX then
-					label = label:sub(1, REF_CHIP_MAX):gsub("[\128-\191]*$", ""):gsub("[\192-\255]$", "") .. "…"
-				end
-				chip:SetLabel(L.FAQ_REF_CHIP:format(label), true)
+				local question = ns.FaqRefs.Title(id) or id
+				chip.fullTitle = question
+				FitChip(chip, question, maxWidth)
 				chip:SetActive(false)
 				chip:Show()
 				chips[#chips + 1] = chip
@@ -492,8 +528,16 @@ function ThreadView.Create(parent, get)
 				chip:Hide()
 			end
 		end
-		W.FlowChips(chips, refsRow, 0, 0, 6)
-		view:Refresh()
+		W.FlowChips(chips, refsRow, 0, 0, REF_CHIP_GAP)
+		local full = #refs >= C.FAQ_REFS_MAX
+		faqButton:SetEnabled(not full)
+		faqButton.icon:SetDesaturated(full)
+		if full then
+			faqButton:HidePicker()
+		end
+		if not layoutOnly then
+			view:Refresh()
+		end
 	end
 
 	function view:SetQuestion(id)
@@ -501,6 +545,7 @@ function ThreadView.Create(parent, get)
 			answerBox:SetText("")
 			wipe(refs)
 			faqButton:HidePicker()
+			UpdateRefs(true)
 			ShowMessage(nil)
 		end
 		current = id
