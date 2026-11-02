@@ -34,6 +34,8 @@ W.COLORS = {
 	success = { 0.2, 0.75, 0.2, 1 },
 	solved = { 0.08, 0.3, 0.08, 0.55 },
 	own = { 0.06, 0.16, 0.32, 0.55 },
+	chip = { 0, 0, 0, 0.5 },
+	chipActive = { 0.45, 0.33, 0.04, 0.9 },
 	ownBar = { 0.5, 0.75, 1, 1 },
 }
 
@@ -170,6 +172,34 @@ function W.TitleBar(parent, label, onClose)
 		bar.close:SetPoint("RIGHT", -10, 0)
 	end
 	return bar
+end
+
+-- Dialog window in the game's frame (PortraitFrameTemplate: metal border,
+-- title bar, the logo as portrait, close button). Clients without the
+-- template get a dark backdrop with our own title bar. Content starts
+-- below W.WINDOW_TOP.
+W.WINDOW_TOP = 60
+W.LOGO = "Interface\\AddOns\\AskAzeroth\\Media\\Logo"
+function W.Window(name, parent, title, onClose)
+	local ok, window = pcall(CreateFrame, "Frame", name, parent, "PortraitFrameTemplate")
+	if ok and window then
+		if window.SetTitle then
+			window:SetTitle(title)
+		end
+		if window.SetPortraitToAsset then
+			window:SetPortraitToAsset(W.LOGO)
+		end
+		if window.CloseButton and onClose then
+			window.CloseButton:SetScript("OnClick", onClose)
+		end
+		window.blizzard = true
+		return window
+	end
+	window = CreateFrame("Frame", name, parent, "BackdropTemplate")
+	window:SetBackdrop(BACKDROP_THICK)
+	SetBackdropColors(window, W.COLORS.window, W.COLORS.frame)
+	W.TitleBar(window, title, onClose)
+	return window
 end
 
 -- The game's red panel button. style is kept for callers ("secondary",
@@ -515,11 +545,13 @@ function W.Chip(parent, onClick, color)
 	end
 	function chip:SetActive(active)
 		self.active = active
+		-- Active: dark gold fill, gold border and white label (readable);
+		-- inactive: dark with a grey border and the label in its colour.
 		if active then
-			SetBackdropColors(self, W.COLORS.accent, W.COLORS.accent)
-			Color(text, W.DARK)
+			SetBackdropColors(self, W.COLORS.chipActive, W.COLORS.accent)
+			Color(text, W.TEXT)
 		else
-			SetBackdropColors(self, W.COLORS.window, W.COLORS.field)
+			SetBackdropColors(self, W.COLORS.chip, W.COLORS.line)
 			Color(text, self.color or W.SOFT)
 		end
 	end

@@ -184,6 +184,26 @@ The glossary tooltips are built on whichever variant reacts.
    specified in `docs/PROTOCOL.md` (M2): synced data may add, never
    overwrite, and `S`/`D` count only when received from the author directly.
 
+## Spell links (to confirm in game)
+
+`Core/SpellRefs.lua` and `UI/GlossaryLinks.lua` rely on these Retail APIs;
+by our rule they should behave the same on Forever:
+
+- `C_Spell.DoesSpellExist`, `C_Spell.GetSpellName`, `C_Spell.GetSpellTexture`
+  and `C_Spell.GetSpellLink` for the IDs in `Core/Data/Spells.lua`.
+- `C_SpellBook.GetNumSpellBookSkillLines`, `GetSpellBookSkillLineInfo`
+  (`itemIndexOffset`, `numSpellBookItems`) and `GetSpellBookItemInfo` with
+  `Enum.SpellBookSpellBank.Player` (`spellID`, `itemType`, `isPassive`) to
+  add the reader's own spells.
+- `GameTooltip:SetSpellByID` on hover; a texture escape (`|T…|t`) inside an
+  addon hyperlink; `ChatFrameUtil.InsertLink` (fallback
+  `ChatEdit_InsertLink`) for shift-click.
+
+`/aa probe spells` prints how many names were found;
+`/aa probe spells <text>` shows which spells a text links. If the list count
+is 0 on Forever, the client does not know these spell IDs; links from the
+own spellbook still work.
+
 ## Results
 
 Fill in after testing (or paste the logs into the PR and I'll fill it in).
