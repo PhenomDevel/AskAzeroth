@@ -3,6 +3,9 @@
 ## Unreleased
 
 - In development, no release yet.
+- The "Ask a question" dialog and the setup wizard use the game's window
+  frame too. Selected category buttons are easier to read: dark gold with
+  a gold border and white text.
 - Notifications show right away again: there was a two-minute pause
   between two notifications, so many seemed to be missing. A notification
   that is still on screen now counts new ones as "+N more", and answers to

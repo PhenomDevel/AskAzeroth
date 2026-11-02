@@ -404,9 +404,9 @@ local function Next()
 end
 
 local function Create()
-	frame = CreateFrame("Frame", FRAME_NAME, UIParent, "BackdropTemplate")
-	frame:SetBackdrop(W.BACKDROP_THICK)
-	W.SetColors(frame, W.COLORS.window, W.COLORS.frame)
+	frame = W.Window(FRAME_NAME, UIParent, L.SETUP_TITLE, function()
+		frame:Hide()
+	end)
 	frame:SetSize(WIDTH, HEIGHT)
 	frame:SetPoint("CENTER", 0, 40)
 	frame:SetFrameStrata("DIALOG")
@@ -420,17 +420,13 @@ local function Create()
 	-- Escape closes it like the close button.
 	tinsert(UISpecialFrames, FRAME_NAME)
 
-	W.TitleBar(frame, L.SETUP_TITLE, function()
-		frame:Hide()
-	end)
-
 	frame.body = CreateFrame("Frame", nil, frame)
 	frame.body:SetPoint("TOPLEFT", PAD, -66)
 	frame.body:SetPoint("BOTTOMRIGHT", -PAD, FOOTER_HEIGHT + 12)
 
 	local footer = CreateFrame("Frame", nil, frame)
-	footer:SetPoint("BOTTOMLEFT", 2, 2)
-	footer:SetPoint("BOTTOMRIGHT", -2, 2)
+	footer:SetPoint("BOTTOMLEFT", 4, 4)
+	footer:SetPoint("BOTTOMRIGHT", -4, 4)
 	footer:SetHeight(FOOTER_HEIGHT)
 	W.EdgeLine(footer, "TOP")
 
