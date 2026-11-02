@@ -3,6 +3,8 @@
 ## Unreleased
 
 - In development, no release yet.
+- Marking your question as solved closes it on the Questions page. A
+  solved question also closes when "Hide solved" takes it out of the list.
 - Setup: as a mentor you can now pick the classes you help with; the
   class list shows the class colours (also in Settings).
 - The "Ask a question" buttons on the Questions and FAQ pages are greyed

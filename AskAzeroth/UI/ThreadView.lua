@@ -8,7 +8,8 @@ local _, ns = ...
 --
 -- ThreadView.Create(parent, get): get(id) returns the question to show
 -- (default Store.Get). Questions that are not public any more (My
--- questions) show their answers read-only.
+-- questions) show their answers read-only. view.onSolved(id), if set, is
+-- called after the player marked the shown question as solved.
 local ThreadView = {}
 ns.ThreadView = ThreadView
 
@@ -608,9 +609,12 @@ function ThreadView.Create(parent, get)
 		end
 	end)
 	solve:SetScript("OnClick", function()
-		local ok, reason = ns.Net.Solve(current)
+		local id = current
+		local ok, reason = ns.Net.Solve(id)
 		if not ok then
 			ShowMessage(ns.UI.ReasonText(reason), true)
+		elseif view.onSolved then
+			view.onSolved(id)
 		end
 	end)
 	StaticPopupDialogs.ASKAZEROTH_WITHDRAW = {

@@ -84,6 +84,13 @@ local function Build(content)
 	threadPane:SetPoint("BOTTOMRIGHT")
 
 	page.thread = ns.ThreadView.Create(threadPane)
+	-- Own question marked as solved: done with it, close it.
+	page.thread.onSolved = function(id)
+		if page.thread:GetQuestion() == id then
+			page.thread:SetQuestion(nil)
+			page.list:SetSelected(nil)
+		end
+	end
 	page.list = ns.QueueList.Create(listBox, function(q)
 		page.thread:SetQuestion(q.id)
 		page.list:SetSelected(q.id)
@@ -151,9 +158,11 @@ local function Build(content)
 			emptyText = Store.Count() == 0 and L.QUEUE_EMPTY or L.QUEUE_NO_MATCH
 		end
 		self.list:SetQuestions(list, emptyText)
-		-- A removed question leaves the thread.
+		-- A removed question leaves the thread, and so does a solved one
+		-- once "Hide solved" takes it out of the list.
 		local selected = self.thread:GetQuestion()
-		if selected and not Store.Get(selected) then
+		local selectedQ = selected and Store.Get(selected)
+		if selected and (not selectedQ or (ns.db.settings.hideSolved and selectedQ.solved)) then
 			self.thread:SetQuestion(nil)
 			self.list:SetSelected(nil)
 		else
