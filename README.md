@@ -67,6 +67,7 @@ In the first release:
 |---------|-|
 | `/aa`, `/askazeroth` | Open or close the window |
 | `/aa settings` | Open the settings |
+| `/aa setup` | Start the first-run setup again |
 | `/aa minimap` | Show or hide the minimap button |
 | `/aa faqstats` | Show which FAQ suggestions answered a question before it was asked |
 | `/aa help` | List the commands |

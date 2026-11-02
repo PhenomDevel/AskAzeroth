@@ -122,6 +122,7 @@ AskAzeroth/
     Settings.lua      Einstellungen als Seite im eigenen Fenster (Mentor, Sprachen, Aufbewahrung)
     Toast.lua
     MinimapButton.lua
+    Setup.lua         Ersteinrichtung beim ersten Login (Sprachen, Rolle, Benachrichtigungen)
   Probe/              Spike-Werkzeug /aa probe, nicht gepackt
 docs/
   DEVELOPMENT.md
