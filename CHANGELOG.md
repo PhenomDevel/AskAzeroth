@@ -17,6 +17,8 @@
   book button; readers open them with one click, in their own FAQ language.
   Pinned answers keep their links. The FAQ has a topic per class and a topic
   dropdown.
+- FAQ: 25 hunter questions (taming, feeding and changing pets, stable,
+  pet modes in dungeons, ammunition, aspects, traps, talents).
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
   Players, FAQ and Settings.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
