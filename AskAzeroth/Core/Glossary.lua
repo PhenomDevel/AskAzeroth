@@ -148,12 +148,15 @@ end
 -- (the chat forms are for chat only), each also with its first letter in
 -- upper and lower case and all in lower and upper case, since players
 -- write "dot", "aoe" or "DOT" (ASCII only). Entries with lower = false
--- only as written. Longest first, so "Blessing of Protection" wins over a
--- shorter form inside it. Built once per language.
+-- only as written. withEnglish adds the English forms (players write
+-- "threat" or "healer" in every language); the forms of lang come first.
+-- Longest first, so "Blessing of Protection" wins over a shorter form
+-- inside it. Built once per language.
 local forms = {}
 
-local function Forms(lang)
-	local list = forms[lang]
+local function Forms(lang, withEnglish)
+	local key = withEnglish and lang ~= "en" and lang .. "+en" or lang
+	local list = forms[key]
 	if list then
 		return list
 	end
@@ -174,12 +177,15 @@ local function Forms(lang)
 			Add(entry, form:upper())
 		end
 	end
-	for _, entry in ipairs(all) do
-		if entry.mark ~= false then
-			local term, alt = Glossary.GetText(entry, lang)
-			AddCased(entry, term)
-			for _, other in ipairs(alt) do
-				AddCased(entry, other)
+	local langs = key == lang and { lang } or { lang, "en" }
+	for _, formLang in ipairs(langs) do
+		for _, entry in ipairs(all) do
+			if entry.mark ~= false then
+				local term, alt = Glossary.GetText(entry, formLang)
+				AddCased(entry, term)
+				for _, other in ipairs(alt) do
+					AddCased(entry, other)
+				end
 			end
 		end
 	end
@@ -189,7 +195,7 @@ local function Forms(lang)
 		end
 		return a.text < b.text
 	end)
-	forms[lang] = list
+	forms[key] = list
 	return list
 end
 
@@ -200,10 +206,11 @@ end
 
 -- Places of glossary terms in text (plain text, no escape sequences), each
 -- entry at most once (its first place), non-overlapping, in text order:
--- a list of { first, last, entry }.
-function Glossary.Find(text, lang)
+-- a list of { first, last, entry }. withEnglish: also the English terms
+-- (for texts players write).
+function Glossary.Find(text, lang, withEnglish)
 	local found, used, taken = {}, {}, {}
-	for _, form in ipairs(Forms(lang)) do
+	for _, form in ipairs(Forms(lang, withEnglish)) do
 		if not used[form.entry] then
 			local init = 1
 			while true do

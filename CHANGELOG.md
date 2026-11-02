@@ -183,3 +183,5 @@
   clicking a term opens it in the glossary (the links were not recognised).
 - Glossary terms are also found when written in lower or upper case ("dot",
   "aoe", "DPS"), as players usually type them.
+- Questions and answers also mark the English terms in every language
+  ("threat", "healer" in a German thread).
