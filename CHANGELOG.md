@@ -19,6 +19,9 @@
   dropdown.
 - FAQ: 25 hunter questions (taming, feeding and changing pets, stable,
   pet modes in dungeons, ammunition, aspects, traps, talents).
+- FAQ: 18 more interface questions (key bindings, action bars, Edit Mode,
+  macros, targeting, nameplates, auto loot, camera, chat tabs, minimap,
+  resetting the interface).
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
   Players, FAQ and Settings.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
