@@ -564,31 +564,31 @@ ns.Faq.Add("quest", {
 		id = "quest-dungeon",
 		de = {
 			q = "Was sind Dungeonquests?",
-			a = "Quests, deren Ziele in einem Dungeon liegen. Sammle sie, bevor du mit einer Gruppe hineingehst, und teile sie mit den anderen. In WoW: Forever bringen Dungeonquests beim ersten Abschluss besonders viel Erfahrung.",
+			a = "Quests, deren Ziele in einem Dungeon liegen. Sammle sie, bevor du mit einer Gruppe hineingehst, und teile sie mit den anderen. In WoW: Forever geben Dungeonquests besonders viel Erfahrung, oft mehr als die Gegner im Dungeon selbst.",
 		},
 		en = {
 			q = "What are dungeon quests?",
-			a = "Quests whose objectives are inside a dungeon. Collect them before entering with a group, and share them with the others. In WoW: Forever, dungeon quests give extra experience the first time you complete them.",
+			a = "Quests whose objectives are inside a dungeon. Collect them before entering with a group, and share them with the others. In WoW: Forever dungeon quests give a lot of experience, often more than the enemies inside.",
 		},
 		fr = {
 			q = "Que sont les quêtes de donjon ?",
-			a = "Des quêtes dont les objectifs se trouvent dans un donjon. Récupérez-les avant d'y entrer en groupe et partagez-les avec les autres. Dans WoW: Forever, les quêtes de donjon rapportent de l'expérience en plus la première fois que vous les terminez.",
+			a = "Des quêtes dont les objectifs se trouvent dans un donjon. Récupérez-les avant d'y entrer en groupe et partagez-les avec les autres. Dans WoW: Forever, les quêtes de donjon rapportent beaucoup d'expérience, souvent plus que les ennemis à l'intérieur.",
 		},
 		es = {
 			q = "¿Qué son las misiones de mazmorra?",
-			a = "Misiones cuyos objetivos están dentro de una mazmorra. Recógelas antes de entrar con el grupo y compártelas con los demás. En WoW: Forever, las misiones de mazmorra dan experiencia extra la primera vez que las completas.",
+			a = "Misiones cuyos objetivos están dentro de una mazmorra. Recógelas antes de entrar con el grupo y compártelas con los demás. En WoW: Forever las misiones de mazmorra dan mucha experiencia, a menudo más que los enemigos de dentro.",
 		},
 		it = {
 			q = "Cosa sono le missioni delle spedizioni?",
-			a = "Missioni con obiettivi all'interno di una spedizione. Raccoglile prima di entrare con il gruppo e condividile con gli altri. In WoW: Forever le missioni delle spedizioni danno esperienza extra la prima volta che le completi.",
+			a = "Missioni con obiettivi all'interno di una spedizione. Raccoglile prima di entrare con il gruppo e condividile con gli altri. In WoW: Forever le missioni delle spedizioni danno molta esperienza, spesso più dei nemici all'interno.",
 		},
 		ru = {
 			q = "Что такое задания подземелий?",
-			a = "Задания, цели которых находятся внутри подземелья. Соберите их до входа с группой и поделитесь с остальными. В WoW: Forever задания подземелий дают дополнительный опыт при первом выполнении.",
+			a = "Задания, цели которых находятся внутри подземелья. Соберите их до входа с группой и поделитесь с остальными. В WoW: Forever задания подземелий дают много опыта, часто больше, чем враги внутри.",
 		},
 		pt = {
 			q = "O que são missões de masmorra?",
-			a = "Missões com objetivos dentro de uma masmorra. Pegue-as antes de entrar com o grupo e compartilhe com os outros. No WoW: Forever, missões de masmorra dão experiência extra na primeira vez que você as conclui.",
+			a = "Missões com objetivos dentro de uma masmorra. Pegue-as antes de entrar com o grupo e compartilhe com os outros. No WoW: Forever, missões de masmorra dão muita experiência, muitas vezes mais que os inimigos lá dentro.",
 		},
 	},
 	{
