@@ -51,6 +51,9 @@ L.CMD_SETTINGS = "открыть настройки"
 L.CMD_MINIMAP = "показать или скрыть кнопку у миникарты"
 L.CMD_MINIMAP_HIDDEN = "Кнопка у миникарты скрыта. |cffffd100/aa minimap|r снова покажет её."
 L.CMD_MINIMAP_SHOWN = "Кнопка у миникарты показана."
+L.CMD_FAQSTATS = "показать, какие подсказки из FAQ заменили вопрос"
+L.FAQSTATS_NONE = "Подсказки из FAQ пока ни разу не помогли."
+L.FAQSTATS_HEADER = "Подсказки из FAQ помогли %d раз. Чаще всего:"
 
 -- Questions page
 L.QUEUE_SEARCH = "Поиск…"
@@ -93,6 +96,9 @@ L.ASK_LANGUAGE = "Язык"
 L.ASK_CONTEXT = "Отправляется вместе: %s"
 L.ASK_SUBMIT = "Спросить"
 L.ASK_CANCEL = "Отмена"
+L.ASK_SUGGEST_TITLE = "Уже есть в FAQ?"
+L.ASK_SUGGEST_HELPED = "Помогло"
+L.ASK_SUGGEST_BACK = "Всё равно спросить"
 
 -- Reasons
 L.REASON_RATE = "Можно задавать один вопрос в минуту. Подождите немного."
@@ -182,8 +188,10 @@ L.PINNED_EMPTY = "Пока ничего не закреплено. Нажмит�
 
 -- FAQ
 L.FAQ_LANGUAGE = "Язык FAQ"
-L.FAQ_LANGUAGE_TIP = "Переключает FAQ между немецким и английским."
+L.FAQ_LANGUAGE_TIP = "Переключает язык FAQ. Ещё не переведённые статьи показываются на английском."
 L.FAQ_NOT_HELPED = "Не помогло? Спросите сообщество."
+L.FAQ_WOWHEAD = "Лучший источник о заданиях, предметах, NPC и картах — Wowhead:"
+L.FAQ_WOWHEAD_TIP = "Скопируйте адрес с помощью Ctrl+C и откройте его в браузере."
 L.FAQ_TOPIC_ADDON = "AskAzeroth"
 L.FAQ_TOPIC_START = "Первые шаги"
 L.FAQ_TOPIC_QUEST = "Задания"
@@ -203,6 +211,7 @@ L.FAQ_REF_LINK = "FAQ: %s"
 L.FAQ_REF_OPEN = "Открывает эту статью в FAQ."
 L.FAQ_REF_UNKNOWN = "В вашей версии AskAzeroth этой статьи ещё нет. Обновите аддон, чтобы её увидеть."
 L.FAQ_REF_MISSING = "Статья FAQ из более новой версии"
+L.FAQ_REF_SUGGESTED = "подходит к вопросу"
 
 -- Categories
 L.CAT_QUEST = "Задание"
