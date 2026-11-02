@@ -3,6 +3,10 @@
 ## Unreleased
 
 - In development, no release yet.
+- First-run setup: on the first login a short wizard asks for your
+  languages, whether you are new or want to help as a mentor, which
+  questions should notify you and a few extras. `/aa setup` or the button
+  in the settings starts it again.
 - Right click on an answer now always opens a menu, also on your own
   answers, with "Pin answer" in it.
 - New look: dark leather-and-gold window with a header bar, navigation on

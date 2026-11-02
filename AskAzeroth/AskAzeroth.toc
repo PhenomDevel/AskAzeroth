@@ -79,6 +79,7 @@ UI\FaqPage.lua
 UI\Settings.lua
 UI\Toast.lua
 UI\MinimapButton.lua
+UI\Setup.lua
 UI\Commands.lua
 
 # Transport test tools (/aa probe); development checkouts only

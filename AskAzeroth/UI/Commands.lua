@@ -14,6 +14,10 @@ ns:RegisterCommand("settings", function()
 	UI.Show(UI.PAGE_SETTINGS)
 end, "settings", L.CMD_SETTINGS)
 
+ns:RegisterCommand("setup", function()
+	ns.Setup.Show()
+end, "setup", L.CMD_SETUP)
+
 ns:RegisterCommand("minimap", function()
 	local settings = ns.db.settings
 	settings.minimapHidden = not settings.minimapHidden

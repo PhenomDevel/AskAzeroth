@@ -35,6 +35,9 @@ ns.dbDefaults = {
 		minimapAngle = 210,
 		-- Page the main window opens with.
 		page = 1,
+		-- Version of the first-run setup the player finished or closed;
+		-- 0 = never (UI/Setup.lua opens it after login).
+		setupVersion = 0,
 	},
 }
 

@@ -1,8 +1,8 @@
 local _, ns = ...
 
--- Settings page in the main window, three columns: general options and
--- how long own questions are kept; mentor notifications; languages (one
--- hidden channel each).
+-- Settings page in the main window, three columns: general options, how
+-- long own questions are kept and the setup wizard; mentor notifications;
+-- languages (one hidden channel each).
 local L = ns.L
 local C = ns.C
 local UI = ns.UI
@@ -65,6 +65,12 @@ local function Build(content)
 	end))
 	retention:SetPoint("TOPLEFT", retentionLabel, "BOTTOMLEFT", 0, -6)
 	W.Tooltip(retention, L.SETTING_RETENTION, L.SETTING_RETENTION_TIP)
+
+	local setup = W.Button(content, L.SETTING_SETUP, nil, function()
+		ns.Setup.Show()
+	end)
+	setup:SetPoint("TOPLEFT", retention, "BOTTOMLEFT", 0, -22)
+	W.Tooltip(setup, L.SETTING_SETUP, L.SETTING_SETUP_TIP)
 
 	-- Mentor notifications (middle column)
 	local notify = settings.notify
