@@ -3,6 +3,8 @@
 ## Unreleased
 
 - In development, no release yet.
+- FAQ answers can show keys, buttons and menu entries, and chat commands
+  in their own colours, so they stand out from the text.
 - Marking your question as solved closes it on the Questions page. A
   solved question also closes when "Hide solved" takes it out of the list.
 - Setup: as a mentor you can now pick the classes you help with; the

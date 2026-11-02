@@ -9,6 +9,8 @@ local _, ns = ...
 -- - spell names (Core/SpellRefs.lua): the first place of each spell gets
 --   its icon and becomes a spell link; hovering shows the game's spell
 --   tooltip, shift-click puts the real spell link into the chat.
+-- - FAQ markup (Core/FaqMarkup.lua): keys, interface names and chat
+--   commands in the addon's own texts are drawn in their colour.
 -- The links only work in frames prepared with GlossaryLinks.Enable.
 local GlossaryLinks = {}
 ns.GlossaryLinks = GlossaryLinks
@@ -18,6 +20,7 @@ local C = ns.C
 local W = ns.Widgets
 local Glossary = ns.Glossary
 local SpellRefs = ns.SpellRefs
+local FaqMarkup = ns.FaqMarkup
 
 local LINK_TYPE = "askazeroth-glossary"
 local FAQ_LINK_TYPE = "askazeroth-faq"
@@ -61,6 +64,32 @@ local function SpellPlaces(text)
 	return places
 end
 
+-- Places of FAQ markup, drawn in the colour of their kind.
+local MARKUP_COLORS = {
+	key = W.Hex(W.KEY),
+	interface = W.Hex(W.INTERFACE),
+	command = W.Hex(W.COMMAND),
+}
+
+local function MarkupPlaces(text)
+	local places = {}
+	for _, found in ipairs(FaqMarkup.Find(text)) do
+		local color, inner = MARKUP_COLORS[found[3]], found[4]
+		places[#places + 1] = { found[1], found[2], function()
+			return ("|c%s%s|r"):format(color, inner)
+		end }
+	end
+	return places
+end
+
+-- text with the places blanked out (same length, so positions stay).
+local function Mask(text, places)
+	for _, place in ipairs(places) do
+		text = text:sub(1, place[1] - 1) .. (" "):rep(place[2] - place[1] + 1) .. text:sub(place[2] + 1)
+	end
+	return text
+end
+
 -- Annotated texts by language and text; spell names depend on the
 -- spellbook, so the cache is cleared when it changes (and when it gets big:
 -- player texts land here too).
@@ -70,23 +99,23 @@ ns.RegisterCallback(GlossaryLinks, "AA_SPELLS_CHANGED", function()
 	cache, cacheSize = {}, 0
 end)
 
--- text with links for the spell names and glossary terms in it (plain
--- text in lang, or text with "|" escaped as "||": spell names and terms
--- never contain "|", so a link never splits an escaped "||"). A spell
--- name is never also a glossary link.
-function GlossaryLinks.Annotate(text, lang)
-	local key = lang .. "\0" .. text
+-- text with links for the spell names and glossary terms in it; with
+-- markup, FAQ markup is drawn first and nothing inside it is linked.
+local function AnnotateText(text, lang, markup)
+	local key = (markup and "m" or "p") .. lang .. "\0" .. text
 	local result = cache[key]
 	if result then
 		return result
 	end
-	local places = SpellPlaces(text)
-	-- Blank out the spell names, so glossary terms are only looked for in
-	-- the rest; the positions stay the same.
-	local masked = text
-	for _, place in ipairs(places) do
-		masked = masked:sub(1, place[1] - 1) .. (" "):rep(place[2] - place[1] + 1) .. masked:sub(place[2] + 1)
+	local places = markup and MarkupPlaces(text) or {}
+	-- Spell names and then glossary terms are only looked for where
+	-- nothing was found yet; the positions stay the same.
+	local masked = Mask(text, places)
+	local spells = SpellPlaces(masked)
+	for _, place in ipairs(spells) do
+		places[#places + 1] = place
 	end
+	masked = Mask(masked, spells)
 	for _, found in ipairs(Glossary.Find(masked, lang)) do
 		local id = found[3].id
 		places[#places + 1] = { found[1], found[2], function(label)
@@ -103,6 +132,13 @@ function GlossaryLinks.Annotate(text, lang)
 	cache[key] = result
 	cacheSize = cacheSize + 1
 	return result
+end
+
+-- The addon's own text (FAQ answer) in lang with its markup drawn and
+-- links for the spell names and glossary terms in it. A spell name is
+-- never also a glossary link.
+function GlossaryLinks.Annotate(text, lang)
+	return AnnotateText(text, lang, true)
 end
 
 -- text with links for the spell names in it, no glossary terms. Also for
@@ -133,7 +169,10 @@ function GlossaryLinks.PlayerText(text, lang)
 		if playerCacheSize >= PLAYER_CACHE_MAX then
 			playerCache, playerCacheSize = {}, 0
 		end
-		result = GlossaryLinks.Annotate(ns.Util.EscapeText(text), lang)
+		-- No FAQ markup: players write "[" and "{" for other things.
+		-- Spell names and terms never contain "|", so a link never
+		-- splits an escaped "||".
+		result = AnnotateText(ns.Util.EscapeText(text), lang, false)
 		playerCache[key] = result
 		playerCacheSize = playerCacheSize + 1
 	end
