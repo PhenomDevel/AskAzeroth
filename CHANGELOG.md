@@ -55,6 +55,9 @@
 - FAQ: 14 more combat questions (elites, aggro range, fleeing enemies,
   evade, corpse run, resurrection sickness, dying in dungeons, durability,
   breath and fatigue, dazed, debuffs, threat, tagged enemies, PvP flag).
+- FAQ: 10 more travel questions (flight points, hearthstone cooldown and
+  replacement, boats and zeppelins, mounting indoors, zone levels, new zones,
+  stuck characters, mage portals, graveyards).
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
   Players, FAQ and Settings.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
