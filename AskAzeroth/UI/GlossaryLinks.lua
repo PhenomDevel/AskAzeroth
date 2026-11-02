@@ -185,6 +185,16 @@ local function InsertSpellLink(id)
 	end
 end
 
+-- Set by the probe (/aa probe glossary): called with an event name and
+-- details for every link event in frames prepared with Enable.
+GlossaryLinks.debugLog = nil
+
+local function Debug(event, link, details)
+	if GlossaryLinks.debugLog then
+		GlossaryLinks.debugLog(event, tostring(link), details or "")
+	end
+end
+
 local function EntryOfLink(link)
 	local id = link:match("^" .. LINK_TYPE .. ":([%l%d%-]+)$")
 	return id and Glossary.Get(id)
@@ -212,11 +222,14 @@ function GlossaryLinks.Enable(frame, tooltipOnly)
 		if entry then
 			GlossaryLinks.ShowTooltip(self, entry, nil, not tooltipOnly)
 		end
+		Debug("enter", link, ("entry %s, tooltip shown %s"):format(tostring(entry and entry.id), tostring(GameTooltip:IsShown())))
 	end)
-	frame:SetScript("OnHyperlinkLeave", function()
+	frame:SetScript("OnHyperlinkLeave", function(_, link)
+		Debug("leave", link)
 		GameTooltip:Hide()
 	end)
-	frame:SetScript("OnHyperlinkClick", function(self, link)
+	frame:SetScript("OnHyperlinkClick", function(self, link, _, mouseButton)
+		Debug("click", link, tostring(mouseButton))
 		self.glossaryLinkClicked = GetTime()
 		local spellId = SpellOfLink(link)
 		if spellId then
@@ -248,6 +261,7 @@ end
 -- not guaranteed.
 function GlossaryLinks.ForwardClicks(frame, button)
 	frame:SetScript("OnMouseUp", function(self, mouseButton)
+		Debug("mouse up", "-", tostring(mouseButton))
 		if mouseButton ~= "LeftButton" then
 			return
 		end

@@ -166,6 +166,14 @@ Result 2026-11-02 (Kevin, first version of the test): A gets enter, leave
 and click for all three link types. A plain frame without
 `SetHyperlinksEnabled` and a `SimpleHTML` frame get no link events.
 
+Result 2026-11-02 (Kevin, second version): A, D and E get enter, leave and
+click for all link types; F gets enter. So clipping and scroll boxes do not
+block link events.
+
+`/aa probe glossary` logs every link event (and mouse up) in the real
+windows prepared by `GlossaryLinks.Enable`, with the glossary entry found
+and whether the tooltip is shown afterwards.
+
 ## Design notes from building the probe
 
 1. **One addon message prefix per language** (`AA1de`, `AA1en`, …) instead of
