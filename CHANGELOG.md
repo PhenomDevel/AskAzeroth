@@ -58,6 +58,9 @@
 - FAQ: 10 more travel questions (flight points, hearthstone cooldown and
   replacement, boats and zeppelins, mounting indoors, zone levels, new zones,
   stuck characters, mage portals, graveyards).
+- FAQ: 12 more gold and trade questions (coins, trading, scams, cash on
+  delivery, mail expiry, auction fees, bid and buyout, bank, stacks,
+  destroying items, saving for a mount, unique items).
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
   Players, FAQ and Settings.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
