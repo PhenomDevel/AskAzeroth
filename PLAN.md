@@ -16,7 +16,7 @@ Abweichend vom ursprünglichen Entwurf gilt:
 - **Bibliotheken minimal wie Guild Finder Forever:** LibStub, CallbackHandler-1.0, AceComm-3.0 (mit ChatThrottleLib) und LibDeflate. Kein AceAddon, AceDB, AceEvent, AceConsole, AceConfig, LibSerialize, LibDataBroker oder LibDBIcon. Serializer, SavedVariables-Defaults, Event-Verteilung, Einstellungen und Minimap-Button sind eigener Code.
 - **Keine automatisierten Tests**, wie in den anderen Addons: `luacheck .` plus Test im Spiel. Kein gemocktes WoW-API im Repo.
 - **Nur Forever** (Interface 16001), kein Retail.
-- **Sieben Sprachen** wie Guild Finder Forever: Kanäle und UI-Texte für Englisch, Deutsch, Französisch, Spanisch, Italienisch, Russisch und Portugiesisch. Das FAQ gibt es zunächst nur auf Deutsch und Englisch.
+- **Sieben Sprachen** wie Guild Finder Forever: Kanäle und UI-Texte für Englisch, Deutsch, Französisch, Spanisch, Italienisch, Russisch und Portugiesisch. Das FAQ gibt es ebenfalls in allen sieben Sprachen (Englisch und Deutsch Pflicht, fehlende Übersetzungen fallen auf Englisch zurück).
 - **M0 mit eigener Probe** (`/aa probe`, nicht gepackt).
 - **Ein PR pro Meilenstein**, danach Test im Spiel durch Kevin, erst dann der nächste.
 - **Angepinnte Antworten** (neu in 1.0): Jede Antwort, auch auf fremde Fragen, lässt sich anpinnen. Sie wird samt Frage lokal gespeichert und läuft nie ab (Abschnitte 5, 7, 10).
@@ -57,7 +57,7 @@ Falls Kanäle nicht funktionieren: Fallback-Plan ist Gilde + Flüstern an bekann
 - Meine Fragen mit einstellbarer Aufbewahrung
 - Angepinnte Antworten: lokal gespeichert, ohne Ablauf, eigene Ansicht mit Suche
 - Login-Sync der aktiven Fragen
-- Statisches FAQ (eingebaut, Deutsch und Englisch)
+- Statisches FAQ (eingebaut, alle sieben Sprachen, Hinweis auf Wowhead)
 - Minimap-Button mit Zähler
 - Rate-Limits und Validierung
 
@@ -108,7 +108,7 @@ AskAzeroth/
     Data/
       Categories.lua
       FaqTopics.lua
-      Faq/              ein Thema pro Datei, Deutsch und Englisch je Eintrag
+      Faq/              ein Thema pro Datei, alle sieben Sprachen je Eintrag
   UI/
     Widgets.lua
     MainFrame.lua     Fenster, Navigation
