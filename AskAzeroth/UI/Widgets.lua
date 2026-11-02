@@ -83,18 +83,47 @@ local function Hex(color)
 end
 W.Hex = Hex
 
--- Category name in its colour.
-function W.CategoryText(key)
+-- Icon markup (with a trailing space) of a category; size follows the
+-- font. For "class" questions with a known asker class, the class icon
+-- (atlas "classicon-<class>", only when the client has it).
+-- luacheck: read globals C_Texture
+function W.CategoryIcon(key, classFile)
+	if key == "class" and type(classFile) == "string" and C_Texture and C_Texture.GetAtlasInfo then
+		local atlas = "classicon-" .. classFile:lower()
+		if C_Texture.GetAtlasInfo(atlas) then
+			return ("|A:%s:14:14|a "):format(atlas)
+		end
+	end
 	local category = ns.C.GetCategory(key)
-	return ("|c%s%s|r"):format(Hex(W.CategoryColor(key)), category and category.label or tostring(key))
+	local icon = category and category.icon
+	if not icon then
+		return ""
+	end
+	if icon:find("^Interface\\Icons\\") then
+		return ("|T%s:0:0:0:0:64:64:5:59:5:59|t "):format(icon)
+	end
+	return ("|T%s:0|t "):format(icon)
+end
+
+-- Category icon and name (for chips and labels; no colour).
+function W.CategoryLabel(key)
+	local category = ns.C.GetCategory(key)
+	return W.CategoryIcon(key) .. (category and category.label or tostring(key))
+end
+
+-- Category icon and name in its colour. classFile: the asker's class, for
+-- the class icon on "class" questions.
+function W.CategoryText(key, classFile)
+	local category = ns.C.GetCategory(key)
+	return ("%s|c%s%s|r"):format(W.CategoryIcon(key, classFile), Hex(W.CategoryColor(key)), category and category.label or tostring(key))
 end
 
 -- Category followed by the question's language code, e.g. "Class · DE".
-function W.CategoryLangText(key, lang)
+function W.CategoryLangText(key, lang, classFile)
 	if type(lang) ~= "string" or lang == "" then
-		return W.CategoryText(key)
+		return W.CategoryText(key, classFile)
 	end
-	return ("%s |c" .. Hex(W.MUTED) .. "·|r |cffd9d9d9%s|r"):format(W.CategoryText(key), lang:upper())
+	return ("%s |c" .. Hex(W.MUTED) .. "·|r |cffd9d9d9%s|r"):format(W.CategoryText(key, classFile), lang:upper())
 end
 
 -- Texture markup for symbols the game fonts lack; size follows the font.

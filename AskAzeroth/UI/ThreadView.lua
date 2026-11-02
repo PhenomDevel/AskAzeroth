@@ -73,7 +73,7 @@ end
 
 -- Category · language · expiry, above the question title.
 local function MetaText(q)
-	return ("%s |c%s· %s · %s|r"):format(W.CategoryText(q.cat), W.Hex(W.MUTED), tostring(q.lang or ""):upper(), ExpiryText(q))
+	return ("%s |c%s· %s · %s|r"):format(W.CategoryText(q.cat, q.ctx and q.ctx.class), W.Hex(W.MUTED), tostring(q.lang or ""):upper(), ExpiryText(q))
 end
 
 function ThreadView.Create(parent, get)

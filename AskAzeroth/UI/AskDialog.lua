@@ -186,7 +186,7 @@ local function Create()
 			Validate()
 		end, W.CategoryColor(category.key))
 		chip.key = category.key
-		chip:SetLabel(category.label)
+		chip:SetLabel(W.CategoryLabel(category.key))
 		chip:SetSize(chipWidth, 30)
 		chip.text:SetFontObject("GameFontHighlight")
 		local column, line = (i - 1) % 3, math.floor((i - 1) / 3)

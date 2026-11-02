@@ -218,7 +218,7 @@ function builders.notify(page)
 			page:Refresh()
 		end, W.CategoryColor(category.key))
 		chip.key = category.key
-		chip:SetLabel(category.label)
+		chip:SetLabel(W.CategoryLabel(category.key))
 		chip:SetSize(chipWidth, 30)
 		local column, line = (i - 1) % 3, math.floor((i - 1) / 3)
 		chip:SetPoint("TOPLEFT", intro, "BOTTOMLEFT", column * (chipWidth + gap), -16 - line * (30 + gap))

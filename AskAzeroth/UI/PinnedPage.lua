@@ -36,7 +36,7 @@ local function Build(content)
 			page:Refresh()
 		end, W.CategoryColor(category.key))
 		chip.key = category.key
-		chip:SetLabel(category.label)
+		chip:SetLabel(W.CategoryLabel(category.key))
 		chips[#chips + 1] = chip
 	end
 	W.FlowChips(chips, content, 228, -14, 6)

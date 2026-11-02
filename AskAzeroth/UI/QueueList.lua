@@ -101,7 +101,7 @@ local function FillRow(list, row, item)
 	row.question = q
 	W.Color(row.title, W.TEXT)
 	row.bg:SetAlpha(Players.IsIgnored(q.author) and 0.5 or 1)
-	row.category:SetText(W.CategoryLangText(q.cat, q.lang))
+	row.category:SetText(W.CategoryLangText(q.cat, q.lang, q.ctx and q.ctx.class))
 	row.age:SetText(W.Ago(Util.Now() - q.created))
 	row.title:SetText((Players.IsFavorite(q.author) and STAR or "") .. Util.EscapeText(q.title))
 	local own = list.highlightOwn and q.author == ns:GetPlayerFullName()

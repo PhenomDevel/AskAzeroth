@@ -3,6 +3,8 @@
 ## Unreleased
 
 - In development, no release yet.
+- Categories have icons in lists, filters, the ask dialog and
+  notifications. Class questions show the asker's class icon.
 - Better contrast: grey secondary text is lighter, and open FAQ entries and
   selected rows use a darker gold background, so grey and blue text on
   them is easier to read. The pin icon of unpinned answers is easier to see.
