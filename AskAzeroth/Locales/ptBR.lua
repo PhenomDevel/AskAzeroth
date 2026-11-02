@@ -252,6 +252,9 @@ L.FAQ_REF_OPEN = "Abre este item no FAQ."
 L.FAQ_REF_UNKNOWN = "Sua versão do AskAzeroth ainda não tem este item. Atualize o addon para vê-lo."
 L.FAQ_REF_MISSING = "Item do FAQ de uma versão mais nova"
 L.FAQ_REF_SUGGESTED = "combina com a pergunta"
+L.GLOSSARY = "Glossário"
+L.GLOSSARY_ALSO = "Também: %s"
+L.GLOSSARY_CLICK = "Clique para abrir no glossário."
 
 -- Categories
 L.CAT_QUEST = "Missão"

@@ -16,6 +16,11 @@ local _, ns = ...
 -- yet); the dropdown picks any other FAQ language. UI.ShowFaq(id) opens an
 -- entry, e.g. from a FAQ link under an answer.
 --
+-- The last row of the topics is the glossary (Core/Glossary.lua): its
+-- terms show in the same accordion, alphabetically, with their
+-- explanation. Glossary terms inside FAQ answers are links with a tooltip
+-- (UI/GlossaryLinks.lua); UI.ShowGlossary(id) opens a term.
+--
 -- Wrapped texts get an explicit width and height from a measuring font
 -- string, never from anchors alone: anchor-sized text measured before the
 -- layout is done gets cut with "…" until the window moves.
@@ -26,6 +31,11 @@ local W = ns.Widgets
 local Faq = ns.Faq
 local FaqRefs = ns.FaqRefs
 local FaqSearch = ns.FaqSearch
+local Glossary = ns.Glossary
+local GlossaryLinks = ns.GlossaryLinks
+
+-- Topic key of the glossary row; FAQ topic keys never start with "@".
+local GLOSSARY = "@glossary"
 
 local TOPIC_WIDTH = 230
 local TOPIC_ROW_HEIGHT = 30
@@ -138,7 +148,8 @@ local function Build(content)
 	end)
 	ScrollUtil.InitScrollBoxListWithScrollBar(topicBox, topicBar, topicView)
 
-	-- "All topics" (key false) and every topic that has entries.
+	-- "All topics" (key false), every topic that has entries and the
+	-- glossary.
 	local function TopicList()
 		local list = { { key = false, label = L.FAQ_TOPICS_ALL, count = #Faq.GetAll() } }
 		for _, topic in ipairs(C.FAQ_TOPICS) do
@@ -147,6 +158,7 @@ local function Build(content)
 				list[#list + 1] = { key = topic.key, label = FaqRefs.TopicText(topic.key), count = count }
 			end
 		end
+		list[#list + 1] = { key = GLOSSARY, label = ("|c%s%s|r"):format(W.Hex(W.BLUE), L.GLOSSARY), count = Glossary.Count() }
 		return list
 	end
 
@@ -247,11 +259,39 @@ local function Build(content)
 		return page.topic == nil
 	end
 
-	local function Heights(entry)
+	local function IsGlossary(entry)
+		return entry.topic == nil
+	end
+
+	-- Key in page.expanded; glossary ids may equal FAQ ids.
+	local function Key(entry)
+		return IsGlossary(entry) and "@" .. entry.id or entry.id
+	end
+
+	-- Bar text and unfolded text of an entry: question and answer with
+	-- glossary links, or term and explanation (other names, FAQ link).
+	local function Texts(entry)
+		if IsGlossary(entry) then
+			local term, alt, def = Glossary.GetText(entry, page.lang)
+			local text = def
+			if #alt > 0 then
+				text = text .. "\n\n" .. ("|c%s%s|r"):format(W.Hex(W.MUTED), L.GLOSSARY_ALSO:format(table.concat(alt, ", ")))
+			end
+			local faqTitle = entry.faq and FaqRefs.Title(entry.faq, page.lang)
+			if faqTitle then
+				text = text .. "\n\n" .. GlossaryLinks.FaqLink(entry.faq, L.FAQ_REF_LINK:format(faqTitle))
+			end
+			return term, text
+		end
 		local q, a = Faq.GetText(entry, page.lang)
+		return q, GlossaryLinks.Annotate(a, page.lang)
+	end
+
+	local function Heights(entry)
+		local q, a = Texts(entry)
 		local qHeight = TextHeight(q, "GameFontNormal", QuestionWidth())
 		local head = ITEM_PAD + qHeight + (ShowsTopic() and 4 + 12 or 0) + ITEM_PAD
-		if not page.expanded[entry.id] then
+		if not page.expanded[Key(entry)] then
 			return head, qHeight, 0
 		end
 		local aHeight = TextHeight(a, "GameFontHighlight", AnswerWidth(), 3)
@@ -299,17 +339,22 @@ local function Build(content)
 			item.divider = W.Divider(bg)
 			item.divider:SetHeight(1)
 			item:SetScript("OnClick", function(self)
-				local id = self.entry.id
-				page.expanded[id] = not page.expanded[id] or nil
-				if page.expanded[id] then
+				-- A click on a link in the answer does not fold it.
+				if GlossaryLinks.JustClicked(self) then
+					return
+				end
+				local key = Key(self.entry)
+				page.expanded[key] = not page.expanded[key] or nil
+				if page.expanded[key] and not IsGlossary(self.entry) then
 					page.lastOpened = self.entry
 				end
 				page:RefreshList()
 			end)
+			GlossaryLinks.Enable(item)
 		end
 		item.entry = entry
-		local q, a = Faq.GetText(entry, page.lang)
-		local open = page.expanded[entry.id]
+		local q, a = Texts(entry)
+		local open = page.expanded[Key(entry)]
 		local _, qHeight, aHeight = Heights(entry)
 		item.icon:SetTexture(open and MINUS or PLUS)
 		item.question:SetWidth(QuestionWidth())
@@ -363,6 +408,15 @@ local function Build(content)
 	-- Entries of the topic, filtered by the search: word search (all words,
 	-- best match first), plain text search while no usable word is typed.
 	local function Filtered()
+		if page.topic == GLOSSARY then
+			local list = {}
+			for _, entry in ipairs(Glossary.GetAll(page.lang)) do
+				if page.search == "" or Glossary.Contains(entry, page.search, page.lang) then
+					list[#list + 1] = entry
+				end
+			end
+			return list
+		end
 		local source = page.topic and Faq.GetTopic(page.topic) or Faq.GetAll()
 		if page.search == "" then
 			return source
@@ -393,7 +447,7 @@ local function Build(content)
 		self.list = Filtered()
 		-- One search result opens right away.
 		if self.search ~= "" and #self.list == 1 then
-			self.expanded[self.list[1].id] = true
+			self.expanded[Key(self.list[1])] = true
 		end
 		listBox:SetDataProvider(CreateDataProvider(self.list), not toTop)
 		empty:SetShown(#self.list == 0)
@@ -416,6 +470,23 @@ local function Build(content)
 		end
 	end
 
+	-- Shows one glossary term: the glossary, no search, the term open and
+	-- in view.
+	function page:SelectGlossary(id)
+		local entry = Glossary.Get(id)
+		if not entry then
+			return
+		end
+		self.topic = GLOSSARY
+		self.search = ""
+		search:SetText("")
+		self.expanded[Key(entry)] = true
+		self:Refresh(true)
+		if listBox.ScrollToElementData then
+			listBox:ScrollToElementData(entry)
+		end
+	end
+
 	return page
 end
 
@@ -427,5 +498,14 @@ function UI.ShowFaq(id)
 	local page = UI.GetCurrentPage()
 	if page and page.Select then
 		page:Select(id)
+	end
+end
+
+-- Opens the glossary on a term (glossary links in FAQ answers).
+function UI.ShowGlossary(id)
+	UI.Show(UI.PAGE_FAQ)
+	local page = UI.GetCurrentPage()
+	if page and page.SelectGlossary then
+		page:SelectGlossary(id)
 	end
 end

@@ -355,7 +355,9 @@ local function Create()
 	local view = CreateScrollBoxListLinearView()
 	view:SetElementExtentCalculator(function(_, entry)
 		local width = math.max(100, textBox:GetWidth() - 4)
-		local q, a = Faq.GetText(entry, FaqRefs.ReaderLanguage())
+		local lang = FaqRefs.ReaderLanguage()
+		local q, a = Faq.GetText(entry, lang)
+		a = ns.GlossaryLinks.Annotate(a, lang)
 		return 12 + 6 + math.ceil(TextHeight(q, W.TITLE_FONT, width)) + 10 + math.ceil(TextHeight(a, "GameFontHighlight", width, 3)) + 8
 	end)
 	view:SetElementInitializer("Frame", function(frame, entry)
@@ -369,11 +371,16 @@ local function Create()
 			frame.text:SetPoint("TOPLEFT", frame.title, "BOTTOMLEFT", 0, -10)
 			frame.text:SetWordWrap(true)
 			frame.text:SetSpacing(3)
+			-- Glossary terms show their tooltip; a click would leave the
+			-- dialog, so it does nothing here.
+			ns.GlossaryLinks.Enable(frame, true)
 		end
 		-- Explicit width and height: anchor-sized text measured before the
 		-- layout is done gets cut with "…".
 		local width = math.max(100, textBox:GetWidth() - 4)
-		local q, a = Faq.GetText(entry, FaqRefs.ReaderLanguage())
+		local lang = FaqRefs.ReaderLanguage()
+		local q, a = Faq.GetText(entry, lang)
+		a = ns.GlossaryLinks.Annotate(a, lang)
 		frame.topic:SetText(FaqRefs.TopicText(entry.topic))
 		frame.title:SetWidth(width)
 		frame.title:SetHeight(math.ceil(TextHeight(q, W.TITLE_FONT, width)))

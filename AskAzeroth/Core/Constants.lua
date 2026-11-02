@@ -91,6 +91,9 @@ C.FAQ_SUGGEST_MIN_LENGTH = 8
 C.FAQ_SUGGEST_DELAY = 0.3
 C.FAQ_SUGGEST_MIN_HITS = 2
 C.FAQ_SUGGEST_MIN_SCORE = 3
+-- Longest glossary definition in bytes (Cyrillic needs two per letter);
+-- it is shown in a tooltip.
+C.GLOSSARY_DEF_MAX = 400
 C.ZONE_MAX = 64
 C.CTX_TEXT_MAX = 24
 C.LEVEL_MAX = 100
