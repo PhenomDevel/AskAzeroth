@@ -55,6 +55,24 @@ local function RestorePosition()
 	end
 end
 
+-- Questions still waiting for a first answer, in the selected languages,
+-- without those of ignored players.
+function UI.CountOpenQuestions()
+	local langs = {}
+	for _, lang in ipairs(ns.Channel.GetSelectedLanguages()) do
+		langs[lang] = true
+	end
+	local count = 0
+	for _, q in ipairs(ns.Store.List(function(q)
+		return langs[q.lang] and ns.Store.GetStatus(q) == "open"
+	end)) do
+		if not ns.Players.IsIgnored(q.author) then
+			count = count + 1
+		end
+	end
+	return count
+end
+
 function UI.UpdateStatus()
 	if not frame or not frame:IsShown() then
 		return

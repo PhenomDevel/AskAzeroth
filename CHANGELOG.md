@@ -5,6 +5,10 @@
 - In development, no release yet.
 - FAQ answers can show keys, buttons and menu entries, and chat commands
   in their own colours, so they stand out from the text.
+- The Questions page and the minimap button tooltip show how many
+  questions in your languages are still waiting for an answer.
+- Question lists and notifications show the question's language next to
+  the category (e.g. "Class · DE").
 - Marking your question as solved closes it on the Questions page. A
   solved question also closes when "Hide solved" takes it out of the list.
 - Setup: as a mentor you can now pick the classes you help with; the
@@ -22,8 +26,6 @@
 - Questions now stay in the public list for 3 days (1 day once solved)
   instead of a few hours, and the thread shows the time left in minutes,
   hours or days. You can have up to 5 open questions at once.
-- FAQ answers list the glossary terms they use in a row "Terms:" below the
-  answer; hover a term for its explanation, click to open it in the glossary.
 - Abilities named in FAQ answers, glossary entries, questions and answers
   are now real spell links with their icon: hover to see the game's spell
   tooltip, shift-click to post the link in chat.
@@ -183,3 +185,7 @@
   address ready to copy, and has a new entry about it.
 - Hovering a blue glossary term or a spell name now shows its tooltip, and
   clicking a term opens it in the glossary (the links were not recognised).
+- Glossary terms are also found when written in lower or upper case ("dot",
+  "aoe", "DPS"), as players usually type them.
+- Questions and answers also mark the English terms in every language
+  ("threat", "healer" in a German thread).

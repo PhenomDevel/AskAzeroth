@@ -100,9 +100,10 @@ ns.RegisterCallback(GlossaryLinks, "AA_SPELLS_CHANGED", function()
 end)
 
 -- text with links for the spell names and glossary terms in it; with
--- markup, FAQ markup is drawn first and nothing inside it is linked.
-local function AnnotateText(text, lang, markup)
-	local key = (markup and "m" or "p") .. lang .. "\0" .. text
+-- markup, FAQ markup is drawn first and nothing inside it is linked;
+-- withEnglish also finds the English glossary terms.
+local function AnnotateText(text, lang, markup, withEnglish)
+	local key = (markup and "m" or "p") .. lang .. (withEnglish and "+en" or "") .. "\0" .. text
 	local result = cache[key]
 	if result then
 		return result
@@ -116,7 +117,7 @@ local function AnnotateText(text, lang, markup)
 		places[#places + 1] = place
 	end
 	masked = Mask(masked, spells)
-	for _, found in ipairs(Glossary.Find(masked, lang)) do
+	for _, found in ipairs(Glossary.Find(masked, lang, withEnglish)) do
 		local id = found[3].id
 		places[#places + 1] = { found[1], found[2], function(label)
 			return ("|c%s|H%s:%s|h%s|h|r"):format(LINK_COLOR, LINK_TYPE, id, label)
@@ -137,8 +138,8 @@ end
 -- The addon's own text (FAQ answer) in lang with its markup drawn and
 -- links for the spell names and glossary terms in it. A spell name is
 -- never also a glossary link.
-function GlossaryLinks.Annotate(text, lang)
-	return AnnotateText(text, lang, true)
+function GlossaryLinks.Annotate(text, lang, withEnglish)
+	return AnnotateText(text, lang, true, withEnglish)
 end
 
 -- text with links for the spell names in it, no glossary terms. Also for
@@ -170,9 +171,9 @@ function GlossaryLinks.PlayerText(text, lang)
 			playerCache, playerCacheSize = {}, 0
 		end
 		-- No FAQ markup: players write "[" and "{" for other things.
-		-- Spell names and terms never contain "|", so a link never
-		-- splits an escaped "||".
-		result = AnnotateText(ns.Util.EscapeText(text), lang, false)
+		-- Players use English terms in every language. Spell names and
+		-- terms never contain "|", so a link never splits an escaped "||".
+		result = AnnotateText(ns.Util.EscapeText(text), lang, false, true)
 		playerCache[key] = result
 		playerCacheSize = playerCacheSize + 1
 	end
