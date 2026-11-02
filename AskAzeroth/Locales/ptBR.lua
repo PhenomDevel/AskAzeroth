@@ -51,6 +51,9 @@ L.CMD_SETTINGS = "abrir as configurações"
 L.CMD_MINIMAP = "mostrar ou ocultar o botão do minimapa"
 L.CMD_MINIMAP_HIDDEN = "Botão do minimapa oculto. |cffffd100/aa minimap|r mostra de novo."
 L.CMD_MINIMAP_SHOWN = "Botão do minimapa visível."
+L.CMD_FAQSTATS = "mostra quais sugestões do FAQ evitaram uma pergunta"
+L.FAQSTATS_NONE = "Nenhuma sugestão do FAQ ajudou ainda."
+L.FAQSTATS_HEADER = "As sugestões do FAQ ajudaram %d vezes. Mais frequentes:"
 
 -- Questions page
 L.QUEUE_SEARCH = "Buscar…"
@@ -93,6 +96,9 @@ L.ASK_LANGUAGE = "Idioma"
 L.ASK_CONTEXT = "Enviado junto: %s"
 L.ASK_SUBMIT = "Perguntar"
 L.ASK_CANCEL = "Cancelar"
+L.ASK_SUGGEST_TITLE = "Já está no FAQ?"
+L.ASK_SUGGEST_HELPED = "Ajudou"
+L.ASK_SUGGEST_BACK = "Perguntar mesmo assim"
 
 -- Reasons
 L.REASON_RATE = "Você pode fazer uma pergunta por minuto. Aguarde um pouco."
@@ -182,8 +188,10 @@ L.PINNED_EMPTY = "Nada fixado ainda. Clique no ícone de nota ao lado de uma res
 
 -- FAQ
 L.FAQ_LANGUAGE = "Idioma do FAQ"
-L.FAQ_LANGUAGE_TIP = "Alterna o FAQ entre alemão e inglês."
+L.FAQ_LANGUAGE_TIP = "Troca o idioma do FAQ. Itens ainda não traduzidos aparecem em inglês."
 L.FAQ_NOT_HELPED = "Não ajudou? Pergunte à comunidade."
+L.FAQ_WOWHEAD = "O Wowhead é a melhor fonte sobre missões, itens, PNJs e mapas:"
+L.FAQ_WOWHEAD_TIP = "Copie o endereço com Ctrl+C e abra-o no navegador."
 L.FAQ_TOPIC_ADDON = "AskAzeroth"
 L.FAQ_TOPIC_START = "Primeiros passos"
 L.FAQ_TOPIC_QUEST = "Missões"
@@ -203,6 +211,7 @@ L.FAQ_REF_LINK = "FAQ: %s"
 L.FAQ_REF_OPEN = "Abre este item no FAQ."
 L.FAQ_REF_UNKNOWN = "Sua versão do AskAzeroth ainda não tem este item. Atualize o addon para vê-lo."
 L.FAQ_REF_MISSING = "Item do FAQ de uma versão mais nova"
+L.FAQ_REF_SUGGESTED = "combina com a pergunta"
 
 -- Categories
 L.CAT_QUEST = "Missão"
