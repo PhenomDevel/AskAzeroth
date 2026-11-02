@@ -166,11 +166,16 @@ local function HookFrame(frame)
 		local entry = EntryOfLink(link)
 		if entry then
 			GlossaryLinks.ShowTooltip(self, entry, nil, true)
+			self.askAzerothTooltip = true
 		end
 	end)
-	frame:HookScript("OnHyperlinkLeave", function(_, link)
-		if EntryOfLink(link) then
-			GameTooltip:Hide()
+	-- The leave event carries no link: hide the tooltip when it is ours.
+	frame:HookScript("OnHyperlinkLeave", function(self)
+		if self.askAzerothTooltip then
+			self.askAzerothTooltip = nil
+			if GameTooltip:GetOwner() == self then
+				GameTooltip:Hide()
+			end
 		end
 	end)
 	frame:HookScript("OnHyperlinkClick", function(_, link, _, button)
