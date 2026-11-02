@@ -87,8 +87,17 @@ function builders.welcome(page)
 	text:SetPoint("TOP", head, "BOTTOM", 0, -14)
 	local hint = W.Paragraph(page, BODY_WIDTH - 60, L.SETUP_WELCOME_HINT, "GameFontHighlightSmall", W.MUTED)
 	hint:SetJustifyH("CENTER")
-	hint:SetPoint("TOP", text, "BOTTOM", 0, -16)
-	function page:Refresh() end
+	-- Community note: answers come from other players, and there may be
+	-- few of them at first.
+	local note = W.Panel(page, W.COLORS.nav, W.COLORS.line)
+	note:SetWidth(BODY_WIDTH - 40)
+	note:SetPoint("TOP", text, "BOTTOM", 0, -16)
+	local noteText = W.Paragraph(note, BODY_WIDTH - 68, L.SETUP_COMMUNITY, "GameFontHighlightSmall", W.SOFT)
+	noteText:SetPoint("TOPLEFT", 14, -10)
+	hint:SetPoint("TOP", note, "BOTTOM", 0, -14)
+	function page:Refresh()
+		note:SetHeight(noteText:GetStringHeight() + 20)
+	end
 end
 
 function builders.languages(page)
