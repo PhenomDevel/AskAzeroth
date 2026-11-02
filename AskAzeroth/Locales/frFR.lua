@@ -264,6 +264,7 @@ L.GLOSSARY = "Glossaire"
 L.GLOSSARY_ALSO = "Aussi : %s"
 L.GLOSSARY_CLICK = "Cliquez pour l'ouvrir dans le glossaire."
 L.GLOSSARY_TERMS = "Termes :"
+L.GLOSSARY_MORE = "Plus dans la FAQ :"
 
 -- Categories
 L.CAT_QUEST = "Quête"

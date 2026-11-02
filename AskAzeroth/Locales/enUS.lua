@@ -268,6 +268,7 @@ L.GLOSSARY = "Glossary"
 L.GLOSSARY_ALSO = "Also: %s"
 L.GLOSSARY_CLICK = "Click to open it in the glossary."
 L.GLOSSARY_TERMS = "Terms:"
+L.GLOSSARY_MORE = "More in the FAQ:"
 
 -- Categories
 L.CAT_QUEST = "Quest"
@@ -327,6 +328,13 @@ L.PROBE_HELP_LOOPBACK = "handle own messages like those of another player (singl
 L.PROBE_HELP_SHOW = "show or hide the channels in the chat frame"
 L.PROBE_HELP_LOG = "print the last log lines (default 20)"
 L.PROBE_HELP_CLEAR = "clear the log"
+L.PROBE_HELP_LINKS = "test window for links in texts (glossary tooltips): which lines react to the mouse"
+L.PROBE_LINKS_TITLE = "AskAzeroth link test – hover and click every blue and violet word, then /aa probe links again"
+L.PROBE_LINKS_API = "Links: Frame:SetHyperlinksEnabled %s, SimpleHTML %s."
+L.PROBE_LINKS_EVENT = "Link test %s: %s %s"
+L.PROBE_LINKS_MOUSE = "Link test %s: mouse over the line."
+L.PROBE_LINKS_ERROR = "Link test %s: %s"
+L.PROBE_LINKS_CLOSED = "Link test closed. Please send the lines above (or /aa probe log)."
 
 L.PROBE_IN_LOCKDOWN = " (lockdown)"
 L.PROBE_HELD = " – held for now"
