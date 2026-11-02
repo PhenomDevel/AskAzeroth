@@ -85,7 +85,7 @@ in-game; there are no automated tests and no mocked WoW API.
 ### Performance
 
 `/aa simulate perf` (development checkout) fills the store with the worst
-case: 150 questions with full-length title and details and 10 answers of
+case: 300 questions with full-length title and details and 10 answers of
 500 bytes each (1650 messages through the receive path), then prints how
 long receiving, sorting the list, building a sync answer, the expiry check
 and refreshing the open page took, and how much memory the questions use.

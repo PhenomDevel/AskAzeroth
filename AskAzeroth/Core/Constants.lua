@@ -99,13 +99,13 @@ C.CTX_TEXT_MAX = 24
 C.LEVEL_MAX = 100
 
 -- A question disappears from the public list (seconds):
-C.EXPIRE_OPEN = 2 * 60 * 60 -- without answers, after created
-C.EXPIRE_ANSWERED = 45 * 60 -- with answers, after the last one
-C.EXPIRE_SOLVED = 10 * 60 -- after it was marked as solved
+C.EXPIRE_OPEN = 3 * 24 * 60 * 60 -- without answers, after created
+C.EXPIRE_ANSWERED = 3 * 24 * 60 * 60 -- with answers, after the last one
+C.EXPIRE_SOLVED = 24 * 60 * 60 -- after it was marked as solved
 -- How often expired questions are removed.
 C.SWEEP_INTERVAL = 60
 -- Public questions kept in memory; the oldest go first.
-C.MAX_QUESTIONS = 150
+C.MAX_QUESTIONS = 300
 -- Answers per question in memory; more are dropped.
 C.MAX_ANSWERS = 50
 
@@ -117,8 +117,9 @@ C.RATE_QUESTION_WINDOW = 60
 C.RATE_QUESTIONS = 1
 C.RATE_ANSWER_WINDOW = 60
 C.RATE_ANSWERS = 6
--- Open (not yet expired or solved) questions per author.
-C.MAX_OPEN_PER_AUTHOR = 3
+-- Open (not yet expired or solved) questions per author. Questions stay
+-- for days, so a player who forgets to mark them solved still has room.
+C.MAX_OPEN_PER_AUTHOR = 5
 
 -- Sync answer (SP): at most this many questions per message.
 C.SYNC_MAX_QUESTIONS = 30

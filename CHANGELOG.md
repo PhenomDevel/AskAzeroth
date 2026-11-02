@@ -3,6 +3,9 @@
 ## Unreleased
 
 - In development, no release yet.
+- Questions now stay in the public list for 3 days (1 day once solved)
+  instead of a few hours, and the thread shows the time left in minutes,
+  hours or days. You can have up to 5 open questions at once.
 - FAQ answers list the glossary terms they use in a row "Terms:" below the
   answer; hover a term for its explanation, click to open it in the glossary.
 - Notifications show right away again: there was a two-minute pause

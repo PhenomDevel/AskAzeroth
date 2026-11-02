@@ -73,9 +73,9 @@ L.THREAD_SOLVE_TIP = "Sua pergunta teve a resposta que você precisava. Ela some
 L.THREAD_WITHDRAW = "Retirar"
 L.THREAD_WITHDRAW_TIP = "Remove sua pergunta para todos."
 L.THREAD_WITHDRAW_CONFIRM = "Retirar sua pergunta para todos?"
-L.THREAD_OPEN_EXPIRES = "Some em %d min se ninguém responder."
-L.THREAD_ANSWERED_EXPIRES = "Some em %d min sem uma nova resposta."
-L.THREAD_SOLVED_EXPIRES = "Resolvida – some em %d min."
+L.THREAD_OPEN_EXPIRES = "Some em %s se ninguém responder."
+L.THREAD_ANSWERED_EXPIRES = "Some em %s sem uma nova resposta."
+L.THREAD_SOLVED_EXPIRES = "Resolvida – some em %s."
 L.THREAD_SOLVED_BANNER = "Esta pergunta está resolvida."
 
 -- Formatting
@@ -83,6 +83,10 @@ L.LEVEL_SHORT = "Nível %d"
 L.AGO_NOW = "agora mesmo"
 L.AGO_MINUTES = "há %d min"
 L.AGO_HOURS = "há %d h"
+L.AGO_DAYS = "há %d d"
+L.DURATION_MINUTES = "%d min"
+L.DURATION_HOURS = "%d h"
+L.DURATION_DAYS = "%d dias"
 
 -- Status
 L.STATUS_OPEN = "aberta"
