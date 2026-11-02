@@ -3,6 +3,10 @@
 ## Unreleased
 
 - In development, no release yet.
+- Notifications show right away again: there was a two-minute pause
+  between two notifications, so many seemed to be missing. A notification
+  that is still on screen now counts new ones as "+N more", and answers to
+  your own questions stay in front.
 - Thread header: the line with category, language and expiry wraps next
   to "Mark as solved" and "Withdraw" instead of being cut off. Your own
   questions no longer show the right-click hint for the player menu.

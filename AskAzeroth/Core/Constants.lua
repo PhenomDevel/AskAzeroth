@@ -143,8 +143,6 @@ C.MAX_PINNED = 500
 -- Notifications (PLAN.md, section 9)
 --------------------------------------------------------------------------------
 
--- At most one toast per this many seconds; the rest is summed up.
-C.TOAST_INTERVAL = 120
 -- How long a toast stays.
 C.TOAST_DURATION = 12
 -- Choices for "only questions from players up to level".
