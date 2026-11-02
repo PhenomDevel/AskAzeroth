@@ -41,6 +41,7 @@ local function ShowTooltip(owner)
 	if ns.db.settings.mentor then
 		GameTooltip:AddLine(L.STATUS_MENTOR, 0.12, 1, 0)
 	end
+	GameTooltip:AddLine(L.QUEUE_OPEN_COUNT:format(ns.UI.CountOpenQuestions()), 1, 1, 1)
 	local unseen = ns.Notify.GetUnseen()
 	if unseen > 0 then
 		GameTooltip:AddLine(L.MINIMAP_NEW:format(unseen), 1, 0.82, 0)
