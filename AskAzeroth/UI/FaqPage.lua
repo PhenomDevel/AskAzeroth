@@ -276,7 +276,7 @@ local function Build(content)
 	local function Texts(entry)
 		if IsGlossary(entry) then
 			local term, alt, def = Glossary.GetText(entry, page.lang)
-			local text = def
+			local text = GlossaryLinks.AnnotateSpells(def)
 			if #alt > 0 then
 				text = text .. "\n\n" .. ("|c%s%s|r"):format(W.Hex(W.MUTED), L.GLOSSARY_ALSO:format(table.concat(alt, ", ")))
 			end

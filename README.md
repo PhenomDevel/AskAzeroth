@@ -57,6 +57,9 @@ In the first release:
 - **Glossary:** over 100 game terms and chat abbreviations (Aggro, DoT, BoP,
   LFG, dungeon short names …) explained in a few words. Terms inside FAQ
   answers show their explanation when you hover over them.
+- **Spell links:** abilities named in FAQ answers, the glossary and threads
+  show their icon and the game's own spell tooltip when you hover over them;
+  shift-click puts the spell link into the chat.
 - **FAQ suggestions while you ask:** matching FAQ entries show up as you type
   your question, so you often have the answer before anyone has to reply.
 - **Sync after login:** questions asked while you were offline are fetched
