@@ -30,6 +30,9 @@ C.LANGUAGE_BY_LOCALE = {
 	ptBR = "pt",
 }
 
+-- Shown on the FAQ page as the place to look things up.
+C.WOWHEAD_URL = "https://www.wowhead.com"
+
 local known = {}
 for _, lang in ipairs(C.LANGUAGES) do
 	known[lang] = true

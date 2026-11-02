@@ -182,8 +182,10 @@ L.PINNED_EMPTY = "Aún no hay nada fijado. Haz clic en el icono de nota junto a 
 
 -- FAQ
 L.FAQ_LANGUAGE = "Idioma de las preguntas frecuentes"
-L.FAQ_LANGUAGE_TIP = "Cambia las preguntas frecuentes entre alemán e inglés."
+L.FAQ_LANGUAGE_TIP = "Cambia el idioma de las preguntas frecuentes. Las entradas aún sin traducir se muestran en inglés."
 L.FAQ_NOT_HELPED = "¿No te ha ayudado? Pregunta a la comunidad."
+L.FAQ_WOWHEAD = "Wowhead es la mejor fuente para misiones, objetos, PNJ y mapas:"
+L.FAQ_WOWHEAD_TIP = "Copia la dirección con Ctrl+C y ábrela en tu navegador."
 L.FAQ_TOPIC_ADDON = "AskAzeroth"
 L.FAQ_TOPIC_START = "Primeros pasos"
 L.FAQ_TOPIC_QUEST = "Misiones"

@@ -182,8 +182,10 @@ L.PINNED_EMPTY = "Ancora niente di fissato. Clicca sull'icona della nota accanto
 
 -- FAQ
 L.FAQ_LANGUAGE = "Lingua delle FAQ"
-L.FAQ_LANGUAGE_TIP = "Passa le FAQ dal tedesco all'inglese e viceversa."
+L.FAQ_LANGUAGE_TIP = "Cambia la lingua delle FAQ. Le voci non ancora tradotte appaiono in inglese."
 L.FAQ_NOT_HELPED = "Non ti ha aiutato? Chiedi alla community."
+L.FAQ_WOWHEAD = "Wowhead è la risorsa migliore per missioni, oggetti, PNG e mappe:"
+L.FAQ_WOWHEAD_TIP = "Copia l'indirizzo con Ctrl+C e aprilo nel browser."
 L.FAQ_TOPIC_ADDON = "AskAzeroth"
 L.FAQ_TOPIC_START = "Primi passi"
 L.FAQ_TOPIC_QUEST = "Missioni"

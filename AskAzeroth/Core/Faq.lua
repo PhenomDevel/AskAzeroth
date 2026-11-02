@@ -12,8 +12,11 @@ local _, ns = ...
 --     },
 --   })
 --
--- Texts are plain text: no "|" escape sequences. Every entry has all FAQ
--- languages (C.FAQ_LANGUAGES). Never change or reuse an id once released:
+-- Further languages (fr, es, it, ru, pt) use the same shape. Texts are
+-- plain text: no "|" escape sequences. Every entry needs English and German
+-- (C.FAQ_REQUIRED); the other FAQ languages (C.FAQ_LANGUAGES) are checked
+-- when present and fall back to English while an entry is not translated
+-- yet. Never change or reuse an id once released:
 -- answers that refer to it travel between players and are kept in
 -- "My questions" and "Pinned".
 local Faq = {}
@@ -21,7 +24,9 @@ ns.Faq = Faq
 
 local C = ns.C
 
-C.FAQ_LANGUAGES = { "en", "de" }
+-- The FAQ comes in every language of the addon (C.LANGUAGES).
+C.FAQ_LANGUAGES = C.LANGUAGES
+C.FAQ_REQUIRED = { "en", "de" }
 
 local byId = {}
 local byTopic = {}
@@ -43,9 +48,14 @@ local function Check(topic, entry)
 	if byId[entry.id] then
 		return "duplicate"
 	end
+	for _, lang in ipairs(C.FAQ_REQUIRED) do
+		if entry[lang] == nil then
+			return lang
+		end
+	end
 	for _, lang in ipairs(C.FAQ_LANGUAGES) do
 		local text = entry[lang]
-		if type(text) ~= "table" or not IsText(text.q) or not IsText(text.a) then
+		if text ~= nil and (type(text) ~= "table" or not IsText(text.q) or not IsText(text.a)) then
 			return lang
 		end
 	end

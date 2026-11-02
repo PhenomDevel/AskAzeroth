@@ -99,3 +99,7 @@
   from favourites and answers to your own questions always. A toast at most
   every 2 minutes ("+N more"), none in combat or instances, and a counter on
   the minimap button.
+- The FAQ can now be shown in every language of the addon; translations
+  follow topic by topic, until then entries appear in English. The FAQ points
+  to Wowhead as the best place to look up quests, items and NPCs, with the
+  address ready to copy, and has a new entry about it.

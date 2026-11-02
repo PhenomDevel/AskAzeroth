@@ -182,8 +182,10 @@ L.PINNED_EMPTY = "Noch nichts angepinnt. Klick auf das Notiz-Symbol neben einer 
 
 -- FAQ
 L.FAQ_LANGUAGE = "FAQ-Sprache"
-L.FAQ_LANGUAGE_TIP = "Schaltet das FAQ zwischen Deutsch und Englisch um."
+L.FAQ_LANGUAGE_TIP = "Wechselt die Sprache des FAQ. Noch nicht übersetzte Einträge erscheinen auf Englisch."
 L.FAQ_NOT_HELPED = "Nicht geholfen? Frag die Community."
+L.FAQ_WOWHEAD = "Die beste Quelle für Quests, Gegenstände, NPCs und Karten ist Wowhead:"
+L.FAQ_WOWHEAD_TIP = "Kopiere die Adresse mit Strg+C und öffne sie im Browser."
 L.FAQ_TOPIC_ADDON = "AskAzeroth"
 L.FAQ_TOPIC_START = "Erste Schritte"
 L.FAQ_TOPIC_QUEST = "Quests"

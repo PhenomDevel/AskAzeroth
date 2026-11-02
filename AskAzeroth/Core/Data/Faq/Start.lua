@@ -233,4 +233,35 @@ ns.Faq.Add("start", {
 			a = "Pick the same rule set and faction so you can group. Add each other as friends, invite each other to a group and share quests. If you start in different zones, meeting in a capital city is easiest.",
 		},
 	},
+	{
+		id = "start-wowhead",
+		de = {
+			q = "Wo kann ich Quests, Gegenstände und NPCs nachschlagen?",
+			a = "Auf Wowhead (www.wowhead.com), der besten Quelle zu WoW: Dort findest du zu fast jeder Quest, jedem Gegenstand und jedem NPC Fundorte auf der Karte, Belohnungen und Kommentare anderer Spieler. Such einfach nach dem Namen. Im FAQ steht die Adresse zum Kopieren unten rechts.",
+		},
+		en = {
+			q = "Where can I look up quests, items and NPCs?",
+			a = "On Wowhead (www.wowhead.com), the best resource for WoW: for almost every quest, item and NPC it shows locations on the map, rewards and comments from other players. Just search for the name. In the FAQ the address is at the bottom right, ready to copy.",
+		},
+		fr = {
+			q = "Où puis-je chercher des quêtes, objets et PNJ ?",
+			a = "Sur Wowhead (www.wowhead.com), la meilleure ressource pour WoW : pour presque chaque quête, objet et PNJ, vous y trouvez l'emplacement sur la carte, les récompenses et les commentaires d'autres joueurs. Cherchez simplement le nom. Dans la FAQ, l'adresse à copier se trouve en bas à droite.",
+		},
+		es = {
+			q = "¿Dónde puedo consultar misiones, objetos y PNJ?",
+			a = "En Wowhead (www.wowhead.com), la mejor fuente sobre WoW: para casi cada misión, objeto y PNJ muestra su ubicación en el mapa, las recompensas y comentarios de otros jugadores. Solo busca el nombre. En las preguntas frecuentes tienes la dirección abajo a la derecha para copiarla.",
+		},
+		it = {
+			q = "Dove posso cercare missioni, oggetti e PNG?",
+			a = "Su Wowhead (www.wowhead.com), la risorsa migliore per WoW: per quasi ogni missione, oggetto e PNG trovi la posizione sulla mappa, le ricompense e i commenti di altri giocatori. Basta cercare il nome. Nelle FAQ l'indirizzo da copiare è in basso a destra.",
+		},
+		ru = {
+			q = "Где посмотреть задания, предметы и NPC?",
+			a = "На Wowhead (www.wowhead.com), лучшем ресурсе по WoW: почти для каждого задания, предмета и NPC там есть место на карте, награды и комментарии других игроков. Просто введите название в поиск. В FAQ адрес для копирования находится внизу справа.",
+		},
+		pt = {
+			q = "Onde posso consultar missões, itens e PNJs?",
+			a = "No Wowhead (www.wowhead.com), a melhor fonte sobre WoW: para quase toda missão, item e PNJ ele mostra a localização no mapa, as recompensas e comentários de outros jogadores. É só pesquisar o nome. No FAQ, o endereço para copiar fica no canto inferior direito.",
+		},
+	},
 })

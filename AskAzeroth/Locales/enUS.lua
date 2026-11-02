@@ -186,8 +186,10 @@ L.PINNED_EMPTY = "Nothing pinned yet. Click the note icon next to an answer to k
 
 -- FAQ
 L.FAQ_LANGUAGE = "FAQ language"
-L.FAQ_LANGUAGE_TIP = "Switches the FAQ between German and English."
+L.FAQ_LANGUAGE_TIP = "Switches the FAQ language. Entries not yet translated are shown in English."
 L.FAQ_NOT_HELPED = "Did not help? Ask the community."
+L.FAQ_WOWHEAD = "Wowhead is the best resource for quests, items, NPCs and maps:"
+L.FAQ_WOWHEAD_TIP = "Copy the address with Ctrl+C and open it in your browser."
 L.FAQ_TOPIC_ADDON = "AskAzeroth"
 L.FAQ_TOPIC_START = "First steps"
 L.FAQ_TOPIC_QUEST = "Quests"

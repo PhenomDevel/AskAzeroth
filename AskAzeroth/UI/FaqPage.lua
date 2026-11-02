@@ -5,8 +5,10 @@ local _, ns = ...
 -- search, language switch, topic dropdown and the list of entries; the
 -- selected answer on the right with "Ask a question" (preselecting the
 -- question category of the entry's topic) for when it did not help. Shown
--- in German for German clients, otherwise in English. UI.ShowFaq(id) opens
--- an entry, e.g. from a FAQ link under an answer.
+-- in the client's language (English for entries not translated yet); the
+-- language switch shows any other. Above the bottom bar a hint points to
+-- Wowhead with the address in a field to copy. UI.ShowFaq(id) opens an
+-- entry, e.g. from a FAQ link under an answer.
 local L = ns.L
 local C = ns.C
 local UI = ns.UI
@@ -144,10 +146,44 @@ local function Build(content)
 	askHint:SetPoint("RIGHT", ask, "LEFT", -12, 0)
 	askHint:SetWordWrap(false)
 
+	-- Wowhead hint: addons cannot open web pages, so the address sits in a
+	-- read-only field that selects itself for Ctrl+C.
+	local wowhead = CreateFrame("Frame", nil, detail)
+	wowhead:SetPoint("BOTTOMLEFT", bottom, "TOPLEFT")
+	wowhead:SetPoint("BOTTOMRIGHT", bottom, "TOPRIGHT")
+	wowhead:SetHeight(40)
+	W.EdgeLine(wowhead, "TOP")
+	local url = W.EditBox(wowhead, 190)
+	url:SetHeight(24)
+	url:SetPoint("RIGHT", -SIDE, 0)
+	url:SetText(C.WOWHEAD_URL)
+	url:SetCursorPosition(0)
+	url:SetScript("OnTextChanged", function(self, userInput)
+		if userInput then
+			self:SetText(C.WOWHEAD_URL)
+			self:HighlightText()
+		end
+	end)
+	url:HookScript("OnEditFocusGained", function(self)
+		self:HighlightText()
+	end)
+	url:HookScript("OnEditFocusLost", function(self)
+		self:HighlightText(0, 0)
+		self:SetCursorPosition(0)
+	end)
+	W.Tooltip(url, "Wowhead", L.FAQ_WOWHEAD_TIP)
+	local wowheadHint = W.Text(wowhead, "GameFontHighlightSmall", W.SOFT)
+	wowheadHint:SetPoint("LEFT", SIDE, 0)
+	wowheadHint:SetPoint("RIGHT", url, "LEFT", -10, 0)
+	wowheadHint:SetJustifyH("LEFT")
+	wowheadHint:SetWordWrap(true)
+	wowheadHint:SetMaxLines(2)
+	wowheadHint:SetText(L.FAQ_WOWHEAD)
+
 	-- The answer can be long: one scrolling element with everything.
 	local textBox = CreateFrame("Frame", nil, detail, "WowScrollBoxList")
 	textBox:SetPoint("TOPLEFT", SIDE, -18)
-	textBox:SetPoint("BOTTOMRIGHT", bottom, "TOPRIGHT", -SIDE - 12, 8)
+	textBox:SetPoint("BOTTOMRIGHT", wowhead, "TOPRIGHT", -SIDE - 12, 8)
 	local textBar = CreateFrame("EventFrame", nil, detail, "MinimalScrollBar")
 	textBar:SetPoint("TOPLEFT", textBox, "TOPRIGHT", 4, 0)
 	textBar:SetPoint("BOTTOMLEFT", textBox, "BOTTOMRIGHT", 4, 0)

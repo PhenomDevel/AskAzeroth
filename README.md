@@ -50,9 +50,10 @@ In the first release:
 - **My questions** with your answers, kept as long as you like.
 - **Pin answers:** pin any helpful answer, also on other players' questions.
   It's kept on your computer together with the question and never expires.
-- **Built-in FAQ** in English and German: beginner questions sorted into
+- **Built-in FAQ** in all 7 languages: beginner questions sorted into
   topics such as first steps, quests, each class, travel, gold and dungeons.
-  Mentors can attach FAQ entries to their answers as links.
+  Mentors can attach FAQ entries to their answers as links, and a hint
+  points to Wowhead for looking up quests, items and NPCs.
 - **Sync after login:** questions asked while you were offline are fetched
   from other players on the channel.
 - **7 languages:** English, Deutsch, Français, Español, Italiano, Русский,

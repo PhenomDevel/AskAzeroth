@@ -182,8 +182,10 @@ L.PINNED_EMPTY = "Rien d'épinglé pour l'instant. Cliquez sur l'icône de note 
 
 -- FAQ
 L.FAQ_LANGUAGE = "Langue de la FAQ"
-L.FAQ_LANGUAGE_TIP = "Bascule la FAQ entre l'allemand et l'anglais."
+L.FAQ_LANGUAGE_TIP = "Change la langue de la FAQ. Les entrées pas encore traduites s'affichent en anglais."
 L.FAQ_NOT_HELPED = "Pas de réponse ? Demandez à la communauté."
+L.FAQ_WOWHEAD = "Wowhead est la meilleure ressource pour les quêtes, objets, PNJ et cartes :"
+L.FAQ_WOWHEAD_TIP = "Copiez l'adresse avec Ctrl+C et ouvrez-la dans votre navigateur."
 L.FAQ_TOPIC_ADDON = "AskAzeroth"
 L.FAQ_TOPIC_START = "Premiers pas"
 L.FAQ_TOPIC_QUEST = "Quêtes"

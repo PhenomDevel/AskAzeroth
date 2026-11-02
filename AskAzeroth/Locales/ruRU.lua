@@ -182,8 +182,10 @@ L.PINNED_EMPTY = "Пока ничего не закреплено. Нажмит�
 
 -- FAQ
 L.FAQ_LANGUAGE = "Язык FAQ"
-L.FAQ_LANGUAGE_TIP = "Переключает FAQ между немецким и английским."
+L.FAQ_LANGUAGE_TIP = "Переключает язык FAQ. Ещё не переведённые статьи показываются на английском."
 L.FAQ_NOT_HELPED = "Не помогло? Спросите сообщество."
+L.FAQ_WOWHEAD = "Лучший источник о заданиях, предметах, NPC и картах — Wowhead:"
+L.FAQ_WOWHEAD_TIP = "Скопируйте адрес с помощью Ctrl+C и откройте его в браузере."
 L.FAQ_TOPIC_ADDON = "AskAzeroth"
 L.FAQ_TOPIC_START = "Первые шаги"
 L.FAQ_TOPIC_QUEST = "Задания"
