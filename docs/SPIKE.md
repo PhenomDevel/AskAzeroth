@@ -147,18 +147,24 @@ Channel notices (owner changes, kicks, password changes) end up in the log.
 
 ### 10. Links in the addon's own texts (glossary)
 
-`/aa probe links` opens a small test window with three lines, each with a
-custom link (`askazeroth-glossary:`), an item link and an `addon:` link:
+`/aa probe links` opens a small test window. Every line has a custom link
+(`askazeroth-glossary:`), an item link and an `addon:` link, in a frame with
+a font string and `SetHyperlinksEnabled(true)`:
 
-- **A**: frame with a font string and `SetHyperlinksEnabled(true)` (what the
-  glossary uses in FAQ answers and threads),
-- **B**: the same frame without that call,
-- **C**: a `SimpleHTML` frame.
+- **A**: the frame on its own,
+- **D**: inside a frame that clips its children (`SetClipsChildren`),
+- **E**: as the element of a `WowScrollBoxList` (like FAQ entries and thread
+  answers),
+- **F**: prepared by `GlossaryLinks.Enable` itself (shows the glossary
+  tooltip for "Aggro").
 
 Hover and click every link in every line, then run `/aa probe links` again
-to close it. The chat (and `/aa probe log`) shows which line and which link
-type got `enter`/`click` events and whether `SetHyperlinksEnabled` exists.
-The glossary tooltips are built on whichever variant reacts.
+to close it. The chat (and `/aa probe log`) shows which line got
+`enter`/`click` events.
+
+Result 2026-11-02 (Kevin, first version of the test): A gets enter, leave
+and click for all three link types. A plain frame without
+`SetHyperlinksEnabled` and a `SimpleHTML` frame get no link events.
 
 ## Design notes from building the probe
 
