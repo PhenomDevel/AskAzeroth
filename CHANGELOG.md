@@ -3,6 +3,10 @@
 ## Unreleased
 
 - In development, no release yet.
+- Notifications show right away again: there was a two-minute pause
+  between two notifications, so many seemed to be missing. A notification
+  that is still on screen now counts new ones as "+N more", and answers to
+  your own questions stay in front.
 - Glossary tooltips in FAQ answers now show when you hover over a blue term.
 - FAQ links on answers: the FAQ button is off once 3 entries are attached,
   and the chips above the answer field always fit into the window (long
