@@ -141,7 +141,7 @@ local function Fill(entry, more)
 		toast.text:SetText(L.TOAST_LINE:format(W.PlayerText(entry.answer.author, ns.Players.GetClass(entry.answer.author)), Util.EscapeText(entry.answer.text)))
 	else
 		local q = entry.question
-		toast.kind:SetText((entry.favorite and W.STAR or "") .. W.CategoryText(q.cat))
+		toast.kind:SetText((entry.favorite and W.STAR or "") .. W.CategoryLangText(q.cat, q.lang))
 		toast.text:SetText(L.TOAST_LINE:format(W.PlayerText(q.author, q.ctx and q.ctx.class), Util.EscapeText(q.title)))
 	end
 	toast.open:SetEnabled(entry.question ~= nil)
