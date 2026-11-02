@@ -9,6 +9,13 @@
   the left, coloured categories, answer cards and an FAQ with list and
   detail view.
 - Loads on retail (Midnight) too, for testing until Forever launches.
+- FAQ suggestions while you ask: as you type the summary of a question,
+  up to three matching FAQ entries appear. Click one to read the answer
+  right there; "That helped" closes the dialog without asking.
+  `/aa faqstats` shows how often that happened.
+- Better FAQ search: finds entries by word, also with other word forms
+  ("Berufe" finds "Beruf") and without accents, best matches first. The
+  FAQ picker for mentors lists entries matching the question first.
 - Bigger FAQ: over 50 typical beginner questions (first steps, quests,
   class and talents, combat, travel, gold, professions, groups, chat,
   interface) with a topic filter. "Ask a question" from the FAQ picks the
@@ -61,6 +68,19 @@
 - FAQ: 12 more gold and trade questions (coins, trading, scams, cash on
   delivery, mail expiry, auction fees, bid and buyout, bank, stacks,
   destroying items, saving for a mount, unique items).
+- FAQ: 13 more group and dungeon questions (group finder playstyles and
+  listings, group size, dungeon XP, entrances, target markers, wipes,
+  leaving, loot rules, resets, launch raids, raid groups, being new).
+- FAQ: 11 more chat and guild questions (channels, item links, whispers,
+  the other faction, emotes, AFK, rolling, founding and leaving a guild,
+  reporting, roleplaying).
+- FAQ: 13 more questions about AskAzeroth itself (good questions, no
+  answers, limits, solved and withdrawn, helped me, favourites, ignoring,
+  notifications, FAQ links, offline questions, the hidden channel, minimap
+  button).
+- FAQ: 11 more questions about classes in general (beginner classes,
+  resources, spell costs, talent reset, dual specialisation, weapon skills,
+  weapon masters, racials, hybrids, buffing others, talents for dungeons).
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
   Players, FAQ and Settings.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
@@ -86,3 +106,7 @@
   from favourites and answers to your own questions always. A toast at most
   every 2 minutes ("+N more"), none in combat or instances, and a counter on
   the minimap button.
+- The FAQ can now be shown in every language of the addon; translations
+  follow topic by topic, until then entries appear in English. The FAQ points
+  to Wowhead as the best place to look up quests, items and NPCs, with the
+  address ready to copy, and has a new entry about it.
