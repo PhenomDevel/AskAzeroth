@@ -42,6 +42,9 @@
 - FAQ: 17 warlock questions (demons and their quests, soul shards, soul
   pouch, levelling, Life Tap, healthstones, soulstones, summoning, Fear,
   Voidwalker, Banish, talents).
+- FAQ: 18 druid questions (forms and their quests, form mana, Cat and
+  Bear, healing, buffs, Entangling Roots, Rebirth, Innervate, cleansing,
+  Moonglade, Hibernate, talents).
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
   Players, FAQ and Settings.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
