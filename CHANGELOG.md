@@ -3,6 +3,12 @@
 ## Unreleased
 
 - In development, no release yet.
+- New FAQ layout: pick a topic on the left, the questions are listed as
+  bars below each other and a click unfolds the answer. Search stays, the
+  FAQ language is now a dropdown, and the Wowhead hint is a highlighted
+  banner across the top of the page.
+- Fixed answer texts that were sometimes cut off with "…" until the
+  window was moved (FAQ, FAQ suggestions and answers in threads).
 - Look closer to the game's own windows: Blizzard window frame with the
   logo as portrait, the game's buttons, close buttons and colours, and one
   font everywhere (also in input fields).

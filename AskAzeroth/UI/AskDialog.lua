@@ -317,6 +317,12 @@ local function Create()
 	textBar:SetPoint("TOPLEFT", textBox, "TOPRIGHT", 4, 0)
 	textBar:SetPoint("BOTTOMLEFT", textBox, "BOTTOMRIGHT", 4, 0)
 	answer.textBox = textBox
+	-- Lay the answer out again once the box has its final width.
+	textBox:HookScript("OnSizeChanged", function(_, width)
+		if width and width > 0 and state.shown and answer:IsShown() then
+			textBox:SetDataProvider(CreateDataProvider({ state.shown }))
+		end
+	end)
 
 	local measure = answer:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
 	measure:Hide()
@@ -332,7 +338,7 @@ local function Create()
 	view:SetElementExtentCalculator(function(_, entry)
 		local width = math.max(100, textBox:GetWidth() - 4)
 		local q, a = Faq.GetText(entry, FaqRefs.ReaderLanguage())
-		return 12 + 6 + TextHeight(q, W.TITLE_FONT, width) + 10 + TextHeight(a, "GameFontHighlight", width, 3) + 8
+		return 12 + 6 + math.ceil(TextHeight(q, W.TITLE_FONT, width)) + 10 + math.ceil(TextHeight(a, "GameFontHighlight", width, 3)) + 8
 	end)
 	view:SetElementInitializer("Frame", function(frame, entry)
 		if not frame.title then
@@ -340,17 +346,22 @@ local function Create()
 			frame.topic:SetPoint("TOPLEFT")
 			frame.title = W.Text(frame, W.TITLE_FONT, W.GOLD)
 			frame.title:SetPoint("TOPLEFT", frame.topic, "BOTTOMLEFT", 0, -6)
-			frame.title:SetPoint("RIGHT", -4, 0)
 			frame.title:SetWordWrap(true)
 			frame.text = W.Text(frame, "GameFontHighlight", W.TEXT)
 			frame.text:SetPoint("TOPLEFT", frame.title, "BOTTOMLEFT", 0, -10)
-			frame.text:SetPoint("RIGHT", -4, 0)
 			frame.text:SetWordWrap(true)
 			frame.text:SetSpacing(3)
 		end
+		-- Explicit width and height: anchor-sized text measured before the
+		-- layout is done gets cut with "…".
+		local width = math.max(100, textBox:GetWidth() - 4)
 		local q, a = Faq.GetText(entry, FaqRefs.ReaderLanguage())
 		frame.topic:SetText(FaqRefs.TopicText(entry.topic))
+		frame.title:SetWidth(width)
+		frame.title:SetHeight(math.ceil(TextHeight(q, W.TITLE_FONT, width)))
 		frame.title:SetText(q)
+		frame.text:SetWidth(width)
+		frame.text:SetHeight(math.ceil(TextHeight(a, "GameFontHighlight", width, 3)))
 		frame.text:SetText(a)
 	end)
 	ScrollUtil.InitScrollBoxListWithScrollBar(textBox, textBar, view)

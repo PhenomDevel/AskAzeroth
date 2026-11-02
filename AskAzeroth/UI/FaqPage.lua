@@ -1,14 +1,24 @@
 -- luacheck: read globals CreateScrollBoxListLinearView ScrollUtil CreateDataProvider
 local _, ns = ...
 
--- Built-in FAQ (Core/Faq.lua, entries in Core/Data/Faq/): on the left
--- search, language switch, topic dropdown and the list of entries; the
--- selected answer on the right with "Ask a question" (preselecting the
--- question category of the entry's topic) for when it did not help. Shown
--- in the client's language (English for entries not translated yet); the
--- language switch shows any other. Above the bottom bar a hint points to
--- Wowhead with the address in a field to copy. UI.ShowFaq(id) opens an
+-- Built-in FAQ (Core/Faq.lua, entries in Core/Data/Faq/).
+--
+--   * Across the top a highlighted banner points to Wowhead, with the
+--     address in a field to copy (addons cannot open web pages).
+--   * On the left the topics with their entry counts ("All topics" first).
+--   * On the right search and FAQ language (dropdown) above the entries of
+--     the topic as an accordion: every question is a bar, a click unfolds
+--     its answer below it. The search covers the selected topic.
+--   * The bottom bar offers "Ask a question" for when nothing helped; it
+--     preselects the question category of the last opened entry's topic.
+--
+-- Shown in the client's language (English for entries not translated
+-- yet); the dropdown picks any other FAQ language. UI.ShowFaq(id) opens an
 -- entry, e.g. from a FAQ link under an answer.
+--
+-- Wrapped texts get an explicit width and height from a measuring font
+-- string, never from anchors alone: anchor-sized text measured before the
+-- layout is done gets cut with "…" until the window moves.
 local L = ns.L
 local C = ns.C
 local UI = ns.UI
@@ -17,146 +27,42 @@ local Faq = ns.Faq
 local FaqRefs = ns.FaqRefs
 local FaqSearch = ns.FaqSearch
 
-local LIST_WIDTH = 360
+local TOPIC_WIDTH = 230
+local TOPIC_ROW_HEIGHT = 30
+local BANNER_HEIGHT = 46
 local PAD = 12
-local SIDE = 22
-local ROW_HEIGHT = 50
+local SIDE = 18
+local ITEM_GAP = 6
+local ITEM_PAD = 10
+local ICON_SIZE = 14
+-- Fallback for the first layout pass, before the list has a width.
+local FALLBACK_WIDTH = 560
+
+local PLUS = "Interface\\Buttons\\UI-PlusButton-Up"
+local MINUS = "Interface\\Buttons\\UI-MinusButton-Up"
+local INFO = "Interface\\Common\\help-i"
+
+-- Banner colours: amber background and border to stand out from the page.
+local BANNER_BG = { 0.42, 0.26, 0.02, 0.55 }
+local BANNER_BORDER = { 1, 0.7, 0.1, 0.9 }
 
 local function Build(content)
-	local page = { search = "", lang = FaqRefs.ReaderLanguage() }
+	local page = { search = "", lang = FaqRefs.ReaderLanguage(), expanded = {} }
 
-	-- Left column.
-	local listPane = CreateFrame("Frame", nil, content)
-	listPane:SetPoint("TOPLEFT")
-	listPane:SetPoint("BOTTOMLEFT")
-	listPane:SetWidth(LIST_WIDTH)
-	W.SideLine(listPane, "RIGHT")
-
-	local filters = CreateFrame("Frame", nil, listPane)
-	filters:SetPoint("TOPLEFT")
-	filters:SetPoint("TOPRIGHT", -1, 0)
-	filters:SetHeight(PAD + 28 + 8 + 28 + PAD)
-	W.EdgeLine(filters, "BOTTOM")
-
-	local switch = W.Button(filters, "", 90)
-	switch:SetHeight(28)
-	switch:SetPoint("TOPRIGHT", -PAD, -PAD)
-	W.Tooltip(switch, L.FAQ_LANGUAGE, L.FAQ_LANGUAGE_TIP)
-	switch:SetScript("OnClick", function()
-		local languages = C.FAQ_LANGUAGES
-		for i, lang in ipairs(languages) do
-			if lang == page.lang then
-				page.lang = languages[i % #languages + 1]
-				break
-			end
-		end
-		page:Refresh()
-	end)
-
-	local search = W.SearchBox(filters, 100, L.QUEUE_SEARCH, function(text)
-		page.search = strtrim(text):lower()
-		page:Refresh()
-	end)
-	search:SetPoint("TOPLEFT", PAD, -PAD)
-	search:SetPoint("RIGHT", switch, "LEFT", -8, 0)
-
-	-- Topics with entries, each with its count; nil = all topics.
-	local function TopicOptions()
-		local options = { { value = false, label = L.FAQ_ALL_TOPICS:format(#Faq.GetAll()) } }
-		for _, topic in ipairs(C.FAQ_TOPICS) do
-			local count = Faq.Count(topic.key)
-			if count > 0 then
-				options[#options + 1] = { value = topic.key, label = ("%s (%d)"):format(FaqRefs.TopicText(topic.key), count) }
-			end
-		end
-		return options
-	end
-	local topicDropdown = W.Dropdown(filters, LIST_WIDTH - 2 * PAD, TopicOptions, function()
-		return page.topic or false
-	end, function(value)
-		page.topic = value or nil
-		page:Refresh()
-	end)
-	topicDropdown:SetPoint("TOPLEFT", PAD, -PAD - 28 - 8)
-
-	local listBox = CreateFrame("Frame", nil, listPane)
-	listBox:SetPoint("TOPLEFT", filters, "BOTTOMLEFT")
-	listBox:SetPoint("BOTTOMRIGHT", -1, 0)
-
-	local scrollBox = CreateFrame("Frame", nil, listBox, "WowScrollBoxList")
-	scrollBox:SetPoint("TOPLEFT")
-	scrollBox:SetPoint("BOTTOMRIGHT", -12, 0)
-	local scrollBar = CreateFrame("EventFrame", nil, listBox, "MinimalScrollBar")
-	scrollBar:SetPoint("TOPLEFT", scrollBox, "TOPRIGHT", 2, -4)
-	scrollBar:SetPoint("BOTTOMLEFT", scrollBox, "BOTTOMRIGHT", 2, 4)
-
-	local empty = W.Text(listBox, "GameFontHighlight", W.MUTED)
-	empty:SetPoint("CENTER", -6, 0)
-	empty:SetJustifyH("CENTER")
-	empty:SetWidth(LIST_WIDTH - 40)
-	empty:SetText(L.QUEUE_NO_MATCH)
-
-	local listView = CreateScrollBoxListLinearView()
-	listView:SetElementExtent(ROW_HEIGHT)
-	listView:SetElementInitializer("Button", function(row, entry)
-		if not row.title then
-			row:SetHeight(ROW_HEIGHT)
-			W.ListRowLook(row)
-			row:SetHighlightTexture(W.WHITE8)
-			row:GetHighlightTexture():SetVertexColor(1, 0.85, 0.5, 0.05)
-			row.title = W.Text(row, "GameFontHighlight", W.TEXT)
-			row.title:SetPoint("TOPLEFT", PAD, -9)
-			row.title:SetPoint("RIGHT", -PAD, 0)
-			row.title:SetWordWrap(false)
-			row.meta = W.Text(row, "GameFontHighlightSmall")
-			row.meta:SetPoint("BOTTOMLEFT", PAD, 9)
-			row:SetScript("OnClick", function(self)
-				page.selected = self.entry
-				page:Refresh()
-			end)
-		end
-		row.entry = entry
-		row.title:SetText((Faq.GetText(entry, page.lang)))
-		row.meta:SetText(FaqRefs.TopicText(entry.topic))
-		row:SetSelectedLook(entry == page.selected)
-	end)
-	ScrollUtil.InitScrollBoxListWithScrollBar(scrollBox, scrollBar, listView)
-
-	-- Right column: the selected entry.
-	local detail = CreateFrame("Frame", nil, content)
-	detail:SetPoint("TOPLEFT", listPane, "TOPRIGHT")
-	detail:SetPoint("BOTTOMRIGHT")
-
-	local bottom = CreateFrame("Frame", nil, detail)
-	bottom:SetPoint("BOTTOMLEFT")
-	bottom:SetPoint("BOTTOMRIGHT")
-	bottom:SetHeight(56)
-	W.Fill(bottom, W.COLORS.nav):SetAllPoints()
-	W.EdgeLine(bottom, "TOP")
-	local askHint = W.Text(bottom, "GameFontHighlight", W.SOFT)
-	askHint:SetPoint("LEFT", SIDE, 0)
-	askHint:SetText(L.FAQ_NOT_HELPED)
-	local ask = W.Button(bottom, L.QUEUE_ASK, nil, function()
-		local topic = page.selected and C.GetFaqTopic(page.selected.topic)
-		ns.AskDialog.Show(function(q)
-			UI.ShowQuestion(q.id)
-		end, topic and topic.cat)
-	end, "primary")
-	ask:SetHeight(32)
-	ask:SetPoint("RIGHT", -SIDE, 0)
-	askHint:SetPoint("RIGHT", ask, "LEFT", -12, 0)
-	askHint:SetWordWrap(false)
-
-	-- Wowhead hint: addons cannot open web pages, so the address sits in a
-	-- read-only field that selects itself for Ctrl+C.
-	local wowhead = CreateFrame("Frame", nil, detail)
-	wowhead:SetPoint("BOTTOMLEFT", bottom, "TOPLEFT")
-	wowhead:SetPoint("BOTTOMRIGHT", bottom, "TOPRIGHT")
-	wowhead:SetHeight(40)
-	W.EdgeLine(wowhead, "TOP")
-	local url = W.EditBox(wowhead, 190)
-	url:SetHeight(24)
-	url:SetPoint("RIGHT", -SIDE, 0)
+	--------------------------------------------------------------------------
+	-- Wowhead banner across the whole page.
+	--------------------------------------------------------------------------
+	local banner = W.Panel(content, BANNER_BG, BANNER_BORDER)
+	banner:SetPoint("TOPLEFT", 8, -8)
+	banner:SetPoint("TOPRIGHT", -8, -8)
+	banner:SetHeight(BANNER_HEIGHT)
+	local info = banner:CreateTexture(nil, "ARTWORK")
+	info:SetTexture(INFO)
+	info:SetSize(26, 26)
+	info:SetPoint("LEFT", 10, 0)
+	local url = W.EditBox(banner, 210)
+	url:SetHeight(26)
+	url:SetPoint("RIGHT", -12, 0)
 	url:SetText(C.WOWHEAD_URL)
 	url:SetCursorPosition(0)
 	url:SetScript("OnTextChanged", function(self, userInput)
@@ -173,101 +79,327 @@ local function Build(content)
 		self:SetCursorPosition(0)
 	end)
 	W.Tooltip(url, "Wowhead", L.FAQ_WOWHEAD_TIP)
-	local wowheadHint = W.Text(wowhead, "GameFontHighlightSmall", W.SOFT)
-	wowheadHint:SetPoint("LEFT", SIDE, 0)
-	wowheadHint:SetPoint("RIGHT", url, "LEFT", -10, 0)
-	wowheadHint:SetJustifyH("LEFT")
-	wowheadHint:SetWordWrap(true)
-	wowheadHint:SetMaxLines(2)
-	wowheadHint:SetText(L.FAQ_WOWHEAD)
+	local bannerText = W.Text(banner, "GameFontNormal", W.GOLD)
+	bannerText:SetPoint("LEFT", info, "RIGHT", 8, 0)
+	bannerText:SetPoint("RIGHT", url, "LEFT", -12, 0)
+	bannerText:SetJustifyH("LEFT")
+	bannerText:SetWordWrap(true)
+	bannerText:SetMaxLines(2)
+	bannerText:SetText(L.FAQ_WOWHEAD)
 
-	-- The answer can be long: one scrolling element with everything.
-	local textBox = CreateFrame("Frame", nil, detail, "WowScrollBoxList")
-	textBox:SetPoint("TOPLEFT", SIDE, -18)
-	textBox:SetPoint("BOTTOMRIGHT", wowhead, "TOPRIGHT", -SIDE - 12, 8)
-	local textBar = CreateFrame("EventFrame", nil, detail, "MinimalScrollBar")
-	textBar:SetPoint("TOPLEFT", textBox, "TOPRIGHT", 4, 0)
-	textBar:SetPoint("BOTTOMLEFT", textBox, "BOTTOMRIGHT", 4, 0)
+	local body = CreateFrame("Frame", nil, content)
+	body:SetPoint("TOPLEFT", banner, "BOTTOMLEFT", -8, -8)
+	body:SetPoint("BOTTOMRIGHT")
 
-	local measure = detail:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+	--------------------------------------------------------------------------
+	-- Topics (left).
+	--------------------------------------------------------------------------
+	local topicPane = CreateFrame("Frame", nil, body)
+	topicPane:SetPoint("TOPLEFT")
+	topicPane:SetPoint("BOTTOMLEFT")
+	topicPane:SetWidth(TOPIC_WIDTH)
+	W.Fill(topicPane, W.COLORS.nav):SetAllPoints()
+	W.SideLine(topicPane, "RIGHT")
+	W.EdgeLine(topicPane, "TOP")
+
+	local topicBox = CreateFrame("Frame", nil, topicPane, "WowScrollBoxList")
+	topicBox:SetPoint("TOPLEFT", 0, -4)
+	topicBox:SetPoint("BOTTOMRIGHT", -13, 4)
+	local topicBar = CreateFrame("EventFrame", nil, topicPane, "MinimalScrollBar")
+	topicBar:SetPoint("TOPLEFT", topicBox, "TOPRIGHT", 2, -4)
+	topicBar:SetPoint("BOTTOMLEFT", topicBox, "BOTTOMRIGHT", 2, 4)
+
+	local topicView = CreateScrollBoxListLinearView()
+	topicView:SetElementExtent(TOPIC_ROW_HEIGHT)
+	topicView:SetElementInitializer("Button", function(row, topic)
+		if not row.label then
+			row:SetHeight(TOPIC_ROW_HEIGHT)
+			W.ListRowLook(row)
+			row:SetHighlightTexture("Interface\\QuestFrame\\UI-QuestTitleHighlight", "ADD")
+			row.label = W.Text(row, "GameFontHighlight", W.TEXT)
+			row.label:SetPoint("LEFT", PAD, 0)
+			row.label:SetPoint("RIGHT", -40, 0)
+			row.label:SetWordWrap(false)
+			row.count = W.Text(row, "GameFontHighlightSmall", W.MUTED)
+			row.count:SetPoint("RIGHT", -PAD, 0)
+			row.count:SetJustifyH("RIGHT")
+			row:SetScript("OnClick", function(self)
+				page.topic = self.topic.key or nil
+				page:Refresh(true)
+			end)
+		end
+		row.topic = topic
+		local active = (topic.key or nil) == page.topic
+		row.label:SetFontObject(active and "GameFontNormal" or "GameFontHighlight")
+		row.label:SetText(topic.label)
+		W.Color(row.label, active and W.GOLD or W.TEXT)
+		row.count:SetText(topic.count)
+		row:SetSelectedLook(active)
+	end)
+	ScrollUtil.InitScrollBoxListWithScrollBar(topicBox, topicBar, topicView)
+
+	-- "All topics" (key false) and every topic that has entries.
+	local function TopicList()
+		local list = { { key = false, label = L.FAQ_TOPICS_ALL, count = #Faq.GetAll() } }
+		for _, topic in ipairs(C.FAQ_TOPICS) do
+			local count = Faq.Count(topic.key)
+			if count > 0 then
+				list[#list + 1] = { key = topic.key, label = FaqRefs.TopicText(topic.key), count = count }
+			end
+		end
+		return list
+	end
+
+	--------------------------------------------------------------------------
+	-- Entries (right).
+	--------------------------------------------------------------------------
+	local main = CreateFrame("Frame", nil, body)
+	main:SetPoint("TOPLEFT", topicPane, "TOPRIGHT")
+	main:SetPoint("BOTTOMRIGHT")
+
+	local filters = CreateFrame("Frame", nil, main)
+	filters:SetPoint("TOPLEFT")
+	filters:SetPoint("TOPRIGHT")
+	filters:SetHeight(PAD + 28 + PAD)
+	W.EdgeLine(filters, "TOP")
+	W.EdgeLine(filters, "BOTTOM")
+
+	local langOptions = {}
+	for _, lang in ipairs(C.FAQ_LANGUAGES) do
+		langOptions[#langOptions + 1] = { value = lang, label = C.LANGUAGE_NAMES[lang] }
+	end
+	local langDropdown = W.Dropdown(filters, 150, langOptions, function()
+		return page.lang
+	end, function(lang)
+		page.lang = lang
+		page:Refresh()
+	end)
+	langDropdown:SetPoint("TOPRIGHT", -SIDE, -PAD - 2)
+	W.Tooltip(langDropdown, L.FAQ_LANGUAGE, L.FAQ_LANGUAGE_TIP)
+
+	local search = W.SearchBox(filters, 100, L.QUEUE_SEARCH, function(text)
+		page.search = strtrim(text):lower()
+		page:Refresh(true)
+	end)
+	search:SetPoint("TOPLEFT", SIDE, -PAD)
+	search:SetPoint("RIGHT", langDropdown, "LEFT", -12, 0)
+
+	-- Bottom bar: "Ask a question".
+	local bottom = CreateFrame("Frame", nil, main)
+	bottom:SetPoint("BOTTOMLEFT")
+	bottom:SetPoint("BOTTOMRIGHT")
+	bottom:SetHeight(50)
+	W.Fill(bottom, W.COLORS.nav):SetAllPoints()
+	W.EdgeLine(bottom, "TOP")
+	local ask = W.Button(bottom, L.QUEUE_ASK, nil, function()
+		local key = page.lastOpened and page.lastOpened.topic or page.topic
+		local topic = key and C.GetFaqTopic(key)
+		ns.AskDialog.Show(function(q)
+			UI.ShowQuestion(q.id)
+		end, topic and topic.cat)
+	end, "primary")
+	ask:SetPoint("RIGHT", -SIDE, 0)
+	local askHint = W.Text(bottom, "GameFontHighlight", W.SOFT)
+	askHint:SetPoint("LEFT", SIDE, 0)
+	askHint:SetPoint("RIGHT", ask, "LEFT", -12, 0)
+	askHint:SetWordWrap(false)
+	askHint:SetText(L.FAQ_NOT_HELPED)
+
+	local listBox = CreateFrame("Frame", nil, main, "WowScrollBoxList")
+	listBox:SetPoint("TOPLEFT", filters, "BOTTOMLEFT", SIDE, -10)
+	listBox:SetPoint("BOTTOMRIGHT", bottom, "TOPRIGHT", -SIDE - 12, 8)
+	local listBar = CreateFrame("EventFrame", nil, main, "MinimalScrollBar")
+	listBar:SetPoint("TOPLEFT", listBox, "TOPRIGHT", 4, 0)
+	listBar:SetPoint("BOTTOMLEFT", listBox, "BOTTOMRIGHT", 4, 0)
+
+	local empty = W.Text(main, "GameFontHighlight", W.MUTED)
+	empty:SetPoint("CENTER", 0, 10)
+	empty:SetJustifyH("CENTER")
+	empty:SetText(L.QUEUE_NO_MATCH)
+
+	-- Measuring.
+	local measure = main:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
 	measure:Hide()
 	local function TextHeight(text, font, width, spacing)
 		measure:SetFontObject(font)
 		measure:SetSpacing(spacing or 0)
 		measure:SetWidth(width)
 		measure:SetText(text)
-		return measure:GetStringHeight()
+		return math.ceil(measure:GetStringHeight())
 	end
 
-	local function DetailHeight(entry)
-		local width = math.max(100, textBox:GetWidth() - 4)
-		local q, a = Faq.GetText(entry, page.lang)
-		return 14 + 8 + TextHeight(q, W.TITLE_FONT, width) + 14 + TextHeight(a, "GameFontHighlight", width, 3) + 12
-	end
-
-	local detailView = CreateScrollBoxListLinearView()
-	detailView:SetElementExtentCalculator(function(_, entry)
-		return DetailHeight(entry)
-	end)
-	detailView:SetElementInitializer("Frame", function(frame, entry)
-		if not frame.title then
-			frame.category = W.Text(frame, "GameFontNormalSmall")
-			frame.category:SetPoint("TOPLEFT")
-			frame.title = W.Text(frame, W.TITLE_FONT, W.GOLD)
-			frame.title:SetPoint("TOPLEFT", frame.category, "BOTTOMLEFT", 0, -8)
-			frame.title:SetPoint("RIGHT", -4, 0)
-			frame.title:SetWordWrap(true)
-			frame.text = W.Text(frame, "GameFontHighlight", W.TEXT)
-			frame.text:SetPoint("TOPLEFT", frame.title, "BOTTOMLEFT", 0, -14)
-			frame.text:SetPoint("RIGHT", -4, 0)
-			frame.text:SetWordWrap(true)
-			frame.text:SetSpacing(3)
+	local function ItemWidth()
+		local width = listBox:GetWidth()
+		if not width or width <= 0 then
+			width = FALLBACK_WIDTH
 		end
+		return width
+	end
+	-- Text width inside an item: icon on the left, topic label on the right.
+	local function QuestionWidth()
+		return ItemWidth() - 2 * ITEM_PAD - ICON_SIZE - 8
+	end
+	local function AnswerWidth()
+		return ItemWidth() - 2 * ITEM_PAD - ICON_SIZE - 8
+	end
+
+	local function ShowsTopic()
+		return page.topic == nil
+	end
+
+	local function Heights(entry)
 		local q, a = Faq.GetText(entry, page.lang)
-		frame.category:SetText(FaqRefs.TopicText(entry.topic))
-		frame.title:SetText(q)
-		frame.text:SetText(a)
+		local qHeight = TextHeight(q, "GameFontNormal", QuestionWidth())
+		local head = ITEM_PAD + qHeight + (ShowsTopic() and 4 + 12 or 0) + ITEM_PAD
+		if not page.expanded[entry.id] then
+			return head, qHeight, 0
+		end
+		local aHeight = TextHeight(a, "GameFontHighlight", AnswerWidth(), 3)
+		return head + aHeight + ITEM_PAD + 2, qHeight, aHeight
+	end
+
+	local listView = CreateScrollBoxListLinearView()
+	listView:SetElementExtentCalculator(function(_, entry)
+		return (Heights(entry)) + ITEM_GAP
 	end)
-	ScrollUtil.InitScrollBoxListWithScrollBar(textBox, textBar, detailView)
-
-	local none = W.Text(detail, "GameFontHighlight", W.MUTED)
-	none:SetPoint("CENTER", 0, 28)
-	none:SetText(L.QUEUE_NO_MATCH)
-
-	function page:Refresh()
-		switch:SetText(C.LANGUAGE_NAMES[self.lang])
-		topicDropdown:Refresh()
-		local source = self.topic and Faq.GetTopic(self.topic) or Faq.GetAll()
-		-- Word search (all words, best match first); plain text search for
-		-- searches without a usable word, e.g. while the first letters are
-		-- typed.
-		local list = source
-		if self.search ~= "" then
-			list = FaqSearch.Filter(source, self.search, { self.lang, "en" })
-			if not list then
-				list = {}
-				for _, entry in ipairs(source) do
-					if FaqSearch.Contains(entry, self.search, self.lang) then
-						list[#list + 1] = entry
-					end
+	listView:SetElementInitializer("Button", function(item, entry)
+		if not item.question then
+			item.bg = W.Panel(item)
+			item.bg:SetPoint("TOPLEFT")
+			item.bg:SetPoint("BOTTOMRIGHT", 0, ITEM_GAP)
+			-- Everything is drawn on the panel (a child frame covers its
+			-- parent's textures); the panel takes no mouse, clicks reach item.
+			local bg = item.bg
+			item.hl = bg:CreateTexture(nil, "BORDER")
+			item.hl:SetPoint("TOPLEFT", 1, -1)
+			item.hl:SetPoint("BOTTOMRIGHT", -1, 1)
+			item.hl:SetColorTexture(1, 0.82, 0, 0.07)
+			item.hl:Hide()
+			item:SetScript("OnEnter", function(self)
+				self.hl:Show()
+			end)
+			item:SetScript("OnLeave", function(self)
+				self.hl:Hide()
+			end)
+			item.icon = bg:CreateTexture(nil, "ARTWORK")
+			item.icon:SetSize(ICON_SIZE, ICON_SIZE)
+			item.icon:SetPoint("TOPLEFT", ITEM_PAD, -ITEM_PAD)
+			item.question = bg:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+			item.question:SetJustifyH("LEFT")
+			item.question:SetJustifyV("TOP")
+			item.question:SetWordWrap(true)
+			item.question:SetPoint("TOPLEFT", item.icon, "TOPRIGHT", 8, 0)
+			item.topic = W.Text(bg, "GameFontHighlightSmall", W.MUTED)
+			item.topic:SetWordWrap(false)
+			item.answer = bg:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+			item.answer:SetJustifyH("LEFT")
+			item.answer:SetJustifyV("TOP")
+			item.answer:SetWordWrap(true)
+			item.answer:SetSpacing(3)
+			item.divider = W.Divider(bg)
+			item.divider:SetHeight(1)
+			item:SetScript("OnClick", function(self)
+				local id = self.entry.id
+				page.expanded[id] = not page.expanded[id] or nil
+				if page.expanded[id] then
+					page.lastOpened = self.entry
 				end
+				page:RefreshList()
+			end)
+		end
+		item.entry = entry
+		local q, a = Faq.GetText(entry, page.lang)
+		local open = page.expanded[entry.id]
+		local _, qHeight, aHeight = Heights(entry)
+		item.icon:SetTexture(open and MINUS or PLUS)
+		item.question:SetWidth(QuestionWidth())
+		item.question:SetHeight(qHeight)
+		item.question:SetText(q)
+		local below = item.question
+		if ShowsTopic() then
+			item.topic:ClearAllPoints()
+			item.topic:SetPoint("TOPLEFT", item.question, "BOTTOMLEFT", 0, -4)
+			item.topic:SetText(FaqRefs.TopicText(entry.topic))
+			item.topic:Show()
+			below = item.topic
+		else
+			item.topic:Hide()
+		end
+		if open then
+			W.SetColors(item.bg, W.COLORS.selected, W.COLORS.favorite)
+			item.divider:ClearAllPoints()
+			item.divider:SetPoint("TOPLEFT", below, "BOTTOMLEFT", 0, -ITEM_PAD / 2)
+			item.divider:SetPoint("RIGHT", item.bg, "RIGHT", -ITEM_PAD, 0)
+			item.divider:Show()
+			item.answer:ClearAllPoints()
+			item.answer:SetPoint("TOPLEFT", below, "BOTTOMLEFT", 0, -ITEM_PAD)
+			item.answer:SetWidth(AnswerWidth())
+			item.answer:SetHeight(aHeight)
+			item.answer:SetText(a)
+			item.answer:Show()
+		else
+			W.SetColors(item.bg, W.COLORS.card, W.COLORS.line)
+			item.divider:Hide()
+			item.answer:Hide()
+		end
+	end)
+	ScrollUtil.InitScrollBoxListWithScrollBar(listBox, listBar, listView)
+
+	-- Heights depend on the width: lay out again once it is known or changes.
+	local lastWidth = 0
+	listBox:HookScript("OnSizeChanged", function(_, width)
+		if width and width > 0 and math.abs(width - lastWidth) >= 1 then
+			lastWidth = width
+			if page.list then
+				page:RefreshList()
 			end
 		end
-		local selectedVisible = false
-		for _, entry in ipairs(list) do
-			selectedVisible = selectedVisible or entry == self.selected
+	end)
+
+	--------------------------------------------------------------------------
+	-- Data.
+	--------------------------------------------------------------------------
+
+	-- Entries of the topic, filtered by the search: word search (all words,
+	-- best match first), plain text search while no usable word is typed.
+	local function Filtered()
+		local source = page.topic and Faq.GetTopic(page.topic) or Faq.GetAll()
+		if page.search == "" then
+			return source
 		end
-		-- Keep the selection while it matches, else show the first entry.
-		if not selectedVisible then
-			self.selected = list[1]
+		local list = FaqSearch.Filter(source, page.search, { page.lang, "en" })
+		if list then
+			return list
 		end
-		scrollBox:SetDataProvider(CreateDataProvider(list), true)
-		empty:SetShown(#list == 0)
-		textBox:SetDataProvider(CreateDataProvider(self.selected and { self.selected } or {}))
-		none:SetShown(self.selected == nil)
+		list = {}
+		for _, entry in ipairs(source) do
+			if FaqSearch.Contains(entry, page.search, page.lang) then
+				list[#list + 1] = entry
+			end
+		end
+		return list
 	end
 
-	-- Shows one entry: its topic, no search, the entry selected and in view.
+	-- Re-lays out the entries, keeping the scroll position.
+	function page:RefreshList()
+		listBox:SetDataProvider(CreateDataProvider(self.list or {}), true)
+		empty:SetShown(#(self.list or {}) == 0)
+	end
+
+	-- toTop: the topic or search changed, start at the top.
+	function page:Refresh(toTop)
+		langDropdown:Refresh()
+		topicBox:SetDataProvider(CreateDataProvider(TopicList()), true)
+		self.list = Filtered()
+		-- One search result opens right away.
+		if self.search ~= "" and #self.list == 1 then
+			self.expanded[self.list[1].id] = true
+		end
+		listBox:SetDataProvider(CreateDataProvider(self.list), not toTop)
+		empty:SetShown(#self.list == 0)
+	end
+
+	-- Shows one entry: its topic, no search, the entry open and in view.
 	function page:Select(id)
 		local entry = Faq.Get(id)
 		if not entry then
@@ -276,10 +408,11 @@ local function Build(content)
 		self.topic = entry.topic
 		self.search = ""
 		search:SetText("")
-		self.selected = entry
-		self:Refresh()
-		if scrollBox.ScrollToElementData then
-			scrollBox:ScrollToElementData(entry)
+		self.expanded[id] = true
+		self.lastOpened = entry
+		self:Refresh(true)
+		if listBox.ScrollToElementData then
+			listBox:ScrollToElementData(entry)
 		end
 	end
 
