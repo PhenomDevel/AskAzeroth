@@ -54,6 +54,7 @@ Core\Data\Faq\Addon.lua
 Core\Data\Faq\Start.lua
 Core\Data\Faq\Quests.lua
 Core\Data\Faq\Classes.lua
+Core\Data\Faq\Warrior.lua
 Core\Data\Faq\Hunter.lua
 Core\Data\Faq\Combat.lua
 Core\Data\Faq\Travel.lua
