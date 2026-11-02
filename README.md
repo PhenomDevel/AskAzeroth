@@ -50,8 +50,9 @@ In the first release:
 - **My questions** with your answers, kept as long as you like.
 - **Pin answers:** pin any helpful answer, also on other players' questions.
   It's kept on your computer together with the question and never expires.
-- **Built-in FAQ** in English and German: over 50 beginner questions sorted
-  into topics such as first steps, quests, travel, gold and dungeons.
+- **Built-in FAQ** in English and German: beginner questions sorted into
+  topics such as first steps, quests, each class, travel, gold and dungeons.
+  Mentors can attach FAQ entries to their answers as links.
 - **Sync after login:** questions asked while you were offline are fetched
   from other players on the channel.
 - **7 languages:** English, Deutsch, Français, Español, Italiano, Русский,

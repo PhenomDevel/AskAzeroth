@@ -71,6 +71,9 @@ C.RETENTION_DAYS = { 0, 7, 30, 90 }
 C.TITLE_MAX = 120
 C.BODY_MAX = 500
 C.ANSWER_MAX = 500
+-- FAQ entries an answer can refer to, and the longest FAQ id.
+C.FAQ_REFS_MAX = 3
+C.FAQ_ID_MAX = 32
 C.ZONE_MAX = 64
 C.CTX_TEXT_MAX = 24
 C.LEVEL_MAX = 100

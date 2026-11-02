@@ -108,8 +108,7 @@ AskAzeroth/
     Data/
       Categories.lua
       FaqTopics.lua
-      FaqDE.lua
-      FaqEN.lua
+      Faq/              ein Thema pro Datei, Deutsch und Englisch je Eintrag
   UI/
     Widgets.lua
     MainFrame.lua     Fenster, Navigation

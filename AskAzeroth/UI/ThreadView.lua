@@ -1,4 +1,4 @@
--- luacheck: read globals CreateScrollBoxListLinearView ScrollUtil CreateDataProvider StaticPopup_Show YES NO GameTooltip
+-- luacheck: read globals CreateScrollBoxListLinearView ScrollUtil CreateDataProvider StaticPopup_Show YES NO GameTooltip CopyTable
 -- luacheck: globals StaticPopupDialogs
 local _, ns = ...
 
@@ -31,6 +31,9 @@ local PIN_ICON = "Interface\\Icons\\INV_Misc_Note_01"
 local ANSWER_HEIGHT = 40
 local BUTTON_WIDTH = 96
 local BOTTOM_HEIGHT = 12 + ANSWER_HEIGHT + 4 + 14 + 8
+-- Row of attached FAQ entries above the answer field.
+local REFS_HEIGHT = 22 + 8
+local REF_CHIP_MAX = 24
 
 -- Asker line under the question: name, level and class, zone, age.
 local function ContextText(q)
@@ -155,9 +158,38 @@ function ThreadView.Create(parent, get)
 	send:SetHeight(ANSWER_HEIGHT)
 	send:SetPoint("TOPRIGHT", -SIDE, -12)
 
+	-- FAQ entries attached to the next answer, shown as removable chips.
+	local refs = {}
+	local refsRow = CreateFrame("Frame", nil, bottom)
+	refsRow:SetPoint("TOPLEFT", SIDE, -12)
+	refsRow:SetPoint("RIGHT", -SIDE, 0)
+	refsRow:SetHeight(22)
+	local refChips = {}
+	local UpdateRefs
+	for i = 1, C.FAQ_REFS_MAX do
+		refChips[i] = W.Chip(refsRow, function(self)
+			table.remove(refs, self.index)
+			UpdateRefs()
+		end, W.GOLD)
+		refChips[i].index = i
+	end
+
+	local faqButton = ns.FaqRefs.CreatePickerButton(bottom, ANSWER_HEIGHT, function(id)
+		for _, known in ipairs(refs) do
+			if known == id then
+				return
+			end
+		end
+		if #refs < C.FAQ_REFS_MAX then
+			refs[#refs + 1] = id
+			UpdateRefs()
+		end
+	end)
+	faqButton:SetPoint("RIGHT", send, "LEFT", -8, 0)
+
 	local answerBox = W.TextArea(bottom, 200, ANSWER_HEIGHT, C.ANSWER_MAX)
 	answerBox:SetPoint("TOPLEFT", SIDE, -12)
-	answerBox:SetPoint("RIGHT", send, "LEFT", -8, 0)
+	answerBox:SetPoint("RIGHT", faqButton, "LEFT", -8, 0)
 	answerBox.counter:ClearAllPoints()
 	answerBox.counter:SetPoint("TOPLEFT", answerBox, "BOTTOMLEFT", 0, -4)
 
@@ -214,7 +246,8 @@ function ThreadView.Create(parent, get)
 		if item.folded then
 			return PAD + 14 + PAD + GAP
 		end
-		return PAD + 14 + 6 + TextHeight(Util.EscapeText(item.answer.text), "GameFontHighlight", InnerWidth()) + PAD + GAP
+		return PAD + 14 + 6 + TextHeight(Util.EscapeText(item.answer.text), "GameFontHighlight", InnerWidth())
+			+ ns.FaqRefs.Height(item.answer.faq) + PAD + GAP
 	end
 
 	-- Answers of ignored players the reader unfolded, by answer id.
@@ -295,6 +328,7 @@ function ThreadView.Create(parent, get)
 		row.body:SetPoint("TOPLEFT", row.head, "BOTTOMLEFT", 0, -6)
 		row.body:SetPoint("RIGHT", -PAD, 0)
 		row.body:SetWordWrap(true)
+		row.links = ns.FaqRefs.CreateLinks(row.bg, row.body)
 	end
 
 	local function FillRow(row, item)
@@ -309,6 +343,7 @@ function ThreadView.Create(parent, get)
 			row.head:SetText("|cffa89a80" .. L.THREAD_IGNORED_ANSWER .. "|r")
 			row.body:SetText("")
 			row.body:Hide()
+			row.links:Fill(nil)
 			W.SetColors(row.bg, W.COLORS.window, W.COLORS.field)
 			return
 		end
@@ -324,6 +359,7 @@ function ThreadView.Create(parent, get)
 		row.age:SetText(W.Ago(Util.Now() - a.created))
 		row.body:SetText(Util.EscapeText(a.text))
 		row.body:Show()
+		row.links:Fill(a.faq)
 		if favorite then
 			W.SetColors(row.bg, W.COLORS.cardFavorite, W.COLORS.favorite)
 		else
@@ -378,9 +414,17 @@ function ThreadView.Create(parent, get)
 		local canAnswer = live and not solved
 		answerBox:SetShown(canAnswer)
 		send:SetShown(canAnswer)
+		faqButton:SetShown(canAnswer)
+		refsRow:SetShown(canAnswer and #refs > 0)
+		if not canAnswer then
+			faqButton:HidePicker()
+		end
 		message:ClearAllPoints()
 		if canAnswer then
-			bottom:SetHeight(BOTTOM_HEIGHT)
+			local refsHeight = #refs > 0 and REFS_HEIGHT or 0
+			bottom:SetHeight(BOTTOM_HEIGHT + refsHeight)
+			answerBox:SetPoint("TOPLEFT", SIDE, -12 - refsHeight)
+			send:SetPoint("TOPRIGHT", -SIDE, -12 - refsHeight)
 			message:SetPoint("LEFT", answerBox.counter, "RIGHT", 12, 0)
 		else
 			bottom:SetHeight(28)
@@ -403,9 +447,32 @@ function ThreadView.Create(parent, get)
 		end
 	end
 
+	function UpdateRefs()
+		local chips = {}
+		for i, chip in ipairs(refChips) do
+			local id = refs[i]
+			if id then
+				local label = ns.FaqRefs.Title(id) or id
+				if #label > REF_CHIP_MAX then
+					label = label:sub(1, REF_CHIP_MAX):gsub("[\128-\191]*$", ""):gsub("[\192-\255]$", "") .. "…"
+				end
+				chip:SetLabel(L.FAQ_REF_CHIP:format(label), true)
+				chip:SetActive(false)
+				chip:Show()
+				chips[#chips + 1] = chip
+			else
+				chip:Hide()
+			end
+		end
+		W.FlowChips(chips, refsRow, 0, 0, 6)
+		view:Refresh()
+	end
+
 	function view:SetQuestion(id)
 		if current ~= id then
 			answerBox:SetText("")
+			wipe(refs)
+			faqButton:HidePicker()
 			ShowMessage(nil)
 		end
 		current = id
@@ -418,12 +485,20 @@ function ThreadView.Create(parent, get)
 
 	send:SetScript("OnClick", function()
 		local text = strtrim(answerBox:GetText())
+		if text == "" and #refs > 0 then
+			-- Only FAQ links: the text names them, in the question's
+			-- language, for players without them (older versions).
+			local q = get(current)
+			text = ns.FaqRefs.FallbackText(refs, q and q.lang)
+		end
 		if text == "" then
 			return
 		end
-		local a, reason = ns.Net.Answer(current, text)
+		local a, reason = ns.Net.Answer(current, text, #refs > 0 and CopyTable(refs) or nil)
 		if a then
 			answerBox:SetText("")
+			wipe(refs)
+			UpdateRefs()
 			answerBox.editBox:ClearFocus()
 			ShowMessage(nil)
 		else

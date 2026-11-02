@@ -13,6 +13,10 @@
   class and talents, combat, travel, gold, professions, groups, chat,
   interface) with a topic filter. "Ask a question" from the FAQ picks the
   matching category for you.
+- FAQ links in answers: attach up to 3 FAQ entries to an answer with the
+  book button; readers open them with one click, in their own FAQ language.
+  Pinned answers keep their links. The FAQ has a topic per class and a topic
+  dropdown.
 - Main window (`/aa`) with the pages Questions, My questions, Pinned,
   Players, FAQ and Settings.
 - Settings: mentor mode, minimap button, languages (one hidden channel each),
