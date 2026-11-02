@@ -4,6 +4,9 @@
 
 - In development, no release yet.
 - Glossary tooltips in FAQ answers now show when you hover over a blue term.
+- FAQ links on answers: the FAQ button is off once 3 entries are attached,
+  and the chips above the answer field always fit into the window (long
+  questions are shortened, the tooltip shows them in full).
 - Notifications never pop up during combat any more; they follow right
   after the fight. Whether they also wait in instances stays a setting.
 - "Test" button for notifications in the settings, and the notification
