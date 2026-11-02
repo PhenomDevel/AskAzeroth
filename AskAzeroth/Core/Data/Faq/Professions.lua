@@ -254,31 +254,31 @@ ns.Faq.Add("prof", {
 		id = "prof-tools",
 		de = {
 			q = "Welche Werkzeuge brauche ich?",
-			a = "Bergbau braucht eine Spitzhacke, Kürschnerei ein Kürschnermesser, Schmiedekunst einen Schmiedehammer und Angeln eine Angelrute. Verzauberer brauchen eine Verzauberungsrute, Ingenieure später einen Schraubenschlüssel. Werkzeuge gibt es bei Handwerkswarenhändlern, meist direkt neben dem Lehrer.",
+			a = "Bergbau braucht eine Spitzhacke, Kürschnerei ein Kürschnermesser, Schmiedekunst einen Schmiedehammer und Angeln eine Angelrute; Ingenieure brauchen bald einen Schraubenschlüssel. Das alles gibt es bei Handwerkswarenhändlern, meist direkt neben dem Lehrer. Verzauberer stellen sich ihre Rute selbst her, aus einer Kupferrute vom Händler.",
 		},
 		en = {
 			q = "Which tools do I need?",
-			a = "Mining needs a mining pick, skinning a skinning knife, blacksmithing a blacksmith hammer and fishing a fishing pole. Enchanters need a runed rod, engineers later an arclight spanner. Trade supplies vendors sell them, usually right next to the trainer.",
+			a = "Mining needs a mining pick, skinning a skinning knife, blacksmithing a blacksmith hammer and fishing a fishing pole; engineers soon need an arclight spanner. Trade supplies vendors sell all of these, usually right next to the trainer. Enchanters make their runed rod themselves from a copper rod bought from a vendor.",
 		},
 		fr = {
 			q = "De quels outils ai-je besoin ?",
-			a = "Le minage demande une pioche de mineur, le dépeçage un couteau à dépecer, la forge un marteau de forgeron et la pêche une canne à pêche. Les enchanteurs ont besoin d'un bâtonnet runique, les ingénieurs plus tard d'une clé spéciale (Arclight Spanner). Les marchands de matériel d'artisanat les vendent, souvent juste à côté du maître.",
+			a = "Le minage demande une pioche de mineur, le dépeçage un couteau à dépecer, la forge un marteau de forgeron et la pêche une canne à pêche ; les ingénieurs ont vite besoin d'une clé spéciale (Arclight Spanner). Les marchands de matériel d'artisanat vendent tout cela, souvent juste à côté du maître. Les enchanteurs fabriquent eux-mêmes leur bâtonnet runique à partir d'un bâtonnet en cuivre acheté chez un marchand.",
 		},
 		es = {
 			q = "¿Qué herramientas necesito?",
-			a = "La minería necesita un pico de minero, el desuello un cuchillo de desollar, la herrería un martillo de herrero y la pesca una caña de pescar. Los encantadores necesitan una vara rúnica y los ingenieros, más adelante, una llave especial (Arclight Spanner). Los vendedores de suministros de artesanía las venden, casi siempre junto al instructor.",
+			a = "La minería necesita un pico de minero, el desuello un cuchillo de desollar, la herrería un martillo de herrero y la pesca una caña de pescar; los ingenieros pronto necesitan una llave especial (Arclight Spanner). Los vendedores de suministros de artesanía venden todo esto, casi siempre junto al instructor. Los encantadores fabrican ellos mismos su vara rúnica con una vara de cobre comprada a un vendedor.",
 		},
 		it = {
 			q = "Di quali attrezzi ho bisogno?",
-			a = "L'estrazione richiede un piccone da minatore, la scuoiatura un coltello da scuoiatore, la forgiatura un martello da fabbro e la pesca una canna da pesca. Gli incantatori hanno bisogno di una bacchetta runica, gli ingegneri più avanti di una chiave speciale (Arclight Spanner). Li vendono i mercanti di forniture artigianali, di solito accanto all'istruttore.",
+			a = "L'estrazione richiede un piccone da minatore, la scuoiatura un coltello da scuoiatore, la forgiatura un martello da fabbro e la pesca una canna da pesca; gli ingegneri presto hanno bisogno di una chiave speciale (Arclight Spanner). Tutto questo lo vendono i mercanti di forniture artigianali, di solito accanto all'istruttore. Gli incantatori si fabbricano da soli la bacchetta runica partendo da una bacchetta di rame comprata da un venditore.",
 		},
 		ru = {
 			q = "Какие инструменты мне нужны?",
-			a = "Для горного дела нужна шахтёрская кирка, для снятия шкур — нож для снятия шкур, для кузнечного дела — кузнечный молот, для рыбалки — удочка. Зачарователям нужен рунический жезл, инженерам позже — особый ключ (Arclight Spanner). Их продают торговцы ремесленными товарами, обычно рядом с наставником.",
+			a = "Для горного дела нужна шахтёрская кирка, для снятия шкур — нож для снятия шкур, для кузнечного дела — кузнечный молот, для рыбалки — удочка; инженерам вскоре понадобится особый ключ (Arclight Spanner). Всё это продают торговцы ремесленными товарами, обычно рядом с наставником. Зачарователи сами делают рунический жезл из медного жезла, купленного у торговца.",
 		},
 		pt = {
 			q = "De quais ferramentas preciso?",
-			a = "Mineração precisa de picareta de mineração, esfolamento de faca de esfolar, ferraria de martelo de ferreiro e pesca de vara de pescar. Encantadores precisam de um bastão rúnico, e engenheiros depois de uma chave especial (Arclight Spanner). Mercadores de suprimentos de ofício vendem, geralmente ao lado do instrutor.",
+			a = "Mineração precisa de picareta de mineração, esfolamento de faca de esfolar, ferraria de martelo de ferreiro e pesca de vara de pescar; engenheiros logo precisam de uma chave especial (Arclight Spanner). Mercadores de suprimentos de ofício vendem tudo isso, geralmente ao lado do instrutor. Encantadores fazem o próprio bastão rúnico a partir de um bastão de cobre comprado de um mercador.",
 		},
 	},
 	{
@@ -719,31 +719,31 @@ ns.Faq.Add("prof", {
 		id = "prof-camping",
 		de = {
 			q = "Was ist Camping?",
-			a = "Camping ist neu in WoW: Forever: Du stellst Lagerfeuer und weitere Objekte in der Welt auf, deren Buffs auch andere Spieler in der Nähe bekommen. Erste Objekte gibt es früh, bessere über Baupläne, die Bosse in Dungeons fallen lassen.",
+			a = "Camping ist neu in WoW: Forever: An einem Lagerfeuer können Spieler in der Nähe ihre selbst hergestellten Lager-Objekte aufstellen, jeder eins. Wer sich ans Feuer setzt, bis er ausgeruht ist, bekommt deren Buffs für eine Weile. Jeder Beruf hat eigene Objekte; die ersten gibt es schon früh, bessere über Baupläne, die Dungeonbosse fallen lassen.",
 		},
 		en = {
 			q = "What is camping?",
-			a = "Camping is new in WoW: Forever: you place campfires and other objects in the world, and nearby players get their buffs too. The first objects come early, better ones from blueprints that dungeon bosses drop.",
+			a = "Camping is new in WoW: Forever: at a campfire, nearby players can each place one camp object they crafted. Sit at the fire until you are rested and you get their buffs for a while. Every profession has its own objects; the first come early, better ones from blueprints that dungeon bosses drop.",
 		},
 		fr = {
 			q = "Qu'est-ce que le camping ?",
-			a = "Le camping est nouveau dans WoW: Forever : vous placez des feux de camp et d'autres objets dans le monde, et les joueurs à proximité profitent aussi de leurs bonus. Les premiers objets viennent tôt, les meilleurs grâce à des plans que lâchent les boss de donjon.",
+			a = "Le camping est nouveau dans WoW: Forever : autour d'un feu de camp, les joueurs proches peuvent chacun installer un objet de camp qu'ils ont fabriqué. Asseyez-vous près du feu jusqu'à être reposé et vous recevez leurs bonus pour un moment. Chaque métier a ses propres objets ; les premiers viennent tôt, les meilleurs grâce à des plans que lâchent les boss de donjon.",
 		},
 		es = {
 			q = "¿Qué es la acampada?",
-			a = "La acampada es nueva en WoW: Forever: colocas hogueras y otros objetos en el mundo, y los jugadores cercanos también reciben sus beneficios. Los primeros objetos llegan pronto, y los mejores, con planos que sueltan los jefes de mazmorra.",
+			a = "La acampada es nueva en WoW: Forever: junto a una hoguera, cada jugador cercano puede colocar un objeto de campamento que haya fabricado. Siéntate junto al fuego hasta estar descansado y recibes sus beneficios durante un rato. Cada profesión tiene sus propios objetos; los primeros llegan pronto, y los mejores, con planos que sueltan los jefes de mazmorra.",
 		},
 		it = {
 			q = "Cos'è il campeggio?",
-			a = "Il campeggio è una novità di WoW: Forever: piazzi fuochi da campo e altri oggetti nel mondo, e anche i giocatori vicini ricevono i loro benefici. I primi oggetti arrivano presto, quelli migliori da progetti lasciati dai boss delle spedizioni.",
+			a = "Il campeggio è una novità di WoW: Forever: presso un fuoco da campo, ogni giocatore vicino può piazzare un oggetto da campo che ha creato. Siediti vicino al fuoco finché sei riposato e ricevi i loro benefici per un po'. Ogni professione ha oggetti propri; i primi arrivano presto, quelli migliori da progetti lasciati dai boss delle spedizioni.",
 		},
 		ru = {
 			q = "Что такое кемпинг?",
-			a = "Кемпинг — новинка WoW: Forever: вы ставите в мире костры и другие предметы, и их усиления получают также игроки поблизости. Первые предметы доступны рано, лучшие — по чертежам, которые выпадают из боссов подземелий.",
+			a = "Кемпинг — новинка WoW: Forever: у костра каждый игрок поблизости может поставить один созданный им предмет лагеря. Посидите у огня, пока не отдохнёте, и получите их усиления на некоторое время. У каждой профессии свои предметы; первые доступны рано, лучшие — по чертежам, которые выпадают из боссов подземелий.",
 		},
 		pt = {
 			q = "O que é o acampamento?",
-			a = "O acampamento é novidade no WoW: Forever: você coloca fogueiras e outros objetos no mundo, e jogadores por perto também recebem os bônus. Os primeiros objetos vêm cedo, e os melhores de plantas que chefes de masmorra deixam cair.",
+			a = "O acampamento é novidade no WoW: Forever: numa fogueira, cada jogador por perto pode colocar um objeto de acampamento que fabricou. Sente-se perto do fogo até ficar descansado e você recebe os bônus deles por um tempo. Cada profissão tem objetos próprios; os primeiros vêm cedo, e os melhores de plantas que chefes de masmorra deixam cair.",
 		},
 	},
 	{
