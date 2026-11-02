@@ -37,31 +37,31 @@ ns.Faq.Add("class", {
 		id = "class-talents",
 		de = {
 			q = "Was sind Talente?",
-			a = "Mit Talentpunkten spezialisierst du deine Klasse. Den ersten Punkt bekommst du auf Stufe 10, danach einen pro Stufe. Das Talentfenster öffnest du über die Menüleiste oder mit der Taste N. Ab Stufe 40 kannst du eine zweite Talentverteilung (Dualspezialisierung) freischalten und zwischen beiden wechseln.",
+			a = "Mit Talentpunkten spezialisierst du deine Klasse. Den ersten Punkt bekommst du auf Stufe 10, danach einen pro Stufe. Das Talentfenster öffnest du über die Menüleiste oder mit der Taste [N]. Ab Stufe 40 kannst du eine zweite Talentverteilung (Dualspezialisierung) freischalten und zwischen beiden wechseln.",
 		},
 		en = {
 			q = "What are talents?",
-			a = "Talent points let you specialise your class. You get your first point at level 10 and one more each level after that. Open the talent window from the menu bar or with the N key. From level 40 you can unlock a second talent setup (dual specialisation) and switch between them.",
+			a = "Talent points let you specialise your class. You get your first point at level 10 and one more each level after that. Open the talent window from the menu bar or with the [N] key. From level 40 you can unlock a second talent setup (dual specialisation) and switch between them.",
 		},
 		fr = {
 			q = "Que sont les talents ?",
-			a = "Les points de talent permettent de spécialiser votre classe. Vous recevez le premier au niveau 10, puis un de plus à chaque niveau. Ouvrez la fenêtre des talents depuis la barre de menu ou avec la touche N. À partir du niveau 40, vous pouvez débloquer une seconde répartition (double spécialisation) et passer de l'une à l'autre.",
+			a = "Les points de talent permettent de spécialiser votre classe. Vous recevez le premier au niveau 10, puis un de plus à chaque niveau. Ouvrez la fenêtre des talents depuis la barre de menu ou avec la touche [N]. À partir du niveau 40, vous pouvez débloquer une seconde répartition (double spécialisation) et passer de l'une à l'autre.",
 		},
 		es = {
 			q = "¿Qué son los talentos?",
-			a = "Los puntos de talento te permiten especializar tu clase. Recibes el primero en el nivel 10 y uno más en cada nivel siguiente. Abre la ventana de talentos desde la barra de menú o con la tecla N. A partir del nivel 40 puedes desbloquear una segunda configuración (especialización doble) y cambiar entre ambas.",
+			a = "Los puntos de talento te permiten especializar tu clase. Recibes el primero en el nivel 10 y uno más en cada nivel siguiente. Abre la ventana de talentos desde la barra de menú o con la tecla [N]. A partir del nivel 40 puedes desbloquear una segunda configuración (especialización doble) y cambiar entre ambas.",
 		},
 		it = {
 			q = "Cosa sono i talenti?",
-			a = "I punti talento ti permettono di specializzare la classe. Ricevi il primo al livello 10 e poi uno in più a ogni livello. Apri la finestra dei talenti dalla barra dei menu o con il tasto N. Dal livello 40 puoi sbloccare una seconda configurazione (doppia specializzazione) e passare dall'una all'altra.",
+			a = "I punti talento ti permettono di specializzare la classe. Ricevi il primo al livello 10 e poi uno in più a ogni livello. Apri la finestra dei talenti dalla barra dei menu o con il tasto [N]. Dal livello 40 puoi sbloccare una seconda configurazione (doppia specializzazione) e passare dall'una all'altra.",
 		},
 		ru = {
 			q = "Что такое таланты?",
-			a = "Очки талантов позволяют специализировать класс. Первое очко вы получаете на 10-м уровне, затем по одному за каждый уровень. Окно талантов открывается из панели меню или клавишей N. С 40-го уровня можно открыть второй набор талантов (двойная специализация) и переключаться между ними.",
+			a = "Очки талантов позволяют специализировать класс. Первое очко вы получаете на 10-м уровне, затем по одному за каждый уровень. Окно талантов открывается из панели меню или клавишей [N]. С 40-го уровня можно открыть второй набор талантов (двойная специализация) и переключаться между ними.",
 		},
 		pt = {
 			q = "O que são talentos?",
-			a = "Pontos de talento permitem especializar sua classe. Você ganha o primeiro no nível 10 e mais um a cada nível depois. Abra a janela de talentos pela barra de menu ou com a tecla N. A partir do nível 40 você pode liberar uma segunda distribuição (especialização dupla) e alternar entre elas.",
+			a = "Pontos de talento permitem especializar sua classe. Você ganha o primeiro no nível 10 e mais um a cada nível depois. Abra a janela de talentos pela barra de menu ou com a tecla [N]. A partir do nível 40 você pode liberar uma segunda distribuição (especialização dupla) e alternar entre elas.",
 		},
 	},
 	{
@@ -161,31 +161,31 @@ ns.Faq.Add("class", {
 		id = "class-action-bar",
 		de = {
 			q = "Wie lege ich Zauber auf die Aktionsleiste?",
-			a = "Öffne das Zauberbuch (Taste P) und zieh einen Zauber auf einen freien Platz deiner Aktionsleiste. Mit den Zahlentasten 1 bis 0 wirkst du dann die Zauber der ersten Leiste. Neue Ränge eines Zaubers ersetzen den alten auf der Leiste meist von selbst.",
+			a = "Öffne das Zauberbuch (Taste [P]) und zieh einen Zauber auf einen freien Platz deiner Aktionsleiste. Mit den Zahlentasten [1] bis [0] wirkst du dann die Zauber der ersten Leiste. Neue Ränge eines Zaubers ersetzen den alten auf der Leiste meist von selbst.",
 		},
 		en = {
 			q = "How do I put spells on my action bar?",
-			a = "Open the spellbook (P key) and drag a spell onto a free slot of your action bar. The number keys 1 to 0 then cast the spells in the first bar. New ranks of a spell usually replace the old one on the bar on their own.",
+			a = "Open the spellbook ([P] key) and drag a spell onto a free slot of your action bar. The number keys [1] to [0] then cast the spells in the first bar. New ranks of a spell usually replace the old one on the bar on their own.",
 		},
 		fr = {
 			q = "Comment mettre des sorts dans ma barre d'action ?",
-			a = "Ouvrez le grimoire (touche P) et faites glisser un sort sur un emplacement libre de votre barre d'action. Les touches 1 à 0 lancent ensuite les sorts de la première barre. Les nouveaux rangs d'un sort remplacent généralement l'ancien sur la barre tout seuls.",
+			a = "Ouvrez le grimoire (touche [P]) et faites glisser un sort sur un emplacement libre de votre barre d'action. Les touches [1] à [0] lancent ensuite les sorts de la première barre. Les nouveaux rangs d'un sort remplacent généralement l'ancien sur la barre tout seuls.",
 		},
 		es = {
 			q = "¿Cómo pongo hechizos en la barra de acción?",
-			a = "Abre el libro de hechizos (tecla P) y arrastra un hechizo a una ranura libre de tu barra de acción. Las teclas del 1 al 0 lanzan entonces los hechizos de la primera barra. Los rangos nuevos de un hechizo suelen sustituir solos al antiguo en la barra.",
+			a = "Abre el libro de hechizos (tecla [P]) y arrastra un hechizo a una ranura libre de tu barra de acción. Las teclas del [1] al [0] lanzan entonces los hechizos de la primera barra. Los rangos nuevos de un hechizo suelen sustituir solos al antiguo en la barra.",
 		},
 		it = {
 			q = "Come metto gli incantesimi sulla barra delle azioni?",
-			a = "Apri il libro degli incantesimi (tasto P) e trascina un incantesimo in uno spazio libero della barra delle azioni. I tasti da 1 a 0 lanciano poi gli incantesimi della prima barra. I nuovi gradi di un incantesimo di solito sostituiscono da soli quello vecchio sulla barra.",
+			a = "Apri il libro degli incantesimi (tasto [P]) e trascina un incantesimo in uno spazio libero della barra delle azioni. I tasti da [1] a [0] lanciano poi gli incantesimi della prima barra. I nuovi gradi di un incantesimo di solito sostituiscono da soli quello vecchio sulla barra.",
 		},
 		ru = {
 			q = "Как поместить заклинания на панель команд?",
-			a = "Откройте книгу заклинаний (клавиша P) и перетащите заклинание в свободную ячейку панели команд. Клавиши от 1 до 0 будут применять заклинания первой панели. Новые ранги заклинания обычно сами заменяют старый на панели.",
+			a = "Откройте книгу заклинаний (клавиша [P]) и перетащите заклинание в свободную ячейку панели команд. Клавиши от [1] до [0] будут применять заклинания первой панели. Новые ранги заклинания обычно сами заменяют старый на панели.",
 		},
 		pt = {
 			q = "Como coloco feitiços na barra de ações?",
-			a = "Abra o grimório (tecla P) e arraste um feitiço para um espaço livre da barra de ações. As teclas de 1 a 0 lançam então os feitiços da primeira barra. Novas categorias de um feitiço costumam substituir sozinhas a antiga na barra.",
+			a = "Abra o grimório (tecla [P]) e arraste um feitiço para um espaço livre da barra de ações. As teclas de [1] a [0] lançam então os feitiços da primeira barra. Novas categorias de um feitiço costumam substituir sozinhas a antiga na barra.",
 		},
 	},
 	{
