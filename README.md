@@ -3,7 +3,7 @@
 <img src="https://raw.githubusercontent.com/PhenomDevel/AskAzeroth/main/docs/logo/logo.png" alt="AskAzeroth logo" width="96" align="right">
 
 [![Version](https://img.shields.io/github/v/release/PhenomDevel/AskAzeroth?label=version)](https://github.com/PhenomDevel/AskAzeroth/releases/latest)
-[![CurseForge](https://img.shields.io/badge/CurseForge-coming%20soon-lightgrey)](https://github.com/PhenomDevel/AskAzeroth)
+[![CurseForge](https://img.shields.io/curseforge/dt/1781780?label=CurseForge)](https://www.curseforge.com/projects/1781780)
 [![License](https://img.shields.io/github/license/PhenomDevel/AskAzeroth)](https://github.com/PhenomDevel/AskAzeroth/blob/main/LICENSE)
 
 **Ask Azeroth anything – experienced players answer.**
@@ -11,7 +11,7 @@
 New to World of Warcraft Forever? Ask your question in game and players who
 know the answer reply in a thread. There's no website and no external tool:
 questions and answers go from player to player over hidden addon channels,
-one per language. AskAzeroth is in development; there is no release yet.
+one per language.
 
 ## Supported versions
 
@@ -25,10 +25,9 @@ realms. Classic Era and other clients are not supported.
 
 ## Installation
 
-AskAzeroth isn't released yet. Once it is:
-
-1. Install it with the CurseForge or Wago app, or download the zip from
-   [GitHub releases](https://github.com/PhenomDevel/AskAzeroth/releases/latest).
+1. Install it with the [CurseForge](https://www.curseforge.com/projects/1781780)
+   or [Wago](https://addons.wago.io/addons/aND9e96o) app, or download the zip
+   from [GitHub releases](https://github.com/PhenomDevel/AskAzeroth/releases/latest).
 2. Manual install: extract `AskAzeroth` into
    `World of Warcraft/<client>/Interface/AddOns/`.
 3. Log in and type `/aa`.
@@ -36,8 +35,6 @@ AskAzeroth isn't released yet. Once it is:
 What changed: [CHANGELOG.md](https://github.com/PhenomDevel/AskAzeroth/blob/main/CHANGELOG.md)
 
 ## Features
-
-In the first release:
 
 - **Ask a question** with a category (quest, class, dungeon, profession,
   interface, other), a short summary and optional details.
