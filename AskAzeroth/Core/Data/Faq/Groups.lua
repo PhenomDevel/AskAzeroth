@@ -6,31 +6,31 @@ ns.Faq.Add("group", {
 		id = "group-find",
 		de = {
 			q = "Wie finde ich eine Gruppe für einen Dungeon?",
-			a = "Nutze die Gruppensuche: Stell deine Gruppe ein oder schau, wer schon sucht; eingeladen wird von Hand. Einen automatischen Dungeonfinder gibt es in WoW: Forever nicht, und Versammlungssteine beschwören niemanden, also lauft ihr selbst zum Eingang. Fragen im Chat oder in deiner Gilde klappt auch. Sag, welchen Dungeon du machen willst und welche Rolle du spielst (Tank, Heiler oder DD), und klärt die Beuteregeln vor dem Start.",
+			a = "Nutze die Gruppensuche (LFG-Tool): Stell deine Gruppe ein oder schau, wer schon sucht. Fragen im Chat oder in deiner Gilde klappt auch. Sag, welchen Dungeon du machen willst und welche Rolle du spielst (Tank, Heiler oder DD), und klärt die Beuteregeln vor dem Start.",
 		},
 		en = {
 			q = "How do I find a group for a dungeon?",
-			a = "Use the group finder: list your group or look at who is already searching; invites are sent by hand. There is no automatic Dungeon Finder in WoW: Forever, and meeting stones do not summon anyone, so you walk to the entrance yourselves. Asking in chat or your guild works, too. Say which dungeon you want and which role you play (tank, healer or DPS), and agree on loot rules before you start.",
+			a = "Use the group finder (LFG tool): list your group or look at who is already searching. Asking in chat or your guild works, too. Say which dungeon you want and which role you play (tank, healer or DPS), and agree on loot rules before you start.",
 		},
 		fr = {
 			q = "Comment trouver un groupe pour un donjon ?",
-			a = "Utilisez la recherche de groupe : inscrivez votre groupe ou regardez qui cherche déjà ; les invitations se font à la main. Il n'y a pas d'outil Donjons automatique dans WoW: Forever, et les pierres de rencontre n'invoquent personne : vous allez donc à pied jusqu'à l'entrée. Demander dans le chat ou à votre guilde marche aussi. Dites quel donjon vous voulez faire et votre rôle (tank, soigneur ou DPS), et mettez-vous d'accord sur les règles de butin avant de commencer.",
+			a = "Utilisez la recherche de groupe (outil LFG) : inscrivez votre groupe ou regardez qui cherche déjà. Demander dans le chat ou à votre guilde marche aussi. Dites quel donjon vous voulez faire et votre rôle (tank, soigneur ou DPS), et mettez-vous d'accord sur les règles de butin avant de commencer.",
 		},
 		es = {
 			q = "¿Cómo encuentro grupo para una mazmorra?",
-			a = "Usa el buscador de grupos: anuncia tu grupo o mira quién está buscando ya; las invitaciones se hacen a mano. En WoW: Forever no hay buscador de mazmorras automático y las piedras de encuentro no invocan a nadie, así que vais andando hasta la entrada. Preguntar en el chat o en tu hermandad también funciona. Di qué mazmorra quieres hacer y tu rol (tanque, sanador o DPS), y acordad las reglas de botín antes de empezar.",
+			a = "Usa el buscador de grupos (herramienta LFG): anuncia tu grupo o mira quién está buscando ya. Preguntar en el chat o en tu hermandad también funciona. Di qué mazmorra quieres hacer y tu rol (tanque, sanador o DPS), y acordad las reglas de botín antes de empezar.",
 		},
 		it = {
 			q = "Come trovo un gruppo per una spedizione?",
-			a = "Usa la ricerca gruppo: inserisci il tuo gruppo o guarda chi sta già cercando; gli inviti si mandano a mano. In WoW: Forever non c'è la ricerca automatica delle spedizioni e le pietre d'incontro non evocano nessuno, quindi raggiungete l'ingresso a piedi. Funziona anche chiedere in chat o in gilda. Di' quale spedizione vuoi fare e il tuo ruolo (tank, guaritore o DPS), e accordatevi sulle regole del bottino prima di iniziare.",
+			a = "Usa la ricerca gruppo (strumento LFG): inserisci il tuo gruppo o guarda chi sta già cercando. Funziona anche chiedere in chat o in gilda. Di' quale spedizione vuoi fare e il tuo ruolo (tank, guaritore o DPS), e accordatevi sulle regole del bottino prima di iniziare.",
 		},
 		ru = {
 			q = "Как найти группу в подземелье?",
-			a = "Воспользуйтесь поиском группы: разместите свою группу или посмотрите, кто уже ищет; приглашают вручную. Автоматического поиска подземелий в WoW: Forever нет, а камни встреч никого не призывают, так что до входа добираетесь сами. Можно также спросить в чате или в гильдии. Скажите, в какое подземелье хотите и какая у вас роль (танк, лекарь или ДД), и до начала договоритесь о правилах добычи.",
+			a = "Воспользуйтесь поиском группы (LFG): разместите свою группу или посмотрите, кто уже ищет. Можно также спросить в чате или в гильдии. Скажите, в какое подземелье хотите и какая у вас роль (танк, лекарь или ДД), и до начала договоритесь о правилах добычи.",
 		},
 		pt = {
 			q = "Como encontro grupo para uma masmorra?",
-			a = "Use o localizador de grupos: anuncie seu grupo ou veja quem já está procurando; os convites são feitos manualmente. Não há localizador de masmorras automático no WoW: Forever, e as pedras de encontro não invocam ninguém, então vocês vão a pé até a entrada. Perguntar no chat ou na guilda também funciona. Diga qual masmorra quer fazer e sua função (tanque, curador ou DPS), e combinem as regras de saque antes de começar.",
+			a = "Use o localizador de grupos (ferramenta LFG): anuncie seu grupo ou veja quem já está procurando. Perguntar no chat ou na guilda também funciona. Diga qual masmorra quer fazer e sua função (tanque, curador ou DPS), e combinem as regras de saque antes de começar.",
 		},
 	},
 	{
