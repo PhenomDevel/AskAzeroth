@@ -23,8 +23,9 @@ local _, ns = ...
 --     },
 --   })
 --
--- English and German are required (C.FAQ_REQUIRED); the other languages
--- fall back to English like the FAQ. Texts are plain text without "|".
+-- English and German are required (C.FAQ_REQUIRED); all entries are also
+-- in the other addon languages (fr, es, it, ru, pt), and a missing language
+-- falls back to English like the FAQ. Texts are plain text without "|".
 -- def stays short (C.GLOSSARY_DEF_MAX bytes): it is shown in a tooltip;
 -- details belong in the FAQ.
 local Glossary = {}
@@ -149,13 +150,53 @@ end
 -- Words that mark an entry inside a text in lang: term and other names
 -- (the chat forms are for chat only), each also with its first letter in
 -- upper and lower case and all in lower and upper case, since players
--- write "dot", "aoe" or "DOT" (ASCII only). Entries with lower = false
+-- write "dot", "aoe" or "DOT" (whole words in lower and upper case only for
+-- ASCII; the first letter also for é or я, see CaseFirst). Entries with lower = false
 -- only as written. withChat adds the chat forms (field chat, as written).
 -- withEnglish adds the English forms (players write
 -- "threat" or "healer" in every language); the forms of lang come first.
 -- Longest first, so "Blessing of Protection" wins over a shorter form
 -- inside it. Built once per language.
 local forms = {}
+
+-- form with its first letter in upper (upper = true) or lower case. Besides
+-- ASCII it knows the two-byte UTF-8 letters of the addon's languages:
+-- Latin-1 (É/é, À/à, …) and Cyrillic (А/а … Я/я, Ё/ё), since string.upper
+-- and string.lower only change ASCII letters.
+local function CaseFirst(form, upper)
+	local b1, b2 = form:byte(1, 2)
+	if not b1 or b1 < 128 then
+		local first = form:sub(1, 1)
+		return (upper and first:upper() or first:lower()) .. form:sub(2)
+	end
+	if not b2 then
+		return form
+	end
+	if b1 == 0xC3 then
+		if upper and b2 >= 0xA0 and b2 <= 0xBE and b2 ~= 0xB7 then
+			b2 = b2 - 0x20
+		elseif not upper and b2 >= 0x80 and b2 <= 0x9E and b2 ~= 0x97 then
+			b2 = b2 + 0x20
+		end
+	elseif b1 == 0xD0 then
+		if upper and b2 >= 0xB0 and b2 <= 0xBF then
+			b2 = b2 - 0x20 -- а-п
+		elseif not upper and b2 >= 0x90 and b2 <= 0x9F then
+			b2 = b2 + 0x20 -- А-П
+		elseif not upper and b2 >= 0xA0 and b2 <= 0xAF then
+			b1, b2 = 0xD1, b2 - 0x20 -- Р-Я
+		elseif not upper and b2 == 0x81 then
+			b1, b2 = 0xD1, 0x91 -- Ё
+		end
+	elseif b1 == 0xD1 and upper then
+		if b2 >= 0x80 and b2 <= 0x8F then
+			b1, b2 = 0xD0, b2 + 0x20 -- р-я
+		elseif b2 == 0x91 then
+			b1, b2 = 0xD0, 0x81 -- ё
+		end
+	end
+	return string.char(b1, b2) .. form:sub(3)
+end
 
 local function Forms(lang, withEnglish, withChat)
 	local langKey = withEnglish and lang ~= "en" and lang .. "+en" or lang
@@ -175,8 +216,8 @@ local function Forms(lang, withEnglish, withChat)
 	local function AddCased(entry, form)
 		Add(entry, form)
 		if entry.lower ~= false then
-			Add(entry, form:sub(1, 1):upper() .. form:sub(2))
-			Add(entry, form:sub(1, 1):lower() .. form:sub(2))
+			Add(entry, CaseFirst(form, true))
+			Add(entry, CaseFirst(form, false))
 			Add(entry, form:lower())
 			Add(entry, form:upper())
 		end

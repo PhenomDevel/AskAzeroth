@@ -3,6 +3,13 @@
 ## Unreleased
 
 - In development, no release yet.
+- Glossary: 63 more terms players use in chat (roles, raid words, items,
+  stats and spec short forms, chat slang and the classic dungeons that are
+  in WoW: Forever). Molten Core, Blackwing Lair and Zul'Gurub are gone
+  from the glossary, since they are not raids in WoW: Forever.
+- The glossary is now in all seven addon languages (French, Spanish,
+  Italian, Russian and Portuguese added). Terms are also found when their
+  first letter is an accented or Cyrillic capital (É, Я).
 - Questions page: new filter "Hide answered" hides questions that already
   have an answer, so mentors see at a glance who still waits for help.
 - Categories have icons in lists, filters, the ask dialog and
@@ -199,8 +206,9 @@
 - Game terms and abbreviations in the normal chat (party, raid, guild,
   whispers, say, channels) become links: hover over "Aggro" for its
   explanation, click to open it in the glossary. Can be switched off in the
-  settings ("Explain terms in the chat"). The explanation disappears as soon as
-  the mouse leaves the term.
+  settings ("Explain terms in the chat"). The AskAzeroth logo in front of
+  a marked term shows where the marking comes from. The explanation
+  disappears as soon as the mouse leaves the term.
 - Mentors can attach glossary terms to their answers as well as FAQ
   entries: the book button has a "Glossary" tab. Readers hover the term for
   its explanation and click it to open the glossary.
