@@ -15,6 +15,8 @@
   The question you have open stays until you open another one, so
   answering it no longer throws you out of the thread. "Keep the ones I
   answered" (on by default) keeps questions you answered in the list.
+  The three options sit in one "Filter" dropdown, so they take a single
+  row next to the open-question count.
 - Categories have icons in lists, filters, the ask dialog and
   notifications. Class questions show the asker's class icon.
 - Better contrast: grey secondary text is lighter, and open FAQ entries and
