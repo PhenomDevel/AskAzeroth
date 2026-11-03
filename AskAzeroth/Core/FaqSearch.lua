@@ -107,32 +107,95 @@ local function Stopwords(lang)
 	return set
 end
 
--- Stems of text without the stop words of the languages in langs, in
--- order of appearance, each once. The second list holds, for each stem,
--- the stem of the word without its plural ending (false when it has none),
--- so a search for "hots" or "bosses" also finds "HoT" and "Boss".
-local function Stems(text, langs)
+-- Search words of text: folded, without the stop words of the languages
+-- in langs, in order of appearance, each once. Words shorter than minChars
+-- (default C.FAQ_SEARCH_MIN_CHARS) are dropped too, except numbers like
+-- "60".
+function FaqSearch.Words(text, langs, minChars)
+	minChars = minChars or C.FAQ_SEARCH_MIN_CHARS
 	local sets = {}
 	for _, lang in ipairs(langs) do
 		sets[#sets + 1] = Stopwords(lang)
 	end
-	local list, singulars, seen = {}, {}, {}
+	local list, seen = {}, {}
 	for word in FaqSearch.Normalize(text):gmatch("%S+") do
-		local skip = CharCount(word) < C.FAQ_SEARCH_MIN_CHARS and not word:find("^%d%d+$")
+		local skip = seen[word] or CharCount(word) < minChars and not word:find("^%d%d+$")
 		for _, set in ipairs(sets) do
 			skip = skip or set[word]
 		end
 		if not skip then
-			local stem = Stem(word)
-			if not seen[stem] then
-				seen[stem] = true
-				list[#list + 1] = stem
-				local singular = ns.Util.Singular(word, C.FAQ_SEARCH_MIN_CHARS)
-				singulars[#list] = singular and Stem(singular) or false
+			seen[word] = true
+			list[#list + 1] = word
+		end
+	end
+	return list
+end
+
+-- Stems of text without the stop words of the languages in langs, in
+-- order of appearance, each once. The second list holds, for each stem,
+-- the stem of the word without its plural ending (false when it has none),
+-- so a search for "hots" or "bosses" also finds "HoT" and "Boss". The
+-- third list holds the whole word of each stem in the singular.
+local function Stems(text, langs)
+	local list, singulars, words, seen = {}, {}, {}, {}
+	for _, word in ipairs(FaqSearch.Words(text, langs)) do
+		local stem = Stem(word)
+		if not seen[stem] then
+			seen[stem] = true
+			list[#list + 1] = stem
+			local singular = ns.Util.Singular(word, C.FAQ_SEARCH_MIN_CHARS)
+			singulars[#list] = singular and Stem(singular) or false
+			words[#list] = singular or word
+		end
+	end
+	return list, singulars, words
+end
+
+-- Other names from the glossary (Core/Glossary.lua), so a search for
+-- "aggro" also finds texts that say "threat": per language list, word →
+-- the other one-word names (term and other names in those languages, in
+-- the singular) of the glossary entries that have that word as a name.
+-- Matched as whole words, since stems are too short ("threat" and
+-- "thread" share one). Built on first use; the glossary loads after this
+-- file.
+local synonymSets = {}
+
+local function Synonyms(langs)
+	local key = table.concat(langs, "+")
+	local map = synonymSets[key]
+	if map or not ns.Glossary then
+		return map or {}
+	end
+	map = {}
+	for _, entry in ipairs(ns.Glossary.GetAll("en")) do
+		local names, seen = {}, {}
+		for _, lang in ipairs(langs) do
+			if entry[lang] then
+				local term, alt = ns.Glossary.GetText(entry, lang)
+				for _, name in ipairs({ term, unpack(alt) }) do
+					local words = FaqSearch.Words(name, langs)
+					if #words == 1 and FaqSearch.Normalize(name):match("^%s*(.-)%s*$") == words[1] then
+						local word = ns.Util.Singular(words[1], C.FAQ_SEARCH_MIN_CHARS) or words[1]
+						if not seen[word] then
+							seen[word] = true
+							names[#names + 1] = word
+						end
+					end
+				end
+			end
+		end
+		for _, name in ipairs(names) do
+			local list = map[name] or {}
+			map[name] = list
+			for _, other in ipairs(names) do
+				if other ~= name then
+					list[#list + 1] = other
+				end
 			end
 		end
 	end
-	return list, singulars
+	synonymSets[key] = map
+	return map
 end
 
 -- Per language: stem → { [entry] = weight }, plus the position of every
@@ -144,21 +207,28 @@ local function Index(lang)
 	if index then
 		return index
 	end
-	index = { stems = {}, order = {} }
+	index = { stems = {}, words = {}, order = {} }
 	local langs = { lang }
+	local function Put(map, key, entry, weight)
+		local entries = map[key]
+		if not entries then
+			entries = {}
+			map[key] = entries
+		end
+		if (entries[entry] or 0) < weight then
+			entries[entry] = weight
+		end
+	end
 	local function Add(entry, text, weight)
 		if not text then
 			return
 		end
 		for _, stem in ipairs(Stems(text, langs)) do
-			local entries = index.stems[stem]
-			if not entries then
-				entries = {}
-				index.stems[stem] = entries
-			end
-			if (entries[entry] or 0) < weight then
-				entries[entry] = weight
-			end
+			Put(index.stems, stem, entry, weight)
+		end
+		-- Whole words in the singular, for the glossary's other names.
+		for _, word in ipairs(FaqSearch.Words(text, langs)) do
+			Put(index.words, ns.Util.Singular(word, C.FAQ_SEARCH_MIN_CHARS) or word, entry, weight)
 		end
 	end
 	for position, entry in ipairs(Faq.GetAll()) do
@@ -190,27 +260,41 @@ end
 -- search words found), best first, and the number of search words.
 function FaqSearch.Search(text, langs)
 	langs = FaqLanguages(langs)
-	local terms, singulars = Stems(text or "", langs)
+	local terms, singulars, words = Stems(text or "", langs)
 	if #terms == 0 then
 		return {}, 0
 	end
 	local results, byEntry = {}, {}
 	local order
+	local synonyms = Synonyms(langs)
 	for i, term in ipairs(terms) do
-		local singular = singulars[i]
+		-- An indexed stem that starts with the word or its singular
+		-- matches, and an indexed word that is one of its other names in
+		-- the glossary.
+		local prefixes = { term, singulars[i] or nil }
+		local others = synonyms[words[i]] or {}
 		-- Best weight of every entry for this word, over all languages.
 		local best = {}
+		local function Take(entries)
+			for entry, weight in pairs(entries) do
+				if (best[entry] or 0) < weight then
+					best[entry] = weight
+				end
+			end
+		end
 		for _, lang in ipairs(langs) do
 			local index = Index(lang)
 			order = order or index.order
 			for stem, entries in pairs(index.stems) do
-				if stem:sub(1, #term) == term or (singular and stem:sub(1, #singular) == singular) then
-					for entry, weight in pairs(entries) do
-						if (best[entry] or 0) < weight then
-							best[entry] = weight
-						end
+				for _, prefix in ipairs(prefixes) do
+					if stem:sub(1, #prefix) == prefix then
+						Take(entries)
+						break
 					end
 				end
+			end
+			for _, other in ipairs(others) do
+				Take(index.words[other] or {})
 			end
 		end
 		for entry, weight in pairs(best) do

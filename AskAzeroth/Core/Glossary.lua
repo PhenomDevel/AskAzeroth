@@ -174,17 +174,58 @@ local function Haystack(entry, lang, namesOnly)
 	return namesOnly and folded.names or folded.all
 end
 
--- True when text appears in term, other names or definition of entry in
--- lang (namesOnly: in term or other names only), in any case and also in
--- the singular ("hots" finds HoT, "доты" finds ДоТ).
-function Glossary.Contains(entry, text, lang, namesOnly)
-	local haystack = Haystack(entry, lang, namesOnly)
-	text = ns.FaqSearch.Normalize(text):match("^%s*(.-)%s*$")
-	if text == "" or haystack:find(text, 1, true) then
-		return true
+-- Search words of the last search (FaqSearch.Words, also two-letter words
+-- like "cc"), since Contains runs for every entry with the same text.
+local lastText, lastLang, lastWords
+
+local function SearchWords(text, lang)
+	if text ~= lastText or lang ~= lastLang then
+		lastText, lastLang = text, lang
+		lastWords = ns.FaqSearch.Words(text, { lang, "en" }, 2)
 	end
-	local singular = Singulars(text)
-	return singular ~= nil and haystack:find(singular, 1, true) ~= nil
+	return lastWords
+end
+
+-- How well text matches entry in lang: the number of search words (stop
+-- words like "how" or "does" left out) that start a word of the term or
+-- other names, the number that start a word anywhere (names and
+-- definition), and the number of search words. A word also matches in the
+-- singular ("hots" finds HoT). In any case (also Cyrillic) and without
+-- accents. A text of stop words only counts as one word, searched as
+-- written.
+function Glossary.Match(entry, text, lang)
+	local names, everything = Haystack(entry, lang, true), Haystack(entry, lang)
+	local words = SearchWords(text, lang)
+	if #words == 0 then
+		local plain = ns.FaqSearch.Normalize(text):match("^%s*(.-)%s*$")
+		local singular = Singulars(plain)
+		local function Has(haystack)
+			return (plain == "" or haystack:find(plain, 1, true) or singular and haystack:find(singular, 1, true)) and 1 or 0
+		end
+		return Has(names), Has(everything), 1
+	end
+	local inNames, inAll = 0, 0
+	for _, word in ipairs(words) do
+		local singular = ns.Util.Singular(word, 2)
+		local function Has(haystack)
+			return haystack:find(" " .. word, 1, true) or singular and haystack:find(" " .. singular, 1, true)
+		end
+		if Has(names) then
+			inNames = inNames + 1
+		end
+		if Has(everything) then
+			inAll = inAll + 1
+		end
+	end
+	return inNames, inAll, #words
+end
+
+-- True when text matches entry in lang: a search word in its term or other
+-- names ("wie funktioniert aggro" finds Aggro), or all search words
+-- anywhere (see Match).
+function Glossary.Contains(entry, text, lang)
+	local inNames, inAll, count = Glossary.Match(entry, text, lang)
+	return inNames > 0 or inAll == count
 end
 
 -- Words that mark an entry inside a text in lang: term and other names

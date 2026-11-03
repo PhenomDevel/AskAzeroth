@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Search: searches by words instead of the exact phrase. "how does aggro" or
+  "wie funktioniert Aggro" now find the Aggro glossary term and the FAQ
+  entries about threat; question words are ignored, and other names from
+  the glossary count too (aggro = threat = Bedrohung).
 - FAQ: a search in "All topics" also shows matching glossary terms (marked
   "Glossary"). Terms whose name matches come first, then the FAQ entries.
 - FAQ: the glossary now sits right below "All topics" in the topic list.
