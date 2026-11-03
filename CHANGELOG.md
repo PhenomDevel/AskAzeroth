@@ -1,6 +1,8 @@
 # Changelog
 
-## v1.0.0 (2026-11-04)
+## Unreleased
+
+## v1.0.0 (2026-11-03)
 
 First release. AskAzeroth is community driven: questions only reach players
 running the addon, so the more players and mentors use it, the faster
