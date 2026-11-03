@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v1.0.2 (2026-11-03)
+
 - Search: searches by words instead of the exact phrase. "how does aggro" or
   "wie funktioniert Aggro" now find the Aggro glossary term and the FAQ
   entries about threat; question words are ignored, and other names from
