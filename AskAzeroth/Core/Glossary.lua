@@ -153,25 +153,32 @@ local function Singulars(text)
 	return changed and singular or nil
 end
 
--- Folded term, other names and definition per language and entry
--- (FaqSearch.Normalize: also Cyrillic lower case, no accents).
+-- Folded texts per language and entry (FaqSearch.Normalize: also
+-- Cyrillic lower case, no accents): names = term and other names, all =
+-- names and definition.
 local haystacks = {}
 
--- True when text appears in term, other names or definition of entry in
--- lang, in any case and also in the singular ("hots" finds HoT, "доты"
--- finds ДоТ).
-function Glossary.Contains(entry, text, lang)
+local function Haystack(entry, lang, namesOnly)
 	local byEntry = haystacks[lang]
 	if not byEntry then
 		byEntry = {}
 		haystacks[lang] = byEntry
 	end
-	local haystack = byEntry[entry]
-	if not haystack then
+	local folded = byEntry[entry]
+	if not folded then
 		local term, alt, def = Glossary.GetText(entry, lang)
-		haystack = " " .. ns.FaqSearch.Normalize(term .. " " .. table.concat(alt, " ") .. " " .. def) .. " "
-		byEntry[entry] = haystack
+		local names = " " .. ns.FaqSearch.Normalize(term .. " " .. table.concat(alt, " ")) .. " "
+		folded = { names = names, all = names .. ns.FaqSearch.Normalize(def) .. " " }
+		byEntry[entry] = folded
 	end
+	return namesOnly and folded.names or folded.all
+end
+
+-- True when text appears in term, other names or definition of entry in
+-- lang (namesOnly: in term or other names only), in any case and also in
+-- the singular ("hots" finds HoT, "доты" finds ДоТ).
+function Glossary.Contains(entry, text, lang, namesOnly)
+	local haystack = Haystack(entry, lang, namesOnly)
 	text = ns.FaqSearch.Normalize(text):match("^%s*(.-)%s*$")
 	if text == "" or haystack:find(text, 1, true) then
 		return true

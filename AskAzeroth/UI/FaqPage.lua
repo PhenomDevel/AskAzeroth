@@ -425,7 +425,11 @@ local function Build(content)
 		if ShowsTopic() then
 			item.topic:ClearAllPoints()
 			item.topic:SetPoint("TOPLEFT", item.question, "BOTTOMLEFT", 0, -4)
-			item.topic:SetText(FaqRefs.TopicText(entry.topic))
+			if IsGlossary(entry) then
+				item.topic:SetText(("|c%s%s|r"):format(W.Hex(W.BLUE), L.GLOSSARY))
+			else
+				item.topic:SetText(FaqRefs.TopicText(entry.topic))
+			end
 			item.topic:Show()
 			below = item.topic
 		else
@@ -474,22 +478,30 @@ local function Build(content)
 	-- Data.
 	--------------------------------------------------------------------------
 
-	-- Entries of the topic, filtered by the search: word search (all words,
-	-- best match first), plain text search while no usable word is typed.
-	local function Filtered()
-		if page.topic == GLOSSARY then
-			local list = {}
-			for _, entry in ipairs(Glossary.GetAll(page.lang)) do
-				if page.search == "" or Glossary.Contains(entry, page.search, page.lang) then
-					list[#list + 1] = entry
-				end
+	-- Glossary entries that match the search, alphabetically. namesOnly:
+	-- match in term or other names only; false: match only in the
+	-- definition.
+	local function GlossaryMatches(namesOnly)
+		local list = {}
+		for _, entry in ipairs(Glossary.GetAll(page.lang)) do
+			local match
+			if namesOnly == nil then
+				match = Glossary.Contains(entry, page.search, page.lang)
+			else
+				local inNames = Glossary.Contains(entry, page.search, page.lang, true)
+				match = inNames == namesOnly and (inNames or Glossary.Contains(entry, page.search, page.lang))
 			end
-			return list
+			if match then
+				list[#list + 1] = entry
+			end
 		end
-		local source = page.topic and Faq.GetTopic(page.topic) or Faq.GetAll()
-		if page.search == "" then
-			return source
-		end
+		return list
+	end
+
+	-- FAQ entries of source filtered by the search: word search (all
+	-- words, best match first), plain text search while no usable word is
+	-- typed.
+	local function FaqMatches(source)
 		local list = FaqSearch.Filter(source, page.search, { page.lang, "en" })
 		if list then
 			return list
@@ -497,6 +509,31 @@ local function Build(content)
 		list = {}
 		for _, entry in ipairs(source) do
 			if FaqSearch.Contains(entry, page.search, page.lang) then
+				list[#list + 1] = entry
+			end
+		end
+		return list
+	end
+
+	-- Entries of the topic, filtered by the search. A search in "All
+	-- topics" also searches the glossary: terms whose name matches come
+	-- first, then the FAQ entries, then terms that match only in their
+	-- explanation.
+	local function Filtered()
+		if page.topic == GLOSSARY then
+			return GlossaryMatches()
+		end
+		local source = page.topic and Faq.GetTopic(page.topic) or Faq.GetAll()
+		if page.search == "" then
+			return source
+		end
+		local faq = FaqMatches(source)
+		if page.topic then
+			return faq
+		end
+		local list = GlossaryMatches(true)
+		for _, entries in ipairs({ faq, GlossaryMatches(false) }) do
+			for _, entry in ipairs(entries) do
 				list[#list + 1] = entry
 			end
 		end
