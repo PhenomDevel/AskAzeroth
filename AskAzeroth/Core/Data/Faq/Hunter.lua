@@ -378,31 +378,31 @@ ns.Faq.Add("hunter", {
 		id = "hunter-pet-modes",
 		de = {
 			q = "Mein Tier greift alles an. Wie stelle ich das ab?",
-			a = "Über die Tierleiste über deinen Aktionsleisten: „Aggressiv“ greift alles in der Nähe an, „Defensiv“ nur, was dich oder das Tier angreift, „Passiv“ nichts von selbst. Für den Anfang ist „Defensiv“ die sicherste Wahl. Mit „Angreifen“ schickst du es gezielt auf dein Ziel.",
+			a = "Über die Tierleiste über deinen Aktionsleisten: {Aggressiv} greift alles in der Nähe an, {Defensiv} nur, was dich oder das Tier angreift, {Passiv} nichts von selbst. Für den Anfang ist {Defensiv} die sicherste Wahl. Mit {Angreifen} schickst du es gezielt auf dein Ziel.",
 		},
 		en = {
 			q = "My pet attacks everything. How do I stop that?",
-			a = "Use the pet bar above your action bars: Aggressive attacks everything nearby, Defensive only what attacks you or the pet, Passive nothing on its own. Defensive is the safest choice to start with. Use Attack to send it at your target.",
+			a = "Use the pet bar above your action bars: {Aggressive} attacks everything nearby, {Defensive} only what attacks you or the pet, {Passive} nothing on its own. {Defensive} is the safest choice to start with. Use {Attack} to send it at your target.",
 		},
 		fr = {
 			q = "Mon familier attaque tout. Comment l'en empêcher ?",
-			a = "Utilisez la barre du familier au-dessus de vos barres d'action : Agressif attaque tout ce qui est proche, Défensif seulement ce qui vous attaque, vous ou lui, Passif rien de lui-même. Défensif est le choix le plus sûr pour commencer. Utilisez Attaque pour l'envoyer sur votre cible.",
+			a = "Utilisez la barre du familier au-dessus de vos barres d'action : {Agressif} attaque tout ce qui est proche, {Défensif} seulement ce qui vous attaque, vous ou lui, {Passif} rien de lui-même. {Défensif} est le choix le plus sûr pour commencer. Utilisez {Attaque} pour l'envoyer sur votre cible.",
 		},
 		es = {
 			q = "Mi mascota ataca a todo. ¿Cómo lo evito?",
-			a = "Usa la barra de mascota sobre tus barras de acción: Agresivo ataca todo lo cercano, Defensivo solo lo que te ataca a ti o a la mascota, Pasivo nada por su cuenta. Defensivo es la opción más segura para empezar. Usa Atacar para enviarla a tu objetivo.",
+			a = "Usa la barra de mascota sobre tus barras de acción: {Agresivo} ataca todo lo cercano, {Defensivo} solo lo que te ataca a ti o a la mascota, {Pasivo} nada por su cuenta. {Defensivo} es la opción más segura para empezar. Usa {Atacar} para enviarla a tu objetivo.",
 		},
 		it = {
 			q = "Il mio famiglio attacca tutto. Come lo fermo?",
-			a = "Usa la barra del famiglio sopra le barre delle azioni: Aggressivo attacca tutto ciò che è vicino, Difensivo solo ciò che attacca te o il famiglio, Passivo niente di propria iniziativa. Difensivo è la scelta più sicura per iniziare. Usa Attacca per mandarlo sul tuo bersaglio.",
+			a = "Usa la barra del famiglio sopra le barre delle azioni: {Aggressivo} attacca tutto ciò che è vicino, {Difensivo} solo ciò che attacca te o il famiglio, {Passivo} niente di propria iniziativa. {Difensivo} è la scelta più sicura per iniziare. Usa {Attacca} per mandarlo sul tuo bersaglio.",
 		},
 		ru = {
 			q = "Мой питомец нападает на всех. Как это остановить?",
-			a = "Используйте панель питомца над панелями команд: «Агрессивный» атакует всех рядом, «Оборонительный» только тех, кто атакует вас или питомца, «Пассивный» никого сам. Для начала «Оборонительный» — самый безопасный выбор. Кнопкой «Атака» отправьте его на свою цель.",
+			a = "Используйте панель питомца над панелями команд: {Агрессивный} атакует всех рядом, {Оборонительный} только тех, кто атакует вас или питомца, {Пассивный} никого сам. Для начала {Оборонительный} — самый безопасный выбор. Кнопкой {Атака} отправьте его на свою цель.",
 		},
 		pt = {
 			q = "Meu ajudante ataca tudo. Como impeço isso?",
-			a = "Use a barra do ajudante acima das suas barras de ação: Agressivo ataca tudo por perto, Defensivo só o que ataca você ou o ajudante, Passivo nada por conta própria. Defensivo é a escolha mais segura para começar. Use Atacar para mandá-lo ao seu alvo.",
+			a = "Use a barra do ajudante acima das suas barras de ação: {Agressivo} ataca tudo por perto, {Defensivo} só o que ataca você ou o ajudante, {Passivo} nada por conta própria. {Defensivo} é a escolha mais segura para começar. Use {Atacar} para mandá-lo ao seu alvo.",
 		},
 	},
 	{
@@ -440,31 +440,31 @@ ns.Faq.Add("hunter", {
 		id = "hunter-pet-growl",
 		de = {
 			q = "Was muss ich mit meinem Tier im Dungeon beachten?",
-			a = "Schalte „Knurren“ auf der Tierleiste ab (Rechtsklick auf das Symbol), sonst zieht dein Tier dem Tank die Gegner weg. Stell das Tier auf „Defensiv“ oder „Passiv“ und schick es nur auf das Ziel des Tanks.",
+			a = "Schalte „Knurren“ auf der Tierleiste ab (Rechtsklick auf das Symbol), sonst zieht dein Tier dem Tank die Gegner weg. Stell das Tier auf {Defensiv} oder {Passiv} und schick es nur auf das Ziel des Tanks.",
 		},
 		en = {
 			q = "What should I watch out for with my pet in a dungeon?",
-			a = "Turn off Growl on the pet bar (right-click its icon), or your pet pulls enemies away from the tank. Set the pet to Defensive or Passive and only send it at the tank's target.",
+			a = "Turn off Growl on the pet bar (right-click its icon), or your pet pulls enemies away from the tank. Set the pet to {Defensive} or {Passive} and only send it at the tank's target.",
 		},
 		fr = {
 			q = "À quoi faire attention avec mon familier en donjon ?",
-			a = "Désactivez Grondement sur la barre du familier (clic droit sur son icône), sinon votre familier attire les ennemis loin du tank. Réglez le familier sur Défensif ou Passif et ne l'envoyez que sur la cible du tank.",
+			a = "Désactivez Grondement sur la barre du familier (clic droit sur son icône), sinon votre familier attire les ennemis loin du tank. Réglez le familier sur {Défensif} ou {Passif} et ne l'envoyez que sur la cible du tank.",
 		},
 		es = {
 			q = "¿Qué debo tener en cuenta con mi mascota en una mazmorra?",
-			a = "Desactiva Gruñido en la barra de mascota (clic derecho en su icono), o tu mascota apartará a los enemigos del tanque. Pon la mascota en Defensivo o Pasivo y envíala solo al objetivo del tanque.",
+			a = "Desactiva Gruñido en la barra de mascota (clic derecho en su icono), o tu mascota apartará a los enemigos del tanque. Pon la mascota en {Defensivo} o {Pasivo} y envíala solo al objetivo del tanque.",
 		},
 		it = {
 			q = "A che cosa devo stare attento con il famiglio in una spedizione?",
-			a = "Disattiva Ringhio nella barra del famiglio (clic destro sulla sua icona), altrimenti il famiglio allontana i nemici dal tank. Imposta il famiglio su Difensivo o Passivo e mandalo solo sul bersaglio del tank.",
+			a = "Disattiva Ringhio nella barra del famiglio (clic destro sulla sua icona), altrimenti il famiglio allontana i nemici dal tank. Imposta il famiglio su {Difensivo} o {Passivo} e mandalo solo sul bersaglio del tank.",
 		},
 		ru = {
 			q = "На что обратить внимание с питомцем в подземелье?",
-			a = "Отключите «Рык» на панели питомца (правый щелчок по значку), иначе питомец будет перетягивать врагов с танка. Переведите питомца в «Оборонительный» или «Пассивный» режим и отправляйте его только на цель танка.",
+			a = "Отключите «Рык» на панели питомца (правый щелчок по значку), иначе питомец будет перетягивать врагов с танка. Переведите питомца в {Оборонительный} или {Пассивный} режим и отправляйте его только на цель танка.",
 		},
 		pt = {
 			q = "Com o que devo ter cuidado com meu ajudante numa masmorra?",
-			a = "Desative Rosnar na barra do ajudante (clique direito no ícone), senão o ajudante tira os inimigos do tanque. Deixe o ajudante em Defensivo ou Passivo e mande-o só no alvo do tanque.",
+			a = "Desative Rosnar na barra do ajudante (clique direito no ícone), senão o ajudante tira os inimigos do tanque. Deixe o ajudante em {Defensivo} ou {Passivo} e mande-o só no alvo do tanque.",
 		},
 	},
 	{
