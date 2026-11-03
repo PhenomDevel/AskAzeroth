@@ -95,6 +95,42 @@ function Util.EscapeText(text)
 	return (text:gsub("|", "||"))
 end
 
+-- Plural endings of words in the addon's languages, longest first: Latin
+-- words take an s or es ("DoTs", "bosses"), words that end in a Cyrillic
+-- letter the Russian plural endings ("ДоТы"). Other endings (German -en,
+-- Italian vowel changes) are left out on purpose: they turn short game
+-- terms into everyday words ("Ding" -> "Dingen", "Lock" -> "Locken").
+local LATIN_PLURALS = { "es", "s" }
+local CYRILLIC_PLURALS = { "ами", "ов", "ей", "ам", "ах", "ы", "и" }
+
+-- The plural endings a word can take; the ending of the word decides.
+-- Latin endings are lower case: compare them with the lower case text.
+function Util.PluralEndings(word)
+	local lead = word:byte(-2)
+	if (word:byte(-1) or 0) >= 128 and (lead == 0xD0 or lead == 0xD1) then
+		return CYRILLIC_PLURALS, true
+	end
+	return LATIN_PLURALS, false
+end
+
+-- word without its plural ending ("hots" -> "hot", "bosses" -> "boss"), or
+-- nil when it has none. word is in lower case; the singular keeps at least
+-- minChars characters.
+function Util.Singular(word, minChars)
+	for _, list in ipairs({ LATIN_PLURALS, CYRILLIC_PLURALS }) do
+		for _, ending in ipairs(list) do
+			-- "boss" or "class" is no plural of "bos" or "clas"
+			if #word > #ending and word:sub(-#ending) == ending and word:sub(-2) ~= "ss" then
+				local singular = word:sub(1, -#ending - 1)
+				if #singular:gsub("[\128-\191]", "") >= minChars then
+					return singular
+				end
+				return nil
+			end
+		end
+	end
+end
+
 function Util.Count(t)
 	local n = 0
 	for _ in pairs(t) do

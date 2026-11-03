@@ -139,12 +139,45 @@ function Glossary.GetAll(lang)
 	return list
 end
 
--- True when text (plain, lower case) appears in term, other names or
--- definition of entry in lang.
+-- text with the plural ending of each word removed ("hots" -> "hot"), or
+-- nil when no word has one.
+local function Singulars(text)
+	local changed = false
+	local singular = text:gsub("[^%s]+", function(word)
+		local found = ns.Util.Singular(word, 2)
+		if found then
+			changed = true
+			return found
+		end
+	end)
+	return changed and singular or nil
+end
+
+-- Folded term, other names and definition per language and entry
+-- (FaqSearch.Normalize: also Cyrillic lower case, no accents).
+local haystacks = {}
+
+-- True when text appears in term, other names or definition of entry in
+-- lang, in any case and also in the singular ("hots" finds HoT, "доты"
+-- finds ДоТ).
 function Glossary.Contains(entry, text, lang)
-	local term, alt, def = Glossary.GetText(entry, lang)
-	local haystack = (term .. "\n" .. table.concat(alt, "\n") .. "\n" .. def):lower()
-	return haystack:find(text, 1, true) ~= nil
+	local byEntry = haystacks[lang]
+	if not byEntry then
+		byEntry = {}
+		haystacks[lang] = byEntry
+	end
+	local haystack = byEntry[entry]
+	if not haystack then
+		local term, alt, def = Glossary.GetText(entry, lang)
+		haystack = " " .. ns.FaqSearch.Normalize(term .. " " .. table.concat(alt, " ") .. " " .. def) .. " "
+		byEntry[entry] = haystack
+	end
+	text = ns.FaqSearch.Normalize(text):match("^%s*(.-)%s*$")
+	if text == "" or haystack:find(text, 1, true) then
+		return true
+	end
+	local singular = Singulars(text)
+	return singular ~= nil and haystack:find(singular, 1, true) ~= nil
 end
 
 -- Words that mark an entry inside a text in lang: term and other names
@@ -258,21 +291,14 @@ local function IsWordByte(byte)
 	return byte ~= nil and (byte >= 128 or string.char(byte):find("%w") ~= nil)
 end
 
--- Plural endings a form may carry when it is marked ("DoTs", "HoTs",
--- "Tanks", "bosses", "ДоТы"), so no entry needs its plurals listed. Latin
--- forms take an s or es in any case ("DOTS"); forms that end in a Cyrillic
--- letter take the Russian plural endings. Longest first. Other endings
--- (German -en, Italian vowel changes) are left out on purpose: they turn
--- short forms into everyday words ("Ding" -> "Dingen", "Lock" -> "Locken").
-local LATIN_PLURALS = { "es", "s" }
-local CYRILLIC_PLURALS = { "ами", "ов", "ей", "ам", "ах", "ы", "и" }
-
+-- A form may carry a plural ending when it is marked ("DoTs", "HoTs",
+-- "Tanks", "bosses", "ДоТы", see Util.PluralEndings), so no entry needs
+-- its plurals listed.
 -- Last byte of the plural ending that follows form at last in text, or
 -- last when none does.
 local function PluralEnd(text, form, last)
-	local lead = form:byte(-2)
-	local cyrillic = form:byte(-1) >= 128 and (lead == 0xD0 or lead == 0xD1)
-	for _, ending in ipairs(cyrillic and CYRILLIC_PLURALS or LATIN_PLURALS) do
+	local endings, cyrillic = ns.Util.PluralEndings(form)
+	for _, ending in ipairs(endings) do
 		local stop = last + #ending
 		local written = text:sub(last + 1, stop)
 		if (cyrillic and written or written:lower()) == ending and not IsWordByte(text:byte(stop + 1)) then
