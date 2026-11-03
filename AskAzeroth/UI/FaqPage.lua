@@ -478,22 +478,31 @@ local function Build(content)
 	-- Data.
 	--------------------------------------------------------------------------
 
-	-- Glossary entries that match the search, alphabetically. namesOnly:
-	-- match in term or other names only; false: match only in the
-	-- definition.
-	local function GlossaryMatches(namesOnly)
-		local list = {}
+	-- Glossary entries that match the search (Glossary.Match). byName:
+	-- entries with a search word in their term or other names, most such
+	-- words first; false: entries with no word in their names but all
+	-- words in their explanation; nil: both, alphabetically.
+	local function GlossaryMatches(byName)
+		local list, hits = {}, {}
 		for _, entry in ipairs(Glossary.GetAll(page.lang)) do
+			local inNames, inAll, count = Glossary.Match(entry, page.search, page.lang)
 			local match
-			if namesOnly == nil then
-				match = Glossary.Contains(entry, page.search, page.lang)
+			if byName == nil then
+				match = inNames > 0 or inAll == count
+			elseif byName then
+				match = inNames > 0
 			else
-				local inNames = Glossary.Contains(entry, page.search, page.lang, true)
-				match = inNames == namesOnly and (inNames or Glossary.Contains(entry, page.search, page.lang))
+				match = inNames == 0 and inAll == count
 			end
 			if match then
 				list[#list + 1] = entry
+				hits[entry] = inNames * 1000 - #list
 			end
+		end
+		if byName then
+			table.sort(list, function(a, b)
+				return hits[a] > hits[b]
+			end)
 		end
 		return list
 	end
@@ -521,7 +530,7 @@ local function Build(content)
 	-- explanation.
 	local function Filtered()
 		if page.topic == GLOSSARY then
-			return GlossaryMatches()
+			return page.search == "" and Glossary.GetAll(page.lang) or GlossaryMatches()
 		end
 		local source = page.topic and Faq.GetTopic(page.topic) or Faq.GetAll()
 		if page.search == "" then
