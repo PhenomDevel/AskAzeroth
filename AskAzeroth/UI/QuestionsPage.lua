@@ -81,17 +81,49 @@ local function Build(content)
 	end)
 	hideAnswered:SetPoint("TOPLEFT", hideSolved, "BOTTOMLEFT", 0, 2)
 	W.Tooltip(hideAnswered, L.QUEUE_HIDE_ANSWERED, L.QUEUE_HIDE_ANSWERED_TIP)
+	-- Finer "Hide answered": keep questions the player answered in the list.
+	local keepOwn = W.Checkbox(filters, L.QUEUE_KEEP_OWN_ANSWERED, function()
+		return ns.db.settings.keepOwnAnswered
+	end, function(checked)
+		ns.db.settings.keepOwnAnswered = checked
+		page:Refresh()
+	end)
+	keepOwn:SetPoint("TOPLEFT", hideAnswered, "BOTTOMLEFT", 18, 2)
+	W.Tooltip(keepOwn, L.QUEUE_KEEP_OWN_ANSWERED, L.QUEUE_KEEP_OWN_ANSWERED_TIP)
 	-- How many questions still wait for a first answer.
 	local openCount = W.Text(filters, "GameFontHighlight", W.SOFT)
 	openCount:SetPoint("RIGHT", filters, "RIGHT", -PAD, 0)
 	openCount:SetPoint("TOP", hideSolved, "TOP", 0, -6)
 	openCount:SetJustifyH("RIGHT")
-	filters:SetHeight(PAD + 28 + 10 + chipsHeight + 6 + 26 + 24 + PAD - 4)
+	filters:SetHeight(PAD + 28 + 10 + chipsHeight + 6 + 26 + 24 + 24 + PAD - 4)
 
-	-- Questions the "Hide solved" / "Hide answered" boxes take out.
+	-- True if the player wrote at least one answer to the question.
+	local function AnsweredByMe(q)
+		local me = ns:GetPlayerFullName()
+		for _, a in pairs(q.answers) do
+			if a.author == me then
+				return true
+			end
+		end
+		return false
+	end
+
+	-- Questions the "Hide solved" / "Hide answered" boxes take out. The
+	-- question open on the right always stays, so answering it (or someone
+	-- else answering it) doesn't throw the player out of the thread; it
+	-- leaves the list once another question is opened.
 	local function HiddenByStatus(q)
+		if q.id == page.thread:GetQuestion() then
+			return false
+		end
 		local settings = ns.db.settings
-		return (settings.hideSolved and q.solved) or (settings.hideAnswered and q.answerCount > 0) or false
+		if settings.hideSolved and q.solved then
+			return true
+		end
+		if settings.hideAnswered and q.answerCount > 0 then
+			return not (settings.keepOwnAnswered and AnsweredByMe(q))
+		end
+		return false
 	end
 
 	local listBox = CreateFrame("Frame", nil, listPane)
@@ -113,6 +145,8 @@ local function Build(content)
 	page.list = ns.QueueList.Create(listBox, function(q)
 		page.thread:SetQuestion(q.id)
 		page.list:SetSelected(q.id)
+		-- The question open before may be one the filters hide now.
+		page:Refresh()
 	end, function()
 		page.showIgnored = not page.showIgnored
 		page:Refresh()
@@ -173,17 +207,19 @@ local function Build(content)
 		end
 		hideSolved:Refresh()
 		hideAnswered:Refresh()
+		keepOwn:Refresh()
+		keepOwn:SetEnabled(ns.db.settings.hideAnswered)
+		keepOwn.label:SetAlpha(ns.db.settings.hideAnswered and 1 or 0.5)
 		openCount:SetText(L.QUEUE_OPEN_COUNT:format(UI.CountOpenQuestions()))
 		local emptyText
 		if #list == 0 then
 			emptyText = Store.Count() == 0 and L.QUEUE_EMPTY or L.QUEUE_NO_MATCH
 		end
 		self.list:SetQuestions(list, emptyText)
-		-- A removed question leaves the thread, and so does one that "Hide
-		-- solved" or "Hide answered" takes out of the list.
+		-- A removed question leaves the thread (the status filters keep the
+		-- open one, see HiddenByStatus).
 		local selected = self.thread:GetQuestion()
-		local selectedQ = selected and Store.Get(selected)
-		if selected and (not selectedQ or HiddenByStatus(selectedQ)) then
+		if selected and not Store.Get(selected) then
 			self.thread:SetQuestion(nil)
 			self.list:SetSelected(nil)
 		else
@@ -247,5 +283,6 @@ function UI.ShowQuestion(id)
 	if page and page.thread and Store.Get(id) then
 		page.thread:SetQuestion(id)
 		page.list:SetSelected(id)
+		page:Refresh()
 	end
 end
