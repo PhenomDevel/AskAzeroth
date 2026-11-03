@@ -5,6 +5,8 @@
 - In development, no release yet.
 - FAQ answers highlight keys (e.g. M for the world map), buttons and menu
   entries, and chat commands in their own colours.
+- Questions page: new filter "Hide answered" hides questions that already
+  have an answer, so mentors see at a glance who still waits for help.
 - Categories have icons in lists, filters, the ask dialog and
   notifications. Class questions show the asker's class icon.
 - Better contrast: grey secondary text is lighter, and open FAQ entries and

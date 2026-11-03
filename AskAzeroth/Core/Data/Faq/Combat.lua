@@ -564,31 +564,31 @@ ns.Faq.Add("combat", {
 		id = "combat-pvp-flag",
 		de = {
 			q = "Warum greift mich ein Spieler der anderen Fraktion an?",
-			a = "Du bist für PvP markiert: auf PvP-Regelwerken in vielen Gebieten automatisch, sonst, wenn du selbst einen Spieler oder Wachen der anderen Fraktion angreifst oder /pvp eingibst. Auf dem normalen Regelwerk kannst du PvP meiden, solange du dich nicht markierst.",
+			a = "Du bist für PvP markiert: auf PvP-Regelwerken in vielen Gebieten automatisch, sonst, wenn du selbst einen Spieler oder Wachen der anderen Fraktion angreifst oder `/pvp` eingibst. Auf dem normalen Regelwerk kannst du PvP meiden, solange du dich nicht markierst.",
 		},
 		en = {
 			q = "Why does a player of the other faction attack me?",
-			a = "You are flagged for PvP: on PvP rulesets automatically in many zones, otherwise when you attack a player or guards of the other faction yourself or type /pvp. On the Normal ruleset you can avoid PvP as long as you do not flag yourself.",
+			a = "You are flagged for PvP: on PvP rulesets automatically in many zones, otherwise when you attack a player or guards of the other faction yourself or type `/pvp`. On the Normal ruleset you can avoid PvP as long as you do not flag yourself.",
 		},
 		fr = {
 			q = "Pourquoi un joueur de l'autre faction m'attaque-t-il ?",
-			a = "Vous êtes marqué JcJ : automatiquement dans beaucoup de zones sur les ensembles de règles JcJ, sinon quand vous attaquez vous-même un joueur ou des gardes de l'autre faction, ou que vous tapez /pvp. Sur l'ensemble de règles Normal, vous évitez le JcJ tant que vous ne vous marquez pas.",
+			a = "Vous êtes marqué JcJ : automatiquement dans beaucoup de zones sur les ensembles de règles JcJ, sinon quand vous attaquez vous-même un joueur ou des gardes de l'autre faction, ou que vous tapez `/pvp`. Sur l'ensemble de règles Normal, vous évitez le JcJ tant que vous ne vous marquez pas.",
 		},
 		es = {
 			q = "¿Por qué me ataca un jugador de la otra facción?",
-			a = "Estás marcado para JcJ: en los conjuntos de reglas JcJ, automáticamente en muchas zonas; si no, cuando tú atacas a un jugador o a los guardias de la otra facción, o escribes /pvp. En el conjunto de reglas Normal puedes evitar el JcJ mientras no te marques.",
+			a = "Estás marcado para JcJ: en los conjuntos de reglas JcJ, automáticamente en muchas zonas; si no, cuando tú atacas a un jugador o a los guardias de la otra facción, o escribes `/pvp`. En el conjunto de reglas Normal puedes evitar el JcJ mientras no te marques.",
 		},
 		it = {
 			q = "Perché un giocatore dell'altra fazione mi attacca?",
-			a = "Sei segnato per il PvP: nei set di regole PvP automaticamente in molte zone, altrimenti quando attacchi tu un giocatore o le guardie dell'altra fazione, oppure scrivi /pvp. Nel set di regole Normale eviti il PvP finché non ti segni da solo.",
+			a = "Sei segnato per il PvP: nei set di regole PvP automaticamente in molte zone, altrimenti quando attacchi tu un giocatore o le guardie dell'altra fazione, oppure scrivi `/pvp`. Nel set di regole Normale eviti il PvP finché non ti segni da solo.",
 		},
 		ru = {
 			q = "Почему на меня нападает игрок другой фракции?",
-			a = "У вас включён режим PvP: в наборах правил PvP — автоматически во многих зонах, в остальных случаях — когда вы сами нападаете на игрока или стражу другой фракции либо вводите /pvp. В «Обычном» наборе правил PvP можно избегать, пока вы сами его не включите.",
+			a = "У вас включён режим PvP: в наборах правил PvP — автоматически во многих зонах, в остальных случаях — когда вы сами нападаете на игрока или стражу другой фракции либо вводите `/pvp`. В «Обычном» наборе правил PvP можно избегать, пока вы сами его не включите.",
 		},
 		pt = {
 			q = "Por que um jogador da outra facção me ataca?",
-			a = "Você está marcado para JxJ: nos conjuntos de regras JxJ, automaticamente em muitas zonas; nos outros, quando você mesmo ataca um jogador ou guardas da outra facção, ou digita /pvp. No conjunto de regras Normal você evita JxJ enquanto não se marcar.",
+			a = "Você está marcado para JxJ: nos conjuntos de regras JxJ, automaticamente em muitas zonas; nos outros, quando você mesmo ataca um jogador ou guardas da outra facção, ou digita `/pvp`. No conjunto de regras Normal você evita JxJ enquanto não se marcar.",
 		},
 	},
 })

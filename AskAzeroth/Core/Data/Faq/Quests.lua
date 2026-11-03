@@ -68,31 +68,31 @@ ns.Faq.Add("quest", {
 		id = "quest-find-objective",
 		de = {
 			q = "Ich finde ein Questziel nicht. Was kann ich tun?",
-			a = "Lies den Questtext im Questlog (Taste L) noch einmal: Meist steht dort eine Richtung oder ein Ort. Schau auf die Weltkarte (Taste M) und die Gebietsnamen. Wenn du weiter feststeckst, frag hier und nenne Quest und Gebiet.",
+			a = "Lies den Questtext im Questlog (Taste [L]) noch einmal: Meist steht dort eine Richtung oder ein Ort. Schau auf die Weltkarte (Taste [M]) und die Gebietsnamen. Wenn du weiter feststeckst, frag hier und nenne Quest und Gebiet.",
 		},
 		en = {
 			q = "I cannot find a quest objective. What can I do?",
-			a = "Read the quest text in the quest log (L key) again: it usually names a direction or a place. Look at the world map (M key) and the zone names. If you are still stuck, ask here and name the quest and the zone.",
+			a = "Read the quest text in the quest log ([L] key) again: it usually names a direction or a place. Look at the world map ([M] key) and the zone names. If you are still stuck, ask here and name the quest and the zone.",
 		},
 		fr = {
 			q = "Je ne trouve pas un objectif de quête. Que faire ?",
-			a = "Relisez le texte de la quête dans le journal de quêtes (touche L) : il indique souvent une direction ou un lieu. Regardez la carte du monde (touche M) et le nom des zones. Si vous êtes toujours bloqué, demandez ici en indiquant la quête et la zone.",
+			a = "Relisez le texte de la quête dans le journal de quêtes (touche [L]) : il indique souvent une direction ou un lieu. Regardez la carte du monde (touche [M]) et le nom des zones. Si vous êtes toujours bloqué, demandez ici en indiquant la quête et la zone.",
 		},
 		es = {
 			q = "No encuentro un objetivo de misión. ¿Qué hago?",
-			a = "Vuelve a leer el texto de la misión en el registro de misiones (tecla L): suele indicar una dirección o un lugar. Mira el mapa del mundo (tecla M) y los nombres de las zonas. Si sigues atascado, pregunta aquí indicando la misión y la zona.",
+			a = "Vuelve a leer el texto de la misión en el registro de misiones (tecla [L]): suele indicar una dirección o un lugar. Mira el mapa del mundo (tecla [M]) y los nombres de las zonas. Si sigues atascado, pregunta aquí indicando la misión y la zona.",
 		},
 		it = {
 			q = "Non trovo un obiettivo della missione. Cosa faccio?",
-			a = "Rileggi il testo della missione nel registro missioni (tasto L): di solito indica una direzione o un luogo. Guarda la mappa del mondo (tasto M) e i nomi delle zone. Se sei ancora bloccato, chiedi qui indicando missione e zona.",
+			a = "Rileggi il testo della missione nel registro missioni (tasto [L]): di solito indica una direzione o un luogo. Guarda la mappa del mondo (tasto [M]) e i nomi delle zone. Se sei ancora bloccato, chiedi qui indicando missione e zona.",
 		},
 		ru = {
 			q = "Не могу найти цель задания. Что делать?",
-			a = "Перечитайте текст задания в журнале заданий (клавиша L): обычно там указано направление или место. Посмотрите на карту мира (клавиша M) и названия зон. Если всё ещё не получается, спросите здесь, указав задание и зону.",
+			a = "Перечитайте текст задания в журнале заданий (клавиша [L]): обычно там указано направление или место. Посмотрите на карту мира (клавиша [M]) и названия зон. Если всё ещё не получается, спросите здесь, указав задание и зону.",
 		},
 		pt = {
 			q = "Não encontro um objetivo de missão. O que faço?",
-			a = "Leia de novo o texto da missão no registro de missões (tecla L): ele costuma citar uma direção ou um lugar. Olhe o mapa-múndi (tecla M) e os nomes das zonas. Se continuar perdido, pergunte aqui citando a missão e a zona.",
+			a = "Leia de novo o texto da missão no registro de missões (tecla [L]): ele costuma citar uma direção ou um lugar. Olhe o mapa-múndi (tecla [M]) e os nomes das zonas. Se continuar perdido, pergunte aqui citando a missão e a zona.",
 		},
 	},
 	{
@@ -130,31 +130,31 @@ ns.Faq.Add("quest", {
 		id = "quest-abandon",
 		de = {
 			q = "Kann ich eine Quest abbrechen?",
-			a = "Ja: Wähl sie im Questlog aus und klick auf „Abbrechen“. Die meisten Quests kannst du später beim selben Auftraggeber wieder annehmen. So machst du auch Platz, wenn dein Questlog voll ist.",
+			a = "Ja: Wähl sie im Questlog aus und klick auf {Abbrechen}. Die meisten Quests kannst du später beim selben Auftraggeber wieder annehmen. So machst du auch Platz, wenn dein Questlog voll ist.",
 		},
 		en = {
 			q = "Can I abandon a quest?",
-			a = "Yes: select it in the quest log and choose Abandon. Most quests can be picked up again from the same character later. Abandoning frees up a slot when your quest log is full.",
+			a = "Yes: select it in the quest log and choose {Abandon}. Most quests can be picked up again from the same character later. Abandoning frees up a slot when your quest log is full.",
 		},
 		fr = {
 			q = "Puis-je abandonner une quête ?",
-			a = "Oui : sélectionnez-la dans le journal de quêtes et choisissez Abandonner. La plupart des quêtes peuvent être reprises plus tard par le même personnage. Abandonner libère une place quand votre journal est plein.",
+			a = "Oui : sélectionnez-la dans le journal de quêtes et choisissez {Abandonner}. La plupart des quêtes peuvent être reprises plus tard par le même personnage. Abandonner libère une place quand votre journal est plein.",
 		},
 		es = {
 			q = "¿Puedo abandonar una misión?",
-			a = "Sí: selecciónala en el registro de misiones y elige Abandonar. La mayoría de las misiones pueden volver a cogerse más tarde con el mismo personaje. Abandonar libera un hueco cuando el registro está lleno.",
+			a = "Sí: selecciónala en el registro de misiones y elige {Abandonar}. La mayoría de las misiones pueden volver a cogerse más tarde con el mismo personaje. Abandonar libera un hueco cuando el registro está lleno.",
 		},
 		it = {
 			q = "Posso abbandonare una missione?",
-			a = "Sì: selezionala nel registro missioni e scegli Abbandona. Quasi tutte le missioni si possono riprendere più tardi con lo stesso personaggio. Abbandonare libera un posto quando il registro è pieno.",
+			a = "Sì: selezionala nel registro missioni e scegli {Abbandona}. Quasi tutte le missioni si possono riprendere più tardi con lo stesso personaggio. Abbandonare libera un posto quando il registro è pieno.",
 		},
 		ru = {
 			q = "Можно ли отказаться от задания?",
-			a = "Да: выберите его в журнале заданий и нажмите «Отказаться». Большинство заданий тот же персонаж может взять снова позже. Отказ освобождает место, когда журнал заполнен.",
+			a = "Да: выберите его в журнале заданий и нажмите {Отказаться}. Большинство заданий тот же персонаж может взять снова позже. Отказ освобождает место, когда журнал заполнен.",
 		},
 		pt = {
 			q = "Posso abandonar uma missão?",
-			a = "Sim: selecione-a no registro de missões e escolha Abandonar. A maioria das missões pode ser pega de novo depois pelo mesmo personagem. Abandonar libera espaço quando o registro está cheio.",
+			a = "Sim: selecione-a no registro de missões e escolha {Abandonar}. A maioria das missões pode ser pega de novo depois pelo mesmo personagem. Abandonar libera espaço quando o registro está cheio.",
 		},
 	},
 	{
@@ -254,31 +254,31 @@ ns.Faq.Add("quest", {
 		id = "quest-share",
 		de = {
 			q = "Wie teile ich eine Quest mit meiner Gruppe?",
-			a = "Wähl die Quest im Questlog aus und klick auf „Teilen“. Gruppenmitglieder, die sie annehmen können, bekommen sie angeboten. Gemeinsam erledigte Gegner zählen dann für alle.",
+			a = "Wähl die Quest im Questlog aus und klick auf {Teilen}. Gruppenmitglieder, die sie annehmen können, bekommen sie angeboten. Gemeinsam erledigte Gegner zählen dann für alle.",
 		},
 		en = {
 			q = "How do I share a quest with my group?",
-			a = "Select the quest in the quest log and click Share. Party members who are eligible get it offered. Enemies killed together then count for everyone.",
+			a = "Select the quest in the quest log and click {Share}. Party members who are eligible get it offered. Enemies killed together then count for everyone.",
 		},
 		fr = {
 			q = "Comment partager une quête avec mon groupe ?",
-			a = "Sélectionnez la quête dans le journal et cliquez sur Partager. Les membres du groupe qui y ont droit se la voient proposer. Les ennemis tués ensemble comptent ensuite pour tout le monde.",
+			a = "Sélectionnez la quête dans le journal et cliquez sur {Partager}. Les membres du groupe qui y ont droit se la voient proposer. Les ennemis tués ensemble comptent ensuite pour tout le monde.",
 		},
 		es = {
 			q = "¿Cómo comparto una misión con mi grupo?",
-			a = "Selecciona la misión en el registro y pulsa Compartir. Los miembros del grupo que puedan cogerla reciben la oferta. Después, los enemigos que matéis juntos cuentan para todos.",
+			a = "Selecciona la misión en el registro y pulsa {Compartir}. Los miembros del grupo que puedan cogerla reciben la oferta. Después, los enemigos que matéis juntos cuentan para todos.",
 		},
 		it = {
 			q = "Come condivido una missione con il gruppo?",
-			a = "Seleziona la missione nel registro e clicca su Condividi. I membri del gruppo che possono prenderla se la vedono proporre. I nemici uccisi insieme contano poi per tutti.",
+			a = "Seleziona la missione nel registro e clicca su {Condividi}. I membri del gruppo che possono prenderla se la vedono proporre. I nemici uccisi insieme contano poi per tutti.",
 		},
 		ru = {
 			q = "Как поделиться заданием с группой?",
-			a = "Выберите задание в журнале и нажмите «Поделиться». Участникам группы, которым оно доступно, предложат его взять. Затем убитые вместе враги засчитываются всем.",
+			a = "Выберите задание в журнале и нажмите {Поделиться}. Участникам группы, которым оно доступно, предложат его взять. Затем убитые вместе враги засчитываются всем.",
 		},
 		pt = {
 			q = "Como compartilho uma missão com o grupo?",
-			a = "Selecione a missão no registro e clique em Compartilhar. Os membros do grupo que podem pegá-la recebem a oferta. Depois, inimigos mortos juntos contam para todos.",
+			a = "Selecione a missão no registro e clique em {Compartilhar}. Os membros do grupo que podem pegá-la recebem a oferta. Depois, inimigos mortos juntos contam para todos.",
 		},
 	},
 	{
@@ -440,31 +440,31 @@ ns.Faq.Add("quest", {
 		id = "quest-reward-choice",
 		de = {
 			q = "Welche Questbelohnung soll ich nehmen?",
-			a = "Nimm, was deine Klasse am besten nutzen kann: passende Rüstungsart und Werte. Vergleich mit gedrückter Umschalttaste mit deiner Ausrüstung. Brauchst du nichts davon, nimm den Gegenstand, der beim Händler am meisten Gold bringt.",
+			a = "Nimm, was deine Klasse am besten nutzen kann: passende Rüstungsart und Werte. Vergleich mit gedrückter [Umschalt]-Taste mit deiner Ausrüstung. Brauchst du nichts davon, nimm den Gegenstand, der beim Händler am meisten Gold bringt.",
 		},
 		en = {
 			q = "Which quest reward should I take?",
-			a = "Take what your class can use best: the right armour type and stats. Hold Shift to compare with your gear. If you need none of them, take the item that sells for the most gold.",
+			a = "Take what your class can use best: the right armour type and stats. Hold [Shift] to compare with your gear. If you need none of them, take the item that sells for the most gold.",
 		},
 		fr = {
 			q = "Quelle récompense de quête choisir ?",
-			a = "Prenez ce que votre classe utilise le mieux : le bon type d'armure et les bonnes caractéristiques. Maintenez Maj pour comparer avec votre équipement. Si rien ne vous sert, prenez l'objet qui se vend le plus cher.",
+			a = "Prenez ce que votre classe utilise le mieux : le bon type d'armure et les bonnes caractéristiques. Maintenez [Maj] pour comparer avec votre équipement. Si rien ne vous sert, prenez l'objet qui se vend le plus cher.",
 		},
 		es = {
 			q = "¿Qué recompensa de misión elijo?",
-			a = "Coge lo que mejor aprovecha tu clase: el tipo de armadura y los atributos adecuados. Mantén Mayús para compararlo con tu equipo. Si nada te sirve, coge el objeto que se venda por más oro.",
+			a = "Coge lo que mejor aprovecha tu clase: el tipo de armadura y los atributos adecuados. Mantén [Mayús] para compararlo con tu equipo. Si nada te sirve, coge el objeto que se venda por más oro.",
 		},
 		it = {
 			q = "Quale ricompensa della missione scelgo?",
-			a = "Prendi ciò che la tua classe usa meglio: il tipo di armatura e le statistiche giuste. Tieni premuto Maiusc per confrontare con il tuo equipaggiamento. Se nessuna ti serve, prendi l'oggetto che si vende a più oro.",
+			a = "Prendi ciò che la tua classe usa meglio: il tipo di armatura e le statistiche giuste. Tieni premuto [Maiusc] per confrontare con il tuo equipaggiamento. Se nessuna ti serve, prendi l'oggetto che si vende a più oro.",
 		},
 		ru = {
 			q = "Какую награду за задание выбрать?",
-			a = "Берите то, что лучше всего подходит вашему классу: нужный тип брони и характеристики. Удерживайте Shift, чтобы сравнить со своей экипировкой. Если ничего не нужно, берите предмет, который дороже всего продаётся.",
+			a = "Берите то, что лучше всего подходит вашему классу: нужный тип брони и характеристики. Удерживайте [Shift], чтобы сравнить со своей экипировкой. Если ничего не нужно, берите предмет, который дороже всего продаётся.",
 		},
 		pt = {
 			q = "Qual recompensa de missão escolho?",
-			a = "Pegue o que sua classe aproveita melhor: o tipo de armadura e os atributos certos. Segure Shift para comparar com seu equipamento. Se nada servir, pegue o item que vende por mais ouro.",
+			a = "Pegue o que sua classe aproveita melhor: o tipo de armadura e os atributos certos. Segure [Shift] para comparar com seu equipamento. Se nada servir, pegue o item que vende por mais ouro.",
 		},
 	},
 	{

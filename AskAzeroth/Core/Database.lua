@@ -38,8 +38,9 @@ ns.dbDefaults = {
 		-- Version of the first-run setup the player finished or closed;
 		-- 0 = never (UI/Setup.lua opens it after login).
 		setupVersion = 0,
-		-- Questions page: hide solved questions.
+		-- Questions page: hide solved / answered questions.
 		hideSolved = false,
+		hideAnswered = false,
 	},
 	-- FAQ entry id → how often its suggestion in the ask dialog was marked
 	-- "That helped" (/aa faqstats). Stays on this computer.
