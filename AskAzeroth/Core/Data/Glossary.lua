@@ -1454,17 +1454,17 @@ ns.Glossary.Add({
 	},
 	{
 		id = "lfd",
-		chat = { "LFD", "LFR", "Dungeonfinder", "Dungeonbrowser" },
+		chat = { "LFD", "Dungeonfinder", "Dungeonbrowser", "LFG-Tool", "LFG tool" },
 		faq = "group-find",
 		de = {
-			term = "Dungeonfinder",
-			alt = { "LFD", "Dungeonbrowser" },
-			def = "Automatische Gruppensuche aus neueren WoW-Versionen, die Gruppen zusammenstellt und hinbringt. In WoW: Forever gibt es sie nicht: Gruppen findest du über die Gruppensuche, den Chat oder deine Gilde, und zum Eingang lauft ihr selbst.",
+			term = "LFG-Tool",
+			alt = { "Gruppensuche", "Dungeonfinder", "LFD" },
+			def = "Die Gruppensuche im Spiel: Dort stellst du deine Gruppe mit Ziel und gesuchten Rollen ein oder schaust, wer schon sucht. Viele sagen auch Dungeonfinder oder LFD dazu.",
 		},
 		en = {
-			term = "Dungeon Finder",
-			alt = { "LFD" },
-			def = "Automatic group finder from newer WoW versions that builds groups and takes them to the dungeon. WoW: Forever doesn't have it: find groups through the group finder, chat or your guild, and walk to the entrance yourselves.",
+			term = "LFG tool",
+			alt = { "group finder", "Dungeon Finder", "LFD" },
+			def = "The game's group finder: list your group with its goal and the roles you need, or see who is already looking. Many players also call it Dungeon Finder or LFD.",
 		},
 	},
 	{
