@@ -378,31 +378,31 @@ ns.Faq.Add("start", {
 		id = "start-sell-junk",
 		de = {
 			q = "Was mache ich mit grauen Gegenständen?",
-			a = "Grau ist Plunder: Verkauf ihn beim nächsten Händler. Das ist am Anfang eine wichtige Goldquelle. Hast du etwas versehentlich verkauft, findest du es eine Weile unter „Rückkauf“ im Händlerfenster.",
+			a = "Grau ist Plunder: Verkauf ihn beim nächsten Händler. Das ist am Anfang eine wichtige Goldquelle. Hast du etwas versehentlich verkauft, findest du es eine Weile unter {Rückkauf} im Händlerfenster.",
 		},
 		en = {
 			q = "What do I do with grey items?",
-			a = "Grey is junk: sell it at the next vendor. Early on that is an important source of gold. If you sold something by mistake, you find it for a while under Buyback in the vendor window.",
+			a = "Grey is junk: sell it at the next vendor. Early on that is an important source of gold. If you sold something by mistake, you find it for a while under {Buyback} in the vendor window.",
 		},
 		fr = {
 			q = "Que faire des objets gris ?",
-			a = "Le gris, c'est de la camelote : vendez-la au prochain marchand. Au début, c'est une source d'or importante. Si vous avez vendu quelque chose par erreur, vous le retrouvez un moment sous Racheter dans la fenêtre du marchand.",
+			a = "Le gris, c'est de la camelote : vendez-la au prochain marchand. Au début, c'est une source d'or importante. Si vous avez vendu quelque chose par erreur, vous le retrouvez un moment sous {Racheter} dans la fenêtre du marchand.",
 		},
 		es = {
 			q = "¿Qué hago con los objetos grises?",
-			a = "Lo gris es chatarra: véndelo al siguiente vendedor. Al principio es una fuente importante de oro. Si vendiste algo por error, lo encuentras durante un rato en Recomprar en la ventana del vendedor.",
+			a = "Lo gris es chatarra: véndelo al siguiente vendedor. Al principio es una fuente importante de oro. Si vendiste algo por error, lo encuentras durante un rato en {Recomprar} en la ventana del vendedor.",
 		},
 		it = {
 			q = "Cosa faccio con gli oggetti grigi?",
-			a = "Il grigio è robaccia: vendila al prossimo mercante. All'inizio è una fonte importante di oro. Se hai venduto qualcosa per errore, lo ritrovi per un po' in Riacquista nella finestra del mercante.",
+			a = "Il grigio è robaccia: vendila al prossimo mercante. All'inizio è una fonte importante di oro. Se hai venduto qualcosa per errore, lo ritrovi per un po' in {Riacquista} nella finestra del mercante.",
 		},
 		ru = {
 			q = "Что делать с серыми предметами?",
-			a = "Серое — это хлам: продайте его ближайшему торговцу. Поначалу это важный источник золота. Если продали что-то по ошибке, какое-то время это можно найти во вкладке «Выкуп» в окне торговца.",
+			a = "Серое — это хлам: продайте его ближайшему торговцу. Поначалу это важный источник золота. Если продали что-то по ошибке, какое-то время это можно найти во вкладке {Выкуп} в окне торговца.",
 		},
 		pt = {
 			q = "O que faço com itens cinzas?",
-			a = "Cinza é lixo: venda no próximo mercador. No começo é uma fonte importante de ouro. Se vendeu algo sem querer, você encontra o item por um tempo em Recomprar na janela do mercador.",
+			a = "Cinza é lixo: venda no próximo mercador. No começo é uma fonte importante de ouro. Se vendeu algo sem querer, você encontra o item por um tempo em {Recomprar} na janela do mercador.",
 		},
 	},
 	{
@@ -444,7 +444,7 @@ ns.Faq.Add("start", {
 		},
 		en = {
 			q = "How do I set my hearthstone?",
-			a = "Talk to an innkeeper and choose Make this inn your home. From then on your hearthstone takes you to that inn. Pick an inn close to your current quests.",
+			a = "Talk to an innkeeper and choose {Make this inn your home}. From then on your hearthstone takes you to that inn. Pick an inn close to your current quests.",
 		},
 		fr = {
 			q = "Comment lier ma pierre de foyer ?",

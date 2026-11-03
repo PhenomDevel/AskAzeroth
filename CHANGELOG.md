@@ -20,6 +20,8 @@ answers come. Tell your guild and friends!
   seconds), up to 5 open questions at once.
 - Questions asked while you were offline are fetched from other players
   after login.
+- Filter "Hide answered" on the Questions page shows only questions that
+  still wait for help.
 - FAQ suggestions while you ask: matching FAQ entries show up as you type,
   so you often have the answer before anyone has to reply.
 
@@ -41,10 +43,13 @@ answers come. Tell your guild and friends!
   forms and without accents). The FAQ can be shown in every addon
   language; entries not translated yet appear in English.
 - A hint points to Wowhead for looking up quests, items and NPCs.
-- Glossary with over 100 game terms and chat abbreviations (Aggro, DoT,
-  BoP, LFG, dungeon short names …). Terms in FAQ answers, threads and the
-  normal chat show their explanation on hover and open the glossary on
-  click (the chat part can be switched off).
+- Glossary with over 160 game terms and chat abbreviations (Aggro, DoT,
+  BoP, LFG, roles, raid words, stats, spec short forms, chat slang, dungeon
+  short names …), in all seven addon languages. Terms in FAQ answers,
+  threads and the normal chat show their explanation on hover and open the
+  glossary on click (the chat part can be switched off). In the chat, the
+  AskAzeroth logo in front of a marked term shows where the marking comes
+  from.
 - Abilities named in FAQ answers, the glossary and threads are real spell
   links with icon and tooltip; shift-click posts them in chat.
 - FAQ answers show keys, buttons, menu entries and chat commands in their

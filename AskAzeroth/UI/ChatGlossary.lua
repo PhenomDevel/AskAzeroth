@@ -94,8 +94,13 @@ local function PlainRanges(text)
 	return ranges
 end
 
+-- The addon logo in front of each marked term, at text height, so players
+-- see where the marking comes from; part of the link, so hovering it shows
+-- the explanation too.
+local LOGO = "|TInterface\\AddOns\\AskAzeroth\\Media\\Logo:0|t"
+
 local function Link(entry, label)
-	return ("|c%s|H%s%s|h%s|h|r"):format(LINK_COLOR, LINK_PREFIX, entry.id, label)
+	return ("|c%s|H%s%s|h%s%s|h|r"):format(LINK_COLOR, LINK_PREFIX, entry.id, LOGO, label)
 end
 
 -- Chat line with links for its glossary terms, each entry once.

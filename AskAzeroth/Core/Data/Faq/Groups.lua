@@ -6,31 +6,31 @@ ns.Faq.Add("group", {
 		id = "group-find",
 		de = {
 			q = "Wie finde ich eine Gruppe für einen Dungeon?",
-			a = "Nutze die Gruppensuche: Stell deine Gruppe ein oder schau, wer schon sucht; eingeladen wird von Hand. Einen automatischen Dungeonfinder gibt es in WoW: Forever nicht, und Versammlungssteine beschwören niemanden, also lauft ihr selbst zum Eingang. Fragen im Chat oder in deiner Gilde klappt auch. Sag, welchen Dungeon du machen willst und welche Rolle du spielst (Tank, Heiler oder DD), und klärt die Beuteregeln vor dem Start.",
+			a = "Nutze die Gruppensuche (LFG-Tool): Stell deine Gruppe ein oder schau, wer schon sucht. Fragen im Chat oder in deiner Gilde klappt auch. Sag, welchen Dungeon du machen willst und welche Rolle du spielst (Tank, Heiler oder DD), und klärt die Beuteregeln vor dem Start.",
 		},
 		en = {
 			q = "How do I find a group for a dungeon?",
-			a = "Use the group finder: list your group or look at who is already searching; invites are sent by hand. There is no automatic Dungeon Finder in WoW: Forever, and meeting stones do not summon anyone, so you walk to the entrance yourselves. Asking in chat or your guild works, too. Say which dungeon you want and which role you play (tank, healer or DPS), and agree on loot rules before you start.",
+			a = "Use the group finder (LFG tool): list your group or look at who is already searching. Asking in chat or your guild works, too. Say which dungeon you want and which role you play (tank, healer or DPS), and agree on loot rules before you start.",
 		},
 		fr = {
 			q = "Comment trouver un groupe pour un donjon ?",
-			a = "Utilisez la recherche de groupe : inscrivez votre groupe ou regardez qui cherche déjà ; les invitations se font à la main. Il n'y a pas d'outil Donjons automatique dans WoW: Forever, et les pierres de rencontre n'invoquent personne : vous allez donc à pied jusqu'à l'entrée. Demander dans le chat ou à votre guilde marche aussi. Dites quel donjon vous voulez faire et votre rôle (tank, soigneur ou DPS), et mettez-vous d'accord sur les règles de butin avant de commencer.",
+			a = "Utilisez la recherche de groupe (outil LFG) : inscrivez votre groupe ou regardez qui cherche déjà. Demander dans le chat ou à votre guilde marche aussi. Dites quel donjon vous voulez faire et votre rôle (tank, soigneur ou DPS), et mettez-vous d'accord sur les règles de butin avant de commencer.",
 		},
 		es = {
 			q = "¿Cómo encuentro grupo para una mazmorra?",
-			a = "Usa el buscador de grupos: anuncia tu grupo o mira quién está buscando ya; las invitaciones se hacen a mano. En WoW: Forever no hay buscador de mazmorras automático y las piedras de encuentro no invocan a nadie, así que vais andando hasta la entrada. Preguntar en el chat o en tu hermandad también funciona. Di qué mazmorra quieres hacer y tu rol (tanque, sanador o DPS), y acordad las reglas de botín antes de empezar.",
+			a = "Usa el buscador de grupos (herramienta LFG): anuncia tu grupo o mira quién está buscando ya. Preguntar en el chat o en tu hermandad también funciona. Di qué mazmorra quieres hacer y tu rol (tanque, sanador o DPS), y acordad las reglas de botín antes de empezar.",
 		},
 		it = {
 			q = "Come trovo un gruppo per una spedizione?",
-			a = "Usa la ricerca gruppo: inserisci il tuo gruppo o guarda chi sta già cercando; gli inviti si mandano a mano. In WoW: Forever non c'è la ricerca automatica delle spedizioni e le pietre d'incontro non evocano nessuno, quindi raggiungete l'ingresso a piedi. Funziona anche chiedere in chat o in gilda. Di' quale spedizione vuoi fare e il tuo ruolo (tank, guaritore o DPS), e accordatevi sulle regole del bottino prima di iniziare.",
+			a = "Usa la ricerca gruppo (strumento LFG): inserisci il tuo gruppo o guarda chi sta già cercando. Funziona anche chiedere in chat o in gilda. Di' quale spedizione vuoi fare e il tuo ruolo (tank, guaritore o DPS), e accordatevi sulle regole del bottino prima di iniziare.",
 		},
 		ru = {
 			q = "Как найти группу в подземелье?",
-			a = "Воспользуйтесь поиском группы: разместите свою группу или посмотрите, кто уже ищет; приглашают вручную. Автоматического поиска подземелий в WoW: Forever нет, а камни встреч никого не призывают, так что до входа добираетесь сами. Можно также спросить в чате или в гильдии. Скажите, в какое подземелье хотите и какая у вас роль (танк, лекарь или ДД), и до начала договоритесь о правилах добычи.",
+			a = "Воспользуйтесь поиском группы (LFG): разместите свою группу или посмотрите, кто уже ищет. Можно также спросить в чате или в гильдии. Скажите, в какое подземелье хотите и какая у вас роль (танк, лекарь или ДД), и до начала договоритесь о правилах добычи.",
 		},
 		pt = {
 			q = "Como encontro grupo para uma masmorra?",
-			a = "Use o localizador de grupos: anuncie seu grupo ou veja quem já está procurando; os convites são feitos manualmente. Não há localizador de masmorras automático no WoW: Forever, e as pedras de encontro não invocam ninguém, então vocês vão a pé até a entrada. Perguntar no chat ou na guilda também funciona. Diga qual masmorra quer fazer e sua função (tanque, curador ou DPS), e combinem as regras de saque antes de começar.",
+			a = "Use o localizador de grupos (ferramenta LFG): anuncie seu grupo ou veja quem já está procurando. Perguntar no chat ou na guilda também funciona. Diga qual masmorra quer fazer e sua função (tanque, curador ou DPS), e combinem as regras de saque antes de começar.",
 		},
 	},
 	{
@@ -68,62 +68,62 @@ ns.Faq.Add("group", {
 		id = "group-loot",
 		de = {
 			q = "Wie wird Beute in der Gruppe verteilt?",
-			a = "Bei vielen Gegenständen würfeln alle auf Bedarf, Gier oder Passen. Wähl Bedarf nur, wenn dein Charakter den Gegenstand wirklich nutzt, sonst Gier. Frag lieber nach, bevor du auf etwas Bedarf würfelst, das auch andere brauchen könnten.",
+			a = "Bei vielen Gegenständen würfeln alle auf {Bedarf}, {Gier} oder {Passen}. Wähl {Bedarf} nur, wenn dein Charakter den Gegenstand wirklich nutzt, sonst {Gier}. Frag lieber nach, bevor du auf etwas {Bedarf} würfelst, das auch andere brauchen könnten.",
 		},
 		en = {
 			q = "How does loot work in a group?",
-			a = "For many items everyone rolls Need, Greed or Pass. Choose Need only if your character will really use the item, otherwise Greed. Ask before rolling Need on items others might want as well.",
+			a = "For many items everyone rolls {Need}, {Greed} or {Pass}. Choose {Need} only if your character will really use the item, otherwise {Greed}. Ask before rolling {Need} on items others might want as well.",
 		},
 		fr = {
 			q = "Comment fonctionne le butin en groupe ?",
-			a = "Pour beaucoup d'objets, chacun choisit Besoin, Cupidité ou Passer. Ne choisissez Besoin que si votre personnage utilisera vraiment l'objet, sinon Cupidité. Demandez avant de faire Besoin sur des objets que d'autres pourraient aussi vouloir.",
+			a = "Pour beaucoup d'objets, chacun choisit {Besoin}, {Cupidité} ou {Passer}. Ne choisissez {Besoin} que si votre personnage utilisera vraiment l'objet, sinon {Cupidité}. Demandez avant de faire {Besoin} sur des objets que d'autres pourraient aussi vouloir.",
 		},
 		es = {
 			q = "¿Cómo funciona el botín en grupo?",
-			a = "En muchos objetos todos eligen Necesidad, Codicia o Pasar. Elige Necesidad solo si tu personaje de verdad va a usar el objeto; si no, Codicia. Pregunta antes de tirar Necesidad en objetos que otros también podrían querer.",
+			a = "En muchos objetos todos eligen {Necesidad}, {Codicia} o {Pasar}. Elige {Necesidad} solo si tu personaje de verdad va a usar el objeto; si no, {Codicia}. Pregunta antes de tirar {Necesidad} en objetos que otros también podrían querer.",
 		},
 		it = {
 			q = "Come funziona il bottino in gruppo?",
-			a = "Per molti oggetti tutti scelgono Necessità, Avidità o Passa. Scegli Necessità solo se il tuo personaggio userà davvero l'oggetto, altrimenti Avidità. Chiedi prima di scegliere Necessità su oggetti che anche altri potrebbero volere.",
+			a = "Per molti oggetti tutti scelgono {Necessità}, {Avidità} o {Passa}. Scegli {Necessità} solo se il tuo personaggio userà davvero l'oggetto, altrimenti {Avidità}. Chiedi prima di scegliere {Necessità} su oggetti che anche altri potrebbero volere.",
 		},
 		ru = {
 			q = "Как делится добыча в группе?",
-			a = "На многие предметы каждый выбирает «Мне это нужно», «Не откажусь» или «Отказаться». Выбирайте «Нужно», только если ваш персонаж действительно будет пользоваться предметом, иначе «Не откажусь». Спросите, прежде чем выбирать «Нужно» на то, что может пригодиться и другим.",
+			a = "На многие предметы каждый выбирает {Мне это нужно}, {Не откажусь} или {Отказаться}. Выбирайте {Нужно}, только если ваш персонаж действительно будет пользоваться предметом, иначе {Не откажусь}. Спросите, прежде чем выбирать {Нужно} на то, что может пригодиться и другим.",
 		},
 		pt = {
 			q = "Como funciona o saque em grupo?",
-			a = "Em muitos itens todos escolhem Necessidade, Ganância ou Passar. Escolha Necessidade só se seu personagem realmente vai usar o item; senão, Ganância. Pergunte antes de rolar Necessidade em itens que outros também podem querer.",
+			a = "Em muitos itens todos escolhem {Necessidade}, {Ganância} ou {Passar}. Escolha {Necessidade} só se seu personagem realmente vai usar o item; senão, {Ganância}. Pergunte antes de rolar {Necessidade} em itens que outros também podem querer.",
 		},
 	},
 	{
 		id = "group-invite",
 		de = {
 			q = "Wie lade ich jemanden in meine Gruppe ein?",
-			a = "Klick mit der rechten Maustaste auf den Namen im Chat oder auf das Porträt und wähl „Einladen“. Danach erscheinen links die Gruppenfenster.",
+			a = "Klick mit der rechten Maustaste auf den Namen im Chat oder auf das Porträt und wähl {Einladen}. Danach erscheinen links die Gruppenfenster.",
 		},
 		en = {
 			q = "How do I invite someone to my group?",
-			a = "Right-click their name in the chat or their portrait and choose Invite. Your party frames then appear on the left.",
+			a = "Right-click their name in the chat or their portrait and choose {Invite}. Your party frames then appear on the left.",
 		},
 		fr = {
 			q = "Comment inviter quelqu'un dans mon groupe ?",
-			a = "Clic droit sur son nom dans le chat ou sur son portrait, puis « Inviter ». Les cadres du groupe apparaissent alors à gauche.",
+			a = "Clic droit sur son nom dans le chat ou sur son portrait, puis {Inviter}. Les cadres du groupe apparaissent alors à gauche.",
 		},
 		es = {
 			q = "¿Cómo invito a alguien a mi grupo?",
-			a = "Clic derecho en su nombre en el chat o en su retrato y elige «Invitar». Los marcos del grupo aparecen entonces a la izquierda.",
+			a = "Clic derecho en su nombre en el chat o en su retrato y elige {Invitar}. Los marcos del grupo aparecen entonces a la izquierda.",
 		},
 		it = {
 			q = "Come invito qualcuno nel gruppo?",
-			a = "Clic destro sul suo nome in chat o sul suo ritratto e scegli «Invita». I riquadri del gruppo compaiono poi a sinistra.",
+			a = "Clic destro sul suo nome in chat o sul suo ritratto e scegli {Invita}. I riquadri del gruppo compaiono poi a sinistra.",
 		},
 		ru = {
 			q = "Как пригласить кого-то в группу?",
-			a = "Щёлкните правой кнопкой по имени в чате или по портрету и выберите «Пригласить». Рамки группы появятся слева.",
+			a = "Щёлкните правой кнопкой по имени в чате или по портрету и выберите {Пригласить}. Рамки группы появятся слева.",
 		},
 		pt = {
 			q = "Como convido alguém para o grupo?",
-			a = "Clique com o botão direito no nome no chat ou no retrato e escolha \"Convidar\". Os quadros do grupo aparecem então à esquerda.",
+			a = "Clique com o botão direito no nome no chat ou no retrato e escolha {Convidar}. Os quadros do grupo aparecem então à esquerda.",
 		},
 	},
 	{
@@ -378,31 +378,31 @@ ns.Faq.Add("group", {
 		id = "group-leave",
 		de = {
 			q = "Wie verlasse ich eine Gruppe?",
-			a = "Rechtsklick auf dein eigenes Porträt und „Gruppe verlassen“. Sag vorher kurz Bescheid, wenn du gehst, besonders mitten im Dungeon.",
+			a = "Rechtsklick auf dein eigenes Porträt und {Gruppe verlassen}. Sag vorher kurz Bescheid, wenn du gehst, besonders mitten im Dungeon.",
 		},
 		en = {
 			q = "How do I leave a group?",
-			a = "Right-click your own portrait and choose Leave Group. Let the others know before you go, especially in the middle of a dungeon.",
+			a = "Right-click your own portrait and choose {Leave Group}. Let the others know before you go, especially in the middle of a dungeon.",
 		},
 		fr = {
 			q = "Comment quitter un groupe ?",
-			a = "Clic droit sur votre propre portrait puis « Quitter le groupe ». Prévenez les autres avant de partir, surtout au milieu d'un donjon.",
+			a = "Clic droit sur votre propre portrait puis {Quitter le groupe}. Prévenez les autres avant de partir, surtout au milieu d'un donjon.",
 		},
 		es = {
 			q = "¿Cómo dejo un grupo?",
-			a = "Clic derecho en tu propio retrato y elige «Abandonar grupo». Avisa a los demás antes de irte, sobre todo en mitad de una mazmorra.",
+			a = "Clic derecho en tu propio retrato y elige {Abandonar grupo}. Avisa a los demás antes de irte, sobre todo en mitad de una mazmorra.",
 		},
 		it = {
 			q = "Come lascio un gruppo?",
-			a = "Clic destro sul tuo ritratto e scegli «Lascia il gruppo». Avvisa gli altri prima di andartene, soprattutto a metà di una spedizione.",
+			a = "Clic destro sul tuo ritratto e scegli {Lascia il gruppo}. Avvisa gli altri prima di andartene, soprattutto a metà di una spedizione.",
 		},
 		ru = {
 			q = "Как покинуть группу?",
-			a = "Щёлкните правой кнопкой по своему портрету и выберите «Покинуть группу». Предупредите остальных, прежде чем уйти, особенно посреди подземелья.",
+			a = "Щёлкните правой кнопкой по своему портрету и выберите {Покинуть группу}. Предупредите остальных, прежде чем уйти, особенно посреди подземелья.",
 		},
 		pt = {
 			q = "Como saio de um grupo?",
-			a = "Clique com o botão direito no seu próprio retrato e escolha \"Sair do grupo\". Avise os outros antes de sair, principalmente no meio de uma masmorra.",
+			a = "Clique com o botão direito no seu próprio retrato e escolha {Sair do grupo}. Avise os outros antes de sair, principalmente no meio de uma masmorra.",
 		},
 	},
 	{
@@ -502,31 +502,31 @@ ns.Faq.Add("group", {
 		id = "group-raid-convert",
 		de = {
 			q = "Wie mache ich aus meiner Gruppe einen Schlachtzug?",
-			a = "Als Anführer über das Menü deines Porträts „In Schlachtzug umwandeln“. Danach können mehr als fünf Spieler beitreten. In einer Schlachtzugsgruppe zählen viele normale Quests nicht mehr.",
+			a = "Als Anführer über das Menü deines Porträts {In Schlachtzug umwandeln}. Danach können mehr als fünf Spieler beitreten. In einer Schlachtzugsgruppe zählen viele normale Quests nicht mehr.",
 		},
 		en = {
 			q = "How do I turn my group into a raid?",
-			a = "As leader, choose Convert to Raid from your portrait menu. Then more than five players can join. In a raid group many normal quests no longer count.",
+			a = "As leader, choose {Convert to Raid} from your portrait menu. Then more than five players can join. In a raid group many normal quests no longer count.",
 		},
 		fr = {
 			q = "Comment transformer mon groupe en raid ?",
-			a = "En tant que chef, choisissez « Convertir en raid » dans le menu de votre portrait. Plus de cinq joueurs peuvent alors rejoindre. Dans un groupe de raid, beaucoup de quêtes normales ne comptent plus.",
+			a = "En tant que chef, choisissez {Convertir en raid} dans le menu de votre portrait. Plus de cinq joueurs peuvent alors rejoindre. Dans un groupe de raid, beaucoup de quêtes normales ne comptent plus.",
 		},
 		es = {
 			q = "¿Cómo convierto mi grupo en banda?",
-			a = "Como líder, elige «Convertir en banda» en el menú de tu retrato. Entonces pueden unirse más de cinco jugadores. En un grupo de banda muchas misiones normales dejan de contar.",
+			a = "Como líder, elige {Convertir en banda} en el menú de tu retrato. Entonces pueden unirse más de cinco jugadores. En un grupo de banda muchas misiones normales dejan de contar.",
 		},
 		it = {
 			q = "Come trasformo il gruppo in un'incursione?",
-			a = "Da capogruppo scegli «Converti in incursione» dal menu del tuo ritratto. Poi possono unirsi più di cinque giocatori. In un gruppo d'incursione molte missioni normali non contano più.",
+			a = "Da capogruppo scegli {Converti in incursione} dal menu del tuo ritratto. Poi possono unirsi più di cinque giocatori. In un gruppo d'incursione molte missioni normali non contano più.",
 		},
 		ru = {
 			q = "Как превратить группу в рейд?",
-			a = "Как лидер выберите «Преобразовать в рейд» в меню своего портрета. Тогда смогут присоединиться больше пяти игроков. В рейдовой группе многие обычные задания не засчитываются.",
+			a = "Как лидер выберите {Преобразовать в рейд} в меню своего портрета. Тогда смогут присоединиться больше пяти игроков. В рейдовой группе многие обычные задания не засчитываются.",
 		},
 		pt = {
 			q = "Como transformo meu grupo em raide?",
-			a = "Como líder, escolha \"Converter em raide\" no menu do seu retrato. Aí mais de cinco jogadores podem entrar. Num grupo de raide muitas missões normais deixam de contar.",
+			a = "Como líder, escolha {Converter em raide} no menu do seu retrato. Aí mais de cinco jogadores podem entrar. Num grupo de raide muitas missões normais deixam de contar.",
 		},
 	},
 	{
