@@ -258,10 +258,35 @@ local function IsWordByte(byte)
 	return byte ~= nil and (byte >= 128 or string.char(byte):find("%w") ~= nil)
 end
 
+-- Plural endings a form may carry when it is marked ("DoTs", "HoTs",
+-- "Tanks", "bosses", "ДоТы"), so no entry needs its plurals listed. Latin
+-- forms take an s or es in any case ("DOTS"); forms that end in a Cyrillic
+-- letter take the Russian plural endings. Longest first. Other endings
+-- (German -en, Italian vowel changes) are left out on purpose: they turn
+-- short forms into everyday words ("Ding" -> "Dingen", "Lock" -> "Locken").
+local LATIN_PLURALS = { "es", "s" }
+local CYRILLIC_PLURALS = { "ами", "ов", "ей", "ам", "ах", "ы", "и" }
+
+-- Last byte of the plural ending that follows form at last in text, or
+-- last when none does.
+local function PluralEnd(text, form, last)
+	local lead = form:byte(-2)
+	local cyrillic = form:byte(-1) >= 128 and (lead == 0xD0 or lead == 0xD1)
+	for _, ending in ipairs(cyrillic and CYRILLIC_PLURALS or LATIN_PLURALS) do
+		local stop = last + #ending
+		local written = text:sub(last + 1, stop)
+		if (cyrillic and written or written:lower()) == ending and not IsWordByte(text:byte(stop + 1)) then
+			return stop
+		end
+	end
+	return last
+end
+
 -- Places of glossary terms in text (plain text, no escape sequences), each
 -- entry at most once (its first place), non-overlapping, in text order:
--- a list of { first, last, entry }. withEnglish: also the English terms
--- (for texts players write); withChat: also the chat forms (chat lines).
+-- a list of { first, last, entry }; a plural ending is part of the place
+-- (see PluralEnd). withEnglish: also the English terms (for texts players
+-- write); withChat: also the chat forms (chat lines).
 function Glossary.Find(text, lang, withEnglish, withChat)
 	local found, used, taken = {}, {}, {}
 	for _, form in ipairs(Forms(lang, withEnglish, withChat)) do
@@ -271,6 +296,9 @@ function Glossary.Find(text, lang, withEnglish, withChat)
 				local first, last = text:find(form.text, init, true)
 				if not first then
 					break
+				end
+				if IsWordByte(text:byte(last + 1)) then
+					last = PluralEnd(text, form.text, last)
 				end
 				local free = not IsWordByte(text:byte(first - 1)) and not IsWordByte(text:byte(last + 1))
 				for i = first, last do

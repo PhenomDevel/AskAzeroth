@@ -742,6 +742,45 @@ ns.Glossary.Add({
 		},
 	},
 	{
+		id = "enrage",
+		chat = { "enraged", "Enraged" },
+		de = {
+			term = "Enrage",
+			alt = { "Wutanfall" },
+			def = "Ein Gegner wird wütend und macht deutlich mehr Schaden, oft wenn er nur noch wenig Leben hat. Bei Bossen heißt so auch der Zeitpunkt (Enrage-Timer), ab dem der Boss so stark wird, dass die Gruppe fast sicher stirbt: Er muss vorher tot sein.",
+		},
+		en = {
+			term = "Enrage",
+			alt = { "enrage timer" },
+			def = "An enemy becomes enraged and deals much more damage, often when its health is low. For bosses it also means the point in time (enrage timer) after which the boss gets so strong that the group almost surely dies: it has to be dead before then.",
+		},
+		fr = {
+			term = "Enrage",
+			alt = { "enragé", "enrager" },
+			def = "Un ennemi devient enragé et inflige beaucoup plus de dégâts, souvent quand il a peu de vie. Pour les boss, c'est aussi le moment (enrage timer) après lequel le boss devient si fort que le groupe meurt presque à coup sûr : il doit être mort avant.",
+		},
+		es = {
+			term = "Enrage",
+			alt = { "enfurecido", "enfurecer" },
+			def = "Un enemigo se enfurece y hace mucho más daño, a menudo cuando le queda poca vida. En los jefes también es el momento (enrage timer) a partir del cual el jefe se vuelve tan fuerte que el grupo muere casi seguro: hay que matarlo antes.",
+		},
+		it = {
+			term = "Enrage",
+			alt = { "infuriato", "infuriare" },
+			def = "Un nemico si infuria e infligge molti più danni, spesso quando gli resta poca vita. Per i boss è anche il momento (enrage timer) dopo il quale il boss diventa così forte che il gruppo muore quasi di sicuro: deve essere morto prima.",
+		},
+		ru = {
+			term = "Энрейдж",
+			alt = { "Enrage", "бешенство" },
+			def = "Враг впадает в ярость и наносит намного больше урона, часто при малом здоровье. У боссов это и момент (энрейдж-таймер), после которого босс так силён, что группа почти точно погибнет: убейте его раньше.",
+		},
+		pt = {
+			term = "Enrage",
+			alt = { "enfurecido", "enfurecer" },
+			def = "Um inimigo fica enfurecido e causa muito mais dano, muitas vezes quando está com pouca vida. Nos chefes também é o momento (enrage timer) a partir do qual o chefe fica tão forte que o grupo quase certamente morre: ele precisa morrer antes.",
+		},
+	},
+	{
 		id = "wipe",
 		chat = { "Wipe", "wipe" },
 		faq = "combat-die-in-dungeon",

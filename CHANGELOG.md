@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Glossary: new term "Enrage" in all languages.
+- Glossary: plurals are marked too ("DoTs", "HoTs", "Tanks", "bosses",
+  Russian "ДоТы"), in texts and in chat.
+
 ## v1.0.0 (2026-11-03)
 
 First release. AskAzeroth is community driven: questions only reach players
