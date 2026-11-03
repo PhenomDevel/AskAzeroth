@@ -65,7 +65,7 @@ local function Build(content)
 	end
 	local chipsHeight = W.WrapChips(chips, filters, PAD, -PAD - 28 - 10, LIST_WIDTH - 2 * PAD, 6)
 
-	-- Hide solved questions (kept in the settings).
+	-- Hide solved / answered questions (kept in the settings).
 	local hideSolved = W.Checkbox(filters, L.QUEUE_HIDE_SOLVED, function()
 		return ns.db.settings.hideSolved
 	end, function(checked)
@@ -73,12 +73,26 @@ local function Build(content)
 		page:Refresh()
 	end)
 	hideSolved:SetPoint("TOPLEFT", PAD - 4, -PAD - 28 - 10 - chipsHeight - 6)
+	local hideAnswered = W.Checkbox(filters, L.QUEUE_HIDE_ANSWERED, function()
+		return ns.db.settings.hideAnswered
+	end, function(checked)
+		ns.db.settings.hideAnswered = checked
+		page:Refresh()
+	end)
+	hideAnswered:SetPoint("TOPLEFT", hideSolved, "BOTTOMLEFT", 0, 2)
+	W.Tooltip(hideAnswered, L.QUEUE_HIDE_ANSWERED, L.QUEUE_HIDE_ANSWERED_TIP)
 	-- How many questions still wait for a first answer.
 	local openCount = W.Text(filters, "GameFontHighlight", W.SOFT)
 	openCount:SetPoint("RIGHT", filters, "RIGHT", -PAD, 0)
 	openCount:SetPoint("TOP", hideSolved, "TOP", 0, -6)
 	openCount:SetJustifyH("RIGHT")
-	filters:SetHeight(PAD + 28 + 10 + chipsHeight + 6 + 26 + PAD - 4)
+	filters:SetHeight(PAD + 28 + 10 + chipsHeight + 6 + 26 + 24 + PAD - 4)
+
+	-- Questions the "Hide solved" / "Hide answered" boxes take out.
+	local function HiddenByStatus(q)
+		local settings = ns.db.settings
+		return (settings.hideSolved and q.solved) or (settings.hideAnswered and q.answerCount > 0) or false
+	end
 
 	local listBox = CreateFrame("Frame", nil, listPane)
 	listBox:SetPoint("TOPLEFT", filters, "BOTTOMLEFT")
@@ -108,7 +122,7 @@ local function Build(content)
 		if not langs[q.lang] then
 			return false
 		end
-		if ns.db.settings.hideSolved and q.solved then
+		if HiddenByStatus(q) then
 			return false
 		end
 		if next(page.cats) and not page.cats[q.cat] then
@@ -158,17 +172,18 @@ local function Build(content)
 			end
 		end
 		hideSolved:Refresh()
+		hideAnswered:Refresh()
 		openCount:SetText(L.QUEUE_OPEN_COUNT:format(UI.CountOpenQuestions()))
 		local emptyText
 		if #list == 0 then
 			emptyText = Store.Count() == 0 and L.QUEUE_EMPTY or L.QUEUE_NO_MATCH
 		end
 		self.list:SetQuestions(list, emptyText)
-		-- A removed question leaves the thread, and so does a solved one
-		-- once "Hide solved" takes it out of the list.
+		-- A removed question leaves the thread, and so does one that "Hide
+		-- solved" or "Hide answered" takes out of the list.
 		local selected = self.thread:GetQuestion()
 		local selectedQ = selected and Store.Get(selected)
-		if selected and (not selectedQ or (ns.db.settings.hideSolved and selectedQ.solved)) then
+		if selected and (not selectedQ or HiddenByStatus(selectedQ)) then
 			self.thread:SetQuestion(nil)
 			self.list:SetSelected(nil)
 		else
