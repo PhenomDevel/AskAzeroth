@@ -1354,19 +1354,6 @@ ns.Glossary.Add({
 		},
 	},
 	{
-		id = "mc",
-		chat = { "MC" },
-		mark = false,
-		de = {
-			term = "MC",
-			def = "Kürzel für Geschmolzener Kern, Schlachtzug für 40 Spieler.",
-		},
-		en = {
-			term = "MC",
-			def = "Short for Molten Core, a 40-player raid.",
-		},
-	},
-	{
 		id = "ony",
 		chat = { "Ony", "ony" },
 		mark = false,
@@ -1379,30 +1366,775 @@ ns.Glossary.Add({
 			def = "Short for Onyxia's Lair, a 40-player raid.",
 		},
 	},
+	-- Added after comparing with the German forum dictionary "Das WoW-Wörterbuch"
+	-- (eu.forums.blizzard.com/de/wow/t/4538): only terms that fit WoW: Forever.
+	-- Roles and group play
 	{
-		id = "bwl",
-		chat = { "BWL" },
+		id = "mt",
+		chat = { "MT", "OT", "Maintank", "Offtank" },
 		mark = false,
 		de = {
-			term = "BWL",
-			def = "Kürzel für Pechschwingenhort, Schlachtzug für 40 Spieler.",
+			term = "MT",
+			alt = { "Maintank", "OT", "Offtank" },
+			def = "Maintank: der Tank, der den Boss oder die wichtigsten Gegner hält. Der Offtank (OT) übernimmt Zusatzgegner oder springt ein, wenn der Maintank stirbt.",
 		},
 		en = {
-			term = "BWL",
-			def = "Short for Blackwing Lair, a 40-player raid.",
+			term = "MT",
+			alt = { "main tank", "OT", "off-tank" },
+			def = "Main tank: the tank who holds the boss or the most important enemies. The off-tank (OT) picks up extra enemies or takes over when the main tank dies.",
 		},
 	},
 	{
-		id = "zg",
-		chat = { "ZG" },
-		mark = false,
+		id = "melee",
+		chat = { "Melee", "melee", "Meelee", "Nahkämpfer" },
 		de = {
-			term = "ZG",
-			def = "Kürzel für Zul'Gurub, Schlachtzug für 20 Spieler.",
+			term = "Melee",
+			alt = { "Nahkämpfer" },
+			def = "Wer im Nahkampf direkt am Gegner steht, etwa Schurken, Krieger oder Druiden in Katzengestalt. Gegenteil: Caster und Fernkämpfer, die aus der Entfernung angreifen.",
 		},
 		en = {
-			term = "ZG",
-			def = "Short for Zul'Gurub, a 20-player raid.",
+			term = "Melee",
+			def = "Players who fight right next to the enemy, such as rogues, warriors or druids in cat form. The opposite are casters and ranged players who attack from a distance.",
 		},
+	},
+	{
+		id = "caster",
+		chat = { "Caster", "caster", "Range", "Ranged", "ranged" },
+		de = {
+			term = "Caster",
+			alt = { "Range", "Fernkämpfer" },
+			def = "Wer vor allem Zauber wirkt, etwa Magier, Hexenmeister oder Priester. \"Range\" meint alle, die aus der Entfernung angreifen, also Caster und Jäger.",
+		},
+		en = {
+			term = "Caster",
+			alt = { "ranged" },
+			def = "Players who mainly cast spells, such as mages, warlocks or priests. \"Ranged\" means everyone who attacks from a distance, so casters and hunters.",
+		},
+	},
+	{
+		id = "raid",
+		chat = { "Raid", "raid", "raiden", "Raids" },
+		faq = "group-raid",
+		de = {
+			term = "Raid",
+			alt = { "Schlachtzug" },
+			def = "Schlachtzug: eine Gruppe mit mehr als fünf Spielern, und die großen Instanzen für solche Gruppen. Raiden heißt, mit einem Schlachtzug dorthin zu gehen.",
+		},
+		en = {
+			term = "Raid",
+			def = "A group of more than five players, and the large instances made for such groups. Raiding means going there with a raid group.",
+		},
+	},
+	{
+		id = "rl",
+		chat = { "RL", "Raidleiter", "Raidlead", "raidlead" },
+		mark = false,
+		de = {
+			term = "RL",
+			alt = { "Raidleiter" },
+			def = "Raidleiter: wer den Schlachtzug führt, Taktiken erklärt und die Beute verteilt. Im Chat kann RL auch \"Real Life\" heißen, also das Leben außerhalb des Spiels.",
+		},
+		en = {
+			term = "RL",
+			alt = { "raid leader" },
+			def = "Raid leader: the person who leads the raid, explains tactics and hands out loot. In chat RL can also mean \"real life\", life outside the game.",
+		},
+	},
+	{
+		id = "premade",
+		chat = { "Premade", "premade" },
+		de = {
+			term = "Premade",
+			def = "Eine Gruppe, die sich schon vorher verabredet hat, etwa aus einer Gilde. Gegenteil: PUG, eine Gruppe aus Spielern, die sich nicht kennen.",
+		},
+		en = {
+			term = "Premade",
+			def = "A group that arranged to play together beforehand, for example from a guild. The opposite is a PUG, a group of players who don't know each other.",
+		},
+	},
+	{
+		id = "lfd",
+		chat = { "LFD", "Dungeonfinder", "Dungeonbrowser", "LFG-Tool", "LFG tool" },
+		faq = "group-find",
+		de = {
+			term = "LFG-Tool",
+			alt = { "Gruppensuche", "Dungeonfinder", "LFD" },
+			def = "Die Gruppensuche im Spiel: Dort stellst du deine Gruppe mit Ziel und gesuchten Rollen ein oder schaust, wer schon sucht. Viele sagen auch Dungeonfinder oder LFD dazu.",
+		},
+		en = {
+			term = "LFG tool",
+			alt = { "group finder", "Dungeon Finder", "LFD" },
+			def = "The game's group finder: list your group with its goal and the roles you need, or see who is already looking. Many players also call it Dungeon Finder or LFD.",
+		},
+	},
+	{
+		id = "instance",
+		chat = { "Ini", "ini", "Inis", "Instanz" },
+		de = {
+			term = "Ini",
+			alt = { "Instanz" },
+			def = "Instanz: ein Dungeon oder Schlachtzug, in dem deine Gruppe eine eigene Kopie für sich hat. Andere Spieler draußen sehen euch dort nicht.",
+		},
+		en = {
+			term = "Instance",
+			alt = { "Ini" },
+			def = "A dungeon or raid where your group gets its own copy. Other players outside don't see you in there.",
+		},
+	},
+	{
+		id = "boss",
+		chat = { "Boss", "boss", "Bosse", "bosses" },
+		de = {
+			term = "Boss",
+			alt = { "Bosse" },
+			def = "Ein besonders starker Gegner, meist in Dungeons und Schlachtzügen, mit eigenen Fähigkeiten und besserer Beute. Die Gegner dazwischen heißen Trash.",
+		},
+		en = {
+			term = "Boss",
+			alt = { "bosses" },
+			def = "A particularly strong enemy, mostly in dungeons and raids, with its own abilities and better loot. The enemies in between are called trash.",
+		},
+	},
+	{
+		id = "lockout",
+		chat = { "ID", "IDs", "Reset", "reset" },
+		faq = "group-lockout",
+		mark = false,
+		de = {
+			term = "ID",
+			alt = { "Raid-ID", "Reset" },
+			def = "Sperre für einen Schlachtzug: Wer dort Bosse getötet hat, ist bis zum nächsten Reset an diese Instanz gebunden. \"Freie ID\" heißt, du kannst noch mit. Reset ist das Zurücksetzen, danach sind alle Gegner wieder da.",
+		},
+		en = {
+			term = "ID",
+			alt = { "lockout", "reset" },
+			def = "A raid lockout: after killing bosses there you are saved to that instance until the next reset. \"Free ID\" means you can still join. A reset brings all enemies back.",
+		},
+	},
+	{
+		id = "bis",
+		chat = { "BiS", "BIS" },
+		lower = false,
+		de = {
+			term = "BiS",
+			alt = { "Best in Slot" },
+			def = "Best in Slot: der beste Gegenstand, den deine Klasse für einen Ausrüstungsplatz bekommen kann. BiS-Listen ändern sich mit Patches, also nimm sie als Richtung, nicht als Pflicht.",
+		},
+		en = {
+			term = "BiS",
+			alt = { "best in slot" },
+			def = "Best in slot: the best item your class can get for an equipment slot. BiS lists change with patches, so treat them as a direction, not a must.",
+		},
+	},
+	{
+		id = "gear",
+		chat = { "Gear", "gear", "Equip", "equip", "EQ" },
+		faq = "class-equip",
+		de = {
+			term = "Gear",
+			alt = { "Equip", "EQ", "Ausrüstung" },
+			def = "Deine angelegte Ausrüstung. \"Gear checken\" heißt, jemand schaut sich an, was du trägst, etwa vor einem Dungeon.",
+		},
+		en = {
+			term = "Gear",
+			alt = { "equip", "EQ" },
+			def = "Your equipped items. \"Checking gear\" means someone looks at what you wear, for example before a dungeon.",
+		},
+	},
+	{
+		id = "dkp",
+		chat = { "DKP" },
+		mark = false,
+		de = {
+			term = "DKP",
+			def = "Dragon Kill Points: Punkte, die manche Gilden für Teilnahme am Schlachtzug vergeben. Mit den Punkten bietet man auf Beute. Das ist eine Gildenregel, kein Spielsystem.",
+		},
+		en = {
+			term = "DKP",
+			def = "Dragon kill points: points some guilds award for joining raids. Members spend them to bid on loot. It's a guild rule, not a game system.",
+		},
+	},
+	{
+		id = "prio",
+		chat = { "Prio", "prio" },
+		de = {
+			term = "Prio",
+			def = "Priorität: wer zuerst dran ist, etwa \"Prio auf Heiler\" bei Beute, oder welchen Gegner ihr zuerst angreift.",
+		},
+		en = {
+			term = "Prio",
+			alt = { "priority" },
+			def = "Priority: who comes first, such as \"healer prio\" on loot, or which enemy you attack first.",
+		},
+	},
+	{
+		id = "brez",
+		chat = { "BRez", "Brez", "brez", "Battle Rez" },
+		faq = "druid-rebirth",
+		mark = false,
+		de = {
+			term = "BRez",
+			alt = { "Kampf-Rez" },
+			def = "Wiederbelebung mitten im Kampf, etwa mit Wiedergeburt des Druiden. Die meisten Wiederbelebungen gehen nur außerhalb des Kampfes.",
+		},
+		en = {
+			term = "BRez",
+			alt = { "battle rez" },
+			def = "A resurrection in the middle of combat, for example a druid's Rebirth. Most resurrections only work out of combat.",
+		},
+	},
+	{
+		id = "dispel",
+		chat = { "Dispel", "dispel", "Dispell", "dispell", "decursen" },
+		de = {
+			term = "Dispel",
+			alt = { "dispellen" },
+			def = "Einen Effekt entfernen: schädliche Flüche, Gifte, Krankheiten oder Magie von Verbündeten, oder Stärkungen vom Gegner. Welche Art du entfernen kannst, hängt von deiner Klasse ab.",
+		},
+		en = {
+			term = "Dispel",
+			alt = { "decurse", "cleanse" },
+			def = "Removing an effect: harmful curses, poisons, diseases or magic from allies, or buffs from enemies. Which kinds you can remove depends on your class.",
+		},
+	},
+	{
+		id = "farm",
+		chat = { "farmen", "Farmen", "farming", "grinden", "grind" },
+		de = {
+			term = "Farmen",
+			alt = { "Grinden" },
+			def = "Immer wieder dasselbe tun, um etwas zu sammeln, etwa Gegner für Material, Gold oder Ruf töten. Grinden meint meist dasselbe für Erfahrung.",
+		},
+		en = {
+			term = "Farming",
+			alt = { "grinding" },
+			def = "Doing the same thing again and again to collect something, such as killing enemies for materials, gold or reputation. Grinding usually means the same for experience.",
+		},
+	},
+	{
+		id = "stack",
+		chat = { "Stack", "stack", "Stacks", "stacks", "stacken" },
+		faq = "gold-stacks",
+		de = {
+			term = "Stack",
+			alt = { "Stapel" },
+			def = "Ein Stapel gleicher Gegenstände in einem Taschenplatz, oder wie oft ein Effekt auf jemandem liegt (\"5 Stacks\"). \"Stacken\" im Kampf heißt auch: alle stellen sich auf einen Punkt.",
+		},
+		en = {
+			term = "Stack",
+			def = "A pile of identical items in one bag slot, or how many times an effect is on someone (\"5 stacks\"). \"Stack up\" in a fight also means: everyone stands on one spot.",
+		},
+	},
+	{
+		id = "transmog",
+		chat = { "Transmog", "transmog", "Mog", "mog", "moggen" },
+		faq = "start-transmog",
+		de = {
+			term = "Transmog",
+			alt = { "moggen", "Transmogrifikation" },
+			def = "Das Aussehen eines Gegenstands auf einen anderen übertragen, die Werte bleiben. In WoW: Forever ist das freiwillig und läuft über den Transmogrifizierer.",
+		},
+		en = {
+			term = "Transmog",
+			alt = { "mog", "transmogrification" },
+			def = "Giving an item the look of another item; the stats stay the same. In WoW: Forever it is optional and done at the transmogrifier.",
+		},
+	},
+	{
+		id = "bg",
+		chat = { "BG", "BGs" },
+		mark = false,
+		de = {
+			term = "BG",
+			alt = { "Schlachtfeld" },
+			def = "Battleground: eine PvP-Karte, auf der zwei Teams mit festen Zielen gegeneinander kämpfen, etwa Flaggen erobern oder Punkte halten. Dafür gibt es Ehre.",
+		},
+		en = {
+			term = "BG",
+			alt = { "battleground" },
+			def = "Battleground: a PvP map where two teams fight each other over fixed goals, such as capturing flags or holding points. It rewards honor.",
+		},
+	},
+	{
+		id = "av",
+		chat = { "AV" },
+		mark = false,
+		de = {
+			term = "AV",
+			def = "Kürzel für Alteractal, ein großes Schlachtfeld im Alteracgebirge.",
+		},
+		en = {
+			term = "AV",
+			def = "Short for Alterac Valley, a large battleground in the Alterac Mountains.",
+		},
+	},
+	{
+		id = "queue",
+		chat = { "Queue", "queue", "queuen" },
+		de = {
+			term = "Queue",
+			alt = { "Warteschlange" },
+			def = "Warteschlange, etwa für ein Schlachtfeld oder beim Einloggen, wenn sehr viele Spieler gleichzeitig wollen. \"In der Queue\" heißt: angemeldet und warten.",
+		},
+		en = {
+			term = "Queue",
+			def = "A waiting line, for example for a battleground or at login when very many players want in at once. \"In queue\" means signed up and waiting.",
+		},
+	},
+	{
+		id = "ic-ooc",
+		chat = { "IC", "OOC", "ooc" },
+		faq = "social-rp",
+		mark = false,
+		de = {
+			term = "IC/OOC",
+			def = "Im Rollenspiel: In Character heißt, du sprichst als deine Figur; Out of Character, du sprichst als Spieler. OOC kann auch \"außerhalb des Kampfes\" heißen.",
+		},
+		en = {
+			term = "IC/OOC",
+			def = "In role-play: in character means you speak as your character; out of character, you speak as yourself. OOC can also mean \"out of combat\".",
+		},
+	},
+	{
+		id = "main",
+		chat = { "Main", "Mainchar" },
+		mark = false,
+		de = {
+			term = "Main",
+			alt = { "Mainchar" },
+			def = "Dein Hauptcharakter, mit dem du am meisten spielst. Die anderen Charaktere heißen Twinks.",
+		},
+		en = {
+			term = "Main",
+			def = "Your main character, the one you play most. Your other characters are alts.",
+		},
+	},
+	{
+		id = "twink",
+		chat = { "Twink", "twink", "Twinks", "alts" },
+		faq = "start-alts",
+		mark = false,
+		de = {
+			term = "Twink",
+			alt = { "Alt" },
+			def = "Ein weiterer Charakter neben deinem Main.",
+		},
+		en = {
+			term = "Alt",
+			alt = { "twink" },
+			def = "Another character besides your main.",
+		},
+	},
+	{
+		id = "npc",
+		chat = { "NPC", "NPCs" },
+		de = {
+			term = "NPC",
+			def = "Non-Player Character: jede Figur, die vom Spiel gesteuert wird, etwa Händler, Lehrer oder Questgeber. Feindliche NPCs heißen meist Mobs.",
+		},
+		en = {
+			term = "NPC",
+			def = "Non-player character: any figure the game controls, such as vendors, trainers or quest givers. Hostile NPCs are usually called mobs.",
+		},
+	},
+	-- Items and professions
+	{
+		id = "pot",
+		chat = { "Pot", "pot", "Pots", "pots", "potten" },
+		mark = false,
+		de = {
+			term = "Pot",
+			alt = { "Trank" },
+			def = "Ein Trank, etwa ein Heil- oder Manatrank. Tränke haben eine gemeinsame Abklingzeit, du kannst also nicht mehrere direkt hintereinander trinken.",
+		},
+		en = {
+			term = "Pot",
+			alt = { "potion" },
+			def = "A potion, such as a healing or mana potion. Potions share a cooldown, so you can't drink several right after each other.",
+		},
+	},
+	{
+		id = "flask",
+		chat = { "Flask", "flask", "Fläschchen" },
+		de = {
+			term = "Fläschchen",
+			alt = { "Flask" },
+			def = "Ein besonders langer Alchemie-Trank, dessen Wirkung auch den Tod übersteht. Wird meist im Schlachtzug benutzt.",
+		},
+		en = {
+			term = "Flask",
+			def = "A particularly long-lasting alchemy potion whose effect even survives death. Mostly used in raids.",
+		},
+	},
+	{
+		id = "healthstone",
+		chat = { "Gesu", "gesu" },
+		faq = "warlock-healthstone",
+		mark = false,
+		de = {
+			term = "Gesu",
+			alt = { "Gesundheitsstein" },
+			def = "Gesundheitsstein: ein Stein, den Hexenmeister herstellen und verteilen. Er heilt dich sofort.",
+		},
+		en = {
+			term = "Healthstone",
+			def = "A stone that warlocks create and hand out. It heals you instantly.",
+		},
+	},
+	{
+		id = "soulstone",
+		chat = { "SS", "Soulstone", "soulstone" },
+		faq = "warlock-soulstone",
+		mark = false,
+		de = {
+			term = "SS",
+			alt = { "Seelenstein" },
+			def = "Seelenstein: ein Hexenmeister legt ihn auf jemanden, der sich nach dem Tod selbst wiederbeleben kann. Meist auf den Heiler.",
+		},
+		en = {
+			term = "SS",
+			alt = { "soulstone" },
+			def = "Soulstone: a warlock puts it on someone, who can then resurrect themselves after dying. Usually on the healer.",
+		},
+	},
+	{
+		id = "trinket",
+		chat = { "Trinket", "trinket", "Trinkets", "trinkets" },
+		de = {
+			term = "Trinket",
+			alt = { "Schmuckstück" },
+			def = "Schmuckstück: zwei Ausrüstungsplätze für Gegenstände mit besonderer Wirkung, oft zum Benutzen mit Abklingzeit.",
+		},
+		en = {
+			term = "Trinket",
+			def = "Two equipment slots for items with a special effect, often one you use with a cooldown.",
+		},
+	},
+	{
+		id = "hand-weapons",
+		chat = { "1H", "2H" },
+		mark = false,
+		de = {
+			term = "1H/2H",
+			alt = { "Einhand", "Zweihand" },
+			def = "Einhand- und Zweihandwaffe. 1H-Waffen lassen eine Hand frei für Schild, Nebenhand oder eine zweite Waffe, 2H-Waffen brauchen beide Hände.",
+		},
+		en = {
+			term = "1H/2H",
+			alt = { "one-hand", "two-hand" },
+			def = "One-hand and two-hand weapon. One-hand weapons leave a hand free for a shield, an off-hand item or a second weapon; two-hand weapons need both hands.",
+		},
+	},
+	{
+		id = "disenchant",
+		chat = { "dissen", "Dissen", "entzen", "Entzen", "disenchant" },
+		faq = "prof-enchanting-disenchant",
+		mark = false,
+		de = {
+			term = "Dissen",
+			alt = { "Entzaubern", "Entzen" },
+			def = "Entzaubern: Verzauberer zerlegen grüne und bessere Gegenstände in Material. \"Kann das jemand dissen?\" fragt nach einem Verzauberer.",
+		},
+		en = {
+			term = "DE",
+			alt = { "disenchant" },
+			def = "Disenchant: enchanters break green and better items into materials. \"Can someone DE this?\" asks for an enchanter.",
+		},
+	},
+	{
+		id = "prof-short",
+		chat = { "VZ", "Ingi", "ingi", "LV", "Ench", "Engi", "engi", "LW" },
+		faq = "prof-list",
+		mark = false,
+		de = {
+			term = "VZ/Ingi/LV",
+			def = "Kürzel für Berufe: VZ ist Verzauberkunst, Ingi Ingenieurskunst, LV Lederverarbeitung. BB kann Bergbau heißen, aber auch Beutebucht.",
+		},
+		en = {
+			term = "Engi/LW",
+			def = "Profession short forms: Engi is engineering, LW leatherworking, Ench enchanting. In German chat VZ, Ingi and LV mean the same.",
+		},
+	},
+	-- Stats and specializations
+	{
+		id = "stats-short",
+		chat = { "Stam", "stam", "Str", "str", "Agi", "agi", "Int", "Spi", "spi" },
+		faq = "class-stats",
+		mark = false,
+		de = {
+			term = "Stam/Str/Agi/Int",
+			def = "Kürzel für Werte: Stam ist Ausdauer, Str Stärke, Agi Beweglichkeit, Int Intelligenz und Spi Willenskraft.",
+		},
+		en = {
+			term = "Stam/Str/Agi/Int",
+			def = "Short forms of stats: Stam is Stamina, Str Strength, Agi Agility, Int Intellect and Spi Spirit.",
+		},
+	},
+	{
+		id = "spec-short",
+		chat = { "Prot", "prot", "Holy", "holy", "Resto", "resto", "Feral", "feral", "Ele", "ele", "Enh", "enh", "Enhancer", "Ret", "ret", "Retri", "Fury", "fury", "Furor", "Arms", "Destro", "destro", "Affli", "affli", "Diszi", "diszi", "Disc", "BM", "MM", "SV" },
+		faq = "class-talents",
+		mark = false,
+		de = {
+			term = "Prot/Holy/Resto …",
+			def = "Kurznamen der Ausrichtungen: Prot = Schutz, Holy = Heilig, Resto = Wiederherstellung, Ele/Enh = Elementar/Verstärkung, Ret = Vergeltung, Fury/Arms = Furor/Waffen, Destro/Affli = Zerstörung/Gebrechen, Diszi = Disziplin, BM/MM/SV = Tierherrschaft/Treffsicherheit/Überleben.",
+		},
+		en = {
+			term = "Prot/Holy/Resto …",
+			def = "Short spec names: Prot = Protection, Resto = Restoration, Ele/Enh = Elemental/Enhancement, Ret = Retribution, Destro/Affli = Destruction/Affliction, Disc = Discipline, BM/MM/SV = Beast Mastery/Marksmanship/Survival.",
+		},
+	},
+	{
+		id = "dudu",
+		chat = { "Dudu", "dudu", "Dudus" },
+		mark = false,
+		de = {
+			term = "Dudu",
+			alt = { "Druide" },
+			def = "Spitzname für Druide.",
+		},
+		en = {
+			term = "Dudu",
+			def = "German chat nickname for druid.",
+		},
+	},
+	{
+		id = "nerf",
+		chat = { "Nerf", "nerf", "generft", "nerfed", "OP", "imba" },
+		mark = false,
+		de = {
+			term = "Nerf",
+			alt = { "OP", "imba" },
+			def = "Ein Nerf ist eine Abschwächung durch einen Patch, das Gegenteil heißt Buff. Was als zu stark gilt, nennen Spieler OP (overpowered) oder imba.",
+		},
+		en = {
+			term = "Nerf",
+			alt = { "OP" },
+			def = "A nerf is a weakening by a patch; the opposite is a buff. Things that seem too strong are called OP (overpowered).",
+		},
+	},
+	-- Interface
+	{
+		id = "addon",
+		chat = { "Addon", "addon", "Addons", "addons", "AddOn" },
+		faq = "ui-addons",
+		-- the addon's own texts say "Addon" all the time
+		mark = false,
+		de = {
+			term = "Addon",
+			def = "Eine Erweiterung der Spieloberfläche von Spielern, etwa für Taschen, Quests oder Kampfwarnungen. AskAzeroth ist auch ein Addon.",
+		},
+		en = {
+			term = "Addon",
+			def = "A player-made extension of the game's interface, for bags, quests or combat warnings, for example. AskAzeroth is an addon too.",
+		},
+	},
+	{
+		id = "ui",
+		chat = { "UI" },
+		mark = false,
+		de = {
+			term = "UI",
+			alt = { "Oberfläche" },
+			def = "User Interface: die Spieloberfläche mit Leisten, Fenstern und Karte. \"/reload\" lädt sie neu, etwa nach dem Ändern von Addons.",
+		},
+		en = {
+			term = "UI",
+			alt = { "interface" },
+			def = "User interface: the game's bars, windows and map. \"/reload\" reloads it, for example after changing addons.",
+		},
+	},
+	{
+		id = "ignore",
+		chat = { "Igno", "igno", "ignore", "Ignore" },
+		faq = "social-ignore",
+		mark = false,
+		de = {
+			term = "Igno",
+			alt = { "Ignorieren" },
+			def = "Ignorierliste: Spieler darauf siehst du im Chat nicht mehr, und sie können dich nicht anflüstern oder einladen. Rechtsklick auf den Namen, dann Ignorieren.",
+		},
+		en = {
+			term = "Ignore",
+			def = "Ignore list: you no longer see these players in chat, and they can't whisper or invite you. Right-click the name, then Ignore.",
+		},
+	},
+	{
+		id = "lag",
+		chat = { "Lag", "lag", "laggt", "lagt", "laggy", "DC" },
+		mark = false,
+		de = {
+			term = "Lag",
+			alt = { "DC" },
+			def = "Verzögerung durch eine langsame Verbindung: das Spiel reagiert spät oder ruckelt. DC (Disconnect) heißt, die Verbindung ist ganz abgebrochen.",
+		},
+		en = {
+			term = "Lag",
+			alt = { "DC" },
+			def = "Delay from a slow connection: the game reacts late or stutters. DC (disconnect) means the connection dropped completely.",
+		},
+	},
+	-- Chat slang
+	{
+		id = "np",
+		chat = { "np", "NP" },
+		mark = false,
+		de = { term = "np", def = "No problem: kein Problem, gern geschehen." },
+		en = { term = "np", def = "No problem; you're welcome." },
+	},
+	{
+		id = "wb",
+		chat = { "wb", "WB" },
+		mark = false,
+		de = { term = "wb", def = "Welcome back: willkommen zurück, etwa wenn jemand wieder am Platz ist." },
+		en = { term = "wb", def = "Welcome back, for example when someone returns to the keyboard." },
+	},
+	{
+		id = "omw",
+		chat = { "omw", "OMW" },
+		mark = false,
+		de = { term = "omw", def = "On my way: bin unterwegs, komme gleich." },
+		en = { term = "omw", def = "On my way." },
+	},
+	{
+		id = "mom",
+		chat = { "sec", "1sec", "1 sec" },
+		mark = false,
+		de = { term = "sec", alt = { "mom" }, def = "One second bzw. Moment: kurz warten, bin gleich so weit." },
+		en = { term = "sec", alt = { "1 sec" }, def = "One second: wait a moment, almost ready." },
+	},
+	{
+		id = "hf",
+		chat = { "hf", "HF", "gl", "GL", "gl hf" },
+		mark = false,
+		de = { term = "hf", alt = { "gl" }, def = "Have fun: viel Spaß. Oft zusammen mit gl (good luck, viel Glück)." },
+		en = { term = "hf", alt = { "gl" }, def = "Have fun, often together with gl (good luck)." },
+	},
+	{
+		id = "gn8",
+		chat = { "gn8", "GN8", "n8", "gn", "GN" },
+		mark = false,
+		de = { term = "gn8", alt = { "n8" }, def = "Gute Nacht." },
+		en = { term = "gn", alt = { "gn8" }, def = "Good night." },
+	},
+	{
+		id = "ka",
+		chat = { "kA", "KA", "k.A." },
+		mark = false,
+		de = { term = "kA", def = "Keine Ahnung." },
+		en = { term = "kA", def = "German chat short form for \"no idea\"." },
+	},
+	{
+		id = "sry",
+		chat = { "sry", "Sry", "SRY" },
+		mark = false,
+		de = { term = "sry", def = "Sorry: Entschuldigung." },
+		en = { term = "sry", def = "Sorry." },
+	},
+	{
+		id = "pls",
+		chat = { "pls", "plz", "plx", "Pls", "Plz" },
+		mark = false,
+		de = { term = "pls", alt = { "plz" }, def = "Please: bitte." },
+		en = { term = "pls", alt = { "plz" }, def = "Please." },
+	},
+	{
+		id = "dnd",
+		chat = { "DND", "dnd" },
+		mark = false,
+		de = { term = "DND", def = "Do not disturb: bitte nicht stören. Mit /dnd setzt du diesen Status selbst." },
+		en = { term = "DND", def = "Do not disturb. Type /dnd to set this status yourself." },
+	},
+	{
+		id = "inc",
+		chat = { "inc", "INC", "Inc" },
+		mark = false,
+		de = {
+			term = "inc",
+			def = "Incoming: Gegner kommen. Eine Warnung an die Gruppe, etwa wenn eine Patrouille oder ein Spieler der anderen Fraktion naht.",
+		},
+		en = {
+			term = "inc",
+			def = "Incoming: enemies are coming. A warning to the group, for example when a patrol or a player of the other faction approaches.",
+		},
+	},
+	{
+		id = "oor",
+		chat = { "OOR", "oor" },
+		mark = false,
+		de = { term = "OOR", def = "Out of range: außer Reichweite, etwa wenn der Heiler dich nicht mehr erreicht." },
+		en = { term = "OOR", def = "Out of range, for example when the healer can't reach you any more." },
+	},
+	{
+		id = "noob",
+		chat = { "Noob", "noob", "n00b", "Newbie", "newbie", "Noobs", "noobs" },
+		mark = false,
+		de = {
+			term = "Noob",
+			alt = { "Newbie" },
+			def = "Eigentlich ein Neuling, im Chat aber oft abwertend gemeint. Neu sein ist kein Fehler: Jeder hat mal angefangen, und mit AskAzeroth kannst du einfach fragen.",
+		},
+		en = {
+			term = "Noob",
+			alt = { "newbie" },
+			def = "Originally a new player, but in chat often meant as an insult. Being new is no fault: everyone started once, and with AskAzeroth you can simply ask.",
+		},
+	},
+	-- Dungeons (the classic dungeons that are in WoW: Forever)
+	{
+		id = "gnomer",
+		chat = { "Gnomer", "gnomer", "Gnomeregan" },
+		mark = false,
+		de = { term = "Gnomer", alt = { "Gnome" }, def = "Kürzel für Gnomeregan, Dungeon in Dun Morogh." },
+		en = { term = "Gnomer", def = "Short for Gnomeregan, a dungeon in Dun Morogh." },
+	},
+	{
+		id = "rfk",
+		chat = { "RFK", "Kral" },
+		mark = false,
+		de = { term = "RFK", alt = { "Kral" }, def = "Kürzel für den Kral der Klingenhauer, Dungeon im Brachland." },
+		en = { term = "RFK", def = "Short for Razorfen Kraul, a dungeon in the Barrens." },
+	},
+	{
+		id = "rfd",
+		chat = { "RFD" },
+		mark = false,
+		de = { term = "RFD", alt = { "Hügel" }, def = "Kürzel für die Hügel der Klingenhauer, Dungeon im Brachland." },
+		en = { term = "RFD", def = "Short for Razorfen Downs, a dungeon in the Barrens." },
+	},
+	{
+		id = "stocks",
+		chat = { "Stocks", "stocks", "Verlies" },
+		mark = false,
+		de = { term = "Verlies", alt = { "Stocks" }, def = "Das Verlies, Dungeon mitten in Sturmwind." },
+		en = { term = "Stocks", def = "Short for The Stockade, a dungeon in the middle of Stormwind." },
+	},
+	{
+		id = "ulda",
+		chat = { "Ulda", "ulda", "Uldaman" },
+		mark = false,
+		de = { term = "Ulda", def = "Kürzel für Uldaman, Dungeon im Ödland." },
+		en = { term = "Ulda", def = "Short for Uldaman, a dungeon in the Badlands." },
+	},
+	{
+		id = "zf",
+		chat = { "ZF" },
+		mark = false,
+		de = { term = "ZF", def = "Kürzel für Zul'Farrak, Dungeon in Tanaris." },
+		en = { term = "ZF", def = "Short for Zul'Farrak, a dungeon in Tanaris." },
+	},
+	{
+		id = "mara",
+		chat = { "Mara", "mara", "Maraudon" },
+		mark = false,
+		de = { term = "Mara", def = "Kürzel für Maraudon, Dungeon in Desolace." },
+		en = { term = "Mara", def = "Short for Maraudon, a dungeon in Desolace." },
+	},
+	{
+		id = "st",
+		chat = { "ST" },
+		mark = false,
+		de = { term = "ST", alt = { "Tempel" }, def = "Kürzel für den Versunkenen Tempel (Tempel von Atal'Hakkar), Dungeon in den Sümpfen des Elends." },
+		en = { term = "ST", def = "Short for the Sunken Temple (Temple of Atal'Hakkar), a dungeon in the Swamp of Sorrows." },
 	},
 })
