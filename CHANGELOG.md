@@ -33,8 +33,8 @@ answers come. Tell your guild and friends!
   be limited to one every 1 to 15 minutes and moved in Edit Mode. Choose
   the sound and whether a counter shows on the minimap button and the
   Questions tab.
-- Attach up to 3 FAQ entries to an answer; readers open them with one
-  click, in their own FAQ language.
+- Attach up to 3 FAQ entries or glossary terms to an answer; readers open
+  them with one click, FAQ entries in their own FAQ language.
 
 ### FAQ and glossary
 - Built-in FAQ with hundreds of beginner questions in topics such as first
