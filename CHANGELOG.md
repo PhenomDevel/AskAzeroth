@@ -7,6 +7,9 @@
   stats and spec short forms, chat slang and the classic dungeons that are
   in WoW: Forever). Molten Core, Blackwing Lair and Zul'Gurub are gone
   from the glossary, since they are not raids in WoW: Forever.
+- The glossary is now in all seven addon languages (French, Spanish,
+  Italian, Russian and Portuguese added). Terms are also found when their
+  first letter is an accented or Cyrillic capital (É, Я).
 - Questions page: new filter "Hide answered" hides questions that already
   have an answer, so mentors see at a glance who still waits for help.
 - Categories have icons in lists, filters, the ask dialog and
