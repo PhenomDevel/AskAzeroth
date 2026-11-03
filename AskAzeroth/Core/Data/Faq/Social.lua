@@ -6,31 +6,31 @@ ns.Faq.Add("social", {
 		id = "social-chat",
 		de = {
 			q = "Wie schreibe ich im Chat?",
-			a = "Drück Enter, schreib deinen Text und drück wieder Enter. Befehle legen fest, wohin er geht: /s sagen, /y schreien, /p Gruppe, /g Gilde, /w Name flüstern, /1 Allgemein-Kanal des Gebiets. Auf das letzte Flüstern antwortest du mit R.",
+			a = "Drück [Enter], schreib deinen Text und drück wieder [Enter]. Befehle legen fest, wohin er geht: `/s` sagen, `/y` schreien, `/p` Gruppe, `/g` Gilde, `/w` Name flüstern, `/1` Allgemein-Kanal des Gebiets. Auf das letzte Flüstern antwortest du mit [R].",
 		},
 		en = {
 			q = "How do I use the chat?",
-			a = "Press Enter, type your text and press Enter again. Commands change where it goes: /s say, /y yell, /p party, /g guild, /w Name whisper, /1 general channel of the zone. Reply to the last whisper with R.",
+			a = "Press [Enter], type your text and press [Enter] again. Commands change where it goes: `/s` say, `/y` yell, `/p` party, `/g` guild, `/w` Name whisper, `/1` general channel of the zone. Reply to the last whisper with [R].",
 		},
 		fr = {
 			q = "Comment utiliser le chat ?",
-			a = "Appuyez sur Entrée, tapez votre texte et appuyez de nouveau sur Entrée. Les commandes changent la destination : /s dire, /y crier, /p groupe, /g guilde, /w Nom chuchoter, /1 canal général de la zone. Répondez au dernier chuchotement avec R.",
+			a = "Appuyez sur [Entrée], tapez votre texte et appuyez de nouveau sur [Entrée]. Les commandes changent la destination : `/s` dire, `/y` crier, `/p` groupe, `/g` guilde, `/w` Nom chuchoter, `/1` canal général de la zone. Répondez au dernier chuchotement avec [R].",
 		},
 		es = {
 			q = "¿Cómo uso el chat?",
-			a = "Pulsa Intro, escribe tu texto y vuelve a pulsar Intro. Los comandos cambian adónde va: /s decir, /y gritar, /p grupo, /g hermandad, /w Nombre susurrar, /1 canal general de la zona. Responde al último susurro con R.",
+			a = "Pulsa [Intro], escribe tu texto y vuelve a pulsar [Intro]. Los comandos cambian adónde va: `/s` decir, `/y` gritar, `/p` grupo, `/g` hermandad, `/w` Nombre susurrar, `/1` canal general de la zona. Responde al último susurro con [R].",
 		},
 		it = {
 			q = "Come uso la chat?",
-			a = "Premi Invio, scrivi il testo e premi di nuovo Invio. I comandi cambiano dove va il messaggio: /s dire, /y urlare, /p gruppo, /g gilda, /w Nome sussurrare, /1 canale generale della zona. Rispondi all'ultimo sussurro con R.",
+			a = "Premi [Invio], scrivi il testo e premi di nuovo [Invio]. I comandi cambiano dove va il messaggio: `/s` dire, `/y` urlare, `/p` gruppo, `/g` gilda, `/w` Nome sussurrare, `/1` canale generale della zona. Rispondi all'ultimo sussurro con [R].",
 		},
 		ru = {
 			q = "Как пользоваться чатом?",
-			a = "Нажмите Enter, введите текст и снова нажмите Enter. Команды меняют, куда уходит сообщение: /s сказать, /y крикнуть, /p группа, /g гильдия, /w Имя шёпот, /1 общий канал зоны. Ответить на последний шёпот можно клавишей R.",
+			a = "Нажмите [Enter], введите текст и снова нажмите [Enter]. Команды меняют, куда уходит сообщение: `/s` сказать, `/y` крикнуть, `/p` группа, `/g` гильдия, `/w` Имя шёпот, `/1` общий канал зоны. Ответить на последний шёпот можно клавишей [R].",
 		},
 		pt = {
 			q = "Como uso o chat?",
-			a = "Aperte Enter, digite o texto e aperte Enter de novo. Comandos mudam para onde vai: /s dizer, /y gritar, /p grupo, /g guilda, /w Nome sussurrar, /1 canal geral da zona. Responda ao último sussurro com R.",
+			a = "Aperte [Enter], digite o texto e aperte [Enter] de novo. Comandos mudam para onde vai: `/s` dizer, `/y` gritar, `/p` grupo, `/g` guilda, `/w` Nome sussurrar, `/1` canal geral da zona. Responda ao último sussurro com [R].",
 		},
 	},
 	{
@@ -68,155 +68,155 @@ ns.Faq.Add("social", {
 		id = "social-friends",
 		de = {
 			q = "Wie füge ich Freunde hinzu?",
-			a = "Öffne das Kontaktfenster (Taste O), klick auf „Freund hinzufügen“ und gib den Namen ein. Du kannst auch mit der rechten Maustaste auf einen Spieler klicken und ihn dort hinzufügen.",
+			a = "Öffne das Kontaktfenster (Taste [O]), klick auf {Freund hinzufügen} und gib den Namen ein. Du kannst auch mit der rechten Maustaste auf einen Spieler klicken und ihn dort hinzufügen.",
 		},
 		en = {
 			q = "How do I add friends?",
-			a = "Open the social window (O key), click Add Friend and enter the name. You can also right-click a player and add them from there.",
+			a = "Open the social window ([O] key), click {Add Friend} and enter the name. You can also right-click a player and add them from there.",
 		},
 		fr = {
 			q = "Comment ajouter des amis ?",
-			a = "Ouvrez la fenêtre sociale (touche O), cliquez sur Ajouter un ami et saisissez le nom. Vous pouvez aussi faire un clic droit sur un joueur et l'ajouter depuis là.",
+			a = "Ouvrez la fenêtre sociale (touche [O]), cliquez sur {Ajouter un ami} et saisissez le nom. Vous pouvez aussi faire un clic droit sur un joueur et l'ajouter depuis là.",
 		},
 		es = {
 			q = "¿Cómo añado amigos?",
-			a = "Abre la ventana social (tecla O), pulsa Añadir amigo y escribe el nombre. También puedes hacer clic derecho en un jugador y añadirlo desde ahí.",
+			a = "Abre la ventana social (tecla [O]), pulsa {Añadir amigo} y escribe el nombre. También puedes hacer clic derecho en un jugador y añadirlo desde ahí.",
 		},
 		it = {
 			q = "Come aggiungo amici?",
-			a = "Apri la finestra sociale (tasto O), clicca su Aggiungi amico e inserisci il nome. Puoi anche fare clic destro su un giocatore e aggiungerlo da lì.",
+			a = "Apri la finestra sociale (tasto [O]), clicca su {Aggiungi amico} e inserisci il nome. Puoi anche fare clic destro su un giocatore e aggiungerlo da lì.",
 		},
 		ru = {
 			q = "Как добавить друзей?",
-			a = "Откройте окно «Общение» (клавиша O), нажмите «Добавить друга» и введите имя. Можно также щёлкнуть правой кнопкой по игроку и добавить его оттуда.",
+			a = "Откройте окно «Общение» (клавиша [O]), нажмите {Добавить друга} и введите имя. Можно также щёлкнуть правой кнопкой по игроку и добавить его оттуда.",
 		},
 		pt = {
 			q = "Como adiciono amigos?",
-			a = "Abra a janela social (tecla O), clique em Adicionar amigo e digite o nome. Também dá para clicar com o botão direito num jogador e adicioná-lo dali.",
+			a = "Abra a janela social (tecla [O]), clique em {Adicionar amigo} e digite o nome. Também dá para clicar com o botão direito num jogador e adicioná-lo dali.",
 		},
 	},
 	{
 		id = "social-ignore",
 		de = {
 			q = "Wie gehe ich mit nervigen Spielern um?",
-			a = "Klick mit der rechten Maustaste auf den Namen und wähl „Ignorieren“; in AskAzeroth kannst du einen Spieler zusätzlich auf der Seite „Spieler“ ignorieren. Beleidigendes Verhalten meldest du über dasselbe Menü.",
+			a = "Klick mit der rechten Maustaste auf den Namen und wähl {Ignorieren}; in AskAzeroth kannst du einen Spieler zusätzlich auf der Seite {Spieler} ignorieren. Beleidigendes Verhalten meldest du über dasselbe Menü.",
 		},
 		en = {
 			q = "How do I deal with annoying players?",
-			a = "Right-click their name and choose Ignore; in AskAzeroth you can also mark a player as ignored on the Players page. You can report abusive behaviour from the same menu.",
+			a = "Right-click their name and choose {Ignore}; in AskAzeroth you can also mark a player as ignored on the {Players} page. You can report abusive behaviour from the same menu.",
 		},
 		fr = {
 			q = "Comment gérer les joueurs pénibles ?",
-			a = "Clic droit sur leur nom puis « Ignorer » ; dans AskAzeroth, vous pouvez aussi marquer un joueur comme ignoré sur la page Joueurs. Vous pouvez signaler un comportement abusif depuis le même menu.",
+			a = "Clic droit sur leur nom puis {Ignorer} ; dans AskAzeroth, vous pouvez aussi marquer un joueur comme ignoré sur la page {Joueurs}. Vous pouvez signaler un comportement abusif depuis le même menu.",
 		},
 		es = {
 			q = "¿Qué hago con los jugadores molestos?",
-			a = "Clic derecho en su nombre y elige «Ignorar»; en AskAzeroth también puedes marcar a un jugador como ignorado en la página Jugadores. Desde el mismo menú puedes denunciar comportamientos abusivos.",
+			a = "Clic derecho en su nombre y elige {Ignorar}; en AskAzeroth también puedes marcar a un jugador como ignorado en la página {Jugadores}. Desde el mismo menú puedes denunciar comportamientos abusivos.",
 		},
 		it = {
 			q = "Come gestisco i giocatori fastidiosi?",
-			a = "Clic destro sul nome e scegli «Ignora»; in AskAzeroth puoi anche segnare un giocatore come ignorato nella pagina Giocatori. Dallo stesso menu puoi segnalare comportamenti offensivi.",
+			a = "Clic destro sul nome e scegli {Ignora}; in AskAzeroth puoi anche segnare un giocatore come ignorato nella pagina {Giocatori}. Dallo stesso menu puoi segnalare comportamenti offensivi.",
 		},
 		ru = {
 			q = "Что делать с надоедливыми игроками?",
-			a = "Щёлкните правой кнопкой по имени и выберите «Игнорировать»; в AskAzeroth игрока можно также отметить как игнорируемого на странице «Игроки». Из того же меню можно пожаловаться на оскорбительное поведение.",
+			a = "Щёлкните правой кнопкой по имени и выберите {Игнорировать}; в AskAzeroth игрока можно также отметить как игнорируемого на странице {Игроки}. Из того же меню можно пожаловаться на оскорбительное поведение.",
 		},
 		pt = {
 			q = "Como lido com jogadores chatos?",
-			a = "Clique com o botão direito no nome e escolha \"Ignorar\"; no AskAzeroth você também pode marcar um jogador como ignorado na página Jogadores. No mesmo menu dá para denunciar comportamento abusivo.",
+			a = "Clique com o botão direito no nome e escolha {Ignorar}; no AskAzeroth você também pode marcar um jogador como ignorado na página {Jogadores}. No mesmo menu dá para denunciar comportamento abusivo.",
 		},
 	},
 	{
 		id = "social-channels",
 		de = {
 			q = "Welche Chatkanäle gibt es?",
-			a = "Allgemein gilt für das ganze Gebiet, Handel nur in Hauptstädten, Suche nach Gruppe ist für Gruppensuche gedacht, Lokale Verteidigung meldet Angriffe. Mit /join Name trittst du einem Kanal bei, mit /leave Nummer verlässt du ihn.",
+			a = "Allgemein gilt für das ganze Gebiet, Handel nur in Hauptstädten, Suche nach Gruppe ist für Gruppensuche gedacht, Lokale Verteidigung meldet Angriffe. Mit `/join` Name trittst du einem Kanal bei, mit `/leave` Nummer verlässt du ihn.",
 		},
 		en = {
 			q = "Which chat channels are there?",
-			a = "General covers the whole zone, Trade only works in capital cities, LookingForGroup is for finding groups, LocalDefense reports attacks. /join Name joins a channel, /leave Number leaves it.",
+			a = "General covers the whole zone, Trade only works in capital cities, LookingForGroup is for finding groups, LocalDefense reports attacks. `/join` Name joins a channel, `/leave` Number leaves it.",
 		},
 		fr = {
 			q = "Quels canaux de discussion existent ?",
-			a = "Général couvre toute la zone, Commerce ne fonctionne que dans les capitales, RechercheDeGroupe sert à trouver des groupes, DéfenseLocale signale les attaques. /join Nom rejoint un canal, /leave Numéro le quitte.",
+			a = "Général couvre toute la zone, Commerce ne fonctionne que dans les capitales, RechercheDeGroupe sert à trouver des groupes, DéfenseLocale signale les attaques. `/join` Nom rejoint un canal, `/leave` Numéro le quitte.",
 		},
 		es = {
 			q = "¿Qué canales de chat hay?",
-			a = "General abarca toda la zona, Comercio solo funciona en las capitales, BuscarGrupo sirve para encontrar grupos y DefensaLocal avisa de ataques. /join Nombre te une a un canal y /leave Número lo abandona.",
+			a = "General abarca toda la zona, Comercio solo funciona en las capitales, BuscarGrupo sirve para encontrar grupos y DefensaLocal avisa de ataques. `/join` Nombre te une a un canal y `/leave` Número lo abandona.",
 		},
 		it = {
 			q = "Quali canali di chat ci sono?",
-			a = "Generale copre tutta la zona, Commercio funziona solo nelle capitali, CercaGruppo serve a trovare gruppi, DifesaLocale segnala gli attacchi. /join Nome entra in un canale, /leave Numero lo lascia.",
+			a = "Generale copre tutta la zona, Commercio funziona solo nelle capitali, CercaGruppo serve a trovare gruppi, DifesaLocale segnala gli attacchi. `/join` Nome entra in un canale, `/leave` Numero lo lascia.",
 		},
 		ru = {
 			q = "Какие есть каналы чата?",
-			a = "«Общий» охватывает всю зону, «Торговля» работает только в столицах, «ПоискСпутников» нужен для поиска группы, «ОборонаЛокальный» сообщает о нападениях. /join Название — войти в канал, /leave Номер — выйти из него.",
+			a = "«Общий» охватывает всю зону, «Торговля» работает только в столицах, «ПоискСпутников» нужен для поиска группы, «ОборонаЛокальный» сообщает о нападениях. `/join` Название — войти в канал, `/leave` Номер — выйти из него.",
 		},
 		pt = {
 			q = "Quais canais de chat existem?",
-			a = "Geral cobre a zona inteira, Comércio só funciona nas capitais, ProcurarGrupo serve para achar grupos e DefesaLocal avisa de ataques. /join Nome entra num canal e /leave Número sai dele.",
+			a = "Geral cobre a zona inteira, Comércio só funciona nas capitais, ProcurarGrupo serve para achar grupos e DefesaLocal avisa de ataques. `/join` Nome entra num canal e `/leave` Número sai dele.",
 		},
 	},
 	{
 		id = "social-link-items",
 		de = {
 			q = "Wie zeige ich einen Gegenstand im Chat?",
-			a = "Klick mit gedrückter Umschalttaste auf den Gegenstand, während das Chat-Eingabefeld offen ist. Dann erscheint ein Link, den andere anklicken können. Das geht auch mit Quests, Zaubern und Berufsrezepten.",
+			a = "Klick mit gedrückter [Umschalttaste] auf den Gegenstand, während das Chat-Eingabefeld offen ist. Dann erscheint ein Link, den andere anklicken können. Das geht auch mit Quests, Zaubern und Berufsrezepten.",
 		},
 		en = {
 			q = "How do I show an item in chat?",
-			a = "Shift-click the item while the chat input box is open. A link appears that others can click. This also works with quests, spells and recipes.",
+			a = "[Shift]-click the item while the chat input box is open. A link appears that others can click. This also works with quests, spells and recipes.",
 		},
 		fr = {
 			q = "Comment montrer un objet dans le chat ?",
-			a = "Faites Maj+clic sur l'objet pendant que la zone de saisie du chat est ouverte. Un lien apparaît, sur lequel les autres peuvent cliquer. Cela marche aussi avec les quêtes, les sorts et les recettes.",
+			a = "Faites [Maj]+clic sur l'objet pendant que la zone de saisie du chat est ouverte. Un lien apparaît, sur lequel les autres peuvent cliquer. Cela marche aussi avec les quêtes, les sorts et les recettes.",
 		},
 		es = {
 			q = "¿Cómo muestro un objeto en el chat?",
-			a = "Haz Mayús+clic en el objeto con el cuadro de texto del chat abierto. Aparece un enlace en el que los demás pueden hacer clic. También funciona con misiones, hechizos y recetas.",
+			a = "Haz [Mayús]+clic en el objeto con el cuadro de texto del chat abierto. Aparece un enlace en el que los demás pueden hacer clic. También funciona con misiones, hechizos y recetas.",
 		},
 		it = {
 			q = "Come mostro un oggetto in chat?",
-			a = "Fai Maiusc+clic sull'oggetto mentre la casella della chat è aperta. Compare un link che gli altri possono cliccare. Funziona anche con missioni, incantesimi e ricette.",
+			a = "Fai [Maiusc]+clic sull'oggetto mentre la casella della chat è aperta. Compare un link che gli altri possono cliccare. Funziona anche con missioni, incantesimi e ricette.",
 		},
 		ru = {
 			q = "Как показать предмет в чате?",
-			a = "Щёлкните по предмету с зажатым Shift, когда открыто поле ввода чата. Появится ссылка, по которой могут щёлкнуть другие. Так же можно делиться заданиями, заклинаниями и рецептами.",
+			a = "Щёлкните по предмету с зажатым [Shift], когда открыто поле ввода чата. Появится ссылка, по которой могут щёлкнуть другие. Так же можно делиться заданиями, заклинаниями и рецептами.",
 		},
 		pt = {
 			q = "Como mostro um item no chat?",
-			a = "Dê Shift+clique no item com a caixa de texto do chat aberta. Aparece um link em que os outros podem clicar. Funciona também com missões, feitiços e receitas.",
+			a = "Dê [Shift]+clique no item com a caixa de texto do chat aberta. Aparece um link em que os outros podem clicar. Funciona também com missões, feitiços e receitas.",
 		},
 	},
 	{
 		id = "social-whisper-name",
 		de = {
 			q = "Warum kommt mein Flüstern nicht an?",
-			a = "Prüf den Namen: In WoW: Forever haben Charaktere einen zweiteiligen Namen, und du brauchst oft den vollen Namen. Am einfachsten ist ein Rechtsklick auf den Namen im Chat und „Flüstern“. Spieler der anderen Fraktion kannst du nicht anflüstern.",
+			a = "Prüf den Namen: In WoW: Forever haben Charaktere einen zweiteiligen Namen, und du brauchst oft den vollen Namen. Am einfachsten ist ein Rechtsklick auf den Namen im Chat und {Flüstern}. Spieler der anderen Fraktion kannst du nicht anflüstern.",
 		},
 		en = {
 			q = "Why does my whisper not arrive?",
-			a = "Check the name: in WoW: Forever characters have a two-part name, and you often need the full name. Easiest is to right-click the name in chat and choose Whisper. You cannot whisper players of the other faction.",
+			a = "Check the name: in WoW: Forever characters have a two-part name, and you often need the full name. Easiest is to right-click the name in chat and choose {Whisper}. You cannot whisper players of the other faction.",
 		},
 		fr = {
 			q = "Pourquoi mon chuchotement n'arrive-t-il pas ?",
-			a = "Vérifiez le nom : dans WoW: Forever, les personnages ont un nom en deux parties, et il faut souvent le nom complet. Le plus simple est un clic droit sur le nom dans le chat puis « Chuchoter ». Vous ne pouvez pas chuchoter aux joueurs de l'autre faction.",
+			a = "Vérifiez le nom : dans WoW: Forever, les personnages ont un nom en deux parties, et il faut souvent le nom complet. Le plus simple est un clic droit sur le nom dans le chat puis {Chuchoter}. Vous ne pouvez pas chuchoter aux joueurs de l'autre faction.",
 		},
 		es = {
 			q = "¿Por qué no llega mi susurro?",
-			a = "Revisa el nombre: en WoW: Forever los personajes tienen un nombre de dos partes y a menudo necesitas el nombre completo. Lo más fácil es hacer clic derecho en el nombre del chat y elegir «Susurrar». No puedes susurrar a jugadores de la otra facción.",
+			a = "Revisa el nombre: en WoW: Forever los personajes tienen un nombre de dos partes y a menudo necesitas el nombre completo. Lo más fácil es hacer clic derecho en el nombre del chat y elegir {Susurrar}. No puedes susurrar a jugadores de la otra facción.",
 		},
 		it = {
 			q = "Perché il mio sussurro non arriva?",
-			a = "Controlla il nome: in WoW: Forever i personaggi hanno un nome in due parti e spesso serve il nome completo. La cosa più semplice è fare clic destro sul nome in chat e scegliere «Sussurra». Non puoi sussurrare ai giocatori dell'altra fazione.",
+			a = "Controlla il nome: in WoW: Forever i personaggi hanno un nome in due parti e spesso serve il nome completo. La cosa più semplice è fare clic destro sul nome in chat e scegliere {Sussurra}. Non puoi sussurrare ai giocatori dell'altra fazione.",
 		},
 		ru = {
 			q = "Почему мой шёпот не доходит?",
-			a = "Проверьте имя: в WoW: Forever имя персонажа состоит из двух частей, и часто нужно полное имя. Проще всего щёлкнуть правой кнопкой по имени в чате и выбрать «Шёпот». Игрокам другой фракции шептать нельзя.",
+			a = "Проверьте имя: в WoW: Forever имя персонажа состоит из двух частей, и часто нужно полное имя. Проще всего щёлкнуть правой кнопкой по имени в чате и выбрать {Шёпот}. Игрокам другой фракции шептать нельзя.",
 		},
 		pt = {
 			q = "Por que meu sussurro não chega?",
-			a = "Confira o nome: no WoW: Forever os personagens têm nome em duas partes, e muitas vezes você precisa do nome completo. O mais fácil é clicar com o botão direito no nome no chat e escolher \"Sussurrar\". Não dá para sussurrar jogadores da outra facção.",
+			a = "Confira o nome: no WoW: Forever os personagens têm nome em duas partes, e muitas vezes você precisa do nome completo. O mais fácil é clicar com o botão direito no nome no chat e escolher {Sussurrar}. Não dá para sussurrar jogadores da outra facção.",
 		},
 	},
 	{
@@ -254,93 +254,93 @@ ns.Faq.Add("social", {
 		id = "social-emotes",
 		de = {
 			q = "Wie benutze ich Emotes?",
-			a = "Gib zum Beispiel /winken, /tanzen, /verbeugen oder /lachen ein (im englischen Client /wave, /dance, /bow, /laugh). Mit einem Ziel richtet sich das Emote an diese Figur. Es macht das Spiel lebendiger und ist im Rollenspiel-Regelwerk sehr beliebt.",
+			a = "Gib zum Beispiel `/winken`, `/tanzen`, `/verbeugen` oder `/lachen` ein (im englischen Client `/wave`, `/dance`, `/bow`, `/laugh`). Mit einem Ziel richtet sich das Emote an diese Figur. Es macht das Spiel lebendiger und ist im Rollenspiel-Regelwerk sehr beliebt.",
 		},
 		en = {
 			q = "How do I use emotes?",
-			a = "Type, for example, /wave, /dance, /bow or /laugh. With a target selected the emote is aimed at that character. It makes the game livelier and is popular on the Roleplaying rule set.",
+			a = "Type, for example, `/wave`, `/dance`, `/bow` or `/laugh`. With a target selected the emote is aimed at that character. It makes the game livelier and is popular on the Roleplaying rule set.",
 		},
 		fr = {
 			q = "Comment utiliser les emotes ?",
-			a = "Tapez par exemple /wave, /dance, /bow ou /laugh (les commandes en anglais fonctionnent dans tous les clients). Avec une cible sélectionnée, l'emote s'adresse à ce personnage. Cela rend le jeu plus vivant et c'est très apprécié sur l'ensemble de règles Jeu de rôle.",
+			a = "Tapez par exemple `/wave`, `/dance`, `/bow` ou `/laugh` (les commandes en anglais fonctionnent dans tous les clients). Avec une cible sélectionnée, l'emote s'adresse à ce personnage. Cela rend le jeu plus vivant et c'est très apprécié sur l'ensemble de règles Jeu de rôle.",
 		},
 		es = {
 			q = "¿Cómo uso los emotes?",
-			a = "Escribe, por ejemplo, /wave, /dance, /bow o /laugh (los comandos en inglés funcionan en todos los clientes). Con un objetivo seleccionado, el emote va dirigido a ese personaje. Da vida al juego y es muy popular en el conjunto de reglas de Rol.",
+			a = "Escribe, por ejemplo, `/wave`, `/dance`, `/bow` o `/laugh` (los comandos en inglés funcionan en todos los clientes). Con un objetivo seleccionado, el emote va dirigido a ese personaje. Da vida al juego y es muy popular en el conjunto de reglas de Rol.",
 		},
 		it = {
 			q = "Come uso le emote?",
-			a = "Scrivi per esempio /wave, /dance, /bow o /laugh (i comandi in inglese funzionano in tutti i client). Con un bersaglio selezionato l'emote è rivolta a quel personaggio. Rende il gioco più vivo ed è molto apprezzata nel set di regole Gioco di ruolo.",
+			a = "Scrivi per esempio `/wave`, `/dance`, `/bow` o `/laugh` (i comandi in inglese funzionano in tutti i client). Con un bersaglio selezionato l'emote è rivolta a quel personaggio. Rende il gioco più vivo ed è molto apprezzata nel set di regole Gioco di ruolo.",
 		},
 		ru = {
 			q = "Как использовать эмоции?",
-			a = "Введите, например, /wave, /dance, /bow или /laugh (английские команды работают в любом клиенте). Если выбрана цель, эмоция обращена к этому персонажу. Так игра становится живее, особенно это любят в ролевом наборе правил.",
+			a = "Введите, например, `/wave`, `/dance`, `/bow` или `/laugh` (английские команды работают в любом клиенте). Если выбрана цель, эмоция обращена к этому персонажу. Так игра становится живее, особенно это любят в ролевом наборе правил.",
 		},
 		pt = {
 			q = "Como uso emotes?",
-			a = "Digite, por exemplo, /wave, /dance, /bow ou /laugh (os comandos em inglês funcionam em todos os clientes). Com um alvo selecionado, o emote é dirigido a esse personagem. Deixa o jogo mais vivo e é muito popular no conjunto de regras de Interpretação.",
+			a = "Digite, por exemplo, `/wave`, `/dance`, `/bow` ou `/laugh` (os comandos em inglês funcionam em todos os clientes). Com um alvo selecionado, o emote é dirigido a esse personagem. Deixa o jogo mais vivo e é muito popular no conjunto de regras de Interpretação.",
 		},
 	},
 	{
 		id = "social-afk",
 		de = {
 			q = "Wie zeige ich, dass ich nicht da bin?",
-			a = "/afk markiert dich als abwesend, /dnd als „nicht stören“; Flüsternde bekommen dann eine Nachricht. Schreibst du wieder etwas oder bewegst dich, ist die Markierung weg.",
+			a = "`/afk` markiert dich als abwesend, `/dnd` als „nicht stören“; Flüsternde bekommen dann eine Nachricht. Schreibst du wieder etwas oder bewegst dich, ist die Markierung weg.",
 		},
 		en = {
 			q = "How do I show that I am away?",
-			a = "/afk marks you as away, /dnd as do not disturb; people who whisper you get a message. Typing or moving again removes the flag.",
+			a = "`/afk` marks you as away, `/dnd` as do not disturb; people who whisper you get a message. Typing or moving again removes the flag.",
 		},
 		fr = {
 			q = "Comment montrer que je suis absent ?",
-			a = "/afk vous marque comme absent, /dnd comme « ne pas déranger » ; ceux qui vous chuchotent reçoivent un message. Dès que vous écrivez ou bougez, la marque disparaît.",
+			a = "`/afk` vous marque comme absent, `/dnd` comme « ne pas déranger » ; ceux qui vous chuchotent reçoivent un message. Dès que vous écrivez ou bougez, la marque disparaît.",
 		},
 		es = {
 			q = "¿Cómo indico que estoy ausente?",
-			a = "/afk te marca como ausente y /dnd como «no molestar»; quien te susurre recibe un mensaje. Si vuelves a escribir o moverte, la marca desaparece.",
+			a = "`/afk` te marca como ausente y `/dnd` como «no molestar»; quien te susurre recibe un mensaje. Si vuelves a escribir o moverte, la marca desaparece.",
 		},
 		it = {
 			q = "Come indico che sono assente?",
-			a = "/afk ti segna come assente, /dnd come «non disturbare»; chi ti sussurra riceve un messaggio. Se scrivi di nuovo o ti muovi, il segno sparisce.",
+			a = "`/afk` ti segna come assente, `/dnd` come «non disturbare»; chi ti sussurra riceve un messaggio. Se scrivi di nuovo o ti muovi, il segno sparisce.",
 		},
 		ru = {
 			q = "Как показать, что я отошёл?",
-			a = "/afk помечает вас как отсутствующего, /dnd — как «не беспокоить»; тем, кто шепчет вам, придёт сообщение. Стоит снова написать что-то или пошевелиться, и пометка исчезнет.",
+			a = "`/afk` помечает вас как отсутствующего, `/dnd` — как «не беспокоить»; тем, кто шепчет вам, придёт сообщение. Стоит снова написать что-то или пошевелиться, и пометка исчезнет.",
 		},
 		pt = {
 			q = "Como mostro que estou ausente?",
-			a = "/afk marca você como ausente e /dnd como \"não perturbe\"; quem sussurrar recebe uma mensagem. Ao digitar ou se mexer de novo, a marca some.",
+			a = "`/afk` marca você como ausente e `/dnd` como \"não perturbe\"; quem sussurrar recebe uma mensagem. Ao digitar ou se mexer de novo, a marca some.",
 		},
 	},
 	{
 		id = "social-roll",
 		de = {
 			q = "Wie würfle ich?",
-			a = "/roll würfelt eine Zahl von 1 bis 100, die alle in der Nähe sehen. Das hilft, faire Entscheidungen zu treffen, etwa wer einen Gegenstand bekommt.",
+			a = "`/roll` würfelt eine Zahl von 1 bis 100, die alle in der Nähe sehen. Das hilft, faire Entscheidungen zu treffen, etwa wer einen Gegenstand bekommt.",
 		},
 		en = {
 			q = "How do I roll a die?",
-			a = "/roll rolls a number from 1 to 100 that everyone nearby sees. It helps make fair decisions, for example who gets an item.",
+			a = "`/roll` rolls a number from 1 to 100 that everyone nearby sees. It helps make fair decisions, for example who gets an item.",
 		},
 		fr = {
 			q = "Comment lancer un dé ?",
-			a = "/roll tire un nombre de 1 à 100 que tout le monde autour voit. Cela aide à décider équitablement, par exemple qui reçoit un objet.",
+			a = "`/roll` tire un nombre de 1 à 100 que tout le monde autour voit. Cela aide à décider équitablement, par exemple qui reçoit un objet.",
 		},
 		es = {
 			q = "¿Cómo tiro un dado?",
-			a = "/roll saca un número del 1 al 100 que ven todos los que están cerca. Ayuda a tomar decisiones justas, por ejemplo quién se lleva un objeto.",
+			a = "`/roll` saca un número del 1 al 100 que ven todos los que están cerca. Ayuda a tomar decisiones justas, por ejemplo quién se lleva un objeto.",
 		},
 		it = {
 			q = "Come tiro un dado?",
-			a = "/roll tira un numero da 1 a 100 che vedono tutti quelli vicini. Aiuta a decidere in modo equo, per esempio chi riceve un oggetto.",
+			a = "`/roll` tira un numero da 1 a 100 che vedono tutti quelli vicini. Aiuta a decidere in modo equo, per esempio chi riceve un oggetto.",
 		},
 		ru = {
 			q = "Как бросить кости?",
-			a = "/roll выдаёт число от 1 до 100, которое видят все рядом. Это помогает решать честно, например кому достанется предмет.",
+			a = "`/roll` выдаёт число от 1 до 100, которое видят все рядом. Это помогает решать честно, например кому достанется предмет.",
 		},
 		pt = {
 			q = "Como rolo um dado?",
-			a = "/roll sorteia um número de 1 a 100 que todos por perto veem. Ajuda a decidir de forma justa, por exemplo quem fica com um item.",
+			a = "`/roll` sorteia um número de 1 a 100 que todos por perto veem. Ajuda a decidir de forma justa, por exemplo quem fica com um item.",
 		},
 	},
 	{
@@ -378,62 +378,62 @@ ns.Faq.Add("social", {
 		id = "social-guild-commands",
 		de = {
 			q = "Wie schreibe ich in der Gilde, und wie verlasse ich sie?",
-			a = "/g schreibt in den Gildenchat. Das Gildenfenster öffnest du über das Kontaktfenster oder die Menüleiste; dort siehst du alle Mitglieder. Verlassen kannst du die Gilde über das Gildenfenster oder mit /gquit.",
+			a = "`/g` schreibt in den Gildenchat. Das Gildenfenster öffnest du über das Kontaktfenster oder die Menüleiste; dort siehst du alle Mitglieder. Verlassen kannst du die Gilde über das Gildenfenster oder mit `/gquit`.",
 		},
 		en = {
 			q = "How do I chat in my guild, and how do I leave it?",
-			a = "/g writes in guild chat. Open the guild window from the social window or the menu bar to see all members. Leave the guild from the guild window or with /gquit.",
+			a = "`/g` writes in guild chat. Open the guild window from the social window or the menu bar to see all members. Leave the guild from the guild window or with `/gquit`.",
 		},
 		fr = {
 			q = "Comment écrire dans ma guilde, et comment la quitter ?",
-			a = "/g écrit dans le chat de guilde. Ouvrez la fenêtre de guilde depuis la fenêtre sociale ou la barre de menu pour voir tous les membres. Quittez la guilde depuis la fenêtre de guilde ou avec /gquit.",
+			a = "`/g` écrit dans le chat de guilde. Ouvrez la fenêtre de guilde depuis la fenêtre sociale ou la barre de menu pour voir tous les membres. Quittez la guilde depuis la fenêtre de guilde ou avec `/gquit`.",
 		},
 		es = {
 			q = "¿Cómo escribo en mi hermandad y cómo la dejo?",
-			a = "/g escribe en el chat de hermandad. Abre la ventana de hermandad desde la ventana social o la barra de menú para ver a todos los miembros. Abandona la hermandad desde esa ventana o con /gquit.",
+			a = "`/g` escribe en el chat de hermandad. Abre la ventana de hermandad desde la ventana social o la barra de menú para ver a todos los miembros. Abandona la hermandad desde esa ventana o con `/gquit`.",
 		},
 		it = {
 			q = "Come scrivo in gilda, e come la lascio?",
-			a = "/g scrive nella chat di gilda. Apri la finestra della gilda dalla finestra sociale o dalla barra dei menu per vedere tutti i membri. Lascia la gilda dalla finestra della gilda o con /gquit.",
+			a = "`/g` scrive nella chat di gilda. Apri la finestra della gilda dalla finestra sociale o dalla barra dei menu per vedere tutti i membri. Lascia la gilda dalla finestra della gilda o con `/gquit`.",
 		},
 		ru = {
 			q = "Как писать в гильдию и как её покинуть?",
-			a = "/g пишет в чат гильдии. Окно гильдии открывается из окна «Общение» или панели меню, там видны все участники. Покинуть гильдию можно в окне гильдии или командой /gquit.",
+			a = "`/g` пишет в чат гильдии. Окно гильдии открывается из окна «Общение» или панели меню, там видны все участники. Покинуть гильдию можно в окне гильдии или командой `/gquit`.",
 		},
 		pt = {
 			q = "Como escrevo na guilda, e como saio dela?",
-			a = "/g escreve no chat da guilda. Abra a janela da guilda pela janela social ou pela barra de menu para ver todos os membros. Saia da guilda pela janela da guilda ou com /gquit.",
+			a = "`/g` escreve no chat da guilda. Abra a janela da guilda pela janela social ou pela barra de menu para ver todos os membros. Saia da guilda pela janela da guilda ou com `/gquit`.",
 		},
 	},
 	{
 		id = "social-report",
 		de = {
 			q = "Wie melde ich einen Spieler?",
-			a = "Rechtsklick auf seinen Namen oder sein Porträt und „Melden“, dann den Grund wählen. Gold-Spam, Beleidigungen, Betrug und Bots solltest du immer melden. Danach am besten ignorieren.",
+			a = "Rechtsklick auf seinen Namen oder sein Porträt und {Melden}, dann den Grund wählen. Gold-Spam, Beleidigungen, Betrug und Bots solltest du immer melden. Danach am besten ignorieren.",
 		},
 		en = {
 			q = "How do I report a player?",
-			a = "Right-click their name or portrait, choose Report and pick the reason. Always report gold spam, abuse, scams and bots. Then ignore them.",
+			a = "Right-click their name or portrait, choose {Report} and pick the reason. Always report gold spam, abuse, scams and bots. Then ignore them.",
 		},
 		fr = {
 			q = "Comment signaler un joueur ?",
-			a = "Clic droit sur son nom ou son portrait, choisissez « Signaler » puis le motif. Signalez toujours le spam de vente d'or, les insultes, les arnaques et les bots. Ensuite, ignorez-le.",
+			a = "Clic droit sur son nom ou son portrait, choisissez {Signaler} puis le motif. Signalez toujours le spam de vente d'or, les insultes, les arnaques et les bots. Ensuite, ignorez-le.",
 		},
 		es = {
 			q = "¿Cómo denuncio a un jugador?",
-			a = "Clic derecho en su nombre o retrato, elige «Denunciar» y selecciona el motivo. Denuncia siempre el spam de oro, los insultos, las estafas y los bots. Después, ignóralo.",
+			a = "Clic derecho en su nombre o retrato, elige {Denunciar} y selecciona el motivo. Denuncia siempre el spam de oro, los insultos, las estafas y los bots. Después, ignóralo.",
 		},
 		it = {
 			q = "Come segnalo un giocatore?",
-			a = "Clic destro sul nome o sul ritratto, scegli «Segnala» e indica il motivo. Segnala sempre spam di oro, insulti, truffe e bot. Poi ignoralo.",
+			a = "Clic destro sul nome o sul ritratto, scegli {Segnala} e indica il motivo. Segnala sempre spam di oro, insulti, truffe e bot. Poi ignoralo.",
 		},
 		ru = {
 			q = "Как пожаловаться на игрока?",
-			a = "Щёлкните правой кнопкой по имени или портрету, выберите «Пожаловаться» и укажите причину. Всегда жалуйтесь на спам продажи золота, оскорбления, мошенничество и ботов. Затем добавьте игрока в игнор.",
+			a = "Щёлкните правой кнопкой по имени или портрету, выберите {Пожаловаться} и укажите причину. Всегда жалуйтесь на спам продажи золота, оскорбления, мошенничество и ботов. Затем добавьте игрока в игнор.",
 		},
 		pt = {
 			q = "Como denuncio um jogador?",
-			a = "Clique com o botão direito no nome ou no retrato, escolha \"Denunciar\" e o motivo. Sempre denuncie spam de ouro, ofensas, golpes e bots. Depois, ignore.",
+			a = "Clique com o botão direito no nome ou no retrato, escolha {Denunciar} e o motivo. Sempre denuncie spam de ouro, ofensas, golpes e bots. Depois, ignore.",
 		},
 	},
 	{
