@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v1.0.1 (2026-11-03)
+
 - Glossary: new term "Enrage" in all languages.
 - Glossary: plurals are marked too ("DoTs", "HoTs", "Tanks", "bosses",
   Russian "ДоТы"), in texts and in chat.
