@@ -781,31 +781,31 @@ ns.Faq.Add("prof", {
 		id = "prof-crafting-orders",
 		de = {
 			q = "Wie lasse ich mir etwas herstellen?",
-			a = "Frag im Handelskanal oder in deiner Gilde nach einem Handwerker mit dem Rezept. Meist bringst du die Materialien mit und gibst ein Trinkgeld. Den Handel macht ihr über das Handelsfenster: Rechtsklick auf den Spieler und „Handeln“.",
+			a = "Frag im Handelskanal oder in deiner Gilde nach einem Handwerker mit dem Rezept. Meist bringst du die Materialien mit und gibst ein Trinkgeld. Den Handel macht ihr über das Handelsfenster: Rechtsklick auf den Spieler und {Handeln}.",
 		},
 		en = {
 			q = "How do I get something crafted for me?",
-			a = "Ask in the trade channel or your guild for a crafter with the recipe. Usually you bring the materials and give a tip. Do the exchange through the trade window: right-click the player and choose Trade.",
+			a = "Ask in the trade channel or your guild for a crafter with the recipe. Usually you bring the materials and give a tip. Do the exchange through the trade window: right-click the player and choose {Trade}.",
 		},
 		fr = {
 			q = "Comment faire fabriquer quelque chose pour moi ?",
-			a = "Demandez dans le canal Commerce ou à votre guilde un artisan qui a la recette. En général, vous apportez les matériaux et donnez un pourboire. Faites l'échange par la fenêtre d'échange : clic droit sur le joueur puis « Échanger ».",
+			a = "Demandez dans le canal Commerce ou à votre guilde un artisan qui a la recette. En général, vous apportez les matériaux et donnez un pourboire. Faites l'échange par la fenêtre d'échange : clic droit sur le joueur puis {Échanger}.",
 		},
 		es = {
 			q = "¿Cómo consigo que me fabriquen algo?",
-			a = "Pregunta en el canal de Comercio o en tu hermandad por alguien que tenga la receta. Lo normal es llevar los materiales y dar una propina. Haz el intercambio por la ventana de comercio: clic derecho en el jugador y elige «Comerciar».",
+			a = "Pregunta en el canal de Comercio o en tu hermandad por alguien que tenga la receta. Lo normal es llevar los materiales y dar una propina. Haz el intercambio por la ventana de comercio: clic derecho en el jugador y elige {Comerciar}.",
 		},
 		it = {
 			q = "Come faccio creare qualcosa per me?",
-			a = "Chiedi nel canale Commercio o in gilda un artigiano che abbia la ricetta. Di solito porti i materiali e lasci una mancia. Fate lo scambio tramite la finestra di scambio: clic destro sul giocatore e scegli «Scambia».",
+			a = "Chiedi nel canale Commercio o in gilda un artigiano che abbia la ricetta. Di solito porti i materiali e lasci una mancia. Fate lo scambio tramite la finestra di scambio: clic destro sul giocatore e scegli {Scambia}.",
 		},
 		ru = {
 			q = "Как заказать изготовление предмета?",
-			a = "Спросите в канале «Торговля» или в гильдии мастера с нужным рецептом. Обычно вы приносите материалы и даёте чаевые. Обменивайтесь через окно обмена: правый щелчок по игроку и «Обмен».",
+			a = "Спросите в канале «Торговля» или в гильдии мастера с нужным рецептом. Обычно вы приносите материалы и даёте чаевые. Обменивайтесь через окно обмена: правый щелчок по игроку и {Обмен}.",
 		},
 		pt = {
 			q = "Como peço para fabricarem algo para mim?",
-			a = "Pergunte no canal de Comércio ou na guilda por alguém com a receita. Normalmente você leva os materiais e dá uma gorjeta. Façam a troca pela janela de negociação: clique direito no jogador e escolha \"Negociar\".",
+			a = "Pergunte no canal de Comércio ou na guilda por alguém com a receita. Normalmente você leva os materiais e dá uma gorjeta. Façam a troca pela janela de negociação: clique direito no jogador e escolha {Negociar}.",
 		},
 	},
 })
