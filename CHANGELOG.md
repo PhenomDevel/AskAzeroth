@@ -199,5 +199,6 @@
 - Game terms and abbreviations in the normal chat (party, raid, guild,
   whispers, say, channels) become links: hover over "Aggro" for its
   explanation, click to open it in the glossary. Can be switched off in the
-  settings ("Explain terms in the chat"). The explanation disappears as soon as
-  the mouse leaves the term.
+  settings ("Explain terms in the chat"). The AskAzeroth logo in front of
+  a marked term shows where the marking comes from. The explanation
+  disappears as soon as the mouse leaves the term.
