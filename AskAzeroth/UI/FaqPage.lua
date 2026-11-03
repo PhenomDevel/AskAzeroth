@@ -16,7 +16,7 @@ local _, ns = ...
 -- yet); the dropdown picks any other FAQ language. UI.ShowFaq(id) opens an
 -- entry, e.g. from a FAQ link under an answer.
 --
--- The last row of the topics is the glossary (Core/Glossary.lua): its
+-- The row below "All topics" is the glossary (Core/Glossary.lua): its
 -- terms show in the same accordion, alphabetically, with their
 -- explanation. Glossary terms inside FAQ answers are links with a tooltip
 -- (UI/GlossaryLinks.lua); UI.ShowGlossary(id) opens a term.
@@ -150,17 +150,19 @@ local function Build(content)
 	end)
 	ScrollUtil.InitScrollBoxListWithScrollBar(topicBox, topicBar, topicView)
 
-	-- "All topics" (key false), every topic that has entries and the
-	-- glossary.
+	-- "All topics" (key false), the glossary and every topic that has
+	-- entries.
 	local function TopicList()
-		local list = { { key = false, label = L.FAQ_TOPICS_ALL, count = #Faq.GetAll() } }
+		local list = {
+			{ key = false, label = L.FAQ_TOPICS_ALL, count = #Faq.GetAll() },
+			{ key = GLOSSARY, label = ("|c%s%s|r"):format(W.Hex(W.BLUE), L.GLOSSARY), count = Glossary.Count() },
+		}
 		for _, topic in ipairs(C.FAQ_TOPICS) do
 			local count = Faq.Count(topic.key)
 			if count > 0 then
 				list[#list + 1] = { key = topic.key, label = FaqRefs.TopicText(topic.key), count = count }
 			end
 		end
-		list[#list + 1] = { key = GLOSSARY, label = ("|c%s%s|r"):format(W.Hex(W.BLUE), L.GLOSSARY), count = Glossary.Count() }
 		return list
 	end
 
