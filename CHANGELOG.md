@@ -4,9 +4,7 @@
 
 - FAQ: a search in "All topics" also shows matching glossary terms (marked
   "Glossary"). Terms whose name matches come first, then the FAQ entries.
-
 - FAQ: the glossary now sits right below "All topics" in the topic list.
-
 - Search: plurals find the singular too. "HoTs" finds HoT in the glossary,
   "bosses" finds the FAQ entries about bosses. The glossary search now also
   ignores accents and the case of Russian letters.
