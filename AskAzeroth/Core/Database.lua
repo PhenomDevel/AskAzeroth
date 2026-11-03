@@ -41,6 +41,8 @@ ns.dbDefaults = {
 		-- Questions page: hide solved / answered questions.
 		hideSolved = false,
 		hideAnswered = false,
+		-- With "Hide answered": still list questions the player answered.
+		keepOwnAnswered = true,
 	},
 	-- FAQ entry id → how often its suggestion in the ask dialog was marked
 	-- "That helped" (/aa faqstats). Stays on this computer.
