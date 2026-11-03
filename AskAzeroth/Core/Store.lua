@@ -429,8 +429,9 @@ function Store.Ask(lang, cat, title, body, ctx)
 	return wire, m.question
 end
 
--- faq (optional): list of FAQ ids the answer refers to. ctx (optional):
--- the answerer's level, race and class.
+-- faq (optional): list of FAQ ids and glossary references ("g:<id>")
+-- the answer refers to. ctx (optional): the answerer's level, race and
+-- class.
 function Store.Answer(qid, text, faq, ctx)
 	local me = ns:GetPlayerFullName()
 	if not me then

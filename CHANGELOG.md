@@ -209,3 +209,6 @@
   settings ("Explain terms in the chat"). The AskAzeroth logo in front of
   a marked term shows where the marking comes from. The explanation
   disappears as soon as the mouse leaves the term.
+- Mentors can attach glossary terms to their answers as well as FAQ
+  entries: the book button has a "Glossary" tab. Readers hover the term for
+  its explanation and click it to open the glossary.

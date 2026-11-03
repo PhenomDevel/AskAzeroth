@@ -523,15 +523,16 @@ function ThreadView.Create(parent, get)
 		end
 	end
 
-	-- Sets the chip's label to "FAQ: <title>", shortened letter by letter
-	-- until the chip is at most maxWidth wide (maxWidth nil: no limit).
-	local function FitChip(chip, question, maxWidth)
+	-- Sets the chip's label to "FAQ: <title>" or "Glossary: <term>"
+	-- (format), shortened letter by letter until the chip is at most
+	-- maxWidth wide (maxWidth nil: no limit).
+	local function FitChip(chip, question, maxWidth, format)
 		local label = question
-		chip:SetLabel(L.FAQ_REF_CHIP:format(label), true)
+		chip:SetLabel(format:format(label), true)
 		while maxWidth and chip:GetWidth() > maxWidth and #label > 1 do
 			label = label:sub(1, -2):gsub("[\192-\255][\128-\191]*$", ""):gsub("[\192-\255]$", "")
 			label = label:gsub("%s+$", "")
-			chip:SetLabel(L.FAQ_REF_CHIP:format(label .. "…"), true)
+			chip:SetLabel(format:format(label .. "…"), true)
 		end
 	end
 
@@ -549,8 +550,10 @@ function ThreadView.Create(parent, get)
 			local id = refs[i]
 			if id then
 				local question = ns.FaqRefs.Title(id) or id
+				local glossary = ns.Faq.GlossaryRef(id) ~= nil
 				chip.fullTitle = question
-				FitChip(chip, question, maxWidth)
+				chip.color = glossary and W.BLUE or W.GOLD
+				FitChip(chip, question, maxWidth, glossary and L.GLOSSARY_REF_CHIP or L.FAQ_REF_CHIP)
 				chip:SetActive(false)
 				chip:Show()
 				chips[#chips + 1] = chip
