@@ -3,6 +3,10 @@
 ## Unreleased
 
 - In development, no release yet.
+- Glossary: 63 more terms players use in chat (roles, raid words, items,
+  stats and spec short forms, chat slang and the classic dungeons that are
+  in WoW: Forever). Molten Core, Blackwing Lair and Zul'Gurub are gone
+  from the glossary, since they are not raids in WoW: Forever.
 - Questions page: new filter "Hide answered" hides questions that already
   have an answer, so mentors see at a glance who still waits for help.
 - Categories have icons in lists, filters, the ask dialog and
