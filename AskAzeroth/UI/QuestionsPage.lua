@@ -65,37 +65,69 @@ local function Build(content)
 	end
 	local chipsHeight = W.WrapChips(chips, filters, PAD, -PAD - 28 - 10, LIST_WIDTH - 2 * PAD, 6)
 
-	-- Hide solved / answered questions (kept in the settings).
-	local hideSolved = W.Checkbox(filters, L.QUEUE_HIDE_SOLVED, function()
-		return ns.db.settings.hideSolved
-	end, function(checked)
-		ns.db.settings.hideSolved = checked
+	-- Hide solved / answered questions (kept in the settings), in one
+	-- dropdown so the filters stay a single row.
+	local function SetFilter(key, value)
+		ns.db.settings[key] = value
 		page:Refresh()
+	end
+	local function AddTooltip(desc, title, text)
+		if desc.SetTooltip then
+			desc:SetTooltip(function(tooltip)
+				tooltip:SetText(title, 1, 1, 1)
+				tooltip:AddLine(text, nil, nil, nil, true)
+			end)
+		end
+	end
+	local function ActiveFilters()
+		local settings = ns.db.settings
+		return (settings.hideSolved and 1 or 0) + (settings.hideAnswered and 1 or 0)
+	end
+	local function FilterText()
+		local active = ActiveFilters()
+		return active > 0 and L.QUEUE_FILTER_ACTIVE:format(active) or L.QUEUE_FILTER
+	end
+	local statusFilter = W.Menu(filters, 150, function(root)
+		local settings = ns.db.settings
+		root:CreateCheckbox(L.QUEUE_HIDE_SOLVED, function()
+			return settings.hideSolved
+		end, function()
+			SetFilter("hideSolved", not settings.hideSolved)
+		end)
+		local hideAnswered = root:CreateCheckbox(L.QUEUE_HIDE_ANSWERED, function()
+			return settings.hideAnswered
+		end, function()
+			SetFilter("hideAnswered", not settings.hideAnswered)
+		end)
+		AddTooltip(hideAnswered, L.QUEUE_HIDE_ANSWERED, L.QUEUE_HIDE_ANSWERED_TIP)
+		-- Finer "Hide answered": keep questions the player answered.
+		local keepOwn = root:CreateCheckbox("   " .. L.QUEUE_KEEP_OWN_ANSWERED, function()
+			return settings.keepOwnAnswered
+		end, function()
+			SetFilter("keepOwnAnswered", not settings.keepOwnAnswered)
+		end)
+		AddTooltip(keepOwn, L.QUEUE_KEEP_OWN_ANSWERED, L.QUEUE_KEEP_OWN_ANSWERED_TIP)
+		if keepOwn.SetEnabled then
+			keepOwn:SetEnabled(function()
+				return settings.hideAnswered
+			end)
+		end
 	end)
-	hideSolved:SetPoint("TOPLEFT", PAD - 4, -PAD - 28 - 10 - chipsHeight - 6)
-	local hideAnswered = W.Checkbox(filters, L.QUEUE_HIDE_ANSWERED, function()
-		return ns.db.settings.hideAnswered
-	end, function(checked)
-		ns.db.settings.hideAnswered = checked
-		page:Refresh()
-	end)
-	hideAnswered:SetPoint("TOPLEFT", hideSolved, "BOTTOMLEFT", 0, 2)
-	W.Tooltip(hideAnswered, L.QUEUE_HIDE_ANSWERED, L.QUEUE_HIDE_ANSWERED_TIP)
-	-- Finer "Hide answered": keep questions the player answered in the list.
-	local keepOwn = W.Checkbox(filters, L.QUEUE_KEEP_OWN_ANSWERED, function()
-		return ns.db.settings.keepOwnAnswered
-	end, function(checked)
-		ns.db.settings.keepOwnAnswered = checked
-		page:Refresh()
-	end)
-	keepOwn:SetPoint("TOPLEFT", hideAnswered, "BOTTOMLEFT", 18, 2)
-	W.Tooltip(keepOwn, L.QUEUE_KEEP_OWN_ANSWERED, L.QUEUE_KEEP_OWN_ANSWERED_TIP)
+	-- Show "Filter (n)" instead of the list of ticked entries.
+	if statusFilter.SetSelectionText then
+		statusFilter:SetSelectionText(FilterText)
+	end
+	if statusFilter.SetDefaultText then
+		statusFilter:SetDefaultText(L.QUEUE_FILTER)
+	end
+	statusFilter:SetPoint("TOPLEFT", PAD, -PAD - 28 - 10 - chipsHeight - 8)
+	W.Tooltip(statusFilter, L.QUEUE_FILTER, L.QUEUE_FILTER_TIP)
 	-- How many questions still wait for a first answer.
 	local openCount = W.Text(filters, "GameFontHighlight", W.SOFT)
 	openCount:SetPoint("RIGHT", filters, "RIGHT", -PAD, 0)
-	openCount:SetPoint("TOP", hideSolved, "TOP", 0, -6)
+	openCount:SetPoint("TOP", statusFilter, "TOP", 0, -6)
 	openCount:SetJustifyH("RIGHT")
-	filters:SetHeight(PAD + 28 + 10 + chipsHeight + 6 + 26 + 24 + 24 + PAD - 4)
+	filters:SetHeight(PAD + 28 + 10 + chipsHeight + 8 + 26 + PAD)
 
 	-- True if the player wrote at least one answer to the question.
 	local function AnsweredByMe(q)
@@ -205,11 +237,10 @@ local function Build(content)
 				end
 			end
 		end
-		hideSolved:Refresh()
-		hideAnswered:Refresh()
-		keepOwn:Refresh()
-		keepOwn:SetEnabled(ns.db.settings.hideAnswered)
-		keepOwn.label:SetAlpha(ns.db.settings.hideAnswered and 1 or 0.5)
+		statusFilter:Refresh()
+		if statusFilter.OverrideText then
+			statusFilter:OverrideText(FilterText())
+		end
 		openCount:SetText(L.QUEUE_OPEN_COUNT:format(UI.CountOpenQuestions()))
 		local emptyText
 		if #list == 0 then

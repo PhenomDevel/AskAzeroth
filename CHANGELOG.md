@@ -20,9 +20,9 @@ answers come. Tell your guild and friends!
   seconds), up to 5 open questions at once.
 - Questions asked while you were offline are fetched from other players
   after login.
-- Filter "Hide answered" on the Questions page shows only questions that
-  still wait for help. "Keep the ones I answered" (on by default) keeps
-  the questions you answered in the list.
+- Questions page filter dropdown: "Hide solved", "Hide answered" (shows
+  only questions that still wait for help) and "Keep the ones I answered"
+  (on by default).
 - FAQ suggestions while you ask: matching FAQ entries show up as you type,
   so you often have the answer before anyone has to reply.
 
