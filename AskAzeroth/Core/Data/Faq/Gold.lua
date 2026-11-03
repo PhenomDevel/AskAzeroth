@@ -223,31 +223,31 @@ ns.Faq.Add("gold", {
 		id = "gold-trade-window",
 		de = {
 			q = "Wie handle ich mit anderen Spielern?",
-			a = "Rechtsklick auf den Spieler und „Handeln“. Legt beide eure Gegenstände und Gold ins Handelsfenster, prüft alles genau und klickt dann beide auf „Handeln“. Erst wenn beide bestätigt haben, wird getauscht.",
+			a = "Rechtsklick auf den Spieler und {Handeln}. Legt beide eure Gegenstände und Gold ins Handelsfenster, prüft alles genau und klickt dann beide auf {Handeln}. Erst wenn beide bestätigt haben, wird getauscht.",
 		},
 		en = {
 			q = "How do I trade with other players?",
-			a = "Right-click the player and choose Trade. Both put items and gold into the trade window, check everything carefully, then both click Trade. The exchange only happens once both have confirmed.",
+			a = "Right-click the player and choose {Trade}. Both put items and gold into the trade window, check everything carefully, then both click {Trade}. The exchange only happens once both have confirmed.",
 		},
 		fr = {
 			q = "Comment faire un échange avec d'autres joueurs ?",
-			a = "Clic droit sur le joueur puis « Échanger ». Chacun place objets et or dans la fenêtre d'échange, vérifiez tout attentivement, puis cliquez tous les deux sur Échanger. L'échange n'a lieu qu'une fois que les deux ont confirmé.",
+			a = "Clic droit sur le joueur puis {Échanger}. Chacun place objets et or dans la fenêtre d'échange, vérifiez tout attentivement, puis cliquez tous les deux sur {Échanger}. L'échange n'a lieu qu'une fois que les deux ont confirmé.",
 		},
 		es = {
 			q = "¿Cómo comercio con otros jugadores?",
-			a = "Clic derecho en el jugador y elige «Comerciar». Ambos ponéis objetos y oro en la ventana de comercio, revisad todo con cuidado y luego pulsad los dos Comerciar. El intercambio solo se hace cuando ambos confirman.",
+			a = "Clic derecho en el jugador y elige {Comerciar}. Ambos ponéis objetos y oro en la ventana de comercio, revisad todo con cuidado y luego pulsad los dos {Comerciar}. El intercambio solo se hace cuando ambos confirman.",
 		},
 		it = {
 			q = "Come scambio con altri giocatori?",
-			a = "Clic destro sul giocatore e scegli «Scambia». Entrambi mettete oggetti e oro nella finestra di scambio, controllate tutto con attenzione e poi cliccate entrambi su Scambia. Lo scambio avviene solo quando entrambi hanno confermato.",
+			a = "Clic destro sul giocatore e scegli {Scambia}. Entrambi mettete oggetti e oro nella finestra di scambio, controllate tutto con attenzione e poi cliccate entrambi su {Scambia}. Lo scambio avviene solo quando entrambi hanno confermato.",
 		},
 		ru = {
 			q = "Как обмениваться с другими игроками?",
-			a = "Щёлкните правой кнопкой по игроку и выберите «Обмен». Оба кладут предметы и золото в окно обмена, внимательно всё проверяют и нажимают «Обмен». Сделка проходит только после подтверждения обоими.",
+			a = "Щёлкните правой кнопкой по игроку и выберите {Обмен}. Оба кладут предметы и золото в окно обмена, внимательно всё проверяют и нажимают {Обмен}. Сделка проходит только после подтверждения обоими.",
 		},
 		pt = {
 			q = "Como negocio com outros jogadores?",
-			a = "Clique com o botão direito no jogador e escolha \"Negociar\". Os dois colocam itens e ouro na janela de negociação, conferem tudo com atenção e clicam em Negociar. A troca só acontece quando os dois confirmam.",
+			a = "Clique com o botão direito no jogador e escolha {Negociar}. Os dois colocam itens e ouro na janela de negociação, conferem tudo com atenção e clicam em {Negociar}. A troca só acontece quando os dois confirmam.",
 		},
 	},
 	{
@@ -440,31 +440,31 @@ ns.Faq.Add("gold", {
 		id = "gold-stacks",
 		de = {
 			q = "Wie teile ich einen Stapel?",
-			a = "Halt die Umschalttaste gedrückt und klick auf den Stapel; dann wählst du, wie viele du nehmen willst. So kannst du zum Beispiel einen Teil verkaufen oder verschicken.",
+			a = "Halt [Umschalt] gedrückt und klick auf den Stapel; dann wählst du, wie viele du nehmen willst. So kannst du zum Beispiel einen Teil verkaufen oder verschicken.",
 		},
 		en = {
 			q = "How do I split a stack?",
-			a = "Hold Shift and click the stack; then choose how many to take. That way you can, for example, sell or mail part of it.",
+			a = "Hold [Shift] and click the stack; then choose how many to take. That way you can, for example, sell or mail part of it.",
 		},
 		fr = {
 			q = "Comment diviser une pile ?",
-			a = "Maintenez Maj et cliquez sur la pile ; choisissez ensuite combien en prendre. Vous pouvez ainsi, par exemple, en vendre ou en envoyer une partie.",
+			a = "Maintenez [Maj] et cliquez sur la pile ; choisissez ensuite combien en prendre. Vous pouvez ainsi, par exemple, en vendre ou en envoyer une partie.",
 		},
 		es = {
 			q = "¿Cómo divido un montón?",
-			a = "Mantén Mayús y haz clic en el montón; luego elige cuántos coger. Así puedes, por ejemplo, vender o enviar una parte.",
+			a = "Mantén [Mayús] y haz clic en el montón; luego elige cuántos coger. Así puedes, por ejemplo, vender o enviar una parte.",
 		},
 		it = {
 			q = "Come divido una pila?",
-			a = "Tieni premuto Maiusc e clicca sulla pila; poi scegli quanti prenderne. Così puoi, per esempio, venderne o spedirne una parte.",
+			a = "Tieni premuto [Maiusc] e clicca sulla pila; poi scegli quanti prenderne. Così puoi, per esempio, venderne o spedirne una parte.",
 		},
 		ru = {
 			q = "Как разделить стопку?",
-			a = "Удерживайте Shift и щёлкните по стопке, затем выберите, сколько взять. Так можно, например, продать или отправить часть.",
+			a = "Удерживайте [Shift] и щёлкните по стопке, затем выберите, сколько взять. Так можно, например, продать или отправить часть.",
 		},
 		pt = {
 			q = "Como divido uma pilha?",
-			a = "Segure Shift e clique na pilha; depois escolha quantos pegar. Assim você pode, por exemplo, vender ou enviar parte dela.",
+			a = "Segure [Shift] e clique na pilha; depois escolha quantos pegar. Assim você pode, por exemplo, vender ou enviar parte dela.",
 		},
 	},
 	{
