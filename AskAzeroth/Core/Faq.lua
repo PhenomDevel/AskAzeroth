@@ -124,9 +124,26 @@ function Faq.HasLanguage(lang)
 	return false
 end
 
--- Cleans a received list of FAQ references: valid ids only, no
--- duplicates, at most C.FAQ_REFS_MAX. Unknown ids are kept (the sender may
--- have a newer FAQ). Returns nil when nothing is left.
+-- References on answers are FAQ ids or glossary ids with this prefix
+-- ("g:aggro").
+Faq.GLOSSARY_PREFIX = "g:"
+
+-- Id of the glossary entry a reference points to, or nil for FAQ ids.
+function Faq.GlossaryRef(ref)
+	if type(ref) == "string" and ref:sub(1, #Faq.GLOSSARY_PREFIX) == Faq.GLOSSARY_PREFIX then
+		local id = ref:sub(#Faq.GLOSSARY_PREFIX + 1)
+		return Faq.IsId(id) and id or nil
+	end
+	return nil
+end
+
+function Faq.IsRef(value)
+	return Faq.IsId(value) or Faq.GlossaryRef(value) ~= nil
+end
+
+-- Cleans a received list of references (FAQ and glossary): valid ids
+-- only, no duplicates, at most C.FAQ_REFS_MAX. Unknown ids are kept (the
+-- sender may have a newer version). Returns nil when nothing is left.
 function Faq.CleanRefs(value)
 	if type(value) ~= "table" then
 		return nil
@@ -134,7 +151,7 @@ function Faq.CleanRefs(value)
 	local list, seen = {}, {}
 	for i = 1, math.min(#value, C.FAQ_REFS_MAX) do
 		local id = value[i]
-		if Faq.IsId(id) and not seen[id] then
+		if Faq.IsRef(id) and not seen[id] then
 			seen[id] = true
 			list[#list + 1] = id
 		end
