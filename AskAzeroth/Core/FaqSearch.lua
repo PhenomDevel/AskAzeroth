@@ -108,13 +108,15 @@ local function Stopwords(lang)
 end
 
 -- Stems of text without the stop words of the languages in langs, in
--- order of appearance, each once.
+-- order of appearance, each once. The second list holds, for each stem,
+-- the stem of the word without its plural ending (false when it has none),
+-- so a search for "hots" or "bosses" also finds "HoT" and "Boss".
 local function Stems(text, langs)
 	local sets = {}
 	for _, lang in ipairs(langs) do
 		sets[#sets + 1] = Stopwords(lang)
 	end
-	local list, seen = {}, {}
+	local list, singulars, seen = {}, {}, {}
 	for word in FaqSearch.Normalize(text):gmatch("%S+") do
 		local skip = CharCount(word) < C.FAQ_SEARCH_MIN_CHARS and not word:find("^%d%d+$")
 		for _, set in ipairs(sets) do
@@ -125,10 +127,12 @@ local function Stems(text, langs)
 			if not seen[stem] then
 				seen[stem] = true
 				list[#list + 1] = stem
+				local singular = ns.Util.Singular(word, C.FAQ_SEARCH_MIN_CHARS)
+				singulars[#list] = singular and Stem(singular) or false
 			end
 		end
 	end
-	return list
+	return list, singulars
 end
 
 -- Per language: stem → { [entry] = weight }, plus the position of every
@@ -186,20 +190,21 @@ end
 -- search words found), best first, and the number of search words.
 function FaqSearch.Search(text, langs)
 	langs = FaqLanguages(langs)
-	local terms = Stems(text or "", langs)
+	local terms, singulars = Stems(text or "", langs)
 	if #terms == 0 then
 		return {}, 0
 	end
 	local results, byEntry = {}, {}
 	local order
-	for _, term in ipairs(terms) do
+	for i, term in ipairs(terms) do
+		local singular = singulars[i]
 		-- Best weight of every entry for this word, over all languages.
 		local best = {}
 		for _, lang in ipairs(langs) do
 			local index = Index(lang)
 			order = order or index.order
 			for stem, entries in pairs(index.stems) do
-				if stem:sub(1, #term) == term then
+				if stem:sub(1, #term) == term or (singular and stem:sub(1, #singular) == singular) then
 					for entry, weight in pairs(entries) do
 						if (best[entry] or 0) < weight then
 							best[entry] = weight

@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Search: plurals find the singular too. "HoTs" finds HoT in the glossary,
+  "bosses" finds the FAQ entries about bosses. The glossary search now also
+  ignores accents and the case of Russian letters.
+
 ## v1.0.1 (2026-11-03)
 
 - Glossary: new term "Enrage" in all languages.
