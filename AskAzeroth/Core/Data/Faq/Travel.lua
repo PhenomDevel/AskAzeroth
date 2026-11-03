@@ -99,31 +99,31 @@ ns.Faq.Add("travel", {
 		id = "travel-cities",
 		de = {
 			q = "Wie finde ich mich in einer Stadt zurecht?",
-			a = "Sprich eine Stadtwache an und frag nach dem Weg: Sie markiert Lehrer, Bank, Auktionshaus, Gasthaus und mehr auf deiner Karte. Die Weltkarte (Taste M) zeigt, wo du bist.",
+			a = "Sprich eine Stadtwache an und frag nach dem Weg: Sie markiert Lehrer, Bank, Auktionshaus, Gasthaus und mehr auf deiner Karte. Die Weltkarte (Taste [M]) zeigt, wo du bist.",
 		},
 		en = {
 			q = "How do I find my way around a city?",
-			a = "Talk to a city guard and ask for directions: they mark trainers, the bank, the auction house, the inn and more on your map. The world map (M key) shows where you are.",
+			a = "Talk to a city guard and ask for directions: they mark trainers, the bank, the auction house, the inn and more on your map. The world map ([M] key) shows where you are.",
 		},
 		fr = {
 			q = "Comment m'orienter dans une ville ?",
-			a = "Parlez à un garde de la ville et demandez votre chemin : il marque sur votre carte les maîtres, la banque, l'hôtel des ventes, l'auberge et plus encore. La carte du monde (touche M) montre où vous êtes.",
+			a = "Parlez à un garde de la ville et demandez votre chemin : il marque sur votre carte les maîtres, la banque, l'hôtel des ventes, l'auberge et plus encore. La carte du monde (touche [M]) montre où vous êtes.",
 		},
 		es = {
 			q = "¿Cómo me oriento en una ciudad?",
-			a = "Habla con un guardia de la ciudad y pregunta el camino: te marca en el mapa instructores, el banco, la casa de subastas, la posada y más. El mapa del mundo (tecla M) muestra dónde estás.",
+			a = "Habla con un guardia de la ciudad y pregunta el camino: te marca en el mapa instructores, el banco, la casa de subastas, la posada y más. El mapa del mundo (tecla [M]) muestra dónde estás.",
 		},
 		it = {
 			q = "Come mi oriento in una città?",
-			a = "Parla con una guardia cittadina e chiedi indicazioni: segna sulla mappa istruttori, banca, casa d'aste, locanda e altro. La mappa del mondo (tasto M) mostra dove sei.",
+			a = "Parla con una guardia cittadina e chiedi indicazioni: segna sulla mappa istruttori, banca, casa d'aste, locanda e altro. La mappa del mondo (tasto [M]) mostra dove sei.",
 		},
 		ru = {
 			q = "Как ориентироваться в городе?",
-			a = "Поговорите с городским стражником и спросите дорогу: он отметит на карте учителей, банк, аукцион, таверну и многое другое. Карта мира (клавиша M) показывает, где вы находитесь.",
+			a = "Поговорите с городским стражником и спросите дорогу: он отметит на карте учителей, банк, аукцион, таверну и многое другое. Карта мира (клавиша [M]) показывает, где вы находитесь.",
 		},
 		pt = {
 			q = "Como me localizo numa cidade?",
-			a = "Fale com um guarda da cidade e peça direções: ele marca no mapa instrutores, banco, casa de leilões, estalagem e mais. O mapa-múndi (tecla M) mostra onde você está.",
+			a = "Fale com um guarda da cidade e peça direções: ele marca no mapa instrutores, banco, casa de leilões, estalagem e mais. O mapa-múndi (tecla [M]) mostra onde você está.",
 		},
 	},
 	{
