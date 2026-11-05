@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v1.1.0 (2026-11-05)
+
 - New command `/aa channels`: shows whether the addon's chat channels are
   joined (with their number), what was sent and received on them, and all
   channels of your client. `/aa channels debug` prints channel events to chat
