@@ -158,8 +158,6 @@ local FILTER_EVENTS = {
 	"CHAT_MSG_CHANNEL_NOTICE_USER",
 	"CHAT_MSG_CHANNEL_JOIN",
 	"CHAT_MSG_CHANNEL_LEAVE",
-	-- Member lists requested by Peers.lua.
-	"CHAT_MSG_CHANNEL_LIST",
 }
 
 local function Filter(_, _, ...)

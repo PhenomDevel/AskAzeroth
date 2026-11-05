@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- `/chatlist AskAzerothEN` (or DE, FR …) shows the channel members again;
+  only the addon's own background lists stay hidden.
 - Forever: the close button (X) of the AskAzeroth window works again; before,
   only Escape closed it.
 
