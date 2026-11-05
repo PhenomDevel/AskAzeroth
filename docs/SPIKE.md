@@ -266,3 +266,20 @@ To be written after the results are in.
   shows the tooltip and opens the glossary.
 - Chat frames are found through `NUM_CHAT_WINDOWS`, `CHAT_FRAMES` and a
   `hooksecurefunc` on `FCF_OpenTemporaryWindow` (whisper windows).
+
+## Whisper mode (to confirm in game on Forever)
+
+`Core/Peers.lua` and the whisper mode in `Core/Comm.lua` rely on:
+
+- `ListChannelByName("AskAzerothDE")` works from addon code without a key
+  press and answers with `CHAT_MSG_CHANNEL_LIST`: arg 1 the comma-separated
+  members (owner/moderator marks are stripped), arg 4 `"5. AskAzerothDE"`,
+  arg 9 the base name. The line is hidden by our chat filter.
+  Check: `/dump AskAzeroth.Peers.Count("de")` some seconds after login
+  with a second AskAzeroth user in the channel → 1 or more.
+- `CHAT_MSG_CHANNEL_JOIN`/`LEAVE` fire for our channels (arg 2 the player).
+- Addon whispers to "First Surname" arrive (confirmed for GFF 2026-11-05).
+- A whisper to a player who went offline returns `ERR_CHAT_PLAYER_NOT_FOUND_S`
+  as `CHAT_MSG_SYSTEM`.
+- `/dump AskAzeroth.Comm.mode` → `"whisper"` on Forever, `"channel"` on
+  retail.

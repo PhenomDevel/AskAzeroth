@@ -16,12 +16,41 @@ expiry, rate limits), `Core/Comm.lua` (transport).
   split messages back together by prefix + distribution + sender and does
   not see the channel (details in [`SPIKE.md`](SPIKE.md)).
 - Payload: own serializer (`Core/Serializer.lua`) → LibDeflate
-  `CompressDeflate` → `EncodeForWoWAddonChannel` → AceComm over `CHANNEL`.
+  `CompressDeflate` → `EncodeForWoWAddonChannel` → AceComm over `CHANNEL`
+  (retail) or `WHISPER` (Forever, see *Whisper mode* below).
 - Every message uses ChatThrottleLib priority `NORMAL`. With two priorities
   on one prefix, ChatThrottleLib's turn-taking could interleave the parts of
   two long messages and the receiver would mix them up.
 - Nothing is sent during the chat messaging lockdown (encounters); `ns.Comm`
   holds messages and sends them afterwards.
+
+### Whisper mode (Forever)
+
+Live Forever rejects addon messages in every chat channel, our own ones
+included: `SendAddonMessage` returns success, 1 to 2 s later the server
+answers with `CHAT_MSG_CHANNEL_NOTICE` `NOT_ALLOWED_IN_CHANNEL` and nothing
+is delivered. Addon whispers work. So on Forever (`Core/Comm.lua`,
+`Core/Peers.lua`, `Core/Net.lua`):
+
+- The language channels are still joined, but only to find each other:
+  peers come from the channel's member list (`ListChannelByName` →
+  `CHAT_MSG_CHANNEL_LIST`, on join and every 120 s), its join/leave notices
+  and the senders of addon whispers on our prefixes. A peer whose whisper
+  bounces ("No player named …") is dropped, the error line is hidden.
+- Own messages go to 20 random peers of the language.
+- Relay: a client that learns a question or answer created in the last
+  15 minutes (first-hand or relayed) passes the question on as an `SP` to
+  3 random peers, leaving out the sender and the author. `SP` only adds
+  what is missing, so each client relays a novelty at most once and the
+  spread stops by itself. `S` and `D` are not relayed (only the author's
+  own message counts); clients the author didn't reach keep the question
+  open until it expires.
+- Received whispers are only accepted for selected languages.
+- Retail starts in channel mode and switches to whisper mode on the first
+  `NOT_ALLOWED_IN_CHANNEL` for one of our channels; channel messages of the
+  last 10 s are then resent by whisper.
+- Names on Forever are "First Surname" without a realm; whisper targets
+  leave out the own realm.
 
 ## Serializer
 
@@ -147,6 +176,14 @@ channel asks the others for what it missed (`Core/Sync.lua`):
    the last answer (and with it the expiry) stays the same.
 3. Each client answers at most one `SR` per language channel every
    5 minutes, so many logins at once don't set off a chain of answers.
+
+In whisper mode the `SR` goes to 2 random peers (retried every 15 s while
+none are known, up to 4 times) and each of them answers the requester by
+whisper; the "someone else was faster" check doesn't apply. A client
+answers the same requester at most every 5 minutes and anyone at most every
+10 s. Questions from a whisper-mode `SP` that are at most 15 minutes old
+still raise notifications, since that is how most clients get new
+questions there.
 
 Own questions are also put back from "My questions" at login (as long as
 they haven't expired), so their thread and actions work before the sync.

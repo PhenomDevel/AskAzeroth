@@ -10,8 +10,8 @@
 
 New to World of Warcraft Forever? Ask your question in game and players who
 know the answer reply in a thread. There's no website and no external tool:
-questions and answers go from player to player over hidden addon channels,
-one per language.
+questions and answers go from player to player as hidden addon messages,
+one network per language.
 
 ## Supported versions
 
@@ -61,7 +61,7 @@ What changed: [CHANGELOG.md](https://github.com/PhenomDevel/AskAzeroth/blob/main
 - **FAQ suggestions while you ask:** matching FAQ entries show up as you type
   your question, so you often have the answer before anyone has to reply.
 - **Sync after login:** questions asked while you were offline are fetched
-  from other players on the channel.
+  from other players.
 - **7 languages:** English, Deutsch, Français, Español, Italiano, Русский,
   Português.
 

@@ -137,6 +137,29 @@ C.SYNC_ANSWER_DELAY_MAX = 8
 -- Answer requests at most this often per language channel.
 C.SYNC_ANSWER_INTERVAL = 5 * 60
 
+-- Whisper transport (Forever, Comm.lua): own messages go to this many
+-- random peers of the language, and a client passes something new on to
+-- RELAY_FANOUT others (Net.lua) if it was created within RELAY_MAX_AGE s.
+C.WHISPER_FANOUT = 20
+C.RELAY_FANOUT = 3
+C.RELAY_MAX_AGE = 15 * 60
+C.RELAY_MAX_BYTES = 4000
+-- A sync request goes to this many random peers; each answers it, but a
+-- client answers the same requester at most every SYNC_ANSWER_INTERVAL and
+-- anyone at most every SYNC_WHISPER_ANSWER_GAP seconds.
+C.SYNC_WHISPER_PEERS = 2
+C.SYNC_WHISPER_ANSWER_GAP = 10
+-- Without known peers, the sync request is retried this often, every
+-- SYNC_REQUEST_DELAY_MAX seconds.
+C.SYNC_REQUEST_RETRIES = 4
+-- Channel members are listed every PEERS_ROSTER_INTERVAL s; peers not seen
+-- for PEERS_EXPIRE s are dropped.
+C.PEERS_ROSTER_INTERVAL = 120
+C.PEERS_EXPIRE = 3 * C.PEERS_ROSTER_INTERVAL + 30
+-- Channel messages of the last RESEND_WINDOW s are resent by whisper when the
+-- server turns out to reject them (NOT_ALLOWED_IN_CHANNEL comes 1-2 s late).
+C.RESEND_WINDOW = 10
+
 -- Pinned answers kept at most; beyond that pinning is refused.
 C.MAX_PINNED = 500
 

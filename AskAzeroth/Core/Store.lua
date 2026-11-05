@@ -348,8 +348,12 @@ function handlers.SP(m, now)
 				AddAnswer(incoming, a)
 			end
 			if not Store.IsExpired(incoming, now) then
-				-- Came in late via sync: no notification for it.
-				incoming.viaSync = true
+				-- Came in late via sync: no notification for it. In whisper
+				-- mode (Forever) most clients get new questions relayed in an
+				-- SP (Net.lua), so recent ones still notify there.
+				if not (ns.Comm.IsWhisperMode() and now - incoming.created <= C.RELAY_MAX_AGE) then
+					incoming.viaSync = true
+				end
 				questions[incoming.id] = incoming
 				q = incoming
 				isNew = true
