@@ -26,6 +26,10 @@ local peers = {}
 -- lang → GetTime() of the last own member list request / received list
 local lastRoster = {}
 local lastList = {}
+-- Member lists of our channels arriving before this time answer our own
+-- request and are hidden; a player's /chatlist after that is shown.
+local hideListUntil = 0
+local HIDE_LIST_WINDOW = 5
 local ticker
 
 for _, lang in ipairs(C.LANGUAGES) do
@@ -130,6 +134,7 @@ function Peers.RequestRoster(lang)
 		return
 	end
 	lastRoster[lang] = GetTime()
+	hideListUntil = GetTime() + HIDE_LIST_WINDOW
 	ListChannelByName(C.GetChannelName(lang))
 end
 
@@ -208,6 +213,12 @@ ns:RegisterEvent("CHAT_MSG_CHANNEL_LIST", function(_, text, _, _, displayName, _
 		ns:Fire("AA_PEERS_CHANGED", lang)
 	end
 end)
+
+if AddFilter then
+	AddFilter("CHAT_MSG_CHANNEL_LIST", function(_, _, _, _, _, displayName, _, _, _, _, baseName)
+		return GetTime() < hideListUntil and Safe(displayName, baseName) and EventLanguage(displayName, baseName) ~= nil
+	end)
+end
 
 ns:RegisterEvent("CHAT_MSG_CHANNEL_JOIN", function(_, _, playerName, _, displayName, _, _, _, _, baseName)
 	if Safe(playerName, displayName, baseName) then
