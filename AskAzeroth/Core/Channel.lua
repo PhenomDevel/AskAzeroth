@@ -49,6 +49,17 @@ function Channel.GetNumber(lang)
 	end
 end
 
+-- Join state of a language: attempts, requested, ready, or nil before the
+-- first join. A copy; for display (/aa channels).
+function Channel.GetState(lang)
+	local state = states[lang]
+	if state then
+		return { attempts = state.attempts, requested = state.requested, ready = state.ready == true, waiting = state.timer ~= nil }
+	end
+end
+
+Channel.MAX_ATTEMPTS = MAX_ATTEMPTS
+
 function Channel.IsReady(lang)
 	return states[lang] ~= nil and states[lang].ready == true
 end
@@ -204,6 +215,7 @@ local function TryJoin(lang)
 			-- addon stays in control of when it is joined.
 			local join = JoinTemporaryChannel or JoinChannelByName
 			join(C.GetChannelName(lang))
+			ns:Fire("AA_CHANNEL_JOIN_REQUESTED", lang, state.attempts)
 		end
 	end
 	if state.attempts < MAX_ATTEMPTS then

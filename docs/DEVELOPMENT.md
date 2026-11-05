@@ -19,6 +19,7 @@ AskAzeroth/                  addon folder (the only thing that gets installed)
                              ThreadView, AskDialog), my questions, pinned, players, FAQ,
                              settings; player menu,
                              toast, minimap button, commands
+  Modules/                   ChannelDebug (/aa channels: channel state and live channel log, packaged)
   Probe/                     development tools, not packaged: transport test (/aa probe),
                              store test (/aa simulate, /aa store, /aa debug), test actions
                              (/aa ask, answer, solve, withdraw), performance test (/aa simulate perf)
