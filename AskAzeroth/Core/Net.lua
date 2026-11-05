@@ -9,6 +9,10 @@ local _, ns = ...
 -- takes turns between priorities, so two priorities on one prefix could mix
 -- the parts of two long messages.
 --
+-- In whisper mode (Forever, see Comm.lua) a message only reaches some
+-- peers, so whoever learns something new first-hand or through a relay
+-- passes it on (Relay below).
+--
 -- Messages: AA_NET_SENT (type, lang, bytes, held), AA_NET_RECEIVED (type,
 -- sender, lang, bytes), AA_SYNC_REQUEST (message) for the sync (M7).
 local Net = {}
@@ -18,6 +22,7 @@ local Util = ns.Util
 local Protocol = ns.Protocol
 local Store = ns.Store
 local Comm = ns.Comm
+local C = ns.C
 
 local PRIORITY = "NORMAL"
 
@@ -43,8 +48,9 @@ function Net.GetPlayerContext()
 	}
 end
 
-local function Send(kind, lang, wire)
-	local bytes, held = Comm.Send(lang, wire, PRIORITY)
+-- targets: list of full names, whisper mode only (see Comm.Send).
+local function Send(kind, lang, wire, targets)
+	local bytes, held = Comm.Send(lang, wire, PRIORITY, nil, targets)
 	Net.stats.sent = Net.stats.sent + 1
 	ns:Fire("AA_NET_SENT", kind, lang, bytes, held)
 end
@@ -94,8 +100,55 @@ function Net.Withdraw(qid)
 end
 
 -- Sync messages (M7) use the same path.
-function Net.SendRaw(kind, lang, wire)
-	Send(kind, lang, wire)
+function Net.SendRaw(kind, lang, wire, targets)
+	Send(kind, lang, wire, targets)
+end
+
+--------------------------------------------------------------------------------
+-- Relay (whisper mode)
+--------------------------------------------------------------------------------
+-- A question that gained something recent (itself or an answer, created
+-- within C.RELAY_MAX_AGE) is passed on as an SP with that question to
+-- C.RELAY_FANOUT random peers, leaving out the sender and the author. SP only
+-- adds what is missing, so a client relays each novelty at most once and
+-- the spread stops by itself. Old content from a login sync isn't relayed.
+-- S and D are not relayed: only the author's own message counts.
+
+-- qid → true while Store.Receive runs
+local changed
+
+ns.RegisterCallback(Net, "AA_QUESTION_ADDED", function(_, q)
+	if changed and Util.Now() - q.created <= C.RELAY_MAX_AGE then
+		changed[q.id] = true
+	end
+end)
+
+ns.RegisterCallback(Net, "AA_ANSWER_ADDED", function(_, q, a)
+	if changed and Util.Now() - a.created <= C.RELAY_MAX_AGE then
+		changed[q.id] = true
+	end
+end)
+
+local function Relay(ids, sender, lang)
+	local list = {}
+	for qid in pairs(ids) do
+		local q = Store.Get(qid)
+		if q and q.lang == lang then
+			list[#list + 1] = q
+		end
+	end
+	if #list == 0 then
+		return
+	end
+	local exclude = { [sender] = true }
+	for _, q in ipairs(list) do
+		exclude[q.author] = true
+	end
+	local targets = ns.Peers.Pick(lang, C.RELAY_FANOUT, exclude)
+	local wire = Protocol.EncodeSyncAnswer(list, C.RELAY_MAX_BYTES)
+	if wire and #targets > 0 then
+		Send("SP", lang, wire, targets)
+	end
 end
 
 Comm.RegisterHandler(function(text, sender, lang)
@@ -111,7 +164,17 @@ Comm.RegisterHandler(function(text, sender, lang)
 		ns:Fire("AA_SYNC_REQUEST", m)
 		return
 	end
+	if not Comm.IsWhisperMode() then
+		Store.Receive(m)
+		return
+	end
+	changed = {}
 	Store.Receive(m)
+	local ids = changed
+	changed = nil
+	if next(ids) then
+		Relay(ids, m.sender, lang)
+	end
 end)
 
 ns.RegisterCallback(Net, "AA_COMM_INVALID", function(_, sender)

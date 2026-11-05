@@ -1,10 +1,20 @@
 local _, ns = ...
 
 -- Transport for all addon traffic: compress + encode with LibDeflate, send via
--- AceComm over the language channel. Messages are held while their channel
--- isn't joined or chat messaging is locked down (encounters etc.) and sent
+-- AceComm. Messages are held while they can't go out (channel not joined, no
+-- peers known, chat messaging locked down during encounters etc.) and sent
 -- afterwards in order. ChatThrottleLib would drop them instead: it only
 -- retries on AddonMessageThrottle, not on lockdown.
+--
+-- Two modes:
+--   * "channel" (retail): to everyone in the language channel.
+--   * "whisper" (Forever): the server rejects addon messages in chat
+--     channels (CHAT_MSG_CHANNEL_NOTICE "NOT_ALLOWED_IN_CHANNEL"), so
+--     messages go as addon whispers to random peers (Peers.lua) and are
+--     passed on by them (Net.lua). Forever starts in this mode; retail
+--     switches to it on that notice and resends what just went out.
+--
+-- Message: AA_COMM_MODE (mode)
 local Comm = {}
 ns.Comm = Comm
 
@@ -25,14 +35,39 @@ local queue = {}
 local ticker
 local handlers = {}
 local langByPrefix = {}
+-- Recently transmitted channel messages, resent when the mode switches.
+local recent = {}
+
+-- Forever builds use interface numbers below retail's (16001 vs. 12xxxx).
+local function IsForever()
+	local _, _, _, interface = GetBuildInfo()
+	return type(interface) == "number" and interface < 100000
+end
+
+Comm.mode = IsForever() and "whisper" or "channel"
+
+function Comm.IsWhisperMode()
+	return Comm.mode == "whisper"
+end
 
 function Comm.InLockdown()
 	local check = C_ChatInfo.InChatMessagingLockdown
 	return check ~= nil and check() and true or false
 end
 
+-- entry: { lang, targets? }
+local function CanSend(entry)
+	if Comm.InLockdown() then
+		return false
+	end
+	if Comm.IsWhisperMode() then
+		return entry.targets ~= nil or ns.Peers.Count(entry.lang) > 0
+	end
+	return ns.Channel.GetNumber(entry.lang) ~= nil
+end
+
 function Comm.CanSend(lang)
-	return ns.Channel.GetNumber(lang) ~= nil and not Comm.InLockdown()
+	return CanSend({ lang = lang })
 end
 
 function Comm.GetQueueLength()
@@ -41,9 +76,25 @@ end
 
 local function Transmit(entry)
 	local callback = entry.callback
-	Comm:SendCommMessage(C.GetCommPrefix(entry.lang), entry.data, "CHANNEL", ns.Channel.GetNumber(entry.lang), entry.prio, callback and function(_, sent, total, didSend)
+	local onChunk = callback and function(_, sent, total, didSend)
 		callback(sent, total, didSend)
-	end)
+	end
+	local prefix = C.GetCommPrefix(entry.lang)
+	if Comm.IsWhisperMode() then
+		local targets = entry.targets or ns.Peers.Pick(entry.lang, C.WHISPER_FANOUT)
+		for i, name in ipairs(targets) do
+			-- Progress of the first copy only.
+			Comm:SendCommMessage(prefix, entry.data, "WHISPER", ns.Util.WhisperName(name), entry.prio, i == 1 and onChunk or nil)
+		end
+		return
+	end
+	Comm:SendCommMessage(prefix, entry.data, "CHANNEL", ns.Channel.GetNumber(entry.lang), entry.prio, onChunk)
+	local now = GetTime()
+	while recent[1] and recent[1].time < now - C.RESEND_WINDOW do
+		table.remove(recent, 1)
+	end
+	entry.time = now
+	recent[#recent + 1] = entry
 end
 
 -- Sends what can go out now; a held message keeps later ones of the same
@@ -53,7 +104,7 @@ local function Flush()
 	local i = 1
 	while queue[i] do
 		local entry = queue[i]
-		if not blocked[entry.lang] and Comm.CanSend(entry.lang) then
+		if not blocked[entry.lang] and CanSend(entry) then
 			table.remove(queue, i)
 			Transmit(entry)
 		else
@@ -77,17 +128,7 @@ local function HasQueued(lang)
 	return false
 end
 
--- Sends text to everyone in the channel of lang. prio: ChatThrottleLib
--- priority ("BULK", "NORMAL", "ALERT"). callback(sentBytes, totalBytes,
--- didSend) runs per transmitted chunk. Returns the encoded size and whether
--- the message was held for later.
-function Comm.Send(lang, text, prio, callback)
-	local data = LibDeflate:EncodeForWoWAddonChannel(LibDeflate:CompressDeflate(text))
-	local entry = { lang = lang, data = data, prio = prio or "NORMAL", callback = callback }
-	if not HasQueued(lang) and Comm.CanSend(lang) then
-		Transmit(entry)
-		return #data, false
-	end
+local function Hold(entry)
 	if #queue >= MAX_QUEUE then
 		table.remove(queue, 1)
 	end
@@ -96,7 +137,44 @@ function Comm.Send(lang, text, prio, callback)
 		ticker = C_Timer.NewTicker(FLUSH_INTERVAL, Flush)
 	end
 	ns:Fire("AA_COMM_HELD", #queue)
+end
+
+-- Sends text in lang: to everyone in the language channel, or in whisper
+-- mode to targets (list of full names) or else to C.WHISPER_FANOUT random
+-- peers. Targets are ignored in channel mode. prio: ChatThrottleLib priority
+-- ("BULK", "NORMAL", "ALERT"). callback(sentBytes, totalBytes, didSend) runs
+-- per transmitted chunk. Returns the encoded size and whether the message
+-- was held for later.
+function Comm.Send(lang, text, prio, callback, targets)
+	local data = LibDeflate:EncodeForWoWAddonChannel(LibDeflate:CompressDeflate(text))
+	if targets and #targets == 0 then
+		return #data, false
+	end
+	local entry = { lang = lang, data = data, prio = prio or "NORMAL", callback = callback, targets = targets }
+	if not HasQueued(lang) and CanSend(entry) then
+		Transmit(entry)
+		return #data, false
+	end
+	Hold(entry)
 	return #data, true
+end
+
+-- Switches to whisper mode and resends the channel messages of the last
+-- C.RESEND_WINDOW seconds (the server answers the rejected ones late).
+function Comm.SetWhisperMode()
+	if Comm.IsWhisperMode() then
+		return
+	end
+	Comm.mode = "whisper"
+	local now = GetTime()
+	for _, entry in ipairs(recent) do
+		if entry.time >= now - C.RESEND_WINDOW then
+			entry.time = nil
+			Hold(entry)
+		end
+	end
+	wipe(recent)
+	ns:Fire("AA_COMM_MODE", Comm.mode)
 end
 
 -- handler(text, sender, lang) receives every valid message of other players
@@ -112,7 +190,7 @@ Comm.IsSelf = IsSelf
 
 function Comm:OnCommReceived(prefix, data, distribution, sender)
 	local lang = langByPrefix[prefix]
-	if not lang or distribution ~= "CHANNEL" then
+	if not lang or (distribution ~= "CHANNEL" and distribution ~= "WHISPER") then
 		return
 	end
 	if issecretvalue and (issecretvalue(data) or issecretvalue(sender)) then
@@ -120,6 +198,12 @@ function Comm:OnCommReceived(prefix, data, distribution, sender)
 	end
 	if type(data) ~= "string" or type(sender) ~= "string" or #data > Comm.MAX_MESSAGE_SIZE or (IsSelf(sender) and not Comm.loopback) then
 		return
+	end
+	if distribution == "WHISPER" then
+		if not ns.Channel.IsSelected(lang) then
+			return
+		end
+		ns.Peers.Add(lang, sender)
 	end
 	local decoded = LibDeflate:DecodeForWoWAddonChannel(data)
 	local text = decoded and LibDeflate:DecompressDeflate(decoded)
@@ -139,3 +223,10 @@ for _, lang in ipairs(C.LANGUAGES) do
 end
 
 ns.RegisterCallback(Comm, "AA_CHANNEL_READY", Flush)
+ns.RegisterCallback(Comm, "AA_PEERS_CHANGED", Flush)
+
+ns.RegisterCallback(Comm, "AA_CHANNEL_NOTICE", function(_, _, notice)
+	if notice == "NOT_ALLOWED_IN_CHANNEL" then
+		Comm.SetWhisperMode()
+	end
+end)

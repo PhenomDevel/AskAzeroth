@@ -7,6 +7,10 @@
   channels of your client. `/aa channels debug` prints channel events to chat
   as they happen (joins, notices, messages), also after a reload, until
   `/aa channels debug off`. Helpful when questions don't arrive.
+- Forever: questions and answers reach other players again. Forever blocks
+  addon messages in chat channels, so AskAzeroth now finds the other users
+  through the channel's member list and sends to them by (hidden) whisper;
+  they pass new questions and answers on.
 - Forever: names without a realm ("First Surname") are recognized, so your
   own questions, answers and whispers to other players work again.
 

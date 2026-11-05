@@ -82,6 +82,7 @@ Core\Data\Glossary.lua
 Core\Database.lua
 Core\SlashCommands.lua
 Core\Channel.lua
+Core\Peers.lua
 Core\Comm.lua
 Core\Protocol.lua
 Core\Store.lua
