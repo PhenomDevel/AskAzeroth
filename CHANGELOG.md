@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v1.1.3 (2026-11-05)
+
 - The close button (X) of the AskAzeroth window is visible again; v1.1.2
   hid it while fixing its click.
 
