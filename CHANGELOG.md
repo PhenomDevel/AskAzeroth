@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- The close button (X) of the AskAzeroth window is visible again; v1.1.2
+  hid it while fixing its click.
+
 ## v1.1.2 (2026-11-05)
 
 - `/chatlist AskAzerothEN` (or DE, FR …) shows the channel members again;

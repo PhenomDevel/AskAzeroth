@@ -168,14 +168,13 @@ local function CreateWindow()
 		end
 		window.blizzard = true
 		-- The template's close button goes through HideUIPanel, which doesn't
-		-- close the window on Forever (only Escape did). Hide it directly and
-		-- keep the button above the header and pages.
-		local close = window.CloseButton
-		if close then
-			close:SetScript("OnClick", function()
+		-- close the window on Forever (only Escape did). Hide it directly.
+		-- Leave its frame level to the template: a fixed level set here
+		-- doesn't survive the strata change in Create() and hid the button.
+		if window.CloseButton then
+			window.CloseButton:SetScript("OnClick", function()
 				window:Hide()
 			end)
-			close:SetFrameLevel(window:GetFrameLevel() + 50)
 		end
 		return window
 	end
