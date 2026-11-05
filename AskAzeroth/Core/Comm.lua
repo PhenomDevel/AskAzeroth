@@ -1,4 +1,3 @@
--- luacheck: read globals UnitName
 local _, ns = ...
 
 -- Transport for all addon traffic: compress + encode with LibDeflate, send via
@@ -107,7 +106,7 @@ function Comm.RegisterHandler(handler)
 end
 
 local function IsSelf(sender)
-	return sender == ns:GetPlayerFullName() or sender == UnitName("player")
+	return ns.Util.FullName(sender) == ns:GetPlayerFullName()
 end
 Comm.IsSelf = IsSelf
 

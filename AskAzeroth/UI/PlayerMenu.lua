@@ -52,6 +52,7 @@ function PlayerMenu.EditNote(name)
 end
 
 function PlayerMenu.Whisper(name)
+	name = Util.WhisperName(name)
 	if ChatFrameUtil and ChatFrameUtil.SendTell then
 		ChatFrameUtil.SendTell(name)
 	elseif ChatFrame_SendTell then
