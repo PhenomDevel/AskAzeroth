@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Forever: your own name is right from the start even when the game reports
+  first name and surname separately, so other players see your questions as
+  yours and "solved"/"withdraw" reach them.
+
 ## v1.1.3 (2026-11-05)
 
 - The close button (X) of the AskAzeroth window is visible again; v1.1.2
