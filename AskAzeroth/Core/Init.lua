@@ -113,10 +113,25 @@ function ns:GetPlayerFullName()
 	if type(learned) == "string" and learned ~= "" then
 		return learned:find("-", 1, true) and learned or learned .. "-" .. realm
 	end
-	local name = UnitFullName("player")
-	if type(name) == "string" and name ~= "" then
-		return name .. "-" .. realm
+	local name = self:GetOwnName()
+	return name and name .. "-" .. realm
+end
+
+-- The character's name without realm. On Forever UnitFullName may return
+-- "Phenom Shira", "" or the parts separately ("Phenom", "Shira"); a second
+-- value that isn't the realm is taken as the surname.
+function ns:GetOwnName()
+	local name, second = UnitFullName("player")
+	if type(name) ~= "string" or name == "" then
+		return nil
 	end
+	if type(second) == "string" and second ~= "" and not name:find(" ", 1, true) then
+		local realm = GetNormalizedRealmName and GetNormalizedRealmName()
+		if type(realm) == "string" and realm ~= "" and second ~= realm and second:find("^%S+$") then
+			return name .. " " .. second
+		end
+	end
+	return name
 end
 
 -- Remembers the own full name per character and fires
