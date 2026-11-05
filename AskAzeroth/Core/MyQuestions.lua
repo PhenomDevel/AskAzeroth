@@ -223,7 +223,25 @@ end)
 
 -- At login: clean up, then put this character's still public questions
 -- back into the store.
+-- The own name changed its format (e.g. learned from an own message on
+-- Forever): saved own questions and answers take the new one.
+ns.RegisterCallback(MyQuestions, "AA_PLAYER_NAME_CHANGED", function(_, old, new)
+	for _, entry in pairs(Entries()) do
+		if entry.author == old then
+			entry.author = new
+		end
+		for _, a in pairs(entry.answers or {}) do
+			if a.author == old then
+				a.author = new
+			end
+		end
+	end
+	Store.RenameAuthor(old, new)
+	Changed()
+end)
+
 ns:RegisterEvent("PLAYER_LOGIN", function()
+	ns:CheckPlayerName()
 	local now = Util.Now()
 	MyQuestions.Cleanup(now)
 	local me = ns:GetPlayerFullName()

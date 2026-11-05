@@ -85,12 +85,14 @@ end
 -- Player
 --------------------------------------------------------------------------------
 
--- Own realm, normalized. Forever leaves the realm out of UnitFullName and of
--- addon message senders, but GetNormalizedRealmName still has it.
+-- Own realm, normalized. Forever leaves the realm out of addon message
+-- senders. GetNormalizedRealmName comes first: it is the same for every
+-- player of the realm, so all clients complete realm-less senders alike
+-- (the second value of UnitFullName need not be the realm on Forever).
 function ns:GetOwnRealm()
-	local _, realm = UnitFullName("player")
+	local realm = GetNormalizedRealmName and GetNormalizedRealmName()
 	if type(realm) ~= "string" or realm == "" then
-		realm = GetNormalizedRealmName and GetNormalizedRealmName()
+		realm = select(2, UnitFullName("player"))
 	end
 	if type(realm) == "string" and realm ~= "" then
 		return realm
@@ -99,11 +101,36 @@ end
 
 -- "Name-Realm", the format questions and answers store authors in. Nil
 -- before the realm is known (early in the loading process). Forever names
--- are "First Surname".
+-- are "First Surname". Once an own message has come back (Comm.lua), the
+-- name as other clients see it is known (charDb.selfName) and used, so own
+-- questions carry the same author name everywhere.
 function ns:GetPlayerFullName()
-	local name = UnitFullName("player")
 	local realm = self:GetOwnRealm()
-	if type(name) == "string" and name ~= "" and realm then
+	if not realm then
+		return nil
+	end
+	local learned = self.charDb and self.charDb.selfName
+	if type(learned) == "string" and learned ~= "" then
+		return learned:find("-", 1, true) and learned or learned .. "-" .. realm
+	end
+	local name = UnitFullName("player")
+	if type(name) == "string" and name ~= "" then
 		return name .. "-" .. realm
+	end
+end
+
+-- Remembers the own full name per character and fires
+-- AA_PLAYER_NAME_CHANGED (old, new) when it differs from the last one, so
+-- saved own questions follow.
+function ns:CheckPlayerName()
+	local name = self:GetPlayerFullName()
+	local charDb = self.charDb
+	if not name or not charDb then
+		return
+	end
+	local old = charDb.fullName
+	charDb.fullName = name
+	if type(old) == "string" and old ~= name then
+		self:Fire("AA_PLAYER_NAME_CHANGED", old, name)
 	end
 end
