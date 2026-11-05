@@ -502,6 +502,21 @@ function Store.Sweep(now)
 	return removed
 end
 
+-- Own questions and answers after the own name changed its format.
+function Store.RenameAuthor(old, new)
+	for _, q in pairs(questions) do
+		if q.author == old then
+			q.author = new
+		end
+		for _, a in pairs(q.answers) do
+			if a.author == old then
+				a.author = new
+			end
+		end
+	end
+	ns:Fire("AA_STORE_CHANGED")
+end
+
 -- Clears everything (debugging).
 function Store.Reset()
 	wipe(questions)

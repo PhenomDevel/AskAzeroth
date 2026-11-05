@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Forever: the addon now recognizes its own messages even when your name
+  ("First Surname") is reported differently than the game's own name
+  functions say. Before, it could send messages to yourself, which then
+  showed up as "collision" drops and cost one of the players a message goes
+  to. Your own questions now carry the same author name on every client.
+- `/aa channels` also shows your own name as the addon sees it.
+
 ## v1.1.0 (2026-11-05)
 
 - New command `/aa channels`: shows whether the addon's chat channels are

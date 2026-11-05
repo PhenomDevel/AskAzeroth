@@ -1,3 +1,4 @@
+-- luacheck: read globals UnitName
 local _, ns = ...
 
 -- Transport for all addon traffic: compress + encode with LibDeflate, send via
@@ -37,6 +38,11 @@ local handlers = {}
 local langByPrefix = {}
 -- Recently transmitted channel messages, resent when the mode switches.
 local recent = {}
+-- Payloads sent in the last SENT_MEMORY seconds: data → GetTime(). One that
+-- comes back is our own (e.g. a whisper to ourselves while our name format
+-- wasn't known yet); its sender is how the others see our name.
+local SENT_MEMORY = 120
+local sentData = {}
 
 -- Forever builds use interface numbers below retail's (16001 vs. 12xxxx).
 local function IsForever()
@@ -80,6 +86,13 @@ local function Transmit(entry)
 		callback(sent, total, didSend)
 	end
 	local prefix = C.GetCommPrefix(entry.lang)
+	local now = GetTime()
+	for data, time in pairs(sentData) do
+		if time < now - SENT_MEMORY then
+			sentData[data] = nil
+		end
+	end
+	sentData[entry.data] = now
 	if Comm.IsWhisperMode() then
 		local targets = entry.targets or ns.Peers.Pick(entry.lang, C.WHISPER_FANOUT)
 		for i, name in ipairs(targets) do
@@ -89,7 +102,6 @@ local function Transmit(entry)
 		return
 	end
 	Comm:SendCommMessage(prefix, entry.data, "CHANNEL", ns.Channel.GetNumber(entry.lang), entry.prio, onChunk)
-	local now = GetTime()
 	while recent[1] and recent[1].time < now - C.RESEND_WINDOW do
 		table.remove(recent, 1)
 	end
@@ -188,6 +200,21 @@ local function IsSelf(sender)
 end
 Comm.IsSelf = IsSelf
 
+-- An own payload came back from sender. Taken as the own name only when it
+-- starts with the character's name, so a player who sends our message back
+-- to us can't pass as us.
+local function LearnSelf(sender)
+	local own = UnitName("player")
+	if type(own) ~= "string" or own == "" or sender:sub(1, #own) ~= own then
+		return
+	end
+	ns.Peers.RemoveEverywhere(sender)
+	if ns.charDb and ns.charDb.selfName ~= sender then
+		ns.charDb.selfName = sender
+		ns:CheckPlayerName()
+	end
+end
+
 function Comm:OnCommReceived(prefix, data, distribution, sender)
 	local lang = langByPrefix[prefix]
 	if not lang or (distribution ~= "CHANNEL" and distribution ~= "WHISPER") then
@@ -196,7 +223,14 @@ function Comm:OnCommReceived(prefix, data, distribution, sender)
 	if issecretvalue and (issecretvalue(data) or issecretvalue(sender)) then
 		return
 	end
-	if type(data) ~= "string" or type(sender) ~= "string" or #data > Comm.MAX_MESSAGE_SIZE or (IsSelf(sender) and not Comm.loopback) then
+	if type(data) ~= "string" or type(sender) ~= "string" or #data > Comm.MAX_MESSAGE_SIZE then
+		return
+	end
+	local own = sentData[data] ~= nil
+	if own then
+		LearnSelf(sender)
+	end
+	if (own or IsSelf(sender)) and not Comm.loopback then
 		return
 	end
 	if distribution == "WHISPER" then

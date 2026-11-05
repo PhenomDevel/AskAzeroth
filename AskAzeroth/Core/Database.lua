@@ -53,6 +53,8 @@ ns.charDbDefaults = {
 	version = DB_VERSION,
 	-- Main window position (point, relativePoint, x, y).
 	window = {},
+	-- selfName: own name as other clients see it, learned from an own
+	-- message (Comm.lua); fullName: last own full name (ns:CheckPlayerName).
 }
 
 local function OnAddonLoaded(event, name)

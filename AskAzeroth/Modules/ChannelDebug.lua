@@ -118,6 +118,8 @@ function ChannelDebug.PrintOverview()
 		end
 		Line("|cffffd100%s|r: %s", ChannelLabel(lang), status)
 	end
+	local unitName, unitRealm = UnitFullName("player")
+	Line(L.CHDBG_SELF, Safe(ns:GetPlayerFullName()), Safe(ns.charDb and ns.charDb.selfName or L.CHDBG_NOT_YET), Safe(unitName), Safe(unitRealm), Safe(ns:GetOwnRealm()))
 	Line(L.CHDBG_SUMMARY, YesNo(Channel.hidden), YesNo(ns.Comm.InLockdown()), ns.Comm.GetQueueLength(), YesNo(Channel.hasChatFilter), YesNo(IsOn()))
 
 	local channels = ClientChannels()
@@ -180,6 +182,10 @@ end)
 
 ns.RegisterCallback(ChannelDebug, "AA_CHANNEL_NOTICE_USER", function(_, lang, notice, playerName)
 	Log(L.CHDBG_EV_NOTICE_USER, C.GetChannelName(lang), NoticeText(notice), Safe(playerName))
+end)
+
+ns.RegisterCallback(ChannelDebug, "AA_PLAYER_NAME_CHANGED", function(_, old, new)
+	Log(L.CHDBG_EV_NAME, Safe(old), Safe(new))
 end)
 
 ns.RegisterCallback(ChannelDebug, "AA_LANGUAGES_CHANGED", function(_, lang, selected)
