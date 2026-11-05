@@ -1,3 +1,4 @@
+-- luacheck: read globals GetNormalizedRealmName
 local addonName, ns = ...
 
 ns.name = addonName
@@ -84,11 +85,25 @@ end
 -- Player
 --------------------------------------------------------------------------------
 
--- "Name-Realm", the format CHAT_MSG_ADDON reports senders in. Nil before the
--- realm is known (early in the loading process).
+-- Own realm, normalized. Forever leaves the realm out of UnitFullName and of
+-- addon message senders, but GetNormalizedRealmName still has it.
+function ns:GetOwnRealm()
+	local _, realm = UnitFullName("player")
+	if type(realm) ~= "string" or realm == "" then
+		realm = GetNormalizedRealmName and GetNormalizedRealmName()
+	end
+	if type(realm) == "string" and realm ~= "" then
+		return realm
+	end
+end
+
+-- "Name-Realm", the format questions and answers store authors in. Nil
+-- before the realm is known (early in the loading process). Forever names
+-- are "First Surname".
 function ns:GetPlayerFullName()
-	local name, realm = UnitFullName("player")
-	if name and realm and realm ~= "" then
+	local name = UnitFullName("player")
+	local realm = self:GetOwnRealm()
+	if type(name) == "string" and name ~= "" and realm then
 		return name .. "-" .. realm
 	end
 end

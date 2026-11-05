@@ -7,6 +7,8 @@
   channels of your client. `/aa channels debug` prints channel events to chat
   as they happen (joins, notices, messages), also after a reload, until
   `/aa channels debug off`. Helpful when questions don't arrive.
+- Forever: names without a realm ("First Surname") are recognized, so your
+  own questions, answers and whispers to other players work again.
 
 ## v1.0.2 (2026-11-03)
 

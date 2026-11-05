@@ -1,4 +1,3 @@
--- luacheck: read globals GetNormalizedRealmName
 local _, ns = ...
 
 -- Small helpers shared by the core files: time, ids, names and text checks.
@@ -41,7 +40,8 @@ end
 -- Player names
 --------------------------------------------------------------------------------
 
--- "Name-Realm" for a sender; same-realm senders can arrive without a realm.
+-- "Name-Realm" for a sender; same-realm senders (all of them on Forever)
+-- arrive without a realm.
 function Util.FullName(name)
 	if type(name) ~= "string" or name == "" then
 		return nil
@@ -49,11 +49,21 @@ function Util.FullName(name)
 	if name:find("-", 1, true) then
 		return name
 	end
-	local realm = GetNormalizedRealmName and GetNormalizedRealmName()
-	if realm and realm ~= "" then
+	local realm = ns:GetOwnRealm()
+	if realm then
 		return name .. "-" .. realm
 	end
 	return name
+end
+
+-- Name to whisper: without the realm when it is the own one. Forever
+-- doesn't accept a realm suffix on names.
+function Util.WhisperName(fullName)
+	local name, realm = fullName:match("^([^%-]+)%-(.+)$")
+	if name and realm == ns:GetOwnRealm() then
+		return name
+	end
+	return fullName
 end
 
 -- "Name" without the realm, for display.
@@ -61,10 +71,14 @@ function Util.ShortName(fullName)
 	return (fullName:match("^([^%-]+)")) or fullName
 end
 
--- A plausible "Name-Realm": no spaces or control characters, short.
+-- A plausible "Name-Realm": short, no control characters. Forever names are
+-- "First Surname", so the name part may hold single inner spaces.
 function Util.IsPlayerName(value)
-	return type(value) == "string" and #value >= 2 and #value <= 64
-		and value:find("^[^%-%s%c]+%-[^%s%c]+$") ~= nil
+	if type(value) ~= "string" or #value < 2 or #value > 64 then
+		return false
+	end
+	local name = value:match("^([^%-%c]+)%-[^%s%c]+$")
+	return name ~= nil and (name:find("^%S+$") or name:find("^%S+ %S+$")) ~= nil
 end
 
 --------------------------------------------------------------------------------
