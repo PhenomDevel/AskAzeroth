@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v1.1.1 (2026-11-05)
+
 - Forever: the addon now recognizes its own messages even when your name
   ("First Surname") is reported differently than the game's own name
   functions say. Before, it could send messages to yourself, which then
