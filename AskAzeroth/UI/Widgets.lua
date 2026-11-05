@@ -235,8 +235,12 @@ function W.Window(name, parent, title, onClose)
 		if window.SetPortraitToAsset then
 			window:SetPortraitToAsset(W.LOGO)
 		end
-		if window.CloseButton and onClose then
-			window.CloseButton:SetScript("OnClick", onClose)
+		-- Never the template's own OnClick: it goes through HideUIPanel,
+		-- which doesn't close addon windows on Forever.
+		if window.CloseButton then
+			window.CloseButton:SetScript("OnClick", onClose or function()
+				window:Hide()
+			end)
 		end
 		window.blizzard = true
 		return window

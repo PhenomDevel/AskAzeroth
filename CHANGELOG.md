@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Forever: the close button (X) of the AskAzeroth window works again; before,
+  only Escape closed it.
+
 ## v1.1.1 (2026-11-05)
 
 - Forever: the addon now recognizes its own messages even when your name

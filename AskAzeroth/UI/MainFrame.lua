@@ -167,6 +167,16 @@ local function CreateWindow()
 			window:SetPortraitToAsset(LOGO)
 		end
 		window.blizzard = true
+		-- The template's close button goes through HideUIPanel, which doesn't
+		-- close the window on Forever (only Escape did). Hide it directly and
+		-- keep the button above the header and pages.
+		local close = window.CloseButton
+		if close then
+			close:SetScript("OnClick", function()
+				window:Hide()
+			end)
+			close:SetFrameLevel(window:GetFrameLevel() + 50)
+		end
 		return window
 	end
 	window = CreateFrame("Frame", FRAME_NAME, UIParent, "BackdropTemplate")
