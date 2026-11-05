@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- New command `/aa channels`: shows whether the addon's chat channels are
+  joined (with their number), what was sent and received on them, and all
+  channels of your client. `/aa channels debug` prints channel events to chat
+  as they happen (joins, notices, messages), also after a reload, until
+  `/aa channels debug off`. Helpful when questions don't arrive.
+
 ## v1.0.2 (2026-11-03)
 
 - Search: searches by words instead of the exact phrase. "how does aggro" or
