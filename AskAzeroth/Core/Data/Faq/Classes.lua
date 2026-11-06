@@ -378,31 +378,130 @@ ns.Faq.Add("class", {
 		id = "class-weapon-master",
 		de = {
 			q = "Wie lerne ich eine neue Waffenart?",
-			a = "Bei Waffenmeistern in den Hauptstädten, gegen etwas Gold. Jeder Waffenmeister lehrt nur bestimmte Waffen, und nicht jede Klasse kann jede Waffe lernen. Frag eine Stadtwache nach dem Weg.",
+			a = "Bei Waffenmeistern in den Hauptstädten, gegen eine kleine Gebühr. Jeder Waffenmeister lehrt nur bestimmte Waffen, und nicht jede Klasse kann jede Waffe lernen. Eine neue Waffenart beginnt bei Fertigkeit 1 und steigt beim Kämpfen. Frag eine Stadtwache nach dem Waffenmeister, sie markiert ihn auf deiner Karte.",
 		},
 		en = {
 			q = "How do I learn a new weapon type?",
-			a = "From weapon masters in the capital cities, for some gold. Each weapon master only teaches certain weapons, and not every class can learn every weapon. Ask a city guard for directions.",
+			a = "From weapon masters in the capital cities, for a small fee. Each weapon master only teaches certain weapons, and not every class can learn every weapon. A new weapon type starts at skill 1 and rises as you fight. Ask a city guard for the weapon master; they mark it on your map.",
 		},
 		fr = {
 			q = "Comment apprendre un nouveau type d'arme ?",
-			a = "Auprès des maîtres d'armes des capitales, contre un peu d'or. Chaque maître d'armes n'enseigne que certaines armes, et toutes les classes ne peuvent pas tout apprendre. Demandez le chemin à un garde de la ville.",
+			a = "Auprès des maîtres d'armes des capitales, contre une petite somme. Chaque maître d'armes n'enseigne que certaines armes, et toutes les classes ne peuvent pas tout apprendre. Un nouveau type d'arme commence à la compétence 1 et monte en combattant. Demandez le maître d'armes à un garde de la ville : il le marque sur votre carte.",
 		},
 		es = {
 			q = "¿Cómo aprendo un tipo de arma nuevo?",
-			a = "Con los maestros de armas de las capitales, por algo de oro. Cada maestro de armas solo enseña ciertas armas y no todas las clases pueden aprender todas. Pregunta el camino a un guardia de la ciudad.",
+			a = "Con los maestros de armas de las capitales, por un pequeño pago. Cada maestro de armas solo enseña ciertas armas y no todas las clases pueden aprender todas. Un tipo de arma nuevo empieza con habilidad 1 y sube al luchar. Pregunta por el maestro de armas a un guardia de la ciudad; lo marca en tu mapa.",
 		},
 		it = {
 			q = "Come imparo un nuovo tipo di arma?",
-			a = "Dai maestri d'armi nelle capitali, per un po' d'oro. Ogni maestro d'armi insegna solo certe armi, e non tutte le classi possono impararle tutte. Chiedi la strada a una guardia cittadina.",
+			a = "Dai maestri d'armi nelle capitali, per una piccola somma. Ogni maestro d'armi insegna solo certe armi, e non tutte le classi possono impararle tutte. Un nuovo tipo di arma parte da abilità 1 e sale combattendo. Chiedi del maestro d'armi a una guardia cittadina: lo segna sulla tua mappa.",
 		},
 		ru = {
 			q = "Как выучить новый тип оружия?",
-			a = "У мастеров оружия в столицах за немного золота. Каждый мастер учит только определённым видам оружия, и не каждый класс может освоить любое оружие. Спросите дорогу у городского стражника.",
+			a = "У мастеров оружия в столицах за небольшую плату. Каждый мастер учит только определённым видам оружия, и не каждый класс может освоить любое оружие. Новый тип оружия начинается с навыка 1 и растёт в бою. Спросите городского стражника о мастере оружия: он отметит его на карте.",
 		},
 		pt = {
 			q = "Como aprendo um novo tipo de arma?",
-			a = "Com os mestres de armas nas capitais, por um pouco de ouro. Cada mestre de armas só ensina certas armas, e nem toda classe pode aprender todas. Pergunte o caminho a um guarda da cidade.",
+			a = "Com os mestres de armas nas capitais, por uma pequena taxa. Cada mestre de armas só ensina certas armas, e nem toda classe pode aprender todas. Um tipo de arma novo começa na perícia 1 e sobe ao lutar. Pergunte a um guarda da cidade pelo mestre de armas; ele marca no seu mapa.",
+		},
+	},
+	{
+		id = "class-weapon-alliance",
+		de = {
+			q = "Wo lerne ich als Allianz welche Waffenart?",
+			a = "Sturmwind: Dolche, Ein- und Zweihandschwerter, Stangenwaffen, Stäbe und Armbrüste. Eisenschmiede hat zwei Waffenmeister: einer lehrt Ein- und Zweihandäxte, Ein- und Zweihandstreitkolben, Faustwaffen und Schusswaffen, der andere Armbrüste, Dolche und Wurfwaffen. Darnassus: Bögen, Dolche, Faustwaffen, Stäbe und Wurfwaffen.",
+			kw = "Waffenmeister Bogen Schwert Axt Streitkolben Stab Dolch Faustwaffe Armbrust Schusswaffe Gewehr Wurfwaffe Stangenwaffe Waffenfertigkeit lernen",
+		},
+		en = {
+			q = "Where do I learn which weapon type as Alliance?",
+			a = "Stormwind: daggers, one- and two-handed swords, polearms, staves and crossbows. Ironforge has two weapon masters: one teaches one- and two-handed axes and maces, fist weapons and guns, the other crossbows, daggers and thrown weapons. Darnassus: bows, daggers, fist weapons, staves and thrown weapons.",
+			kw = "weapon master skill learn bow sword axe mace staff dagger gun",
+		},
+		fr = {
+			q = "Où apprendre quel type d'arme côté Alliance ?",
+			a = "Hurlevent : dagues, épées à une et à deux mains, armes d'hast, bâtons et arbalètes. Forgefer a deux maîtres d'armes : l'un enseigne les haches et les masses à une et à deux mains, les armes de pugilat et les armes à feu, l'autre les arbalètes, les dagues et les armes de jet. Darnassus : arcs, dagues, armes de pugilat, bâtons et armes de jet.",
+		},
+		es = {
+			q = "¿Dónde aprendo cada tipo de arma en la Alianza?",
+			a = "Ventormenta: dagas, espadas de una y dos manos, armas de asta, bastones y ballestas. Forjaz tiene dos maestros de armas: uno enseña hachas y mazas de una y dos manos, armas de puño y armas de fuego; el otro, ballestas, dagas y armas arrojadizas. Darnassus: arcos, dagas, armas de puño, bastones y armas arrojadizas.",
+		},
+		it = {
+			q = "Dove imparo ogni tipo di arma con l'Alleanza?",
+			a = "Roccavento: pugnali, spade a una e a due mani, armi ad asta, bastoni e balestre. Forgiardente ha due maestri d'armi: uno insegna asce e mazze a una e a due mani, armi da pugno e armi da fuoco, l'altro balestre, pugnali e armi da lancio. Darnassus: archi, pugnali, armi da pugno, bastoni e armi da lancio.",
+		},
+		ru = {
+			q = "Где Альянсу учить какой тип оружия?",
+			a = "Штормград: кинжалы, одноручные и двуручные мечи, древковое оружие, посохи и арбалеты. В Стальгорне два мастера оружия: один учит одноручным и двуручным топорам и дробящему оружию, кистевому и огнестрельному оружию, другой – арбалетам, кинжалам и метательному оружию. Дарнас: луки, кинжалы, кистевое оружие, посохи и метательное оружие.",
+		},
+		pt = {
+			q = "Onde aprendo cada tipo de arma na Aliança?",
+			a = "Ventobravo: adagas, espadas de uma e duas mãos, armas de haste, báculos e bestas. Altaforja tem dois mestres de armas: um ensina machados e maças de uma e duas mãos, armas de punho e armas de fogo; o outro, bestas, adagas e armas de arremesso. Darnassus: arcos, adagas, armas de punho, báculos e armas de arremesso.",
+		},
+	},
+	{
+		id = "class-weapon-horde",
+		de = {
+			q = "Wo lerne ich als Horde welche Waffenart?",
+			a = "Orgrimmar hat zwei Waffenmeister: einer lehrt Bögen, Dolche, Faustwaffen, Ein- und Zweihandäxte und Wurfwaffen, der andere Bögen, Ein- und Zweihandäxte, Stäbe und Wurfwaffen. Donnerfels: Schusswaffen, Ein- und Zweihandstreitkolben und Stäbe. Unterstadt: Armbrüste, Dolche, Ein- und Zweihandschwerter und Stangenwaffen.",
+			kw = "Waffenmeister Bogen Schwert Axt Streitkolben Stab Dolch Faustwaffe Armbrust Schusswaffe Gewehr Wurfwaffe Stangenwaffe Waffenfertigkeit lernen",
+		},
+		en = {
+			q = "Where do I learn which weapon type as Horde?",
+			a = "Orgrimmar has two weapon masters: one teaches bows, daggers, fist weapons, one- and two-handed axes and thrown weapons, the other bows, one- and two-handed axes, staves and thrown weapons. Thunder Bluff: guns, one- and two-handed maces and staves. Undercity: crossbows, daggers, one- and two-handed swords and polearms.",
+			kw = "weapon master skill learn bow sword axe mace staff dagger gun",
+		},
+		fr = {
+			q = "Où apprendre quel type d'arme côté Horde ?",
+			a = "Orgrimmar a deux maîtres d'armes : l'un enseigne les arcs, les dagues, les armes de pugilat, les haches à une et à deux mains et les armes de jet, l'autre les arcs, les haches à une et à deux mains, les bâtons et les armes de jet. Les Pitons-du-Tonnerre : armes à feu, masses à une et à deux mains et bâtons. Fossoyeuse : arbalètes, dagues, épées à une et à deux mains et armes d'hast.",
+		},
+		es = {
+			q = "¿Dónde aprendo cada tipo de arma en la Horda?",
+			a = "Orgrimmar tiene dos maestros de armas: uno enseña arcos, dagas, armas de puño, hachas de una y dos manos y armas arrojadizas; el otro, arcos, hachas de una y dos manos, bastones y armas arrojadizas. Cima del Trueno: armas de fuego, mazas de una y dos manos y bastones. Entrañas: ballestas, dagas, espadas de una y dos manos y armas de asta.",
+		},
+		it = {
+			q = "Dove imparo ogni tipo di arma con l'Orda?",
+			a = "Orgrimmar ha due maestri d'armi: uno insegna archi, pugnali, armi da pugno, asce a una e a due mani e armi da lancio, l'altro archi, asce a una e a due mani, bastoni e armi da lancio. Picco del Tuono: armi da fuoco, mazze a una e a due mani e bastoni. Sepulcria: balestre, pugnali, spade a una e a due mani e armi ad asta.",
+		},
+		ru = {
+			q = "Где Орде учить какой тип оружия?",
+			a = "В Оргриммаре два мастера оружия: один учит лукам, кинжалам, кистевому оружию, одноручным и двуручным топорам и метательному оружию, другой – лукам, одноручным и двуручным топорам, посохам и метательному оружию. Громовой Утес: огнестрельное оружие, одноручное и двуручное дробящее оружие и посохи. Подгород: арбалеты, кинжалы, одноручные и двуручные мечи и древковое оружие.",
+		},
+		pt = {
+			q = "Onde aprendo cada tipo de arma na Horda?",
+			a = "Orgrimmar tem dois mestres de armas: um ensina arcos, adagas, armas de punho, machados de uma e duas mãos e armas de arremesso; o outro, arcos, machados de uma e duas mãos, báculos e armas de arremesso. Penhasco do Trovão: armas de fogo, maças de uma e duas mãos e báculos. Cidade Baixa: bestas, adagas, espadas de uma e duas mãos e armas de haste.",
+		},
+	},
+	{
+		id = "class-weapon-by-class",
+		de = {
+			q = "Welche Waffenarten kann meine Klasse lernen?",
+			a = "Krieger: alle außer Zauberstäben. Paladine: Ein- und Zweihandäxte, -streitkolben und -schwerter sowie Stangenwaffen. Jäger: Äxte, Schwerter, Dolche, Faustwaffen, Stangenwaffen, Stäbe, Bögen, Armbrüste, Schusswaffen und Wurfwaffen. Schurken: Dolche, Faustwaffen, Einhandschwerter und -streitkolben, Bögen, Armbrüste, Schusswaffen und Wurfwaffen. Schamanen: Dolche, Faustwaffen, Stäbe, Einhandäxte und -streitkolben, zweihändige nur mit einem Verstärkungstalent. Druiden: Dolche, Faustwaffen, Ein- und Zweihandstreitkolben und Stäbe. Priester: Dolche, Einhandstreitkolben, Stäbe und Zauberstäbe. Magier und Hexenmeister: Dolche, Einhandschwerter, Stäbe und Zauberstäbe.",
+			kw = "Waffenmeister Krieger Paladin Jäger Schurke Schamane Druide Priester Magier Hexenmeister Waffe tragen benutzen",
+		},
+		en = {
+			q = "Which weapon types can my class learn?",
+			a = "Warriors: everything except wands. Paladins: one- and two-handed axes, maces and swords, and polearms. Hunters: axes, swords, daggers, fist weapons, polearms, staves, bows, crossbows, guns and thrown weapons. Rogues: daggers, fist weapons, one-handed swords and maces, bows, crossbows, guns and thrown weapons. Shamans: daggers, fist weapons, staves, one-handed axes and maces; two-handed ones only with an Enhancement talent. Druids: daggers, fist weapons, one- and two-handed maces and staves. Priests: daggers, one-handed maces, staves and wands. Mages and warlocks: daggers, one-handed swords, staves and wands.",
+			kw = "weapon master warrior paladin hunter rogue shaman druid priest mage warlock use equip",
+		},
+		fr = {
+			q = "Quels types d'armes ma classe peut-elle apprendre ?",
+			a = "Guerriers : tout sauf les baguettes. Paladins : haches, masses et épées à une et à deux mains, et armes d'hast. Chasseurs : haches, épées, dagues, armes de pugilat, armes d'hast, bâtons, arcs, arbalètes, armes à feu et armes de jet. Voleurs : dagues, armes de pugilat, épées et masses à une main, arcs, arbalètes, armes à feu et armes de jet. Chamans : dagues, armes de pugilat, bâtons, haches et masses à une main ; à deux mains seulement avec un talent Amélioration. Druides : dagues, armes de pugilat, masses à une et à deux mains et bâtons. Prêtres : dagues, masses à une main, bâtons et baguettes. Mages et démonistes : dagues, épées à une main, bâtons et baguettes.",
+		},
+		es = {
+			q = "¿Qué tipos de arma puede aprender mi clase?",
+			a = "Guerreros: todo menos varitas. Paladines: hachas, mazas y espadas de una y dos manos, y armas de asta. Cazadores: hachas, espadas, dagas, armas de puño, armas de asta, bastones, arcos, ballestas, armas de fuego y armas arrojadizas. Pícaros: dagas, armas de puño, espadas y mazas de una mano, arcos, ballestas, armas de fuego y armas arrojadizas. Chamanes: dagas, armas de puño, bastones, hachas y mazas de una mano; las de dos manos solo con un talento de Mejora. Druidas: dagas, armas de puño, mazas de una y dos manos y bastones. Sacerdotes: dagas, mazas de una mano, bastones y varitas. Magos y brujos: dagas, espadas de una mano, bastones y varitas.",
+		},
+		it = {
+			q = "Quali tipi di arma può imparare la mia classe?",
+			a = "Guerrieri: tutto tranne le bacchette. Paladini: asce, mazze e spade a una e a due mani, e armi ad asta. Cacciatori: asce, spade, pugnali, armi da pugno, armi ad asta, bastoni, archi, balestre, armi da fuoco e armi da lancio. Ladri: pugnali, armi da pugno, spade e mazze a una mano, archi, balestre, armi da fuoco e armi da lancio. Sciamani: pugnali, armi da pugno, bastoni, asce e mazze a una mano; quelle a due mani solo con un talento Potenziamento. Druidi: pugnali, armi da pugno, mazze a una e a due mani e bastoni. Sacerdoti: pugnali, mazze a una mano, bastoni e bacchette. Maghi e stregoni: pugnali, spade a una mano, bastoni e bacchette.",
+		},
+		ru = {
+			q = "Какие типы оружия может выучить мой класс?",
+			a = "Воины: всё, кроме жезлов. Паладины: одноручные и двуручные топоры, дробящее оружие и мечи, а также древковое оружие. Охотники: топоры, мечи, кинжалы, кистевое и древковое оружие, посохи, луки, арбалеты, огнестрельное и метательное оружие. Разбойники: кинжалы, кистевое оружие, одноручные мечи и дробящее оружие, луки, арбалеты, огнестрельное и метательное оружие. Шаманы: кинжалы, кистевое оружие, посохи, одноручные топоры и дробящее оружие; двуручные только с талантом Совершенствования. Друиды: кинжалы, кистевое оружие, одноручное и двуручное дробящее оружие и посохи. Жрецы: кинжалы, одноручное дробящее оружие, посохи и жезлы. Маги и чернокнижники: кинжалы, одноручные мечи, посохи и жезлы.",
+		},
+		pt = {
+			q = "Quais tipos de arma minha classe pode aprender?",
+			a = "Guerreiros: tudo menos varinhas. Paladinos: machados, maças e espadas de uma e duas mãos, e armas de haste. Caçadores: machados, espadas, adagas, armas de punho, armas de haste, báculos, arcos, bestas, armas de fogo e armas de arremesso. Ladinos: adagas, armas de punho, espadas e maças de uma mão, arcos, bestas, armas de fogo e armas de arremesso. Xamãs: adagas, armas de punho, báculos, machados e maças de uma mão; as de duas mãos só com um talento de Aperfeiçoamento. Druidas: adagas, armas de punho, maças de uma e duas mãos e báculos. Sacerdotes: adagas, maças de uma mão, báculos e varinhas. Magos e bruxos: adagas, espadas de uma mão, báculos e varinhas.",
 		},
 	},
 	{
