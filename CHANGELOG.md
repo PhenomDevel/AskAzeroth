@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v1.2.0 (2026-11-06)
+
 - FAQ: where to learn weapon skills. Which weapon master in which capital
   teaches which weapon types (Alliance and Horde) and which weapon types
   each class can learn.
