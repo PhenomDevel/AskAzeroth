@@ -10,6 +10,7 @@ local _, ns = ...
 --   D   { t, q = question id }
 --   SR  { t, k = { known question ids } }
 --   SP  { t, qs = { { i, a = author, c, ti, b?, x?, ts, an = { { i, a, tx, f?, x?, ts } } } } }
+--   H   { t }   hello to a newcomer of the channel (whisper mode, Peers.lua)
 --
 -- Decode returns a normalized message or nil plus a reason. It checks types,
 -- lengths, lists and times; who may send what is checked by the store, which
@@ -183,6 +184,10 @@ function readers.SR(m, sender)
 	return { type = "SR", sender = sender, known = known }
 end
 
+function readers.H(_, sender)
+	return { type = "H", sender = sender }
+end
+
 -- Sync answers carry other players' questions. Invalid entries are skipped
 -- one by one, so one bad entry doesn't cost the rest.
 function readers.SP(m, sender, lang, now)
@@ -258,6 +263,10 @@ end
 
 function Protocol.EncodeWithdraw(qid)
 	return Serializer.Serialize({ t = "D", q = qid })
+end
+
+function Protocol.EncodeHello()
+	return Serializer.Serialize({ t = "H" })
 end
 
 function Protocol.EncodeSyncRequest(knownIds)

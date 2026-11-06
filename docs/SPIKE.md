@@ -271,12 +271,19 @@ To be written after the results are in.
 
 `Core/Peers.lua` and the whisper mode in `Core/Comm.lua` rely on:
 
-- `ListChannelByName("AskAzerothDE")` works from addon code without a key
-  press and answers with `CHAT_MSG_CHANNEL_LIST`: arg 1 the comma-separated
-  members (owner/moderator marks are stripped), arg 4 `"5. AskAzerothDE"`,
-  arg 9 the base name. The line is hidden by our chat filter.
-  Check: `/dump AskAzeroth.Peers.Count("de")` some seconds after login
-  with a second AskAzeroth user in the channel → 1 or more.
+- `ListChannelByName` is protected: called from a timer it raised
+  `ADDON_ACTION_BLOCKED` (Kevin, 2026-11-06). It is now only called from a
+  `WorldFrame` `OnMouseDown` hook (a click into the world). To confirm: no
+  `ADDON_ACTION_BLOCKED` after login and some clicks, and
+  `/dump AskAzeroth.Peers.Count("de")` → 1 or more with a second AskAzeroth
+  user in the channel. If it is blocked there too, the addon saves
+  `AskAzerothDB.rosterBlockedBuild` and stops asking until the next build.
+  The answer is `CHAT_MSG_CHANNEL_LIST`: arg 1 the comma-separated members
+  (owner/moderator marks are stripped), arg 4 `"5. AskAzerothDE"`, arg 9
+  the base name. The line is hidden by our chat filter.
+- Hello on join: when a second AskAzeroth user joins, the first one sends it
+  an `H` whisper (with two users the chance is 100 %); the newcomer then
+  knows the first one even without a member list.
 - `CHAT_MSG_CHANNEL_JOIN`/`LEAVE` fire for our channels (arg 2 the player).
 - Addon whispers to "First Surname" arrive (confirmed for GFF 2026-11-05).
 - A whisper to a player who went offline returns `ERR_CHAT_PLAYER_NOT_FOUND_S`

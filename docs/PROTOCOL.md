@@ -35,7 +35,14 @@ is delivered. Addon whispers work. So on Forever (`Core/Comm.lua`,
 - The language channels are still joined, but only to find each other:
   peers come from the channel's member list (`ListChannelByName` →
   `CHAT_MSG_CHANNEL_LIST`, on join and every 120 s), its join/leave notices
-  and the senders of addon whispers on our prefixes. A peer whose whisper
+  and the senders of addon whispers on our prefixes. `ListChannelByName` is
+  protected (key press or click only), so a wanted list is requested on the
+  player's next mouse click into the world; if the client blocks it anyway
+  (`ADDON_ACTION_BLOCKED`), member lists stay off until the next game build.
+  On a join notice, each member sends the newcomer a hello `H` (`{ t = "H" }`,
+  no fields) with probability 3 / channel members, 2 to 10 s later, so the
+  newcomer learns about about three peers without a member list. Older
+  clients drop `H` as an unknown type but still note the sender as a peer. A peer whose whisper
   bounces ("No player named …") is dropped, the error line is hidden.
 - Own messages go to 20 random peers of the language.
 - Relay: a client that learns a question or answer created in the last

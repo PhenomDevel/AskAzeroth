@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Forever: no more `ADDON_ACTION_BLOCKED` error for `ListChannelByName`.
+  The addon asks for the channel's member list only on your next click into
+  the world, and players already in the channel greet newcomers, so you
+  find the other AskAzeroth users without it.
+
 ## v1.1.4 (2026-11-05)
 
 - Forever: your own name is right from the start even when the game reports

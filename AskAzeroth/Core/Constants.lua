@@ -152,10 +152,15 @@ C.SYNC_WHISPER_ANSWER_GAP = 10
 -- Without known peers, the sync request is retried this often, every
 -- SYNC_REQUEST_DELAY_MAX seconds.
 C.SYNC_REQUEST_RETRIES = 4
--- Channel members are listed every PEERS_ROSTER_INTERVAL s; peers not seen
--- for PEERS_EXPIRE s are dropped.
+-- Channel members are listed every PEERS_ROSTER_INTERVAL s (on the next
+-- click after that); peers not seen for PEERS_EXPIRE s are dropped.
 C.PEERS_ROSTER_INTERVAL = 120
 C.PEERS_EXPIRE = 3 * C.PEERS_ROSTER_INTERVAL + 30
+-- About this many members greet a newcomer of the channel, PEERS_HELLO_DELAY_MIN
+-- to _MAX s after its join notice.
+C.PEERS_HELLO_TARGET = 3
+C.PEERS_HELLO_DELAY_MIN = 2
+C.PEERS_HELLO_DELAY_MAX = 10
 -- Channel messages of the last RESEND_WINDOW s are resent by whisper when the
 -- server turns out to reject them (NOT_ALLOWED_IN_CHANNEL comes 1-2 s late).
 C.RESEND_WINDOW = 10

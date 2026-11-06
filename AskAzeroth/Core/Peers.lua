@@ -1,12 +1,19 @@
--- luacheck: read globals ListChannelByName ChatFrameUtil ChatFrame_AddMessageEventFilter ERR_CHAT_PLAYER_NOT_FOUND_S
+-- luacheck: read globals ListChannelByName ChatFrameUtil ChatFrame_AddMessageEventFilter ERR_CHAT_PLAYER_NOT_FOUND_S WorldFrame InCombatLockdown
 local _, ns = ...
 
 -- Other AskAzeroth users per language, for the whisper transport (Forever
 -- drops addon messages in chat channels, see Comm.lua). The language
 -- channels are still joined, only to find each other:
 --   * the channel's member list (ListChannelByName → CHAT_MSG_CHANNEL_LIST),
---     requested when the channel is ready and every C.PEERS_ROSTER_INTERVAL,
---   * join/leave notices of the channel,
+--     wanted when the channel is ready and every C.PEERS_ROSTER_INTERVAL.
+--     ListChannelByName is protected: it only works during a key press or
+--     click. So a wanted list is requested on the player's next click into
+--     the world or into our window (Peers.OnHardwareEvent), never from a
+--     timer. Should the client block it there too (ADDON_ACTION_BLOCKED),
+--     member lists stay off until the next game build,
+--   * join/leave notices of the channel; on a join, a few members greet the
+--     newcomer with a hello whisper (H), so it learns about them even
+--     without a member list,
 --   * senders of addon whispers on the language's prefix.
 -- Once member lists arrive, entries not confirmed for C.PEERS_EXPIRE
 -- seconds are dropped; offline peers also drop out on the server's "No
@@ -31,6 +38,12 @@ local lastList = {}
 local hideListUntil = 0
 local HIDE_LIST_WINDOW = 5
 local ticker
+-- lang → true while a member list is wanted (sent on the next key press or
+-- click, see Peers.OnHardwareEvent)
+local wanted = {}
+-- Client build the protected call was blocked on (also saved, see
+-- RosterBlocked); nil = not blocked.
+local blockedBuild
 
 for _, lang in ipairs(C.LANGUAGES) do
 	peers[lang] = {}
@@ -128,15 +141,60 @@ local function Prune()
 	end
 end
 
--- Asks the server for the member list of lang's channel.
+local function ClientBuild()
+	local version, build = GetBuildInfo()
+	return tostring(version) .. "." .. tostring(build)
+end
+
+-- True while ListChannelByName was blocked on this client build.
+local function RosterBlocked()
+	local build = blockedBuild or ns.db and ns.db.rosterBlockedBuild
+	return build ~= nil and build == ClientBuild()
+end
+
+-- Marks lang's member list as wanted; it is requested on the next key press
+-- or click (ListChannelByName is protected).
 function Peers.RequestRoster(lang)
-	if not ListChannelByName or not ns.Channel.GetNumber(lang) then
+	if ListChannelByName and ns.Channel.GetNumber(lang) and not RosterBlocked() then
+		wanted[lang] = true
+	end
+end
+
+-- Called while a key press or click is being handled: sends one wanted
+-- member list request (one per event, the others follow on later ones).
+function Peers.OnHardwareEvent()
+	if not next(wanted) or not ListChannelByName or RosterBlocked() or InCombatLockdown() then
 		return
 	end
-	lastRoster[lang] = GetTime()
-	hideListUntil = GetTime() + HIDE_LIST_WINDOW
-	ListChannelByName(C.GetChannelName(lang))
+	for _, lang in ipairs(C.LANGUAGES) do
+		if wanted[lang] then
+			wanted[lang] = nil
+			if ns.Channel.GetNumber(lang) then
+				lastRoster[lang] = GetTime()
+				hideListUntil = GetTime() + HIDE_LIST_WINDOW
+				ListChannelByName(C.GetChannelName(lang))
+				return
+			end
+		end
+	end
 end
+
+if WorldFrame then
+	WorldFrame:HookScript("OnMouseDown", Peers.OnHardwareEvent)
+end
+
+-- The client still refused the call: stop asking until the next game build.
+local function OnActionBlocked(_, addon, func)
+	if addon == ns.name and type(func) == "string" and func:find("ListChannelByName", 1, true) then
+		blockedBuild = ClientBuild()
+		wipe(wanted)
+		if ns.db then
+			ns.db.rosterBlockedBuild = blockedBuild
+		end
+	end
+end
+ns:RegisterEvent("ADDON_ACTION_BLOCKED", OnActionBlocked)
+ns:RegisterEvent("ADDON_ACTION_FORBIDDEN", OnActionBlocked)
 
 local function RefreshAll()
 	Prune()
@@ -220,11 +278,34 @@ if AddFilter then
 	end)
 end
 
+-- A newcomer doesn't know the members yet. Each member greets it with
+-- probability C.PEERS_HELLO_TARGET / members after a random delay, so about
+-- that many hellos arrive however big the channel is.
+local function Greet(lang, name)
+	if not ns.Comm.IsWhisperMode() or not ns.Channel.IsSelected(lang) then
+		return
+	end
+	if math.random() * (Peers.Count(lang) + 1) >= C.PEERS_HELLO_TARGET then
+		return
+	end
+	local delay = C.PEERS_HELLO_DELAY_MIN + math.random() * (C.PEERS_HELLO_DELAY_MAX - C.PEERS_HELLO_DELAY_MIN)
+	C_Timer.After(delay, function()
+		if peers[lang] and peers[lang][name] then
+			ns.Net.SendRaw("H", lang, ns.Protocol.EncodeHello(), { name })
+		end
+	end)
+end
+
 ns:RegisterEvent("CHAT_MSG_CHANNEL_JOIN", function(_, _, playerName, _, displayName, _, _, _, _, baseName)
 	if Safe(playerName, displayName, baseName) then
 		local lang = EventLanguage(displayName, baseName)
 		if lang then
 			Peers.Add(lang, playerName)
+			-- Also a peer we knew already: it may have relogged.
+			local name = Util.FullName(playerName)
+			if name then
+				Greet(lang, name)
+			end
 		end
 	end
 end)
@@ -276,18 +357,16 @@ end)
 ns.RegisterCallback(Peers, "AA_CHANNEL_READY", function(_, lang)
 	if ns.Comm.IsWhisperMode() then
 		Start()
-		-- Give the server a moment after the join.
-		C_Timer.After(2, function()
-			if (lastRoster[lang] or -math.huge) < GetTime() - 5 then
-				Peers.RequestRoster(lang)
-			end
-		end)
+		if (lastRoster[lang] or -math.huge) < GetTime() - 5 then
+			Peers.RequestRoster(lang)
+		end
 	end
 end)
 
 ns.RegisterCallback(Peers, "AA_COMM_MODE", Start)
 
 ns.RegisterCallback(Peers, "AA_CHANNEL_LEFT", function(_, lang)
+	wanted[lang] = nil
 	if next(peers[lang]) then
 		wipe(peers[lang])
 		ns:Fire("AA_PEERS_CHANGED", lang)

@@ -160,6 +160,10 @@ Comm.RegisterHandler(function(text, sender, lang)
 		ns:Fire("AA_MESSAGE_DROPPED", reason, Util.FullName(sender), "?")
 		return
 	end
+	-- The sender is a peer now (Comm.lua); nothing else to do.
+	if m.type == "H" then
+		return
+	end
 	if m.type == "SR" then
 		ns:Fire("AA_SYNC_REQUEST", m)
 		return
