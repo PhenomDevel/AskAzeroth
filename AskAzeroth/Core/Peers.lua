@@ -1,16 +1,17 @@
--- luacheck: read globals ListChannelByName ChatFrameUtil ChatFrame_AddMessageEventFilter ERR_CHAT_PLAYER_NOT_FOUND_S
+-- luacheck: read globals ChatFrameUtil ChatFrame_AddMessageEventFilter ERR_CHAT_PLAYER_NOT_FOUND_S
 local _, ns = ...
 
 -- Other AskAzeroth users per language, for the whisper transport (Forever
 -- drops addon messages in chat channels, see Comm.lua). The language
--- channels are still joined, only to find each other:
---   * the channel's member list (ListChannelByName → CHAT_MSG_CHANNEL_LIST),
---     requested when the channel is ready and every C.PEERS_ROSTER_INTERVAL,
---   * join/leave notices of the channel,
---   * senders of addon whispers on the language's prefix.
--- Once member lists arrive, entries not confirmed for C.PEERS_EXPIRE
--- seconds are dropped; offline peers also drop out on the server's "No
--- player named …" answer to a whisper.
+-- channels are still joined, only to find each other. Peers come from:
+--   * join/leave notices of the channel; a member who sees someone join
+--     greets them (Welcome below), so the newcomer learns about them,
+--   * senders of addon whispers on the language's prefix,
+--   * peers remembered from earlier sessions (AskAzerothDB.knownPeers),
+--   * member lists the player requests with /chatlist. The addon can't
+--     request them itself: ListChannelByName is protected.
+-- Offline peers drop out on the server's "No player named …" answer to a
+-- whisper; that line is hidden.
 --
 -- Message: AA_PEERS_CHANGED (lang)
 local Peers = {}
@@ -23,14 +24,9 @@ local AddFilter = ChatFrameUtil and ChatFrameUtil.AddMessageEventFilter or ChatF
 
 -- lang → { [fullName] = last seen (GetTime) }
 local peers = {}
--- lang → GetTime() of the last own member list request / received list
-local lastRoster = {}
-local lastList = {}
--- Member lists of our channels arriving before this time answer our own
--- request and are hidden; a player's /chatlist after that is shown.
-local hideListUntil = 0
-local HIDE_LIST_WINDOW = 5
-local ticker
+
+-- lang → { [fullName] = GetServerTime() last seen }, kept across sessions.
+ns.dbDefaults.knownPeers = {}
 
 for _, lang in ipairs(C.LANGUAGES) do
 	peers[lang] = {}
@@ -49,6 +45,7 @@ function Peers.Add(lang, name, quiet)
 	end
 	local isNew = list[name] == nil
 	list[name] = GetTime()
+	Peers.Remember(lang, name)
 	if isNew and not quiet then
 		ns:Fire("AA_PEERS_CHANGED", lang)
 	end
@@ -60,6 +57,86 @@ function Peers.Remove(lang, name)
 	name = Util.FullName(name)
 	if list and name and list[name] then
 		list[name] = nil
+		ns:Fire("AA_PEERS_CHANGED", lang)
+	end
+	local known = ns.db and ns.db.knownPeers[lang]
+	if known and name then
+		known[name] = nil
+	end
+end
+
+--------------------------------------------------------------------------------
+-- Remembered peers
+--------------------------------------------------------------------------------
+
+local function Known(lang)
+	local all = ns.db and ns.db.knownPeers
+	if not all then
+		return nil
+	end
+	if type(all[lang]) ~= "table" then
+		all[lang] = {}
+	end
+	return all[lang]
+end
+
+-- Keeps the newest C.PEERS_REMEMBER_MAX, none older than
+-- C.PEERS_REMEMBER_DAYS.
+local function TrimKnown(known)
+	local limit = GetServerTime() - C.PEERS_REMEMBER_DAYS * 86400
+	local list = {}
+	for name, seen in pairs(known) do
+		if type(seen) ~= "number" or seen < limit or not Util.IsPlayerName(name) then
+			known[name] = nil
+		else
+			list[#list + 1] = name
+		end
+	end
+	if #list > C.PEERS_REMEMBER_MAX then
+		table.sort(list, function(a, b)
+			return known[a] > known[b]
+		end)
+		for i = C.PEERS_REMEMBER_MAX + 1, #list do
+			known[list[i]] = nil
+		end
+	end
+end
+
+function Peers.Remember(lang, name)
+	local known = Known(lang)
+	if known then
+		local isNew = known[name] == nil
+		known[name] = GetServerTime()
+		if isNew then
+			TrimKnown(known)
+		end
+	end
+end
+
+-- Puts the remembered peers of lang into the set; whispers to those who
+-- are offline bounce and remove them again.
+local function LoadKnown(lang)
+	local known = Known(lang)
+	if not known then
+		return
+	end
+	TrimKnown(known)
+	-- The saved data is per account; only peers of the own realm (on
+	-- Forever: the own ruleset's realm) can be whispered.
+	local realm = ns:GetOwnRealm()
+	if not realm then
+		return
+	end
+	local suffix = "-" .. realm
+	local list = peers[lang]
+	local added = false
+	for name in pairs(known) do
+		if not list[name] and not IsMe(name) and name:sub(-#suffix) == suffix then
+			list[name] = GetTime()
+			added = true
+		end
+	end
+	if added then
 		ns:Fire("AA_PEERS_CHANGED", lang)
 	end
 end
@@ -107,56 +184,6 @@ function Peers.Pick(lang, count, exclude)
 	return list
 end
 
--- Only where member lists keep coming; otherwise peers known from join
--- notices would run out.
-local function Prune()
-	local limit = GetTime() - C.PEERS_EXPIRE
-	for lang, list in pairs(peers) do
-		local changed = false
-		if (lastList[lang] or -math.huge) < limit then
-			list = {}
-		end
-		for name, seen in pairs(list) do
-			if seen < limit then
-				list[name] = nil
-				changed = true
-			end
-		end
-		if changed then
-			ns:Fire("AA_PEERS_CHANGED", lang)
-		end
-	end
-end
-
--- Asks the server for the member list of lang's channel.
-function Peers.RequestRoster(lang)
-	if not ListChannelByName or not ns.Channel.GetNumber(lang) then
-		return
-	end
-	lastRoster[lang] = GetTime()
-	hideListUntil = GetTime() + HIDE_LIST_WINDOW
-	ListChannelByName(C.GetChannelName(lang))
-end
-
-local function RefreshAll()
-	Prune()
-	if not ns.Comm.IsWhisperMode() then
-		return
-	end
-	for _, lang in ipairs(ns.Channel.GetReadyLanguages()) do
-		Peers.RequestRoster(lang)
-	end
-end
-
-local function Start()
-	if ticker or not ns.Comm.IsWhisperMode() then
-		return
-	end
-	ticker = C_Timer.NewTicker(C.PEERS_ROSTER_INTERVAL, RefreshAll)
-	-- Channels that are ready already (mode switched after joining).
-	C_Timer.After(1, RefreshAll)
-end
-
 --------------------------------------------------------------------------------
 -- Channel events
 --------------------------------------------------------------------------------
@@ -201,7 +228,6 @@ ns:RegisterEvent("CHAT_MSG_CHANNEL_LIST", function(_, text, _, _, displayName, _
 	if not lang then
 		return
 	end
-	lastList[lang] = GetTime()
 	local added = false
 	for entry in text:gmatch("[^,]+") do
 		local name = CleanMember(entry)
@@ -214,9 +240,22 @@ ns:RegisterEvent("CHAT_MSG_CHANNEL_LIST", function(_, text, _, _, displayName, _
 	end
 end)
 
-if AddFilter then
-	AddFilter("CHAT_MSG_CHANNEL_LIST", function(_, _, _, _, _, displayName, _, _, _, _, baseName)
-		return GetTime() < hideListUntil and Safe(displayName, baseName) and EventLanguage(displayName, baseName) ~= nil
+-- Someone joined: a few of the members greet them with a sync request by
+-- whisper (each with probability C.WELCOME_PEERS / known peers, after a
+-- random delay), so the newcomer learns about them and gets peers to sync
+-- with. The newcomer answers the request only if it has something new.
+local function Welcome(lang, name)
+	if not ns.Comm.IsWhisperMode() or not ns.Channel.IsReady(lang) then
+		return
+	end
+	local chance = C.WELCOME_PEERS / math.max(1, Peers.Count(lang))
+	if math.random() > chance then
+		return
+	end
+	C_Timer.After(C.WELCOME_DELAY_MIN + math.random() * (C.WELCOME_DELAY_MAX - C.WELCOME_DELAY_MIN), function()
+		if peers[lang][name] and ns.Sync then
+			ns.Sync.Request(lang, { name })
+		end
 	end)
 end
 
@@ -225,6 +264,7 @@ ns:RegisterEvent("CHAT_MSG_CHANNEL_JOIN", function(_, _, playerName, _, displayN
 		local lang = EventLanguage(displayName, baseName)
 		if lang then
 			Peers.Add(lang, playerName)
+			Welcome(lang, Util.FullName(playerName))
 		end
 	end
 end)
@@ -275,17 +315,15 @@ end)
 
 ns.RegisterCallback(Peers, "AA_CHANNEL_READY", function(_, lang)
 	if ns.Comm.IsWhisperMode() then
-		Start()
-		-- Give the server a moment after the join.
-		C_Timer.After(2, function()
-			if (lastRoster[lang] or -math.huge) < GetTime() - 5 then
-				Peers.RequestRoster(lang)
-			end
-		end)
+		LoadKnown(lang)
 	end
 end)
 
-ns.RegisterCallback(Peers, "AA_COMM_MODE", Start)
+ns.RegisterCallback(Peers, "AA_COMM_MODE", function()
+	for _, lang in ipairs(ns.Channel.GetReadyLanguages()) do
+		LoadKnown(lang)
+	end
+end)
 
 ns.RegisterCallback(Peers, "AA_CHANNEL_LEFT", function(_, lang)
 	if next(peers[lang]) then

@@ -42,11 +42,11 @@ local function RandomDelay(min, max)
 	return min + math.random() * (max - min)
 end
 
--- Returns false if there is no one to ask yet (whisper mode).
-function Sync.Request(lang)
-	local targets
+-- Returns false if there is no one to ask yet (whisper mode). targets:
+-- whom to ask in whisper mode (default: C.SYNC_WHISPER_PEERS random peers).
+function Sync.Request(lang, targets)
 	if ns.Comm.IsWhisperMode() then
-		targets = ns.Peers.Pick(lang, C.SYNC_WHISPER_PEERS)
+		targets = targets or ns.Peers.Pick(lang, C.SYNC_WHISPER_PEERS)
 		if #targets == 0 then
 			return false
 		end
@@ -65,8 +65,25 @@ local function ScheduleRequest(lang, retries)
 	local delay = retries < C.SYNC_REQUEST_RETRIES and C.SYNC_REQUEST_DELAY_MAX or RandomDelay(C.SYNC_REQUEST_DELAY_MIN, C.SYNC_REQUEST_DELAY_MAX)
 	requestTimers[lang] = C_Timer.NewTimer(delay, function()
 		requestTimers[lang] = nil
-		if ns.Channel.IsReady(lang) and not Sync.Request(lang) and retries > 0 then
-			ScheduleRequest(lang, retries - 1)
+		if not ns.Channel.IsReady(lang) then
+			return
+		end
+		local sentAt = GetTime()
+		if not Sync.Request(lang) then
+			if retries > 0 then
+				ScheduleRequest(lang, retries - 1)
+			end
+			return
+		end
+		-- Whisper mode: the peers asked may have gone offline (remembered
+		-- ones especially); ask others if no answer came.
+		if ns.Comm.IsWhisperMode() and retries > 0 then
+			requestTimers[lang] = C_Timer.NewTimer(C.SYNC_WHISPER_TIMEOUT, function()
+				requestTimers[lang] = nil
+				if (lastSeenAnswer[lang] or -math.huge) < sentAt then
+					ScheduleRequest(lang, retries - 1)
+				end
+			end)
 		end
 	end)
 end

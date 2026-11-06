@@ -45,7 +45,7 @@ message lockdown during encounters). Do not assume the old Classic Era API.
 - All traffic goes through `ns.Comm` (hidden language channels, LibDeflate,
   AceComm, one prefix per language: `AA1<lang>`). Forever rejects addon
   messages in channels, so there `ns.Comm` whispers to peers found via the
-  channel member list (`Core/Peers.lua`, "Whisper mode" in
+  channel's join notices and remembered peers (`Core/Peers.lua`, "Whisper mode" in
   `docs/PROTOCOL.md`). Never call
   `SendAddonMessage` elsewhere, except in `Probe/`.
 - Nothing is sent while `C_ChatInfo.InChatMessagingLockdown()` is true;

@@ -5,6 +5,10 @@
 - FAQ: where to learn weapon skills. Which weapon master in which capital
   teaches which weapon types (Alliance and Horde) and which weapon types
   each class can learn.
+- Forever: no more "AskAzeroth tried to call the protected function
+  ListChannelByName()" errors. Other AskAzeroth users are now found when they
+  join a language channel, and players from earlier sessions are
+  remembered.
 
 ## v1.1.4 (2026-11-05)
 

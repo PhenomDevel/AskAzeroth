@@ -32,11 +32,18 @@ answers with `CHAT_MSG_CHANNEL_NOTICE` `NOT_ALLOWED_IN_CHANNEL` and nothing
 is delivered. Addon whispers work. So on Forever (`Core/Comm.lua`,
 `Core/Peers.lua`, `Core/Net.lua`):
 
-- The language channels are still joined, but only to find each other:
-  peers come from the channel's member list (`ListChannelByName` →
-  `CHAT_MSG_CHANNEL_LIST`, on join and every 120 s), its join/leave notices
-  and the senders of addon whispers on our prefixes. A peer whose whisper
-  bounces ("No player named …") is dropped, the error line is hidden.
+- The language channels are still joined, but only to find each other.
+  Peers come from the channel's join/leave notices, the senders of addon
+  whispers on our prefixes, peers remembered from earlier sessions
+  (`AskAzerothDB.knownPeers`, the newest 60 per language, 14 days) and
+  member lists the player requests with `/chatlist`. The addon can't
+  request member lists itself: `ListChannelByName` is protected
+  (`ADDON_ACTION_BLOCKED`, seen on Forever 2026-11-06).
+- Welcome: when someone joins a language channel, about 3 members (each
+  with probability 3 / known peers) send them an `SR` by whisper after 2 to
+  8 s. The newcomer learns about them that way and has peers to sync with.
+- A peer whose whisper bounces ("No player named …") is dropped (also from
+  the remembered ones), the error line is hidden.
 - Own messages go to 20 random peers of the language.
 - Relay: a client that learns a question or answer created in the last
   15 minutes (first-hand or relayed) passes the question on as an `SP` to
@@ -178,7 +185,7 @@ channel asks the others for what it missed (`Core/Sync.lua`):
    5 minutes, so many logins at once don't set off a chain of answers.
 
 In whisper mode the `SR` goes to 2 random peers (retried every 15 s while
-none are known, up to 4 times) and each of them answers the requester by
+none are known, or 20 s after a request no `SP` answered, up to 4 times) and each of them answers the requester by
 whisper; the "someone else was faster" check doesn't apply. A client
 answers the same requester at most every 5 minutes and anyone at most every
 10 s. Questions from a whisper-mode `SP` that are at most 15 minutes old
