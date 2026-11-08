@@ -1,34 +1,26 @@
--- luacheck: read globals Minimap GameTooltip GetCursorPosition
+-- luacheck: read globals GameTooltip
 local _, ns = ...
 
--- Own minimap button: left click toggles the window, right click opens the
--- settings, drag moves it around the minimap. The addon compartment entry
--- (.toc) does the same. A red badge counts notifications not yet seen.
+-- Minimap button via LibDBIcon, so minimap addons (SexyMap, Leatrix Plus,
+-- button collectors …) can hide, fade or collect it like other addons'
+-- buttons. Left click toggles the window, right click opens the settings,
+-- drag moves it around the minimap. The addon compartment entry (.toc) does
+-- the same. A red badge counts notifications not yet seen.
 local MinimapButton = {}
 ns.MinimapButton = MinimapButton
 
 local L = ns.L
 local C = ns.C
 
-local RADIUS_OFFSET = 10
+local NAME = "AskAzeroth"
 local ICON = "Interface\\AddOns\\AskAzeroth\\Media\\Logo"
 
-local button
+local LibDBIcon = LibStub("LibDBIcon-1.0")
 
-local function UpdatePosition()
-	local angle = math.rad(ns.db.settings.minimapAngle or 210)
-	local radius = Minimap:GetWidth() / 2 + RADIUS_OFFSET
-	button:ClearAllPoints()
-	button:SetPoint("CENTER", Minimap, "CENTER", math.cos(angle) * radius, math.sin(angle) * radius)
-end
+-- LibDBIcon's db keys mapped onto the existing saved settings.
+local DB_KEYS = { minimapPos = "minimapAngle", hide = "minimapHidden" }
 
-local function OnDragUpdate()
-	local mx, my = Minimap:GetCenter()
-	local cx, cy = GetCursorPosition()
-	local scale = Minimap:GetEffectiveScale()
-	ns.db.settings.minimapAngle = math.deg(math.atan2(cy / scale - my, cx / scale - mx)) % 360
-	UpdatePosition()
-end
+local badge
 
 local function ShowTooltip(owner)
 	GameTooltip:SetOwner(owner, "ANCHOR_LEFT")
@@ -60,71 +52,66 @@ local function OnClick(mouseButton)
 	end
 end
 
-local function Create()
-	button = CreateFrame("Button", "AskAzerothMinimapButton", Minimap)
-	button:SetSize(31, 31)
-	button:SetFrameStrata("MEDIUM")
-	button:SetFrameLevel(8)
-	button:RegisterForClicks("LeftButtonUp", "RightButtonUp")
-	button:RegisterForDrag("LeftButton")
-	button:SetHighlightTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight")
-
-	local icon = button:CreateTexture(nil, "BACKGROUND")
-	icon:SetTexture(ICON)
-	icon:SetSize(20, 20)
-	icon:SetPoint("TOPLEFT", 7, -5)
-	local border = button:CreateTexture(nil, "OVERLAY")
-	border:SetTexture("Interface\\Minimap\\MiniMap-TrackingBorder")
-	border:SetSize(53, 53)
-	border:SetPoint("TOPLEFT")
-
-	local badge = ns.Widgets.Panel(button, { 0.7, 0.1, 0.1, 1 }, { 0, 0, 0, 1 })
+local function CreateBadge(button)
+	badge = ns.Widgets.Panel(button, { 0.7, 0.1, 0.1, 1 }, { 0, 0, 0, 1 })
 	badge:SetSize(16, 14)
 	badge:SetPoint("TOPRIGHT", 2, 2)
 	badge:SetFrameLevel(button:GetFrameLevel() + 2)
 	badge.text = ns.Widgets.Text(badge, "GameFontHighlightSmall")
 	badge.text:SetPoint("CENTER", 0, 0)
 	badge:Hide()
-	button.badge = badge
+end
 
-	button:SetScript("OnClick", function(_, mouseButton)
-		OnClick(mouseButton)
-	end)
-	button:SetScript("OnDragStart", function(self)
-		self:SetScript("OnUpdate", OnDragUpdate)
-	end)
-	button:SetScript("OnDragStop", function(self)
-		self:SetScript("OnUpdate", nil)
-	end)
-	button:SetScript("OnEnter", ShowTooltip)
-	button:SetScript("OnLeave", function()
-		GameTooltip:Hide()
-	end)
-	UpdatePosition()
+local function Register()
+	local object = LibStub("LibDataBroker-1.1"):NewDataObject(NAME, {
+		type = "launcher",
+		icon = ICON,
+		OnClick = function(_, mouseButton)
+			OnClick(mouseButton)
+		end,
+		OnEnter = ShowTooltip,
+		OnLeave = function()
+			GameTooltip:Hide()
+		end,
+	})
+	local db = setmetatable({}, {
+		__index = function(_, key)
+			local settingsKey = DB_KEYS[key]
+			return settingsKey and ns.db.settings[settingsKey]
+		end,
+		__newindex = function(store, key, value)
+			local settingsKey = DB_KEYS[key]
+			if settingsKey then
+				ns.db.settings[settingsKey] = value
+			else
+				rawset(store, key, value)
+			end
+		end,
+	})
+	LibDBIcon:Register(NAME, object, db)
+	CreateBadge(LibDBIcon:GetMinimapButton(NAME))
 	MinimapButton.UpdateBadge()
 end
 
 function MinimapButton.UpdateBadge()
-	if not button then
+	if not badge then
 		return
 	end
 	local count = ns.Notify.GetBadgeCount()
-	button.badge:SetShown(count > 0)
-	button.badge.text:SetText(count > 99 and "99+" or tostring(count))
-	button.badge:SetWidth(math.max(16, button.badge.text:GetStringWidth() + 6))
+	badge:SetShown(count > 0)
+	badge.text:SetText(count > 99 and "99+" or tostring(count))
+	badge:SetWidth(math.max(16, badge.text:GetStringWidth() + 6))
 end
 
 function MinimapButton.Update()
+	if not LibDBIcon:IsRegistered(NAME) then
+		Register()
+	end
 	if ns.db.settings.minimapHidden then
-		if button then
-			button:Hide()
-		end
-		return
+		LibDBIcon:Hide(NAME)
+	else
+		LibDBIcon:Show(NAME)
 	end
-	if not button then
-		Create()
-	end
-	button:Show()
 end
 
 ns.RegisterCallback(MinimapButton, "AA_DB_READY", MinimapButton.Update)

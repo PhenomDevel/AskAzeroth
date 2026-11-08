@@ -13,6 +13,10 @@ externals:
     tag: 1.0.2-release
     # GitHub repo, so name the CurseForge project for the embedded-library relation.
     curse-slug: libdeflate
+  AskAzeroth/Libs/LibDataBroker-1.1:
+    url: https://github.com/tekkub/libdatabroker-1-1
+    curse-slug: libdatabroker-1-1
+  AskAzeroth/Libs/LibDBIcon-1.0: https://repos.curseforge.com/wow/libdbicon-1-0/trunk/LibDBIcon-1.0
 
 # The addon lives in a subfolder; move it to the zip root.
 move-folders:
@@ -35,6 +39,7 @@ ignore:
   - AskAzeroth/Libs/LibDeflate/examples
   - AskAzeroth/Libs/LibDeflate/README.md
   - AskAzeroth/Libs/LibDeflate/changelog.md
+  - AskAzeroth/Libs/LibDataBroker-1.1/README.textile
 
 manual-changelog:
   filename: CHANGELOG.md
