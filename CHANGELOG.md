@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v1.3.0 (2026-11-08)
+
 - FAQ: shift-click an entry to copy it into the chat as "AskAzeroth: question
   answer". Long entries are split into numbered messages (1/3, 2/3 …): after
   each Enter the next part is waiting in the chat input, Escape stops. Players with
