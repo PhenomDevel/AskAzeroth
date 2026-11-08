@@ -595,31 +595,31 @@ ns.Faq.Add("addon", {
 		id = "addon-share-chat",
 		de = {
 			q = "Wie teile ich einen FAQ-Eintrag im Chat?",
-			a = "Öffne das Chatfenster und klick bei gedrückter [Shift]-Taste auf einen Eintrag im FAQ. Frage und Antwort landen als „AskAzeroth: …“ in der Eingabezeile; lange Einträge werden auf mehrere Nachrichten (1/3, 2/3 …) verteilt: Nach jedem [Enter] steht der nächste Teil in der Eingabezeile, [Esc] bricht ab. Mitspieler mit AskAzeroth sehen „AskAzeroth“ als Link und öffnen den ganzen Eintrag mit einem Klick in ihrer Sprache.",
+			a = "Öffne das Chatfenster und klick bei gedrückter [Shift]-Taste auf einen Eintrag im FAQ. Frage und Antwort landen als „AskAzeroth: …“ in der Eingabezeile; lange Einträge werden auf mehrere Nachrichten (1/3, 2/3 …) verteilt: Nach jedem [Enter] steht der nächste Teil in der Eingabezeile, [Esc] bricht ab. Mitspieler mit AskAzeroth sehen „AskAzeroth“ als Link und öffnen den ganzen Eintrag mit einem Klick in ihrer Sprache. Schneller geht es mit {In den Chat senden} unter dem geöffneten Eintrag: Er geht sofort in den Chat, in dem du zuletzt geschrieben hast.",
 		},
 		en = {
 			q = "How do I share a FAQ entry in chat?",
-			a = "Open the chat input and hold [Shift] while you click an entry in the FAQ. Question and answer go into the input as \"AskAzeroth: …\"; long entries are split into several messages (1/3, 2/3 …): after each [Enter] the next part is waiting in the input, [Esc] stops. Players with AskAzeroth see \"AskAzeroth\" as a link and open the whole entry with one click in their own language.",
+			a = "Open the chat input and hold [Shift] while you click an entry in the FAQ. Question and answer go into the input as \"AskAzeroth: …\"; long entries are split into several messages (1/3, 2/3 …): after each [Enter] the next part is waiting in the input, [Esc] stops. Players with AskAzeroth see \"AskAzeroth\" as a link and open the whole entry with one click in their own language. Quicker: {Send to chat} under the open entry sends it right away to the chat you last wrote in.",
 		},
 		fr = {
 			q = "Comment partager une entrée de la FAQ dans la discussion ?",
-			a = "Ouvrez la ligne de saisie de la discussion et cliquez sur une entrée de la FAQ en maintenant [Maj]. La question et la réponse s'y ajoutent sous la forme « AskAzeroth: … » ; les longues entrées sont réparties sur plusieurs messages (1/3, 2/3 …) : après chaque [Entrée], la partie suivante attend dans la ligne de saisie, [Échap] arrête. Les joueurs qui ont AskAzeroth voient « AskAzeroth » comme un lien et ouvrent toute l'entrée d'un clic, dans leur langue.",
+			a = "Ouvrez la ligne de saisie de la discussion et cliquez sur une entrée de la FAQ en maintenant [Maj]. La question et la réponse s'y ajoutent sous la forme « AskAzeroth: … » ; les longues entrées sont réparties sur plusieurs messages (1/3, 2/3 …) : après chaque [Entrée], la partie suivante attend dans la ligne de saisie, [Échap] arrête. Les joueurs qui ont AskAzeroth voient « AskAzeroth » comme un lien et ouvrent toute l'entrée d'un clic, dans leur langue. Plus rapide : {Envoyer dans la discussion} sous l'entrée ouverte l'envoie tout de suite là où vous avez écrit en dernier.",
 		},
 		es = {
 			q = "¿Cómo comparto una entrada de las preguntas frecuentes en el chat?",
-			a = "Abre la línea de escritura del chat y haz clic en una entrada de las preguntas frecuentes manteniendo pulsado [Mayús]. La pregunta y la respuesta aparecen como «AskAzeroth: …»; las entradas largas se reparten en varios mensajes (1/3, 2/3 …): tras cada [Intro] la siguiente parte espera en la línea, [Esc] lo detiene. Los jugadores con AskAzeroth ven «AskAzeroth» como enlace y abren la entrada completa con un clic en su idioma.",
+			a = "Abre la línea de escritura del chat y haz clic en una entrada de las preguntas frecuentes manteniendo pulsado [Mayús]. La pregunta y la respuesta aparecen como «AskAzeroth: …»; las entradas largas se reparten en varios mensajes (1/3, 2/3 …): tras cada [Intro] la siguiente parte espera en la línea, [Esc] lo detiene. Los jugadores con AskAzeroth ven «AskAzeroth» como enlace y abren la entrada completa con un clic en su idioma. Más rápido: {Enviar al chat} bajo la entrada abierta la envía enseguida al chat en el que escribiste por última vez.",
 		},
 		it = {
 			q = "Come condivido una voce delle FAQ in chat?",
-			a = "Apri la riga di scrittura della chat e clicca su una voce delle FAQ tenendo premuto [Maiusc]. Domanda e risposta finiscono nella riga come «AskAzeroth: …»; le voci lunghe vengono divise in più messaggi (1/3, 2/3 …): dopo ogni [Invio] la parte successiva è già nella riga, [Esc] interrompe. I giocatori con AskAzeroth vedono «AskAzeroth» come link e aprono la voce intera con un clic nella propria lingua.",
+			a = "Apri la riga di scrittura della chat e clicca su una voce delle FAQ tenendo premuto [Maiusc]. Domanda e risposta finiscono nella riga come «AskAzeroth: …»; le voci lunghe vengono divise in più messaggi (1/3, 2/3 …): dopo ogni [Invio] la parte successiva è già nella riga, [Esc] interrompe. I giocatori con AskAzeroth vedono «AskAzeroth» come link e aprono la voce intera con un clic nella propria lingua. Più veloce: {Invia in chat} sotto la voce aperta la invia subito nella chat in cui hai scritto l'ultima volta.",
 		},
 		ru = {
 			q = "Как поделиться статьёй FAQ в чате?",
-			a = "Откройте строку ввода чата и щёлкните по статье в FAQ, удерживая [Shift]. Вопрос и ответ появятся в строке в виде «AskAzeroth: …»; длинные статьи делятся на несколько сообщений (1/3, 2/3 …): после каждого [Enter] следующая часть уже ждёт в строке ввода, [Esc] прерывает. Игроки с AskAzeroth видят «AskAzeroth» как ссылку и одним щелчком открывают всю статью на своём языке.",
+			a = "Откройте строку ввода чата и щёлкните по статье в FAQ, удерживая [Shift]. Вопрос и ответ появятся в строке в виде «AskAzeroth: …»; длинные статьи делятся на несколько сообщений (1/3, 2/3 …): после каждого [Enter] следующая часть уже ждёт в строке ввода, [Esc] прерывает. Игроки с AskAzeroth видят «AskAzeroth» как ссылку и одним щелчком открывают всю статью на своём языке. Быстрее: кнопка {Отправить в чат} под открытой статьёй сразу отправит её в чат, куда вы писали последним.",
 		},
 		pt = {
 			q = "Como compartilho um item do FAQ no chat?",
-			a = "Abra a linha de digitação do chat e clique num item do FAQ segurando [Shift]. A pergunta e a resposta vão para a linha como \"AskAzeroth: …\"; itens longos são divididos em várias mensagens (1/3, 2/3 …): depois de cada [Enter] a próxima parte já espera na linha, [Esc] interrompe. Jogadores com AskAzeroth veem \"AskAzeroth\" como link e abrem o item inteiro com um clique no próprio idioma.",
+			a = "Abra a linha de digitação do chat e clique num item do FAQ segurando [Shift]. A pergunta e a resposta vão para a linha como \"AskAzeroth: …\"; itens longos são divididos em várias mensagens (1/3, 2/3 …): depois de cada [Enter] a próxima parte já espera na linha, [Esc] interrompe. Jogadores com AskAzeroth veem \"AskAzeroth\" como link e abrem o item inteiro com um clique no próprio idioma. Mais rápido: {Enviar ao chat} abaixo do item aberto envia-o na hora para o chat em que você escreveu por último.",
 		},
 	},
 	{

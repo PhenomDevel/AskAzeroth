@@ -302,7 +302,8 @@ local function Build(content)
 			return head, qHeight, 0
 		end
 		local aHeight = TextHeight(a, "GameFontHighlight", AnswerWidth(), 3)
-		local terms = FaqOfGlossary(entry) and ITEM_PAD / 2 + FAQ_ROW_HEIGHT or 0
+		-- Glossary: button to its FAQ entry; FAQ: button to send it to the chat.
+		local terms = (FaqOfGlossary(entry) or not IsGlossary(entry)) and ITEM_PAD / 2 + FAQ_ROW_HEIGHT or 0
 		return head + aHeight + terms + ITEM_PAD + 2, qHeight, aHeight
 	end
 
@@ -404,6 +405,28 @@ local function Build(content)
 			item.faqRow.label = W.Text(item.faqRow, "GameFontHighlightSmall", W.MUTED)
 			item.faqRow.label:SetPoint("LEFT")
 			item.faqRow.label:SetText(L.GLOSSARY_MORE)
+			item.shareRow = CreateFrame("Button", nil, bg)
+			item.shareRow:SetHeight(FAQ_ROW_HEIGHT)
+			item.shareRow.text = W.Text(item.shareRow, "GameFontHighlightSmall", W.GOLD)
+			item.shareRow.text:SetPoint("LEFT")
+			item.shareRow.text:SetText(L.FAQ_SEND)
+			item.shareRow:SetWidth(item.shareRow.text:GetStringWidth() + 8)
+			item.shareRow:SetScript("OnEnter", function(self)
+				self.text:SetTextColor(1, 1, 1)
+				local _, _, label = ns.FaqShare.Target()
+				GameTooltip:SetOwner(self, "ANCHOR_TOP")
+				GameTooltip:SetText(L.FAQ_SEND, 1, 1, 1)
+				GameTooltip:AddLine(label and L.FAQ_SEND_TIP:format(label) or L.FAQ_SEND_NO_TARGET, W.MUTED[1], W.MUTED[2], W.MUTED[3], true)
+				GameTooltip:Show()
+			end)
+			item.shareRow:SetScript("OnLeave", function(self)
+				W.Color(self.text, W.GOLD)
+				GameTooltip:Hide()
+			end)
+			item.shareRow:SetScript("OnClick", function()
+				GameTooltip:Hide()
+				ns.FaqShare.Send(item.entry.id, page.lang)
+			end)
 			item.divider = W.Divider(bg)
 			item.divider:SetHeight(1)
 			item:SetScript("OnClick", function(self)
@@ -468,11 +491,17 @@ local function Build(content)
 				FillFaqButton(item, faqId)
 			end
 			item.faqRow:SetShown(faqId ~= nil)
+			if not IsGlossary(entry) then
+				item.shareRow:ClearAllPoints()
+				item.shareRow:SetPoint("TOPLEFT", item.answerFrame, "BOTTOMLEFT", 0, -ITEM_PAD / 2)
+			end
+			item.shareRow:SetShown(not IsGlossary(entry))
 		else
 			W.SetColors(item.bg, W.COLORS.card, W.COLORS.line)
 			item.divider:Hide()
 			item.answerFrame:Hide()
 			item.faqRow:Hide()
+			item.shareRow:Hide()
 		end
 	end)
 	ScrollUtil.InitScrollBoxListWithScrollBar(listBox, listBar, listView)

@@ -7,6 +7,9 @@
   each Enter the next part is waiting in the chat input, Escape stops. Players with
   AskAzeroth see "AskAzeroth" as a link: hover shows the whole entry in their
   language, a click opens it in the FAQ. Works for FAQ links in answers too.
+- FAQ: "Send to chat" under an open entry sends it right away to the chat you
+  last wrote in (say, party, guild, whisper, channel …), split into several
+  messages when it is long.
 - Minimap button: now a standard LibDBIcon button, so minimap addons
   (SexyMap, Leatrix Plus, button collectors …) hide it until you hover the
   minimap, like other addons' buttons. Position, the show/hide setting and the
