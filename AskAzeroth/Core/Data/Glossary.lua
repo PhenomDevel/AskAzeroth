@@ -391,6 +391,8 @@ ns.Glossary.Add({
 	},
 	{
 		id = "add",
+		-- other cases are everyday words ("add")
+		exact = { "Add" },
 		chat = { "Add", "Adds", "adds" },
 		mark = false,
 		de = {
@@ -2963,6 +2965,8 @@ ns.Glossary.Add({
 	},
 	{
 		id = "shammy",
+		-- other cases are everyday words ("sham")
+		exact = { "Sham" },
 		chat = { "Schami", "schami", "Shammy", "shammy", "Sham" },
 		mark = false,
 		de = {
@@ -3117,6 +3121,8 @@ ns.Glossary.Add({
 	},
 	{
 		id = "if",
+		-- other cases are everyday words ("if")
+		exact = { "IF" },
 		chat = { "IF" },
 		mark = false,
 		de = {
@@ -3151,6 +3157,8 @@ ns.Glossary.Add({
 	},
 	{
 		id = "darn",
+		-- other cases are everyday words ("darn")
+		exact = { "Darn" },
 		chat = { "Darna", "Darn" },
 		mark = false,
 		de = {
@@ -3813,6 +3821,8 @@ ns.Glossary.Add({
 	},
 	{
 		id = "caster",
+		-- other cases are everyday words ("range")
+		exact = { "Range" },
 		chat = { "Caster", "caster", "Range", "Ranged", "ranged" },
 		de = {
 			term = "Caster",
@@ -4614,6 +4624,8 @@ ns.Glossary.Add({
 	},
 	{
 		id = "main",
+		-- other cases are everyday words ("main")
+		exact = { "Main" },
 		chat = { "Main", "Mainchar" },
 		mark = false,
 		de = {
@@ -5041,6 +5053,8 @@ ns.Glossary.Add({
 	-- Stats and specializations
 	{
 		id = "stats-short",
+		-- other cases are everyday words ("int")
+		exact = { "Int" },
 		chat = { "Stam", "stam", "Str", "str", "Agi", "agi", "Int", "Spi", "spi" },
 		faq = "class-stats",
 		mark = false,
@@ -5076,6 +5090,8 @@ ns.Glossary.Add({
 	},
 	{
 		id = "spec-short",
+		-- other cases are everyday words ("arms", "disc")
+		exact = { "Arms", "Disc" },
 		chat = { "Prot", "prot", "Holy", "holy", "Resto", "resto", "Feral", "feral", "Ele", "ele", "Enh", "enh", "Enhancer", "Ret", "ret", "Retri", "Fury", "fury", "Furor", "Arms", "Destro", "destro", "Affli", "affli", "Diszi", "diszi", "Disc", "BM", "MM", "SV" },
 		faq = "class-talents",
 		mark = false,
@@ -5145,6 +5161,8 @@ ns.Glossary.Add({
 	},
 	{
 		id = "nerf",
+		-- other cases are everyday words ("op")
+		exact = { "OP" },
 		chat = { "Nerf", "nerf", "generft", "nerfed", "OP", "imba" },
 		mark = false,
 		de = {
@@ -5634,6 +5652,8 @@ ns.Glossary.Add({
 	},
 	{
 		id = "st",
+		-- other cases are everyday words ("st")
+		exact = { "ST" },
 		chat = { "ST" },
 		mark = false,
 		de = { term = "ST", alt = { "Tempel" }, def = "Kürzel für den Versunkenen Tempel (Tempel von Atal'Hakkar), Dungeon in den Sümpfen des Elends." },

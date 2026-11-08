@@ -117,6 +117,33 @@ end
 local LATIN_PLURALS = { "es", "s" }
 local CYRILLIC_PLURALS = { "ами", "ов", "ей", "ам", "ах", "ы", "и" }
 
+-- Lower case of each two-byte UTF-8 upper case letter Util.Lower knows:
+-- Latin-1 (À-Þ without ×, so Ä, É, Ñ) and Cyrillic (А-Я, Ё). Each keeps
+-- its two bytes.
+local LOWER = {}
+for b2 = 0x80, 0x9E do
+	if b2 ~= 0x97 then
+		LOWER[string.char(0xC3, b2)] = string.char(0xC3, b2 + 0x20)
+	end
+end
+for b2 = 0x90, 0x9F do
+	LOWER[string.char(0xD0, b2)] = string.char(0xD0, b2 + 0x20) -- А-П
+end
+for b2 = 0xA0, 0xAF do
+	LOWER[string.char(0xD0, b2)] = string.char(0xD1, b2 - 0x20) -- Р-Я
+end
+LOWER["\208\129"] = "\209\145" -- Ё
+LOWER["\197\146"] = "\197\147" -- Œ
+LOWER["\197\184"] = "\195\191" -- Ÿ
+
+-- text in lower case: ASCII (string.lower) and the two-byte letters of the
+-- addon's languages (LOWER). Unlike FaqSearch.Normalize it keeps the length
+-- and every byte position, so a place found in it is the same place in
+-- text.
+function Util.Lower(text)
+	return (text:lower():gsub("[\195\197\208][\128-\191]", LOWER))
+end
+
 -- The plural endings a word can take; the ending of the word decides.
 -- Latin endings are lower case: compare them with the lower case text.
 function Util.PluralEndings(word)
