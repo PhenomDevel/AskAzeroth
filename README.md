@@ -50,7 +50,9 @@ What changed: [CHANGELOG.md](https://github.com/PhenomDevel/AskAzeroth/blob/main
 - **Built-in FAQ** in all 7 languages: beginner questions sorted into
   topics such as first steps, quests, each class, travel, gold and dungeons.
   Mentors can attach FAQ entries to their answers as links, and a hint
-  points to Wowhead for looking up quests, items and NPCs.
+  points to Wowhead for looking up quests, items and NPCs. Shift-click an
+  entry to share it in the chat: other AskAzeroth users get a link to the
+  whole entry in their own language.
 - **Glossary:** over 100 game terms and chat abbreviations (Aggro, DoT, BoP,
   LFG, dungeon short names …) explained in a few words. Terms inside FAQ
   answers, threads and the normal chat show their explanation when you hover

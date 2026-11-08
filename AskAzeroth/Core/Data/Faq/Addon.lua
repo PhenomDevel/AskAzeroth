@@ -592,6 +592,37 @@ ns.Faq.Add("addon", {
 		},
 	},
 	{
+		id = "addon-share-chat",
+		de = {
+			q = "Wie teile ich einen FAQ-Eintrag im Chat?",
+			a = "Öffne das Chatfenster und klick bei gedrückter [Shift]-Taste auf einen Eintrag im FAQ. Frage und Antwort landen als „AskAzeroth: …“ in der Eingabezeile; lange Antworten werden gekürzt, damit alles in eine Nachricht passt. Mitspieler mit AskAzeroth sehen „AskAzeroth“ als Link und öffnen den ganzen Eintrag mit einem Klick in ihrer Sprache.",
+		},
+		en = {
+			q = "How do I share a FAQ entry in chat?",
+			a = "Open the chat input and hold [Shift] while you click an entry in the FAQ. Question and answer go into the input as \"AskAzeroth: …\"; long answers get shortened so everything fits in one message. Players with AskAzeroth see \"AskAzeroth\" as a link and open the whole entry with one click in their own language.",
+		},
+		fr = {
+			q = "Comment partager une entrée de la FAQ dans la discussion ?",
+			a = "Ouvrez la ligne de saisie de la discussion et cliquez sur une entrée de la FAQ en maintenant [Maj]. La question et la réponse s'y ajoutent sous la forme « AskAzeroth: … » ; les longues réponses sont raccourcies pour tenir en un seul message. Les joueurs qui ont AskAzeroth voient « AskAzeroth » comme un lien et ouvrent toute l'entrée d'un clic, dans leur langue.",
+		},
+		es = {
+			q = "¿Cómo comparto una entrada de las preguntas frecuentes en el chat?",
+			a = "Abre la línea de escritura del chat y haz clic en una entrada de las preguntas frecuentes manteniendo pulsado [Mayús]. La pregunta y la respuesta aparecen como «AskAzeroth: …»; las respuestas largas se acortan para que todo quepa en un mensaje. Los jugadores con AskAzeroth ven «AskAzeroth» como enlace y abren la entrada completa con un clic en su idioma.",
+		},
+		it = {
+			q = "Come condivido una voce delle FAQ in chat?",
+			a = "Apri la riga di scrittura della chat e clicca su una voce delle FAQ tenendo premuto [Maiusc]. Domanda e risposta finiscono nella riga come «AskAzeroth: …»; le risposte lunghe vengono accorciate perché tutto stia in un messaggio. I giocatori con AskAzeroth vedono «AskAzeroth» come link e aprono la voce intera con un clic nella propria lingua.",
+		},
+		ru = {
+			q = "Как поделиться статьёй FAQ в чате?",
+			a = "Откройте строку ввода чата и щёлкните по статье в FAQ, удерживая [Shift]. Вопрос и ответ появятся в строке в виде «AskAzeroth: …»; длинные ответы сокращаются, чтобы всё поместилось в одно сообщение. Игроки с AskAzeroth видят «AskAzeroth» как ссылку и одним щелчком открывают всю статью на своём языке.",
+		},
+		pt = {
+			q = "Como compartilho um item do FAQ no chat?",
+			a = "Abra a linha de digitação do chat e clique num item do FAQ segurando [Shift]. A pergunta e a resposta vão para a linha como \"AskAzeroth: …\"; respostas longas são encurtadas para caber numa mensagem. Jogadores com AskAzeroth veem \"AskAzeroth\" como link e abrem o item inteiro com um clique no próprio idioma.",
+		},
+	},
+	{
 		id = "addon-minimap-button",
 		de = {
 			q = "Wie blende ich den Minimap-Button aus?",
