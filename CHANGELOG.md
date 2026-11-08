@@ -5,6 +5,9 @@
 - Glossary: terms are now found in any spelling, in texts and in normal chat
   ("Dps", "dpS", "DPS", also Ä/É/Я). Short forms whose other spellings are
   everyday words ("IF", "Add", "OP" and a few more) stay as written.
+- Glossary: new entry Hall of Thanes (WoW: Forever dungeon beneath Ironforge,
+  levels 13 to 18), also found by searching "HoT". The HoT tooltip (heal over
+  time) now says that HoT often means this dungeon in group searches.
 
 ## v1.3.0 (2026-11-08)
 
