@@ -275,11 +275,26 @@ To be written after the results are in.
   returns the open chat input; `EditBox:Insert` puts text at its cursor.
   Without an open input, `ChatFrameUtil.OpenChat(text)` (fallback
   `ChatFrame_OpenChat`) opens one with the text.
-- A chat message may have 255 bytes; the shared line is cut to that,
-  counting what is already typed.
+- A chat message may have 255 bytes; longer entries are split into
+  numbered parts, the first one counting what is already typed. The addon
+  never calls `SendChatMessage`: the player sends each part with Enter.
+  `HookScript` on the edit box's `OnTextChanged`/`OnEnterPressed`/
+  `OnEscapePressed` runs after the game's handler; the next part is put in
+  with `ChatFrameUtil.OpenChat(text, editBox.chatFrame)` one frame later,
+  and the game keeps the chat type (say, party, guild, whisper, channel).
 - The plain text "AskAzeroth: <question> <answer>" is sent unchanged (no
   links of our own are sent; the receivers' chat filter adds the link
   `addon:AskAzeroth:faq:<id>`, same handling as the glossary links above).
+
+The "Send to chat" button under an open FAQ entry relies on:
+
+- The edit box attributes `chatType`, `tellTarget` and `channelTarget` of
+  the open input, otherwise `DEFAULT_CHAT_FRAME.editBox`, name the chat
+  the player would type into.
+- `C_ChatInfo.SendChatMessage` (fallback `SendChatMessage`) may be called
+  several times in one click: say, yell and channels need a hardware event
+  outside instances, and the click should count for every call. Not
+  allowed during `C_ChatInfo.InChatMessagingLockdown()`.
 
 ## Whisper mode (to confirm in game on Forever)
 
