@@ -267,6 +267,20 @@ To be written after the results are in.
 - Chat frames are found through `NUM_CHAT_WINDOWS`, `CHAT_FRAMES` and a
   `hooksecurefunc` on `FCF_OpenTemporaryWindow` (whisper windows).
 
+## FAQ entries in the chat (to confirm in game)
+
+`UI/FaqShare.lua` relies on these Retail behaviours:
+
+- `ChatFrameUtil.GetActiveWindow` (fallback `ChatEdit_GetActiveWindow`)
+  returns the open chat input; `EditBox:Insert` puts text at its cursor.
+  Without an open input, `ChatFrameUtil.OpenChat(text)` (fallback
+  `ChatFrame_OpenChat`) opens one with the text.
+- A chat message may have 255 bytes; the shared line is cut to that,
+  counting what is already typed.
+- The plain text "AskAzeroth: <question> <answer>" is sent unchanged (no
+  links of our own are sent; the receivers' chat filter adds the link
+  `addon:AskAzeroth:faq:<id>`, same handling as the glossary links above).
+
 ## Whisper mode (to confirm in game on Forever)
 
 `Core/Peers.lua` and the whisper mode in `Core/Comm.lua` rely on:

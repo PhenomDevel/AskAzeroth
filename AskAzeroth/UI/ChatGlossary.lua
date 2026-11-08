@@ -1,4 +1,4 @@
--- luacheck: read globals ChatFrameUtil ChatFrame_AddMessageEventFilter NUM_CHAT_WINDOWS CHAT_FRAMES FCF_OpenTemporaryWindow GameTooltip hooksecurefunc
+-- luacheck: read globals ChatFrameUtil ChatFrame_AddMessageEventFilter NUM_CHAT_WINDOWS CHAT_FRAMES FCF_OpenTemporaryWindow GameTooltip hooksecurefunc IsModifiedClick
 local _, ns = ...
 
 -- Glossary terms in the normal chat (party, raid, guild, whispers, say,
@@ -6,7 +6,8 @@ local _, ns = ...
 -- hovering shows the explanation, a click opens the term in the glossary.
 -- Uses the terms of the client language, the English ones and the chat
 -- forms (Core/Data/Glossary.lua, field chat). Can be switched off in the
--- settings (settings.chatGlossary).
+-- settings (settings.chatGlossary). Shared FAQ entries ("AskAzeroth: …",
+-- UI/FaqShare.lua) get their link here too, also with the glossary off.
 --
 -- Only text outside escape sequences is touched: links, coloured text,
 -- textures, atlases and protected names (|K…|k) stay as they are. Lines
@@ -132,18 +133,24 @@ ChatGlossary.Annotate = Annotate
 local cache, cacheSize = {}, 0
 local CACHE_MAX = 200
 
+-- Shared FAQ entries (UI/FaqShare.lua) become links first, whether or not
+-- the glossary is switched on; the glossary skips text inside links.
 local function Filter(_, _, message, ...)
-	if type(message) ~= "string" or (issecretvalue and issecretvalue(message)) or not ChatGlossary.IsEnabled() then
+	if type(message) ~= "string" or (issecretvalue and issecretvalue(message)) then
 		return false
 	end
-	local result = cache[message]
-	if not result then
-		if cacheSize >= CACHE_MAX then
-			cache, cacheSize = {}, 0
+	local result = ns.FaqShare.Annotate(message)
+	if ChatGlossary.IsEnabled() then
+		local annotated = cache[result]
+		if not annotated then
+			if cacheSize >= CACHE_MAX then
+				cache, cacheSize = {}, 0
+			end
+			annotated = Annotate(result, ns.FaqRefs.ReaderLanguage())
+			cache[result] = annotated
+			cacheSize = cacheSize + 1
 		end
-		result = Annotate(message, ns.FaqRefs.ReaderLanguage())
-		cache[message] = result
-		cacheSize = cacheSize + 1
+		result = annotated
 	end
 	if result == message then
 		return false
@@ -169,8 +176,12 @@ local function HookFrame(frame)
 	hooked[frame] = true
 	frame:HookScript("OnHyperlinkEnter", function(self, link)
 		local entry = EntryOfLink(link)
+		local faqEntry = not entry and ns.FaqShare.EntryOfLink(link)
 		if entry then
 			GlossaryLinks.ShowTooltip(self, entry, nil, true)
+			self.askAzerothTooltip = true
+		elseif faqEntry then
+			ns.FaqShare.ShowTooltip(self, faqEntry)
 			self.askAzerothTooltip = true
 		end
 	end)
@@ -188,6 +199,16 @@ local function HookFrame(frame)
 		if entry and button == "LeftButton" then
 			GameTooltip:Hide()
 			ns.UI.ShowGlossary(entry.id)
+			return
+		end
+		local faqEntry = ns.FaqShare.EntryOfLink(link)
+		if faqEntry and button == "LeftButton" then
+			GameTooltip:Hide()
+			if IsModifiedClick("CHATLINK") then
+				ns.FaqShare.Insert(faqEntry.id)
+			else
+				ns.UI.ShowFaq(faqEntry.id)
+			end
 		end
 	end)
 end

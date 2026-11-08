@@ -290,7 +290,11 @@ function GlossaryLinks.Enable(frame, tooltipOnly)
 		end
 		local faqId = LinkValue(link, FAQ_LINK_TYPE)
 		if faqId and ns.Faq.Get(faqId) then
-			ns.UI.ShowFaq(faqId)
+			if IsModifiedClick("CHATLINK") then
+				ns.FaqShare.Insert(faqId)
+			else
+				ns.UI.ShowFaq(faqId)
+			end
 			return
 		end
 		local entry = not tooltipOnly and EntryOfLink(link)

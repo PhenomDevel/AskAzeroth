@@ -1,4 +1,4 @@
--- luacheck: read globals CreateScrollBoxListLinearView ScrollUtil CreateDataProvider GameTooltip
+-- luacheck: read globals CreateScrollBoxListLinearView ScrollUtil CreateDataProvider GameTooltip IsModifiedClick
 local _, ns = ...
 
 -- References on answers, to FAQ entries and glossary terms ("g:<id>",
@@ -134,6 +134,8 @@ function FaqRefs.CreateLinks(parent, anchor)
 			GameTooltip:Hide()
 			if self.glossaryId then
 				ns.UI.ShowGlossary(self.glossaryId)
+			elseif IsModifiedClick("CHATLINK") then
+				ns.FaqShare.Insert(self.id)
 			else
 				ns.UI.ShowFaq(self.id)
 			end

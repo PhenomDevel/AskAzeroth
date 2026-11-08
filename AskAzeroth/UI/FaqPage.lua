@@ -1,4 +1,4 @@
--- luacheck: read globals CreateScrollBoxListLinearView ScrollUtil CreateDataProvider GameTooltip
+-- luacheck: read globals CreateScrollBoxListLinearView ScrollUtil CreateDataProvider GameTooltip IsModifiedClick
 local _, ns = ...
 
 -- Built-in FAQ (Core/Faq.lua, entries in Core/Data/Faq/).
@@ -14,7 +14,8 @@ local _, ns = ...
 --
 -- Shown in the client's language (English for entries not translated
 -- yet); the dropdown picks any other FAQ language. UI.ShowFaq(id) opens an
--- entry, e.g. from a FAQ link under an answer.
+-- entry, e.g. from a FAQ link under an answer. A shift-click on a FAQ
+-- entry puts it into the chat (UI/FaqShare.lua).
 --
 -- The row below "All topics" is the glossary (Core/Glossary.lua): its
 -- terms show in the same accordion, alphabetically, with their
@@ -363,11 +364,20 @@ local function Build(content)
 			item.hl:SetPoint("BOTTOMRIGHT", -1, 1)
 			item.hl:SetColorTexture(1, 0.82, 0, 0.07)
 			item.hl:Hide()
+			-- FAQ entries tell how to share them in the chat.
 			item:SetScript("OnEnter", function(self)
 				self.hl:Show()
+				if not IsGlossary(self.entry) then
+					GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT")
+					GameTooltip:SetText(L.FAQ_SHARE_HINT, 1, 1, 1, 1, true)
+					GameTooltip:Show()
+				end
 			end)
 			item:SetScript("OnLeave", function(self)
 				self.hl:Hide()
+				if GameTooltip:GetOwner() == self then
+					GameTooltip:Hide()
+				end
 			end)
 			item.icon = bg:CreateTexture(nil, "ARTWORK")
 			item.icon:SetSize(ICON_SIZE, ICON_SIZE)
@@ -397,6 +407,10 @@ local function Build(content)
 			item.divider = W.Divider(bg)
 			item.divider:SetHeight(1)
 			item:SetScript("OnClick", function(self)
+				if not IsGlossary(self.entry) and IsModifiedClick("CHATLINK") then
+					ns.FaqShare.Insert(self.entry.id, page.lang)
+					return
+				end
 				local key = Key(self.entry)
 				page.expanded[key] = not page.expanded[key] or nil
 				if page.expanded[key] and not IsGlossary(self.entry) then

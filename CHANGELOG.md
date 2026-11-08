@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- FAQ: shift-click an entry to copy it into the chat as "AskAzeroth: question
+  answer" (long answers are shortened to fit one message). Players with
+  AskAzeroth see "AskAzeroth" as a link: hover shows the whole entry in their
+  language, a click opens it in the FAQ. Works for FAQ links in answers too.
 - Minimap button: now a standard LibDBIcon button, so minimap addons
   (SexyMap, Leatrix Plus, button collectors …) hide it until you hover the
   minimap, like other addons' buttons. Position, the show/hide setting and the

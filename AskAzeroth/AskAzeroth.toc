@@ -102,6 +102,7 @@ UI\PlayerMenu.lua
 UI\QueueList.lua
 UI\FaqRefs.lua
 UI\GlossaryLinks.lua
+UI\FaqShare.lua
 UI\ChatGlossary.lua
 UI\ThreadView.lua
 UI\AskDialog.lua
