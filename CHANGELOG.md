@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Glossary: new entry Hall of Thanes (WoW: Forever dungeon beneath Ironforge,
+  levels 13 to 18), also found by searching "HoT". The HoT tooltip (heal over
+  time) now says that HoT often means this dungeon in group searches.
+
 ## v1.3.0 (2026-11-08)
 
 - FAQ: shift-click an entry to copy it into the chat as "AskAzeroth: question

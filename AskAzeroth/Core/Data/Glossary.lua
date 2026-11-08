@@ -200,37 +200,37 @@ ns.Glossary.Add({
 		de = {
 			term = "HoT",
 			alt = { "Heilung über Zeit" },
-			def = "Heal over Time: ein Effekt, der über einige Sekunden immer wieder heilt, etwa Erneuerung oder Verjüngung.",
+			def = "Heal over Time: ein Effekt, der über einige Sekunden immer wieder heilt, etwa Erneuerung oder Verjüngung. In der Gruppensuche heißt HoT oft auch der Dungeon Hall of Thanes.",
 		},
 		en = {
 			term = "HoT",
 			alt = { "heal over time" },
-			def = "Heal over time: an effect that heals again and again over a few seconds, such as Renew or Rejuvenation.",
+			def = "Heal over time: an effect that heals again and again over a few seconds, such as Renew or Rejuvenation. In group searches HoT often also means the Hall of Thanes dungeon.",
 		},
 		fr = {
 			term = "HoT",
 			alt = { "soins sur la durée" },
-			def = "Soins sur la durée : un effet qui soigne encore et encore pendant quelques secondes, comme Rénovation ou Récupération.",
+			def = "Soins sur la durée : un effet qui soigne encore et encore pendant quelques secondes, comme Rénovation ou Récupération. Dans les recherches de groupe, HoT désigne souvent aussi le donjon Hall of Thanes.",
 		},
 		es = {
 			term = "HoT",
 			alt = { "sanación en el tiempo" },
-			def = "Sanación en el tiempo: un efecto que sana una y otra vez durante unos segundos, como Renovar o Rejuvenecimiento.",
+			def = "Sanación en el tiempo: un efecto que sana una y otra vez durante unos segundos, como Renovar o Rejuvenecimiento. En la búsqueda de grupo, HoT también suele ser la mazmorra Hall of Thanes.",
 		},
 		it = {
 			term = "HoT",
 			alt = { "cure nel tempo" },
-			def = "Cure nel tempo: un effetto che cura ripetutamente per alcuni secondi, come Rinnovamento o Ringiovanimento.",
+			def = "Cure nel tempo: un effetto che cura ripetutamente per alcuni secondi, come Rinnovamento o Ringiovanimento. Nella ricerca di gruppo HoT indica spesso anche la spedizione Hall of Thanes.",
 		},
 		ru = {
 			term = "ХоТ",
 			alt = { "HoT", "периодическое лечение" },
-			def = "Периодическое лечение: эффект, который снова и снова лечит в течение нескольких секунд, например Обновление или Омоложение.",
+			def = "Периодическое лечение: эффект, который снова и снова лечит в течение нескольких секунд, например Обновление или Омоложение. При поиске группы HoT часто означает и подземелье Hall of Thanes.",
 		},
 		pt = {
 			term = "HoT",
 			alt = { "cura ao longo do tempo" },
-			def = "Cura ao longo do tempo: um efeito que cura repetidamente por alguns segundos, como Renovar ou Rejuvenescer.",
+			def = "Cura ao longo do tempo: um efeito que cura repetidamente por alguns segundos, como Renovar ou Rejuvenescer. Na busca de grupo, HoT muitas vezes também é a masmorra Hall of Thanes.",
 		},
 	},
 	{
@@ -5643,5 +5643,20 @@ ns.Glossary.Add({
 		it = { term = "ST", def = "Abbreviazione del Tempio Sommerso (Tempio di Atal'Hakkar), una spedizione nella Palude del Dolore." },
 		ru = { term = "ST", alt = { "Затонувший храм" }, def = "Сокращение от «Затонувший храм» (храм Атал'Хаккара), подземелье в Болоте Печали." },
 		pt = { term = "ST", def = "Abreviação do Templo Submerso (Templo de Atal'Hakkar), uma masmorra no Pântano das Mágoas." },
+	},
+	{
+		id = "thanes",
+		-- HoT is also heal over time: the form belongs to the entry "hot",
+		-- whose text names this dungeon too; here it is an other name, so
+		-- a search for HoT finds both entries.
+		chat = { "Hall of Thanes" },
+		mark = false,
+		de = { term = "Hall of Thanes", alt = { "HoT" }, def = "Dungeon von WoW: Forever unter Eisenschmiede für Stufe 13 bis 18. Kurz HoT, wie Heal over Time." },
+		en = { term = "Hall of Thanes", alt = { "HoT" }, def = "WoW: Forever dungeon beneath Ironforge for levels 13 to 18. Short HoT, like heal over time." },
+		fr = { term = "Hall of Thanes", alt = { "HoT" }, def = "Donjon de WoW: Forever sous Forgefer, pour les niveaux 13 à 18. En abrégé HoT, comme les soins sur la durée." },
+		es = { term = "Hall of Thanes", alt = { "HoT" }, def = "Mazmorra de WoW: Forever bajo Forjaz para los niveles 13 a 18. Abreviada HoT, como la sanación en el tiempo." },
+		it = { term = "Hall of Thanes", alt = { "HoT" }, def = "Spedizione di WoW: Forever sotto Forgiardente per i livelli da 13 a 18. In breve HoT, come le cure nel tempo." },
+		ru = { term = "Hall of Thanes", alt = { "HoT", "ХоТ" }, def = "Подземелье WoW: Forever под Стальгорном для уровней 13–18. Сокращённо HoT, как и периодическое лечение." },
+		pt = { term = "Hall of Thanes", alt = { "HoT" }, def = "Masmorra do WoW: Forever sob Altaforja para os níveis 13 a 18. Abreviada HoT, como a cura ao longo do tempo." },
 	},
 })
