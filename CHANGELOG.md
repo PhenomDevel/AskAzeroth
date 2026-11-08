@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v1.3.1 (2026-11-08)
+
 - Glossary: terms are now found in any spelling, in texts and in normal chat
   ("Dps", "dpS", "DPS", also Ä/É/Я). Short forms whose other spellings are
   everyday words ("IF", "Add", "OP" and a few more) stay as written.
