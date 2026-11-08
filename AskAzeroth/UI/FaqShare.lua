@@ -1,12 +1,13 @@
--- luacheck: read globals ChatFrameUtil ChatEdit_GetActiveWindow ChatFrame_OpenChat GameTooltip
+-- luacheck: read globals ChatFrameUtil ChatEdit_GetActiveWindow ChatFrame_OpenChat GameTooltip C_Timer
 local _, ns = ...
 
 -- FAQ entries in the normal chat.
 --
 -- Sending: a shift-click on a FAQ entry puts it into the chat input as
--- plain text, "AskAzeroth: <question> <answer>", the answer shortened
--- with "…" so the whole line fits the chat's limit (C.CHAT_MESSAGE_MAX
--- bytes, counting what is already typed). Players cannot send links of
+-- plain text, "AskAzeroth: <question> <answer>". Longer than the chat's
+-- limit (C.CHAT_MESSAGE_MAX bytes, counting what is already typed), it is
+-- split into numbered messages that the player sends one by one with
+-- Enter. Players cannot send links of
 -- their own, so the line carries nothing but text: players without the
 -- addon read the question, the answer and the addon's name.
 --
@@ -28,6 +29,8 @@ local FaqMarkup = ns.FaqMarkup
 
 -- Longest chat message in bytes.
 C.CHAT_MESSAGE_MAX = 255
+-- Most chat messages one shared entry is split into.
+C.FAQ_SHARE_PARTS_MAX = 6
 -- Name in front of a shared question; the same in every language.
 C.FAQ_SHARE_TAG = "AskAzeroth"
 
@@ -38,39 +41,58 @@ FaqShare.LINK_PREFIX = "addon:AskAzeroth:faq:"
 local LINK_COLOR = W.Hex(W.GOLD)
 local LOGO = "|TInterface\\AddOns\\AskAzeroth\\Media\\Logo:0|t"
 
--- The first bytes of text, at most maxBytes, cut after a whole UTF-8
--- character and, where possible, at a space.
-local function Cut(text, maxBytes)
+-- Byte where text is cut to fit maxBytes: after a whole UTF-8 character
+-- and, where possible, before a space.
+local function CutPoint(text, maxBytes)
 	if #text <= maxBytes then
-		return text
+		return #text
 	end
 	local stop = maxBytes
 	-- A continuation byte (10xxxxxx) after the cut means a split character.
 	while stop > 0 and (text:byte(stop + 1) or 0) >= 0x80 and (text:byte(stop + 1) or 0) < 0xC0 do
 		stop = stop - 1
 	end
-	local cut = text:sub(1, stop)
-	local space = cut:find(" [^ ]*$")
+	local space = text:sub(1, stop + 1):find(" [^ ]*$")
 	if space and space > maxBytes / 2 then
-		cut = cut:sub(1, space - 1)
+		return space - 1
 	end
-	return (cut:gsub("[%s%p]+$", ""))
+	return stop
 end
 
--- Chat line of an entry in lang within maxBytes, nil when not even the
--- question fits.
-function FaqShare.Format(entry, lang, maxBytes)
+-- Chat messages of an entry in lang: "AskAzeroth: <question> <answer>",
+-- split at words into messages of at most C.CHAT_MESSAGE_MAX bytes, each
+-- with " (i/n)" when there are several. firstMax is the room in the first
+-- message (less when text is typed already). The question always stays
+-- whole in the first message, so receivers recognise it. nil when it does
+-- not fit there.
+function FaqShare.Parts(entry, lang, firstMax)
 	local q, a = Faq.GetText(entry, lang)
-	local tag = TAG_OPEN .. q
-	if #tag > maxBytes then
+	local head = TAG_OPEN .. q
+	local text = head .. " " .. FaqMarkup.Strip(a)
+	if #text <= firstMax then
+		return { text }
+	end
+	local reserve = #(" (%d/%d)"):format(C.FAQ_SHARE_PARTS_MAX, C.FAQ_SHARE_PARTS_MAX)
+	if #head + reserve > firstMax then
 		return nil
 	end
-	local room = maxBytes - #tag - 1
-	a = FaqMarkup.Strip(a)
-	if #a > room then
-		a = room > #ELLIPSIS + 10 and Cut(a, room - #ELLIPSIS) .. ELLIPSIS or ""
+	local parts, rest = {}, text
+	while rest ~= "" do
+		local room = (#parts == 0 and firstMax or C.CHAT_MESSAGE_MAX) - reserve
+		if #parts == C.FAQ_SHARE_PARTS_MAX - 1 and #rest > room then
+			-- Last allowed message: shorten what is left.
+			rest = rest:sub(1, CutPoint(rest, room - #ELLIPSIS)):gsub("[%s%p]+$", "") .. ELLIPSIS
+		end
+		local cut = math.max(CutPoint(rest, room), #parts == 0 and #head or 1)
+		parts[#parts + 1] = (rest:sub(1, cut):gsub("%s+$", ""))
+		rest = rest:sub(cut + 1):gsub("^%s+", "")
 	end
-	return a ~= "" and tag .. " " .. a or tag
+	if #parts > 1 then
+		for i, part in ipairs(parts) do
+			parts[i] = ("%s (%d/%d)"):format(part, i, #parts)
+		end
+	end
+	return parts
 end
 
 local function ActiveEditBox()
@@ -80,16 +102,61 @@ local function ActiveEditBox()
 	return ChatEdit_GetActiveWindow and ChatEdit_GetActiveWindow()
 end
 
-local function OpenChat(text)
+local function OpenChat(text, chatFrame)
 	if ChatFrameUtil and ChatFrameUtil.OpenChat then
-		ChatFrameUtil.OpenChat(text)
+		ChatFrameUtil.OpenChat(text, chatFrame)
 	elseif ChatFrame_OpenChat then
-		ChatFrame_OpenChat(text)
+		ChatFrame_OpenChat(text, chatFrame)
 	end
 end
 
+-- Messages still to come: { box = edit box, parts = {…}, index = part in
+-- the box now }. The addon never sends chat itself: the player sends every
+-- part with Enter, then the next one is put into the input (same chat
+-- type, the game keeps it). Escape, or sending something without the
+-- part, drops the rest.
+local pending
+
+local function Hook(box)
+	if not box or box.askAzerothShare or not box.HookScript then
+		return
+	end
+	box.askAzerothShare = true
+	-- The text is gone once the game has sent it: keep the last one.
+	box:HookScript("OnTextChanged", function(self)
+		local text = self:GetText()
+		if text and text ~= "" then
+			self.askAzerothLastText = text
+		end
+	end)
+	box:HookScript("OnEnterPressed", function(self)
+		local job = pending
+		if not job or job.box ~= self then
+			return
+		end
+		local sent = self.askAzerothLastText or ""
+		if not sent:find(job.parts[job.index], 1, true) or job.index >= #job.parts then
+			pending = nil
+			return
+		end
+		job.index = job.index + 1
+		-- After the game has closed the input.
+		C_Timer.After(0, function()
+			if pending == job then
+				OpenChat(job.parts[job.index], self.chatFrame)
+			end
+		end)
+	end)
+	box:HookScript("OnEscapePressed", function(self)
+		if pending and pending.box == self then
+			pending = nil
+		end
+	end)
+end
+
 -- Puts entry id into the chat input, in lang (default: the reader's): at
--- the cursor of an open input, otherwise in a newly opened one. Returns
+-- the cursor of an open input, otherwise in a newly opened one. Longer
+-- entries follow part by part, one per Enter (FaqShare.Parts). Returns
 -- true when something was inserted.
 function FaqShare.Insert(id, lang)
 	local entry = Faq.Get(id)
@@ -97,22 +164,27 @@ function FaqShare.Insert(id, lang)
 		return false
 	end
 	lang = lang or ns.FaqRefs.ReaderLanguage()
-	local editBox = ActiveEditBox()
-	if editBox and editBox.Insert then
-		local typed = editBox:GetText() or ""
+	pending = nil
+	local box = ActiveEditBox()
+	local parts
+	if box and box.Insert then
+		local typed = box:GetText() or ""
 		local before = typed ~= "" and not typed:find("%s$") and " " or ""
-		local line = FaqShare.Format(entry, lang, C.CHAT_MESSAGE_MAX - #typed - #before)
-		if not line then
+		parts = FaqShare.Parts(entry, lang, C.CHAT_MESSAGE_MAX - #typed - #before)
+		if not parts then
 			return false
 		end
-		editBox:Insert(before .. line)
-		return true
+		box:Insert(before .. parts[1])
+	else
+		parts = FaqShare.Parts(entry, lang, C.CHAT_MESSAGE_MAX)
+		OpenChat(parts[1])
+		box = ActiveEditBox()
 	end
-	local line = FaqShare.Format(entry, lang, C.CHAT_MESSAGE_MAX)
-	if line then
-		OpenChat(line)
+	if #parts > 1 and box then
+		Hook(box)
+		pending = { box = box, parts = parts, index = 1 }
 	end
-	return line ~= nil
+	return true
 end
 
 --------------------------------------------------------------------------------

@@ -3,7 +3,8 @@
 ## Unreleased
 
 - FAQ: shift-click an entry to copy it into the chat as "AskAzeroth: question
-  answer" (long answers are shortened to fit one message). Players with
+  answer". Long entries are split into numbered messages (1/3, 2/3 …): after
+  each Enter the next part is waiting in the chat input, Escape stops. Players with
   AskAzeroth see "AskAzeroth" as a link: hover shows the whole entry in their
   language, a click opens it in the FAQ. Works for FAQ links in answers too.
 - Minimap button: now a standard LibDBIcon button, so minimap addons
