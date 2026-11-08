@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Glossary: terms are now found in any spelling, in texts and in normal chat
+  ("Dps", "dpS", "DPS", also Ä/É/Я). Short forms whose other spellings are
+  everyday words ("IF", "Add", "OP" and a few more) stay as written.
+
 ## v1.3.0 (2026-11-08)
 
 - FAQ: shift-click an entry to copy it into the chat as "AskAzeroth: question

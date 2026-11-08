@@ -8,8 +8,8 @@ local _, ns = ...
 --     {
 --       id = "bop",              -- stable, like FAQ ids; never change it
 --       chat = { "BoP" },        -- optional: short forms players write in
---                                --   chat in every language; marked as
---                                --   written in chat lines
+--                                --   chat in every language; marked in
+--                                --   any case in chat lines
 --                                --   (UI/ChatGlossary.lua)
 --       faq = "paladin-bop",     -- optional: FAQ entry with more detail
 --       mark = false,            -- optional: never mark it inside texts,
@@ -18,6 +18,9 @@ local _, ns = ...
 --       lower = false,           -- optional: mark it only as written, not
 --                                --   in lower or upper case, when that is
 --                                --   an everyday word ("ah", "hot")
+--       exact = { "IF" },        -- optional: forms of term, alt or chat
+--                                --   marked only as written, when another
+--                                --   case is an everyday word ("if")
 --       de = { term = "BoP", alt = { "Segen des Schutzes" }, def = "…" },
 --       en = { term = "BoP", alt = { "Blessing of Protection" }, def = "…" },
 --     },
@@ -65,6 +68,9 @@ local function Check(entry)
 	end
 	if not IsTextList(entry.chat) then
 		return "chat"
+	end
+	if not IsTextList(entry.exact) then
+		return "exact"
 	end
 	if entry.faq ~= nil and not Faq.IsId(entry.faq) then
 		return "faq"
@@ -229,55 +235,15 @@ function Glossary.Contains(entry, text, lang)
 end
 
 -- Words that mark an entry inside a text in lang: term and other names
--- (the chat forms are for chat only), each also with its first letter in
--- upper and lower case and all in lower and upper case, since players
--- write "dot", "aoe" or "DOT" (whole words in lower and upper case only for
--- ASCII; the first letter also for é or я, see CaseFirst). Entries with lower = false
--- only as written. withChat adds the chat forms (field chat, as written).
--- withEnglish adds the English forms (players write
--- "threat" or "healer" in every language); the forms of lang come first.
--- Longest first, so "Blessing of Protection" wins over a shorter form
--- inside it. Built once per language.
+-- (the chat forms are for chat only). They match in any case ("dps",
+-- "Dps", "dpS", "DPS"; also É/é and Я/я, see Util.Lower): such a form is
+-- kept in lower case (ci = true) and looked for in the lower case text.
+-- Entries with lower = false and the forms in exact only as written. withChat adds the chat forms
+-- (field chat, matched the same way). withEnglish adds the English forms (players
+-- write "threat" or "healer" in every language); the forms of lang come
+-- first. Longest first, so "Blessing of Protection" wins over a shorter
+-- form inside it. Built once per language.
 local forms = {}
-
--- form with its first letter in upper (upper = true) or lower case. Besides
--- ASCII it knows the two-byte UTF-8 letters of the addon's languages:
--- Latin-1 (É/é, À/à, …) and Cyrillic (А/а … Я/я, Ё/ё), since string.upper
--- and string.lower only change ASCII letters.
-local function CaseFirst(form, upper)
-	local b1, b2 = form:byte(1, 2)
-	if not b1 or b1 < 128 then
-		local first = form:sub(1, 1)
-		return (upper and first:upper() or first:lower()) .. form:sub(2)
-	end
-	if not b2 then
-		return form
-	end
-	if b1 == 0xC3 then
-		if upper and b2 >= 0xA0 and b2 <= 0xBE and b2 ~= 0xB7 then
-			b2 = b2 - 0x20
-		elseif not upper and b2 >= 0x80 and b2 <= 0x9E and b2 ~= 0x97 then
-			b2 = b2 + 0x20
-		end
-	elseif b1 == 0xD0 then
-		if upper and b2 >= 0xB0 and b2 <= 0xBF then
-			b2 = b2 - 0x20 -- а-п
-		elseif not upper and b2 >= 0x90 and b2 <= 0x9F then
-			b2 = b2 + 0x20 -- А-П
-		elseif not upper and b2 >= 0xA0 and b2 <= 0xAF then
-			b1, b2 = 0xD1, b2 - 0x20 -- Р-Я
-		elseif not upper and b2 == 0x81 then
-			b1, b2 = 0xD1, 0x91 -- Ё
-		end
-	elseif b1 == 0xD1 and upper then
-		if b2 >= 0x80 and b2 <= 0x8F then
-			b1, b2 = 0xD0, b2 + 0x20 -- р-я
-		elseif b2 == 0x91 then
-			b1, b2 = 0xD0, 0x81 -- ё
-		end
-	end
-	return string.char(b1, b2) .. form:sub(3)
-end
 
 local function Forms(lang, withEnglish, withChat)
 	local langKey = withEnglish and lang ~= "en" and lang .. "+en" or lang
@@ -288,19 +254,26 @@ local function Forms(lang, withEnglish, withChat)
 	end
 	list = {}
 	local seen = {}
-	local function Add(entry, form)
-		if not seen[form] then
-			seen[form] = true
-			list[#list + 1] = { text = form, entry = entry }
+	local function Add(entry, form, ci)
+		local seenKey = (ci and "i" or "w") .. form
+		if not seen[seenKey] then
+			seen[seenKey] = true
+			list[#list + 1] = { text = form, entry = entry, ci = ci }
 		end
 	end
+	local function IsExact(entry, form)
+		for _, exact in ipairs(entry.exact or {}) do
+			if exact == form then
+				return true
+			end
+		end
+		return entry.lower == false
+	end
 	local function AddCased(entry, form)
-		Add(entry, form)
-		if entry.lower ~= false then
-			Add(entry, CaseFirst(form, true))
-			Add(entry, CaseFirst(form, false))
-			Add(entry, form:lower())
-			Add(entry, form:upper())
+		if not IsExact(entry, form) then
+			Add(entry, ns.Util.Lower(form), true)
+		else
+			Add(entry, form)
 		end
 	end
 	local langs = langKey == lang and { lang } or { lang, "en" }
@@ -315,12 +288,12 @@ local function Forms(lang, withEnglish, withChat)
 			end
 		end
 	end
-	-- Chat forms as written, also of entries never marked in texts: in chat
-	-- "pull" or "need" mean the game term.
+	-- Chat forms, also of entries never marked in texts: in chat "pull" or
+	-- "need" mean the game term. In any case too (see AddCased).
 	if withChat then
 		for _, entry in ipairs(all) do
 			for _, form in ipairs(entry.chat or {}) do
-				Add(entry, form)
+				AddCased(entry, form)
 			end
 		end
 	end
@@ -356,23 +329,27 @@ local function PluralEnd(text, form, last)
 	return last
 end
 
--- Places of glossary terms in text (plain text, no escape sequences), each
--- entry at most once (its first place), non-overlapping, in text order:
+-- Places of glossary terms in text (plain text, no escape sequences), in
+-- any case (except lower = false and exact), each entry at most once
+-- (its first place), non-overlapping, in text order:
 -- a list of { first, last, entry }; a plural ending is part of the place
 -- (see PluralEnd). withEnglish: also the English terms (for texts players
 -- write); withChat: also the chat forms (chat lines).
 function Glossary.Find(text, lang, withEnglish, withChat)
 	local found, used, taken = {}, {}, {}
+	-- Same length and byte positions as text (see Util.Lower).
+	local lowered = ns.Util.Lower(text)
 	for _, form in ipairs(Forms(lang, withEnglish, withChat)) do
 		if not used[form.entry] then
+			local haystack = form.ci and lowered or text
 			local init = 1
 			while true do
-				local first, last = text:find(form.text, init, true)
+				local first, last = haystack:find(form.text, init, true)
 				if not first then
 					break
 				end
 				if IsWordByte(text:byte(last + 1)) then
-					last = PluralEnd(text, form.text, last)
+					last = PluralEnd(haystack, form.text, last)
 				end
 				local free = not IsWordByte(text:byte(first - 1)) and not IsWordByte(text:byte(last + 1))
 				for i = first, last do
