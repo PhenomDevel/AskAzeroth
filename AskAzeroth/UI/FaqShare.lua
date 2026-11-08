@@ -1,4 +1,4 @@
--- luacheck: read globals ChatFrameUtil ChatEdit_GetActiveWindow ChatFrame_OpenChat GameTooltip C_Timer
+-- luacheck: read globals ChatFrameUtil ChatEdit_GetActiveWindow ChatFrame_OpenChat GameTooltip C_Timer C_ChatInfo SendChatMessage DEFAULT_CHAT_FRAME GetChannelName
 local _, ns = ...
 
 -- FAQ entries in the normal chat.
@@ -10,6 +10,9 @@ local _, ns = ...
 -- Enter. Players cannot send links of
 -- their own, so the line carries nothing but text: players without the
 -- addon read the question, the answer and the addon's name.
+--
+-- Button: FaqShare.Send sends all parts at once to the chat the player
+-- would type into (say, party, guild, whisper, channel …).
 --
 -- Receiving: FaqShare.Annotate (called by the chat filter in
 -- UI/ChatGlossary.lua) turns the word "AskAzeroth" into a link when the
@@ -183,6 +186,78 @@ function FaqShare.Insert(id, lang)
 	if #parts > 1 and box then
 		Hook(box)
 		pending = { box = box, parts = parts, index = 1 }
+	end
+	return true
+end
+
+--------------------------------------------------------------------------------
+-- Sending with a button.
+--------------------------------------------------------------------------------
+
+-- Chat types the button sends to; others (Battle.net whispers, emotes)
+-- fall back to FaqShare.Insert.
+local SENDABLE = {
+	SAY = true, YELL = true, PARTY = true, RAID = true, INSTANCE_CHAT = true,
+	GUILD = true, OFFICER = true, WHISPER = true, CHANNEL = true,
+}
+
+-- The chat the player would type into now: the open input, otherwise the
+-- main chat window's (it keeps the last chat type).
+local function TargetBox()
+	return ActiveEditBox() or (DEFAULT_CHAT_FRAME and DEFAULT_CHAT_FRAME.editBox)
+end
+
+-- Chat type, target (whisper name or channel number) and a label for the
+-- player of the current chat, or nil when the button cannot send there.
+function FaqShare.Target()
+	local box = TargetBox()
+	local chatType = box and box.GetAttribute and box:GetAttribute("chatType")
+	if not SENDABLE[chatType] then
+		return nil
+	end
+	if chatType == "WHISPER" then
+		local name = box:GetAttribute("tellTarget")
+		if type(name) ~= "string" or name == "" then
+			return nil
+		end
+		return chatType, name, name
+	end
+	if chatType == "CHANNEL" then
+		local number = tonumber(box:GetAttribute("channelTarget"))
+		local name
+		if number then
+			name = select(2, GetChannelName(number))
+		end
+		if type(name) ~= "string" or name == "" then
+			return nil
+		end
+		return chatType, number, ("%d. %s"):format(number, name)
+	end
+	return chatType, nil, _G["CHAT_MSG_" .. chatType] or chatType
+end
+
+-- Sends entry id in lang to the current chat (FaqShare.Target), all parts
+-- at once. Must run in a click: say, yell and channels need a hardware
+-- event. Where the button cannot send, the entry goes into the chat input
+-- instead. Returns true when it was sent.
+function FaqShare.Send(id, lang)
+	local entry = Faq.Get(id)
+	if not entry then
+		return false
+	end
+	if ns.Comm.InLockdown() then
+		ns:Print(L.FAQ_SEND_LOCKED)
+		return false
+	end
+	local chatType, target = FaqShare.Target()
+	local send = C_ChatInfo and C_ChatInfo.SendChatMessage or SendChatMessage
+	if not chatType or not send then
+		FaqShare.Insert(id, lang)
+		return false
+	end
+	pending = nil
+	for _, part in ipairs(FaqShare.Parts(entry, lang or ns.FaqRefs.ReaderLanguage(), C.CHAT_MESSAGE_MAX)) do
+		send(part, chatType, nil, target)
 	end
 	return true
 end

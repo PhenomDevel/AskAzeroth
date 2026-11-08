@@ -286,6 +286,16 @@ To be written after the results are in.
   links of our own are sent; the receivers' chat filter adds the link
   `addon:AskAzeroth:faq:<id>`, same handling as the glossary links above).
 
+The "Send to chat" button under an open FAQ entry relies on:
+
+- The edit box attributes `chatType`, `tellTarget` and `channelTarget` of
+  the open input, otherwise `DEFAULT_CHAT_FRAME.editBox`, name the chat
+  the player would type into.
+- `C_ChatInfo.SendChatMessage` (fallback `SendChatMessage`) may be called
+  several times in one click: say, yell and channels need a hardware event
+  outside instances, and the click should count for every call. Not
+  allowed during `C_ChatInfo.InChatMessagingLockdown()`.
+
 ## Whisper mode (to confirm in game on Forever)
 
 `Core/Peers.lua` and the whisper mode in `Core/Comm.lua` rely on:
