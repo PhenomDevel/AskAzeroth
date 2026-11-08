@@ -34,12 +34,15 @@ message lockdown during encounters). Do not assume the old Classic Era API.
   `docs/SPIKE.md` and have Kevin test it in-game.
 
 ## Libraries
-- Only: LibStub, CallbackHandler-1.0, AceComm-3.0 (with ChatThrottleLib) and
-  LibDeflate. They come from `.pkgmeta` externals and are git-ignored;
-  `tools/fetch-libs.sh` fetches them for local development.
-- No other library (no AceAddon, AceDB, AceConfig, LibSerialize, LibDBIcon …):
-  serializer, saved data, window, widgets, settings and minimap button are
-  our own. Ask Kevin before adding one.
+- Only: LibStub, CallbackHandler-1.0, AceComm-3.0 (with ChatThrottleLib),
+  LibDeflate, LibDataBroker-1.1 and LibDBIcon-1.0. They come from `.pkgmeta`
+  externals and are git-ignored; `tools/fetch-libs.sh` fetches them for local
+  development.
+- LibDBIcon draws the minimap button, so minimap addons can hide, fade or
+  collect it like other addons' buttons.
+- No other library (no AceAddon, AceDB, AceConfig, LibSerialize …):
+  serializer, saved data, window, widgets and settings are our own. Ask Kevin
+  before adding one.
 
 ## Networking rules
 - All traffic goes through `ns.Comm` (hidden language channels, LibDeflate,

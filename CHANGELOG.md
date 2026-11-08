@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Minimap button: now a standard LibDBIcon button, so minimap addons
+  (SexyMap, Leatrix Plus, button collectors …) hide it until you hover the
+  minimap, like other addons' buttons. Position, the show/hide setting and the
+  notification badge are kept.
+
 ## v1.2.0 (2026-11-06)
 
 - FAQ: where to learn weapon skills. Which weapon master in which capital
