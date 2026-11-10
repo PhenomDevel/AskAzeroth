@@ -113,6 +113,7 @@ UI\PinnedPage.lua
 UI\PlayersPage.lua
 UI\FaqPage.lua
 UI\Settings.lua
+UI\About.lua
 UI\Toast.lua
 UI\MinimapButton.lua
 UI\Setup.lua

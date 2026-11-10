@@ -18,7 +18,7 @@ AskAzeroth/                  addon folder (the only thing that gets installed)
                              slash commands, language channels, transport
   UI/                        widgets, main window with its pages: questions (QueueList,
                              ThreadView, AskDialog), my questions, pinned, players, FAQ,
-                             settings; player menu,
+                             settings, about; player menu,
                              toast, minimap button, commands
   Modules/                   ChannelDebug (/aa channels: channel state and live channel log, packaged)
   Probe/                     development tools, not packaged: transport test (/aa probe),
