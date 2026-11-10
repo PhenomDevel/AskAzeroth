@@ -42,6 +42,8 @@ What changed: [CHANGELOG.md](https://github.com/PhenomDevel/AskAzeroth/blob/main
   solved when you're happy.
 - **Mentor mode** for experienced players, with notifications per category
   that pause in combat and in instances.
+- **Who's online:** the window shows how many players and mentors are online
+  with AskAzeroth, per language in the tooltip (an estimate).
 - **Your own player list:** favourites, ignored players, notes and a
   "helped me" counter, all kept on your computer only.
 - **My questions** with your answers, kept as long as you like.

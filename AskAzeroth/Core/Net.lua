@@ -14,7 +14,8 @@ local _, ns = ...
 -- passes it on (Relay below).
 --
 -- Messages: AA_NET_SENT (type, lang, bytes, held), AA_NET_RECEIVED (type,
--- sender, lang, bytes), AA_SYNC_REQUEST (message) for the sync (M7).
+-- sender, lang, bytes), AA_SYNC_REQUEST (message) for the sync (M7),
+-- AA_PRESENCE (message) for Presence.lua.
 local Net = {}
 ns.Net = Net
 
@@ -162,6 +163,10 @@ Comm.RegisterHandler(function(text, sender, lang)
 	end
 	if m.type == "SR" then
 		ns:Fire("AA_SYNC_REQUEST", m)
+		return
+	end
+	if m.type == "P" then
+		ns:Fire("AA_PRESENCE", m)
 		return
 	end
 	if not Comm.IsWhisperMode() then

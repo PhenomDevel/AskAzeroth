@@ -87,6 +87,13 @@ function UI.UpdateStatus()
 	frame.languages.text:SetText(table.concat(codes, " · "))
 	frame.languages:SetWidth(frame.languages.text:GetStringWidth() + 18)
 
+	local players, mentors, any = ns.Presence.CountAll()
+	frame.online:SetShown(any)
+	if any then
+		frame.online.text:SetText(L.ONLINE_COUNT:format(players, mentors))
+		frame.online:SetWidth(frame.online.text:GetStringWidth() + 4)
+	end
+
 	frame.lockdown:SetShown(ns.Comm.InLockdown())
 	local mentor = ns.db.settings.mentor and true or false
 	frame.mentor:SetShown(mentor)
@@ -100,6 +107,26 @@ local function LanguageTooltip(self)
 		GameTooltip:AddDoubleLine(C.LANGUAGE_NAMES[lang], C.GetChannelName(lang),
 			1, 1, 1, ready and 0.56 or 0.9, ready and 0.82 or 0.63, ready and 0.56 or 0.63)
 	end
+	GameTooltip:Show()
+end
+
+-- Players and mentors online per joined language, for tooltips (also used
+-- by the minimap button).
+function UI.AddOnlineLines(tooltip)
+	for _, lang in ipairs(ns.Channel.GetSelectedLanguages()) do
+		if ns.Channel.IsReady(lang) then
+			local players, mentors = ns.Presence.Count(lang)
+			tooltip:AddDoubleLine(C.LANGUAGE_NAMES[lang], L.ONLINE_COUNT:format(players, mentors), 1, 1, 1, 1, 0.82, 0)
+		end
+	end
+end
+
+local function OnlineTooltip(self)
+	GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT")
+	GameTooltip:SetText(L.ONLINE_TITLE, 1, 1, 1)
+	UI.AddOnlineLines(GameTooltip)
+	GameTooltip:AddLine(" ")
+	GameTooltip:AddLine(L.ONLINE_TIP, nil, nil, nil, true)
 	GameTooltip:Show()
 end
 
@@ -255,8 +282,21 @@ local function CreateHeader()
 	end)
 	frame.languages = languages
 
+	-- Players and mentors online (estimate, see Core/Presence.lua).
+	local online = CreateFrame("Frame", nil, header)
+	online:SetHeight(20)
+	online:SetPoint("RIGHT", languages, "LEFT", -14, 0)
+	online.text = W.Text(online, "GameFontHighlightSmall", W.SOFT)
+	online.text:SetPoint("RIGHT")
+	online:EnableMouse(true)
+	online:SetScript("OnEnter", OnlineTooltip)
+	online:SetScript("OnLeave", function()
+		GameTooltip:Hide()
+	end)
+	frame.online = online
+
 	local lockdown = W.Text(header, "GameFontHighlightSmall", W.GOLD)
-	lockdown:SetPoint("RIGHT", languages, "LEFT", -14, 0)
+	lockdown:SetPoint("RIGHT", online, "LEFT", -14, 0)
 	lockdown:SetText(L.STATUS_LOCKDOWN)
 	frame.lockdown = lockdown
 	return header
@@ -416,7 +456,7 @@ end
 ns.RegisterCallback(UI, "AA_NOTIFY_CHANGED", function()
 	UI.UpdateBadge()
 end)
-for _, message in ipairs({ "AA_CHANNEL_READY", "AA_CHANNEL_LEFT", "AA_CHANNEL_FAILED", "AA_COMM_HELD", "AA_COMM_FLUSHED", "AA_LANGUAGES_CHANGED" }) do
+for _, message in ipairs({ "AA_CHANNEL_READY", "AA_CHANNEL_LEFT", "AA_CHANNEL_FAILED", "AA_COMM_HELD", "AA_COMM_FLUSHED", "AA_LANGUAGES_CHANGED", "AA_PRESENCE_CHANGED" }) do
 	ns.RegisterCallback(UI, message, UI.UpdateStatus)
 end
 -- Lockdown starts and ends without an own message; check now and then.

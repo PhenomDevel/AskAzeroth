@@ -29,6 +29,9 @@ L.WINDOW_SUBTITLE = "Newcomer help"
 -- Status line
 L.STATUS_LOCKDOWN = "Chat messages locked (encounter)"
 L.STATUS_MENTOR = "Mentor mode"
+L.ONLINE_COUNT = "%d players · %d mentors online"
+L.ONLINE_TITLE = "Online with AskAzeroth"
+L.ONLINE_TIP = "An estimate: clients tell each other who is online, so the numbers settle a few seconds after login and can be off a little. Players with an older version of the addon count as players."
 
 -- Settings
 L.SETTINGS_GENERAL = "General"
