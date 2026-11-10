@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- New "About" page: who made the addon (Phenom), version, and links to Discord, CurseForge, Wago, GitHub and bug reports, ready to copy.
+
 ## v1.3.1 (2026-11-08)
 
 - Glossary: terms are now found in any spelling, in texts and in normal chat
