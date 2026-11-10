@@ -94,6 +94,7 @@ Core\Notify.lua
 Core\MyQuestions.lua
 Core\Pinned.lua
 Core\Sync.lua
+Core\Presence.lua
 
 # UI
 UI\Widgets.lua

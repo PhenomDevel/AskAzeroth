@@ -25,6 +25,9 @@ L.WINDOW_SUBTITLE = "Neulingshilfe"
 -- Status line
 L.STATUS_LOCKDOWN = "Chatnachrichten gesperrt (Bosskampf)"
 L.STATUS_MENTOR = "Mentor-Modus"
+L.ONLINE_COUNT = "%d Spieler · %d Mentoren online"
+L.ONLINE_TITLE = "Online mit AskAzeroth"
+L.ONLINE_TIP = "Eine Schätzung: Die Clients sagen sich gegenseitig, wer online ist. Die Zahlen stehen deshalb erst einige Sekunden nach dem Login und können etwas abweichen. Spieler mit einer älteren Addon-Version zählen als Spieler."
 
 -- Settings
 L.SETTINGS_GENERAL = "Allgemein"

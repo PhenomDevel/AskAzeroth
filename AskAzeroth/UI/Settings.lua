@@ -47,6 +47,7 @@ local function Build(content)
 	end, function(checked)
 		settings.mentor = checked
 		UI.UpdateStatus()
+		ns:Fire("AA_ROLE_CHANGED")
 	end))
 	mentor:SetPoint("TOPLEFT", general, "BOTTOMLEFT", -4, -8)
 	W.Tooltip(mentor, L.SETTING_MENTOR, L.SETTING_MENTOR_TIP)

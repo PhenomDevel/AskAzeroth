@@ -3,6 +3,10 @@
 ## Unreleased
 
 - New "About" page: who made the addon (Phenom), version, and links to Discord, CurseForge, Wago, GitHub and bug reports, ready to copy.
+- The window header now shows how many players and mentors are online with
+  AskAzeroth (hover for the numbers per language). It is an estimate: the
+  addons tell each other who is online, so the numbers settle a few seconds
+  after login. Players with an older version count as players.
 
 ## v1.3.1 (2026-11-08)
 

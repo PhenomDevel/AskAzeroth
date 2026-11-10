@@ -13,7 +13,8 @@ AskAzeroth/                  addon folder (the only thing that gets installed)
   Media/                     Logo.tga (addon icon, 64x64, 32-bit TGA from docs/logo/logo.svg)
   Core/                      namespace and events (Init.lua), constants, helpers (Util),
                              serializer, categories and FAQ texts (Data/), protocol, store, Net (store ↔ channels),
-                             login sync, my questions, pinned answers, players, notifications, saved data,
+                             login sync, presence (who is online), my questions, pinned answers, players,
+                             notifications, saved data,
                              slash commands, language channels, transport
   UI/                        widgets, main window with its pages: questions (QueueList,
                              ThreadView, AskDialog), my questions, pinned, players, FAQ,

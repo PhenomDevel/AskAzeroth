@@ -25,6 +25,9 @@ L.WINDOW_SUBTITLE = "Aide aux débutants"
 -- Status line
 L.STATUS_LOCKDOWN = "Messages de discussion bloqués (rencontre)"
 L.STATUS_MENTOR = "Mode mentor"
+L.ONLINE_COUNT = "%d joueurs · %d mentors en ligne"
+L.ONLINE_TITLE = "En ligne avec AskAzeroth"
+L.ONLINE_TIP = "Une estimation : les clients s'indiquent mutuellement qui est en ligne. Les chiffres se stabilisent quelques secondes après la connexion et peuvent varier un peu. Les joueurs avec une ancienne version de l'addon comptent comme joueurs."
 
 -- Settings
 L.SETTINGS_GENERAL = "Général"

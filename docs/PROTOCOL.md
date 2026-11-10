@@ -85,6 +85,7 @@ messages small.
 | `S` solved | `q` question id, `ts` time | the question's author |
 | `D` withdrawn | `q` question id | the question's author |
 | `SR` sync request | `k` list of known question ids | anyone |
+| `P` presence | `m` mentor (boolean), `r` reply wanted (optional), `o` online list (optional, whisper mode) | anyone |
 | `SP` sync answer | `qs` list of questions with `a` author and `an` answers (`i`, `a`, `tx`, `f`, `x`, `ts`) | anyone |
 
 The author of `Q`, `A`, `S` and `D` is always the sender reported by the
@@ -194,6 +195,34 @@ questions there.
 
 Own questions are also put back from "My questions" at login (as long as
 they haven't expired), so their thread and actions work before the sync.
+
+## Presence
+
+How many AskAzeroth users are online, split into players and mentors
+(`Core/Presence.lua`, shown in the window header and the minimap tooltip).
+Every client keeps its own estimate; there is no exact count, because the
+addon can't read the channels' member lists itself.
+
+- `P` carries the sender's role (`m`). In whisper mode it also carries `o`,
+  the players the sender knows to be online, as flat triples `name, age,
+  role` (age: seconds since last seen, at most 3600; role: 0 unknown,
+  1 player, 2 mentor), the newest 300 first. Invalid triples are skipped.
+- Every client sends a `P` every 5 minutes (±1 minute) to 2 random peers; in
+  channel mode to the channel, without a list.
+- 3 to 10 s after joining a language channel a client sends a `P` with
+  `r = true` to 3 random peers (retried every 15 s, up to 8 times, while
+  none are known). Each answers with its own `P` (with list, without `r`),
+  at most once per requester every 5 minutes.
+- Lists are merged: for every name the newest sighting wins, together with
+  its role. First-hand sightings also come from `Core/Peers.lua` (join
+  notices, `/chatlist`, received whispers; role unknown).
+- A leave notice or a bounced whisper removes a player; sightings from
+  before that time don't bring them back.
+- Players not seen for 60 minutes (channel mode: 13 minutes) no longer
+  count. Unknown roles (older versions) count as players. The own character
+  counts while its channel is joined.
+- Known limit: like `SP`, a forged list can add made-up names.
+- Older clients drop `P` as an unknown type.
 
 ## Expiry
 

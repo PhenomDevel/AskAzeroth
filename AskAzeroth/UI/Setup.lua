@@ -388,8 +388,13 @@ end
 
 function Setup.SetRole(key)
 	role = key
-	Settings().mentor = key == "mentor"
+	local mentor = key == "mentor"
+	local changed = (Settings().mentor == true) ~= mentor
+	Settings().mentor = mentor
 	UI.UpdateStatus()
+	if changed then
+		ns:Fire("AA_ROLE_CHANGED")
+	end
 	pages.role:Refresh()
 	UpdateFooter()
 end
