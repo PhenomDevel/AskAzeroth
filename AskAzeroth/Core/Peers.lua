@@ -13,7 +13,9 @@ local _, ns = ...
 -- Offline peers drop out on the server's "No player named …" answer to a
 -- whisper; that line is hidden.
 --
--- Message: AA_PEERS_CHANGED (lang)
+-- Messages: AA_PEERS_CHANGED (lang); AA_PEER_SEEN (lang, name) whenever a
+-- player shows up first-hand (join, member list, whisper), AA_PEER_GONE
+-- (lang, name) when one leaves or turns out to be offline.
 local Peers = {}
 ns.Peers = Peers
 
@@ -46,6 +48,7 @@ function Peers.Add(lang, name, quiet)
 	local isNew = list[name] == nil
 	list[name] = GetTime()
 	Peers.Remember(lang, name)
+	ns:Fire("AA_PEER_SEEN", lang, name)
 	if isNew and not quiet then
 		ns:Fire("AA_PEERS_CHANGED", lang)
 	end
@@ -55,6 +58,9 @@ end
 function Peers.Remove(lang, name)
 	local list = peers[lang]
 	name = Util.FullName(name)
+	if name and not IsMe(name) then
+		ns:Fire("AA_PEER_GONE", lang, name)
+	end
 	if list and name and list[name] then
 		list[name] = nil
 		ns:Fire("AA_PEERS_CHANGED", lang)

@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- The window header now shows how many players and mentors are online with
+  AskAzeroth (hover for the numbers per language). It is an estimate: the
+  addons tell each other who is online, so the numbers settle a few seconds
+  after login. Players with an older version count as players.
+
 ## v1.3.1 (2026-11-08)
 
 - Glossary: terms are now found in any spelling, in texts and in normal chat

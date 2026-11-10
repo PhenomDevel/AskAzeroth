@@ -10,6 +10,7 @@ local _, ns = ...
 --   D   { t, q = question id }
 --   SR  { t, k = { known question ids } }
 --   SP  { t, qs = { { i, a = author, c, ti, b?, x?, ts, an = { { i, a, tx, f?, x?, ts } } } } }
+--   P   { t, m = mentor, r = reply wanted?, o = { name, age, role, name, age, role, ... }? }
 --
 -- Decode returns a normalized message or nil plus a reason. It checks types,
 -- lengths, lists and times; who may send what is checked by the store, which
@@ -218,6 +219,31 @@ function readers.SP(m, sender, lang, now)
 	return { type = "SP", sender = sender, questions = questions }
 end
 
+-- Presence (Core/Presence.lua): the sender's role, and optionally the
+-- players the sender knows to be online as flat triples (name, seconds since
+-- last seen, role: 0 unknown, 1 player, 2 mentor). Invalid triples are
+-- skipped one by one.
+function readers.P(m, sender)
+	if type(m.m) ~= "boolean" then
+		return nil, "role"
+	end
+	local online
+	if m.o ~= nil then
+		if type(m.o) ~= "table" or #m.o > 3 * C.PRESENCE_LIST_MAX then
+			return nil, "online"
+		end
+		online = {}
+		for i = 1, #m.o - 2, 3 do
+			local name, age, role = m.o[i], m.o[i + 1], m.o[i + 2]
+			if Util.IsPlayerName(name) and type(age) == "number" and age == math.floor(age)
+				and age >= 0 and age <= C.PRESENCE_TTL and (role == 0 or role == 1 or role == 2) then
+				online[#online + 1] = { name = name, age = age, role = role }
+			end
+		end
+	end
+	return { type = "P", sender = sender, mentor = m.m, reply = m.r == true, online = online }
+end
+
 -- text: the decompressed payload; sender: "Name-Realm"; lang: the channel's
 -- language. Returns the message or nil, reason.
 function Protocol.Decode(text, sender, lang, now)
@@ -262,6 +288,22 @@ end
 
 function Protocol.EncodeSyncRequest(knownIds)
 	return Serializer.Serialize({ t = "SR", k = knownIds })
+end
+
+-- mentor: own role; online: list of { name, age, role } (see readers.P) or
+-- nil; reply: ask the receiver to answer with its own list.
+function Protocol.EncodePresence(mentor, online, reply)
+	local list
+	if online and #online > 0 then
+		list = {}
+		for i = 1, math.min(#online, C.PRESENCE_LIST_MAX) do
+			local entry = online[i]
+			list[#list + 1] = entry.name
+			list[#list + 1] = entry.age
+			list[#list + 1] = entry.role
+		end
+	end
+	return Serializer.Serialize({ t = "P", m = mentor and true or false, r = reply or nil, o = list })
 end
 
 local function SyncEntry(q, answers, count)

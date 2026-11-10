@@ -168,6 +168,28 @@ C.WELCOME_DELAY_MAX = 8
 -- server turns out to reject them (NOT_ALLOWED_IN_CHANNEL comes 1-2 s late).
 C.RESEND_WINDOW = 10
 
+-- Presence (Core/Presence.lua): every client tells PRESENCE_GOSSIP_PEERS
+-- random peers every PRESENCE_INTERVAL s (random +-PRESENCE_JITTER) that it
+-- is online and whether it is a mentor; in whisper mode it adds the newest
+-- PRESENCE_LIST_MAX players it knows to be online. After joining a channel
+-- it asks PRESENCE_ASK_PEERS peers for their lists, PRESENCE_DELAY_MIN..MAX s
+-- later (retried every PRESENCE_RETRY s, PRESENCE_RETRIES times, while no
+-- peers are known). A client answers the same player at most every
+-- PRESENCE_INTERVAL s. Players not seen for PRESENCE_TTL s (whisper mode) or
+-- PRESENCE_TTL_CHANNEL s (channel mode, where everyone hears everyone) no
+-- longer count; leave notices and bounced whispers remove them at once.
+C.PRESENCE_INTERVAL = 5 * 60
+C.PRESENCE_JITTER = 60
+C.PRESENCE_GOSSIP_PEERS = 2
+C.PRESENCE_ASK_PEERS = 3
+C.PRESENCE_LIST_MAX = 300
+C.PRESENCE_DELAY_MIN = 3
+C.PRESENCE_DELAY_MAX = 10
+C.PRESENCE_RETRY = 15
+C.PRESENCE_RETRIES = 8
+C.PRESENCE_TTL = 60 * 60
+C.PRESENCE_TTL_CHANNEL = 13 * 60
+
 -- Pinned answers kept at most; beyond that pinning is refused.
 C.MAX_PINNED = 500
 
