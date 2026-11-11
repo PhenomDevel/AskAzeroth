@@ -189,6 +189,14 @@ C.PRESENCE_RETRY = 15
 C.PRESENCE_RETRIES = 8
 C.PRESENCE_TTL = 60 * 60
 C.PRESENCE_TTL_CHANNEL = 13 * 60
+-- Players in a received presence list seen within PEER_REPORTED_MAX_AGE s
+-- become peers too (whisper mode).
+C.PEER_REPORTED_MAX_AGE = 15 * 60
+-- Group and guild greeting (Presence.lua): GREETING_DELAY s after a channel
+-- is ready or the group grew, at most once per GREETING_INTERVAL s per
+-- distribution (except when the group grew).
+C.GREETING_DELAY = 3
+C.GREETING_INTERVAL = 60
 
 -- Pinned answers kept at most; beyond that pinning is refused.
 C.MAX_PINNED = 500

@@ -15,6 +15,11 @@ local _, ns = ...
 --     passed on by them (Net.lua). Forever starts in this mode; retail
 --     switches to it on that notice and resends what just went out.
 --
+-- Besides that, both modes can greet the own group and guild over their
+-- addon distributions (Comm.SendGroup): those are no chat channels, so the
+-- server delivers them on Forever too. Whoever answers is a peer, which
+-- finds other AskAzeroth users without the channel's join notices.
+--
 -- Message: AA_COMM_MODE (mode)
 local Comm = {}
 ns.Comm = Comm
@@ -45,6 +50,9 @@ local SENT_MEMORY = 120
 local sentData = {}
 
 -- Forever builds use interface numbers below retail's (16001 vs. 12xxxx).
+-- Addon distributions that reach the own group or guild (Comm.SendGroup).
+local GROUP_DISTRIBUTIONS = { PARTY = true, RAID = true, INSTANCE_CHAT = true, GUILD = true }
+
 local function IsForever()
 	local _, _, _, interface = GetBuildInfo()
 	return type(interface) == "number" and interface < 100000
@@ -61,10 +69,13 @@ function Comm.InLockdown()
 	return check ~= nil and check() and true or false
 end
 
--- entry: { lang, targets? }
+-- entry: { lang, targets?, distribution? }
 local function CanSend(entry)
 	if Comm.InLockdown() then
 		return false
+	end
+	if entry.distribution then
+		return true
 	end
 	if Comm.IsWhisperMode() then
 		return entry.targets ~= nil or ns.Peers.Count(entry.lang) > 0
@@ -93,6 +104,10 @@ local function Transmit(entry)
 		end
 	end
 	sentData[entry.data] = now
+	if entry.distribution then
+		Comm:SendCommMessage(prefix, entry.data, entry.distribution, nil, entry.prio, onChunk)
+		return
+	end
 	if Comm.IsWhisperMode() then
 		local targets = entry.targets or ns.Peers.Pick(entry.lang, C.WHISPER_FANOUT)
 		for i, name in ipairs(targets) do
@@ -171,6 +186,22 @@ function Comm.Send(lang, text, prio, callback, targets)
 	return #data, true
 end
 
+-- Sends text in lang to the own group or guild: distribution is one of
+-- PARTY, RAID, INSTANCE_CHAT, GUILD. Only players who selected lang read it.
+function Comm.SendGroup(lang, text, distribution, prio)
+	if not GROUP_DISTRIBUTIONS[distribution] then
+		return 0, false
+	end
+	local data = LibDeflate:EncodeForWoWAddonChannel(LibDeflate:CompressDeflate(text))
+	local entry = { lang = lang, data = data, prio = prio or "NORMAL", distribution = distribution }
+	if not HasQueued(lang) and CanSend(entry) then
+		Transmit(entry)
+		return #data, false
+	end
+	Hold(entry)
+	return #data, true
+end
+
 -- Switches to whisper mode and resends the channel messages of the last
 -- C.RESEND_WINDOW seconds (the server answers the rejected ones late).
 function Comm.SetWhisperMode()
@@ -189,8 +220,8 @@ function Comm.SetWhisperMode()
 	ns:Fire("AA_COMM_MODE", Comm.mode)
 end
 
--- handler(text, sender, lang) receives every valid message of other players
--- (and own ones while Comm.loopback is set).
+-- handler(text, sender, lang, distribution) receives every valid message of
+-- other players (and own ones while Comm.loopback is set).
 function Comm.RegisterHandler(handler)
 	handlers[#handlers + 1] = handler
 end
@@ -208,7 +239,7 @@ local function LearnSelf(sender)
 	if type(own) ~= "string" or own == "" or sender:sub(1, #own) ~= own then
 		return
 	end
-	ns.Peers.RemoveEverywhere(sender)
+	ns.Peers.RemoveEverywhere(sender, "self")
 	if ns.charDb and ns.charDb.selfName ~= sender then
 		ns.charDb.selfName = sender
 		ns:CheckPlayerName()
@@ -217,7 +248,7 @@ end
 
 function Comm:OnCommReceived(prefix, data, distribution, sender)
 	local lang = langByPrefix[prefix]
-	if not lang or (distribution ~= "CHANNEL" and distribution ~= "WHISPER") then
+	if not lang or (distribution ~= "CHANNEL" and distribution ~= "WHISPER" and not GROUP_DISTRIBUTIONS[distribution]) then
 		return
 	end
 	if issecretvalue and (issecretvalue(data) or issecretvalue(sender)) then
@@ -233,11 +264,12 @@ function Comm:OnCommReceived(prefix, data, distribution, sender)
 	if (own or IsSelf(sender)) and not Comm.loopback then
 		return
 	end
-	if distribution == "WHISPER" then
+	-- First-hand contact: the sender uses AskAzeroth in this language.
+	if distribution ~= "CHANNEL" then
 		if not ns.Channel.IsSelected(lang) then
 			return
 		end
-		ns.Peers.Add(lang, sender)
+		ns.Peers.Add(lang, sender, false, distribution == "WHISPER" and "whisper" or "group")
 	end
 	local decoded = LibDeflate:DecodeForWoWAddonChannel(data)
 	local text = decoded and LibDeflate:DecompressDeflate(decoded)
@@ -246,7 +278,7 @@ function Comm:OnCommReceived(prefix, data, distribution, sender)
 		return
 	end
 	for i = 1, #handlers do
-		handlers[i](text, sender, lang)
+		handlers[i](text, sender, lang, distribution)
 	end
 end
 

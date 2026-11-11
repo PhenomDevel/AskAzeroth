@@ -1,3 +1,4 @@
+-- luacheck: read globals IsInGroup IsInRaid IsInGuild GetNumGroupMembers LE_PARTY_CATEGORY_INSTANCE
 local _, ns = ...
 
 -- How many AskAzeroth users are online, split into players and mentors, per
@@ -17,10 +18,20 @@ local _, ns = ...
 --     member lists, whispers). Leave notices and bounced whispers remove
 --     them; a later sighting from an older list doesn't bring them back.
 --   * Players not seen for C.PRESENCE_TTL s no longer count.
+--   * Whisper mode: players in a received list seen within
+--     C.PEER_REPORTED_MAX_AGE s also become peers (Peers.AddReported), so
+--     one known peer is enough to reach the others.
+--   * Group and guild greeting (whisper mode): after joining a channel, and
+--     when the group grows, a P with r = true goes to the group and the
+--     guild (Comm.SendGroup). Everyone there who uses AskAzeroth in that
+--     language answers by whisper, and both sides know each other as
+--     peers, without the channel's join notices.
 -- The result is an estimate: forged lists could add names, and players of
 -- older versions count as players because they don't send their role.
 --
--- Message: AA_PRESENCE_CHANGED ()
+-- Messages: AA_PRESENCE_CHANGED (); for the debug output AA_PRESENCE_SENT
+-- (lang, targets, distribution, reply) and AA_PRESENCE_RECEIVED (lang,
+-- sender, mentor, onlineCount, reply).
 local Presence = {}
 ns.Presence = Presence
 
@@ -232,6 +243,7 @@ local function Send(lang, targets, reply)
 	end
 	if not ns.Comm.IsWhisperMode() then
 		ns.Net.SendRaw("P", lang, Protocol.EncodePresence(IsMentor()))
+		ns:Fire("AA_PRESENCE_SENT", lang, nil, nil, false)
 		return true
 	end
 	targets = targets or ns.Peers.Pick(lang, C.PRESENCE_GOSSIP_PEERS)
@@ -240,8 +252,69 @@ local function Send(lang, targets, reply)
 	end
 	local exclude = #targets == 1 and targets[1] or nil
 	ns.Net.SendRaw("P", lang, Protocol.EncodePresence(IsMentor(), OnlineList(lang, exclude), reply), targets)
+	ns:Fire("AA_PRESENCE_SENT", lang, targets, nil, reply and true or false)
 	return true
 end
+
+--------------------------------------------------------------------------------
+-- Group and guild greeting (whisper mode)
+--------------------------------------------------------------------------------
+
+-- distribution → GetTime() of the last greeting, so roster updates in a
+-- row don't send it over and over.
+local lastGreeting = {}
+local lastGroupSize = 0
+
+local function GroupDistribution()
+	if IsInGroup(LE_PARTY_CATEGORY_INSTANCE) then
+		return "INSTANCE_CHAT"
+	elseif IsInRaid() then
+		return "RAID"
+	elseif IsInGroup() then
+		return "PARTY"
+	end
+end
+
+-- Asks every AskAzeroth user of the group or guild to answer by whisper;
+-- distribution: PARTY, RAID, INSTANCE_CHAT or GUILD.
+local function Greet(distribution, force)
+	if not distribution or not ns.Comm.IsWhisperMode() then
+		return
+	end
+	local now = GetTime()
+	local langs = ns.Channel.GetReadyLanguages()
+	if #langs == 0 or not force and now - (lastGreeting[distribution] or -math.huge) < C.GREETING_INTERVAL then
+		return
+	end
+	lastGreeting[distribution] = now
+	local text = Protocol.EncodePresence(IsMentor(), nil, true)
+	for _, lang in ipairs(langs) do
+		ns.Net.SendGroup("P", lang, text, distribution)
+		ns:Fire("AA_PRESENCE_SENT", lang, nil, distribution, true)
+	end
+end
+
+local function GreetAll()
+	Greet(GroupDistribution())
+	if IsInGuild() then
+		Greet("GUILD")
+	end
+end
+
+-- The group grew: greet it again (debounced, roster updates come in bursts).
+local greetTimer
+ns:RegisterEvent("GROUP_ROSTER_UPDATE", function()
+	local size = GetNumGroupMembers() or 0
+	local grew = size > lastGroupSize
+	lastGroupSize = size
+	if not grew or size < 2 or greetTimer then
+		return
+	end
+	greetTimer = C_Timer.NewTimer(C.GREETING_DELAY, function()
+		greetTimer = nil
+		Greet(GroupDistribution(), true)
+	end)
+end)
 
 -- After joining: ask a few peers for their lists, retried while none are
 -- known yet.
@@ -283,10 +356,15 @@ function Presence.OnPresence(m)
 		return
 	end
 	local now = Util.Now()
+	ns:Fire("AA_PRESENCE_RECEIVED", lang, m.sender, m.mentor, m.online and #m.online or 0, m.reply)
 	See(lang, m.sender, now, m.mentor and ROLE_MENTOR or ROLE_PLAYER)
 	if m.online then
+		local whisper = ns.Comm.IsWhisperMode()
 		for _, entry in ipairs(m.online) do
 			See(lang, entry.name, now - entry.age, entry.role)
+			if whisper and entry.age <= C.PEER_REPORTED_MAX_AGE then
+				ns.Peers.AddReported(lang, entry.name)
+			end
 		end
 	end
 	if m.reply and ns.Comm.IsWhisperMode() then
@@ -317,6 +395,8 @@ end)
 
 ns.RegisterCallback(Presence, "AA_CHANNEL_READY", function(_, lang)
 	ScheduleAsk(lang)
+	-- Once the other selected channels had a moment to get ready too.
+	C_Timer.After(C.GREETING_DELAY, GreetAll)
 	Changed()
 end)
 
@@ -325,6 +405,7 @@ ns.RegisterCallback(Presence, "AA_COMM_MODE", function()
 	for _, lang in ipairs(ns.Channel.GetReadyLanguages()) do
 		ScheduleAsk(lang)
 	end
+	GreetAll()
 	Changed()
 end)
 

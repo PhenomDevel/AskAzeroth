@@ -13,8 +13,8 @@ local _, ns = ...
 -- peers, so whoever learns something new first-hand or through a relay
 -- passes it on (Relay below).
 --
--- Messages: AA_NET_SENT (type, lang, bytes, held), AA_NET_RECEIVED (type,
--- sender, lang, bytes), AA_SYNC_REQUEST (message) for the sync (M7),
+-- Messages: AA_NET_SENT (type, lang, bytes, held, distribution?, targets?),
+-- AA_NET_RECEIVED (type, sender, lang, bytes, distribution), AA_SYNC_REQUEST (message) for the sync (M7),
 -- AA_PRESENCE (message) for Presence.lua.
 local Net = {}
 ns.Net = Net
@@ -53,7 +53,7 @@ end
 local function Send(kind, lang, wire, targets)
 	local bytes, held = Comm.Send(lang, wire, PRIORITY, nil, targets)
 	Net.stats.sent = Net.stats.sent + 1
-	ns:Fire("AA_NET_SENT", kind, lang, bytes, held)
+	ns:Fire("AA_NET_SENT", kind, lang, bytes, held, nil, targets)
 end
 
 -- Each action returns the stored question/answer (or true), or nil, reason.
@@ -105,6 +105,13 @@ function Net.SendRaw(kind, lang, wire, targets)
 	Send(kind, lang, wire, targets)
 end
 
+-- To the own group or guild (see Comm.SendGroup).
+function Net.SendGroup(kind, lang, wire, distribution)
+	local bytes, held = Comm.SendGroup(lang, wire, distribution, PRIORITY)
+	Net.stats.sent = Net.stats.sent + 1
+	ns:Fire("AA_NET_SENT", kind, lang, bytes, held, distribution)
+end
+
 --------------------------------------------------------------------------------
 -- Relay (whisper mode)
 --------------------------------------------------------------------------------
@@ -152,10 +159,10 @@ local function Relay(ids, sender, lang)
 	end
 end
 
-Comm.RegisterHandler(function(text, sender, lang)
+Comm.RegisterHandler(function(text, sender, lang, distribution)
 	Net.stats.received = Net.stats.received + 1
 	local m, reason = Protocol.Decode(text, sender, lang)
-	ns:Fire("AA_NET_RECEIVED", m and m.type or "?", sender, lang, #text)
+	ns:Fire("AA_NET_RECEIVED", m and m.type or "?", sender, lang, #text, distribution)
 	if not m then
 		Net.stats.invalid = Net.stats.invalid + 1
 		ns:Fire("AA_MESSAGE_DROPPED", reason, Util.FullName(sender), "?")

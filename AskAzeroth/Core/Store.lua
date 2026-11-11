@@ -13,6 +13,7 @@ local _, ns = ...
 --   AA_QUESTION_ADDED (question)      AA_ANSWER_ADDED (question, answer)
 --   AA_QUESTION_SOLVED (question)     AA_QUESTION_REMOVED (question, reason)
 --   AA_STORE_CHANGED ()               AA_MESSAGE_DROPPED (reason, sender, type)
+--   AA_SYNC_RECEIVED (lang, sender, questions, newQuestions, newAnswers)
 local Store = {}
 ns.Store = Store
 
@@ -337,6 +338,7 @@ end
 -- questions. Rate limits don't apply; the sender relays others' messages.
 function handlers.SP(m, now)
 	local added = 0
+	local newQuestions, newAnswers = 0, 0
 	for _, incoming in ipairs(m.questions) do
 		local answers = incoming.syncAnswers
 		incoming.syncAnswers = nil
@@ -358,12 +360,14 @@ function handlers.SP(m, now)
 				q = incoming
 				isNew = true
 				added = added + 1
+				newQuestions = newQuestions + 1
 				ns:Fire("AA_QUESTION_ADDED", q)
 			end
 		elseif q.author == incoming.author then
 			for _, a in ipairs(answers) do
 				if AddAnswer(q, a) then
 					added = added + 1
+					newAnswers = newAnswers + 1
 					ns:Fire("AA_ANSWER_ADDED", q, a)
 				end
 			end
@@ -374,6 +378,8 @@ function handlers.SP(m, now)
 			end
 		end
 	end
+	-- For the debug output: what the sync data brought.
+	ns:Fire("AA_SYNC_RECEIVED", m.lang, m.sender, #m.questions, newQuestions, newAnswers)
 	if added == 0 then
 		return Drop("nothing-new", m.sender, "SP")
 	end

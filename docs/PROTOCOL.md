@@ -39,6 +39,20 @@ is delivered. Addon whispers work. So on Forever (`Core/Comm.lua`,
   member lists the player requests with `/chatlist`. The addon can't
   request member lists itself: `ListChannelByName` is protected
   (`ADDON_ACTION_BLOCKED`, seen on Forever 2026-11-06).
+- Group and guild greeting (`Core/Presence.lua`): 3 s after a language
+  channel is ready, and whenever the group grows, a `P` with `r = true` goes
+  over the addon distribution of the own group (`PARTY`, `RAID` or
+  `INSTANCE_CHAT`) and the guild (`GUILD`), at most once a minute each.
+  These are no chat channels, so the server delivers them. Everyone there
+  who selected the language answers with a whispered `P`; sender and
+  answerer are peers of each other from then on. This finds other users
+  even when the channel's join notices never arrive.
+- Reported peers: players in a received `P` list who were seen in the last
+  15 minutes and are on the own realm become peers too (not remembered
+  across sessions). Knowing one peer is enough to reach the others; a
+  made-up name only costs a whisper that bounces.
+- Messages over `PARTY`, `RAID`, `INSTANCE_CHAT` and `GUILD` are accepted
+  like whispers (selected languages only, the sender becomes a peer).
 - Welcome: when someone joins a language channel, about 3 members (each
   with probability 3 / known peers) send them an `SR` by whisper after 2 to
   8 s. The newcomer learns about them that way and has peers to sync with.
@@ -185,9 +199,10 @@ channel asks the others for what it missed (`Core/Sync.lua`):
 3. Each client answers at most one `SR` per language channel every
    5 minutes, so many logins at once don't set off a chain of answers.
 
-In whisper mode the `SR` goes to 2 random peers (retried every 15 s while
-none are known, or 20 s after a request no `SP` answered, up to 4 times) and each of them answers the requester by
-whisper; the "someone else was faster" check doesn't apply. A client
+In whisper mode the `SR` goes to 2 random peers and each of them answers
+the requester by whisper. While no peer is known, the request waits and
+goes out 2 s after the first one is found, however long that takes. If no
+`SP` came 20 s after a request, 2 other peers are asked (up to 4 times); the "someone else was faster" check doesn't apply. A client
 answers the same requester at most every 5 minutes and anyone at most every
 10 s. Questions from a whisper-mode `SP` that are at most 15 minutes old
 still raise notifications, since that is how most clients get new

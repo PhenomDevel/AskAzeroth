@@ -14,9 +14,21 @@ local _, ns = ...
 -- The store only adds what is missing from an SP (Store.lua, handlers.SP).
 --
 -- Whisper mode (Forever, see Comm.lua): the SR goes to C.SYNC_WHISPER_PEERS
--- random peers (retried while none are known yet), each of them answers
--- the requester directly. The answer interval then counts per requester,
--- plus C.SYNC_WHISPER_ANSWER_GAP between any two answers.
+-- random peers, each of them answers the requester directly. While no peer
+-- is known the request waits and goes out as soon as the first one is
+-- found (Peers.lua), however long that takes. The answer interval then
+-- counts per requester, plus C.SYNC_WHISPER_ANSWER_GAP between any two
+-- answers.
+--
+-- Messages for the debug output (Modules/ChannelDebug.lua):
+--   AA_SYNC_SENT (lang, targets, knownCount, why)  why: "login", "retry",
+--                                                  "welcome", "peer"
+--   AA_SYNC_WAITING (lang)                         nobody to ask yet
+--   AA_SYNC_NO_ANSWER (lang, targets, seconds)
+--   AA_SYNC_INCOMING (lang, sender, knownCount, outcome, delay)
+--       outcome: "later" (answers after delay s), "pending", "recent", "gap"
+--   AA_SYNC_ANSWERED (lang, target, count)         target nil: the channel
+--   AA_SYNC_NOT_ANSWERED (lang, target, reason)    "faster", "nothing", "left"
 local Sync = {}
 ns.Sync = Sync
 
@@ -35,8 +47,16 @@ local lastAnswer = {}
 local lastAnyAnswer = {}
 -- lang → time the last SP from someone else arrived
 local lastSeenAnswer = {}
+-- lang → true while the request waits for the first peer (whisper mode)
+local waiting = {}
 
 Sync.stats = { requests = 0, answers = 0, skipped = 0 }
+
+-- For /aa channels: whether the request waits for a peer, and GetTime() of
+-- the last sync data from someone else (nil: none yet).
+function Sync.GetState(lang)
+	return waiting[lang] ~= nil, lastSeenAnswer[lang]
+end
 
 local function RandomDelay(min, max)
 	return min + math.random() * (max - min)
@@ -44,44 +64,53 @@ end
 
 -- Returns false if there is no one to ask yet (whisper mode). targets:
 -- whom to ask in whisper mode (default: C.SYNC_WHISPER_PEERS random peers).
-function Sync.Request(lang, targets)
+-- why: what started it, for the debug output.
+function Sync.Request(lang, targets, why)
 	if ns.Comm.IsWhisperMode() then
 		targets = targets or ns.Peers.Pick(lang, C.SYNC_WHISPER_PEERS)
 		if #targets == 0 then
 			return false
 		end
+	else
+		targets = nil
 	end
 	local known = Store.GetKnownIds(lang)
 	ns.Net.SendRaw("SR", lang, Protocol.EncodeSyncRequest(known), targets)
 	Sync.stats.requests = Sync.stats.requests + 1
+	ns:Fire("AA_SYNC_SENT", lang, targets, #known, why or "login")
 	return true
 end
 
-local function ScheduleRequest(lang, retries)
+-- retries: further requests to other peers when no answer comes; delay:
+-- seconds until the request (default: random, after login).
+local function ScheduleRequest(lang, retries, delay, why)
 	if requestTimers[lang] then
 		requestTimers[lang]:Cancel()
 	end
+	waiting[lang] = nil
 	retries = retries or C.SYNC_REQUEST_RETRIES
-	local delay = retries < C.SYNC_REQUEST_RETRIES and C.SYNC_REQUEST_DELAY_MAX or RandomDelay(C.SYNC_REQUEST_DELAY_MIN, C.SYNC_REQUEST_DELAY_MAX)
+	delay = delay or RandomDelay(C.SYNC_REQUEST_DELAY_MIN, C.SYNC_REQUEST_DELAY_MAX)
 	requestTimers[lang] = C_Timer.NewTimer(delay, function()
 		requestTimers[lang] = nil
 		if not ns.Channel.IsReady(lang) then
 			return
 		end
 		local sentAt = GetTime()
-		if not Sync.Request(lang) then
-			if retries > 0 then
-				ScheduleRequest(lang, retries - 1)
-			end
+		local targets = ns.Comm.IsWhisperMode() and ns.Peers.Pick(lang, C.SYNC_WHISPER_PEERS) or nil
+		if not Sync.Request(lang, targets, why) then
+			-- Nobody known yet: AA_PEERS_CHANGED below sends it.
+			waiting[lang] = { retries = retries }
+			ns:Fire("AA_SYNC_WAITING", lang)
 			return
 		end
 		-- Whisper mode: the peers asked may have gone offline (remembered
-		-- ones especially); ask others if no answer came.
+		-- ones especially) or had nothing new; ask others if no answer came.
 		if ns.Comm.IsWhisperMode() and retries > 0 then
 			requestTimers[lang] = C_Timer.NewTimer(C.SYNC_WHISPER_TIMEOUT, function()
 				requestTimers[lang] = nil
 				if (lastSeenAnswer[lang] or -math.huge) < sentAt then
-					ScheduleRequest(lang, retries - 1)
+					ns:Fire("AA_SYNC_NO_ANSWER", lang, targets, C.SYNC_WHISPER_TIMEOUT)
+					ScheduleRequest(lang, retries - 1, C.SYNC_REQUEST_DELAY_MIN, "retry")
 				end
 			end)
 		end
@@ -96,23 +125,32 @@ local function Answer(key)
 	-- Someone else was faster (on the channel only; whispers aren't seen).
 	if not entry.target and (lastSeenAnswer[lang] or -math.huge) >= entry.since then
 		Sync.stats.skipped = Sync.stats.skipped + 1
+		ns:Fire("AA_SYNC_NOT_ANSWERED", lang, entry.target, "faster")
 		return
 	end
 	if not ns.Channel.IsReady(lang) then
+		ns:Fire("AA_SYNC_NOT_ANSWERED", lang, entry.target, "left")
 		return
 	end
 	local list = Store.GetForSync(lang, entry.known)
-	if #list == 0 then
-		return
-	end
-	local wire = Protocol.EncodeSyncAnswer(list, C.SYNC_MAX_BYTES)
+	local wire = #list > 0 and Protocol.EncodeSyncAnswer(list, C.SYNC_MAX_BYTES)
 	if not wire then
+		ns:Fire("AA_SYNC_NOT_ANSWERED", lang, entry.target, "nothing")
 		return
 	end
 	lastAnswer[key] = now
 	lastAnyAnswer[lang] = now
 	ns.Net.SendRaw("SP", lang, wire, entry.target and { entry.target } or nil)
 	Sync.stats.answers = Sync.stats.answers + 1
+	ns:Fire("AA_SYNC_ANSWERED", lang, entry.target, #list)
+end
+
+local function CountKnown(known)
+	local count = 0
+	for _ in pairs(known or {}) do
+		count = count + 1
+	end
+	return count
 end
 
 -- m: decoded SR (sender, lang, known).
@@ -124,20 +162,31 @@ function Sync.OnRequest(m)
 	local now = GetTime()
 	local whisper = ns.Comm.IsWhisperMode()
 	local key = whisper and (lang .. "|" .. m.sender) or lang
-	if pending[key] or now - (lastAnswer[key] or -math.huge) < C.SYNC_ANSWER_INTERVAL
-		or whisper and now - (lastAnyAnswer[lang] or -math.huge) < C.SYNC_WHISPER_ANSWER_GAP then
+	local knownCount = CountKnown(m.known)
+	local outcome
+	if pending[key] then
+		outcome = "pending"
+	elseif now - (lastAnswer[key] or -math.huge) < C.SYNC_ANSWER_INTERVAL then
+		outcome = "recent"
+	elseif whisper and now - (lastAnyAnswer[lang] or -math.huge) < C.SYNC_WHISPER_ANSWER_GAP then
+		outcome = "gap"
+	end
+	if outcome then
 		Sync.stats.skipped = Sync.stats.skipped + 1
+		ns:Fire("AA_SYNC_INCOMING", lang, m.sender, knownCount, outcome, 0)
 		return
 	end
+	local delay = RandomDelay(C.SYNC_ANSWER_DELAY_MIN, C.SYNC_ANSWER_DELAY_MAX)
 	pending[key] = {
 		lang = lang,
 		target = whisper and m.sender or nil,
 		known = m.known,
 		since = now,
-		timer = C_Timer.NewTimer(RandomDelay(C.SYNC_ANSWER_DELAY_MIN, C.SYNC_ANSWER_DELAY_MAX), function()
+		timer = C_Timer.NewTimer(delay, function()
 			Answer(key)
 		end),
 	}
+	ns:Fire("AA_SYNC_INCOMING", lang, m.sender, knownCount, "later", delay)
 end
 
 ns.RegisterCallback(Sync, "AA_SYNC_REQUEST", function(_, m)
@@ -154,8 +203,19 @@ ns.RegisterCallback(Sync, "AA_CHANNEL_READY", function(_, lang)
 	ScheduleRequest(lang)
 end)
 
+-- The first peer was found while the request was waiting for one.
+ns.RegisterCallback(Sync, "AA_PEERS_CHANGED", function(_, lang)
+	local wait = waiting[lang]
+	if wait and ns.Channel.IsReady(lang) and ns.Peers.Count(lang) > 0 then
+		-- A short delay, so a batch of new peers (member list, a reported
+		-- online list) is complete before picking.
+		ScheduleRequest(lang, wait.retries, C.SYNC_ANSWER_DELAY_MIN, "peer")
+	end
+end)
+
 -- A left channel needs a new sync when joined again.
 ns.RegisterCallback(Sync, "AA_CHANNEL_LEFT", function(_, lang)
+	waiting[lang] = nil
 	if requestTimers[lang] then
 		requestTimers[lang]:Cancel()
 		requestTimers[lang] = nil
