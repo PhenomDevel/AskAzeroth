@@ -9,13 +9,20 @@ local _, ns = ...
 --   * senders of addon whispers on the language's prefix,
 --   * peers remembered from earlier sessions (AskAzerothDB.knownPeers),
 --   * member lists the player requests with /chatlist. The addon can't
---     request them itself: ListChannelByName is protected.
+--     request them itself: ListChannelByName is protected,
+--   * group and guild members who answer a greeting (Presence.lua),
+--   * players other peers report as recently online (Presence.lua lists,
+--     Peers.AddReported), so knowing one peer is enough to find the rest.
 -- Offline peers drop out on the server's "No player named …" answer to a
 -- whisper; that line is hidden.
 --
 -- Messages: AA_PEERS_CHANGED (lang); AA_PEER_SEEN (lang, name) whenever a
 -- player shows up first-hand (join, member list, whisper), AA_PEER_GONE
--- (lang, name) when one leaves or turns out to be offline.
+-- (lang, name) when one leaves or turns out to be offline. For the debug
+-- output: AA_PEER_ADDED (lang, name, source, count) for a new peer, source
+-- "join", "list", "whisper", "group", "reported"; AA_PEER_REMOVED (lang,
+-- name, reason, count), reason "left", "offline", "self"; AA_PEERS_LOADED
+-- (lang, added, count) for remembered peers.
 local Peers = {}
 ns.Peers = Peers
 
@@ -39,7 +46,8 @@ local function IsMe(name)
 end
 
 -- name: as the client reports it ("Name", "First Surname", "Name-Realm").
-function Peers.Add(lang, name, quiet)
+-- source: how the player was found (see AA_PEER_ADDED above).
+function Peers.Add(lang, name, quiet, source)
 	local list = peers[lang]
 	name = Util.FullName(name)
 	if not list or not Util.IsPlayerName(name) or IsMe(name) then
@@ -49,13 +57,37 @@ function Peers.Add(lang, name, quiet)
 	list[name] = GetTime()
 	Peers.Remember(lang, name)
 	ns:Fire("AA_PEER_SEEN", lang, name)
-	if isNew and not quiet then
-		ns:Fire("AA_PEERS_CHANGED", lang)
+	if isNew then
+		ns:Fire("AA_PEER_ADDED", lang, name, source or "whisper", Peers.Count(lang))
+		if not quiet then
+			ns:Fire("AA_PEERS_CHANGED", lang)
+		end
 	end
 	return isNew
 end
 
-function Peers.Remove(lang, name)
+-- A player another peer reported as online within C.PEER_REPORTED_MAX_AGE
+-- seconds. Not first-hand, so not remembered across sessions and no
+-- sighting for Presence; a made-up name only costs a whisper, and an
+-- offline one bounces and drops out again. Only the own realm's players
+-- can be whispered.
+function Peers.AddReported(lang, name)
+	local list = peers[lang]
+	local realm = ns:GetOwnRealm()
+	if not list or not realm or not Util.IsPlayerName(name) or list[name] or IsMe(name) then
+		return false
+	end
+	if name:sub(-#realm - 1) ~= "-" .. realm then
+		return false
+	end
+	list[name] = GetTime()
+	ns:Fire("AA_PEER_ADDED", lang, name, "reported", Peers.Count(lang))
+	ns:Fire("AA_PEERS_CHANGED", lang)
+	return true
+end
+
+-- reason: "left", "offline" or "self" (for the debug output).
+function Peers.Remove(lang, name, reason)
 	local list = peers[lang]
 	name = Util.FullName(name)
 	if name and not IsMe(name) then
@@ -63,6 +95,7 @@ function Peers.Remove(lang, name)
 	end
 	if list and name and list[name] then
 		list[name] = nil
+		ns:Fire("AA_PEER_REMOVED", lang, name, reason or "left", Peers.Count(lang))
 		ns:Fire("AA_PEERS_CHANGED", lang)
 	end
 	local known = ns.db and ns.db.knownPeers[lang]
@@ -135,22 +168,23 @@ local function LoadKnown(lang)
 	end
 	local suffix = "-" .. realm
 	local list = peers[lang]
-	local added = false
+	local added = 0
 	for name in pairs(known) do
 		if not list[name] and not IsMe(name) and name:sub(-#suffix) == suffix then
 			list[name] = GetTime()
-			added = true
+			added = added + 1
 		end
 	end
-	if added then
+	ns:Fire("AA_PEERS_LOADED", lang, added, Peers.Count(lang))
+	if added > 0 then
 		ns:Fire("AA_PEERS_CHANGED", lang)
 	end
 end
 
--- Removes a player from every language (offline).
-function Peers.RemoveEverywhere(name)
+-- Removes a player from every language; reason as for Peers.Remove.
+function Peers.RemoveEverywhere(name, reason)
 	for _, lang in ipairs(C.LANGUAGES) do
-		Peers.Remove(lang, name)
+		Peers.Remove(lang, name, reason or "offline")
 	end
 end
 
@@ -237,7 +271,7 @@ ns:RegisterEvent("CHAT_MSG_CHANNEL_LIST", function(_, text, _, _, displayName, _
 	local added = false
 	for entry in text:gmatch("[^,]+") do
 		local name = CleanMember(entry)
-		if name and Peers.Add(lang, name, true) then
+		if name and Peers.Add(lang, name, true, "list") then
 			added = true
 		end
 	end
@@ -260,7 +294,7 @@ local function Welcome(lang, name)
 	end
 	C_Timer.After(C.WELCOME_DELAY_MIN + math.random() * (C.WELCOME_DELAY_MAX - C.WELCOME_DELAY_MIN), function()
 		if peers[lang][name] and ns.Sync then
-			ns.Sync.Request(lang, { name })
+			ns.Sync.Request(lang, { name }, "welcome")
 		end
 	end)
 end
@@ -269,7 +303,7 @@ ns:RegisterEvent("CHAT_MSG_CHANNEL_JOIN", function(_, _, playerName, _, displayN
 	if Safe(playerName, displayName, baseName) then
 		local lang = EventLanguage(displayName, baseName)
 		if lang then
-			Peers.Add(lang, playerName)
+			Peers.Add(lang, playerName, false, "join")
 			Welcome(lang, Util.FullName(playerName))
 		end
 	end
@@ -279,7 +313,7 @@ ns:RegisterEvent("CHAT_MSG_CHANNEL_LEAVE", function(_, _, playerName, _, display
 	if Safe(playerName, displayName, baseName) then
 		local lang = EventLanguage(displayName, baseName)
 		if lang then
-			Peers.Remove(lang, playerName)
+			Peers.Remove(lang, playerName, "left")
 		end
 	end
 end)
@@ -311,7 +345,7 @@ end
 ns:RegisterEvent("CHAT_MSG_SYSTEM", function(_, text)
 	local name = OfflineName(text)
 	if name and Peers.IsPeer(name) then
-		Peers.RemoveEverywhere(name)
+		Peers.RemoveEverywhere(name, "offline")
 	end
 end)
 

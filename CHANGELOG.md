@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased
+
+- Sync fixed: the addon now also finds other AskAzeroth users in your group,
+  raid and guild, and learns about everyone your contacts know to be online.
+  The sync no longer gives up when nobody is known right after login; it
+  starts as soon as the first other user is found.
+- Debug output (`/aa channels debug`) rewritten: every line now says in a
+  plain sentence what the addon does and why – which users it found or lost,
+  whom it asks for missing questions, what a sync brought (new questions and
+  answers) and why a message was ignored. `/aa channels` also shows how many
+  users are known per language and when the last sync data arrived.
+
 ## v1.4.0 (2026-11-10)
 
 - New "About" page: who made the addon (Phenom), version, and links to Discord, CurseForge, Wago, GitHub and bug reports, ready to copy.

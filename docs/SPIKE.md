@@ -313,3 +313,10 @@ The "Send to chat" button under an open FAQ entry relies on:
   as `CHAT_MSG_SYSTEM`.
 - `/dump AskAzeroth.Comm.mode` → `"whisper"` on Forever, `"channel"` on
   retail.
+- Not confirmed so far: the join notices above. Peer discovery therefore
+  no longer relies on them alone (2026-11-11): addon messages over
+  `PARTY`/`RAID`/`INSTANCE_CHAT`/`GUILD` are assumed to arrive on Forever
+  as on retail (they are no chat channels). Check with
+  `/aa channels debug on` in a group with another user: a line "Found
+  another AskAzeroth user: … (answered in your group or guild)" should
+  appear a few seconds after login or after joining the group.
