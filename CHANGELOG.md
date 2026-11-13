@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v1.4.1 (2026-11-13)
 
 - Sync fixed: the addon now also finds other AskAzeroth users in your group,
   raid and guild, and learns about everyone your contacts know to be online.
