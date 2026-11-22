@@ -9,7 +9,7 @@ local W = ns.Widgets
 
 local ABOUT = {
 	logo = "Interface\\AddOns\\AskAzeroth\\Media\\Logo",
-	discord = "https://discord.gg/4fSVKCVJWy",
+	discord = "https://discord.gg/YSJEyEEHs7",
 	curseforge = "https://www.curseforge.com/projects/1781780",
 	wago = "https://addons.wago.io/addons/aND9e96o",
 	github = "https://github.com/PhenomDevel/AskAzeroth",

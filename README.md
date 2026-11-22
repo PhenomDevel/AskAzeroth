@@ -84,6 +84,7 @@ What changed: [CHANGELOG.md](https://github.com/PhenomDevel/AskAzeroth/blob/main
 ## Support
 
 - Bugs and ideas: [GitHub issues](https://github.com/PhenomDevel/AskAzeroth/issues)
+- Questions and chat: [Phenom's Discord](https://discord.gg/YSJEyEEHs7)
 - If you like the addon, star it on GitHub or leave a tip on
   [Streamlabs](https://streamlabs.com/phenombutbetter/tip).
 
