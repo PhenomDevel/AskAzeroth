@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v1.4.2 (2026-11-22)
 
 - New Discord invite link on the About page and in the README.
 
